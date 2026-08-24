@@ -88,7 +88,15 @@ STEPS = {
         (
             "0-1",
             "建立文件夹体系与 Experiment_Matrix（实验矩阵总表）",
-            """在本步骤中，你需要为后续全部实验（B1 区 A 扫描、B2 Y 极限扫描、B3 盲验、谐响应等）预先建立层级清晰的文件夹，并编制 Experiment_Matrix 总表。总表中至少应包含：实验编号、执行日期、机床轴位、激励方式、操作者、原始数据路径、备份路径、是否只读封存。每个实验编号对应唯一路径，命名建议采用「阶段_构型_方法」形式（例如 E1_C0_SLDV_Raw），避免仅用日期或「试验1」这类无法追溯的名称。
+            """在本步骤中，你需要为后续全部实验（B1 区 A 扫描、B2 Y 极限扫描、B3 盲验、谐响应等）预先建立层级清晰的文件夹，并编制 Experiment_Matrix 总表。推荐标准目录树如下（可微调命名，但层级逻辑不可乱）：
+
+01_Admin/ — 矩阵、预约、安全告知、Pre-registration、门禁签字 PDF  
+02_Test_Raw/ — 全部实验原始数据（B1/B2/B3/谐响应，只读封存）  
+03_Simulation/ — Baseline_FE_v0、Updated_FE_ThetaStar、FE_Y_Extreme、谐响应仿真结果  
+04_SCI_Reserve/ — 10-start、EMA 汇总、5 trial 完整备份（与 θ* 版本隔离）  
+05_Thesis/ — 论文章节、Figure_Index、附录、Public 脱敏版  
+
+Experiment_Matrix 总表至少应包含：实验编号、执行日期、机床轴位、SSS 版本（SSS-M 或 SSS-H）、激励点、操作者、原始数据路径、备份路径、是否只读封存。每个实验编号对应唯一路径，命名建议采用「Exp编号_构型_方法_Raw」形式（例如 ExpB1_C0_SLDV_Raw），避免仅用日期或「试验1」这类无法追溯的名称。
 
 这一步骤的核心价值在于：从数据产生的第一分钟起就保证可追溯性。若文件夹命名随意、或实验结束后才补建目录，答辩时很难证明「这些数据确实来自同一次、同一状态下的测量」。常见遗漏是只建了物理文件夹却没有 Experiment_Matrix，或矩阵里缺少备份路径与操作者字段。Fatal 级风险是数据散乱、无法与 SSS（标准状态）记录、轴位截图一一对应。
 
@@ -105,12 +113,12 @@ STEPS = {
         ),
         (
             "0-3",
-            "定稿 SSS（Standard State Specification，标准状态规范）及检查表",
-            """SSS 描述的是「仿真与实验必须共同遵守的机床状态」，包括但不限于：各直线轴位置、伺服上电/下电、主轴启停、冷却/风机、拖链与电缆姿态、工装夹具、地脚垫铁与拧紧状态等。对于直驱三轴龙门，务必明确直驱电机是否通电、锁轴状态如何——静止不等于状态一致。SSS 定稿后，每次实验前用检查表逐项核对并签字，实验后若状态发生变化必须重新记录，不可默认「和上次一样」。
+            "定稿 SSS（Standard State Specification，标准状态规范）及 SSS-M / SSS-H 双版本",
+            """SSS 描述的是「仿真与实验必须共同遵守的机床状态」，包括但不限于：各直线轴位置、伺服上电/下电、主轴启停、冷却/风机、拖链与电缆姿态、工装夹具、地脚垫铁与拧紧状态等。对于直驱三轴龙门，务必明确直驱电机是否通电、锁轴状态如何——静止不等于状态一致。
 
-若仿真按某一轴位与通电状态建模，而实验时拖链下垂、电机下电或相邻设备未关，会导致频率系统性偏移，后续 MAC（Modal Assurance Criterion，模态 assurance 准则）对比失去意义。常见遗漏是在 SSS 中只写了几何轴位，未写电气与辅机状态。易错点是以为「机床停在那里」就足够，忽略了风机振动或伺服刚度变化。
+本课题涉及两种构型，必须分别定稿两份状态规范：SSS-M（Y 中位构型，对应 B1 标定实验与 Baseline FE）和 SSS-H（Y 极限构型，对应 B2 实验与 FE_Y_Extreme）。两份文件除 Y 轴坐标、拖链/电缆姿态外，其余电气与辅机要求应保持一致并交叉引用。每次实验前用对应版本的 SSS_Checklist 逐项核对并签字；B2、B3 若与 B1 不同日进行，实验当日仍须重走 B0 环境/噪底/SSS 核对，不可引用 B1 当天的记录代替。
 
-必存文件：SSS_Definition.pdf、SSS_Checklist.pdf（可合并）。必存图片：SSS 状态示意图（标注轴位、拖链、关键辅机）。""",
+若仿真按某一轴位与通电状态建模，而实验时拖链下垂、电机下电或相邻设备未关，会导致频率系统性偏移，后续 MAC（Modal Assurance Criterion，模态置信准则）对比失去意义。常见遗漏是只写了几何轴位、未区分 SSS-M/SSS-H，或未写电气与辅机状态。易错点是 B2 实验仍用 SSS-M 检查表。""",
         ),
         (
             "0-4",
@@ -346,12 +354,10 @@ Fatal 风险是扫描区 A 包含盲验点。易错点是没有保存 polygon �
             ),
             (
                 "B1-3",
-                "3 种激励 × 5 次重复 Trial",
-                """在区 A 内采用 3 种激励配置（具体组合按实验矩阵），每种配置做 5 次重复测量。每一次 trial 填写 Trial_Log（力幅、激励点、操作者、异常备注）。原始数据存入 E1_C0_SLDV_Raw/，文件夹结构在 Experiment_Matrix 中登记。
+            "3 种激励 × 5 次重复 Trial（激励点 EX1 / EX2 / EX3）",
+            """在区 A 内采用 3 种激励配置，分别对应激励点 EX1、EX2、EX3（即 0-6 中定义的 E1–E3 激励位置；下文用 EX 前缀避免与阶段 E「盲验」步骤编号混淆）。每种配置做 5 次重复测量。每一次 trial 填写 Trial_Log_B1.csv（力幅、激励点 EX 编号、操作者、异常备注）。原始数据存入 02_Test_Raw/ExpB1_C0_SLDV_Raw/，文件夹结构在 Experiment_Matrix 中登记。
 
-只做 3 次重复无法评估稳定性，论文也难以给出误差棒。易错点是各 trial 力幅差异过大，导致 FRF 幅值不可比。
-
-必存数据：E1_C0_SLDV_Raw/ 全部原始文件 + Trial_Log。本步骤不强制单独汇总图。""",
+只做 3 次重复无法评估稳定性，论文也难以给出误差棒。易错点是各 trial 力幅差异过大，或三种激励实际打在相近位置导致某阶模态激励不足。""",
             ),
             (
                 "B1-4",
@@ -383,34 +389,32 @@ Fatal 风险是扫描区 A 包含盲验点。易错点是没有保存 polygon �
             (
                 "B2-1",
                 "Y 极限轴位下重复 B1 流程（仅 raw，禁止 refit）",
-                """将机床移至 Y 极限轴位，按 SSS 更新拖链/电缆姿态并拍照存档，在相同 SLDV 设置下对区 A 进行测量，数据存入 E4_C1_SLDV_Raw/。本步骤仅采集 raw 数据供 F 阶段与 FE_Y_Extreme(θ*) 正推对比，严禁在此步骤或 C 阶段用 B2 数据调整 θ*。
+                """实验当日必须先完成 B0-1~B0-3（SSS-H 核对、环境记录、背景噪底），不可引用 B1 当天记录。将机床移至 Y 极限轴位，按 SSS-H 更新拖链/电缆姿态并拍照存档，在相同 SLDV 设置下对区 A 进行测量。数据存入 02_Test_Raw/ExpB2_C1_SLDV_Raw/，填写 Trial_Log_B2.csv，实验当日完成双备份 Backup_Log_B2.txt。
 
-Fatal 风险是用 B2 数据 refit 参数后再声称「构型泛化验证」。易错点是 Y 极限轴位截图缺失，或拖链姿态与 FE_Y_Extreme 不一致。
-
-必存数据：E4_C1_SLDV_Raw/。必存图片：Y 极限轴位截图 + 四向照片（若状态相对 B1 有变化）。""",
+本步骤仅采集 raw 数据供 F 阶段与 FE_Y_Extreme(θ*) 正推对比，严禁用 B2 数据调整 θ*。Fatal 风险是用 B2 数据 refit 后再声称「构型泛化验证」。易错点是仍用 SSS-M 检查表、或 Y 极限拖链姿态与 FE_Y_Extreme 不一致。""",
             ),
         ],
         "B3 步骤三：P10 / P11 / P12 独立盲测": [
             (
                 "B3-1",
                 "确认修正尚未使用盲验数据并封存",
-                """在开始 P10–P12 测量前，确认 D 阶段修正尚未开始或至少尚未读取盲验文件夹。盲验 raw 数据分别存入 Blind_P10/、Blind_P11/、Blind_P12/，文件夹在 θ* 冻结并 G3 通过之前保持只读封存。
+                """实验当日必须先完成 B0-1~B0-3。在开始 P10–P12 测量前，确认 D 阶段修正尚未开始或至少尚未读取盲验文件夹。盲验 raw 分别存入 02_Test_Raw/Blind_P10/、Blind_P11/、Blind_P12/，在 θ* 冻结且 G3 通过之前保持只读封存。
 
-盲验名存实亡（修正过程中偷看盲验数据）是 Fatal 级学术不端风险。必存图片：P10–P12 位置实物图（与 Pre-registration 对照）。""",
+盲验名存实亡（修正过程中偷看盲验数据）是 Fatal 级学术不端风险。""",
             ),
             (
                 "B3-2",
                 "三区各 5 次重复测量",
-                """P10 位于结合部附近，P11 位于刀位旁（不安装传感器处），P12 位于空间远端；每点 5 次重复，激励方式与 B1 保持一致。三点空间分散，不可挤在同一条梁面——否则盲验只相当于「同一点测五次」。
+                """P10 位于结合部附近，P11 位于刀位旁（不安装传感器处），P12 位于空间远端；每点 5 次重复，激励方式与 B1 保持一致。填写 Trial_Log_B3.csv，实验当日完成双备份 Backup_Log_B3.txt。三点空间分散，不可挤在同一条梁面。
 
-仍只测 1 个盲验点无法支撑「盲验通过」结论。必存数据：各点 5 重复 raw 文件。""",
+仍只测 1 个盲验点无法支撑「盲验通过」结论。""",
             ),
             (
                 "B3-3",
                 "盲验封存 / 开封记录",
-                """测量完成后对盲验文件夹封存，记录封存时间与见证人；θ* 冻结且 G3 通过后方可填写开封记录 Unseal_Record.pdf，再进入 E 阶段分析。开封日期必须晚于 θ* 冻结日期。
+                """测量完成后对盲验文件夹封存，填写 Seal_Record.pdf（封存日期、见证人）。开封记录 Unseal_Record.pdf 仅在 θ* 冻结且 G3 通过后、阶段 E 步骤 E1 中填写，B3 阶段不得填写开封记录。
 
-无见证签字或开封早于冻结，答辩时会被质疑程序无效。必存文件：Seal_Record.pdf、Unseal_Record.pdf。""",
+无见证签字或开封早于冻结，答辩时会被质疑程序无效。""",
             ),
         ],
         "B4 备用重测": [
@@ -517,10 +521,10 @@ G3 后仍微调 θ 是 Fatal 风险。必存数据：Updated_FE_ThetaStar.wbpz�
         ),
         (
             "E3",
-            "汇总判定：≥2/3 合格（优秀 3/3）",
-            """盲验单点 MAC 合格线：≥0.55（优秀 ≥0.60）；三点中至少 2 点合格为通过，优秀标准为 3/3 全通过。报告平均 MAC ± std，写入 Blind_Summary_3points.csv。Fail 时不得用盲验数据回头调参。
+            "汇总判定：≥2/3 合格（优秀 3/3），含频率与 MAC",
+            """盲验单点判定需同时报告频率误差与法向 MAC（两点均记录于 Blind_Summary_3points.csv）。MAC 合格线：≥0.55（优秀 ≥0.60）；频率误差合格线：≤10%（优秀 ≤8%）。单点判定为 MAC 与频率均达标；三点中至少 2 点达标为通过，优秀为 3/3 全通过。报告平均 MAC ± std 与平均频率误差。
 
-1 点 pass 即下结论是常见错误。必存数据：Blind_Summary_3points.csv。必存图片：代表点 FRF 对比图。""",
+1 点 pass 即下结论是常见错误。Fail 时不得用盲验数据回头调参。""",
         ),
         (
             "E4",
@@ -573,10 +577,8 @@ G3 后仍微调 θ 是 Fatal 风险。必存数据：Updated_FE_ThetaStar.wbpz�
             ),
             (
                 "G2-2",
-                "测输入力 + TP / 参考点 FRF",
-                """测量输入力谱与 TP、参考点 FRF，力链标定结果存档 Force_Chain.pdf。只测加速度不测力，FRF 幅值不可信。
-
-必存文件：Force_Chain.pdf。""",
+                "测输入力 + TP / 参考点 FRF（激励方式定稿）",
+                """谐响应实验采用与 G1 仿真一致的频段。激励推荐使用激振器+力传感器或力锤（二选一，写入 Harmonic_Excitation_Spec.pdf），激励位置优先 EX1 或 TP 附近（与仿真载荷施加方式对应）。测量输入力谱与 TP、参考点 FRF，力链标定结果存档 Force_Chain.pdf。只测加速度不测力，FRF 幅值不可信。""",
             ),
             (
                 "G2-3",
@@ -604,17 +606,13 @@ G3 后仍微调 θ 是 Fatal 风险。必存数据：Updated_FE_ThetaStar.wbpz�
         ),
         (
             "H2",
-            "第 3 章（随 G1 补图）",
-            """第 3 章随仿真与实验进展补充图表，维护 Figure_Master_Index，核心图不少于 16 张。图号、数据路径、生成脚本应可追溯。
-
-必存：Figure_Index.xlsx。必存图片：16+ 核心图。""",
+            "第 3 章（随仿真/实验补图）",
+            """第 3 章随进展补充图表，维护 Figure_Index.xlsx。核心图不少于 16 张，建议初稿至少包含：技术路线、CAD/FE 模型、网格收敛、重力变形、FE 前 6 阶振型、测点布置、稳态图、实验振型、Before/After MAC、J(θ) 收敛、盲验汇总、构型正推（若做 F）、谐响应三线 FRF、重复性误差棒、灵敏度龙卷风、SSS 状态图。图号、数据路径、生成脚本应可追溯。""",
         ),
         (
             "H3",
-            "第 4–6 章（方法、结果、结论）",
-            """第 4–6 章随 C/D/E/G 阶段填充，结论必须与门禁结果一致。附录 A–D（坐标变换、MAC 协议、Trial 规则、盲验程序）应同步完成，不可论文写完再补日志。
-
-必存：Ch4-6.docx。""",
+            "第 4–6 章（方法、结果、结论）+ Limitation 清单",
+            """第 4–6 章随 C/D/E/G 阶段填充，结论必须与门禁结果一致。附录 A–D（坐标变换、MAC 协议、Trial 规则、盲验程序）应同步完成。Limitation 必写清单（写入 Limitation_Checklist.pdf 并体现在第 5–6 章）：① TP 附加质量影响；② 谐响应≠切削稳定性；③ 单机床/单构型外推限度；④ 构型正推（F 阶段）误差范围；⑤ 结合部参数非唯一性（多初值）；⑥ SSS 无法完全复现的项。""",
         ),
         (
             "H4",
@@ -669,7 +667,8 @@ def add_criteria_section(doc: Document) -> None:
         "标定点 P1–P9 频率误差（Updated vs Exp）：合格 ≤8%，优秀 ≤5%。",
         "标定点 P1–P9 MAC（法向投影后）：合格 ≥0.65，优秀 ≥0.70。",
         "盲验单点 MAC（P10/P11/P12 各点）：合格 ≥0.55，优秀 ≥0.60。",
-        "盲验通过率：合格为三点中至少 2 点达标，优秀为 3/3 全达标。",
+        "盲验单点频率误差（Updated vs Exp，各点）：合格 ≤10%，优秀 ≤8%。",
+        "盲验通过率：合格为三点中 MAC 与频率均达标的点数 ≥2/3，优秀为 3/3。",
         "谐响应峰值频率误差（Updated vs Exp）：合格 ≤12%，优秀 ≤10%。",
     ]
     for c in criteria:
@@ -680,15 +679,59 @@ def add_criteria_section(doc: Document) -> None:
         doc,
         """P1–P9 为标定点，参与模型修正目标函数 J(θ)，应在结构上分散布置并优先选择对结合部参数敏感的位置。P10、P11、P12 为盲验点，不参与任何修正优化；P10 建议位于结合部附近，P11 位于刀位旁但不在传感器安装位置，P12 位于空间远端以检验远距离预测能力。三者必须在 Pre-registration 中事先登记并在空间上分散，不可位于同一梁段。
 
-E1–E3 为激励点，应在结构上分散，避免所有激励都集中在同一区域导致某阶模态激励不足。TP 为刀位点，用于谐响应仿真与实验的输出对比位置，映射与附加质量记录必须完整。""",
+E1–E3（文档中亦记 EX1–EX3）为激励点，应在结构上分散。TP 为刀位点，用于谐响应输出对比，映射与附加质量记录必须完整。""",
+    )
+
+
+def add_fatal_section(doc: Document) -> None:
+    doc.add_paragraph("附录：Fatal 级致命遗漏清单", style="Heading 1")
+    add_para(doc, "下列任一条发生，将直接威胁盲验成立性、数据可追溯性或答辩可信度。实验/仿真过程中逐条自查：")
+    fatals = [
+        "G1 未通过即开始正式实验，或实验后擅自修改 Baseline 几何/网格/BC。",
+        "P10–P12 或 SLDV 全场数据进入修正目标函数 J(θ)（修正仅用 P1–P9）。",
+        "θ* 冻结（G3）之前打开、查看或分析盲验 raw 数据。",
+        "B1 扫描区 A 的 polygon 包含 P10–P12 盲验点位置。",
+        "用 B2（Y 极限）raw 数据 refit θ*，再声称构型泛化验证。",
+        "实验模态与 FE 模态按阶号 1 对 1 硬配对，未做频率+MAC+形态综合配对。",
+        "结合部全刚性连接，或未做网格收敛即冻结 Baseline。",
+        "用普通模态（无预应力）代替重力预应力模态与实验对比。",
+        "测点映射距离 d>10 mm 未复核仍用于 MAC 与修正。",
+        "G3 通过后仍微调 θ*，或盲验 fail 后使用盲验数据调参。",
+        "盲验仅测 1 点，或无 Pre-registration 签字即开始 B3。",
+        "无 Trial 选用规则，事后从 5 次重复中挑选「最好 3 次」。",
+        "只存 3 次 trial processed 而删除 raw trial 4–5。",
+        "谐响应结果未经说明即声称加工稳定性或切削性能结论。",
+        "B2/B3 实验日未重走 B0（SSS/环境/噪底），却与 B1 数据混为同一状态。",
+    ]
+    for f in fatals:
+        doc.add_paragraph(f, style="List Number")
+
+
+def add_code_legend(doc: Document) -> None:
+    doc.add_paragraph("附录：编号对照说明", style="Heading 1")
+    add_para(
+        doc,
+        """为避免混淆，全文采用以下编号约定（阅读步骤码时请先对照本表）：
+
+门禁 G1–G5：Baseline 冻结、配对冻结、θ* 冻结、盲验判定、谐响应判定五道签字门禁，与阶段 G「谐响应」无关。  
+阶段 G 步骤 G1-1/G2-1 等：G 表示 Harmonic Response（谐响应）阶段内的步骤序号，不等于门禁 G1/G2。  
+阶段 E 步骤 E1–E4：E 表示 Blind Validation（盲验判定）阶段内的步骤序号，不等于激励点 E1–E3。  
+激励点 EX1–EX3：即坐标文件中的 E1–E3 激励位置；文档正文优先写 EX 前缀。  
+实验文件夹 ExpB1/ExpB2：ExpB1= B1 实验 batch，ExpB2= B2 实验 batch，不等于阶段步骤编号。  
+构型 C1：专指 Y 极限构型验证（F 阶段）；阶段 C 步骤 C1 指模态识别，二者含义不同。""",
     )
 
 
 DELIVERABLES: dict[str, dict[str, list[str]]] = {
     "0-1": {
         "data": [
-            "Experiment_Matrix.xlsx — 实验矩阵总表（实验编号、日期、轴位、激励、操作者、raw 路径、备份路径、封存状态）",
-            "01_Admin/ — 管理类文件根目录（矩阵、预约、安全告知等）",
+            "Experiment_Matrix.xlsx — 实验矩阵总表",
+            "01_Admin/ — 管理类（矩阵、预约、安全、Pre-registration、门禁 PDF）",
+            "02_Test_Raw/ — 全部实验 raw（只读）",
+            "03_Simulation/ — Baseline、Updated、FE_Y_Extreme、谐响应仿真",
+            "04_SCI_Reserve/ — 10-start、EMA、5 trial 完整备份",
+            "05_Thesis/ — 论文、Figure_Index、附录、Public 版",
+            "Folder_Structure.pdf — 目录树说明与命名规则",
         ],
         "images": [],
     },
@@ -698,10 +741,14 @@ DELIVERABLES: dict[str, dict[str, list[str]]] = {
     },
     "0-3": {
         "data": [
-            "SSS_Definition.pdf — 标准状态定义（轴位、伺服、主轴、风机、拖链、地脚等）",
-            "SSS_Checklist.pdf — 每次实验前核对用检查表（可打印打勾）",
+            "SSS-M_Definition.pdf — Y 中位构型标准状态（B1 + Baseline FE）",
+            "SSS-H_Definition.pdf — Y 极限构型标准状态（B2 + FE_Y_Extreme）",
+            "SSS-M_Checklist.pdf / SSS-H_Checklist.pdf — 各构型实验前核对表",
         ],
-        "images": ["SSS_Overview.png — SSS 状态示意图（标注轴位、拖链、关键辅机）"],
+        "images": [
+            "SSS-M_Overview.png — Y 中位状态示意",
+            "SSS-H_Overview.png — Y 极限状态示意（拖链/电缆姿态）",
+        ],
     },
     "0-4": {
         "data": ["MAC_Calculation_Protocol.pdf — 法向投影公式、归一化、阈值、版本号"],
@@ -818,8 +865,8 @@ DELIVERABLES: dict[str, dict[str, list[str]]] = {
     },
     "B1-3": {
         "data": [
-            "E1_C0_SLDV_Raw/ — B1 全部原始数据（3 激励 ×5 trial，只读）",
-            "Trial_Log_B1.csv — 每次 trial 力幅、激励点、操作者、异常备注",
+            "02_Test_Raw/ExpB1_C0_SLDV_Raw/ — B1 全部 raw（3 激励 EX1–EX3 ×5 trial，只读）",
+            "Trial_Log_B1.csv — 每次 trial 力幅、EX 编号、操作者、异常备注",
         ],
         "images": [],
     },
@@ -842,10 +889,15 @@ DELIVERABLES: dict[str, dict[str, list[str]]] = {
         "images": [],
     },
     "B2-1": {
-        "data": ["E4_C1_SLDV_Raw/ — Y 极限构型 SLDV 原始数据（禁止用于 refit θ*）"],
+        "data": [
+            "02_Test_Raw/ExpB2_C1_SLDV_Raw/ — Y 极限 SLDV raw（禁止 refit θ*）",
+            "Trial_Log_B2.csv — B2 各 trial 记录",
+            "Backup_Log_B2.txt — 当日双备份路径与校验",
+            "B0_Log_B2.pdf — 当日 B0-1~B0-3 记录（SSS-H、环境、噪底）",
+        ],
         "images": [
             "Y_Extreme_Axis.png — Y 极限轴位截图",
-            "Y_Extreme_4Views.jpg — 若相对 B1 状态变化，补四向照片",
+            "Y_Extreme_4Views.jpg — 四向现场照片（SSS-H）",
         ],
     },
     "B3-1": {
@@ -858,22 +910,26 @@ DELIVERABLES: dict[str, dict[str, list[str]]] = {
     },
     "B3-2": {
         "data": [
-            "Blind_P10/Trial1-5/ — P10 五次重复 raw",
-            "Blind_P11/Trial1-5/ — P11 五次重复 raw",
-            "Blind_P12/Trial1-5/ — P12 五次重复 raw",
+            "02_Test_Raw/Blind_P10/Trial1-5/ — P10 五次重复 raw",
+            "02_Test_Raw/Blind_P11/Trial1-5/ — P11 五次重复 raw",
+            "02_Test_Raw/Blind_P12/Trial1-5/ — P12 五次重复 raw",
+            "Trial_Log_B3.csv — 盲验各 trial 记录",
+            "Backup_Log_B3.txt — 当日双备份路径与校验",
         ],
         "images": [],
     },
     "B3-3": {
-        "data": [
-            "Seal_Record.pdf — 盲验数据封存记录（日期、见证人）",
-            "Unseal_Record.pdf — 开封记录（须晚于 θ* 冻结，E1 填写）",
-        ],
+        "data": ["Seal_Record.pdf — 盲验封存记录（日期、见证人；开封记录在 E1 填写）"],
         "images": [],
     },
     "B4-1": {
-        "data": ["B4_Retest_Log.pdf — 重测原因、新实验编号、与失败 batch 关系说明"],
-        "images": ["若重测因机床状态变化：补 Machine_4Views.jpg + AxisPosition_Screenshot.png"],
+        "data": [
+            "B4_Retest_Log.pdf — 重测原因、新实验编号、与失败 batch 关系",
+            "（若状态变化）补 B0_Log_B4.pdf — 当日 SSS/环境/噪底",
+        ],
+        "images": [
+            "B4_Retest_Photos.jpg — 仅当重测因机床状态变化时：四向照 + 轴位截图",
+        ],
     },
     "C1": {
         "data": [
@@ -968,6 +1024,7 @@ DELIVERABLES: dict[str, dict[str, list[str]]] = {
     },
     "G2-2": {
         "data": [
+            "Harmonic_Excitation_Spec.pdf — 谐响应激励方式（激振器/力锤、位置、频段）",
             "Force_Chain.pdf — 力链标定记录",
             "Input_Force_Spectrum.csv — 输入力谱数据",
         ],
@@ -986,13 +1043,17 @@ DELIVERABLES: dict[str, dict[str, list[str]]] = {
         "images": ["Tech_Roadmap.png — 技术路线图"],
     },
     "H2": {
-        "data": ["Figure_Index.xlsx — 图索引（图号、文件名、数据路径、生成脚本）"],
-        "images": ["Core_Figures/ — 16+ 核心论文图（按 Figure_Index 命名）"],
+        "data": [
+            "Figure_Index.xlsx — 图索引（图号、文件名、数据路径、脚本）",
+            "Core_Figure_List.pdf — 16+ 核心图目录初稿（见 H2 步骤正文列表）",
+        ],
+        "images": ["Core_Figures/ — 按 Figure_Index 存放的全部核心论文图"],
     },
     "H3": {
         "data": [
             "Ch4-6.docx — 第 4–6 章",
             "Appendix_A-D.pdf — 坐标/MAC/Trial/盲验程序附录",
+            "Limitation_Checklist.pdf — Limitation 必写清单（6 条）",
         ],
         "images": [],
     },
@@ -1062,10 +1123,10 @@ CHECKPOINTS: dict[str, list[str]] = {
     "B1-4": ["轻/重敲线性检验完成", "Linearity_Check.pdf 已存档", "正式测量力幅在线性区"],
     "B1-5": ["EMA P1–P9 完成", "P1–P3 同点 SLDV 已测", "E3_C0_EMA/ 已备份"],
     "B1-6": ["双备份当日完成", "备份路径写入矩阵", "原始文件夹设只读"],
-    "B2-1": ["Y 极限轴位截图已拍", "E4_C1_SLDV_Raw/ 已存", "未用 B2 数据 refit θ*"],
-    "B3-1": ["修正未使用盲验数据", "Blind 文件夹分点存放", "位置图与 Pre-registration 一致"],
-    "B3-2": ["P10/P11/P12 各 5 重复", "三点空间分散", "raw 文件命名含点号"],
-    "B3-3": ["封存记录已写", "开封日期晚于 θ* 冻结", "见证签字齐全"],
+    "B2-1": ["当日 B0-1~B0-3 已完成（SSS-H）", "Trial_Log_B2 + 双备份齐全", "未用 B2 数据 refit θ*"],
+    "B3-1": ["当日 B0-1~B0-3 已完成", "修正未使用盲验数据", "Blind 分文件夹封存"],
+    "B3-2": ["P10/P11/P12 各 5 重复", "Trial_Log_B3 + 双备份齐全", "三点空间分散"],
+    "B3-3": ["Seal_Record 已填写", "B3 阶段未填 Unseal", "见证签字齐全"],
     "B4-1": ["仅重测失败步骤", "新编号不覆盖旧 raw", "重测原因已记录"],
     "C1": ["稳态图判据与 Settings 一致", "6 阶弹性模态已输出", "剔除极点有记录"],
     "C2": ["配对综合频率+MAC+形态", "歧义已记录", "Mode_Pairing_Table 已冻结前复核"],
@@ -1078,19 +1139,19 @@ CHECKPOINTS: dict[str, list[str]] = {
     "D5": ["θ* 已收敛", "Updated_FE_ThetaStar 已导出", "Gate_G3 已签字"],
     "E1": ["Unseal_Record 日期正确", "θ* 确认冻结", "见证签字齐全"],
     "E2": ["三点 Updated/Baseline/Exp 齐全", "法向 MAC 已算", "Blind_Summary.csv 已出"],
-    "E3": ["≥2/3 判定已做", "平均 MAC±std 已报", "fail 未用于调参"],
+    "E3": ["≥2/3 判定（MAC+频率双达标）", "平均 MAC±std 已报", "fail 未用于调参"],
     "E4": ["Gate_G4 已签字", "fail 有分析记录", "回 D3 未用盲验数据"],
     "F1": ["FE_Y_Extreme(θ*) 正推完成", "C1_Forward.csv 已出", "未 refit θ*"],
     "F2": ["与 B2 raw 已对比", "Limitation 已写", "表述与误差匹配"],
     "G1-1": ["Updated/Baseline 同频段", "Harmonic csv 已出", "基于 θ* 版本"],
     "G1-2": ["TP FRF 已输出", "模态叠加收敛已检", "Mode_Convergence.csv 已存"],
     "G2-1": ["附加质量位置已记录", "Added_Mass_Note 已写", "布置照已拍"],
-    "G2-2": ["力链标定完成", "Force_Chain.pdf 已存", "输入力谱已测"],
+    "G2-2": ["Harmonic_Excitation_Spec 已定", "力链标定完成", "输入力谱已测"],
     "G2-3": ["5 重复完成", "γ²≥0.7 已核查", "TP_FRF_5trials.csv 已出"],
     "G2-4": ["峰值频率为主指标", "Gate_G5 已签字", "三线 FRF 图已出"],
     "H1": ["创新点 3 条定稿", "Limitation 已写", "技术路线图已入第 1 章"],
     "H2": ["Figure_Index 已维护", "核心图 ≥16", "图号与数据路径一致"],
-    "H3": ["第 4–6 章与门禁一致", "附录 A–D 同步", "结论未超出数据支持范围"],
+    "H3": ["Limitation_Checklist 6 条齐", "附录 A–D 同步", "结论与门禁一致"],
     "H4": ["符号表与正文一致", "参考文献 GB/T 7714", "无符号多义"],
     "H5": ["Public 版 FE/图已完成", "涉密信息已脱敏", "送审版可独立提交"],
     "H6": ["SCI 章节划分已规划", "避免自我抄袭", "扩展数据已在 I 阶段收齐"],
@@ -1162,6 +1223,8 @@ def build_document() -> Document:
         render_phase(doc, key, STEPS[key])
 
     add_criteria_section(doc)
+    add_fatal_section(doc)
+    add_code_legend(doc)
     return doc
 
 
