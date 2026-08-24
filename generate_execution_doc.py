@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Generate narrative-style thesis execution guide (minimal tables)."""
+import re
 from docx import Document
 from docx.shared import Pt, Cm
 from docx.enum.text import WD_LINE_SPACING
@@ -34,16 +35,48 @@ def add_para(doc: Document, text: str, style: str = "Normal") -> None:
     doc.add_paragraph(text, style=style)
 
 
+def clean_body(body: str) -> str:
+    """Remove inline 必存 lines; deliverables are rendered in dedicated sections."""
+    paras = []
+    for p in body.strip().split("\n\n"):
+        p = p.strip()
+        if not p:
+            continue
+        if re.match(r"^必存[：:]", p):
+            continue
+        # drop trailing sentence chunks that are only deliverable reminders
+        p = re.sub(r"\n?必存[文件数据图片][：:][^\n]+$", "", p).strip()
+        if p:
+            paras.append(p)
+    return "\n\n".join(paras)
+
+
 def add_step(
     doc: Document,
     code: str,
     title: str,
     body: str,
     checkpoints: list[str] | None = None,
+    deliverables: dict | None = None,
 ) -> None:
     doc.add_paragraph(f"{code}　{title}", style="Heading 3")
-    for para in body.strip().split("\n\n"):
+    for para in clean_body(body).split("\n\n"):
         add_para(doc, para.strip())
+    if deliverables:
+        data_items = deliverables.get("data") or []
+        image_items = deliverables.get("images") or []
+        add_para(doc, "【必存数据】（本步完成后必须存档的文件/文件夹，命名保持一致）")
+        if data_items:
+            for item in data_items:
+                doc.add_paragraph(item, style="List Number")
+        else:
+            add_para(doc, "本步无单独数据文件；操作记录写入 Experiment_Matrix 或对应阶段日志即可。")
+        add_para(doc, "【必存图片】（本步必须拍摄或导出的图，用于论文/答辩/追溯）")
+        if image_items:
+            for item in image_items:
+                doc.add_paragraph(item, style="List Number")
+        else:
+            add_para(doc, "本步无专用图片要求。")
     if checkpoints:
         add_para(doc, "现场操作要点（逐项打勾）：")
         for item in checkpoints:
@@ -651,6 +684,353 @@ E1–E3 为激励点，应在结构上分散，避免所有激励都集中在同
     )
 
 
+DELIVERABLES: dict[str, dict[str, list[str]]] = {
+    "0-1": {
+        "data": [
+            "Experiment_Matrix.xlsx — 实验矩阵总表（实验编号、日期、轴位、激励、操作者、raw 路径、备份路径、封存状态）",
+            "01_Admin/ — 管理类文件根目录（矩阵、预约、安全告知等）",
+        ],
+        "images": [],
+    },
+    "0-2": {
+        "data": ["P10-P12_PreRegistration.pdf — 盲验三点坐标、类型、实物标记方式、导师签字页"],
+        "images": ["P10-P12_Marker_Photo.jpg — 盲验点实物标记照（可见编号与贴点位置）"],
+    },
+    "0-3": {
+        "data": [
+            "SSS_Definition.pdf — 标准状态定义（轴位、伺服、主轴、风机、拖链、地脚等）",
+            "SSS_Checklist.pdf — 每次实验前核对用检查表（可打印打勾）",
+        ],
+        "images": ["SSS_Overview.png — SSS 状态示意图（标注轴位、拖链、关键辅机）"],
+    },
+    "0-4": {
+        "data": ["MAC_Calculation_Protocol.pdf — 法向投影公式、归一化、阈值、版本号"],
+        "images": ["MAC_Normal_Projection.png — 法向投影示意（可选但建议存）"],
+    },
+    "0-5": {
+        "data": ["Trial_Selection_Rule.pdf — Trial 1–3 选用与异常 trial 剔除规则"],
+        "images": [],
+    },
+    "0-6": {
+        "data": ["Coordinate_Transform.pdf — 机床/CAD/FE/SLDV 四套坐标变换关系与验证记录"],
+        "images": ["Coordinate_Systems.png — 坐标系关系示意图（原点、轴向）"],
+    },
+    "0-7": {
+        "data": ["Mode_Screening_Rules.docx — 12 阶提取、6 阶弹性模态筛选与剔除判据"],
+        "images": ["Mode_Screening_Example.png — 被剔除模态 vs 保留模态振型对比示例"],
+    },
+    "0-8": {
+        "data": ["Booking_Record.pdf — 机床/SLDV/B4 备用时段预约记录（邮件或系统截图）"],
+        "images": [],
+    },
+    "0-9": {
+        "data": [
+            "Purchase_List.pdf — 反光膜、加速计、力传感器等采购清单",
+            "Laser_Safety_Signoff.pdf — 激光安全告知签字页",
+        ],
+        "images": [],
+    },
+    "A1-1": {
+        "data": [
+            "A1_Model.step — CAD/几何源文件",
+            "Simplification_List.docx — 几何简化清单（删/留部件及理由）",
+        ],
+        "images": ["CAD_Assembly.png — CAD 装配图（标注主要部件与坐标原点）"],
+    },
+    "A1-2": {
+        "data": ["Mass_Summary.csv — FE 质量/质心与 BOM 或称重对比表"],
+        "images": ["Mass_CoG_Compare.png — 质心位置对比示意图"],
+    },
+    "A2-1": {
+        "data": ["Joint_Theta0.csv — 结合部参数初值 θ₀、Bounds、物理含义与来源"],
+        "images": ["Joint_Locations.png — 结合部位置示意图（标注参数对应位置）"],
+    },
+    "A2-2": {
+        "data": ["Boundary_Spec.pdf — 地脚 BC 类型、位置、与 SSS 对应说明"],
+        "images": ["BC_Annotation.png — FE 模型边界条件标注图"],
+    },
+    "A3-1": {
+        "data": ["Mesh_Convergence.csv — 粗/中/细网格前三阶频率对比表"],
+        "images": [
+            "Mesh_Views.png — 网格划分图（整体 + 结合部局部）",
+            "Mesh_Convergence_Curve.png — 前三阶频率收敛曲线",
+        ],
+    },
+    "A4-1": {
+        "data": ["Static_Results.rst — 重力静力分析结果文件"],
+        "images": ["Static_Deformation.png — 重力变形云图"],
+    },
+    "A4-2": {
+        "data": [
+            "Modal_Results.rst — 预应力模态分析结果",
+            "Modal_Settings.txt — 模态分析设置（阶次、频率范围、预应力链接）",
+        ],
+        "images": [],
+    },
+    "A4-3": {
+        "data": ["Elastic_Modes_6.csv — 6 阶弹性模态频率及剔除记录"],
+        "images": ["FE_Mode1-6.png — FE 前 6 阶弹性模态振型图（可 6 张或拼图）"],
+    },
+    "A5-1": {
+        "data": ["P1-P12_Mapping.csv — 测点/激励点/TP 映射节点与距离 d"],
+        "images": ["Point_Layout.png — 测点布置图（FE 与实验对照）"],
+    },
+    "A5-2": {
+        "data": ["Sensitivity.csv — 参数灵敏度分析结果"],
+        "images": ["Sensitivity_Tornado.png — 灵敏度龙卷风图"],
+    },
+    "A6-1": {
+        "data": ["FE_Y_Extreme.wbpz — Y 极限构型 FE 工程文件"],
+        "images": ["Y_Extreme_Config.png — Y 极限轴位与拖链/电缆姿态截图或示意图"],
+    },
+    "A7-1": {
+        "data": [
+            "Baseline_FE_v0.wbpz — 冻结 Baseline 有限元工程",
+            "Gate_G1.pdf — G1 门禁签字记录",
+        ],
+        "images": [],
+    },
+    "B0-1": {
+        "data": ["SSS_Checklist_Signed.pdf — 当次实验 SSS 核对签字版"],
+        "images": [
+            "Machine_4Views.jpg — 机床四向现场照片",
+            "AxisPosition_Screenshot.png — 数控系统轴位截图（含 X/Y/Z）",
+        ],
+    },
+    "B0-2": {
+        "data": ["Environment_Log.csv — 温度、湿度、干扰源、静置时间记录"],
+        "images": [],
+    },
+    "B0-3": {
+        "data": ["Background_Noise.csv — 30 s 背景噪底数据"],
+        "images": ["Background_Spectrum.png — 背景噪底频谱图"],
+    },
+    "B1-1": {
+        "data": [
+            "System_Config.txt — SLDV 软硬件版本、采样率、平均次数等 Setup 参数",
+            "Modal_ID_Settings.txt — 模态识别软件设置（与 C1 一致）",
+        ],
+        "images": ["SLDV_Setup_Photo.jpg — SLDV Setup 现场照片"],
+    },
+    "B1-2": {
+        "data": ["ScanZone_A.csv — 区 A polygon 顶点坐标与 d_min"],
+        "images": ["ScanZone_A_Map.png — 区 A 示意图（边界 + 盲验点位置）"],
+    },
+    "B1-3": {
+        "data": [
+            "E1_C0_SLDV_Raw/ — B1 全部原始数据（3 激励 ×5 trial，只读）",
+            "Trial_Log_B1.csv — 每次 trial 力幅、激励点、操作者、异常备注",
+        ],
+        "images": [],
+    },
+    "B1-4": {
+        "data": ["Linearity_Check.pdf — 力锤轻/重敲线性检验记录与结论"],
+        "images": ["Linearity_FRF_Compare.png — 轻/重敲 FRF 对比（建议存）"],
+    },
+    "B1-5": {
+        "data": [
+            "E3_C0_EMA/ — EMA P1–P9 原始数据",
+            "CrossCheck_P1-P3.csv — P1–P3 同点 SLDV/EMA 交叉验证记录",
+        ],
+        "images": [],
+    },
+    "B1-6": {
+        "data": [
+            "Backup_Log_B1.txt — 双备份路径、日期、文件大小/校验信息",
+            "Experiment_Matrix 更新 — 登记 B1 raw 与备份位置",
+        ],
+        "images": [],
+    },
+    "B2-1": {
+        "data": ["E4_C1_SLDV_Raw/ — Y 极限构型 SLDV 原始数据（禁止用于 refit θ*）"],
+        "images": [
+            "Y_Extreme_Axis.png — Y 极限轴位截图",
+            "Y_Extreme_4Views.jpg — 若相对 B1 状态变化，补四向照片",
+        ],
+    },
+    "B3-1": {
+        "data": [
+            "Blind_P10/ — P10 盲验 raw（封存）",
+            "Blind_P11/ — P11 盲验 raw（封存）",
+            "Blind_P12/ — P12 盲验 raw（封存）",
+        ],
+        "images": ["BlindPoints_Layout.jpg — P10–P12 位置实物图（与 Pre-registration 对照）"],
+    },
+    "B3-2": {
+        "data": [
+            "Blind_P10/Trial1-5/ — P10 五次重复 raw",
+            "Blind_P11/Trial1-5/ — P11 五次重复 raw",
+            "Blind_P12/Trial1-5/ — P12 五次重复 raw",
+        ],
+        "images": [],
+    },
+    "B3-3": {
+        "data": [
+            "Seal_Record.pdf — 盲验数据封存记录（日期、见证人）",
+            "Unseal_Record.pdf — 开封记录（须晚于 θ* 冻结，E1 填写）",
+        ],
+        "images": [],
+    },
+    "B4-1": {
+        "data": ["B4_Retest_Log.pdf — 重测原因、新实验编号、与失败 batch 关系说明"],
+        "images": ["若重测因机床状态变化：补 Machine_4Views.jpg + AxisPosition_Screenshot.png"],
+    },
+    "C1": {
+        "data": [
+            "Modal_Parameters.csv — 实验识别模态参数（频率、阻尼等）",
+            "Pole_Rejection_Log.csv — 剔除极点清单与原因",
+        ],
+        "images": ["Stabilization_Diagram.png — 稳态图"],
+    },
+    "C2": {
+        "data": ["Mode_Pairing_Table.xlsx — Exp↔FE 配对表（含歧义说明）"],
+        "images": ["Exp_Mode1-6.png — 实验前 6 阶模态振型图"],
+    },
+    "C3": {
+        "data": ["Repeatability.csv — 5 次 trial 频率/MAC 的 mean±std"],
+        "images": ["Repeatability_Bars.png — 重复性误差棒图"],
+    },
+    "C4": {
+        "data": ["Gate_G2.pdf — G2 配对表冻结签字记录"],
+        "images": [],
+    },
+    "D1": {
+        "data": ["Freq_MAC_Before.csv — 修正前 Baseline 与实验频率/MAC 对比"],
+        "images": ["Before_Compare.png — Before 频率 + MAC 对比图"],
+    },
+    "D2": {
+        "data": ["Objective_Function.txt — J(θ) 定义、权重、仅用 P1–P9 的声明"],
+        "images": [],
+    },
+    "D3": {
+        "data": [
+            "Iteration_Log.csv — 每轮迭代参数、目标函数值、是否满足 Bounds",
+            "Lcurve_Selection.pdf — L-curve 选参记录",
+        ],
+        "images": ["J_Convergence.png — J(θ) 收敛曲线"],
+    },
+    "D4": {
+        "data": [
+            "10start/ — 10 组初值优化结果（SCI 储备）",
+            "MultiStart_Summary.csv — 多初值 θ* 对比汇总",
+        ],
+        "images": ["MultiStart_Boxplot.png — 多初值结果 boxplot（SCI 储备，建议存）"],
+    },
+    "D5": {
+        "data": [
+            "Updated_FE_ThetaStar.wbpz — 修正后冻结 FE 工程",
+            "Gate_G3.pdf — G3 门禁签字记录",
+            "ThetaStar_Frozen.csv — θ* 参数终值与 Bounds",
+        ],
+        "images": ["MAC_Before_After.png — 修正前后 MAC 对比图"],
+    },
+    "E1": {
+        "data": ["Unseal_Record.pdf — 盲验开封记录（见证签字，日期晚于 G3）"],
+        "images": [],
+    },
+    "E2": {
+        "data": ["Blind_Summary.csv — P10/P11/P12 各点 Updated/Baseline/Exp 对比"],
+        "images": ["Blind_3Points_Summary.png — 三点盲验汇总图"],
+    },
+    "E3": {
+        "data": ["Blind_Summary_3points.csv — 通过率判定表（≥2/3 或 3/3）"],
+        "images": ["Blind_Representative_FRF.png — 代表点 FRF 对比图"],
+    },
+    "E4": {
+        "data": [
+            "Gate_G4.pdf — G4 门禁签字记录",
+            "Fail_Analysis.pdf — 若 fail：原因分析与回 D3 记录（禁用盲验数据）",
+        ],
+        "images": [],
+    },
+    "F1": {
+        "data": ["C1_Forward.csv — FE_Y_Extreme(θ*) 正推模态结果"],
+        "images": [],
+    },
+    "F2": {
+        "data": ["C1_Compare_Summary.csv — 正推 vs B2 raw 频率/MAC 对比表"],
+        "images": ["C1_Compare_Chart.png — 构型验证对比图（误差大时仍须存）"],
+    },
+    "G1-1": {
+        "data": [
+            "Harmonic_Updated.csv — Updated(θ*) 谐响应 TP 输出",
+            "Harmonic_Baseline.csv — Baseline 谐响应 TP 输出",
+        ],
+        "images": [],
+    },
+    "G1-2": {
+        "data": ["Mode_Convergence.csv — 模态叠加阶次收敛记录"],
+        "images": ["Mode_Superposition_Conv.png — 叠加收敛曲线（建议存）"],
+    },
+    "G2-1": {
+        "data": ["Added_Mass_Note.pdf — TP 加速计附加质量、安装位置、仿真等效说明"],
+        "images": ["TP_Sensor_Photo.jpg — TP 传感器布置照片"],
+    },
+    "G2-2": {
+        "data": [
+            "Force_Chain.pdf — 力链标定记录",
+            "Input_Force_Spectrum.csv — 输入力谱数据",
+        ],
+        "images": [],
+    },
+    "G2-3": {
+        "data": ["TP_FRF_5trials.csv — TP 谐响应 5 次重复 FRF 及 γ²"],
+        "images": ["Coherence_Gamma2.png — 相干系数 γ² 图（建议存）"],
+    },
+    "G2-4": {
+        "data": ["Gate_G5.pdf — G5 门禁签字记录"],
+        "images": ["Harmonic_FRF_3Lines.png — Updated/Baseline/Exp 三线 FRF 对比图"],
+    },
+    "H1": {
+        "data": ["Ch1-2.docx — 第 1、2 章草稿（含创新点 3 条）"],
+        "images": ["Tech_Roadmap.png — 技术路线图"],
+    },
+    "H2": {
+        "data": ["Figure_Index.xlsx — 图索引（图号、文件名、数据路径、生成脚本）"],
+        "images": ["Core_Figures/ — 16+ 核心论文图（按 Figure_Index 命名）"],
+    },
+    "H3": {
+        "data": [
+            "Ch4-6.docx — 第 4–6 章",
+            "Appendix_A-D.pdf — 坐标/MAC/Trial/盲验程序附录",
+        ],
+        "images": [],
+    },
+    "H4": {
+        "data": ["Symbols.docx — 符号表", "References.bib — GB/T 7714 参考文献"],
+        "images": [],
+    },
+    "H5": {
+        "data": ["FE_Public/ — 脱敏 Public 版 FE 与可送审插图"],
+        "images": ["Public_Figures/ — 涉密脱敏后的论文插图"],
+    },
+    "H6": {
+        "data": ["SCI_Outline.docx — 硕士论文与 SCI 章节划分规划"],
+        "images": [],
+    },
+    "I1": {
+        "data": [
+            "04_SCI_Reserve/B1_raw/ — B1 隔离备份",
+            "04_SCI_Reserve/B2_raw/ — B2 隔离备份",
+            "04_SCI_Reserve/10start/ — 多初值优化备份",
+        ],
+        "images": [],
+    },
+    "I2": {
+        "data": ["02_Test_Raw/ — 全部 5 trial 原始数据（不可删 trial 4–5）"],
+        "images": [],
+    },
+    "I3": {
+        "data": [
+            "SCI_EMA_Summary.csv — EMA 交叉验证汇总",
+            "SCI_C1_Summary.csv — C1 构型验证汇总",
+            "SCI_Blind_Detail.csv — 三盲验详细汇总",
+        ],
+        "images": [],
+    },
+}
+
+
 CHECKPOINTS: dict[str, list[str]] = {
     "0-1": ["Experiment_Matrix 中每个实验编号唯一且已指定备份路径", "文件夹命名含阶段代号而非纯日期", "矩阵字段含操作者与只读封存标记"],
     "0-2": ["Pre-registration 日期早于 B1 正式实验", "P10/P11/P12 坐标与实物标记一致", "导师签字页已扫描存档"],
@@ -725,12 +1105,28 @@ def render_phase(doc: Document, phase_title: str, content) -> None:
     if isinstance(content, list):
         for item in content:
             if len(item) == 3:
-                add_step(doc, item[0], item[1], item[2], CHECKPOINTS.get(item[0]))
+                code = item[0]
+                add_step(
+                    doc,
+                    code,
+                    item[1],
+                    item[2],
+                    CHECKPOINTS.get(code),
+                    DELIVERABLES.get(code),
+                )
     elif isinstance(content, dict):
         for sub_title, steps in content.items():
             doc.add_paragraph(sub_title, style="Heading 2")
             for item in steps:
-                add_step(doc, item[0], item[1], item[2], CHECKPOINTS.get(item[0]))
+                code = item[0]
+                add_step(
+                    doc,
+                    code,
+                    item[1],
+                    item[2],
+                    CHECKPOINTS.get(code),
+                    DELIVERABLES.get(code),
+                )
 
 
 def build_document() -> Document:
@@ -743,7 +1139,7 @@ def build_document() -> Document:
     )
     add_para(
         doc,
-        """本文档按执行顺序列出从实验前准备到论文撰写的全部步骤。英文术语在中文后用括号备注；不写工期，只写步骤顺序。与旧版表格版不同，本版以文字叙述为主：每一步说明做什么、为什么做、注意什么、可能风险、常见遗漏与易错点，并明确必存数据与图片。非必要不使用表格，便于开题后打印携带与实验现场查阅。""",
+        """本文档按执行顺序列出从实验前准备到论文撰写的全部步骤。英文术语在中文后用括号备注；不写工期，只写步骤顺序。每一步结构为：文字说明 → 【必存数据】（编号列表，含文件名与用途）→ 【必存图片】（编号列表，含拍摄/导出要求）→ 现场操作要点。非必要不使用表格，便于开题后打印携带与实验现场查阅。""",
     )
     add_para(
         doc,
