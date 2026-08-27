@@ -29,6 +29,12 @@ namespace Aetherboard.VR
         public static GameObject LoadGridCell() =>
             Resources.Load<GameObject>(ModelRoot + "Grid_Cell");
 
+        public static GameObject LoadBossHologram(string bossId)
+        {
+            if (string.IsNullOrEmpty(bossId)) bossId = "earth";
+            return Resources.Load<GameObject>($"{ModelRoot}Boss_{bossId}");
+        }
+
         public static bool HasExternalArt =>
             LoadPieceModel(JobType.Knight) != null || LoadTableBase() != null;
     }

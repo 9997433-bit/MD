@@ -56,6 +56,8 @@ Assets/Aetherboard/Resources/Aetherboard/Art/Models/
 | `Piece_Bard.prefab` | 游弦棋子 |
 | `Table_Base.prefab` | 桌台底座 |
 | `Grid_Cell.prefab` | 单格（可选） |
+| `Boss_earth.prefab` | 土灵全息核心（可选） |
+| `Boss_wind.prefab` | 风灵全息核心（可选） |
 
 > 建议：模型高度约 **0.1m**，原点居中，面向 +Z。导入后拖成 Prefab 再放入 Models 目录。
 

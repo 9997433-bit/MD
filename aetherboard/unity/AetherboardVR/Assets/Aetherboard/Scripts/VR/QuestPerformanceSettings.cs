@@ -16,6 +16,7 @@ namespace Aetherboard.VR
             if (disableVsync) QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = targetFrameRate;
             QualitySettings.shadows = ShadowQuality.Disable;
+            BattleLightingController.ApplyQuestProfile();
 #endif
         }
     }

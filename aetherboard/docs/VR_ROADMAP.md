@@ -48,6 +48,8 @@
 | **Quest 侧载工具** | ✅ | ADB 检查 / 安装 + 实机诊断日志 |
 | **联机 HUD / VR 面板** | ✅ | Host IP 编辑 + PlayerPrefs 持久化 |
 | **Styled 美术 Prefab** | ✅ | 职业造型 + 材质 + 外部模型钩子 |
+| **Boss 全息 UI** | ✅ | 3D 铭牌 + 双 Boss 主题 + 轨道环 |
+| **战斗光照** | ✅ | 三色环境光 + Key/Fill/Rim + Quest 优化 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
 | Quest 实机验证 | 🔲 | 按 QUEST_VERIFICATION.md 人工验收 |
 

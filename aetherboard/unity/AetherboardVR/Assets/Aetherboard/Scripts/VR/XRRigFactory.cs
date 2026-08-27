@@ -192,12 +192,12 @@ namespace Aetherboard.VR
 
         public static void EnsureLighting()
         {
-            if (Object.FindObjectOfType<Light>() != null) return;
-            var lightGo = new GameObject("Directional Light");
-            var light = lightGo.AddComponent<Light>();
-            light.type = LightType.Directional;
-            light.intensity = 1.1f;
-            lightGo.transform.rotation = Quaternion.Euler(50, -30, 0);
+            BattleLightingController.SetupBattleLighting();
+        }
+
+        public static void EnsureLightingAt(Vector3 tableCenter)
+        {
+            BattleLightingController.SetupBattleLighting(tableCenter);
         }
     }
 }

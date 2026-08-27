@@ -61,7 +61,7 @@ namespace Aetherboard.VR
             netPanelGo.transform.localRotation = Quaternion.Euler(0f, -28f, 0f);
             netPanelGo.AddComponent<BattleNetVRPanel>().Bind(net);
 
-            XRRigFactory.EnsureLighting();
+            XRRigFactory.EnsureLightingAt(tableCenter);
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
 
             foreach (var piece in tableView.GetComponentsInChildren<PieceToken>(true))
