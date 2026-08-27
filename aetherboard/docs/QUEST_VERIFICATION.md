@@ -30,6 +30,7 @@ Quest 启动后，`QuestRuntimeDiagnostics` 自动在 logcat 输出：
 - XR 是否启用
 - 桌台来源（Prefab / Procedural）
 - **LAN IP**（联机时填入 PC Host 地址）
+- **自动验收检查**（PASS/FAIL）：BattleDirector、棋子数量、XR 等
 
 ```bash
 # 查看 Android 日志

@@ -22,6 +22,19 @@ Aetherboard → Configure URP Pipeline
 - MSAA 4x
 - HDR 关闭
 - 阴影距离 12m · 单级 Cascade
+- 全局 Volume：`BattleVolumeProfile`（Bloom + 色彩调整 + 暗角）
+
+## 后处理 Volume
+
+`Configure URP Pipeline` 会创建：
+
+| 资源 | 路径 |
+|------|------|
+| Volume Profile | `Assets/Aetherboard/Resources/Aetherboard/Settings/BattleVolumeProfile.asset` |
+
+运行时由 `BattlePostProcessController` 自动挂载全局 Volume。Quest 构建会降级 Bloom 强度以保帧率。
+
+手动微调：在 Project 窗口选中 `BattleVolumeProfile`，调整 Bloom Intensity / Vignette。
 
 ## 手动验证
 

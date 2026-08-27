@@ -49,7 +49,7 @@ CI：`.github/workflows/aetherboard-tests.yml`
 
 - [ ] Quest 头显实机验收（10 项清单）
 - [ ] 可选：替换 `Resources/Aetherboard/Art/Models/` 正式 FBX
-- [ ] 可选：URP 后处理 Volume（Bloom 等）
+- [x] URP 后处理 Volume（Bloom / 色彩 / 暗角）
 
 ## 破坏性变更
 

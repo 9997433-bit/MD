@@ -17,6 +17,7 @@ namespace Aetherboard.VR
             Application.targetFrameRate = targetFrameRate;
             QualitySettings.shadows = ShadowQuality.Disable;
             BattleLightingController.ApplyQuestProfile();
+            BattlePostProcessController.ApplyQuestProfile();
 #endif
         }
     }

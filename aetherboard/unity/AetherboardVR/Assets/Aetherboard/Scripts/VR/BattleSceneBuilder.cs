@@ -66,6 +66,7 @@ namespace Aetherboard.VR
             resultGo.AddComponent<BattleResultOverlay>().Bind(director);
 
             XRRigFactory.EnsureLightingAt(tableCenter);
+            BattlePostProcessController.SetupBattlePostProcess();
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
 
             foreach (var piece in tableView.GetComponentsInChildren<PieceToken>(true))

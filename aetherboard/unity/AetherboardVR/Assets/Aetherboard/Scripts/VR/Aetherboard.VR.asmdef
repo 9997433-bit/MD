@@ -5,7 +5,8 @@
     "Aetherboard.Core",
     "Aetherboard.Netcode",
     "Unity.XR.Interaction.Toolkit",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "Unity.RenderPipelines.Universal.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
@@ -14,6 +15,12 @@
   "precompiledReferences": [],
   "autoReferenced": true,
   "defineConstraints": [],
-  "versionDefines": [],
+  "versionDefines": [
+    {
+      "name": "com.unity.render-pipelines.universal",
+      "expression": "14.0.0",
+      "define": "AETHERBOARD_URP_INSTALLED"
+    }
+  ],
   "noEngineReferences": false
 }

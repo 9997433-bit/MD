@@ -36,6 +36,7 @@
 
 ### 渲染与触觉
 - URP 14 可选迁移 + Editor 一键配置
+- URP 后处理 Volume（Bloom / 色彩调整 / 暗角，Quest 自动降级）
 - Quest/PCVR 控制器触觉：抓取、落子、技能
 - 战斗结算世界空间面板（胜败统计、再战/换 Boss）
 

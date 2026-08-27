@@ -55,6 +55,7 @@
 | **URP 渲染管线** | ✅ | 可选 URP 14 + Editor 一键配置 |
 | **VR 触觉反馈** | ✅ | 抓取/技能/落子震动 |
 | **战斗结算 UI** | ✅ | 胜败世界空间面板 + 再战 |
+| **URP 后处理** | ✅ | Bloom / 色彩 / 暗角 Volume + Quest 降级 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
 | Quest 实机验证 | 🔲 | 按 QUEST_VERIFICATION.md 人工验收 |
 
