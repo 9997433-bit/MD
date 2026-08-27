@@ -29,19 +29,31 @@ STANDARDS_MAP = {
 
 # E1733A_CC_ANALYSIS (=66) result selectors: CI index -> Remote.h constant
 # name (E1733A_CI_xxxx). The message returns the metric as a 4-byte float.
+#
+# ISO uncertainty note (E1 boundary only). Remote.h labels CI 0-11 with the
+# symbol set B, ~B, M, E-, E+, E, R-, R+, R, A-, A+, A. These symbols match
+# the metric names used by the ISO 230-2 positioning standards that appear in
+# STANDARDS_MAP (indexes 6/7/11/12), where R and A are uncertainty-style
+# quantities built from an estimator times a coverage factor. Remote.h also
+# exposes a [Data Analysis] -> "Coverage Factor (Sigma)" setting
+# (E1733A_CI_ANASETUP_ANASIGMA_ITEMTEXT = 74). What is proven here stops at
+# these header labels: the actual estimator, coverage-factor application, and
+# per-standard formula bodies are NOT transcribed anywhere and remain unknown
+# (see ledger entry ANA-UNK-ALG-ISO230-BODY, boundary no_instruction_window).
+# Do not infer formulas from the symbol names.
 ANALYSIS_CI_MAP = {
-    0: "E1733A_CI_BIMAXREV",
-    1: "E1733A_CI_BIMEANREV",
-    2: "E1733A_CI_BIMEANDEV",
-    3: "E1733A_CI_REVSYSPOSDEV",
-    4: "E1733A_CI_FWDSYSPOSDEV",
-    5: "E1733A_CI_BISYSPOSDEV",
-    6: "E1733A_CI_REVREPEATPOS",
-    7: "E1733A_CI_FWDREPEATPOS",
-    8: "E1733A_CI_BIREPEATPOS",
-    9: "E1733A_CI_REVACCURACY",
-    10: "E1733A_CI_FWDACCURACY",
-    11: "E1733A_CI_BIACCURACY",
+    0: "E1733A_CI_BIMAXREV",       # Remote.h: "B, max reversl error" (sic)
+    1: "E1733A_CI_BIMEANREV",      # Remote.h: "~B, mean reversal error"
+    2: "E1733A_CI_BIMEANDEV",      # Remote.h: "M, mean bi-directional positin deviation" (sic)
+    3: "E1733A_CI_REVSYSPOSDEV",   # Remote.h: "E-, Mean positional deviation, backward"
+    4: "E1733A_CI_FWDSYSPOSDEV",   # Remote.h: "E+, Mean positional deviation, forward"
+    5: "E1733A_CI_BISYSPOSDEV",    # Remote.h: "E, Mean positional deviation, bi-directional"
+    6: "E1733A_CI_REVREPEATPOS",   # Remote.h: "R-, Repeatabolity, backward" (sic)
+    7: "E1733A_CI_FWDREPEATPOS",   # Remote.h: "R+, Repeatabolity, forward" (sic)
+    8: "E1733A_CI_BIREPEATPOS",    # Remote.h: "R, Repeatabolity, bi-directional" (sic)
+    9: "E1733A_CI_REVACCURACY",    # Remote.h: "A-, Accuracy, backward"
+    10: "E1733A_CI_FWDACCURACY",   # Remote.h: "A+, Accuracy, forward"
+    11: "E1733A_CI_BIACCURACY",    # Remote.h: "A, Accuracy, bi-directional"
     12: "E1733A_CI_REVRAWREP",
     13: "E1733A_CI_FWDRAWREP",
     14: "E1733A_CI_BIRAWREP",
