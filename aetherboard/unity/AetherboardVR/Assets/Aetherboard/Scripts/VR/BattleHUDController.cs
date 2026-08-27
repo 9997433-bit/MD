@@ -8,6 +8,7 @@ namespace Aetherboard.VR
         private BattleDirector _director;
         private CoopController _coop;
         private Vector2 _scroll;
+        private string _hostAddressEdit;
         private readonly GUILayoutOption _btnW = GUILayout.Width(118);
 
         public void Bind(BattleDirector director, CoopController coop)
@@ -69,12 +70,28 @@ namespace Aetherboard.VR
             var net = FindObjectOfType<BattleNetSession>();
             if (net != null)
             {
+                if (string.IsNullOrEmpty(_hostAddressEdit))
+                    _hostAddressEdit = net.HostAddress;
+
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button("离线", _btnW)) net.SetRole(NetSessionRole.Offline);
                 if (GUILayout.Button("Host", _btnW)) net.SetRole(NetSessionRole.Host);
-                if (GUILayout.Button("Client", _btnW)) net.SetRole(NetSessionRole.Client);
+                if (GUILayout.Button("Client", _btnW)) net.ApplyHostAddressAndConnectAsClient(_hostAddressEdit);
                 GUILayout.EndHorizontal();
-                GUILayout.Label($"网络: {net.Role}  {net.ActiveTransport}  ({net.HostAddress})  P{net.LocalPlayerId}");
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Host IP:", GUILayout.Width(56));
+                _hostAddressEdit = GUILayout.TextField(_hostAddressEdit, GUILayout.Width(150));
+                if (GUILayout.Button("保存", GUILayout.Width(48)))
+                    net.SetHostAddress(_hostAddressEdit);
+                GUILayout.EndHorizontal();
+
+                GUILayout.Label(
+                    $"网络: {net.Role}  {net.ActiveTransport}  P{net.LocalPlayerId}",
+                    RichLabel());
+                GUILayout.Label(
+                    $"地址 {net.HostAddress}  |  TCP {net.HostPort}  WS {net.HostWsPort}  NGO {net.HostNgoPort}",
+                    RichLabel());
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button($"传输: {net.ClientTransport}", _btnW))
                     net.CycleClientTransport();

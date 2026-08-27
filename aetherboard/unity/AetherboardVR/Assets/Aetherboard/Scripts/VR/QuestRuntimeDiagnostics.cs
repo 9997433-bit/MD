@@ -50,7 +50,8 @@ namespace Aetherboard.VR
             _buffer.AppendLine($"  XR: {UnityEngine.XR.XRSettings.enabled} ({UnityEngine.XR.XRSettings.loadedDeviceName})");
             _buffer.AppendLine($"  Prefabs: {(BattlePrefabLibrary.HasPrefabs ? "Resources" : "Procedural")}");
             _buffer.AppendLine($"  LAN IP: {TryGetLanIp()}");
-            _buffer.AppendLine("  Client: N → B=NetcodeNative | hostAddress=PC LAN IP");
+            _buffer.AppendLine($"  Saved Host: {BattleNetPrefs.LoadHost()}");
+            _buffer.AppendLine("  VR Panel: 桌台右侧联机面板 | 键盘输入=Quest IP");
             Debug.Log(_buffer.ToString());
         }
 

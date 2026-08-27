@@ -68,11 +68,12 @@ Play → H（TCP 8767 + WS 8769 + NGO 7777）
 ### Quest 端
 
 1. 启动 Aetherboard VR
-2. 在 Inspector 或后续 HUD 中设置 `hostAddress` = PC IP
-3. `N` 进入 Client
-4. `B` 切换传输：
-   - **WebSocket** → `ws://PC_IP:8769`
-   - **NetcodeNative** → `PC_IP:7777`
+2. 看向桌台右侧 **联机面板**（或左上角 IMGUI HUD）
+3. 点击 **键盘输入** 输入 PC 局域网 IP（如 `192.168.1.42`），或桌面模式直接编辑 Host IP 字段
+4. 点击 **Client** 连接
+5. 若失败，点 **传输切换** 尝试 WebSocket / NetcodeNative
+
+> 设置会自动保存到 PlayerPrefs，下次启动无需重输。
 
 > Player Settings 已启用 **Internet Access**（`forceInternetPermission`）。
 

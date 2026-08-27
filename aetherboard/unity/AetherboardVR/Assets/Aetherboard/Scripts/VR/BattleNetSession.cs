@@ -72,13 +72,35 @@ namespace Aetherboard.VR
             if (director == null) director = GetComponent<BattleDirector>();
             _coop = GetComponent<CoopController>();
             director?.SetNetworkBridge(this);
+            BattleNetPrefs.ApplyTo(this);
         }
 
         public int LocalPlayerId => _localPlayerId;
 
+        public void SetHostAddress(string address)
+        {
+            if (string.IsNullOrWhiteSpace(address)) return;
+            hostAddress = address.Trim();
+            BattleNetPrefs.SaveHost(hostAddress);
+        }
+
+        public void SetClientTransport(NetClientTransport transport)
+        {
+            clientTransport = transport;
+            BattleNetPrefs.SaveTransport(transport);
+            Debug.Log($"[Aetherboard] Client transport → {clientTransport}");
+        }
+
+        public void ApplyHostAddressAndConnectAsClient(string address)
+        {
+            SetHostAddress(address);
+            SetRole(NetSessionRole.Client);
+        }
+
         public void SetLocalPlayerId(int playerId)
         {
             _localPlayerId = playerId == 2 ? 2 : 1;
+            BattleNetPrefs.SavePlayerId(_localPlayerId);
         }
 
         public void CycleClientTransport()
@@ -91,6 +113,7 @@ namespace Aetherboard.VR
                 NetClientTransport.NetcodeRelay => NetClientTransport.NetcodeNative,
                 _ => NetClientTransport.Auto
             };
+            BattleNetPrefs.SaveTransport(clientTransport);
             Debug.Log($"[Aetherboard] Client transport → {clientTransport}");
         }
 
@@ -121,6 +144,7 @@ namespace Aetherboard.VR
         {
             if (role == newRole) return;
             role = newRole;
+            BattleNetPrefs.SaveFrom(this);
             OnDestroy();
             _transport = null;
             _activeTransport = "—";

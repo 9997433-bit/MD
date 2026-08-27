@@ -52,8 +52,14 @@ namespace Aetherboard.VR
             audioGo.AddComponent<BattleAudioController>().Bind(director);
 
             root.AddComponent<BattleParticleVFX>().Bind(director, tableView);
-            root.AddComponent<BattleNetSession>();
+            var net = root.AddComponent<BattleNetSession>();
             root.AddComponent<QuestPerformanceSettings>();
+
+            var netPanelGo = new GameObject("BattleNetVRPanel");
+            netPanelGo.transform.SetParent(root.transform, false);
+            netPanelGo.transform.localPosition = new Vector3(0.58f, 0.22f, -0.35f);
+            netPanelGo.transform.localRotation = Quaternion.Euler(0f, -28f, 0f);
+            netPanelGo.AddComponent<BattleNetVRPanel>().Bind(net);
 
             XRRigFactory.EnsureLighting();
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
