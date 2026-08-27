@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**90 pytest**，静态阶段 **已关闭并冻结**
+**规模**：**237 条 identifier**，**94 pytest**，静态阶段 **已关闭并冻结**
 
 ## 八层目录
 
@@ -56,6 +56,7 @@ make test      # 运行测试
 make handoff   # 实机交接摘要
 make check-captures  # 采集文件预检
 make phase-b   # 实机采集后刷新
+make phase-c   # 实验日志校验
 ```
 
 ## 下一步（需实物）
