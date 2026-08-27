@@ -25,6 +25,7 @@ cat STATIC_REPORT.md
 | `HARDWARE_HANDOFF.md` | 实机接入三步指南 |
 | `STATIC_REPORT.md` | 自动摘要 |
 | `manifests/pending_index.json` | 阻塞 identifier 索引 |
+| `BLOCKED_REPORT.md` | 98 条阻塞项人类可读表 |
 | `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
 | `manifests/bom_crosswalk.json` | BOM → HW 交叉对照 |
 | `manifests/phase_roadmap.json` | 阶段 B/C 解锁路线图 |

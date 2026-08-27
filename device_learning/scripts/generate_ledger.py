@@ -44,6 +44,7 @@ FEEDERS = [
     ["audit_sensitive_tokens.py"],
     ["validate_catalog_integrity.py"],
     ["build_evidence_summary.py"],
+    ["build_blocked_report.py"],
     ["build_learning_report.py"],
     ["build_identifier_index.py"],
     ["verify_completion.py"],

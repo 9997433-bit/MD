@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:39:19.174733+00:00",
+  "generated_at": "2026-08-27T15:40:30.699075+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -2155,7 +2155,7 @@
   },
   "manifests": {
     "bit_strings": {
-      "generated_at": "2026-08-27T15:39:17.541536+00:00",
+      "generated_at": "2026-08-27T15:40:29.028313+00:00",
       "source": "firmware/device.bit",
       "file_size_bytes": 131046,
       "min_string_length": 4,
@@ -2304,7 +2304,7 @@
       }
     },
     "bom_crosswalk": {
-      "generated_at": "2026-08-27T15:39:18.202163+00:00",
+      "generated_at": "2026-08-27T15:40:29.675729+00:00",
       "component_count": 40,
       "linked_count": 27,
       "links": [
@@ -2557,7 +2557,7 @@
       "boundary": "Keyword heuristic on ref/marking only; not a netlist"
     },
     "catalog_integrity": {
-      "generated_at": "2026-08-27T15:39:18.853283+00:00",
+      "generated_at": "2026-08-27T15:40:30.309382+00:00",
       "entry_count": 237,
       "unique_identifiers": 237,
       "duplicate_count": 0,
@@ -2573,6 +2573,7 @@
         "min_identifiers": true,
         "learning_guide": true,
         "static_report": true,
+        "blocked_report": true,
         "phase_b_scaffold": true,
         "phase_c_scaffold": true,
         "hardware_handoff": true,
@@ -2587,7 +2588,7 @@
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "config_entropy": {
-      "generated_at": "2026-08-27T15:39:17.630633+00:00",
+      "generated_at": "2026-08-27T15:40:29.109225+00:00",
       "source": "firmware/device.bit",
       "config_segment_bytes": 130948,
       "byte_entropy_bits": 4.3049,
@@ -2600,7 +2601,7 @@
       ]
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:39:18.356866+00:00",
+      "generated_at": "2026-08-27T15:40:29.830344+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -2757,7 +2758,7 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-27T15:39:17.837399+00:00",
+      "generated_at": "2026-08-27T15:40:29.315474+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
@@ -2779,7 +2780,7 @@
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-27T15:39:17.709986+00:00",
+      "generated_at": "2026-08-27T15:40:29.188751+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
       "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
@@ -2790,7 +2791,7 @@
       "layout_ref": "manifests/eeprom_layout_ref.json"
     },
     "evidence_summary": {
-      "generated_at": "2026-08-27T15:39:18.930017+00:00",
+      "generated_at": "2026-08-27T15:40:30.386826+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
@@ -2808,16 +2809,19 @@
         "protocol_log_present": false
       },
       "bitstream": {
-        "idcode": null,
+        "idcode": "0x01414093",
+        "part": "3s200ft256",
+        "build_date": "2011/06/10",
         "frames_est": 627,
         "iob_candidate": 223
       },
       "eeprom_status": "synthetic_pipeline_test",
+      "catalog_integrity_ok": true,
       "stop_conditions_pass": true,
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:39:17.171882+00:00",
+      "generated_at": "2026-08-27T15:40:28.666357+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2879,7 +2883,7 @@
       ]
     },
     "firmware_scan": {
-      "generated_at": "2026-08-27T15:39:17.961952+00:00",
+      "generated_at": "2026-08-27T15:40:29.441088+00:00",
       "eeprom_size": 8192,
       "boot_format": "C2",
       "firmware_offset": 12,
@@ -2904,7 +2908,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:39:17.450649+00:00",
+      "generated_utc": "2026-08-27T15:40:28.937873+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -3160,7 +3164,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:39:17.355605+00:00",
+      "generated_utc": "2026-08-27T15:40:28.846463+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -4289,7 +4293,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:39:17.171882+00:00",
+      "generated_at": "2026-08-27T15:40:28.666357+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -4340,7 +4344,7 @@
       ]
     },
     "pending_index": {
-      "generated_at": "2026-08-27T15:39:18.434364+00:00",
+      "generated_at": "2026-08-27T15:40:29.908630+00:00",
       "blocked_statuses": [
         "missing",
         "not_started",
@@ -5232,7 +5236,7 @@
       "note": "Blocked items must not be upgraded without new evidence"
     },
     "phase_b_status": {
-      "generated_at": "2026-08-27T15:39:18.514522+00:00",
+      "generated_at": "2026-08-27T15:40:29.988569+00:00",
       "captures_dir": "phase_b/captures",
       "capture_count": 0,
       "captures": [],
@@ -5247,7 +5251,7 @@
       ]
     },
     "phase_roadmap": {
-      "generated_at": "2026-08-27T15:39:18.278891+00:00",
+      "generated_at": "2026-08-27T15:40:29.752666+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -5397,7 +5401,7 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:39:18.122619+00:00",
+      "generated_at": "2026-08-27T15:40:29.597315+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -6118,7 +6122,7 @@
       "count": 22
     },
     "sensitive_audit": {
-      "generated_at": "2026-08-27T15:39:18.765808+00:00",
+      "generated_at": "2026-08-27T15:40:30.230432+00:00",
       "scanned_roots": [
         "manifests",
         "."
@@ -6128,7 +6132,7 @@
       "ok": true
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:39:18.045329+00:00",
+      "generated_at": "2026-08-27T15:40:29.520268+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -6264,7 +6268,7 @@
       "pin_bridge_count": 22
     },
     "usb_capture_meta": {
-      "generated_at": "2026-08-27T15:39:18.593854+00:00",
+      "generated_at": "2026-08-27T15:40:30.068165+00:00",
       "status": "missing",
       "path": "phase_b/captures",
       "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"

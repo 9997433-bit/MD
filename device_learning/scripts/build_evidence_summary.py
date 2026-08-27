@@ -9,12 +9,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _idcode(frame: dict) -> str | None:
+    reg = frame.get("packet_stream", {}).get("registers", {}).get("IDCODE", {})
+    return reg.get("raw") or frame.get("idcode", {}).get("raw")
+
+
 def main() -> None:
     cov = json.loads((ROOT / "coverage.json").read_text(encoding="utf-8"))
     pending = json.loads((ROOT / "manifests" / "pending_index.json").read_text(encoding="utf-8"))
     phase_b = json.loads((ROOT / "manifests" / "phase_b_status.json").read_text(encoding="utf-8"))
     frame = json.loads((ROOT / "manifests" / "frame_summary.json").read_text(encoding="utf-8"))
     eeprom = json.loads((ROOT / "manifests" / "eeprom_meta.json").read_text(encoding="utf-8"))
+    integrity = json.loads((ROOT / "manifests" / "catalog_integrity.json").read_text(encoding="utf-8"))
 
     fa = frame.get("frame_analysis", {})
     summary = {
@@ -25,11 +31,14 @@ def main() -> None:
         "blocked": pending.get("total_blocked"),
         "hardware_ready": phase_b.get("flags", {}),
         "bitstream": {
-            "idcode": frame.get("idcode", {}).get("raw"),
+            "idcode": _idcode(frame),
+            "part": frame.get("bit_container", {}).get("sections", {}).get("b_part_name", {}).get("value"),
+            "build_date": frame.get("bit_container", {}).get("sections", {}).get("c_date", {}).get("value"),
             "frames_est": fa.get("estimated_frame_count"),
             "iob_candidate": fa.get("candidate_iob_config_words"),
         },
         "eeprom_status": eeprom.get("status"),
+        "catalog_integrity_ok": integrity.get("ok"),
         "stop_conditions_pass": cov.get("all_pass"),
         "declaration": cov.get("declaration"),
     }

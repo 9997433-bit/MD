@@ -43,10 +43,9 @@
 
 ```bash
 cd device_learning
-python3 scripts/generate_ledger.py   # 生成账本 + STATIC_REPORT.md
-python3 scripts/verify_completion.py # 静态阶段验收
-python3 -m pytest tests/ -q          # 42 项测试
-python3 scripts/run_phase_b.py       # 实机采集后一键刷新
+make verify              # 生成账本 + 验收（推荐）
+make test                # 55 项测试
+make phase-b             # 实机采集后一键刷新
 ```
 
 ## 核心声明
