@@ -76,6 +76,85 @@ header h1 {
 
 .bar.boss { background: linear-gradient(90deg, #922b21, var(--boss)); }
 
+.fury-cast {
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid #5a3030;
+  background: linear-gradient(180deg, rgba(40, 12, 8, 0.9), rgba(20, 10, 10, 0.85));
+  position: relative;
+  overflow: hidden;
+}
+
+.fury-cast.wind {
+  border-color: #2a4a66;
+  background: linear-gradient(180deg, rgba(8, 24, 40, 0.9), rgba(6, 16, 28, 0.85));
+}
+
+.fury-cast.casting {
+  animation: fury-glow 1.6s ease-in-out infinite;
+}
+
+.fury-cast.urgent {
+  animation: fury-urgent 0.55s ease-in-out infinite;
+  border-color: #ff6b4a;
+}
+
+.fury-label {
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+  color: #ffb199;
+}
+
+.fury-cast.wind .fury-label { color: #9edcff; }
+
+.fury-bar-wrap {
+  background: #111822;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 10px;
+}
+
+.fury-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #c0392b, #ff6b4a);
+  transition: width 0.25s ease;
+}
+
+.fury-cast.wind .fury-bar-fill {
+  background: linear-gradient(90deg, #2471a3, #5eb1ff);
+}
+
+.fury-burst {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(255, 220, 120, 0.55), transparent 70%);
+}
+
+.fury-burst.active {
+  animation: fury-burst 0.65s ease-out forwards;
+}
+
+@keyframes fury-glow {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 100, 60, 0); }
+  50% { box-shadow: 0 0 14px rgba(255, 100, 60, 0.35); }
+}
+
+@keyframes fury-urgent {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes fury-burst {
+  0% { opacity: 0; transform: scale(0.85); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
 .battle-area {
   display: grid;
   grid-template-columns: minmax(320px, 520px) 1fr;

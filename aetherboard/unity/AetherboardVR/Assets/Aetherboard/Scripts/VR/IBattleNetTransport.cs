@@ -18,7 +18,8 @@ namespace Aetherboard.VR
     public enum BattleNetTransportKind
     {
         Tcp,
-        WebSocket
+        WebSocket,
+        NetcodeRelay
     }
 
     public static class BattleNetTransportFactory
@@ -26,6 +27,7 @@ namespace Aetherboard.VR
         public static IBattleNetTransport Create(BattleNetTransportKind kind) => kind switch
         {
             BattleNetTransportKind.WebSocket => new BattleWebSocketNetTransport(),
+            BattleNetTransportKind.NetcodeRelay => new BattleNetcodeRelayTransport(),
             _ => new BattleTcpNetTransport()
         };
     }

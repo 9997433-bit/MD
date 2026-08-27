@@ -203,5 +203,15 @@ namespace Aetherboard.Core.Tests
             Assert.Equal(BattleSyncProtocol.TypeError, BattleSyncProtocol.ExtractType(line));
             Assert.Contains("无权", BattleSyncProtocol.ExtractErrorMessage(line));
         }
+
+        [Fact]
+        public void NetMessageCodec_FrameRoundTrip()
+        {
+            var json = "{\"type\":\"state\",\"payload\":{\"turn\":3}}";
+            var framed = BattleNetMessageCodec.Frame(json);
+            Assert.True(framed.Length > BattleNetMessageCodec.HeaderSize);
+            var parsed = BattleNetMessageCodec.Unframe(framed, framed.Length);
+            Assert.Equal(json, parsed);
+        }
     }
 }

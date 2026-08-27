@@ -95,3 +95,5 @@ director.ExportCommandLogJson();
 | `BattleWebSocketNetTransport` | 消息帧 JSON（8769） |
 
 `BattleNetTransportFactory` 可按类型创建，便于后续接入 Unity Netcode 适配器而不改动 `BattleNetSession`。
+
+详见 [NETCODE.md](./NETCODE.md)。

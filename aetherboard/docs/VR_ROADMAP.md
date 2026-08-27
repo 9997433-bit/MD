@@ -39,7 +39,9 @@
 | **机制 VFX 升级** | ✅ | 缩圈光墙 / 重击双波 / 风刃 / 集合信标 |
 | **读条打断 VFX** | ✅ | 轨道环 + 紧急脉冲 + 打断爆发 |
 | **网络传输抽象** | ✅ | `IBattleNetTransport` TCP/WS 可插拔 |
-| 在线多人传输层 | 🔲 | Unity Netcode 适配器 |
+| **Netcode 适配原型** | ✅ | `BattleNetcodeService` + Relay 传输 |
+| **Web 读条 UI** | ✅ | 进度条 + 紧急脉冲 + 打断爆发 |
+| 在线多人传输层 | 🔲 | NGO CustomMessaging 实装 |
 
 ## 技术栈
 

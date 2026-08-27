@@ -15,8 +15,9 @@ namespace Aetherboard.VR
     public enum NetClientTransport
     {
         Auto,
+        WebSocket,
         Tcp,
-        WebSocket
+        NetcodeRelay
     }
 
     public interface IBattleNetworkBridge
@@ -81,6 +82,7 @@ namespace Aetherboard.VR
             {
                 NetClientTransport.Auto => NetClientTransport.WebSocket,
                 NetClientTransport.WebSocket => NetClientTransport.Tcp,
+                NetClientTransport.Tcp => NetClientTransport.NetcodeRelay,
                 _ => NetClientTransport.Auto
             };
             Debug.Log($"[Aetherboard] Client transport → {clientTransport}");
@@ -181,17 +183,21 @@ namespace Aetherboard.VR
         private void ConnectClient()
         {
             _activeTransport = "—";
-            var connected = false;
-
-            if (clientTransport != NetClientTransport.Tcp)
-                connected = TryConnectTransport(BattleNetTransportKind.WebSocket, hostWsPort);
-
-            if (!connected && clientTransport != NetClientTransport.WebSocket)
-                connected = TryConnectTransport(BattleNetTransportKind.Tcp, hostPort);
+            var connected = clientTransport switch
+            {
+                NetClientTransport.NetcodeRelay =>
+                    TryConnectTransport(BattleNetTransportKind.NetcodeRelay, hostWsPort),
+                NetClientTransport.Tcp =>
+                    TryConnectTransport(BattleNetTransportKind.Tcp, hostPort),
+                NetClientTransport.WebSocket =>
+                    TryConnectTransport(BattleNetTransportKind.WebSocket, hostWsPort),
+                _ => TryConnectTransport(BattleNetTransportKind.WebSocket, hostWsPort)
+                     || TryConnectTransport(BattleNetTransportKind.Tcp, hostPort)
+            };
 
             if (!connected)
             {
-                Debug.LogWarning("[Aetherboard] Client connect failed (tried WS/TCP per transport setting).");
+                Debug.LogWarning("[Aetherboard] Client connect failed.");
                 role = NetSessionRole.Offline;
             }
         }

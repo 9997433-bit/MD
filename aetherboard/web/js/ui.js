@@ -2,6 +2,7 @@ import { BOSS_POS, JOB_SKILLS, Phase, SKILLS, TELEGRAPH_TEXT } from "./constants
 import { importHostState } from "./hostState.js";
 import { canControl } from "./coop.js";
 import { CommandLog, downloadReplayJson, replayCommands } from "./replay.js";
+import { createFuryBarElements, updateFuryBar } from "./furyBar.js";
 
 const phaseLabel = {
   WARNING: "预警",
@@ -24,6 +25,8 @@ export class GameUI {
     this.selectedUnitId = null;
     this.pendingSkillId = null;
     this.commandLog = new CommandLog(engine.seed, engine.bossId);
+    this._lastFury = 0;
+    this.furyBar = createFuryBarElements();
 
     this.boardEl = document.getElementById("board");
     this.bossNameEl = document.getElementById("boss-name");
@@ -33,7 +36,6 @@ export class GameUI {
     this.bossHpBar = document.getElementById("boss-hp-bar");
     this.bossHpText = document.getElementById("boss-hp-text");
     this.bossPhase = document.getElementById("boss-phase");
-    this.furyIndicator = document.getElementById("fury-indicator");
     this.partyList = document.getElementById("party-list");
     this.selectedUnit = document.getElementById("selected-unit");
     this.skillButtons = document.getElementById("skill-buttons");
@@ -198,10 +200,7 @@ export class GameUI {
     this.bossHpBar.style.width = `${Math.max(0, ratio * 100)}%`;
     this.bossHpText.textContent = `${boss.hp} / ${boss.maxHp}`;
     this.bossPhase.textContent = `Phase ${boss.phase}`;
-    this.furyIndicator.classList.toggle("hidden", boss.fury <= 0);
-    if (boss.fury > 0) {
-      this.furyIndicator.textContent = `${this.engine.profile.furyName}读条：剩余 ${boss.fury} 回合`;
-    }
+    this._lastFury = updateFuryBar(this.furyBar, boss, this.engine.profile, this._lastFury);
     this.bossSelect.value = this.engine.bossId;
   }
 
