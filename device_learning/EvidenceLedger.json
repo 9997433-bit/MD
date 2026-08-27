@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:26:02.746972+00:00",
+  "generated_at": "2026-08-27T15:26:59.218185+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -2217,7 +2217,7 @@
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:26:02.431881+00:00",
+      "generated_at": "2026-08-27T15:26:58.898449+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -2405,7 +2405,7 @@
       ]
     },
     "eeprom_meta": {
-      "generated_at": "2026-08-27T15:26:02.121767+00:00",
+      "generated_at": "2026-08-27T15:26:58.584992+00:00",
       "capture_path": "phase_b/captures/eeprom.bin",
       "status": "missing",
       "reason": "phase_b/captures/eeprom.bin not present",
@@ -2413,7 +2413,7 @@
       "note": "no EEPROM dump available; no field values inferred"
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:26:01.767094+00:00",
+      "generated_at": "2026-08-27T15:26:58.220821+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2480,7 +2480,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:26:02.037992+00:00",
+      "generated_utc": "2026-08-27T15:26:58.500252+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -2722,7 +2722,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:26:01.945956+00:00",
+      "generated_utc": "2026-08-27T15:26:58.402463+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -3851,7 +3851,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:26:01.767094+00:00",
+      "generated_at": "2026-08-27T15:26:58.220821+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -3906,7 +3906,7 @@
       "ready": false
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:26:02.352501+00:00",
+      "generated_at": "2026-08-27T15:26:58.819638+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -4627,7 +4627,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:26:02.275575+00:00",
+      "generated_at": "2026-08-27T15:26:58.741648+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [

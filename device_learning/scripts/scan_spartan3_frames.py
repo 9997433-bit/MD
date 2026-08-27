@@ -82,6 +82,11 @@ FRAMES_PER_COLUMN = {
 # column-count estimate.
 CLB_LIKE_FRAMES_PER_COLUMN = 19
 
+# Header-class codes for the 16-bit word classifier (top three bits of each
+# 16-bit word, matching the Type-1 / Type-2 packet opcode field position).
+WORD_CLASS_TYPE1 = 0b001
+WORD_CLASS_TYPE2 = 0b010
+
 
 def decode_far(value: int) -> dict:
     """Decode a raw 32-bit FAR value into its documented sub-fields."""
@@ -178,6 +183,36 @@ def frame_type_counts(packets: dict, frame_analysis: dict) -> dict:
     return out
 
 
+def word_class_scan(config_segment: bytes) -> dict:
+    """Coarse 16-bit word histogram over the raw configuration segment.
+
+    Each 16-bit word is bucketed by the top three bits, which line up with the
+    packet opcode field: class ``001`` and ``010`` mirror the Type-1 / Type-2
+    header signatures, ``zero`` counts all-zero words (padding), and ``other``
+    covers the remaining data/CRC words. This is an intentionally simple,
+    reproducible density measure over the whole segment, complementary to the
+    packet-accurate counts in ``frame_type_counts``.
+    """
+    n = len(config_segment) // 2
+    words = struct.unpack_from(f">{n}H", config_segment, 0)
+    counts = {"zero": 0, "type1": 0, "type2": 0, "other": 0}
+    for w in words:
+        if w == 0:
+            counts["zero"] += 1
+        elif (w >> 13) == WORD_CLASS_TYPE1:
+            counts["type1"] += 1
+        elif (w >> 13) == WORD_CLASS_TYPE2:
+            counts["type2"] += 1
+        else:
+            counts["other"] += 1
+    return {
+        "confidence": "candidate (heuristic 16-bit classifier)",
+        "word_count": n,
+        "class_counts": counts,
+        "zero_word_ratio": round(counts["zero"] / n, 4) if n else 0.0,
+    }
+
+
 def register_write_inventory(packets: dict) -> dict:
     """Inventory every Type-1 register write with its payload."""
     writes = []
@@ -225,6 +260,10 @@ def scan(bit_path: str) -> dict:
         result["note"] = "configuration segment not located"
         return result
 
+    declared_len = container.get("config_data_declared_length")
+    part_name = (container.get("sections", {})
+                 .get("b_part_name", {}).get("value"))
+
     config = data[config_off:]
     sync_local = config.find(struct.pack(">I", SYNC_WORD))
     if sync_local < 0:
@@ -233,6 +272,16 @@ def scan(bit_path: str) -> dict:
         return result
 
     packets = parse_packets(config, sync_local)
+
+    # Coarse whole-segment word histogram over the declared configuration bytes.
+    seg_end = config_off + declared_len if declared_len else len(data)
+    result["device"] = part_name
+    result["config_length"] = declared_len
+    result["scan"] = word_class_scan(data[config_off:seg_end])
+    result["notes"] = (
+        "Heuristic Spartan-3 frame classifier (16-bit word top-3-bit header "
+        "class); see far_address_distribution / frame_type_counts / "
+        "register_write_inventory for packet-accurate detail.")
 
     # Recover the FLR-based frame view the same way the sibling parser does so
     # frame-count estimates stay consistent across manifests.

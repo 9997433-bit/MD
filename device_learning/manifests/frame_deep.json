@@ -1,10 +1,24 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-08-27T15:26:02.037992+00:00",
+  "generated_utc": "2026-08-27T15:27:10.763525+00:00",
   "source_file": "firmware/device.bit",
   "file_size_bytes": 131046,
   "reference": "UG332 / XAPP452 (public Xilinx documentation)",
   "scan_status": "partial-ok",
+  "device": "3s200ft256",
+  "config_length": 130952,
+  "scan": {
+    "confidence": "candidate (heuristic 16-bit classifier)",
+    "word_count": 65476,
+    "class_counts": {
+      "zero": 25962,
+      "type1": 4598,
+      "type2": 3796,
+      "other": 31120
+    },
+    "zero_word_ratio": 0.3965
+  },
+  "notes": "Heuristic Spartan-3 frame classifier (16-bit word top-3-bit header class); see far_address_distribution / frame_type_counts / register_write_inventory for packet-accurate detail.",
   "config_segment": {
     "offset_in_file": 94,
     "declared_length_bytes": 130952,

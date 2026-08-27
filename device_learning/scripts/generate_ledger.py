@@ -36,6 +36,7 @@ FEEDERS = [
     ["redact_manifests.py"],
     ["build_learning_report.py"],
     ["verify_completion.py"],
+    ["build_eeprom_synthetic.py"],
 ]
 
 

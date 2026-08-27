@@ -29,12 +29,22 @@
 2. 继电器切换实验 → 验证 SIG-002
 3. 正弦输入 + 抓包 → 验证数据帧格式
 
-## 一键生成
+## 阶段状态
+
+| 阶段 | 状态 |
+|------|------|
+| A 静态分析 | **完成** (`verify_completion.py` → `static_phase_complete: true`) |
+| B 实机采集 | 脚手架就绪，等待 `phase_b/captures/` |
+| C 实验验证 | 脚手架就绪，见 `phase_c/README.md` |
+| D 行为复现 | 未开始 |
+
+## 一键命令
 
 ```bash
 cd device_learning
-python3 scripts/generate_ledger.py
-python3 -m pytest tests/ -q
+python3 scripts/generate_ledger.py   # 生成账本 + STATIC_REPORT.md
+python3 scripts/verify_completion.py # 静态阶段验收
+python3 -m pytest tests/ -q          # 35 项测试
 ```
 
 ## 核心声明
