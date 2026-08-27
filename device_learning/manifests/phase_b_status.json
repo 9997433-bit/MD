@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:32:10.423617+00:00",
+  "generated_at": "2026-08-27T16:34:24.853635+00:00",
   "captures_dir": "phase_b/captures",
   "capture_count": 0,
   "captures": [],
@@ -7,6 +7,7 @@
     "eeprom_present": false,
     "eeprom_observed": false,
     "usb_capture_present": false,
+    "usb_capture_observed": false,
     "protocol_log_present": false
   },
   "ready_for_ledger_refresh": false,

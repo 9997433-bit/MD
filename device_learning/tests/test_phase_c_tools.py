@@ -27,7 +27,7 @@ def test_validate_captures_rejects_synthetic_eeprom(synthetic_eeprom_capture):
     result = _run("validate_captures.py")
     assert result.returncode == 3
     data = json.loads(result.stdout)
-    assert data["synthetic_eeprom_detected"] is True
+    assert data["synthetic_fixture_detected"] is True
 
 
 def test_phase_transition_with_fake_real_eeprom():

@@ -21,16 +21,28 @@ def load_phase_b_flags() -> dict:
 def main() -> None:
     sys.path.insert(0, str(ROOT / "scripts"))
     from eeprom_source import is_synthetic_dump  # noqa: E402
+    from pcap_source import is_synthetic_pcap  # noqa: E402
 
     eeprom_path = CAPTURES / "eeprom.bin"
     eeprom_bytes = eeprom_path.read_bytes() if eeprom_path.exists() else b""
+    enum_path = CAPTURES / "usb_enum.pcapng"
+    enum_bytes = enum_path.read_bytes() if enum_path.exists() else b""
+    real_pcaps = []
+    if CAPTURES.exists():
+        for p in CAPTURES.glob("*.pcapng"):
+            data = p.read_bytes()
+            if not is_synthetic_pcap(data):
+                real_pcaps.append(p.name)
+
     flags = {
         "eeprom_file": eeprom_path.exists(),
         "eeprom_observed": eeprom_path.exists() and bool(eeprom_bytes) and not is_synthetic_dump(eeprom_bytes),
         "eeprom_synthetic": eeprom_path.exists() and bool(eeprom_bytes) and is_synthetic_dump(eeprom_bytes),
-        "usb_enum": (CAPTURES / "usb_enum.pcapng").exists(),
+        "usb_enum": enum_path.exists(),
+        "usb_enum_synthetic": enum_path.exists() and bool(enum_bytes) and is_synthetic_pcap(enum_bytes),
         "usb_session": (CAPTURES / "usb_session.pcapng").exists(),
         "any_pcap": any(CAPTURES.glob("*.pcapng")) if CAPTURES.exists() else False,
+        "any_pcap_observed": len(real_pcaps) > 0,
     }
     # Prefer ingest flags when available (post-ingest)
     ingest = load_phase_b_flags()
@@ -43,10 +55,12 @@ def main() -> None:
 
     if flags["eeprom_synthetic"] and not flags["eeprom_observed"]:
         warnings.append("eeprom.bin matches synthetic fixture SHA-256 — not counted as real capture")
+    if flags.get("usb_enum_synthetic") and not flags.get("any_pcap_observed"):
+        warnings.append("usb_enum.pcapng matches synthetic fixture — not counted as real capture")
 
-    if flags["eeprom_observed"] or flags["any_pcap"]:
+    if flags["eeprom_observed"] or flags["any_pcap_observed"]:
         recommended = "phase_b_in_progress"
-    if flags["eeprom_observed"] and flags["any_pcap"]:
+    if flags["eeprom_observed"] and flags["any_pcap_observed"]:
         recommended = "phase_b_partial_complete"
 
     meta = {
@@ -58,7 +72,7 @@ def main() -> None:
         "warnings": warnings,
         "action": (
             "make phase-b"
-            if flags["eeprom_observed"] or flags["any_pcap"]
+            if flags["eeprom_observed"] or flags["any_pcap_observed"]
             else "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
         ),
     }

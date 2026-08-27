@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from eeprom_source import is_synthetic_dump  # noqa: E402
+from pcap_source import is_synthetic_pcap  # noqa: E402
 
 CAPTURES = ROOT / "phase_b" / "captures"
 EXPECTED = {
@@ -54,6 +55,11 @@ def check_file(name: str, spec: dict) -> dict:
             row["ok"] = False
             row["issue"] = "unrecognized pcap/pcapng magic"
             return row
+        if is_synthetic_pcap(path.read_bytes()):
+            row["is_synthetic_fixture"] = True
+            row["ok"] = False
+            row["issue"] = "SHA-256 matches synthetic fixture — replace with real capture"
+            return row
     row["ok"] = True
     return row
 
@@ -88,12 +94,12 @@ def main() -> int:
         "checks": checks,
         "ready_for_phase_b": ready,
         "partial_captures": partial and not ready,
-        "synthetic_eeprom_detected": synthetic_only,
+        "synthetic_fixture_detected": synthetic_only,
     }
     print(json.dumps(report, indent=2, ensure_ascii=False))
 
     if synthetic_only:
-        print("\n警告: eeprom.bin 为合成夹具，不能作为实机证据。", file=sys.stderr)
+        print("\n警告: 检测到合成夹具，不能作为实机证据。", file=sys.stderr)
         return 3
     if not partial:
         print("\n提示: 尚无采集文件。见 HARDWARE_HANDOFF.md", file=sys.stderr)

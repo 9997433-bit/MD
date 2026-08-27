@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:32:03.665628+00:00",
+  "generated_at": "2026-08-27T16:34:18.009028+00:00",
   "artifacts": [
     {
       "path": "phase_b/captures/eeprom.bin",
@@ -32,6 +32,7 @@
     "eeprom_present": false,
     "eeprom_observed": false,
     "usb_capture_present": false,
+    "usb_capture_observed": false,
     "protocol_log_present": false
   },
   "eeprom_status": "synthetic_pipeline_test",

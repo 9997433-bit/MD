@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:32:09.640003+00:00",
+  "generated_at": "2026-08-27T16:34:24.057013+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "static_phase_closed": true,
   "frozen": true,
@@ -12,8 +12,8 @@
     "not_started": 30,
     "missing": 12
   },
-  "pytest_count": 100,
-  "manifest_json_count": 42,
+  "pytest_count": 103,
+  "manifest_json_count": 43,
   "phase_b_blockers_remaining": 3,
   "upgrade_proposals_pending": 0,
   "resume_commands": [

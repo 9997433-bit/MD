@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:32:04.689993+00:00",
+  "generated_at": "2026-08-27T16:34:19.038431+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,7 +10,7 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-27T16:32:04.588262+00:00",
+      "generated_at": "2026-08-27T16:34:18.934252+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
@@ -23,8 +23,8 @@
         "not_started": 30,
         "missing": 12
       },
-      "pytest_count": 100,
-      "manifest_json_count": 42,
+      "pytest_count": 103,
+      "manifest_json_count": 43,
       "phase_b_blockers_remaining": 3,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-27T16:32:03.819870+00:00",
+      "generated_at": "2026-08-27T16:34:18.163393+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -108,7 +108,7 @@
       "next_command": "make check-captures"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-27T16:32:04.051433+00:00",
+      "generated_at": "2026-08-27T16:34:18.394543+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": false,
       "checklist": "0/6",
@@ -116,7 +116,7 @@
       "recommended_action": "complete phase B captures first"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-27T16:32:01.674061+00:00",
+      "generated_at": "2026-08-27T16:34:15.937970+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "static_complete_pending_hardware",
       "transition_ready": false,
@@ -125,14 +125,16 @@
         "eeprom_observed": false,
         "eeprom_synthetic": false,
         "usb_enum": false,
+        "usb_enum_synthetic": false,
         "usb_session": false,
-        "any_pcap": false
+        "any_pcap": false,
+        "any_pcap_observed": false
       },
       "warnings": [],
       "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-27T16:32:03.665628+00:00",
+      "generated_at": "2026-08-27T16:34:18.009028+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -165,6 +167,7 @@
         "eeprom_present": false,
         "eeprom_observed": false,
         "usb_capture_present": false,
+        "usb_capture_observed": false,
         "protocol_log_present": false
       },
       "eeprom_status": "synthetic_pipeline_test",
@@ -175,7 +178,7 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-27T16:32:03.742800+00:00",
+      "generated_at": "2026-08-27T16:34:18.086482+00:00",
       "applicable": false,
       "proposal_count": 0,
       "proposals": [],
@@ -185,7 +188,7 @@
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-27T16:32:03.042770+00:00",
+      "generated_at": "2026-08-27T16:34:17.385036+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -335,7 +338,7 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-27T16:31:23.672197+00:00",
+      "generated_at": "2026-08-27T16:33:35.969818+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
@@ -351,6 +354,7 @@
         "eeprom_present": false,
         "eeprom_observed": false,
         "usb_capture_present": false,
+        "usb_capture_observed": false,
         "protocol_log_present": false
       },
       "bitstream": {
@@ -425,7 +429,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-27T16:32:01.594182+00:00",
+      "updated_at": "2026-08-27T16:34:15.858654+00:00",
       "done_count": 0,
       "total_count": 6
     },
@@ -482,7 +486,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-27T16:32:00.708084+00:00",
+      "updated_at": "2026-08-27T16:34:14.971358+00:00",
       "done_count": 0,
       "total_count": 6
     }

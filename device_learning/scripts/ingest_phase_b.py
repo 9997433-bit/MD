@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from eeprom_source import is_synthetic_dump  # noqa: E402
+from pcap_source import is_synthetic_pcap  # noqa: E402
 CAPTURES = ROOT / "phase_b" / "captures"
 EXPECTED_EEPROM_SIZE = 8192  # 24LC64
 
@@ -35,6 +36,7 @@ def describe_capture(path: Path) -> dict:
         info["is_synthetic_fixture"] = is_synthetic_dump(path.read_bytes())
     if path.suffix in (".pcap", ".pcapng"):
         info["type"] = "usb_capture"
+        info["is_synthetic_fixture"] = is_synthetic_pcap(path.read_bytes())
     if path.name == "protocol_log.json":
         info["type"] = "protocol_log"
         try:
@@ -54,6 +56,9 @@ def main() -> None:
         c["name"] == "eeprom.bin" and not c.get("is_synthetic_fixture") for c in captures
     )
     has_pcap = any(c.get("type") == "usb_capture" for c in captures)
+    has_real_pcap = any(
+        c.get("type") == "usb_capture" and not c.get("is_synthetic_fixture") for c in captures
+    )
     has_protocol = any(c.get("type") == "protocol_log" for c in captures)
 
     status = {
@@ -65,9 +70,10 @@ def main() -> None:
             "eeprom_present": has_eeprom,
             "eeprom_observed": has_real_eeprom,
             "usb_capture_present": has_pcap,
+            "usb_capture_observed": has_real_pcap,
             "protocol_log_present": has_protocol,
         },
-        "ready_for_ledger_refresh": has_real_eeprom or has_pcap,
+        "ready_for_ledger_refresh": has_real_eeprom or has_real_pcap,
         "next_steps": [],
     }
     if not captures:

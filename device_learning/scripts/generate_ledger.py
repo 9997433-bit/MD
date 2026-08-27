@@ -30,6 +30,7 @@ FEEDERS = [
     ["extract_bit_strings.py"],
     ["scan_config_entropy.py"],
     ["build_eeprom_synthetic.py"],
+    ["build_pcap_synthetic.py"],
     ["analyze_eeprom.py"],
     ["scan_firmware_stub.py"],
     ["build_system_map.py"],

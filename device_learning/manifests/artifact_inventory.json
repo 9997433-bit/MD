@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:32:06.087027+00:00",
-  "artifact_count": 57,
-  "present_count": 57,
+  "generated_at": "2026-08-27T16:34:20.460441+00:00",
+  "artifact_count": 58,
+  "present_count": 58,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 246483
+      "size_bytes": 247426
     },
     {
       "path": "coverage.json",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15230
+      "size_bytes": 15381
     },
     {
       "path": "manifests/output_hashes.json",
@@ -121,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 8556
+      "size_bytes": 8710
     },
     {
       "path": "manifests/bit_strings.json",
@@ -145,7 +145,7 @@
       "path": "manifests/capture_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1039
+      "size_bytes": 1074
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -193,7 +193,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 785
+      "size_bytes": 820
     },
     {
       "path": "manifests/experiment_index.json",
@@ -256,6 +256,12 @@
       "size_bytes": 1024
     },
     {
+      "path": "manifests/pcap_synthetic_meta.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 349
+    },
+    {
       "path": "manifests/pending_index.json",
       "description": "generated manifest",
       "exists": true,
@@ -271,7 +277,7 @@
       "path": "manifests/phase_b_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 400
+      "size_bytes": 435
     },
     {
       "path": "manifests/phase_b_upgrade_proposals.json",
@@ -295,7 +301,7 @@
       "path": "manifests/phase_transition.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 484
+      "size_bytes": 549
     },
     {
       "path": "manifests/photo_hw_map.json",
