@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:51:27.756719+00:00",
+  "generated_at": "2026-08-27T15:52:17.652240+00:00",
   "artifact_count": 42,
   "present_count": 42,
   "artifacts": [
@@ -7,7 +7,7 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 220455
+      "size_bytes": 220452
     },
     {
       "path": "coverage.json",
@@ -193,7 +193,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1024
+      "size_bytes": 1023
     },
     {
       "path": "manifests/pending_index.json",

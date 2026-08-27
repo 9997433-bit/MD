@@ -47,6 +47,7 @@ make verify              # 生成账本 + 验收（推荐）
 make test                # 全量 pytest（含合成流水线集成测试）
 make health              # 包健康检查
 make dryrun              # 合成 EEPROM 流水线演练（非实机数据）
+make handoff             # 实机交接摘要（阶段 B 入口）
 make phase-b             # 实机采集后一键刷新
 ```
 

@@ -11,10 +11,11 @@
 ```bash
 cd device_learning
 make verify    # 生成账本 + 验收
-make test      # 74 项 pytest
+make test      # 76 项 pytest
+make health    # 包健康检查
+make handoff   # 实机交接摘要
 make dryrun    # 合成流水线演练（非实机数据）
 make status    # 一行状态摘要
-make handoff    # 实机交接摘要
 make ci        # verify + test（同 CI）
 ```
 
