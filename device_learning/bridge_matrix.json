@@ -1,0 +1,57 @@
+{
+  "note": "proven_bridge 永为 null 的强制桥。null 表示两层之间没有冻结证据可证明映射关系，禁止凭推测升级。",
+  "forced_null_bridges": [
+    "bitstream_frame -> verilog_module: null",
+    "usb_command -> fpga_register: null",
+    "photo_trace -> pin_constraint: null",
+    "iob_pin -> relay_control_bit: null",
+    "lut_init -> boolean_function: null",
+    "clock_net -> timing_constraint: null",
+    "eeprom_descriptor -> usb_enumeration: null",
+    "config_frame -> block_ram_content: null",
+    "host_ioctl -> usb_command: null",
+    "photo_component -> schematic_net: null"
+  ],
+  "cells": {
+    "bitstream_to_rtl": {
+      "proven_bridge": null,
+      "reason": "配置帧只含比特级 CLB/IOB 配置，无法反推 RTL 模块层次；forced null"
+    },
+    "usb_to_register": {
+      "proven_bridge": null,
+      "reason": "未抓取到主机 USB 传输，命令码到内部寄存器写入无对应"
+    },
+    "photo_to_pinconstraint": {
+      "proven_bridge": null,
+      "reason": "照片走线仅可见外层，无法连到约束文件的引脚锁定；forced null"
+    },
+    "iobpin_to_relaybit": {
+      "proven_bridge": null,
+      "reason": "I/O 引脚与继电器驱动位的映射未经在板测量证明；forced null"
+    },
+    "lut_to_logic": {
+      "proven_bridge": null,
+      "reason": "LUT init 十六进制未解码为布尔方程，缺少信号命名"
+    },
+    "clocknet_to_timing": {
+      "proven_bridge": null,
+      "reason": "时钟布线未绑定到 PERIOD/OFFSET 时序约束"
+    },
+    "eeprom_to_enum": {
+      "proven_bridge": null,
+      "reason": "描述符内容未在实际枚举过程中观测比对"
+    },
+    "frame_to_bram": {
+      "proven_bridge": null,
+      "reason": "BRAM 初始化内容未从配置帧中提取还原"
+    },
+    "ioctl_to_usb": {
+      "proven_bridge": null,
+      "reason": "驱动 IOCTL 到 USB 包的对应关系无动态捕获证据"
+    },
+    "component_to_net": {
+      "proven_bridge": null,
+      "reason": "照片元件丝印到原理图网络无连通性证明"
+    }
+  }
+}
