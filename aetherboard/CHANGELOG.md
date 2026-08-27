@@ -1,5 +1,11 @@
 # Aetherboard 更新日志
 
+## [0.2.2-vr] — 2026-08-27
+
+### VR UX
+- **Boss 选择持久化**（`BattleBossPrefs`）— Quest 重启记住上次 Boss
+- Editor 菜单 `Reset Controls Hint` 重新显示操作提示
+
 ## [0.2.1-vr] — 2026-08-27
 
 ### VR UX（Phase 2）

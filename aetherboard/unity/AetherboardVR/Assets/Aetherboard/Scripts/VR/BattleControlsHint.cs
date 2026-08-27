@@ -9,7 +9,7 @@ namespace Aetherboard.VR
     /// </summary>
     public class BattleControlsHint : MonoBehaviour
     {
-        private const string PrefsKey = "aetherboard_controls_hint_dismissed";
+        public const string PrefsKey = "aetherboard_controls_hint_dismissed";
 
         private Canvas _canvas;
 
@@ -30,6 +30,12 @@ namespace Aetherboard.VR
             PlayerPrefs.Save();
             if (_canvas != null) _canvas.gameObject.SetActive(false);
             enabled = false;
+        }
+
+        public static void ResetDismissedFlag()
+        {
+            PlayerPrefs.DeleteKey(PrefsKey);
+            PlayerPrefs.Save();
         }
 
         private void BuildUi()
