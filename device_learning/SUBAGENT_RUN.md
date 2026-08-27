@@ -1,24 +1,46 @@
 # 子代理并行执行记录
 
-**时间**：2026-08-27  
-**模型**：Fable 5（claude-fable-5-thinking-high）
+**最后更新**：2026-08-27  
+**主分支**：`cursor/device-learning-generate-ledger-b8f5`  
+**PR**：https://github.com/9997433-bit/MD/pull/6
 
-| # | 类型 | 任务 | 状态 | 产出 |
-|---|------|------|------|------|
-| 1 | 写 | 文件哈希 manifest | ✅ | manifests/file_hashes.json |
-| 2 | 写 | 位流元数据解析 | ✅ | scripts/parse_bit_header.py, bitstream_meta.json |
-| 3 | 写 | 照片硬件 BOM | ✅ | manifests/hardware_bom.json (32条) |
-| 4 | 写 | catalog_hw.py | ✅ | 32 条 HW identifier |
-| 5 | 写 | catalog_bit.py | ✅ | 50 条 BIT/FRM/IOB/CLK/MEM |
-| 6 | 写 | catalog_signal/usb | ✅ | 18 SIG + 25 USB |
-| 7 | 写 | 位流帧解析脚本 | ✅ | scripts/parse_bitstream.py, frame_summary.json |
-| 8 | 写 | 引脚假设映射 | ✅ | manifests/pin_hypothesis.json (22条) |
-| 9 | 写 | bridge_matrix + 遗漏 | ✅ | bridge_matrix.json, OMISSIONS |
-| 10 | 写 | generate_ledger.py | ✅ | EvidenceLedger.json, coverage.json |
-| 11 | 写 | pytest 测试套件 | ✅ | 6 测试文件 |
-| 12 | 写 | README + 执行状态 | ✅ | README, EXECUTION_STATUS |
+## 最终规模
 
-**主代理汇总**：
-- 总 identifier：**125** 条（hw 32 + bit 50 + sig 18 + usb 25）
-- 分支：`cursor/device-learning-analysis-7fdd`
-- 停止条件 1–5 全部 pass
+| 指标 | 值 |
+|------|-----|
+| Identifier | **237**（八层 catalog） |
+| pytest | **100** |
+| confirmed / blocked | 68 / 98 |
+| 静态阶段 | **已关闭冻结** |
+
+## 阶段状态
+
+| 阶段 | 状态 |
+|------|------|
+| A 静态分析 | ✅ 完成（`STATIC_CLOSURE.md`） |
+| B 实机采集 | 脚手架就绪，等待 `phase_b/captures/` |
+| C 实验验证 | 脚手架就绪，见 `phase_c/` |
+
+## 子代理交付汇总（历史）
+
+| 任务 | 产出 |
+|------|------|
+| 文件哈希 / manifest | `file_hashes.json`, `manifest_files.json` |
+| 位流解析 | `parse_bitstream.py`, `frame_summary.json`, `scan_spartan3_frames.py`, `frame_deep.json` |
+| 硬件 BOM / 照片 | `hardware_bom.json`, `photo_index.json` |
+| 八层 catalog | `catalogs/*.py` |
+| 账本生成 | `generate_ledger.py`, `EvidenceLedger.json` |
+| 阶段 B/C 工具 | `make intake`, `make phase-b`, `make phase-c`, `handoff_bundle.json` |
+
+## 无实机时的停止条件
+
+**不要再扩展 identifier 或升级 catalog status。** 入口：
+
+```bash
+make intake    # 人类
+make resume    # Agent JSON
+```
+
+## 声明
+
+> 目录完整 ≠ 厂商等价 ≠ 掌握运行行为

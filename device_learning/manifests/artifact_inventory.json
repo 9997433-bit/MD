@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:29:35.319375+00:00",
+  "generated_at": "2026-08-27T16:32:06.087027+00:00",
   "artifact_count": 57,
   "present_count": 57,
   "artifacts": [
@@ -7,7 +7,7 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 246481
+      "size_bytes": 246483
     },
     {
       "path": "coverage.json",
@@ -31,7 +31,7 @@
       "path": "STATIC_CLOSURE.md",
       "description": "静态阶段关闭摘要",
       "exists": true,
-      "size_bytes": 854
+      "size_bytes": 855
     },
     {
       "path": "CONFIRMED_REPORT.md",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15229
+      "size_bytes": 15230
     },
     {
       "path": "manifests/output_hashes.json",
@@ -253,7 +253,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1023
+      "size_bytes": 1024
     },
     {
       "path": "manifests/pending_index.json",
@@ -331,7 +331,7 @@
       "path": "manifests/static_closure.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 894
+      "size_bytes": 895
     },
     {
       "path": "manifests/system_map.json",
