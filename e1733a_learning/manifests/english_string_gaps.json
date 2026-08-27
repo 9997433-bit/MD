@@ -1,0 +1,66 @@
+{
+  "generated_from": "English.csv static mapping (subagent bc-4c25db37)",
+  "note": "概念级映射；账本仍以 Remote.h/PE 为锚。字符串 ID 仅作 UI 参考，不证明算法。",
+  "ledger_has_string_id_anchors": false,
+  "gap_blocks": [
+    {
+      "block": "ANA-UNC-ISO230",
+      "csv_id_range": "343-376, 3190-3196",
+      "description": "ISO 230-2 测量不确定度估算 UI 整块",
+      "suggested_prefix": "ANA-E1-UNC-*",
+      "status": "missing",
+      "boundary": "string_table_only"
+    },
+    {
+      "block": "CMP-TABLE-PARAMS",
+      "csv_id_range": "3047-3051",
+      "description": "补偿表起止/间隔/位置生成参数提示",
+      "suggested_ids": ["CMP-E1-HINT-TABLE-START", "CMP-E1-HINT-TABLE-END", "CMP-E1-HINT-TABLE-INTERVAL"],
+      "status": "missing",
+      "boundary": "string_table_only"
+    },
+    {
+      "block": "CMP-E1-ENV-CAL",
+      "csv_id_range": "2001-2011",
+      "description": "传感器校准对话框",
+      "suggested_prefix": "CMP-E1-ENV-CAL-*",
+      "status": "missing",
+      "boundary": "string_table_only"
+    },
+    {
+      "block": "ANA-STR-GRAPH-RUNS",
+      "csv_id_range": "49-56, 57, 59",
+      "description": "图形分析：正向/反向曲线、Backlash/pt、Remove Raw Offset",
+      "suggested_prefix": "ANA-E1-STR-RUNS-*",
+      "status": "missing",
+      "boundary": "remote_h_comprise_bits_unmapped"
+    },
+    {
+      "block": "ACQ-TRIG-PARAMS",
+      "csv_id_range": "145-146, 311-312",
+      "description": "Target Window、Trigger Dwell、窗内外",
+      "suggested_ids": ["ACQ-E1-TRIG-STR-TARGETWIN", "ACQ-E1-TRIG-STR-DWELL"],
+      "remote_h_candidates": ["MEASETUP_TRIGWND_ITEMTEXT", "MEASETUP_TRIGDWELL_ITEMTEXT"],
+      "status": "candidate",
+      "boundary": "remote_h_constant_exists_in_setup_constants"
+    },
+    {
+      "block": "ANA-STD-ISOFIELDS",
+      "csv_id_range": "147-171",
+      "description": "ISO Information 报告字段（检验员、机床信息、传感器坐标等）",
+      "suggested_prefix": "ANA-E1-STD-ISOFIELD-*",
+      "status": "missing",
+      "boundary": "string_table_only"
+    }
+  ],
+  "forced_null_reminders": [
+    "Wavelength Compensation [112] must not bridge to Edlen/Ciddor formula",
+    "CompSel Interpolate [314] must not bridge to spline implementation"
+  ],
+  "coverage_summary": {
+    "analysis_core_metrics": "covered via ANA-E1-API-ANALYSIS-* and ANA-E1-STD-*",
+    "compensation_ui_cfg": "partial via CMP-E1-CFG-*",
+    "environment_exports": "partial via CMP-E1-ENV-E1736A_*",
+    "trigger_modes": "covered via ACQ-E1-TRIG-MANUAL/ENCODER/AUTO"
+  }
+}

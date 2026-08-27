@@ -23,4 +23,6 @@
 
 - [阶段B未知导出复核](bc-0998dff5-3577-53cd-befa-ca64c573d676)：`E1736A_ReadEnvironment` 导出项改为 `unknown`（与 ProcessRawData 一致）
 - 补登记 `E1736ACore.dll` 11 个功能导出 → `CMP-E1-CORE-*`
-- [static-analysis占位层](bc-21d0a120-6fec-5ec6-962a-fb702072dc78)：子代理被策略拦截；主代理已写入 `.static-analysis/`
+- [Sample 解析](bc-0184b8ee-e763-5f7d-b096-a396ae9fccc7)：`parse_sample` 修复 mea_type/field_count/LinearErr；新增 `test_e1733a_sample_manifest.py`
+- [扩展分析 catalog](bc-545f109c-2545-598a-89ce-f566a43aa292)：`verify_analysis_ci_map()` 等已合并
+- [English.csv 映射](bc-4c25db37-acaf-536d-9672-5d7b03211580)：缺口清单 → `manifests/english_string_gaps.json`
