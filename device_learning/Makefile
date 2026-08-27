@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b clean status freeze ci health dryrun handoff
+.PHONY: ledger test verify phase-b clean status freeze ci health dryrun handoff check-captures
 
 ledger:
 	python3 scripts/generate_ledger.py
@@ -19,6 +19,9 @@ status:
 
 handoff:
 	python3 scripts/print_handoff.py
+
+check-captures:
+	python3 scripts/validate_captures.py
 
 freeze: verify
 	@echo "Static phase frozen — see manifests/static_freeze.json"

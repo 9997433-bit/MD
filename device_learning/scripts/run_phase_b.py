@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CAPTURES = ROOT / "phase_b" / "captures"
 SCRIPTS = ROOT / "scripts"
+STATUS_PATH = ROOT / "manifests" / "phase_b_status.json"
 
 
 def has_captures() -> bool:
@@ -25,21 +26,34 @@ def run(script: str, *args: str) -> None:
     subprocess.run(cmd, check=True)
 
 
+def load_status() -> dict:
+    if STATUS_PATH.exists():
+        return json.loads(STATUS_PATH.read_text(encoding="utf-8"))
+    return {}
+
+
 def main() -> int:
     if not has_captures():
         print("No phase B captures found in phase_b/captures/")
         print("See HARDWARE_HANDOFF.md for placement instructions.")
-        print("Running ledger refresh only (synthetic fixture path).")
+        print("Running ledger refresh only (no capture ingest).")
 
     run("ingest_phase_b.py")
+    status = load_status()
     run("analyze_pcap_stub.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")
+    run("sync_phase_b_checklist.py")
+    run("detect_phase_transition.py")
     run("generate_ledger.py")
     run("verify_completion.py")
+
+    status = load_status()
     if status.get("ready_for_ledger_refresh"):
         print("\nPhase B captures ingested. Review manifests/ and EvidenceLedger.json.")
+    else:
+        print("\nLedger refreshed (static). Place captures and re-run make phase-b.")
     return 0
 
 

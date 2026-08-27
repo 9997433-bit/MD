@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**78 pytest**，静态阶段 **已关闭并冻结**
+**规模**：**237 条 identifier**，**81 pytest**，静态阶段 **已关闭并冻结**
 
 ## 八层目录
 
@@ -51,6 +51,8 @@ python3 scripts/verify_completion.py
 ```bash
 make ledger    # 生成账本
 make test      # 运行测试
+make handoff   # 实机交接摘要
+make check-captures  # 采集文件预检
 make phase-b   # 实机采集后刷新
 ```
 

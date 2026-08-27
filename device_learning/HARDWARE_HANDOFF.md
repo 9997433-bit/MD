@@ -30,6 +30,7 @@ device_learning/phase_b/captures/
 
 ```bash
 cd device_learning
+python3 scripts/validate_captures.py   # 可选：采集前预检
 python3 scripts/run_phase_b.py
 ```
 
