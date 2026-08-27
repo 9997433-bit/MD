@@ -34,6 +34,7 @@ FEEDERS = [
     ["build_system_map.py"],
     ["build_photo_index.py"],
     ["build_crossref.py"],
+    ["build_pending_index.py"],
     ["ingest_phase_b.py"],
     ["analyze_pcap_stub.py"],
     ["redact_manifests.py"],

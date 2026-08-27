@@ -19,6 +19,8 @@ def main() -> int:
         "static_report": (ROOT / "STATIC_REPORT.md").exists(),
         "phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
         "phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
+        "hardware_handoff": (ROOT / "HARDWARE_HANDOFF.md").exists(),
+        "pending_index": (ROOT / "manifests" / "pending_index.json").exists(),
         "no_captures_yet": not (ROOT / "phase_b" / "captures" / "eeprom.bin").exists(),
     }
     result = {

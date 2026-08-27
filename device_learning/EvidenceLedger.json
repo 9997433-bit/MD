@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:31:24.906331+00:00",
+  "generated_at": "2026-08-27T15:33:42.071331+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -2155,7 +2155,7 @@
   },
   "manifests": {
     "bit_strings": {
-      "generated_at": "2026-08-27T15:31:24.033689+00:00",
+      "generated_at": "2026-08-27T15:33:41.055487+00:00",
       "source": "firmware/device.bit",
       "file_size_bytes": 131046,
       "min_string_length": 4,
@@ -2313,12 +2313,14 @@
         "static_report": true,
         "phase_b_scaffold": true,
         "phase_c_scaffold": true,
+        "hardware_handoff": true,
+        "pending_index": true,
         "no_captures_yet": true
       },
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:31:24.506099+00:00",
+      "generated_at": "2026-08-27T15:33:41.563094+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -2475,7 +2477,7 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-27T15:31:24.193787+00:00",
+      "generated_at": "2026-08-27T15:33:41.225039+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
@@ -2492,7 +2494,7 @@
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-27T15:31:24.113621+00:00",
+      "generated_at": "2026-08-27T15:33:41.144693+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
       "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
@@ -2502,7 +2504,7 @@
       "firmware_offset": 16
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:31:23.666467+00:00",
+      "generated_at": "2026-08-27T15:33:40.617447+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2564,7 +2566,7 @@
       ]
     },
     "firmware_scan": {
-      "generated_at": "2026-08-27T15:31:24.272275+00:00",
+      "generated_at": "2026-08-27T15:33:41.303174+00:00",
       "eeprom_size": 8192,
       "firmware_offset": 16,
       "firmware_scan": {
@@ -2578,7 +2580,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:31:23.941774+00:00",
+      "generated_utc": "2026-08-27T15:33:40.924234+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -2834,7 +2836,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:31:23.849446+00:00",
+      "generated_utc": "2026-08-27T15:33:40.829682+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -3963,7 +3965,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:31:23.666467+00:00",
+      "generated_at": "2026-08-27T15:33:40.617447+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -4013,8 +4015,900 @@
         }
       ]
     },
+    "pending_index": {
+      "generated_at": "2026-08-27T15:33:41.641594+00:00",
+      "blocked_statuses": [
+        "missing",
+        "not_started",
+        "unknown"
+      ],
+      "total_blocked": 98,
+      "by_status": {
+        "missing": {
+          "count": 12,
+          "items": [
+            {
+              "identifier": "FW-MCU-CORE-IMAGE",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "mcu"
+            },
+            {
+              "identifier": "FW-MCU-RESET-VECTOR",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "mcu"
+            },
+            {
+              "identifier": "FW-MCU-CODE-XRAM-MAP",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "mcu"
+            },
+            {
+              "identifier": "FW-MCU-I2C-BOOT-PATH",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "mcu"
+            },
+            {
+              "identifier": "FW-MCU-RENUMERATION",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "mcu"
+            },
+            {
+              "identifier": "FW-EEPROM-IMAGE",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            },
+            {
+              "identifier": "FW-EEPROM-CONFIG-BYTE",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            },
+            {
+              "identifier": "FW-EEPROM-VIDPID",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            },
+            {
+              "identifier": "FW-EEPROM-DESC-OVERRIDE",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            },
+            {
+              "identifier": "FW-EEPROM-BOOT-FORMAT",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            },
+            {
+              "identifier": "FW-EEPROM-DID-FIELD",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            },
+            {
+              "identifier": "FW-EEPROM-FW-RECORDS",
+              "layer": "usb",
+              "status": "missing",
+              "boundary": "no_dump",
+              "module": "eeprom"
+            }
+          ]
+        },
+        "not_started": {
+          "count": 30,
+          "items": [
+            {
+              "identifier": "SIG-ADC-TO-INTERFACE",
+              "layer": "signal",
+              "status": "not_started",
+              "boundary": "cross_layer",
+              "module": "path"
+            },
+            {
+              "identifier": "PROTO-DESC-DEVICE",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_capture",
+              "module": "descriptor"
+            },
+            {
+              "identifier": "PROTO-DESC-CONFIG",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_capture",
+              "module": "descriptor"
+            },
+            {
+              "identifier": "PROTO-DESC-INTERFACE",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_capture",
+              "module": "descriptor"
+            },
+            {
+              "identifier": "PROTO-DESC-STRING",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_capture",
+              "module": "descriptor"
+            },
+            {
+              "identifier": "PROTO-CTRL-VENDOR-REQ",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_capture",
+              "module": "control"
+            },
+            {
+              "identifier": "DRV-HOST-MODULE",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_binary",
+              "module": "driver"
+            },
+            {
+              "identifier": "DRV-INF-BINDING",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_binary",
+              "module": "driver"
+            },
+            {
+              "identifier": "DRV-IOCTL-SURFACE",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_binary",
+              "module": "driver"
+            },
+            {
+              "identifier": "DRV-FIRMWARE-LOADER",
+              "layer": "usb",
+              "status": "not_started",
+              "boundary": "no_binary",
+              "module": "driver"
+            },
+            {
+              "identifier": "LEARN-010-USB-PROTO",
+              "layer": "learn",
+              "status": "not_started",
+              "boundary": "Need pcap",
+              "module": "topic"
+            },
+            {
+              "identifier": "LEARN-011-8051-DISASM",
+              "layer": "learn",
+              "status": "not_started",
+              "boundary": "Need eeprom.bin",
+              "module": "topic"
+            },
+            {
+              "identifier": "LEARN-012-PIN-TEST",
+              "layer": "learn",
+              "status": "not_started",
+              "boundary": "Need hardware",
+              "module": "topic"
+            },
+            {
+              "identifier": "LEARN-013-RELAY-TEST",
+              "layer": "learn",
+              "status": "not_started",
+              "boundary": "Need hardware",
+              "module": "topic"
+            },
+            {
+              "identifier": "LEARN-015-OPEN-REIMPL",
+              "layer": "learn",
+              "status": "not_started",
+              "boundary": "Future phase D",
+              "module": "topic"
+            },
+            {
+              "identifier": "EXP-001-EEPROM-DUMP",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need programmer",
+              "module": "capture"
+            },
+            {
+              "identifier": "EXP-002-USB-ENUM",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need device+host",
+              "module": "capture"
+            },
+            {
+              "identifier": "EXP-003-USB-SESSION",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need official driver",
+              "module": "capture"
+            },
+            {
+              "identifier": "EXP-004-PIN-FIFO",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need scope",
+              "module": "verify"
+            },
+            {
+              "identifier": "EXP-005-PIN-ADC",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need scope",
+              "module": "verify"
+            },
+            {
+              "identifier": "EXP-006-RELAY-TOGGLE",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need signal source",
+              "module": "verify"
+            },
+            {
+              "identifier": "EXP-007-COUPLING",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need relay command or manual",
+              "module": "verify"
+            },
+            {
+              "identifier": "EXP-008-SINE-IN",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need AWG+driver",
+              "module": "verify"
+            },
+            {
+              "identifier": "EXP-009-CLOCK-IFCLK",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Need freq counter",
+              "module": "verify"
+            },
+            {
+              "identifier": "EXP-010-8051-DISASM",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Depends EXP-001",
+              "module": "analysis"
+            },
+            {
+              "identifier": "EXP-011-PROTO-TABLE",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Depends EXP-003",
+              "module": "analysis"
+            },
+            {
+              "identifier": "EXP-012-VIDPID",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Depends EXP-001/002",
+              "module": "analysis"
+            },
+            {
+              "identifier": "EXP-013-ENDPOINT-MAP",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Depends EXP-002",
+              "module": "analysis"
+            },
+            {
+              "identifier": "EXP-014-DATA-FRAME",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Depends EXP-008",
+              "module": "analysis"
+            },
+            {
+              "identifier": "EXP-015-BRG-UPGRADE",
+              "layer": "exp",
+              "status": "not_started",
+              "boundary": "Needs EXP-004..008",
+              "module": "meta"
+            }
+          ]
+        },
+        "unknown": {
+          "count": 56,
+          "items": [
+            {
+              "identifier": "HW-013-EEPROM-CAPACITY",
+              "layer": "hw",
+              "status": "unknown",
+              "boundary": "需读板",
+              "module": "storage"
+            },
+            {
+              "identifier": "HW-015-CRYSTAL-FPGA",
+              "layer": "hw",
+              "status": "unknown",
+              "boundary": "照片未清晰标注",
+              "module": "clock"
+            },
+            {
+              "identifier": "FRM-006-STARTUP",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": "需帧级解码",
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-008-FAR",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": "需完整解析",
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-009-PIPELINE",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-025-IO-BLOCK-WRITES",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": "需FAR解码",
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-026-CLB-BLOCK-WRITES",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": "需FAR解码",
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-027-BRAM-BLOCK-WRITES",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": "需FAR解码",
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-028-CONFIG-ORDER",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-029-DONE-PIPE",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "frame"
+            },
+            {
+              "identifier": "FRM-030-WAKEUP",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "frame"
+            },
+            {
+              "identifier": "IOB-002-INPUTS",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-003-OUTPUTS",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-004-BIDIR",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-008-CLOCK",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-009-RESET",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-010-UNUSED",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-011-BANK-0",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-012-BANK-1",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-013-BANK-2",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-014-BANK-3",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "IOB-015-PULL",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "iob"
+            },
+            {
+              "identifier": "CLK-001-GCLK",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "clock"
+            },
+            {
+              "identifier": "CLK-002-DIST",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "clock"
+            },
+            {
+              "identifier": "CLK-003-DLL",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "clock"
+            },
+            {
+              "identifier": "CLK-004-RESET",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "clock"
+            },
+            {
+              "identifier": "CLK-005-DOMAINS",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "clock"
+            },
+            {
+              "identifier": "MEM-001-BRAM",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "memory"
+            },
+            {
+              "identifier": "MEM-002-BRAM-INIT",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "memory"
+            },
+            {
+              "identifier": "MEM-003-DIST-RAM",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "memory"
+            },
+            {
+              "identifier": "MEM-005-ROM",
+              "layer": "bit",
+              "status": "unknown",
+              "boundary": null,
+              "module": "memory"
+            },
+            {
+              "identifier": "SIG-ACQ-CHANNEL",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "frontend"
+            },
+            {
+              "identifier": "SIG-POWER-RAILS",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "power"
+            },
+            {
+              "identifier": "SIG-PROTOCOL-FRAMING",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "usb"
+            },
+            {
+              "identifier": "SIG-INPUT-PROTECTION",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "input"
+            },
+            {
+              "identifier": "SIG-COUPLING-MODE",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "coupling"
+            },
+            {
+              "identifier": "SIG-COUPLING-RELAY",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "coupling"
+            },
+            {
+              "identifier": "SIG-RELAY-DRIVE",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "coupling"
+            },
+            {
+              "identifier": "SIG-ATTENUATOR",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "gain"
+            },
+            {
+              "identifier": "SIG-PREAMP-GAIN",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "gain"
+            },
+            {
+              "identifier": "SIG-ANTIALIAS-FILTER",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "filter"
+            },
+            {
+              "identifier": "SIG-ADC-INTERFACE",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "adc"
+            },
+            {
+              "identifier": "SIG-ADC-RESOLUTION",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_datasheet",
+              "module": "adc"
+            },
+            {
+              "identifier": "SIG-ADC-SAMPLE-RATE",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_datasheet",
+              "module": "adc"
+            },
+            {
+              "identifier": "SIG-ADC-REFERENCE",
+              "layer": "signal",
+              "status": "unknown",
+              "boundary": "no_measurement",
+              "module": "adc"
+            },
+            {
+              "identifier": "FW-FPGA-CONFIG-IFACE",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_dump",
+              "module": "fpga"
+            },
+            {
+              "identifier": "PROTO-EP-MAP",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "endpoint"
+            },
+            {
+              "identifier": "PROTO-EP-BULK-IN",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "endpoint"
+            },
+            {
+              "identifier": "PROTO-EP-BULK-OUT",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "endpoint"
+            },
+            {
+              "identifier": "PROTO-EP-INTERRUPT",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "endpoint"
+            },
+            {
+              "identifier": "PROTO-EP-ALT-SETTINGS",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "endpoint"
+            },
+            {
+              "identifier": "PROTO-XFER-MODE",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "no_capture",
+              "module": "transfer"
+            },
+            {
+              "identifier": "DRV-PIPE-EP-BIND",
+              "layer": "usb",
+              "status": "unknown",
+              "boundary": "cross_layer",
+              "module": "driver"
+            },
+            {
+              "identifier": "ARCH-007-CLOCK-FPGA",
+              "layer": "arch",
+              "status": "unknown",
+              "boundary": null,
+              "module": "clock"
+            },
+            {
+              "identifier": "ARCH-008-RESET-USB",
+              "layer": "arch",
+              "status": "unknown",
+              "boundary": null,
+              "module": "reset"
+            },
+            {
+              "identifier": "LEARN-014-BRAM-DECODE",
+              "layer": "learn",
+              "status": "unknown",
+              "boundary": "No decoder",
+              "module": "topic"
+            }
+          ]
+        }
+      },
+      "by_layer": {
+        "arch": {
+          "count": 2,
+          "identifiers": [
+            "ARCH-007-CLOCK-FPGA",
+            "ARCH-008-RESET-USB"
+          ]
+        },
+        "bit": {
+          "count": 29,
+          "identifiers": [
+            "FRM-006-STARTUP",
+            "FRM-008-FAR",
+            "FRM-009-PIPELINE",
+            "FRM-025-IO-BLOCK-WRITES",
+            "FRM-026-CLB-BLOCK-WRITES",
+            "FRM-027-BRAM-BLOCK-WRITES",
+            "FRM-028-CONFIG-ORDER",
+            "FRM-029-DONE-PIPE",
+            "FRM-030-WAKEUP",
+            "IOB-002-INPUTS",
+            "IOB-003-OUTPUTS",
+            "IOB-004-BIDIR",
+            "IOB-008-CLOCK",
+            "IOB-009-RESET",
+            "IOB-010-UNUSED",
+            "IOB-011-BANK-0",
+            "IOB-012-BANK-1",
+            "IOB-013-BANK-2",
+            "IOB-014-BANK-3",
+            "IOB-015-PULL",
+            "CLK-001-GCLK",
+            "CLK-002-DIST",
+            "CLK-003-DLL",
+            "CLK-004-RESET",
+            "CLK-005-DOMAINS",
+            "MEM-001-BRAM",
+            "MEM-002-BRAM-INIT",
+            "MEM-003-DIST-RAM",
+            "MEM-005-ROM"
+          ]
+        },
+        "exp": {
+          "count": 15,
+          "identifiers": [
+            "EXP-001-EEPROM-DUMP",
+            "EXP-002-USB-ENUM",
+            "EXP-003-USB-SESSION",
+            "EXP-004-PIN-FIFO",
+            "EXP-005-PIN-ADC",
+            "EXP-006-RELAY-TOGGLE",
+            "EXP-007-COUPLING",
+            "EXP-008-SINE-IN",
+            "EXP-009-CLOCK-IFCLK",
+            "EXP-010-8051-DISASM",
+            "EXP-011-PROTO-TABLE",
+            "EXP-012-VIDPID",
+            "EXP-013-ENDPOINT-MAP",
+            "EXP-014-DATA-FRAME",
+            "EXP-015-BRG-UPGRADE"
+          ]
+        },
+        "hw": {
+          "count": 2,
+          "identifiers": [
+            "HW-013-EEPROM-CAPACITY",
+            "HW-015-CRYSTAL-FPGA"
+          ]
+        },
+        "learn": {
+          "count": 6,
+          "identifiers": [
+            "LEARN-010-USB-PROTO",
+            "LEARN-011-8051-DISASM",
+            "LEARN-012-PIN-TEST",
+            "LEARN-013-RELAY-TEST",
+            "LEARN-014-BRAM-DECODE",
+            "LEARN-015-OPEN-REIMPL"
+          ]
+        },
+        "signal": {
+          "count": 15,
+          "identifiers": [
+            "SIG-ACQ-CHANNEL",
+            "SIG-POWER-RAILS",
+            "SIG-PROTOCOL-FRAMING",
+            "SIG-INPUT-PROTECTION",
+            "SIG-COUPLING-MODE",
+            "SIG-COUPLING-RELAY",
+            "SIG-RELAY-DRIVE",
+            "SIG-ATTENUATOR",
+            "SIG-PREAMP-GAIN",
+            "SIG-ANTIALIAS-FILTER",
+            "SIG-ADC-INTERFACE",
+            "SIG-ADC-RESOLUTION",
+            "SIG-ADC-SAMPLE-RATE",
+            "SIG-ADC-REFERENCE",
+            "SIG-ADC-TO-INTERFACE"
+          ]
+        },
+        "usb": {
+          "count": 29,
+          "identifiers": [
+            "FW-MCU-CORE-IMAGE",
+            "FW-MCU-RESET-VECTOR",
+            "FW-MCU-CODE-XRAM-MAP",
+            "FW-MCU-I2C-BOOT-PATH",
+            "FW-MCU-RENUMERATION",
+            "FW-EEPROM-IMAGE",
+            "FW-EEPROM-CONFIG-BYTE",
+            "FW-EEPROM-VIDPID",
+            "FW-EEPROM-DESC-OVERRIDE",
+            "FW-EEPROM-BOOT-FORMAT",
+            "FW-EEPROM-DID-FIELD",
+            "FW-EEPROM-FW-RECORDS",
+            "FW-FPGA-CONFIG-IFACE",
+            "PROTO-DESC-DEVICE",
+            "PROTO-DESC-CONFIG",
+            "PROTO-DESC-INTERFACE",
+            "PROTO-DESC-STRING",
+            "PROTO-EP-MAP",
+            "PROTO-EP-BULK-IN",
+            "PROTO-EP-BULK-OUT",
+            "PROTO-EP-INTERRUPT",
+            "PROTO-EP-ALT-SETTINGS",
+            "PROTO-XFER-MODE",
+            "PROTO-CTRL-VENDOR-REQ",
+            "DRV-HOST-MODULE",
+            "DRV-INF-BINDING",
+            "DRV-IOCTL-SURFACE",
+            "DRV-FIRMWARE-LOADER",
+            "DRV-PIPE-EP-BIND"
+          ]
+        }
+      },
+      "phase_b_unblocks": [
+        "FW-MCU-CORE-IMAGE",
+        "FW-MCU-RESET-VECTOR",
+        "FW-MCU-CODE-XRAM-MAP",
+        "FW-MCU-I2C-BOOT-PATH",
+        "FW-MCU-RENUMERATION",
+        "FW-EEPROM-IMAGE",
+        "FW-EEPROM-CONFIG-BYTE",
+        "FW-EEPROM-VIDPID",
+        "FW-EEPROM-DESC-OVERRIDE",
+        "FW-EEPROM-BOOT-FORMAT",
+        "FW-EEPROM-DID-FIELD",
+        "FW-EEPROM-FW-RECORDS",
+        "SIG-ADC-TO-INTERFACE",
+        "PROTO-DESC-DEVICE",
+        "PROTO-DESC-CONFIG",
+        "PROTO-DESC-INTERFACE",
+        "PROTO-DESC-STRING",
+        "PROTO-CTRL-VENDOR-REQ",
+        "DRV-HOST-MODULE",
+        "DRV-INF-BINDING",
+        "DRV-IOCTL-SURFACE",
+        "DRV-FIRMWARE-LOADER",
+        "LEARN-010-USB-PROTO",
+        "LEARN-011-8051-DISASM",
+        "LEARN-012-PIN-TEST",
+        "LEARN-013-RELAY-TEST",
+        "LEARN-015-OPEN-REIMPL",
+        "EXP-001-EEPROM-DUMP",
+        "EXP-002-USB-ENUM",
+        "EXP-003-USB-SESSION",
+        "EXP-004-PIN-FIFO",
+        "EXP-005-PIN-ADC",
+        "EXP-006-RELAY-TOGGLE",
+        "EXP-007-COUPLING",
+        "EXP-008-SINE-IN",
+        "EXP-009-CLOCK-IFCLK",
+        "EXP-010-8051-DISASM",
+        "EXP-011-PROTO-TABLE",
+        "EXP-012-VIDPID",
+        "EXP-013-ENDPOINT-MAP",
+        "EXP-014-DATA-FRAME",
+        "EXP-015-BRG-UPGRADE"
+      ],
+      "note": "Blocked items must not be upgraded without new evidence"
+    },
     "phase_b_status": {
-      "generated_at": "2026-08-27T15:31:24.586343+00:00",
+      "generated_at": "2026-08-27T15:33:41.732544+00:00",
       "captures_dir": "phase_b/captures",
       "capture_count": 0,
       "captures": [],
@@ -4029,7 +4923,7 @@
       ]
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:31:24.428057+00:00",
+      "generated_at": "2026-08-27T15:33:41.470026+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -4750,7 +5644,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:31:24.350204+00:00",
+      "generated_at": "2026-08-27T15:33:41.392267+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -4886,7 +5780,7 @@
       "pin_bridge_count": 22
     },
     "usb_capture_meta": {
-      "generated_at": "2026-08-27T15:31:24.666471+00:00",
+      "generated_at": "2026-08-27T15:33:41.812364+00:00",
       "status": "missing",
       "path": "phase_b/captures",
       "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"

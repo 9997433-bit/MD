@@ -9,11 +9,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _load_json(path: Path) -> dict:
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return {}
+
+
 def main() -> None:
     cov = json.loads((ROOT / "coverage.json").read_text(encoding="utf-8"))
     frame = json.loads((ROOT / "manifests" / "frame_summary.json").read_text(encoding="utf-8"))
     sysmap = json.loads((ROOT / "manifests" / "system_map.json").read_text(encoding="utf-8"))
     bom = json.loads((ROOT / "manifests" / "hardware_bom.json").read_text(encoding="utf-8"))
+    pending = _load_json(ROOT / "manifests" / "pending_index.json")
+    phase_b = _load_json(ROOT / "manifests" / "phase_b_status.json")
+    bit_strings = _load_json(ROOT / "manifests" / "bit_strings.json")
+    board = bom.get("board_info", {})
 
     fa = frame.get("frame_analysis", {})
     lines = [
@@ -41,6 +51,7 @@ def main() -> None:
         "",
         "## 硬件",
         "",
+        f"- 板卡版本：{board.get('board_revision', 'N/A')}",
         f"- BOM 组件：{len(bom.get('components', []))} 条",
         f"- 照片索引：10 张",
         "",
@@ -51,6 +62,11 @@ def main() -> None:
         f"- FDRI 字数：{fa.get('fdri_word_count', 'N/A')}",
         f"- 帧估计：{fa.get('estimated_frame_count', 'N/A')}",
         f"- IOB candidate 配置字：{fa.get('candidate_iob_config_words', 'N/A')}",
+        f"- 位流字符串（脱敏）：{bit_strings.get('unique_redacted_count', 'N/A')} 条",
+        "",
+        "## 待解项",
+        "",
+        f"- 阻塞 identifier：**{pending.get('total_blocked', 'N/A')}** 条（见 `manifests/pending_index.json`）",
         "",
         "## 数据路径",
         "",
@@ -60,11 +76,17 @@ def main() -> None:
 
     lines += [
         "",
+        "## 阶段 B 状态",
+        "",
+        f"- EEPROM 已采集：{'是' if phase_b.get('flags', {}).get('eeprom_present') else '否'}",
+        f"- USB 抓包已采集：{'是' if phase_b.get('flags', {}).get('usb_capture_present') else '否'}",
+        "",
         "## 阻塞项（需实机）",
         "",
         "- EEPROM 转储 → `phase_b/captures/eeprom.bin`",
         "- USB 抓包 → `phase_b/captures/*.pcapng`",
         "- 实验验证 → 见 `phase_c/README.md`",
+        "- 接入指南 → `HARDWARE_HANDOFF.md`",
         "",
         "## 重新生成",
         "",

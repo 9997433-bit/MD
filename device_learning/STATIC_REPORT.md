@@ -1,6 +1,6 @@
 # 静态分析报告（自动生成）
 
-**生成时间**：2026-08-27 15:31 UTC
+**生成时间**：2026-08-27 15:33 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -23,6 +23,7 @@
 
 ## 硬件
 
+- 板卡版本：198755F-01L
 - BOM 组件：40 条
 - 照片索引：10 张
 
@@ -33,6 +34,11 @@
 - FDRI 字数：32648
 - 帧估计：627
 - IOB candidate 配置字：223
+- 位流字符串（脱敏）：367 条
+
+## 待解项
+
+- 阻塞 identifier：**98** 条（见 `manifests/pending_index.json`）
 
 ## 数据路径
 
@@ -42,11 +48,17 @@
 - `NODE-FPGA` → `NODE-USB-CTL` (hypothesis)
 - `NODE-USB-CTL` → `NODE-HOST` (not_started)
 
+## 阶段 B 状态
+
+- EEPROM 已采集：否
+- USB 抓包已采集：否
+
 ## 阻塞项（需实机）
 
 - EEPROM 转储 → `phase_b/captures/eeprom.bin`
 - USB 抓包 → `phase_b/captures/*.pcapng`
 - 实验验证 → 见 `phase_c/README.md`
+- 接入指南 → `HARDWARE_HANDOFF.md`
 
 ## 重新生成
 

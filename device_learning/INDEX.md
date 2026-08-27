@@ -22,7 +22,9 @@ cat STATIC_REPORT.md
 | `coverage.json` | 完成度统计 |
 | `bridge_matrix.json` | 强制 null 桥 |
 | `LEARNING_GUIDE.md` | 三周学习路线 |
+| `HARDWARE_HANDOFF.md` | 实机接入三步指南 |
 | `STATIC_REPORT.md` | 自动摘要 |
+| `manifests/pending_index.json` | 阻塞 identifier 索引 |
 | `phase_b/` | 实机采集（EEPROM/抓包） |
 | `phase_c/` | 实验验证 |
 | `phase_b/fixtures/` | 合成参考（非实机数据） |
@@ -37,9 +39,11 @@ cat STATIC_REPORT.md
 
 ## 实机下一步
 
+阅读 `HARDWARE_HANDOFF.md`，然后：
+
 1. 放 `eeprom.bin` → `phase_b/captures/`
 2. 放 `*.pcapng` → `phase_b/captures/`
-3. 重新运行 `generate_ledger.py`
+3. 运行 `python3 scripts/run_phase_b.py`
 
 无实机时可运行合成夹具测试流水线：
 

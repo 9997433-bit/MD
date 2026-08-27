@@ -14,14 +14,15 @@
 6. 读 `manifests/system_map.json` — 数据路径
 7. 读 `catalogs/catalog_ref.py` — 公开参考信号（candidate）
 8. 读 `bridge_matrix.json` + `OMISSIONS_AND_REMAINING.md` — 诚实边界
+9. 读 `manifests/pending_index.json` — 98 条阻塞项一览
 
 ### 第 2 周（需设备）
 
-1. 按 `phase_b/templates/eeprom_read.md` 读取 EEPROM
-2. 运行 `python3 scripts/analyze_eeprom.py` + `scan_firmware_stub.py`
-3. 按 `phase_b/templates/usb_capture.md` 抓包
-4. 填写 `protocol_log_template.json`
-5. 运行 `python3 scripts/ingest_phase_b.py` + `generate_ledger.py`
+1. 读 `HARDWARE_HANDOFF.md` — 三步接入
+2. 按 `phase_b/templates/eeprom_read.md` 读取 EEPROM
+3. 运行 `python3 scripts/run_phase_b.py`（或分步执行 ingest + generate）
+4. 按 `phase_b/templates/usb_capture.md` 抓包
+5. 填写 `protocol_log_template.json`
 
 ### 第 3 周（验证）
 
@@ -44,7 +45,8 @@
 cd device_learning
 python3 scripts/generate_ledger.py   # 生成账本 + STATIC_REPORT.md
 python3 scripts/verify_completion.py # 静态阶段验收
-python3 -m pytest tests/ -q          # 35 项测试
+python3 -m pytest tests/ -q          # 42 项测试
+python3 scripts/run_phase_b.py       # 实机采集后一键刷新
 ```
 
 ## 核心声明
