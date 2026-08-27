@@ -140,13 +140,13 @@ def parse_bit_container(data: bytes) -> dict:
     # hard-coding the preamble length so minor header variants still parse.
     first_key = None
     for i in range(min(len(data), 64)):
-        if data[i] in SHORT_KEYS and data[i - 0] in SHORT_KEYS:
-            # candidate: verify it is followed by a plausible 16-bit length
-            if i + 3 <= len(data):
-                length = struct.unpack_from(">H", data, i + 1)[0]
-                if 0 < length < 512 and i + 3 + length <= len(data):
-                    first_key = i
-                    break
+        # Look for the 'a' (design name) key followed by a plausible 16-bit
+        # length prefix, which marks the start of the keyed sections.
+        if data[i] == 0x61 and i + 3 <= len(data):
+            length = struct.unpack_from(">H", data, i + 1)[0]
+            if 0 < length < 512 and i + 3 + length <= len(data):
+                first_key = i
+                break
     if first_key is None:
         result["parse_notes"].append("could not locate first keyed section")
         return result
@@ -291,15 +291,18 @@ def parse_packets(config: bytes, sync_offset: int) -> dict:
                 pkt["is_frame_data"] = True
             pos += wc * 4
         else:
-            # Not a recognized packet header. This is expected only for the
-            # very first dummy/pad words; otherwise flag and stop.
+            # Not a recognized Type-1/Type-2 header. These occur as dummy/pad
+            # words and as bare CRC words emitted right after an FDRI block.
+            # Record them as filler and keep walking so the trailing command
+            # packets (START / CRC / DESYNCH) are still captured.
             if word in (0xFFFFFFFF, 0x00000000, 0x20000000):
                 out["packets"].append({
                     "offset": start, "type": "pad", "word": f"0x{word:08x}"})
-                continue
-            out["parse_notes"].append(
-                f"unrecognized packet header 0x{word:08x} at config offset {start}")
-            break
+            else:
+                out.setdefault("trailing_words", []).append({
+                    "offset": start, "word": f"0x{word:08x}",
+                    "note": "filler / post-FDRI CRC candidate"})
+            continue
 
     return out
 
