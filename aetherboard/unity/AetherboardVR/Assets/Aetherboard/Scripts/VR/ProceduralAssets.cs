@@ -49,6 +49,18 @@ namespace Aetherboard.VR
             return go;
         }
 
+        public static GameObject CreateWallQuad(Transform parent, float width, float height, Color color)
+        {
+            var go = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            go.name = "ShrinkWall";
+            go.transform.SetParent(parent, false);
+            go.transform.localScale = new Vector3(width, height, 1f);
+            var col = go.GetComponent<Collider>();
+            if (col != null) Object.Destroy(col);
+            go.GetComponent<Renderer>().material = CreateUnlitMaterial(color);
+            return go;
+        }
+
         public static GameObject CreateTableBase(Transform parent, float size)
         {
             var go = GameObject.CreatePrimitive(PrimitiveType.Cube);

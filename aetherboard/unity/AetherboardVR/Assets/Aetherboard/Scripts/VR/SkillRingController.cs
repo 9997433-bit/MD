@@ -17,10 +17,12 @@ namespace Aetherboard.VR
         private BattleTableView _table;
         private Transform _ringAnchor;
         private readonly List<SkillChip> _chips = new();
+        private SkillChip _hoveredChip;
         private string _activeUnitId;
         private string _pendingSkillId;
         private bool _awaitingTarget;
 
+        public bool IsVisible => _ringAnchor != null && _ringAnchor.gameObject.activeSelf;
         public bool AwaitingTarget => _awaitingTarget;
         public string PendingSkillId => _pendingSkillId;
 
@@ -38,10 +40,13 @@ namespace Aetherboard.VR
             _activeUnitId = unitId;
             _pendingSkillId = null;
             _awaitingTarget = false;
+            ClearHover();
             ClearChips();
 
             var skills = new List<string>(JobCatalog.JobSkills[job]);
             if (_director.State.Boss.FuryCastTurns > 0) skills.Add("interrupt");
+
+            CreateBackingDisc();
 
             for (var i = 0; i < skills.Count; i++)
             {
@@ -51,7 +56,11 @@ namespace Aetherboard.VR
 
                 var angle = (i / (float)skills.Count) * Mathf.PI * 2f;
                 var local = new Vector3(Mathf.Cos(angle), 0.04f, Mathf.Sin(angle)) * radius;
-                var chip = CreateChip(def.Name, def.Kind, local, skillId);
+                var target = def.Heal > 0
+                    ? _director.State.Party.Find(u => u.Id == unitId)?.Pos
+                    : BoardMath.BossPos(BoardMath.DefaultSize);
+                var enabled = _director.Engine.CanUseSkill(unitId, skillId, target);
+                var chip = CreateChip(def.Name, def.Kind, local, skillId, enabled);
                 _chips.Add(chip);
             }
 
@@ -62,21 +71,44 @@ namespace Aetherboard.VR
 
         public void Hide()
         {
+            ClearHover();
             _ringAnchor.gameObject.SetActive(false);
             _pendingSkillId = null;
             _awaitingTarget = false;
             ClearChips();
         }
 
+        public void UpdateVrHover(Ray ray)
+        {
+            if (!IsVisible) return;
+            if (VRRaycastUtility.TryHitSkillChip(ray, out var chip, out _) && _chips.Contains(chip))
+                SetHoveredChip(chip);
+            else
+                SetHoveredChip(null);
+        }
+
+        public bool TryActivateFromRay(Ray ray)
+        {
+            if (!IsVisible) return false;
+            if (VRRaycastUtility.TryHitSkillChip(ray, out var chip, out _))
+                return ActivateSkill(chip.SkillId);
+            if (_hoveredChip != null)
+                return ActivateSkill(_hoveredChip.SkillId);
+            return false;
+        }
+
         public bool TrySelectChip(RaycastHit hit)
         {
-            var chip = hit.collider.GetComponent<SkillChip>();
+            var chip = hit.collider.GetComponentInParent<SkillChip>();
             if (chip == null) return false;
             return ActivateSkill(chip.SkillId);
         }
 
         public bool ActivateSkill(string skillId)
         {
+            var chip = _chips.Find(c => c.SkillId == skillId);
+            if (chip != null && !chip.IsEnabled) return false;
+
             var def = SkillCatalog.Skills[skillId];
             var unit = _director.State.Party.Find(u => u.Id == _activeUnitId);
             if (unit == null) return false;
@@ -108,16 +140,27 @@ namespace Aetherboard.VR
             return false;
         }
 
-        private SkillChip CreateChip(string label, string kind, Vector3 localPos, string skillId)
+        private void CreateBackingDisc()
+        {
+            var disc = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            disc.name = "SkillRingBacking";
+            disc.transform.SetParent(_ringAnchor, false);
+            disc.transform.localPosition = Vector3.zero;
+            disc.transform.localScale = new Vector3(radius * 2.4f, 0.003f, radius * 2.4f);
+            disc.GetComponent<Renderer>().material =
+                ProceduralAssets.CreateUnlitMaterial(new Color(0.05f, 0.08f, 0.12f, 0.82f));
+            var col = disc.GetComponent<Collider>();
+            if (col != null) Destroy(col);
+        }
+
+        private SkillChip CreateChip(string label, string kind, Vector3 localPos, string skillId, bool enabled)
         {
             var go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             go.name = $"Skill_{skillId}";
             go.transform.SetParent(_ringAnchor, false);
             go.transform.localPosition = localPos;
-            go.transform.localScale = new Vector3(chipSize, 0.008f, chipSize);
+            go.transform.localScale = new Vector3(chipSize, 0.012f, chipSize);
             var r = go.GetComponent<Renderer>();
-            r.material = ProceduralAssets.CreateUnlitMaterial(
-                kind == "ogcd" ? new Color(0.9f, 0.55f, 0.1f) : new Color(0.2f, 0.55f, 0.95f));
 
             var textGo = new GameObject("Label");
             textGo.transform.SetParent(go.transform, false);
@@ -128,18 +171,34 @@ namespace Aetherboard.VR
             text.fontSize = 32;
             text.characterSize = 0.05f;
             text.anchor = TextAnchor.MiddleCenter;
-            text.color = Color.white;
+            text.color = enabled ? Color.white : new Color(1f, 1f, 1f, 0.45f);
 
             var chip = go.AddComponent<SkillChip>();
             chip.SkillId = skillId;
+            chip.Init(r, kind, enabled);
             return chip;
         }
+
+        private void SetHoveredChip(SkillChip chip)
+        {
+            if (_hoveredChip == chip) return;
+            _hoveredChip?.SetHovered(false);
+            _hoveredChip = chip;
+            _hoveredChip?.SetHovered(true);
+        }
+
+        private void ClearHover() => SetHoveredChip(null);
 
         private void ClearChips()
         {
             foreach (var c in _chips)
                 if (c != null) Destroy(c.gameObject);
             _chips.Clear();
+            if (_ringAnchor != null)
+            {
+                for (var i = _ringAnchor.childCount - 1; i >= 0; i--)
+                    Destroy(_ringAnchor.GetChild(i).gameObject);
+            }
         }
 
         private void LateUpdate()
@@ -155,10 +214,5 @@ namespace Aetherboard.VR
             _ringAnchor.rotation = Quaternion.LookRotation(
                 _ringAnchor.position - cam.transform.position, Vector3.up);
         }
-    }
-
-    public class SkillChip : MonoBehaviour
-    {
-        public string SkillId;
     }
 }

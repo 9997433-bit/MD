@@ -35,6 +35,8 @@
 | **XR Origin 官方 Prefab** | ✅ | 菜单安装 + Resources 自动加载 |
 | **Unity WS Host** | ✅ | `BattleWebSocketHostServer` 8769 |
 | **XR 抓取吸附** | ✅ | `PieceXRGrabController` + 格子高亮 |
+| **技能环 VR 射线** | ✅ | 悬停高亮 + 扳机选择 + 不可用灰显 |
+| **机制 VFX 升级** | ✅ | 缩圈光墙 / 重击双波 / 风刃 / 集合信标 |
 | 在线多人传输层 | 🔲 | Netcode 生产级封装 |
 
 ## 技术栈

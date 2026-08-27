@@ -4,8 +4,7 @@ using Aetherboard.Core;
 namespace Aetherboard.VR
 {
     /// <summary>
-    /// VR controller shortcuts: Grip = skill ring, Trigger = confirm, Primary = end phase.
-    /// Uses legacy Input when XR Input System bindings are not configured.
+    /// VR controller shortcuts with skill-ring-first ray priority.
     /// </summary>
     public class VRInputBridge : MonoBehaviour
     {
@@ -31,11 +30,15 @@ namespace Aetherboard.VR
         {
             if (!XRRigFactory.XrActive || _director == null) return;
 
+            var ray = VRRaycastUtility.CenterEyeRay();
+            if (_skillRing != null && _skillRing.IsVisible)
+                _skillRing.UpdateVrHover(ray);
+
             if (Input.GetButtonDown("XRI_Right_TriggerButton") || Input.GetKeyDown(KeyCode.JoystickButton2))
-                TrySelectUnderGaze();
+                HandleTrigger(ray);
 
             if (Input.GetButtonDown("XRI_Right_GripButton") || Input.GetKeyDown(KeyCode.JoystickButton4))
-                TryShowSkillRingForNearestPiece();
+                HandleGrip(ray);
 
             if (Input.GetButtonDown("XRI_Right_PrimaryButton") || Input.GetKeyDown(KeyCode.JoystickButton0))
                 _director.EndCurrentPhase();
@@ -44,14 +47,25 @@ namespace Aetherboard.VR
                 _director.StepAuto();
         }
 
-        private void TrySelectUnderGaze()
+        private void HandleTrigger(Ray ray)
         {
-            var cam = Camera.main;
-            if (cam == null) return;
-            var ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            if (!Physics.Raycast(ray, out var hit, 8f)) return;
+            if (_skillRing != null && _skillRing.IsVisible)
+            {
+                if (_skillRing.TryActivateFromRay(ray)) return;
+            }
 
-            var piece = hit.collider.GetComponentInParent<PieceToken>();
+            if (_skillRing != null && _skillRing.AwaitingTarget &&
+                VRRaycastUtility.TryHitBoard(ray, out _, out var cell, out _) && cell != null)
+            {
+                if (_skillRing.TryTargetCell(new GridPos(cell.X, cell.Y)))
+                {
+                    _desktop.CancelSelection();
+                    return;
+                }
+            }
+
+            if (!VRRaycastUtility.TryHitBoard(ray, out var piece, out var boardCell, out var hit)) return;
+
             if (piece != null)
             {
                 if (_coop != null && !_coop.CanControlUnit(piece.UnitId)) return;
@@ -59,22 +73,38 @@ namespace Aetherboard.VR
                 if (_director.State.Phase == BattlePhase.Move)
                     piece.BeginDrag(hit.point);
                 else if (_director.State.Phase is BattlePhase.Action or BattlePhase.Weave)
-                {
-                    var unit = _director.State.Party.Find(u => u.Id == piece.UnitId);
-                    if (unit != null)
-                        _skillRing.ShowForUnit(unit.Id, unit.Job, piece.transform.position);
-                }
+                    ShowSkillRingForPiece(piece);
                 return;
             }
 
-            var cell = hit.collider.GetComponentInParent<GridCell>();
-            if (cell == null) return;
-            var dest = new GridPos(cell.X, cell.Y);
-            if (_skillRing != null && _skillRing.AwaitingTarget)
+            if (boardCell != null && _skillRing != null && _skillRing.AwaitingTarget)
             {
-                if (_skillRing.TryTargetCell(dest))
+                if (_skillRing.TryTargetCell(new GridPos(boardCell.X, boardCell.Y)))
                     _desktop.CancelSelection();
             }
+        }
+
+        private void HandleGrip(Ray ray)
+        {
+            if (_director.State is BattlePhase.Action or BattlePhase.Weave)
+            {
+                if (VRRaycastUtility.TryHitBoard(ray, out var piece, out _, out _) && piece != null)
+                {
+                    if (_coop != null && !_coop.CanControlUnit(piece.UnitId)) return;
+                    _desktop.SelectPiece(piece);
+                    ShowSkillRingForPiece(piece);
+                    return;
+                }
+            }
+
+            TryShowSkillRingForNearestPiece();
+        }
+
+        private void ShowSkillRingForPiece(PieceToken piece)
+        {
+            var unit = _director.State.Party.Find(u => u.Id == piece.UnitId);
+            if (unit != null)
+                _skillRing.ShowForUnit(unit.Id, unit.Job, piece.transform.position);
         }
 
         private void TryShowSkillRingForNearestPiece()
@@ -97,9 +127,7 @@ namespace Aetherboard.VR
             if (nearest == null) return;
             if (_coop != null && !_coop.CanControlUnit(nearest.UnitId)) return;
             _desktop.SelectPiece(nearest);
-            var unit = _director.State.Party.Find(u => u.Id == nearest.UnitId);
-            if (unit != null)
-                _skillRing.ShowForUnit(unit.Id, unit.Job, nearest.transform.position);
+            ShowSkillRingForPiece(nearest);
         }
     }
 }
