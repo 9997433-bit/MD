@@ -1,0 +1,26 @@
+{
+  "name": "Aetherboard.VR",
+  "rootNamespace": "Aetherboard.VR",
+  "references": [
+    "Aetherboard.Core",
+    "Aetherboard.Netcode",
+    "Unity.XR.Interaction.Toolkit",
+    "Unity.InputSystem",
+    "Unity.RenderPipelines.Universal.Runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "com.unity.render-pipelines.universal",
+      "expression": "14.0.0",
+      "define": "AETHERBOARD_URP_INSTALLED"
+    }
+  ],
+  "noEngineReferences": false
+}

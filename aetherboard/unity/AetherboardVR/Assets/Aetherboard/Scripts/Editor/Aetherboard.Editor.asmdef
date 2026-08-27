@@ -1,0 +1,24 @@
+{
+  "name": "Aetherboard.Editor",
+  "rootNamespace": "Aetherboard.Editor",
+  "references": [
+    "Aetherboard.Core",
+    "Aetherboard.VR",
+    "Unity.RenderPipelines.Universal.Runtime"
+  ],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "com.unity.render-pipelines.universal",
+      "expression": "14.0.0",
+      "define": "AETHERBOARD_URP_INSTALLED"
+    }
+  ],
+  "noEngineReferences": false
+}

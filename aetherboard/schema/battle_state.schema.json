@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherboard.local/schema/battle_state.json",
+  "title": "AetherboardBattleState",
+  "type": "object",
+  "required": ["turn", "phase", "boardSize", "bossId", "boss", "party", "cells"],
+  "properties": {
+    "turn": { "type": "integer", "minimum": 1 },
+    "phase": {
+      "type": "string",
+      "enum": ["WARNING", "MOVE", "ACTION", "WEAVE", "RESOLVE", "VICTORY", "DEFEAT"]
+    },
+    "boardSize": { "type": "integer", "const": 7 },
+    "bossId": { "type": "string", "enum": ["earth", "wind"] },
+    "boss": {
+      "type": "object",
+      "required": ["name", "hp", "maxHp", "phase", "telegraph", "alive"],
+      "properties": {
+        "name": { "type": "string" },
+        "hp": { "type": "integer" },
+        "maxHp": { "type": "integer" },
+        "phase": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "telegraph": {
+          "type": "string",
+          "enum": ["NONE", "SLAM", "EARTHQUAKE", "SHRINK", "EARTHEN_FURY", "GALE", "SPREAD", "STACK", "CYCLONE"]
+        },
+        "furyCastTurns": { "type": "integer" },
+        "shrinkLevel": { "type": "integer" },
+        "alive": { "type": "boolean" }
+      }
+    },
+    "party": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "job", "pos", "hp", "maxHp", "alive"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "job": { "type": "string", "enum": ["knight", "white_mage", "black_mage", "bard"] },
+          "pos": {
+            "type": "object",
+            "required": ["x", "y"],
+            "properties": { "x": { "type": "integer" }, "y": { "type": "integer" } }
+          },
+          "hp": { "type": "integer" },
+          "maxHp": { "type": "integer" },
+          "alive": { "type": "boolean" },
+          "moved": { "type": "boolean" },
+          "gcdUsed": { "type": "boolean" },
+          "ogcdUsed": { "type": "boolean" },
+          "mitTurns": { "type": "integer" },
+          "songTurns": { "type": "integer" },
+          "tauntTurns": { "type": "integer" }
+        }
+      }
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": { "type": "string", "enum": ["NORMAL", "HAZARD", "SAFE"] }
+      }
+    },
+    "pendingHazards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "x": { "type": "integer" }, "y": { "type": "integer" } }
+      }
+    },
+    "previewCells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "x": { "type": "integer" }, "y": { "type": "integer" } }
+      }
+    },
+    "log": { "type": "array", "items": { "type": "string" } }
+  }
+}

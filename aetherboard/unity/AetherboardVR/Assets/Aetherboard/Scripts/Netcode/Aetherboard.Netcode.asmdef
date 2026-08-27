@@ -1,0 +1,23 @@
+{
+  "name": "Aetherboard.Netcode",
+  "rootNamespace": "Aetherboard.NetcodeIntegration",
+  "references": [
+    "Aetherboard.Core",
+    "Unity.Netcode.Runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "com.unity.netcode.gameobjects",
+      "expression": "1.0.0",
+      "define": "AETHERBOARD_NGO_INSTALLED"
+    }
+  ],
+  "noEngineReferences": false
+}

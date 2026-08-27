@@ -1,0 +1,49 @@
+name: Aetherboard Tests
+
+on:
+  push:
+    paths:
+      - 'aetherboard/**'
+      - '.github/workflows/aetherboard-tests.yml'
+  pull_request:
+    paths:
+      - 'aetherboard/**'
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aetherboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: PYTHONPATH=. python3 -m unittest discover -s tests -q
+
+  csharp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aetherboard/csharp/Aetherboard.Core.Tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet test --verbosity normal
+
+  scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Quest verify script syntax
+        run: bash -n aetherboard/scripts/quest_verify.sh
+      - name: Validate run_all_tests script syntax
+        run: bash -n aetherboard/scripts/run_all_tests.sh
+      - name: Validate release_preflight script syntax
+        run: bash -n aetherboard/scripts/release_preflight.sh
+      - name: Validate print_merge_instructions script syntax
+        run: bash -n aetherboard/scripts/print_merge_instructions.sh

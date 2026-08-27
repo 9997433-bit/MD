@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aetherboard — VR 战棋原型</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Aetherboard</h1>
+      <p class="subtitle">FF14 风格 GCD 战棋 · 2D 可玩原型（VR 前验证）</p>
+    </header>
+
+    <section class="hud">
+      <div class="panel">
+        <h2>战斗状态</h2>
+        <label class="boss-select">Boss
+          <select id="boss-select">
+            <option value="earth">土灵守护者</option>
+            <option value="wind">风灵领主</option>
+          </select>
+        </label>
+        <div id="net-status" class="net-status hidden">单机模式</div>
+        <div id="player-select" class="player-select hidden">
+          <button type="button" id="btn-p1" class="secondary">P1 铁卫/游弦</button>
+          <button type="button" id="btn-p2" class="secondary">P2 白愈/黑炎</button>
+        </div>
+        <div id="turn-info">回合 1</div>
+        <div id="phase-info">阶段：预警</div>
+        <div id="telegraph-info">—</div>
+      </div>
+      <div class="panel boss-panel">
+        <h2 id="boss-name">土灵守护者</h2>
+        <div class="bar-wrap"><div id="boss-hp-bar" class="bar boss"></div></div>
+        <div id="boss-hp-text">6000 / 6000</div>
+        <div id="boss-phase">P1</div>
+        <div id="fury-cast" class="fury-cast hidden earth">
+          <div id="fury-label" class="fury-label">土神之怒 · 剩余 2 回合</div>
+          <div class="fury-bar-wrap">
+            <div id="fury-bar-fill" class="fury-bar-fill"></div>
+          </div>
+          <div id="fury-burst" class="fury-burst hidden" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <main class="battle-area">
+      <div id="board" class="board" aria-label="7x7 战棋棋盘"></div>
+      <aside class="side-panel">
+        <div class="panel">
+          <h2>小队</h2>
+          <ul id="party-list"></ul>
+        </div>
+        <div class="panel">
+          <h2>行动</h2>
+          <div id="selected-unit">选择单位</div>
+          <div id="skill-buttons" class="skill-buttons"></div>
+          <button id="btn-end-phase" class="primary">结束当前阶段</button>
+          <button id="btn-auto" class="secondary">自动演示一步</button>
+          <button id="btn-reset" class="secondary">重新开始</button>
+          <button id="btn-export-replay" class="secondary">导出回放 (JSON)</button>
+          <button id="btn-replay" class="secondary">回放当前记录</button>
+          <label class="secondary replay-import">
+            导入回放
+            <input id="btn-import-replay" type="file" accept="application/json,.json" hidden />
+          </label>
+        </div>
+        <div class="panel log-panel">
+          <h2>战斗日志</h2>
+          <ol id="battle-log" reversed></ol>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>操作：点击棋子选中 → 点击格子移动 / 施法 → 「结束当前阶段」推进。单机可导出/导入 JSON 回放。联机：<code>?client=1&player=1</code>（WebSocket 默认 <code>ws://127.0.0.1:8769</code>，HTTP 回退加 <code>&amp;http=1</code>）。</p>
+    </footer>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

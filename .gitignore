@@ -1,4 +1,15 @@
 __pycache__/
-*.pyc
+*.py[cod]
 .pytest_cache/
-download/
+.DS_Store
+
+# C# / Unity
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ibrary/
+[Tt]emp/
+[Uu]ser[Ss]ettings/
+*.csproj.user
+*.sln.docstates
+
