@@ -33,7 +33,7 @@ cd device_learning
 python3 scripts/run_phase_b.py
 ```
 
-或分步执行：
+进度追踪：`phase_b/CHECKLIST.json`（自动由流水线同步）
 
 ```bash
 cd device_learning

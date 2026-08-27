@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - "device_learning/**"
+      - ".github/workflows/device_learning.yml"
   pull_request:
     paths:
       - "device_learning/**"
+      - ".github/workflows/device_learning.yml"
 
 jobs:
   test:
@@ -20,6 +22,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pytest
-      - run: make ledger
-      - run: make test
-      - run: make verify
+      - run: make ci
+      - run: make health

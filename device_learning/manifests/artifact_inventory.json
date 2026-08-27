@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:44:58.974173+00:00",
+  "generated_at": "2026-08-27T15:46:01.005940+00:00",
   "artifact_count": 40,
   "present_count": 40,
   "artifacts": [
@@ -7,7 +7,7 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 218385
+      "size_bytes": 218386
     },
     {
       "path": "coverage.json",
@@ -61,7 +61,7 @@
       "path": "HARDWARE_HANDOFF.md",
       "description": "实机接入指南",
       "exists": true,
-      "size_bytes": 2132
+      "size_bytes": 2183
     },
     {
       "path": "phase_b/CHECKLIST.json",
@@ -73,7 +73,7 @@
       "path": "manifests/static_freeze.json",
       "description": "静态阶段冻结记录",
       "exists": true,
-      "size_bytes": 492
+      "size_bytes": 523
     },
     {
       "path": "manifests/output_hashes.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 5975
+      "size_bytes": 5978
     },
     {
       "path": "manifests/bit_strings.json",
@@ -115,7 +115,7 @@
       "path": "manifests/completion_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 808
+      "size_bytes": 781
     },
     {
       "path": "manifests/config_entropy.json",

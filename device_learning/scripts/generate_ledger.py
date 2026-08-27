@@ -54,6 +54,7 @@ FEEDERS = [
     ["build_artifact_inventory.py"],
     ["build_output_hashes.py"],
     ["sync_phase_b_checklist.py"],
+    ["sync_phase_c_checklist.py"],
 ]
 
 
