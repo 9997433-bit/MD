@@ -18,7 +18,14 @@
 from catalogs import make_entry
 
 ENTRIES = [
-    _e("FW-EEPROM-SYNTHETIC-FIXTURE", "eeprom", "Synthetic EEPROM for pipeline test only", "candidate", "NOT device data", "phase_b/fixtures/"),
+    make_entry(
+        "FW-EEPROM-SYNTHETIC-FIXTURE", "FW", "eeprom",
+        "Synthetic EEPROM for pipeline test only",
+        "candidate", "NOT device data",
+        "phase_b/fixtures/eeprom_synthetic_reference.bin",
+    ),
+    make_entry(
+        "FW-EEPROM-LAYOUT-REF", "FW", "eeprom",
         "Public FX2LP EEPROM field layout reference",
         "candidate", "reference_only",
         "manifests/eeprom_layout_ref.json",

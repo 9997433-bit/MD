@@ -1,0 +1,12 @@
+{
+  "type": "synthetic_reference",
+  "warning": "NOT a device dump \u2014 pipeline test fixture only",
+  "generated_at": "2026-08-27T15:28:17.540442+00:00",
+  "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
+  "size_bytes": 8192,
+  "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
+  "boot_config_byte": "0xc0",
+  "vid_hex": "0x0000",
+  "pid_hex": "0x0000",
+  "firmware_offset": 16
+}

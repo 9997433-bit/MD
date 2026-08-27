@@ -15,7 +15,7 @@ def test_photo_index():
 
 def test_crossref_index():
     data = json.loads((ROOT / "manifests" / "crossref_index.json").read_text())
-    assert data["total_identifiers"] >= 200
+    assert data["total_identifiers"] >= 220
     assert "usb_path" in data["themes"]
 
 

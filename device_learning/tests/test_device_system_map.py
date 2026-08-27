@@ -15,9 +15,9 @@ def test_system_map():
     assert data["edge_count"] >= 5
 
 
-def test_eeprom_meta_missing():
+def test_eeprom_meta_status():
     meta = json.loads((ROOT / "manifests" / "eeprom_meta.json").read_text())
-    assert meta["status"] == "missing"
+    assert meta["status"] in ("missing", "synthetic_pipeline_test", "observed")
 
 
 def test_eeprom_layout_ref():

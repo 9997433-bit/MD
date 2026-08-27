@@ -27,6 +27,7 @@ FEEDERS = [
     ["parse_bit_header.py", str(ROOT / "firmware" / "device.bit"), "-o", str(MANIFESTS / "bitstream_meta.json")],
     ["parse_bitstream.py"],
     ["scan_spartan3_frames.py"],
+    ["build_eeprom_synthetic.py"],
     ["analyze_eeprom.py"],
     ["scan_firmware_stub.py"],
     ["build_system_map.py"],
@@ -36,7 +37,6 @@ FEEDERS = [
     ["redact_manifests.py"],
     ["build_learning_report.py"],
     ["verify_completion.py"],
-    ["build_eeprom_synthetic.py"],
 ]
 
 

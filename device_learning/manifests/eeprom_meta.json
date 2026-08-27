@@ -1,8 +1,16 @@
 {
-  "generated_at": "2026-08-27T15:26:58.584992+00:00",
-  "capture_path": "phase_b/captures/eeprom.bin",
-  "status": "missing",
-  "reason": "phase_b/captures/eeprom.bin not present",
-  "layout_ref": "manifests/eeprom_layout_ref.json",
-  "note": "no EEPROM dump available; no field values inferred"
+  "status": "synthetic_pipeline_test",
+  "generated_at": "2026-08-27T15:28:16.841581+00:00",
+  "warning": "Using synthetic fixture — NOT device data",
+  "source": "synthetic_reference",
+  "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
+  "size_bytes": 8192,
+  "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
+  "boot_config_byte": "0xc0",
+  "vid_hex": "0x0000",
+  "pid_hex": "0x0000",
+  "firmware_offset": 16,
+  "firmware_size_bytes": 8176,
+  "firmware_header_hex": "020010001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f",
+  "boundary": "Values observed from file only; synthetic fixture is NOT device truth"
 }

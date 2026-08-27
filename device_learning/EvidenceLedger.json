@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:26:59.218185+00:00",
+  "generated_at": "2026-08-27T15:28:17.543850+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -905,96 +905,6 @@
         "status": "unknown",
         "boundary": null,
         "evidence": null
-      },
-      {
-        "identifier": "FRM-011-FAR-DIST",
-        "layer": "bit",
-        "module": "frame",
-        "description": "FAR address value distribution",
-        "status": "candidate",
-        "boundary": "启发式解码",
-        "evidence": "frame_deep.json"
-      },
-      {
-        "identifier": "FRM-012-TYPE1-REG-TOP",
-        "layer": "bit",
-        "module": "frame",
-        "description": "Top Type-1 register write targets",
-        "status": "candidate",
-        "boundary": "寄存器语义未映射",
-        "evidence": "frame_deep.json"
-      },
-      {
-        "identifier": "FRM-013-ZERO-RATIO",
-        "layer": "bit",
-        "module": "frame",
-        "description": "Zero-word padding ratio in config",
-        "status": "confirmed",
-        "boundary": null,
-        "evidence": "frame_deep.json"
-      },
-      {
-        "identifier": "FRM-014-CLASS-COUNTS",
-        "layer": "bit",
-        "module": "frame",
-        "description": "Frame word class histogram",
-        "status": "candidate",
-        "boundary": null,
-        "evidence": "frame_deep.json"
-      },
-      {
-        "identifier": "FRM-015-IO-BLOCK-WRITES",
-        "layer": "bit",
-        "module": "frame",
-        "description": "IO block FAR writes",
-        "status": "unknown",
-        "boundary": "需FAR解码",
-        "evidence": null
-      },
-      {
-        "identifier": "FRM-016-CLB-BLOCK-WRITES",
-        "layer": "bit",
-        "module": "frame",
-        "description": "CLB block FAR writes",
-        "status": "unknown",
-        "boundary": "需FAR解码",
-        "evidence": null
-      },
-      {
-        "identifier": "FRM-017-BRAM-BLOCK-WRITES",
-        "layer": "bit",
-        "module": "frame",
-        "description": "BRAM block FAR writes",
-        "status": "unknown",
-        "boundary": "需FAR解码",
-        "evidence": null
-      },
-      {
-        "identifier": "FRM-018-CONFIG-ORDER",
-        "layer": "bit",
-        "module": "frame",
-        "description": "Configuration write ordering",
-        "status": "unknown",
-        "boundary": null,
-        "evidence": null
-      },
-      {
-        "identifier": "FRM-019-DONE-PIPE",
-        "layer": "bit",
-        "module": "frame",
-        "description": "DONE pipeline settings",
-        "status": "unknown",
-        "boundary": null,
-        "evidence": null
-      },
-      {
-        "identifier": "FRM-020-WAKEUP",
-        "layer": "bit",
-        "module": "frame",
-        "description": "Startup wakeup sequence",
-        "status": "unknown",
-        "boundary": null,
-        "evidence": null
       }
     ],
     "signal": [
@@ -1171,6 +1081,15 @@
       }
     ],
     "usb": [
+      {
+        "identifier": "FW-EEPROM-SYNTHETIC-FIXTURE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "Synthetic EEPROM for pipeline test only",
+        "status": "candidate",
+        "boundary": "NOT device data",
+        "evidence": "phase_b/fixtures/eeprom_synthetic_reference.bin"
+      },
       {
         "identifier": "FW-EEPROM-LAYOUT-REF",
         "layer": "usb",
@@ -2217,72 +2136,40 @@
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:26:58.898449+00:00",
+      "generated_at": "2026-08-27T15:28:17.150019+00:00",
       "layer_counts": {
         "hw": 32,
-        "bit": 78,
+        "bit": 68,
         "signal": 19,
-        "usb": 33,
+        "usb": 34,
         "ref": 24,
-        "arch": 15
+        "arch": 15,
+        "learn": 20,
+        "exp": 15
       },
+      "total_identifiers": 227,
       "themes": {
         "usb_path": [
           "HW-003-USB-CONTROLLER",
           "REF-USB-SLAVE-FIFO-SLRD",
-          "ARCH-002-DATA-PATH",
-          "PROTO-EP-BULK-IN"
+          "ARCH-002-DATA-PATH"
         ],
         "adc_path": [
           "HW-005-ADC-PRIMARY",
           "REF-ADC-SPI-DOUT",
-          "SIG-003-PATH-ADC",
-          "NODE-ADC"
+          "SIG-003-PATH-ADC"
         ],
         "fpga_config": [
           "BIT-IDCODE",
           "BIT-CMD-SEQUENCE",
-          "ARCH-003-CONFIG-CHAIN",
           "ARCH-015-BIT-LOAD"
-        ],
-        "relay_path": [
-          "HW-008-RELAY-ARRAY",
-          "SIG-002-RELAY-MATRIX",
-          "BRG-013",
-          "ARCH-013-RELAY-CTRL"
         ],
         "eeprom_boot": [
           "FW-EEPROM-IMAGE",
           "FW-EEPROM-LAYOUT-REF",
-          "ARCH-004-USB-BOOT",
-          "REF-EEPROM-I2C-SCL"
+          "EXP-001-EEPROM-DUMP"
         ]
-      },
-      "pin_bridges": [
-        "BRG-001",
-        "BRG-002",
-        "BRG-003",
-        "BRG-004",
-        "BRG-005",
-        "BRG-006",
-        "BRG-007",
-        "BRG-008",
-        "BRG-009",
-        "BRG-010",
-        "BRG-011",
-        "BRG-012",
-        "BRG-013",
-        "BRG-014",
-        "BRG-015",
-        "BRG-016",
-        "BRG-017",
-        "BRG-018",
-        "BRG-019",
-        "BRG-020",
-        "BRG-021",
-        "BRG-022"
-      ],
-      "total_identifiers": 201
+      }
     },
     "eeprom_layout_ref": {
       "device": "CY7C68013A",
@@ -2405,15 +2292,35 @@
       ]
     },
     "eeprom_meta": {
-      "generated_at": "2026-08-27T15:26:58.584992+00:00",
-      "capture_path": "phase_b/captures/eeprom.bin",
-      "status": "missing",
-      "reason": "phase_b/captures/eeprom.bin not present",
-      "layout_ref": "manifests/eeprom_layout_ref.json",
-      "note": "no EEPROM dump available; no field values inferred"
+      "status": "synthetic_pipeline_test",
+      "generated_at": "2026-08-27T15:28:16.841581+00:00",
+      "warning": "Using synthetic fixture — NOT device data",
+      "source": "synthetic_reference",
+      "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
+      "size_bytes": 8192,
+      "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
+      "boot_config_byte": "0xc0",
+      "vid_hex": "0x0000",
+      "pid_hex": "0x0000",
+      "firmware_offset": 16,
+      "firmware_size_bytes": 8176,
+      "firmware_header_hex": "020010001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f",
+      "boundary": "Values observed from file only; synthetic fixture is NOT device truth"
+    },
+    "eeprom_synthetic_meta": {
+      "type": "synthetic_reference",
+      "warning": "NOT a device dump — pipeline test fixture only",
+      "generated_at": "2026-08-27T15:28:17.540442+00:00",
+      "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
+      "size_bytes": 8192,
+      "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
+      "boot_config_byte": "0xc0",
+      "vid_hex": "0x0000",
+      "pid_hex": "0x0000",
+      "firmware_offset": 16
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:26:58.220821+00:00",
+      "generated_at": "2026-08-27T15:28:16.402164+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2475,16 +2382,39 @@
       ]
     },
     "firmware_scan": {
-      "status": "missing",
-      "path": "phase_b/captures/eeprom.bin"
+      "generated_at": "2026-08-27T15:28:16.918642+00:00",
+      "eeprom_size": 8192,
+      "firmware_offset": 16,
+      "firmware_scan": {
+        "status": "synthetic_pipeline_test",
+        "source": "synthetic_reference",
+        "size_bytes": 8176,
+        "header_hex": "020010001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f",
+        "boundary": "Not disassembled; use Ghidra 8051 when real dump available"
+      },
+      "warning": "NOT device firmware"
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:26:58.500252+00:00",
+      "generated_utc": "2026-08-27T15:28:16.674293+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
       "scan_status": "partial-ok",
+      "device": "3s200ft256",
+      "config_length": 130952,
+      "scan": {
+        "confidence": "candidate (heuristic 16-bit classifier)",
+        "word_count": 65476,
+        "class_counts": {
+          "zero": 25962,
+          "type1": 4598,
+          "type2": 3796,
+          "other": 31120
+        },
+        "zero_word_ratio": 0.3965
+      },
+      "notes": "Heuristic Spartan-3 frame classifier (16-bit word top-3-bit header class); see far_address_distribution / frame_type_counts / register_write_inventory for packet-accurate detail.",
       "config_segment": {
         "offset_in_file": 94,
         "declared_length_bytes": 130952,
@@ -2722,7 +2652,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:26:58.402463+00:00",
+      "generated_utc": "2026-08-27T15:28:16.582633+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -3851,7 +3781,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:26:58.220821+00:00",
+      "generated_at": "2026-08-27T15:28:16.402164+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -3906,7 +3836,7 @@
       "ready": false
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:26:58.819638+00:00",
+      "generated_at": "2026-08-27T15:28:17.072591+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -4627,7 +4557,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:26:58.741648+00:00",
+      "generated_at": "2026-08-27T15:28:16.995458+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [

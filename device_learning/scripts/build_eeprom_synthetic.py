@@ -31,7 +31,7 @@ def build() -> bytes:
     data[14] = 0x80  # config: bus-powered
     # Minimal 8051-like header pattern (not real firmware)
     data[FW_OFFSET : FW_OFFSET + 4] = bytes([0x02, 0x00, 0x10, 0x00])  # LJMP-ish placeholder
-  for i in range(FW_OFFSET + 4, min(FW_OFFSET + 256, SIZE)):
+    for i in range(FW_OFFSET + 4, min(FW_OFFSET + 256, SIZE)):
         data[i] = i & 0xFF
     return bytes(data)
 

@@ -1,4 +1,13 @@
 {
-  "status": "missing",
-  "path": "phase_b/captures/eeprom.bin"
+  "generated_at": "2026-08-27T15:28:16.918642+00:00",
+  "eeprom_size": 8192,
+  "firmware_offset": 16,
+  "firmware_scan": {
+    "status": "synthetic_pipeline_test",
+    "source": "synthetic_reference",
+    "size_bytes": 8176,
+    "header_hex": "020010001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f",
+    "boundary": "Not disassembled; use Ghidra 8051 when real dump available"
+  },
+  "warning": "NOT device firmware"
 }

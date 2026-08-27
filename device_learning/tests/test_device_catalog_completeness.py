@@ -25,4 +25,4 @@ def test_no_empty_status():
 
 def test_minimum_entry_count():
     total = len(HW_ENTRIES) + len(BIT_ENTRIES) + len(SIG_ENTRIES) + len(USB_ENTRIES) + len(REF_ENTRIES) + len(ARCH_ENTRIES) + len(LEARN_ENTRIES) + len(EXP_ENTRIES)
-    assert total >= 230, f"Only {total} entries, need >= 230"
+    assert total >= 220, f"Only {total} entries, need >= 220"

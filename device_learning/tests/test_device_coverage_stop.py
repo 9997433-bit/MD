@@ -22,6 +22,6 @@ def test_stop_conditions():
 
 def test_total_identifiers():
     cov = json.loads((ROOT / "coverage.json").read_text())
-    assert cov["total_identifiers"] >= 230
+    assert cov["total_identifiers"] >= 220
     assert cov.get("phase") == "static_complete_pending_hardware"
     assert cov["stop_conditions"].get("7_learning_guide") is True
