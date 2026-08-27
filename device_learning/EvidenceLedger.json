@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:09:01.220665+00:00",
+  "generated_at": "2026-08-27T16:14:44.839383+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -2155,7 +2155,7 @@
   },
   "manifests": {
     "artifact_inventory": {
-      "generated_at": "2026-08-27T16:09:00.823785+00:00",
+      "generated_at": "2026-08-27T16:14:44.444130+00:00",
       "artifact_count": 51,
       "present_count": 51,
       "artifacts": [
@@ -2468,7 +2468,7 @@
       ]
     },
     "bit_strings": {
-      "generated_at": "2026-08-27T16:08:58.151273+00:00",
+      "generated_at": "2026-08-27T16:14:41.747952+00:00",
       "source": "firmware/device.bit",
       "file_size_bytes": 131046,
       "min_string_length": 4,
@@ -2617,7 +2617,7 @@
       }
     },
     "bom_crosswalk": {
-      "generated_at": "2026-08-27T16:08:58.872733+00:00",
+      "generated_at": "2026-08-27T16:14:42.491880+00:00",
       "component_count": 40,
       "linked_count": 27,
       "links": [
@@ -2870,7 +2870,7 @@
       "boundary": "Keyword heuristic on ref/marking only; not a netlist"
     },
     "capture_manifest": {
-      "generated_at": "2026-08-27T16:08:59.574406+00:00",
+      "generated_at": "2026-08-27T16:14:43.194532+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -2913,7 +2913,7 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "catalog_integrity": {
-      "generated_at": "2026-08-27T16:09:00.203760+00:00",
+      "generated_at": "2026-08-27T16:14:43.820668+00:00",
       "entry_count": 237,
       "unique_identifiers": 237,
       "duplicate_count": 0,
@@ -2954,7 +2954,7 @@
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "config_entropy": {
-      "generated_at": "2026-08-27T16:08:58.231290+00:00",
+      "generated_at": "2026-08-27T16:14:41.828514+00:00",
       "source": "firmware/device.bit",
       "config_segment_bytes": 130948,
       "byte_entropy_bits": 4.3049,
@@ -2967,7 +2967,7 @@
       ]
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T16:08:59.026859+00:00",
+      "generated_at": "2026-08-27T16:14:42.645329+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -3124,7 +3124,7 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-27T16:08:58.435730+00:00",
+      "generated_at": "2026-08-27T16:14:42.053723+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
@@ -3146,7 +3146,7 @@
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-27T16:08:58.310544+00:00",
+      "generated_at": "2026-08-27T16:14:41.907405+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
       "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
@@ -3157,7 +3157,7 @@
       "layout_ref": "manifests/eeprom_layout_ref.json"
     },
     "evidence_summary": {
-      "generated_at": "2026-08-27T16:09:00.283175+00:00",
+      "generated_at": "2026-08-27T16:14:43.897939+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
@@ -3188,20 +3188,20 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "experiment_index": {
-      "generated_at": "2026-08-27T16:08:59.882052+00:00",
+      "generated_at": "2026-08-27T16:14:43.503605+00:00",
       "entry_count": 0,
       "experiments": [],
       "boundary": "Index only; catalog upgrades require human review"
     },
     "experiment_validation": {
-      "generated_at": "2026-08-27T16:08:59.805720+00:00",
+      "generated_at": "2026-08-27T16:14:43.427113+00:00",
       "log_count": 0,
       "valid_count": 0,
       "files": [],
       "boundary": "Validation only; does not auto-upgrade catalog entries"
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T16:08:57.787413+00:00",
+      "generated_at": "2026-08-27T16:14:41.388182+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -3265,10 +3265,10 @@
     "firmware_extract": {
       "status": "missing",
       "path": "/workspace/device_learning/phase_b/captures/eeprom.bin",
-      "generated_at": "2026-08-27T16:08:59.495375+00:00"
+      "generated_at": "2026-08-27T16:14:43.115348+00:00"
     },
     "firmware_scan": {
-      "generated_at": "2026-08-27T16:08:58.562037+00:00",
+      "generated_at": "2026-08-27T16:14:42.180532+00:00",
       "eeprom_size": 8192,
       "boot_format": "C2",
       "firmware_offset": 12,
@@ -3293,7 +3293,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T16:08:58.061675+00:00",
+      "generated_utc": "2026-08-27T16:14:41.658383+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -3549,7 +3549,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T16:08:57.967974+00:00",
+      "generated_utc": "2026-08-27T16:14:41.566915+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -4678,7 +4678,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T16:08:57.787413+00:00",
+      "generated_at": "2026-08-27T16:14:41.388182+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -4729,19 +4729,19 @@
       ]
     },
     "output_hashes": {
-      "generated_at": "2026-08-27T16:09:00.903385+00:00",
+      "generated_at": "2026-08-27T16:14:44.524308+00:00",
       "output_count": 15,
-      "combined_sha256": "8d07d85c46972c5559a7104fb699b9e25a6efa1b5581d228c028b4ee8198b873",
+      "combined_sha256": "dd8f2a397bda638f6a600f36e96fe3917756df698e659e554d63dde6db7f720a",
       "outputs": [
         {
           "path": "EvidenceLedger.json",
           "size_bytes": 226737,
-          "sha256": "9e1ddbffbd7feaa93e1bca1422a9c4b35c1b8d8c779998430ddb4585b6271cf8"
+          "sha256": "97aa143a902bff7ef74b5f4f206cd319632a9a62aa8ffecf478b58b410ad6d23"
         },
         {
           "path": "coverage.json",
           "size_bytes": 881,
-          "sha256": "f6cdfe0c82e4126ec3afa9b7c55148d82cb8e3cf94f877c52f4653fabce92ae4"
+          "sha256": "31add75ef009c4ece97f79256f5573795d739257e82900cae17c926515783c52"
         },
         {
           "path": "bridge_matrix.json",
@@ -4751,37 +4751,37 @@
         {
           "path": "STATIC_REPORT.md",
           "size_bytes": 1637,
-          "sha256": "d2bbf7bd5c58421943004b4c140228580505f01965f67688b306022b8391568b"
+          "sha256": "cc6557a1802cc4f739520e3c339ddb6dbd36cafc55dc47756b2247329f0f85d7"
         },
         {
           "path": "CONFIRMED_REPORT.md",
           "size_bytes": 3771,
-          "sha256": "7cccaf3980f1bb055042eaf805a6c6f99fce2818d207ded97d15bf35ca954998"
+          "sha256": "c6c3db727d1c22857850fc27133474bcd966709b7420f59521bdc24ec377c7a9"
         },
         {
           "path": "BLOCKED_REPORT.md",
           "size_bytes": 4746,
-          "sha256": "a31dc0b2ac05d7cfb5e9dd74d7040f2ef03c6f0eec347ea367886eecc54b098b"
+          "sha256": "afa9f3266fcbdd1cd063931e262b688b56117772de21a2aa0b44a960f995a1fd"
         },
         {
           "path": "BRIDGE_REPORT.md",
           "size_bytes": 969,
-          "sha256": "783ade3caad5499904efa6a2d463b58ca8bd9359837c9e767c7d0c8e25bd458c"
+          "sha256": "97906bb000942a2247bb59890028ea03534e811ee7b972184724f2c865e8eba3"
         },
         {
           "path": "ARCHITECTURE.md",
           "size_bytes": 731,
-          "sha256": "0fe3cb49e5e1c59a584cc6042b5fdbe0e5fa3d7094cb9480cc01c4101cc8289c"
+          "sha256": "1186d41997c2931e3732a15a0e8c011d4586bef0323af28c06a52a67ed2815d5"
         },
         {
           "path": "IDENTIFIER_INDEX.md",
           "size_bytes": 18696,
-          "sha256": "3dadb7ecaafac706e19c1b358c3ebacd4a74d3dee7c069309759c26c2bebd7e3"
+          "sha256": "7e3f24df21cbc61b63a1a30417d540e4fb0921f60e5e521d006dd22687b0652a"
         },
         {
           "path": "manifests/evidence_summary.json",
           "size_bytes": 785,
-          "sha256": "d79b2abdd98de16988ea5903a1233a12b138159b0abd9a42510ed83c846124e8"
+          "sha256": "877d07dc2950c165db5b0a14dec5728a453b29d3c18467364e5479f2c3ef0afb"
         },
         {
           "path": "manifests/completion_status.json",
@@ -4791,33 +4791,33 @@
         {
           "path": "manifests/catalog_integrity.json",
           "size_bytes": 182,
-          "sha256": "4aed58c85633dddbef8d43521cdff616ace045522d22dba57153a1cf5ee58485"
+          "sha256": "b09b876548e9a5f56365d94e69bf68069950722eda1e41948ec5cfeebd78d93d"
         },
         {
           "path": "manifests/sensitive_audit.json",
           "size_bytes": 162,
-          "sha256": "1897dd44610c7601972bf027b6094e255288432ebf9190d794c59d82179d9217"
+          "sha256": "83836c6aa0dcfa11e2e61f3a50865cceae3e86a8167075dd340d073057187fdd"
         },
         {
           "path": "manifests/frame_summary.json",
           "size_bytes": 14548,
-          "sha256": "8734332a4992c0ae3eeafbb505634538374eeaa616ffa04431b6a9c4e59a476a"
+          "sha256": "964f8f363dce6442f04e09b77a4a56637b5bdfe37c3d077d3e718cb01879fd5c"
         },
         {
           "path": "manifests/pending_index.json",
           "size_bytes": 23445,
-          "sha256": "90f7bb48ded1574fb93bca95354bca05f81487a14fab0dc896bc72504fb96f77"
+          "sha256": "611e03bcd1e1415f532a132c0fdece62740522e48459785beaf09a257df414f6"
         }
       ],
       "boundary": "Hashes of generated artifacts; inputs see file_hashes.json"
     },
     "package_manifest": {
-      "generated_at": "2026-08-27T16:08:52.880872+00:00",
+      "generated_at": "2026-08-27T16:14:07.798382+00:00",
       "package": "device_learning",
       "version": "static-1.0",
       "phase": "static_complete_pending_hardware",
       "static_phase_complete": true,
-      "frozen_at": "2026-08-27T16:08:52.776636+00:00",
+      "frozen_at": "2026-08-27T16:14:07.694208+00:00",
       "metrics": {
         "identifiers": 237,
         "confirmed": 68,
@@ -4826,7 +4826,7 @@
         "manifest_json_count": 40
       },
       "input_hashes": {
-        "combined_output_sha256": "ae8df7a38014a3ca9371a106815acafc63f7ccef9db62ebe89e3df377d88993b"
+        "combined_output_sha256": "48930f4a6902417ffc0d83831fcb5157a3f3e03822ee97543be6d52900f01717"
       },
       "checklists": {
         "phase_b": "0/6",
@@ -4843,7 +4843,7 @@
       "boundary": "Static phase frozen; no further status upgrades without hardware evidence"
     },
     "pending_index": {
-      "generated_at": "2026-08-27T16:08:59.104416+00:00",
+      "generated_at": "2026-08-27T16:14:42.723223+00:00",
       "blocked_statuses": [
         "missing",
         "not_started",
@@ -5735,7 +5735,7 @@
       "note": "Blocked items must not be upgraded without new evidence"
     },
     "phase_b_readiness": {
-      "generated_at": "2026-08-27T16:08:59.728843+00:00",
+      "generated_at": "2026-08-27T16:14:43.349970+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -5771,7 +5771,7 @@
       "next_command": "make check-captures"
     },
     "phase_b_status": {
-      "generated_at": "2026-08-27T16:08:59.184112+00:00",
+      "generated_at": "2026-08-27T16:14:42.804449+00:00",
       "captures_dir": "phase_b/captures",
       "capture_count": 0,
       "captures": [],
@@ -5787,7 +5787,7 @@
       ]
     },
     "phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-27T16:08:59.651993+00:00",
+      "generated_at": "2026-08-27T16:14:43.272044+00:00",
       "applicable": false,
       "proposal_count": 0,
       "proposals": [],
@@ -5797,7 +5797,7 @@
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "phase_c_readiness": {
-      "generated_at": "2026-08-27T16:08:59.958759+00:00",
+      "generated_at": "2026-08-27T16:14:43.580204+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": false,
       "checklist": "0/6",
@@ -5805,7 +5805,7 @@
       "recommended_action": "complete phase B captures first"
     },
     "phase_roadmap": {
-      "generated_at": "2026-08-27T16:08:58.948888+00:00",
+      "generated_at": "2026-08-27T16:14:42.568333+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -5955,7 +5955,7 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "phase_transition": {
-      "generated_at": "2026-08-27T16:09:01.139034+00:00",
+      "generated_at": "2026-08-27T16:14:44.758603+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "static_complete_pending_hardware",
       "transition_ready": false,
@@ -5971,7 +5971,7 @@
       "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "photo_hw_map": {
-      "generated_at": "2026-08-27T16:08:58.794961+00:00",
+      "generated_at": "2026-08-27T16:14:42.414388+00:00",
       "photo_count": 10,
       "photos_with_hw_links": 7,
       "photos": [
@@ -6076,7 +6076,7 @@
       "boundary": "Keyword match on photo_index components only"
     },
     "photo_index": {
-      "generated_at": "2026-08-27T16:08:58.717454+00:00",
+      "generated_at": "2026-08-27T16:14:42.336742+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -6797,13 +6797,13 @@
       "count": 22
     },
     "protocol_log_meta": {
-      "generated_at": "2026-08-27T16:08:59.343262+00:00",
+      "generated_at": "2026-08-27T16:14:42.963214+00:00",
       "status": "missing",
       "path": "phase_b/captures/protocol_log.json",
       "boundary": "Optional; copy phase_b/templates/protocol_log_template.json after capture"
     },
     "sensitive_audit": {
-      "generated_at": "2026-08-27T16:09:00.126425+00:00",
+      "generated_at": "2026-08-27T16:14:43.742783+00:00",
       "scanned_roots": [
         "manifests",
         "."
@@ -6813,15 +6813,15 @@
       "ok": true
     },
     "static_freeze": {
-      "frozen_at": "2026-08-27T16:08:52.776636+00:00",
+      "frozen_at": "2026-08-27T16:14:07.694208+00:00",
       "phase": "static_complete_pending_hardware",
       "static_phase_complete": true,
       "identifiers": 237,
       "confirmed": 68,
       "blocked": 98,
-      "git_commit": "d23d6aeb4e23c8ec25a3fb7327a4afc39c5246b4",
+      "git_commit": "e84ee0e2e5c18973cf77f7334f6acbf0291e6eb6",
       "input_file_count": 11,
-      "output_combined_sha256": "ae8df7a38014a3ca9371a106815acafc63f7ccef9db62ebe89e3df377d88993b",
+      "output_combined_sha256": "48930f4a6902417ffc0d83831fcb5157a3f3e03822ee97543be6d52900f01717",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "next_phase": "phase_b_hardware_capture",
       "stop_conditions_pass": true
@@ -6841,7 +6841,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "system_map": {
-      "generated_at": "2026-08-27T16:08:58.640553+00:00",
+      "generated_at": "2026-08-27T16:14:42.259544+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -6977,7 +6977,7 @@
       "pin_bridge_count": 22
     },
     "usb_capture_meta": {
-      "generated_at": "2026-08-27T16:08:59.264530+00:00",
+      "generated_at": "2026-08-27T16:14:42.883936+00:00",
       "status": "missing",
       "path": "phase_b/captures",
       "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"

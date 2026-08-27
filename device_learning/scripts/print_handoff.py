@@ -68,6 +68,7 @@ def main() -> None:
     print()
     print("── 采集后执行 ──")
     print("  cd device_learning && make phase-b")
+    print("  make proposals   # 审阅 catalog 升级建议")
     print()
     print("── 详细文档 ──")
     print("  HARDWARE_HANDOFF.md")

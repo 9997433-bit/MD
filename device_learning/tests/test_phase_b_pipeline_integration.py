@@ -2,32 +2,12 @@
 from __future__ import annotations
 
 import json
-import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 ROOT = Path(__file__).resolve().parents[1]
-SYNTH = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
 CAPTURE = ROOT / "phase_b" / "captures" / "eeprom.bin"
-
-
-@pytest.fixture
-def synthetic_eeprom_capture():
-    """Temporarily place synthetic fixture in captures/; always cleaned up."""
-    CAPTURE.parent.mkdir(parents=True, exist_ok=True)
-    backup = CAPTURE.read_bytes() if CAPTURE.exists() else None
-    shutil.copy(SYNTH, CAPTURE)
-    yield
-    if backup is not None:
-        CAPTURE.write_bytes(backup)
-    elif CAPTURE.exists():
-        CAPTURE.unlink()
-    subprocess.run([sys.executable, str(ROOT / "scripts" / "ingest_phase_b.py")], cwd=ROOT, check=False)
-    subprocess.run([sys.executable, str(ROOT / "scripts" / "sync_phase_b_checklist.py")], cwd=ROOT, check=False)
-    subprocess.run([sys.executable, str(ROOT / "scripts" / "detect_phase_transition.py")], cwd=ROOT, check=False)
 
 
 def _run(script: str) -> None:

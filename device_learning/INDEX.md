@@ -4,10 +4,16 @@
 
 ```bash
 cd device_learning
-make verify    # 生成账本 + 验收
-make test      # 72 项 pytest
-make health    # 包健康检查
-make status    # 一行状态摘要
+make verify       # 生成账本 + 验收
+make test         # 94 项 pytest
+make health       # 包健康检查
+make handoff      # 实机交接摘要
+make readiness    # 阶段 B 就绪报告
+make check-captures  # 采集预检
+make phase-b      # 实机采集后刷新
+make phase-c      # 实验日志处理
+make proposals    # 查看升级建议
+make status       # 一行状态摘要
 ```
 
 ## 目录地图
@@ -17,27 +23,20 @@ make status    # 一行状态摘要
 | `firmware/device.bit` | Xilinx 位流 |
 | `hardware/photos/` | 10 张板卡照片 |
 | `catalogs/` | 八层 identifier 目录 |
-| `manifests/` | 哈希、BOM、帧分析、系统图（29 JSON） |
+| `manifests/` | 哈希、BOM、帧分析、系统图（35+ JSON） |
 | `EvidenceLedger.json` | 主账本 |
 | `coverage.json` | 完成度统计 |
 | `bridge_matrix.json` | 强制 null 桥 |
-| `ARCHITECTURE.md` | 系统数据路径 mermaid 图 |
-| `CONFIRMED_REPORT.md` | 68 条 confirmed 项 |
-| `BLOCKED_REPORT.md` | 98 条阻塞项 |
-| `BRIDGE_REPORT.md` | 10 条 null 桥策略 |
-| `CHECKLIST_REPORT.md` | 阶段 B/C 检查清单进度 |
-| `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
+| `PHASE_B_READINESS.md` | 阶段 B 阻塞项 |
+| `PHASE_C_READINESS.md` | 阶段 C 前置与进度 |
 | `HARDWARE_HANDOFF.md` | 实机接入三步指南 |
-| `manifests/static_freeze.json` | 静态阶段冻结记录 |
-| `manifests/phase_transition.json` | 阶段转换建议 |
-| `phase_b/CHECKLIST.json` | 阶段 B 机器可读清单 |
-| `phase_c/CHECKLIST.json` | 阶段 C 机器可读清单 |
-| `phase_b/` | 实机采集（EEPROM/抓包） |
-| `phase_c/` | 实验验证 |
+| `manifests/phase_b_upgrade_proposals.json` | catalog 升级建议（人工审阅） |
+| `phase_b/captures/` | 实机采集放置目录 |
+| `phase_c/logs/` | 实验日志目录 |
 
 ## 八层 catalog
 
-`hw` · `bit` · `signal` · `usb` · `ref` · `arch` · `learn` · `exp`
+`hw` · `bit` · `signal` · `usb` · `ref` · `arch` · `learn` · `exp` — **237 条 identifier**
 
 ## 声明
 
@@ -45,8 +44,7 @@ make status    # 一行状态摘要
 
 ## 实机下一步
 
-```bash
-make phase-b
-```
-
-详见 `HARDWARE_HANDOFF.md`。
+1. 阅读 `HARDWARE_HANDOFF.md`
+2. 放置 `phase_b/captures/eeprom.bin` 与 `*.pcapng`
+3. `make check-captures && make phase-b`
+4. `make proposals` 审阅升级建议后手动编辑 `catalogs/*.py`

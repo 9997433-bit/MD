@@ -19,7 +19,8 @@ def test_all_manifests_parse():
 
 def test_phase_c_checklist():
     data = json.loads((ROOT / "phase_c" / "CHECKLIST.json").read_text())
-    assert data["status"] == "not_started"
+    assert data["status"] in ("not_started", "in_progress")
+    assert data["done_count"] == 0, "phase C checklist should start empty in static repo"
     assert len(data["tasks"]) >= 5
 
 

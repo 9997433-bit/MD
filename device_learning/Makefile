@@ -23,6 +23,9 @@ status:
 handoff:
 	python3 scripts/print_handoff.py
 
+proposals:
+	python3 scripts/print_proposals.py
+
 check-captures:
 	python3 scripts/validate_captures.py
 

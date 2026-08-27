@@ -7,8 +7,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 SYNTH = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
@@ -25,46 +23,26 @@ def _run(script: str, *args: str) -> subprocess.CompletedProcess:
     )
 
 
-def test_validate_captures_rejects_synthetic_eeprom():
-    CAPTURE.parent.mkdir(parents=True, exist_ok=True)
-    backup = CAPTURE.read_bytes() if CAPTURE.exists() else None
-    shutil.copy(SYNTH, CAPTURE)
-    try:
-        result = _run("validate_captures.py")
-        assert result.returncode == 3
-        data = json.loads(result.stdout)
-        assert data["synthetic_eeprom_detected"] is True
-    finally:
-        if backup is not None:
-            CAPTURE.write_bytes(backup)
-        elif CAPTURE.exists():
-            CAPTURE.unlink()
+def test_validate_captures_rejects_synthetic_eeprom(synthetic_eeprom_capture):
+    result = _run("validate_captures.py")
+    assert result.returncode == 3
+    data = json.loads(result.stdout)
+    assert data["synthetic_eeprom_detected"] is True
 
 
 def test_phase_transition_with_fake_real_eeprom():
-    CAPTURE.parent.mkdir(parents=True, exist_ok=True)
-    backup = CAPTURE.read_bytes() if CAPTURE.exists() else None
     CAPTURE.write_bytes(b"\xff" * 8192)
-    try:
-        _run("ingest_phase_b.py")
-        _run("detect_phase_transition.py")
-        t = json.loads((ROOT / "manifests" / "phase_transition.json").read_text())
-        assert t["recommended_phase"] == "phase_b_in_progress"
-        assert t["capture_flags"]["eeprom_observed"] is True
-    finally:
-        if backup is not None:
-            CAPTURE.write_bytes(backup)
-        elif CAPTURE.exists():
-            CAPTURE.unlink()
-        _run("ingest_phase_b.py")
-        _run("detect_phase_transition.py")
+    _run("ingest_phase_b.py")
+    _run("detect_phase_transition.py")
+    t = json.loads((ROOT / "manifests" / "phase_transition.json").read_text())
+    assert t["recommended_phase"] == "phase_b_in_progress"
+    assert t["capture_flags"]["eeprom_observed"] is True
 
 
 def test_experiment_log_validation_template_invalid():
     logs = ROOT / "phase_c" / "logs"
     logs.mkdir(parents=True, exist_ok=True)
     target = logs / "_test_template.json"
-    backup = target.read_bytes() if target.exists() else None
     shutil.copy(TEMPLATE, target)
     try:
         _run("validate_experiment_log.py")
@@ -74,8 +52,7 @@ def test_experiment_log_validation_template_invalid():
     finally:
         if target.exists():
             target.unlink()
-        if backup is not None:
-            target.write_bytes(backup)
+        _run("sync_phase_c_checklist.py")
 
 
 def test_run_phase_c_exits_zero():
