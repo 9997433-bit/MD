@@ -1,9 +1,11 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
+using Aetherboard.Core;
 
 namespace Aetherboard.VR
 {
@@ -82,6 +84,9 @@ namespace Aetherboard.VR
             LogCheck(sb, "BattleNetSession", UnityEngine.Object.FindObjectOfType<BattleNetSession>() != null);
             LogCheck(sb, "ResultOverlay", UnityEngine.Object.FindObjectOfType<BattleResultOverlay>() != null);
             LogCheck(sb, "BossSelectPanel", UnityEngine.Object.FindObjectOfType<BattleBossSelectPanel>() != null);
+            LogCheck(sb, "BossRegistry>=3", BossRegistry.AllBossIds.Count >= 3);
+            foreach (var bossId in new[] { "earth", "wind", "ice" })
+                LogCheck(sb, $"BossProfile:{bossId}", BossRegistry.AllBossIds.Contains(bossId));
 
             var pieces = UnityEngine.Object.FindObjectsOfType<PieceToken>();
             LogCheck(sb, "PieceTokens>=4", pieces != null && pieces.Length >= 4);
@@ -106,6 +111,7 @@ namespace Aetherboard.VR
             sb.AppendLine("  [ ] 8 Online WS — PC host sync");
             sb.AppendLine("  [ ] 9 Online NGO — NetcodeNative 7777");
             sb.AppendLine("  [ ] 10 Audio — phase/damage SFX");
+            sb.AppendLine("  [ ] 11 Boss select — earth/wind/ice via left panel (or keys 1/2/3 desktop)");
         }
 
         private static void LogCheck(StringBuilder sb, string label, bool pass)

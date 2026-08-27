@@ -83,7 +83,8 @@ namespace Aetherboard.VR
                 "Grip — 抓取棋子 / 打开技能环\n" +
                 "扳机 — 选中 / 确认技能\n" +
                 "A — 结束阶段  |  B — 自动一步\n" +
-                "左侧 — 换 Boss  |  右侧 — 联机", 15);
+                "左侧 — 土灵/风灵/冰灵\n" +
+                "右侧 — 联机", 15);
 
             var btnGo = new GameObject("Dismiss", typeof(RectTransform), typeof(Image), typeof(Button));
             btnGo.transform.SetParent(panelGo.transform, false);

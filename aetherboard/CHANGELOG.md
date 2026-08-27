@@ -1,5 +1,13 @@
 # Aetherboard 更新日志
 
+## [0.3.1-vr] — 2026-08-27
+
+### 三 Boss 抛光
+- **冰主题音效**：Boss 切换和弦 + 读条滴答频率区分土/风/冰
+- **读条 VFX**：`FuryCastBarVFX` 冰灵配色与打断爆发
+- **Quest 验收**：自动检查三 Boss 注册 + 手册项 #11（Boss 切换）
+- 操作提示 / README / GDD / VR_ROADMAP 同步三 Boss 范围
+
 ## [0.3.0-vr] — 2026-08-27
 
 ### 发布
