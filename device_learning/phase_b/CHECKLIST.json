@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "phase": "B",
+  "status": "not_started",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "prerequisites": [
+    "legal_authorization",
+    "physical_device",
+    "eeprom_reader",
+    "usb_capture_host"
+  ],
+  "tasks": [
+    {
+      "id": "B1",
+      "name": "eeprom_dump",
+      "artifact": "phase_b/captures/eeprom.bin",
+      "expected_size_bytes": 8192,
+      "template": "phase_b/templates/eeprom_read.md",
+      "verify": "python3 scripts/diff_eeprom.py read1.bin read2.bin",
+      "done": false
+    },
+    {
+      "id": "B2",
+      "name": "usb_enum_capture",
+      "artifact": "phase_b/captures/usb_enum.pcapng",
+      "template": "phase_b/templates/usb_capture.md",
+      "done": false
+    },
+    {
+      "id": "B3",
+      "name": "usb_session_capture",
+      "artifact": "phase_b/captures/usb_session.pcapng",
+      "template": "phase_b/templates/usb_capture.md",
+      "done": false
+    },
+    {
+      "id": "B4",
+      "name": "protocol_log",
+      "artifact": "phase_b/captures/protocol_log.json",
+      "template": "phase_b/templates/protocol_log_template.json",
+      "optional": true,
+      "done": false
+    },
+    {
+      "id": "B5",
+      "name": "ledger_refresh",
+      "command": "make phase-b",
+      "done": false
+    },
+    {
+      "id": "B6",
+      "name": "8051_disasm",
+      "artifact": "phase_b/analysis/mcu_disasm.txt",
+      "template": "phase_b/templates/ghidra_8051.md",
+      "depends": [
+        "B1"
+      ],
+      "done": false
+    }
+  ],
+  "updated_at": "2026-08-27T15:44:59.134097+00:00",
+  "done_count": 0,
+  "total_count": 6
+}

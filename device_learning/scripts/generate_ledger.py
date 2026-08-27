@@ -49,10 +49,11 @@ FEEDERS = [
     ["build_confirmed_report.py"],
     ["build_bridge_report.py"],
     ["build_system_diagram.py"],
-    ["build_artifact_inventory.py"],
     ["build_learning_report.py"],
     ["build_identifier_index.py"],
-    ["verify_completion.py"],
+    ["build_artifact_inventory.py"],
+    ["build_output_hashes.py"],
+    ["sync_phase_b_checklist.py"],
 ]
 
 
@@ -149,6 +150,10 @@ def main() -> None:
     (ROOT / "coverage.json").write_text(
         json.dumps(coverage, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
+    for post in ("verify_completion.py", "build_static_freeze.py"):
+        script = ROOT / "scripts" / post
+        if script.exists():
+            subprocess.run([sys.executable, str(script)], check=False)
     print(f"Ledger: {coverage['total_identifiers']} identifiers")
     print(f"Coverage: {coverage['status_counts']}")
     print(f"Stop conditions pass: {coverage['all_pass']}")

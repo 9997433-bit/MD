@@ -26,3 +26,4 @@ def test_print_status_cli():
     out = subprocess.check_output(["python3", "scripts/print_status.py"], cwd=ROOT, text=True)
     assert "phase=static_complete_pending_hardware" in out
     assert "idcode=0x01414093" in out
+    assert "frozen=True" in out

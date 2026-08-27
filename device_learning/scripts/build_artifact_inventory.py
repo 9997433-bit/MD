@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-ARTIFACTS = [
+CORE_ARTIFACTS = [
     ("EvidenceLedger.json", "主账本"),
     ("coverage.json", "完成度统计"),
     ("bridge_matrix.json", "强制 null 桥"),
@@ -19,31 +19,26 @@ ARTIFACTS = [
     ("ARCHITECTURE.md", "系统架构 mermaid 图"),
     ("IDENTIFIER_INDEX.md", "identifier 全表"),
     ("HARDWARE_HANDOFF.md", "实机接入指南"),
-    ("manifests/evidence_summary.json", "一页式证据摘要"),
-    ("manifests/pending_index.json", "阻塞项索引"),
-    ("manifests/phase_roadmap.json", "阶段路线图"),
-    ("manifests/catalog_integrity.json", "目录完整性校验"),
-    ("manifests/sensitive_audit.json", "敏感词审计"),
-    ("manifests/frame_summary.json", "位流帧摘要"),
-    ("manifests/frame_deep.json", "位流深层扫描"),
-    ("manifests/hardware_bom.json", "硬件 BOM"),
-    ("manifests/eeprom_meta.json", "EEPROM 元数据"),
-    ("manifests/photo_hw_map.json", "照片 HW 映射"),
+    ("phase_b/CHECKLIST.json", "阶段 B 机器可读检查清单"),
+    ("manifests/static_freeze.json", "静态阶段冻结记录"),
+    ("manifests/output_hashes.json", "产物哈希"),
 ]
 
 
 def main() -> None:
     items = []
-    for rel, desc in ARTIFACTS:
+    seen: set[str] = set()
+    for rel, desc in CORE_ARTIFACTS:
         path = ROOT / rel
-        items.append(
-            {
-                "path": rel,
-                "description": desc,
-                "exists": path.exists(),
-                "size_bytes": path.stat().st_size if path.exists() else 0,
-            }
-        )
+        items.append({"path": rel, "description": desc, "exists": path.exists(), "size_bytes": path.stat().st_size if path.exists() else 0})
+        seen.add(rel)
+
+    for path in sorted((ROOT / "manifests").glob("*.json")):
+        rel = f"manifests/{path.name}"
+        if rel not in seen:
+            items.append({"path": rel, "description": "generated manifest", "exists": True, "size_bytes": path.stat().st_size})
+            seen.add(rel)
+
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "artifact_count": len(items),
@@ -52,7 +47,7 @@ def main() -> None:
     }
     out = ROOT / "manifests" / "artifact_inventory.json"
     out.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(json.dumps({"present_count": meta["present_count"]}, indent=2))
+    print(json.dumps({"present_count": meta["present_count"], "artifact_count": meta["artifact_count"]}, indent=2))
 
 
 if __name__ == "__main__":

@@ -11,6 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     cov = json.loads((ROOT / "coverage.json").read_text(encoding="utf-8"))
     summary = json.loads((ROOT / "manifests" / "evidence_summary.json").read_text(encoding="utf-8"))
+    freeze = {}
+    freeze_path = ROOT / "manifests" / "static_freeze.json"
+    if freeze_path.exists():
+        freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
     print(
         f"phase={summary.get('phase')} "
         f"ids={summary.get('identifiers')} "
@@ -18,6 +22,7 @@ def main() -> None:
         f"blocked={summary.get('blocked')} "
         f"idcode={summary.get('bitstream', {}).get('idcode')} "
         f"eeprom={summary.get('eeprom_status')} "
+        f"frozen={freeze.get('static_phase_complete', '?')} "
         f"pass={summary.get('stop_conditions_pass')}"
     )
 

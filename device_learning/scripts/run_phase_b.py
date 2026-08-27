@@ -38,8 +38,6 @@ def main() -> int:
         run("scan_firmware_stub.py")
     run("generate_ledger.py")
     run("verify_completion.py")
-
-    status = json.loads((ROOT / "manifests" / "phase_b_status.json").read_text(encoding="utf-8"))
     if status.get("ready_for_ledger_refresh"):
         print("\nPhase B captures ingested. Review manifests/ and EvidenceLedger.json.")
     return 0

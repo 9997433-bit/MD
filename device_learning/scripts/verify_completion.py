@@ -22,6 +22,8 @@ def main() -> int:
         "architecture_diagram": (ROOT / "ARCHITECTURE.md").exists(),
         "bridge_report": (ROOT / "BRIDGE_REPORT.md").exists(),
         "artifact_inventory": (ROOT / "manifests" / "artifact_inventory.json").exists(),
+        "output_hashes": (ROOT / "manifests" / "output_hashes.json").exists(),
+        "phase_b_checklist": (ROOT / "phase_b" / "CHECKLIST.json").exists(),
         "phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
         "phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
         "hardware_handoff": (ROOT / "HARDWARE_HANDOFF.md").exists(),

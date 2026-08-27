@@ -11,7 +11,7 @@
 ```bash
 cd device_learning
 make verify    # 生成账本 + 验收
-make test      # 56 项 pytest
+make test      # 63 项 pytest
 make status    # 一行状态摘要
 ```
 

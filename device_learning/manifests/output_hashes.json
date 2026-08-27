@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-08-27T15:44:59.055553+00:00",
+  "output_count": 15,
+  "combined_sha256": "89d911513792f18bb44304fd1b79fdf9db1ce2b28bf8435e9203545db241f6b2",
+  "outputs": [
+    {
+      "path": "EvidenceLedger.json",
+      "size_bytes": 218385,
+      "sha256": "f80b6a7cc417ddab71b4b594baec531afc5c25eb5af897d1ca3b7854a86d31db"
+    },
+    {
+      "path": "coverage.json",
+      "size_bytes": 881,
+      "sha256": "3ff9712f455b4ddd64d9be18366f632148e219b5843d62c0365936f02d17a126"
+    },
+    {
+      "path": "bridge_matrix.json",
+      "size_bytes": 1509,
+      "sha256": "1f37bec898f991dbbe7e9c099dbd1c5b641529ce4b86b6cf8c976dd3353ca81d"
+    },
+    {
+      "path": "STATIC_REPORT.md",
+      "size_bytes": 1637,
+      "sha256": "09c7523b64fa8dce1463a4e8f8f5303a99a61920ab678566917b3c7af7015803"
+    },
+    {
+      "path": "CONFIRMED_REPORT.md",
+      "size_bytes": 3771,
+      "sha256": "0bcf9647daa2d63e80d8cdfdb6a696c87fc47e2757304921d0223ce36b075d8c"
+    },
+    {
+      "path": "BLOCKED_REPORT.md",
+      "size_bytes": 4746,
+      "sha256": "df97be0167e8ea964af20e309bdd9b3b4247f35dfa05e5bd99c7ee71acbb7042"
+    },
+    {
+      "path": "BRIDGE_REPORT.md",
+      "size_bytes": 969,
+      "sha256": "1fcf776a530af69fd6aded824c0927d7960af6113906cd7e8c3341e7b09303e3"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "size_bytes": 731,
+      "sha256": "642c15e77f2155a7a1e82b1ce234ed373e4b945d50421338a0f5751eb0ea53dd"
+    },
+    {
+      "path": "IDENTIFIER_INDEX.md",
+      "size_bytes": 18696,
+      "sha256": "08a3df00b4711ebd469ec6145e2b1faab4b9ca40bf83eba807c4b25a2d2324b5"
+    },
+    {
+      "path": "manifests/evidence_summary.json",
+      "size_bytes": 755,
+      "sha256": "fab89af941b2c2b3ccc72e8ed03c4f309d331a8b160b2e3d238936e9c0a8936a"
+    },
+    {
+      "path": "manifests/completion_status.json",
+      "size_bytes": 808,
+      "sha256": "457cb0cb2589f03b00658d267080d74baceea44f2cb9ee7f0467343eb85dd512"
+    },
+    {
+      "path": "manifests/catalog_integrity.json",
+      "size_bytes": 182,
+      "sha256": "c99bf02f3e077c28e86070171f05cc0bf2daf16049ea725e262bef6d84a27198"
+    },
+    {
+      "path": "manifests/sensitive_audit.json",
+      "size_bytes": 162,
+      "sha256": "3e2e037ba61b5506f6c1eff2c6b3afa89dd636222d155f750fb3c906d7f50fcb"
+    },
+    {
+      "path": "manifests/frame_summary.json",
+      "size_bytes": 14548,
+      "sha256": "cc403536ac9c8c1a38c136e18db7fd2ea089b91faffe43b6b624da81cebac635"
+    },
+    {
+      "path": "manifests/pending_index.json",
+      "size_bytes": 23445,
+      "sha256": "d0c2156cf719377d861b9070077213c230bfe6790579a44ad996230523cf3317"
+    }
+  ],
+  "boundary": "Hashes of generated artifacts; inputs see file_hashes.json"
+}

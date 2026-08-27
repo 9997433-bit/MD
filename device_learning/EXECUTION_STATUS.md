@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**59 pytest**，停止条件 **10/10 pass**
+**规模**：**237 条 identifier**，**67 pytest**，停止条件 **全部通过**
 
 ## 八层目录
 
@@ -36,7 +36,11 @@ python3 scripts/verify_completion.py
 | `manifests/catalog_integrity.json` | 目录 schema 校验 |
 | `CONFIRMED_REPORT.md` | 68 条 confirmed 项 |
 | `BLOCKED_REPORT.md` | 98 条阻塞项人类可读表 |
-| `manifests/photo_hw_map.json` | 照片 → HW 标识符映射 |
+| `ARCHITECTURE.md` | 系统数据路径 mermaid 图 |
+| `BRIDGE_REPORT.md` | 10 条 null 桥策略 |
+| `manifests/static_freeze.json` | 静态阶段冻结记录 |
+| `manifests/output_hashes.json` | 产物 SHA256 清单 |
+| `phase_b/CHECKLIST.json` | 阶段 B 机器可读检查清单 |
 | `manifests/pending_index.json` | 98 条阻塞项 |
 | `manifests/phase_roadmap.json` | 阶段 B/C 解锁路线 |
 | `HARDWARE_HANDOFF.md` | 实机接入步骤 |

@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b clean status
+.PHONY: ledger test verify phase-b clean status freeze ci
 
 ledger:
 	python3 scripts/generate_ledger.py
@@ -16,6 +16,11 @@ phase-b:
 
 status:
 	python3 scripts/print_status.py
+
+freeze: verify
+	@echo "Static phase frozen — see manifests/static_freeze.json"
+
+ci: verify test
 
 clean:
 	rm -rf .pytest_cache
