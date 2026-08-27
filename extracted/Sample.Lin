@@ -1,0 +1,196 @@
+<Option Description File - Rev. 1.00a - Keysight E1733A 1.12>
+UserSetup
+
+Identify=MeaType,Choosing=0
+Identify=FileName,ItemText=Sample.Lin
+Identify=SynchOp,Choosing=1
+Identify=RotaryDev,Choosing=1
+Identify=UserEdited,Choosing=0
+Identify=AutoScale,Choosing=0
+Identify=StopOnErr,Choosing=1
+Identify=StopOnLost,Choosing=0
+Identify=Extended,Choosing=1
+Identify=TargetSign,Choosing=0
+Identify=FootSpace,"TextUnit=50.8 mm"
+Identify=DeadPath,"TextUnit=0 mm"
+Identify=Preset,"TextUnit=0 mm"
+Identify=Average,Choosing=0
+Identify=OCFactor,Choosing=0
+Identify=RangeType,Choosing=0
+Identify=SquareErr,"TextUnit=0 arcsec"
+Identify=RotAQBRes,Choosing=0
+Identify=ParaType,Choosing=0
+Identify=AllowKBPos,Choosing=0
+Identify=Axis,Choosing=0
+Identify=AutoTitle,Choosing=1
+Identify=Mode,Choosing=0
+Identify=Cycles,ItemText=5
+Identify=StartPos,"TextUnit=6.711 mm"
+Identify=Interval,"TextUnit=174.4209 mm"
+Identify=EndPos,"TextUnit=1750.92 mm"
+Identify=Points,TextUnit=11
+Identify=UserDef,Choosing=0
+Identify=Positions,"TextUnit=6.7110,181.1319,355.5528,529.9737,704.3946,878.8155,1053.2364,1227.6573,1402.0782,1576.4991,1750.9200 mm",Expanded=N
+Identify=Axis2,Choosing=0
+Identify=Mode2,Choosing=0
+Identify=Cycles2,ItemText=5
+Identify=StartPos2,"TextUnit=0 mm"
+Identify=Interval2,"TextUnit=100 mm"
+Identify=EndPos2,"TextUnit=1000.00001 mm"
+Identify=Points2,TextUnit=11
+Identify=UserDef2,Choosing=0
+Identify=Positions2,"TextUnit=0,100,200,300,400,500,600,700,800,900,1000 mm",Expanded=N
+Identify=TrigType,Choosing=2
+Identify=TrigWnd,"TextUnit=0.5 mm"
+Identify=TrigDwell,"TextUnit=1 sec"
+Identify=AQBMode,Choosing=0
+Identify=AQBRes,"TextUnit=1 um"
+Identify=EPTimeOut,Choosing=0
+Identify=AutoTimer,"TextUnit=1 sec"
+Identify=UnitSysSel,Choosing=0
+Identify=PosUnit,Choosing=0
+Identify=ErrUnit,Choosing=1
+Identify=ResultRes,Choosing=1
+Identify=ExpCoef,Choosing=0
+Identify=WayLength,"TextUnit=812.8 mm"
+Identify=WayDir,Choosing=0
+Identify=WayStaNum,ItemText=16
+Identify=FlaStaAC,ItemText=8
+Identify=FlaStaAG,ItemText=6
+Identify=FlaAxisDir,Choosing=0
+Identify=FlaLenAC,"TextUnit=812.8 mm"
+Identify=FlaLenAG,"TextUnit=609.6 mm"
+Identify=FlaLenAE,"TextUnit=1012 mm"
+Identify=FlaAllSta,"ItemText=20,20,16,12,16,12,16,12",Expanded=N
+Identify=DiaScaleX,TextUnit=4
+Identify=DiaScaleY,TextUnit=4
+Identify=DiaScaleZ,TextUnit=3
+Identify=AxisDirSel,ItemText=00000000
+Identify=AxisOrder,ItemText=1
+Identify=AxisDone,Comprise=Y,Expanded=N
+Identify=MeaAxisSel,ItemText=
+Identify=SameAs,Choosing=0
+Identify=TBDispSel,Choosing=0
+Identify=StartType,Choosing=0
+Identify=TBStartPos,"TextUnit=0 mm"
+Identify=StopType,Choosing=3
+Identify=TBStopPos,"TextUnit=100 mm"
+Identify=TBInterval,"TextUnit=0.1 sec"
+Identify=TotalTime,"TextUnit=0 sec"
+Identify=PointNum,ItemText=100
+Identify=ManualRH,Choosing=0
+Identify=EnvUnitSel,Choosing=2
+Identify=EnvUpdate,"TextUnit=10 sec"
+Identify=Standard,Choosing=7
+Identify=AnaMod,Choosing=0
+Identify=AnaGraph,Comprise=YYYYYYYNNN,Expanded=N
+Identify=AnaSigma,TextUnit=2
+Identify=AnaNum,Comprise=YYYYYNNYNN,Expanded=N
+Identify=AnaSlope,Choosing=0
+Identify=PrnShowSel,Comprise=YYYY,Expanded=N
+Identify=PrnEnvSel,Choosing=0
+Identify=PrnCopies,ItemText=1
+Identify=PrnOrient,Choosing=0
+Identify=PrnMargin,Choosing=0
+Identify=TBDataPnt,Choosing=0
+Identify=FlaMethod,Choosing=0
+Identify=CompZero,ItemText=1
+Identify=Location,"ItemText=aaa bbb ccc"
+Identify=AssetNo,ItemText=67890
+Identify=Comments,ItemText=,Expanded=N
+Identify=StartTime,ItemText=
+Identify=MachName,ItemText=AAA
+Identify=MachType,"ItemText=Vertical Spindle Machining Center"
+Identify=MachSN,ItemText=111111
+Identify=MachModel,ItemText=12345
+Identify=DateTest,ItemText=1999-9-14
+Identify=Operator,"ItemText=Joe Smith"
+Identify=MeaInst,"ItemText=BBB,1234567"
+Identify=TypeScale,"ItemText=ball screw and rotary encoder"
+Identify=NDECorr,Choosing=1
+Identify=FeedRate,"TextUnit=1000 mm/min"
+Identify=DwellTime,"TextUnit=5 sec"
+Identify=CompUsed,"ItemText=reversal and leadscrew"
+Identify=CoefScale,"TextUnit=11.7 ppm/C"
+Identify=PosAxes,"ItemText=Y=300 mm; Z=350 mm; C=0"
+Identify=ToolX,"TextUnit=0 mm"
+Identify=ToolY,"TextUnit=0 mm"
+Identify=ToolZ,"TextUnit=120 mm"
+Identify=PieceX,"TextUnit=0 mm"
+Identify=PieceY,"TextUnit=0 mm"
+Identify=PieceZ,"TextUnit=30 mm"
+Identify=MatSen1,"ItemText=table, X=50"
+Identify=MatSen2,"ItemText=table, X=1700"
+Identify=MatSen3,"ItemText=table, X=30"
+Identify=ATSen,"ItemText=centre of work zone"
+Identify=MeaLength,"TextUnit=0 mm"
+Identify=CalMeaDev,Choosing=0
+Identify=ErrorRange,"TextUnit=0.8 ppm"
+Identify=AlignErr,Choosing=0
+Identify=Diff20CMax,Choosing=1
+Identify=MatTempDev,Choosing=0
+Identify=UncExpCoef,"TextUnit=2 ppm/C"
+Identify=EnvVarErr,"TextUnit=1.7 um"
+Identify=CompRout,"TextUnit=4 sec"
+Identify=CompCalc,Choosing=0
+Identify=CompDir,Choosing=0
+Identify=CompSign,Choosing=0
+Identify=CompAbs,Choosing=0
+Identify=CompTI,Choosing=0
+Identify=MachUnit,"TextUnit=1 um"
+Identify=CompSel,Choosing=0
+Identify=CompStart,"TextUnit=6.711 mm"
+Identify=CompIntvl,"TextUnit=174.4209 mm"
+Identify=CompEnd,"TextUnit=1750.92 mm"
+Identify=UpperSel,Choosing=0
+Identify=LaserRes,"TextUnit=-0.01 um"
+Identify=LaserSen,Choosing=1
+Identify=ErrorRes,"TextUnit=-0.1 um"
+Identify=ComboRes,"TextUnit=-0.0001 arcdeg"
+Identify=SpeedRes,"TextUnit=-0.01 mm/s"
+Identify=LaserRes2,"TextUnit=-0.01 um"
+Identify=LaserSen2,Choosing=1
+Identify=LowerSel,Choosing=3
+Identify=TargetRes,"TextUnit=-0.01 um"
+Identify=EncoderRes,"TextUnit=-0.01 um"
+Identify=RotaryRes,"TextUnit=-0.0001 arcdeg"
+Identify=RotarySen,Choosing=1
+Identify=MidDispSel,Choosing=0
+Identify=GraPanel,"ItemText=Linear - Measurement Axis: X"
+Identify=LimitSel,Choosing=0
+Identify=LimitLine,"TextUnit=25 um"
+Identify=UserSel,Choosing=0
+Identify=UserScale,"TextUnit=100 um"
+Identify=Legend,Choosing=0
+Identify=TarInRow,Choosing=1
+Identify=ResAxisSel,Choosing=0
+Identify=GridLines,Choosing=1
+Identify=Centered,Choosing=0
+Identify=FlaGraSel,Choosing=1
+Identify=ErrorSign,Choosing=0
+Identify=FirstRow,ItemText=1
+Identify=RefDisp,Choosing=2
+Identify=RotThita,"TextUnit=30 arcdeg"
+Identify=RotPhy,"TextUnit=15 arcdeg"
+Identify=FigRanges,"ItemText=,,,",Expanded=N
+Identify=EnvRanges,"ItemText=,,,",Expanded=N
+Identify=DataGrids,"ItemText=0,0,0,0",Expanded=N
+Identify=CompGrids,"ItemText=0,0,0,0",Expanded=N
+Identify=LinearErr,"TextUnit=-1.2,-0.5,0.2,-0.6,-1.9,-3.0,-3.7,-3.7,-3.5,-3.2,-3.6,-0.1,0.3,0.2,-0.2,-0.4,0.4,1.7,3.0,3.5,3.6,2.3,-1.7,-0.9,-0.6,-1.2,-2.3,-3.5,-4.3,-4.4,-4.3,-3.8,-4.0,-0.6,-0.1,-0.2,-0.6,-0.7,0.2,1.5,2.7,3.3,3.5,2.1,-1.9,-1.1,-0.7,-1.3,-2.9,-3.7,-4.6,-5.1,-5.0,-4.7,-4.5,-1.2,-0.9,-1.0,-1.0,-1.0,-0.2,1.0,2.4,3.0,3.1,1.9,-1.3,-0.2,0.1,-0.3,-1.4,-2.8,-3.6,-3.6,-3.2,-2.8,-3.2,0.4,0.5,0.5,-0.2,0.0,0.9,1.9,3.2,3.8,3.7,2.8,-1.9,-0.8,-0.7,-1.3,-2.3,-3.7,-4.5,-4.6,-4.5,-4.1,-4.5,-0.9,-0.4,-0.5,-1.1,-0.9,-0.1,1.1,2.6,3.5,3.2,2.2 um",Expanded=N
+Identify=EnvDispSel,Choosing=0
+Identify=ATHistory,"TextUnit=20,20,20 C",Expanded=N
+Identify=APHistory,"TextUnit=101,101,101 kPa",Expanded=N
+Identify=RHHistory,"TextUnit=50,50,50 %",Expanded=N
+Identify=MTHistory,"TextUnit=20,20,20 C",Expanded=N
+Identify=ProgHist,"ItemText=1,2,3",Expanded=N
+Identify=TimeHist,"ItemText=1,20,30",Expanded=N
+Identify=NormRange,Choosing=1
+Identify=ATList,"TextUnit=21.00,,22.00,21.00,21.50,21.50 C",Expanded=N
+Identify=APList,"TextUnit=101.33,,101.33,101.33,101.33,101.33 kPa",Expanded=N
+Identify=RHList,"TextUnit=50,,55,40,45,55 %",Expanded=N
+Identify=MT1List,"TextUnit=21.00,,22.00,21.00,21.50,21.50 C",Expanded=N
+Identify=MT2List,"TextUnit=21.00,,22.00,21.00,21.50,21.50 C",Expanded=N
+Identify=MT3List,"TextUnit=21.00,,22.00,21.00,21.50,21.50 C",Expanded=N
+Identify=EnvCount,ItemText=0
+
+<End of Option Description File - Rev. 1.00a>

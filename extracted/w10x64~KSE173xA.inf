@@ -1,0 +1,97 @@
+;
+; KSE173xA.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=USB
+ClassGuid={36FC9E60-C465-11CF-8056-444553540000}
+Provider=%ManufacturerName%
+CatalogFile=KSE173xA.cat
+DriverVer=01/31/2017,19.48.22.791
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+KSE173xA.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%Keysight.Name%=Keysight,NTamd64.10.0
+
+[Keysight.NTamd64.10.0]
+%KSE1735A.Name%=KSE173xA_Device, USB\VID_0957&PID_3518
+%KSE1736A.Name%=KSE173xA_Device, USB\VID_0957&PID_3618
+
+[KSE173xA_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+KSE173xA.sys
+
+[KSE173xA_Device.NT.HW]
+AddReg=KSE173xA_AddReg
+
+[KSE173xA_AddReg]
+; By default, USBDevice class uses iProduct descriptor to name the device in
+; Device Manager on Windows 8 and higher.
+; Uncomment for this device to use %DeviceName% on Windows 8 and higher:
+;HKR,,FriendlyName,,%KSE173xA.DeviceDesc%
+
+
+;-------------- Service installation
+[KSE173xA_Device.NT.Services]
+AddService = KSE173xA,%SPSVCINST_ASSOCSERVICE%, KSE173xA_Service_Inst
+
+; -------------- KSE173xA driver install sections
+[KSE173xA_Service_Inst]
+DisplayName    = %KSE173xA.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\KSE173xA.sys
+
+;
+;--- KSE173xA_Device Coinstaller installation ------
+;
+
+[DestinationDirs]
+KSE173xA_Device_CoInstaller_CopyFiles = 11
+
+[KSE173xA_Device.NT.CoInstallers]
+AddReg=KSE173xA_Device_CoInstaller_AddReg
+CopyFiles=KSE173xA_Device_CoInstaller_CopyFiles
+
+[KSE173xA_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01011.dll,WdfCoInstaller"
+
+[KSE173xA_Device_CoInstaller_CopyFiles]
+WdfCoInstaller01011.dll
+
+[SourceDisksFiles]
+WdfCoInstaller01011.dll=1 ; make sure the number matches with SourceDisksNames
+
+[KSE173xA_Device.NT.Wdf]
+KmdfService =  KSE173xA, KSE173xA_wdfsect
+[KSE173xA_wdfsect]
+KmdfLibraryVersion = 1.11
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+KSE173xA.DeviceDesc = "KSE173xA Device"
+ManufacturerName="Keysight Technologies, Incorporated"
+KSE173xA.SVCDESC="Keysight Common USB Data Device"
+KSE1735A.Name="Keysight E1735A USB Axis Module"
+KSE1736A.Name="Keysight E1736A USB Sensor Hub"
+Keysight.Name="Keysight Technologies, Incorporated"
+DiskName="Keysight USB Driver Installation Disk"
+
+
+REG_MULTI_SZ = 0x00010000

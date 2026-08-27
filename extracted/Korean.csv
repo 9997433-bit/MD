@@ -1,0 +1,708 @@
+Keysight E1733A String Table
+Korean
+
+[1],Linear,거리변위
+[2],Angular,각도변위
+[3],Straightness,진직도
+[4],Squareness,직각도
+[5],Parallelism,평행도
+[6],Rotary,회전
+[7],Way Straightness,경로 진직도
+[8],Flatness,평면도
+[9],Diagonal,대각선
+[10],Lin. Time Base,거리변위 vs 시간
+[11],Ang. Time Base,각도변위 vs 시간
+[12],Str. Time Base,진직도 vs 시간
+[13],Lin. Dual Axes,두축 거리변위
+[14],Start,시작
+[15],Max,최대
+[16],Min,최소
+[17],Mean,평균
+[18],End,종료
+[19],Location,위치
+[20],T start,시작 시간
+[21],T end,종료 시간
+[22],Auto,자동
+[23],Manual,수동
+[24],Metric,미터법
+[25],English,인치법
+[26],Bidirectional,양방향
+[27],Unidirectional,단방향
+[28],Pilgrim,순례 방향
+[29],Spindle,회전평행
+[30],Coplanar,평면평행
+[31],Short Range,단 거리
+[32],Long Range,장 거리
+[33],Encoder,인코더
+[34],Up/Down,상호통신
+[35],Position,위치
+[36],Total Time,총 시간
+[37],Total Points,총 포인트
+[38],User,사용자
+[39],Repeatability,반복정확도
+[40],Mean Reversal Error,평균 역방향 오차
+[41],Sys. Dev. Pos.,장비의 위치 편차
+[42],Raw Accuracy,원시 정밀도
+[43],Raw Repeatability,원시 반복도
+[44],Max Reversal Error,최대 역방향 오차
+[45],6 Sigma (total pop.),6 시그마 (총 pop.)
+[46],Slope,기울기
+[47],Least Squares,최소자승법
+[48],End Points,끝점
+[49],Forward Data Runs,정방향 측정 값
+[50],Forward Mean,정방향 평균 값
+[51],Forward +/-n sigma,정방향 +/- 시그마
+[52],Reverse Data Runs,역방향 측정 값
+[53],Reverse Mean,역방향 평균 값
+[54],Reverse +/-n sigma,역방향 +/- 시그마
+[55],Combined Mean,종합 평균 값
+[56],Combined +/-n sigma,종합 +/- 시그마
+[57],Remove Raw Offset,원시 옵셋 제거
+[58],Mean Bidir. Pos. Dev.,양방향 위치의 평균 편차
+[59],Backlash / pt.,백래쉬/포인트
+[60],Laser,레이저
+[61],Error,오차
+[62],Target,설정 위치
+[63],Rotary,각도 위치
+[64],Angle,각도
+[65],Time,시간
+[66],Velocity,속도
+[67],Station,측정점 
+[68],Correction,보정
+[69],Absolute,절대
+[70],Incremental,상대
+[71],Algebraic,대수
+[72],Calibrator,교정기
+[73],Acceleration,가속도
+[74],Statistics,통계
+[75],Graph,그래프
+[76],Data,데이터
+[77],Comp.,보정
+[78],Env.,환경
+[79],All,전축
+[80],No,아니오
+[81],Yes,예
+[82],Moody Analyzed,무디스의 분석
+[83],Licensed E1735A,인증 E1735A
+[84],Keyboard Error,오류값 입력
+[85],Measurement Type,측정 유형
+[86],Current Date,현재의 날짜 및 시간
+[87],Error,오차
+[88],Standards,규격
+[89],Modified,수정
+[90],User Defined,사용자 정의
+[91],Auto Reset After Error,자동 재설정
+[92],Beep on Record,기록시 신호음
+[93],Same As Axis 1,1 축과 동일
+[94],Auto Time Scale,시구간 자동설정
+[95],Stop On Error,오류 정지
+[96],Limit Lines,제한 선
+[97],User Scale,사용자 구간
+[98],Legend,범례
+[99],Targets in Row,목표값 표시
+[100],Goto Row,지정된 행으로 이동
+[101],Max. Elevation,최대 고저차
+[102],Air Pressure,공기압
+[103],Air Temperature,공기온도
+[104],Relative Humidity,상대습도
+[105],Material Temp. 1,물체 온도 1
+[106],Material Temp. 2,물체 온도 2
+[107],Material Temp. 3,물체 온도 3
+[108],Update Method,업데이트 방법
+[109],Environmental Units,환경 단위
+[110],Compensation,환경 보상
+[111],Laser Wavelength,레이저 파장
+[112],Wavelength Compensation,파장 보상
+[113],Total Compensation Number,총 보상계수
+[114],Travel,이동
+[115],Measurement Axis,측정 축
+[116],Travel Mode,이동 방법
+[117],No. of Cycles,반복측정수
+[118],Direction,방향
+[119],Targets,설치 목표
+[120],Start Position,시작위치
+[121],End Position,종료위치
+[122],No. of Points,측정점 수
+[123],Interval,간격
+[124],Foot Spacing,측정자 간격
+[125],Way Length,경로길이
+[126],# of Stations,측정점수
+[127],Analyze Data,데이터 분석
+[128],Material Compensation,재질 보정
+[129],Expans. Coeff.,팽창계수
+[130],Units,단위
+[131],Error Units,오차단위
+[132],Position Units,위치단위
+[133],Display Resolution,표시분해능
+[134],Measurement Units,측정단위
+[135],Other,기타
+[136],Rotary Resolution,회전분해능
+[137],Optical Square,광학직각
+[138],Averaging,평균값
+[139],Calibration Factor,보정계수
+[140],Dead Path,데드패스
+[141],Preset,프리셋
+[142],Trigger,트리거
+[143],Encoder Resolution,엔코더 분해능
+[144],Trigger Type,트리거 형태
+[145],Target Window,설정 범위
+[146],Trigger Dwell,설정 시간
+[147],Test Conditions,측정 조건들
+[148],Temperature Sensor,온도센서
+[149],Material Sensor #1,재질 온도센서#1
+[150],Material Sensor #2,재질 온도센서#2
+[151],Material Sensor #3,재질 온도센서#3
+[152],Air Sensor,공기 센서
+[153],Test Parameters,측정 항목
+[154],Type of Scale,교정 유형
+[155],Compensation Used,사용한 보정
+[156],Feed Rate,이송 속도
+[157],NDE Correction (yes or no),NDE 보정(예 또는 아니오)
+[158],Dwell Time at Each Target Position,각 설정 위치에서의 머무는 시간
+[159],Measuring Information,측정 정보
+[160],Measuring Instrument and Serial No.,측정기기 와 일련번호
+[161],Name of Inspector,관리자 이름
+[162],Date of Test,측정 날짜
+[163],Machine Name,기기 명
+[164],Machine Type,기기 형태
+[165],Machine Serial No.,기기 고유번호
+[166],Machine Name; Type and Serial No.,기기 명; 형태와 고유번호
+[167],Test Location,측정 위치
+[168],Position of axes not under test,위치 검증되지 않은 축
+[169],Coefficient of Thermal Expansion of Scale,위치 검출기의 열팽창 계수
+[170],Offset to Tool Reference (X/Y/Z),공구 기준 오프셋 (X / Y / Z)
+[171],Offset to Workpiece Reference (X/Y/Z),피 가공품 기준 오프셋 (X / Y / Z)
+[172],Stop Timer,타이머 정지
+[173],Start Timer,타이머 시작
+[174],Timer,타이머 
+[175],No. of Points,측정점수
+[176],Total Time,총 시간
+[177],Coverage Factor,적용계수
+[178],Numerical Analysis,수치해석
+[179],Graphic Analysis,그래프해석
+[180],Machine Model No.,기기 모델 번호
+[181],Asset No.,관리번호
+[182],Filename,파일명
+[183],Comments,주석
+[184],End Point Time Out,최대 머무는 시간
+[185],Time Base,시간 기준
+[186],Default Path,기본 경로
+[187],Language,언어
+[188],System,시스템
+[189],Error Sign Convention,오차 표시 규정
+[190],Zero Point,기계 영점
+[191],Machine Units,기기 단위
+[192],Measurement Setup,측정 설치
+[193],Machine Information,기기 정보
+[194],ISO Information,ISO 정보
+[195],Data Analysis,데이터 분석
+[196],Axis:,축:
+[197],Deviation,편차
+[198],Port,포트
+[199],Sensor,센서
+[200],Description,서술
+[201],Used for,용도
+[202],USB Axis Module,USB 측정 모듈
+[203],Sensor Hub,센서 허브
+[204],Material Sensor,물체 온도 센서
+[205],Air Sensor,공기 센서
+[206],Serial No.,일련번호
+[207],Hardware,하드웨어
+[208],Test Record Button,측정 기록 버튼
+[209],Hardware Not Ready,하드웨어의 준비가되어 있지 않습니다
+[210],No License,라이센스 없습니다
+[211],Laser Off or Warming Up,레이저의 전원이 꺼져 있거나 예열 중
+[212],No Return Beam,반사 측정 광이 없음
+[213],Reset Position,재설정
+[214],Optics Out Of Range,광학계가 범위를 벗어남
+[215],Nameplate,명판
+[216],Step 1: Reset laser and rotary at 0 arcdeg,단계 1: 레이저 재설치 와 rotary 0 arcdeg 위치에
+[217],Step 2: Sample between -3 and -4 arcdeg,단계 2: ROTARY  -3 과 -4 arcdeg 사이에 위치
+[218],Step 3: Sample between +3 and +4 arcdeg,단계 3: ROTARY  +3 과 +4 arcdeg 사이에 위치
+[219],Keysight Technologies Inc.,Keysight Technologies Inc.
+[220],Revision,개정
+[221],Dimensional Metrology Software,치수 계측 소프트웨어
+[222],All Rights Reserved,판권 소유
+[223],Open,열기
+[224],Setup,설치
+[225],Start,시작
+[226],Reset,재설치
+[227],Continue,연속
+[228],Stop,정지
+[229],Save,저장
+[230],Print,인쇄
+[231],Record,기록
+[232],Erase,삭제
+[233],Help,도움말
+[234],Exit,종료
+[235],OK,예
+[236],Cancel,아니오
+[237],Calibrate,보정
+[238],Recalculate,재계산
+[239],Apply,적용
+[240],Import,가져오기
+[241],Setup + Data,설치 + 데이터
+[242],All Data,모든 데이터
+[243],Last Run,마지막 수행
+[244],Last Data,마지막 데이터
+[245],Setup Only,설치만
+[246],Raw Data,원 데이터
+[247],Compensation Table,보상표
+[248],Environmental Data,환경보상 데이터
+[249],Setup Printer,프린터 설정
+[250],Report,보고서
+[251],Collecting data . . .,데이터 수집 ~ . . .
+[252],Text File,문서 파일
+[253],CSV (comma delimited),CSV (쉼표로 분리)
+[254],Plus/Minus,plus(+)/minus(-)
+[255],Closure,종료
+[256],Elevation,고도
+[257],Data Point,데이터 포인트
+[258],Combined,결합
+[259],Forward,정방향
+[260],Reverse,역방향
+[261],Warning,경고
+[262],Tested Axis,측정 축
+[263],Axis Deviation,위치 정확도
+[264],Reversal Value,역방향 값
+[265],Mean Reversal Value,평균 역방향 값
+[266],Range Mean Bidirectional Positional Deviation,평균 양방향 위치 편차
+[267],Systematic Positional Deviation,계통적 위치 편차
+[268],Repeatability of Positioning,위치 반복도
+[269],Accuracy,정밀도
+[270],Unidirectional,단방향
+[271],Bidirectional,양방향
+[272],Not Applicable,적용불가
+[273],Target Position,설정 위치
+[274],Approach Direction,접근 방향
+[275],Positional Deviation,위치 편차
+[276],Mean Unidir. Pos. Dev.,단방향 위치 평균 편차
+[277],Est. of Standard Uncertainty,표준 불확도 추정
+[278],Unidir. Repeatability,단방향 반복도
+[279],Bidir. Repeatability,양방향 반복도
+[280],(Used for NDE Correction),(NDE 보정에 사용)
+[281],Data not saved,데이터 저장되어 있지 않습니다
+[282],Measurement not completed,측정이 완벽하지 않습니다
+[283],Reset position?,위치 재설치 ?
+[284],Measurement completed,측정 완료
+[285],Measurement terminated,측정 종료
+[286],Measurement completed with %d data lost,측정 완료되었습니다만  %d 데이터가 누락되었습니다
+[287],Measurement of current axis completed,이 축의 측정 완료
+[288],Cannot open file,파일이 열리지 않습니다
+[289],Cannot save file,파일을 저장할 수 없습니다
+[290],%s / %s must be an integer,%s /%s 정수 입력
+[291],Inconsistent values,값이 일치 하지 않습니다
+[292],Invalid entry,잘못된 입력
+[293],No. of cycles doesn't comply ISO standard. Print?,"측정 횟수가 ISO 기준에 미달합니다, 인쇄 할까요 ?"
+[294],All Files,모든 파일
+[295],Legacy Files,기존 파일
+[296],Firmware,펌웨어
+[297],Driver,드라이버
+[298],Library,라이브러리
+[299],User Calibration,사용자 교정
+[300],Shift,시프트
+[301],Modify data by user?,사용자가 데이타 수정 ?
+[302],Optics,광학계
+[303],Default,기본
+[304],Saved,저장
+[305],Average Material Temp.,평균 물체 온도
+[306],Current Axis,현재 축
+[307],Extended Resolution,확장 분해능
+[308],Data Lost,데이터 손실
+[309],Information,정보
+[310],Keyboard Position,키보드 위치
+[311],Outside Target Window,대상 범위 외
+[312],Inside Target Window,대상 범위 내
+[313],Target List,대상 범위 항목
+[314],Interpolate,중간 항 삽입
+[315],Compensation Values,보상 값
+[316],None,없음
+[317],Already running [%s] software,[% s] 소프트웨어를 이미 실행 중입니다
+[318],Offline Mode,오프라인 모드
+[319],Main Menu,메인 메뉴
+[320],Numeric Display,수치 표시
+[321],Default Display Mode,기본 표시 모드
+[322],Advanced Options,고급 옵션
+[323],Pos. Uncertnty,위치 불확실성
+[324],Sorted by position number,위치 번호 순으로 정렬
+[325],Sorted by run number,측정 번호 순으로 정렬
+[326],Sorted by line number,축 번호 순으로 정렬
+[327],Number of total data pairs,총 측정 수
+[328],Number of total data runs,데이터 계측 합계
+[329],Axis 2 Data,축 2 데이터
+[330],Out of spec,사양 범위 외의.
+[331],Target Value,설정 값
+[332],Error Value,오차 값
+[333],Pos #,위치 #
+[334],Run #,계측 #
+[335],Line #,축 #
+[336],Point #,점 #
+[337],Position,위치
+[338],Coefficient of Thermal Expansion,열팽창 계수
+[339],Compensation Routine,보정 갱신주기
+[340],Update Each %s ,업데이트 %s
+[341],Equation,공식
+[342],Parameter,매개 변수
+[343],Air Conditions Used for Compensation of Laser Interferometer,레이저 간섭계 대기 조건을 보상
+[344],Positioning Measurement,위치 측정
+[345],Estimation of Measurement Uncertainty,측정 불확도 추정
+[346],Laser Interferometer Measurement,레이저 간섭계 측정
+[347],Simplified Method,간이 방법
+[348],Average Industial Conditions,평균적인 공장 조건
+[349],Improved Industrial Conditions,개선 된 공장 조건
+[350],Contributors,요인
+[351],Device,장비
+[352],Measurement Length,측정 길이
+[353],Error Range,오차 범위
+[354],Alignment,정렬
+[355],Beam Alignment,빔 정렬
+[356],Misalignment,오정렬
+[357],Compensation of Workpiece Temperature,공작물 온도 보정
+[358],Thermal Expansion Coefficient,열팽창 계수
+[359],Difference to 20C,20 °의 차이
+[360],Temperature Measurement,온도 측정
+[361],Maximum,최대
+[362],Machine Tool,공작 기기
+[363],Zero,제로
+[364],Included in U(%s),U (%s)에 포함
+[365],Environmental Variation,환경 변화
+[366],Correction of R Values Due to U(EVE),불확도 U (EVE)에 의한 반복성 R 값 수정
+[367],Correction of Repeatability Values,반복 값의 보정
+[368],According to Table,표에 따라
+[369],Typical Results,전형적인 결과
+[370],At Target %s,대상 %의
+[371],For R According to Table,R에서 사용 형태에 따라
+[372],Corrected,수정 후
+[373],Uncorrected,수정 전
+[374],Assumed,가정
+[375],Calibrated Measuring Device,교정 된 장비
+[376],Uncertainty of Expansion Coefficient,선팽창 계수의 불확도
+[377],Unit,단위
+[378],Amplitude,진폭
+[379],Frequency,주파수
+[380],Show Legend,범례 표시
+[381],Show Machine Info.,기기 정보 보기
+[382],Merge Data,데이터 병합
+[383],Can't combine different data types or target lists,다른 데이터 유형 또는 대상 목록을 결합 할 수 없습니다.
+[384],Synchronized Operation,동기화 작업
+[385],Demo Mode,데모 모드
+[386],Rotary Table,회전 테이블
+[387],Printer,프린터
+[388],Copies,복사
+[389],Orientation,방향
+[390],Portrait,초상화
+[391],Landscape,경치
+[392],Download,다운로드
+[393],User defined download program,사용자 정의 다운로드 프로그램
+[394],File not found,화일을 찾을 수 없습니다.
+[395],Show Hint,
+[396],Extra Margin,
+[397],Left,
+[398],Top,
+[399],Right,
+[400],Bottom,
+[401],Calibration Due,
+[402],Calibration Expired,
+[403],Calibration Period,
+[404],Month,
+[405],Dual Axis,
+[406],Single Axis,
+[407],Hysteresis,
+
+[1001],Install,실행
+[1002],[%s] will be installed in the following folder,[%s]가 다음 폴더에 설치됩니다
+[1003],[%s] has been successfully installed,[%s]를 성공적으로 설치했습니다
+[1004],Failed to install [%s],설치 실패 [%s]
+[1005],Remove,삭제
+[1006],Remove all components of [%s],[%s]의 모든 구성 요소를 제거
+[1007],[%s] has been removed,[%s]가 삭제되었습니다
+[1008],Failed to remove [%s],[%s]의 삭제하는 데 실패 
+[1009],Reinstall,다시 설치
+[1010],Please close program [%s] first,프로그램를 닫으십시오 [%s]
+[1011],Install Path,설치 경로
+[1012],User Data,사용자 데이터
+[1013],User data will not be deleted,사용자 데이터는 삭제되지 않습니다
+[1014],Agree,동의
+[1015],Do Not Agree,동의하지 않음
+[1016],Customize,사용자 정의
+[1017],Customize user interface and advanced options of [%s],[%s]의 사용자 인터페이스 및 고급 옵션을 사용자 정의하다
+[1018],Repair,수리
+[1019],Repair system settings and reinstall driver,시스템 설정을 복구하고 드라이버를 다시 설치
+
+[2001],Existing Calibration,기존의 교정
+[2002],New Calibration,새로운 교정
+[2003],Raw Value,원시 값
+[2004],Calibrated,보정
+[2005],Reference,참고
+[2006],Temperature,온도
+[2007],Write Sensor,센서를 작성
+[2008],Sensor Calibration,센서 교정
+[2009],Sensor has been updated,센서가 업데이트되었습니다
+[2010],Discard changes,변경 사항을 취소
+[2011],Cannot access sensor,센서에 액세스 할 수 없습니다
+
+[3001],Laser position,레이저 위치
+[3002],Laser position 2,레이저 위치 2
+[3003],Error value,오류 값
+[3004],Target position,목표 위치
+[3005],Encoder reading,인코더 읽기
+[3006],Rotary table reading,회전 테이블 읽기
+[3007],Rotary angle,회전 각도
+[3008],Elapsed time,경과 시간
+[3009],Motion velocity,운동 속도
+[3010],Target position number,목표 위치 번호
+[3011],Click to change lower display,하단 디스플레이를 변경하려면 클릭
+[3012],Click to change upper display,상단 디스플레이를 변경하려면 클릭
+[3013],Beam strength 2,빔 강도 2
+[3014],beam strength,빔 강도
+[3015],Simulated laser position,시뮬레이션 레이저 위치
+[3016],Rotary table status |Click to enter hardware setup menu,회전 테이블 상태 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[3017],Air pressure,공기 압력
+[3018],Air temperature,대기 온도
+[3019],Material Temperature 1,재료 온도 1
+[3020],Material Temperature 2,재료 온도 2
+[3021],Material temperature 3,재료 온도 3
+[3022],Air relative humidity,공기의 상대 습도
+[3023],Environmental parameter display area |Double click to enlarge or recover,환경 매개 변수 표시 영역 | 더블 확대하거나 복구합니다
+[3024],Measurement graph display area |Double click to enlarge or recover |Drag to change display area,측정 그래프 표시 영역 | 표시 영역을 변경하려면 드래그 | 더블 클릭하면 확대하거나 복구하는 방법
+[3025],Measurement data display area |Double click to enlarge or recover,측정 데이터 표시 영역 | 더블 클릭하면 확대하거나 복구하는 방법
+[3026],Change error value sign,변경 오류 값 기호
+[3027],Enter limit line value,한계선 값을 입력
+[3028],Select -> to display limit line,선택 -> 디스플레이 제한 라인
+[3029],Enter line number |Press the left button to setup it as the first line,첫 번째 줄 설치에 눌러 왼쪽 버튼 | 행 번호를 입력
+[3030],Select the display mode of the target position,목표 위치의 표시 모드를 선택
+[3031],Enter user defined Y-axis range,사용자 정의 Y 축 범위를 입력
+[3032],Select ->  Display graph,선택 -> 디스플레이 그래프
+[3033],Auto select Y-axis range,자동 선택 Y 축 범위
+[3034],Select -> Display according to user defined range,사용자 정의 범위에 따라> 디스플레이 -를 선택
+[3035],Toolbar,도구 모음
+[3036],Select environmental parameter units ,환경 매개 변수 단위를 선택
+[3037],"Pressed to display grid lines, released to hide grid lines ","눈금 선을 표시 누르면, 눈금 선을 숨길 출시"
+[3038],"Pressed to display 3D graph, released to display 2D graph","3D 그래프를 표시 프레스, 2D 그래프를 표시 출시"
+[3039],Select environmental parameter type,환경 매개 변수 유형을 선택
+[3040],Select the axis to be displayed,나타낼 축을 선택
+[3041],Select the data type of the time to be displayed,나타낼 시간의 데이터 형태를 선택
+[3042],Select the items to be displayed,나타낼 항목을 선택
+[3043],Enter the measurement point number for the zero position ,제로 위치에 대한 측정 지점 번호를 입력
+[3044],Select the conversion method of the error sign,오류 기호의 변환 방법을 선택합니다
+[3045],Compensation value calculation method,보정 값 산출 방법
+[3046],Select the measurement unit format |It will effect on all the display values,그것은 모든 표시 값에 유효한 것이다 | 측정 유닛 형식을 선택
+[3047],Length value correspond to one machine compensation value,길이 값은 하나의 기계 보상 값에 대응
+[3048],Select compensation table location and generation method,선택 보정 테이블의 위치 및 생성 방법
+[3049],Start position of the compensation table,보정 테이블의 시작 위치
+[3050],End position of the compensation table,보정 테이블의 끝 위치
+[3051],Interval of the compensation table,보정 테이블의 간격
+[3052],Select the expression form of the compensation value |It will affect the sign of the compensation value,보정 값의 표현 형식을 선택 |이 보정 값의 부호에 영향을 미칠 것이다
+[3053],Select the calculation methods for the forward and reverse compensation values |Combination: compensation value from the average of the two values |Forward/Reverse: calculate two compensation values separately,조합 | 앞으로의 계산 방법을 선택하고 보정 값을 반전 : | 두 값의 평균치로부터 보정 값을 정방향 / 역방향 : 개별적 개의 보정 값을 계산할
+[3054],Click to enter ISO information menu,ISO 정보 메뉴를 입력하려면 클릭
+[3055],Click to enter machine information menu,기기 정보 메뉴를 입력하려면 클릭
+[3056],Click to enter measurement setup menu,측정 설정 메뉴를 입력하려면 클릭
+[3057],Click to enter data analysis menu,데이터 분석 메뉴를 입력하려면 클릭
+[3058],Select settings for the measurement |Default: Default for all the settings; suitable for new measurement |Saved: Save measurement and information setting; Suitable for the repeating measurement |Information: Save information settings only; Suitable for measurement for the same machine,측정을위한 선택 설정 | 기본값 : 모든 설정을 기본; 새로운 측정에 적합한는 | 저장 : 측정 및 정보 설정을 저장합니다; 반복 측정에 적합 | 정보 : 정보 설정 만 저장; 동일한 시스템의 측정에 적합
+[3059],Select display language,표시 언어 선택
+[3060],Click to setup the default path for data files,설정 데이터 파일의 기본 경로를 클릭
+[3061],Select the display method of the interface,인터페이스의 표시 방법을 선택
+[3062],Installed certificate,설치된 인증서
+[3063],Select to open simulation mode,오픈 시뮬레이션 모드를선택
+[3064],Select for auto recovery after signal loss,신호 손실 후 자동 복구를 위한 선택
+[3065],Select to enter demo mode,입력 데모 모드를 선택
+[3066],Select for beep on the data recording,데이터 기록시 표시음 선택
+[3067],Select for E1736A S/N,E1736A의 S/N를 선택
+[3068],Select for E1735A S/N,E1735A의 S/N를 선택
+[3069],Select for the second E1735A S/N,두 번째 E1735A의 S/N를 선택
+[3070],"Select for the operation of [Reset], [Start], [Record] and [Stop] applied to both E1735A","적용되는 모든 E1735A의 [재설정],[시작],[기록] 및 [정지] 동작 선택"
+[3071],Enter the wavelength of the laser head,레이저 헤드의 파장을 입력
+[3072],User calibration value,사용자 보정 값
+[3073],Optics calibration parameter,광학 보정 파라미터
+[3074],Change laser position sign,레이저 방향 기호 변경
+[3075],Air parameter update method |Plug or unplug sensor will change the setting,공기 매개 변수 업데이트 방법 | 센서를 삽입하거나 제거하면이 설정을 자동으로 변경됩니다
+[3076],Select air humidity update method,공기 습도 업데이트 방법 선택
+[3077],Select to enter the air humidity manually |Data from air sensor will be ignored,수동으로 공기 습도를 입력하려면 선택 | 공기 센서로부터 데이터는 무시됩니다
+[3078],Material temperature update method |Plug or unplug sensor will change the setting,재료 온도 업데이트 방법 | 플러그 또는 분리 센서 설정을 변경합니다
+[3079],Average of the material temperatures,재료 온도의 평균
+[3080],Compensation number for the laser wavelength in air,공기의 레이저 파장에 대한 보상 번호
+[3081],Total compensation number including wavelength and expansion compensations,파장 및 확장 보상을 포함하여 총 보상 번호
+[3082],Expansion coefficient of the device under test or lead screw,테스트 또는 리드 스크류에 따라 장치의 팽창 계수
+[3083],Repetition number of measurement cycles,측정 사이클의 반복 횟수
+[3084],The length of the segment from point A to point C,A점 에서 C점 까지의 구획 길이
+[3085],The length of the segment from point A to point G,A점 에서 G점 까지의 구획 길이
+[3086],Diagonal length of the measurement area,측정 영역의 대각선 길이
+[3087],Select the name of the axis for the next measurement,다음 측정을 위한 축의 이름을 선택
+[3088],Number of stops on each axis,각 축의 정지 수
+[3089],Change the number of stops on AC,AC에 정지 수를 변경
+[3090],Change the number of stops on AG,AG에 정지 수를 변경
+[3091],Select the direction of the measurement on the axis,축에서 측정의 방향을 선택
+[3092],Enter the foot spacing of the measurement accessory,측정 액세서리의 풋 간격을 입력
+[3093],The length of the guide under test |depends on the number of the stops and the foot spacing  ,레일의 길이를 측정 | 풋 간격과 정지 수에 의존
+[3094],Number of stops for the measurement,측정을 위한 정지 수
+[3095],Distance between the target positions,목표 위치 사이의 거리
+[3096],The first target position,첫번째 타겟 위치
+[3097],The last target position,최종 타겟 위치
+[3098],Number of target positions in one travel range,단일 행정에서 목표 위치의 수
+[3099],Data not available,이 데이터는 사용할 수 없습니다
+[3100],Select to enable user defined target position,사용자 정의 타겟 위치를 활성화하려면 선택
+[3101],Select measurement travel direction,측정 이동 방향을 선택
+[3102],Select direction and sequence of approaching each target positions,이 방향과 순서에 가까운 목표 위치를 선택
+[3103],Enter the name of the target axis,대상 축 이름 입력
+[3104],Repetition number of the measurement cycles for the second axis,두 번째 축에 대한 측정 사이클의 반복 횟수
+[3105],Select direction and sequence of approaching each target position on the second axis,두번째 축에서 근접한 각 타겟 위치의 구획과 방향을 선택
+[3106],Enter the name of the target axis for the second axis,두번째 축에 대한 타겟 축 이름 입력
+[3107],Delay time of the sampling after the object moves inside the target window ,타겟 창 안에 측정 물이 이동하고 난 후의 샘플링하는 시간
+[3108],Enter the resolution of the encoder,엔코더의 정밀도를 입력
+[3109],Select sampling trigger method,샘플링 트리거 방법 선택
+[3110],Sampling by time,시간에 의해 샘플링
+[3111],Enter target window number |Auto sampling happens after the dwell time since the object moves inside of the target window,타겟 창 수 | 타겟 창 안에 측정 물이 이동한 후 머무른 시간 후의 자동 샘플링 선택
+[3112],Select encoder output format,엔코더 출력 형식 선택
+[3113],Select the display accuracy of the data |It will affect accuracy of the  data in the data table and the saved file,데이터의 표시 정확도 선택 |이 데이터 테이블 및 저장된 파일 데이터의 정확도에 영향을 미칠 것이다
+[3114],Select the displayed unit of the error value,에러 값의 표시 단위를 선택
+[3115],Select the displayed unit of the position value,위치 값의 표시 단위를 선택
+[3116],Select the type of the parallelism measurement,병렬 측정의 유형을 선택
+[3117],Enter the error of the optical square,직각계의 오차를 입력
+[3118],Enter the value of the dead path,데드 패스의 값을 입력
+[3119],Rotary table resolution,회전 테이블 정밀도
+[3120],User defined reset position,사용자 리셋에 의해 설정된 레이저 위치 값
+[3121],Select average measurement time |Shorter average time will increase the measurement response speed |Longer average time will reduce the influence of the air turbulence,평균 타이밍 측정 | 응답 속도 측정을 향상시킬 수있는 짧은 평균 시간 | 긴 시간 평균화 난기류의 영향을 감소시킬 수있다
+[3122],Select the type of linear measurement optics,선형 측정 광학계의 유형을 선택
+[3123],Trigger sampling when the object stays in the start or end position for more than specified time ,대상의 시작 또는 종료 후 지정된 시간 트리거 자동 샘플링 이상으로 유지
+[3124],Allow user to enter target position value when doing manual sampling,사용자 수동 입력 목표 위치 자체의 샘플 값을 허용
+[3125],Use extended resolution |It will increase measurement accuracy but reduce sampling speed,"확장 정밀도 사용 | 이는 측정 정확도를 개선하지만, 샘플링 속도가 감소한다"
+[3126],Target position interval for the second axis,두 번째 축의 타겟 위치 간격
+[3127],The first target position for the second axis,두 번째 축에 대한 첫 번째 타겟 위치
+[3128],The last target position for the second axis,두 번째 축에 대한 마지막 타겟 위치
+[3129],The number of the target positions in one travel range for the second axis ,두 번째 축에 대해 단일 행정에서의 타겟 위치의 수
+[3130],Data not available,사용할 수 없는 데이터
+[3131],Select to enable user defined target position for the second axis,두 번째 축에 대한 사용자 정의 타겟 위치를 활성화하려면 선택
+[3132],Enter X-axis scale,X 축 스케일 입력
+[3133],Enter Y-axis scale,Y 축 스케일 입력
+[3134],Enter Z-axis scale,Z 축 스케일 입력
+[3135],Calculated angle Alpha value,알파 각도 수치 계산
+[3136],Calculated angle Beta value,베타 각도 수치 계산
+[3137],Calculated diagonal length,대각선 길이 수치 계산
+[3138],Enter sampling time interval,샘플링 시간 간격을 입력
+[3139],Start sampling when the object passes the designated position (both directions),대상이 지정된 위치 (양방향)을 통과 할 때 샘플링을 시작
+[3140],Select to enable sampling mode,샘플링 모드를 활성화하려면 선택
+[3141],Advanced setup,고급 설정
+[3142],Stop sampling when the target passes the designated position (both direction),타겟이 지정된 위치 (양방향)을 통과 할 때 샘플링을 중지
+[3143],Enter total sampling points,샘플의 총 수를 입력
+[3144],Enter total sampling time,총 샘플링 시간을 입력
+[3145],Stop sampling when data is lost,데이터가 손실 될 때 샘플링을 중지
+[3146],Stop sampling when error occurs,에러 발생시 샘플링 중지
+[3147],Select the mode of stop sampling,정지 샘플링 모드를 선택
+[3148],Enter the value of the cover factor,커버 팩터의 값을 입력
+[3149],Select the calculation method of the flatness,편평도의 산출 방법을 선택
+[3150],Select the name of the printer,프린터의 이름을 선택
+[3151],Enter the number of the copies to be printed,매수를 입력 인쇄 할
+[3152],Select the orientation of the print,용지 방향을 선택합니다
+[3153],Select the content of the print,원하는 인쇄 내용을 선택
+[3154],Select the display mode of the environmental parameters,환경 파라미터의 디스플레이 모드를 선택
+[3155],Display data in the graph,그래프에서 데이터를 표시
+[3156],Graphical analysis options,그래픽 분석 옵션
+[3157],Data analysis options,데이터 분석 옵션
+[3158],Select to display the slope of the fitting line,피팅 직선의 기울기를 표시 선택
+[3159],Select measurement standard,측정 표준 선택 
+[3160],Unselect to cancel the modification for the standard,이 옵션을 제거하는 표준 수정에 대한 취소됩니다
+[3161],Enter the name of the operator for the operation,측정 운영자의 전체 이름을 입력합니다
+[3162],Enter the location of the measurement,측정의 위치를?? 입력
+[3163],Enter the name of the machine,시스템의 이름을 입력
+[3164],Enter the type of the machine,시스템의 유형을 입력
+[3165],Enter the serial number of the machine,기기의 일련 번호를 입력
+[3166],Enter the model number of the machine,기기의 모델 번호를 입력
+[3167],Enter the property number of the machine,기기의 자산 번호를 입력
+[3168],Enter the calibration date,교정 날짜를 입력
+[3169],The file name for the saved settings,저장된 설정의 파일 이름
+[3170],Enter other notes to be saved,다른 코멘트를 저장하기 입력
+[3171],Enter the type of the device to be measured,측정 할 디바이스의 보상 방법을 입력 
+[3172],Enter the compensation method for the device to be measured,측정 할 디바이스의 유형을 입력 
+[3173],Enter the feed speed for the measurement,측정을 위한 이송 속도를 입력
+[3174],Enter the dwell time for the object at each position,각 위치에서 객체의 지속 시간을 입력
+[3175],Enter the thermal coefficient of the device to be measured,측정을 위한 기기의 열 팽창 계수를 입력
+[3176],Select if NDE correction is used,개정 NDE을 채택할지 여부를 선택합니다
+[3177],Enter the name and serial number of the instrument used for the measurement,측정에 사용되는 기기의 이름과 일련 번호를 입력
+[3178],Enter the locations of the axes not used in the calibration,교정에 사용되지 축의 위치를?? 입력
+[3179],Enter the reference bias of the tool in X direction,X 방향으로의 공구의 기준 바이어스 입력
+[3180],Enter the reference bias of the device in X direction,X 방향으로 장치의 기준 바이어스 입력
+[3181],Enter the reference bias of the tool in Y direction,Y 방향으로의 공구의 기준 바이어스 입력
+[3182],Enter the reference bias of the tool in Y direction,Y 방향으로의 공구의 기준 바이어스 입력
+[3183],Enter the reference bias of the device in Y direction,Y 방향으로의 장치의 레퍼런스 바이어스 입력
+[3184],Enter the reference bias of the device in Y direction,Y 방향으로의 장치의 레퍼런스 바이어스 입력
+[3185],Enter the coordinate of the material sensor 1,상기 재료 센서 (1)의 좌표를 입력합니다
+[3186],Enter the coordinate of the material sensor 2,상기 재료 센서 (2)의 좌표를 입력합니다
+[3187],Enter the coordinate of the air sensor,상기 공기 센서의 좌표를 입력합니다
+[3188],Enter the coordinate of the material sensor 3,상기 재료 센서 (3)의 좌표를 입력합니다
+[3189],The update time of the sensor data in the compensation program,보상 프로그램의 센서 데이터의 갱신 시간
+[3190],Enter the maximum difference between the environmental temperature and 20 degree C during the measurement,측정시의 환경 온도 20도 C 사이의 최대 차이를 입력
+[3191],Enter the maximum error of the material sensors used during the measurement,측정시에 사용되는 재료 센서의 최대 오차를 입력
+[3192],The maximum length of the measurement,측정의 최대 길이
+[3193],The error range of the instruments used in the measurement,측정에 사용되는 기기의 오차 범위
+[3194],Enter the estimated error from the optic alignment in the measurement,측정의 광학 정렬로부터 추정 오차를 입력
+[3195],Enter the uncertainty of the expansion coefficient in the measurement,측정에 팽창 계수의 불확실성을 입력
+[3196],Enter the estimated error from the change of the environmental parameters in the measurement,측정의 환경 매개 변수의 변화로 추정 오차를 입력
+[3197],Select if the instruments used in the measurement are calibrated,측정에 사용되는 악기 교정하는 경우에 선택
+[3198],Select the serial number of the E1735A for the second axis,두 번째 축에 대한 E1735A의 일련 번호를 선택
+[3199],Select the serial number of the E1736A for the second axis,두 번째 축에 대한 E1736A의 일련 번호를 선택
+[3200],Select the serial number of the E1735A for the first axis,제 1 축에 대한 E1735A의 일련 번호를 선택
+[3201],Select the serial number of the E1736A for the first axis,제 1 축에 대한 E1736A의 일련 번호를 선택
+[3202],Display help information when the mouse cursor moves over an item,
+[3203],Leave extra margin on selected side of paper,
+
+[4001],Click to start linear measurement |Calibrate the accuracy of a linear guide,선형 측정을 시작하려면 클릭 | 리니어 가이드의 정확성을 보정
+[4002],Click to start rotary measurement |Calibrate the accuracy of a rotary stage,회전 측정을 시작하려면 클릭 | 로터리 스테이지의 정확도를 보정
+[4003],Click to start angular measurement |Measure pitch or yaw along a linear path,"각도 측정을 시작하려면 클릭 | 선형 경로를 따라 피치, 요 측정"
+[4004],Click to start way straightness measurement |Use angular optics to make straightness measurements at multiple points along a machine part such as a milling machine way.,웨이 진직도 측정을 시작하려면 클릭 | 밀링 머신 등의 기계 부품을 따라 여러 지점에서 직선 측정을 위해 각도 광학을 사용합니다.
+[4005],Click to start time base linear measurement |Measure linear displacement over time,시간 기본 선형 측정을 시작하려면 클릭 | 시간이 지남에 따라 선형 변위를 측정
+[4006],Click to start straightness measurement |Use straightness optics to determine if a machine’s moveable part is moving along a straight path,진직도 측정을 시작하려면 클릭 | 기계의 가동 부분이 직선 경로를 따라 이동하는지를 확인하기 위해 진직도 광학을 사용한다
+[4007],"Click to start diagonal measurement |Use for volumetric analysis, as described in ANSI standard B5.54",대각선 측정을 시작하려면 클릭 | ANSI 표준 B5.54의 설명에 따라 체적 분석을 위해 사용
+[4008],"Click to start squareness measurement |Use to determine if two machine axes are oriented, and move, perpendicular to each other",직각도 측정을 시작하려면 클릭 | 공작 기계의 주축 사이의 수직 측정 오차
+[4009],Click to start the parallelism measurement |Use to determine if two machine axes move parallel to each other,평행도 측정을 시작하기 위해 클릭 | 스핀들 병렬 기계 또는 동일 평면 병렬 측정
+[4010],Click to start the flatness measurement |Measure the flatness error of a surface plate,평탄도 측정을 시작하려면 클릭 | 정반의 평탄도를 측정 오차
+[4011],Click to start dual axis measurement |Calibrate the linear position accuracy of two linear guide synchronously,두 축 측정을 시작하려면 클릭 |  2 축의 동기식 선형 위치 정밀도의 보정
+[4012],Click to start time base angular measurement |Measure angle value over time,시간 기본 각도 측정을 시작하려면 클릭 | 시간에 각도 값을 측정
+[4013],Click to start time base straightness measurement |Measurement straightness value over time,시간 기본 진직도 측정을 시작하려면 클릭 | 시간이 지남에 따라 진직도 값을 측정
+[4014],Setup basic options,설치 기본 옵션
+[4015],Open the help file,도움말 파일을 엽니다
+[4016],Exit the program,프로그램을 종료
+[4017],Open an existing file |Start or review a measurement using saved data,기존 파일을 엽니다 | 저장된 데이터를 사용하여 측정 하거나 확인하기 위해
+[4018],Display one less decimal place,소수점 이하 표시
+[4019],Display one more decimal place,소수점 이상 표시
+[4020],Change the sign of upper display number,상단에 표시된 숫자의 부호를 변경
+[4021],Change the sign of lower display number,하단에 표시된 숫자의 부호를 변경
+[4022],The status of the measurement module of second axis |Click to enter hardware setup menu,두 번째 축의 측정 모듈의 상태 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4023],The software is running in demo mode |Click to enter hardware setup menu,이 소프트웨어는 데모 모드에서 실행 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4024],The status of the laser head |Click to enter the hardware setup menu,레이저 헤드의 상태는 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4025],The status of the second laser head |Click to enter the hardware setup menu,두범째 레이저 헤드의 상태는 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4026],The status of the single axis measurement module |Click to enter the hardware setup menu,단일 축 측정 모듈의 상태는 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4027],The status of the sensor interface card |Click to enter the hardware setup menu,센서 인터페이스 카드의 상태는 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4028],The communication status of the single axis measurement module |Click to enter the hardware setup menu,단일 축 측정 모듈의 통신 상태 | 하드웨어 설정 메뉴를 입력하려면 클릭
+[4029],Display the line correspond to the number on the right side as the first line,번호는 첫 번째 행의 표시 라인의 우측에 대응
+[4030],Select the program to use for the download operation,다운로드 동작의 실행 파일을 실행하여
+[4031],Run the selected download program,실행 사용자 정의 다운로드 작업
+[4032],Increase font size,글꼴 크기를 증가
+[4033],Decrease font size,글꼴 크기를 줄입니다
+[4034],Display the graph symmetrically,대칭 그래프를 표시
+[4035],Display the graph,그래프를 표시
+[4036],"Enlarge the designated area |Press left button of the mouse, drag the pointer, and release the button",", 마우스를 눌러 왼쪽 버튼을 포인터를 드래그 해 놓습니다 | 지정된 영역을 확대"
+[4037],Zoom in,확대
+[4038],Zoom out,축소
+[4039],Copy the current data or graph to the clipboard,클립 보드에 현재 데이터 나 그래프를 복사
+[4040],The status of the measurement,측정 상태
+[4041],The progress of the measurement,측정의 진행
+[4042],Compensation table |Double click to enlarge or reduce,보정 테이블 | 더블 확대하거나 줄일 클릭
+[4043],Machine information |Double click to enter machine information menu,기계 정보 | 더블 기계 정보 메뉴를 입력합니다
+[4044],Measurement setup |Double click to  enter measurement setup interface,측정 설정 | 더블 클릭하면 측정 설정 인터페이스를 입력합니다
+[4045],Measurement results |Double click to enter the data analysis menu,측정 결과 | 데이터 분석 메뉴를 입력하려면 두 번 클릭
+[4046],Save measurement settings or data,측정 설정이나 데이터를 저장
+[4047],Print measurement results or report,인쇄 측정 결과 또는 보고서
+[4048],Start or continue the measurement,시작하거나 측정을 계속
+[4049],Record measurement data manually,수동으로 녹화 된 측정 데이터
+[4050],Pause the measurement,측정을 일시 중지
+[4051],Display help information,도움말 정보를 표시
+[4052],Stop the measurement,측정을 중지
+[4053],Erase the measurement data,측정 데이터를 삭제
+[4054],"Reset laser data, erase error mark",레이저 데이터를 다시 에러 표시를 지우
+[4055],"Input measurement settings, measurement data or machine information","입력 측정 설정, 측정 데이터 또는 시스템 정보"
+[4056],Set up parameters,설정 매개 변수
+[4057],Hardware information of the connected equipment,연결된 장비의 하드웨어 정보
+[4058],The information of the connection and distribution of the sensors,센서의 연결 및 분포 정보
+[4059],The list of the target positions,대상 위치의 목록
+[4060],The list of the target positions of the second axis,두 번째 축의 목표 위치리스트
+                                                                           

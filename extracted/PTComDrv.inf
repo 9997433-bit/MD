@@ -1,0 +1,79 @@
+;; PTComDrv.inf
+
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Provider=%ProviderName%
+DriverVer=08/20/2015, 2.0.1.2
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+CatalogFile.NTx86=PTComDrv.cat
+
+;--------- SourceDiskNames and SourceDiskFiles Section -----------------------
+
+[SourceDisksNames]
+1 = "Install Disk",Disk1,,
+
+[SourceDisksFiles]
+PTComDrv.sys = 1,,
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+PTComDrv_Files_Driver = 10,System32\Drivers
+
+;--------- Manufacturer and Models Sections ----------------------------------
+
+[Manufacturer]
+%Keysight.Name%=Keysight
+
+[Keysight]
+%AE1735A.Name%=PTComDrv_DDI, USB\VID_0957&PID_3518
+%AE1736A.Name%=PTComDrv_DDI, USB\VID_0957&PID_3618
+
+;---------- DDInstall Sections -----------------------------------------------
+; --------- Windows 9X -----------------
+
+[PTComDrv_DDI]
+CopyFiles=PTComDrv_Files_Driver
+AddReg=PTComDrv_9X_AddReg
+
+[PTComDrv_9X_AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,PTComDrv.sys
+HKR, "Parameters", "BreakOnEntry", 0x00010001, 0
+
+; --------- Windows NT -----------------
+
+[PTComDrv_DDI.NT]
+CopyFiles=PTComDrv_Files_Driver
+AddReg=PTComDrv_NT_AddReg
+
+[PTComDrv_DDI.NT.Services]
+Addservice = PTComDrv, 0x00000002, PTComDrv_AddService
+
+[PTComDrv_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\PTComDrv.sys
+
+[PTComDrv_NT_AddReg]
+HKLM, "System\CurrentControlSet\Services\PTComDrv\Parameters",\
+	"BreakOnEntry", 0x00010001, 0
+
+; --------- Files (common) -------------
+
+[PTComDrv_Files_Driver]
+PTComDrv.sys
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+ProviderName="Keysight Technologies, Inc."
+SvcDesc="Common USB Data Device"
+AE1735A.Name="E1735A USB Axis Module"
+AE1736A.Name="E1736A USB Sensor Hub"
+Keysight.Name="Keysight Technologies"

@@ -1,0 +1,708 @@
+Keysight E1733A String Table
+Japanese
+
+[1],Linear,長さ
+[2],Angular,角度
+[3],Straightness,真直度
+[4],Squareness,直角度
+[5],Parallelism,平行度
+[6],Rotary,角度位置
+[7],Way Straightness,進路の真直度
+[8],Flatness,平面度
+[9],Diagonal,対角線
+[10],Lin. Time Base,タイムベース：長さ
+[11],Ang. Time Base,タイムベース：角度
+[12],Str. Time Base,タイムベース：真直度
+[13],Lin. Dual Axes,長さ二軸
+[14],Start,開始
+[15],Max,最大
+[16],Min,最小
+[17],Mean,平均
+[18],End,終了
+[19],Location,測定場所
+[20],T start,開始時
+[21],T end,終了時
+[22],Auto,自動
+[23],Manual,手動
+[24],Metric,メートル法
+[25],English,ヤードポンド法
+[26],Bidirectional,両方向
+[27],Unidirectional,一方向
+[28],Pilgrim,ピルグリム
+[29],Spindle,スピンドル
+[30],Coplanar,コプレーナ
+[31],Short Range,ショートレンジ
+[32],Long Range,ロングレンジ
+[33],Encoder,エンコーダ
+[34],Up/Down,Up/Down
+[35],Position,位置
+[36],Total Time,合計時間
+[37],Total Points,合計点数
+[38],User,ユーザー
+[39],Repeatability,繰り返し確度
+[40],Mean Reversal Error,平均逆転値
+[41],Sys. Dev. Pos.,系統的位置偏差
+[42],Raw Accuracy,最大誤差幅(全体)
+[43],Raw Repeatability,最大誤差幅:各点
+[44],Max Reversal Error,最大逆転値
+[45],6 Sigma (total pop.),6 ｼｸﾞﾏ(合計)
+[46],Slope,スロープ
+[47],Least Squares,最小自乗法
+[48],End Points,エンドポイント法
+[49],Forward Data Runs,前方計測データ
+[50],Forward Mean,前方平均
+[51],Forward +/-n sigma,前方 +/- nシグマ
+[52],Reverse Data Runs,逆方向計測データ
+[53],Reverse Mean,逆方向平均
+[54],Reverse +/-n sigma,逆方向 ± n-シグマ
+[55],Combined Mean,総合平均
+[56],Combined +/-n sigma,総合± n-シグマ
+[57],Remove Raw Offset,オフセットなし
+[58],Mean Bidir. Pos. Dev.,両方向位置の平均偏差
+[59],Backlash / pt.,ポイント毎のバックラッシュ
+[60],Laser,レーザー
+[61],Error,誤差
+[62],Target,目標値
+[63],Rotary,角度位置
+[64],Angle,角度
+[65],Time,時間
+[66],Velocity,速度
+[67],Station,測定点
+[68],Correction,補正
+[69],Absolute,絶対
+[70],Incremental,相対
+[71],Algebraic,代数
+[72],Calibrator,キャリブレータ
+[73],Acceleration,加速度
+[74],Statistics,統計
+[75],Graph,グラフ
+[76],Data,データ
+[77],Comp.,補正
+[78],Env.,環境
+[79],All,全軸
+[80],No,なし
+[81],Yes,あり
+[82],Moody Analyzed,ムーディー解析済み
+[83],Licensed E1735A,Licensed E1735A
+[84],Keyboard Error,キーボード入力
+[85],Measurement Type,測定種類：
+[86],Current Date,現在の日付、時刻
+[87],Error,誤差
+[88],Standards,規格
+[89],Modified,変更済み
+[90],User Defined,ユーザー定義
+[91],Auto Reset After Error,Auto Reset After Error
+[92],Beep on Record,ビープオンレコード
+[93],Same As Axis 1,１軸と同じ
+[94],Auto Time Scale,オートスケール
+[95],Stop On Error,エラーで停止
+[96],Limit Lines,機械仕様
+[97],User Scale,User Scale
+[98],Legend,凡例
+[99],Targets in Row,目標値表示
+[100],Goto Row,移動行
+[101],Max. Elevation,最大高低差
+[102],Air Pressure,気圧
+[103],Air Temperature,気温
+[104],Relative Humidity,相対湿度
+[105],Material Temp. 1,物体温度 1
+[106],Material Temp. 2,物体温度 2
+[107],Material Temp. 3,物体温度 3
+[108],Update Method,更新方法
+[109],Environmental Units,環境単位
+[110],Compensation,補正
+[111],Laser Wavelength,レーザー波長
+[112],Wavelength Compensation,波長補正係数
+[113],Total Compensation Number,総合補正係数
+[114],Travel,移動
+[115],Measurement Axis,測定軸
+[116],Travel Mode,移動モード
+[117],No. of Cycles,サイクル数
+[118],Direction,方向
+[119],Targets,目標
+[120],Start Position,開始位置
+[121],End Position,終了位置
+[122],No. of Points,測定点数
+[123],Interval,間隔
+[124],Foot Spacing,フットスペース
+[125],Way Length,進路の長さ
+[126],# of Stations,測定点数
+[127],Analyze Data,データ解析
+[128],Material Compensation,物体補正
+[129],Expans. Coeff.,膨張係数：
+[130],Units,単位：
+[131],Error Units,誤差単位
+[132],Position Units,位置単位
+[133],Display Resolution,表示分解能
+[134],Measurement Units,測定単位
+[135],Other,その他
+[136],Rotary Resolution,ロータリーエンコーダ分解能
+[137],Optical Square,オプティカルスクエア
+[138],Averaging,平均(秒)
+[139],Calibration Factor,ｷｬﾘﾌﾞﾚｰｼｮﾝ係数
+[140],Dead Path,デッドパス
+[141],Preset,プリセット
+[142],Trigger,トリガ
+[143],Encoder Resolution,エンコーダ分解能
+[144],Trigger Type,トリガ方法
+[145],Target Window,ターゲットウインドウ
+[146],Trigger Dwell,トリガドゥエル
+[147],Test Conditions,試験条件
+[148],Temperature Sensor,温度検出器
+[149],Material Sensor #1,物体温度検出器1
+[150],Material Sensor #2,物体温度検出器2
+[151],Material Sensor #3,物体温度検出器3
+[152],Air Sensor,エアセンサー
+[153],Test Parameters,試験パラメータ
+[154],Type of Scale,位置検出器の種類
+[155],Compensation Used,使用した補正
+[156],Feed Rate,送り速度
+[157],NDE Correction (yes or no),ＮＤＥ補正（あり、なし）
+[158],Dwell Time at Each Target Position,各目標位置でのドゥエル時間
+[159],Measuring Information,測定情報
+[160],Measuring Instrument and Serial No.,測定器及び製造番号
+[161],Name of Inspector,試験実施者氏名
+[162],Date of Test,試験年月日
+[163],Machine Name,機械名
+[164],Machine Type,機械の種類
+[165],Machine Serial No.,製造番号
+[166],Machine Name; Type and Serial No.,機械名、形式及び製造番号
+[167],Test Location,試験位置
+[168],Position of axes not under test,試験していない軸の位置
+[169],Coefficient of Thermal Expansion of Scale,位置検出器の熱膨張係数
+[170],Offset to Tool Reference (X/Y/Z),工具基準に対するオフセット(X/Y/Z)
+[171],Offset to Workpiece Reference (X/Y/Z),被加工品基準に対するオフセット(X/Y/Z)
+[172],Stop Timer,タイマの停止
+[173],Start Timer,タイマの開始
+[174],Timer,タイマ
+[175],No. of Points,測定点数
+[176],Total Time,合計時間
+[177],Coverage Factor,シグマ
+[178],Numerical Analysis,数値解析
+[179],Graphic Analysis,グラフ解析
+[180],Machine Model No.,機械型番
+[181],Asset No.,管理番号
+[182],Filename,ファイル名
+[183],Comments,コメント
+[184],End Point Time Out,折返しタイムアウト
+[185],Time Base,タイムベース
+[186],Default Path,Default Path
+[187],Language,言語
+[188],System,システム
+[189],Error Sign Convention,誤差の符号取り決め
+[190],Machine Zero Point,機械ｾﾞﾛ ﾎﾟｲﾝﾄ(
+[191],Machine Units,機械単位
+[192],Measurement Setup,測定セットアップ
+[193],Machine Information,機械情報
+[194],ISO Information,ISO情報
+[195],Data Analysis,データ解析
+[196],Axis:,軸：
+[197],Deviation,偏差
+[198],Port,ポート
+[199],Sensor,センサー
+[200],Description,種類
+[201],Used for,用途
+[202],USB Axis Module,USB測定モジュール
+[203],Sensor Hub,センサーハブ
+[204],Material Sensor,物体温度センサ
+[205],Air Sensor,エアセンサ
+[206],Serial No.,シリアル番号
+[207],Hardware,ハードウェア
+[208],Test Record Button,テスト・レコードボタン
+[209],Hardware Not Ready,ハードウェアの準備が出来ていません
+[210],No License,ライセンスがありません
+[211],Laser Off or Warming Up,レーザーの電源が切れているか、ウォームアップ中
+[212],No Return Beam,測定光が戻っていません
+[213],Reset Position,リセット
+[214],Optics Out Of Range,光学系は有効範囲外
+[215],Nameplate,銘板
+[216],Step 1: Reset laser and rotary at 0 arcdeg,Step 1: 0°でリセット
+[217],Step 2: Sample between -3 and -4 arcdeg,Step 2: -3°から-4°回転してレコード
+[218],Step 3: Sample between +3 and +4 arcdeg,Step 3: +3°から+4°回転してレコード
+[219],Agilent Technologies Inc.,Agilent Technologies Inc.
+[220],Revision,Revision
+[221],Dimensional Metrology Software,Dimensional Metrology Software
+[222],All Rights Reserved,All Rights Reserved
+[223],Open,開く
+[224],Setup,セットアップ
+[225],Start,開始
+[226],Reset,リセット
+[227],Continue,継続
+[228],Stop,停止
+[229],Save,保存
+[230],Print,印刷
+[231],Record,レコード
+[232],Erase,削除
+[233],Help,Help
+[234],Exit,終了
+[235],OK,OK
+[236],Cancel,中止
+[237],Calibrate,校正
+[238],Recalculate,再校正
+[239],Apply,Apply
+[240],Import,インポート
+[241],Setup + Data,セットアップ・データ(
+[242],All Data,全てのデータ
+[243],Last Run,最後の測定
+[244],Last Data,最後のデータ
+[245],Setup Only,セットアップのみ(
+[246],Raw Data,生データ
+[247],Compensation Table,補正テーブル
+[248],Environmental Data,環境データ
+[249],Setup Printer,プリンタの設定
+[250],Report,印刷
+[251],Collecting data . . .,データ集録中 . . .
+[252],Text File,テキストファイル
+[253],CSV (comma delimited),CSVファイル
+[254],Plus/Minus,正/負：
+[255],Closure,閉合差
+[256],Elevation,高低
+[257],Data Point,データポイント
+[258],Combined,総合
+[259],Forward,前方
+[260],Reverse,逆方向
+[261],Warning,Warning
+[262],Tested Axis,試験軸
+[263],Axis Deviation,評価事項
+[264],Reversal Value,反転値
+[265],Mean Reversal Value,平均反転値
+[266],Range Mean Bidirectional Positional Deviation,軸の両方向位置決めの偏差
+[267],Systematic Positional Deviation,系統偏差
+[268],Repeatability of Positioning,繰返し性
+[269],Accuracy,確度
+[270],Unidirectional,一方向
+[271],Bidirectional,両方向
+[272],Not Applicable,適用しない
+[273],Target Position,目標位置
+[274],Approach Direction,位置決めの向き
+[275],Positional Deviation,位置決め偏差
+[276],Mean Unidir. Pos. Dev.,平均一方向位置決め偏差
+[277],Est. of Standard Uncertainty,標準不確かさの推定値
+[278],Unidir. Repeatability,一方向繰り返し性
+[279],Bidir. Repeatability,両方向繰り返し性
+[280],(Used for NDE Correction),(ＮＤＥ補正に使用)
+[281],Data not saved,データが保存されていません
+[282],Measurement not completed,測定が完了していません
+[283],Reset position?,Reset position?
+[284],Measurement completed,測定完了
+[285],Measurement terminated,測定中断
+[286],Measurement completed with %d data lost,測定完了しましたが %d データ欠落しました
+[287],Measurement of current axis completed,この軸の測定完了
+[288],Cannot open file,ファイルが開けません
+[289],Cannot save file,ファイルが保存できません
+[290],%s / %s must be an integer,%s / %s: 　整数で入力
+[291],Inconsistent values,矛盾した値です
+[292],Invalid entry,不正な入力
+[293],No. of cycles doesn't comply ISO standard. Print?,測定回数が不足のためISO印刷が出来ません
+[294],All Files,すべてのファイル
+[295],Legacy Files,旧タイプのファイル
+[296],Firmware,ファームウェア
+[297],Driver,ドライバー
+[298],Library,ライブラリー
+[299],User Calibration,User Calibration
+[300],Shift,Shift
+[301],Modify data by user?,Modify data by user?
+[302],Optics,光学系
+[303],Default,ﾃﾞﾌｫﾙﾄ
+[304],Saved,
+[305],Average Material Temp.,平均物体温度：
+[306],Current Axis,
+[307],Extended Resolution,拡張分解能
+[308],Data Lost,
+[309],Information,
+[310],Keyboard Position,ｷｰﾎﾞｰﾄﾞ位置
+[311],Outside Target Window,ﾀｰｹﾞｯﾄ ｳｨﾝﾄﾞｳ外
+[312],Inside Target Window,ﾀｰｹﾞｯﾄ ｳｨﾝﾄﾞｳ内
+[313],Target List,ﾀｰｹﾞｯﾄ ﾘｽﾄ
+[314],Interpolate,補間
+[315],Compensation Values,値
+[316],None,なし
+[317],Already running [%s] software,[%s] ｿﾌﾄｳｪｱを既に実行中です
+[318],Offline Mode,
+[319],Main Menu,ﾒｲﾝ ﾒﾆｭｰ(
+[320],Numeric Display,数値表示
+[321],Default Display Mode,
+[322],Advanced Options,
+[323],Pos. Uncertnty,位置不確実性
+[324],Sorted by position number,位置番号によるｿｰﾄ
+[325],Sorted by run number,計測番号によるｿｰﾄ
+[326],Sorted by line number,軸番号によるｿｰﾄ
+[327],Number of total data pairs,合計ﾃﾞｰﾀ対の数：
+[328],Number of total data runs,ﾃﾞｰﾀ 計測の合計数：
+[329],Axis 2 Data,軸2ﾃﾞｰﾀ
+[330],Out of spec,仕様範囲外
+[331],Target Value,ﾀｰｹﾞｯﾄ値
+[332],Error Value,誤差値
+[333],Pos #,位置＃
+[334],Run #,計測＃
+[335],Line #,軸 #
+[336],Point #,点 #
+[337],Position,位置
+[338],Coefficient of Thermal Expansion,
+[339],Compensation Routine,補正更新周期
+[340],Update Each %s ,
+[341],Equation,
+[342],Parameter,パラメーター
+[343],Air Conditions Used for Compensation of Laser Interferometer,
+[344],Positioning Measurement,位置決め測定
+[345],Estimation of Measurement Uncertainty,測定不確かさの推定
+[346],Laser Interferometer Measurement,レーザーによる測定
+[347],Simplified Method,簡易法
+[348],Average Industial Conditions,平均的な工場条件
+[349],Improved Industrial Conditions,改善された工場条件
+[350],Contributors,要因
+[351],Device,
+[352],Measurement Length,測定長さ
+[353],Error Range,誤差範囲
+[354],Alignment,アライメント
+[355],Beam Alignment,ビームのアライメント
+[356],Misalignment,
+[357],Compensation of Workpiece Temperature,工作物温度の補正
+[358],Thermal Expansion Coefficient,線膨張係数
+[359],Difference to 20C,20°からの差
+[360],Temperature Measurement,温度測定
+[361],Maximum,最大
+[362],Machine Tool,
+[363],Zero,ゼロ
+[364],Included in U(%s),　U(%s)に含む
+[365],Environmental Variation,環境変動
+[366],Correction of R Values Due to U(EVE),不確かさU(EVE)による繰返し性Rの値の修正
+[367],Correction of Repeatability Values,繰返し性の値の修正
+[368],According to Table,
+[369],Typical Results,
+[370],At Target %s,
+[371],For R According to Table,
+[372],Corrected,修正後
+[373],Uncorrected,修正前
+[374],Assumed,想定
+[375],Calibrated Measuring Device,校正された機器
+[376],Uncertainty of Expansion Coefficient,線膨張係数の不確かさ
+[377],Unit,単位
+[378],Amplitude,振幅
+[379],Frequency,周波数
+[380],Show Legend,凡例表示
+[381],Show Machine Info.,機械情報表示
+[382],Merge Data,ﾃﾞｰﾀの結合 (
+[383],Can't combine different data types or target lists,異なるﾃﾞｰﾀ ﾀｲﾌﾟまたはﾀｰｹﾞｯﾄ ﾘｽﾄを結合することはできません｡
+[384],Synchronized Operation,2軸同期オペレーション
+[385],Demo Mode,
+[386],Rotary Table,
+[387],Printer,
+[388],Copies,
+[389],Orientation,
+[390],Portrait,ポートレイト（縦）
+[391],Landscape,ランドスケープ（横）
+[392],Download,
+[393],User defined download program,
+[394],File not found,ﾌｧｲﾙが見つかりません
+[395],Show Hint,
+[396],Extra Margin,
+[397],Left,
+[398],Top,
+[399],Right,
+[400],Bottom,
+[401],Calibration Due,
+[402],Calibration Expired,
+[403],Calibration Period,
+[404],Month,
+[405],Dual Axis,
+[406],Single Axis,
+[407],Hysteresis,
+
+[1001],Install,
+[1002],[%s] will be installed in the following folder,
+[1003],[%s] has been successfully installed,
+[1004],Failed to install [%s],
+[1005],Remove,
+[1006],Remove all components of [%s],
+[1007],[%s] has been removed,
+[1008],Failed to remove [%s],
+[1009],Reinstall,
+[1010],Please close program [%s] first,
+[1011],Install Path,
+[1012],User Data,
+[1013],User data will not be deleted,
+[1014],Agree,
+[1015],Do Not Agree,
+[1016],Customize,
+[1017],Customize user interface and advanced options of [%s],
+[1018],Repair,
+[1019],Repair system settings and reinstall driver,
+
+[2001],Existing Calibration,
+[2002],New Calibration,
+[2003],Raw Value,
+[2004],Calibrated,
+[2005],Reference,
+[2006],Temperature,
+[2007],Write Sensor,
+[2008],Sensor Calibration,
+[2009],Sensor has been updated,
+[2010],Discard changes,
+[2011],Cannot access sensor,
+
+[3001],Laser position,レーザー測定値
+[3002],Laser position 2,
+[3003],Error value,誤差値
+[3004],Target position,目標位置
+[3005],Encoder reading,エンコーダ値
+[3006],Rotary table reading,エンコーダ値
+[3007],Rotary angle,
+[3008],Elapsed time,経過時間
+[3009],Motion velocity,速度
+[3010],Target position number,ターゲット位置番号
+[3011],Click to change lower display,表示切替
+[3012],Click to change upper display,表示切替
+[3013],Beam strength 2,
+[3014],beam strength,ビーム強度
+[3015],Simulated laser position,
+[3016],Rotary table status |Click to enter hardware setup menu,ロータリーテーブルのステータス|クリックでシステム設定メニューが開きます
+[3017],Air pressure,気圧
+[3018],Air temperature,気温
+[3019],Material Temperature 1,物体温度 1
+[3020],Material Temperature 2,物体温度 2
+[3021],Material temperature 3,物体温度 3
+[3022],Air relative humidity,湿度
+[3023],Environmental parameter display area |Double click to enlarge or recover,環境値表示|ダブルクリックで拡大/縮小できます
+[3024],Measurement graph display area |Double click to enlarge or recover |Drag to change display area,測定グラフ表示|ダブルクリックで拡大/縮小できます
+[3025],Measurement data display area |Double click to enlarge or recover,測定データ表示|ダブルクリックで拡大/縮小できます
+[3026],Change error value sign,
+[3027],Enter limit line value,リミット値
+[3028],Select -> to display limit line,リミット表示
+[3029],Enter line number |Press the left button to setup it as the first line,
+[3030],Select the display mode of the target position,
+[3031],Enter user defined Y-axis range,ユーザー定義の縦軸レンジ
+[3032],Select ->  Display graph,凡例表示
+[3033],Auto select Y-axis range,
+[3034],Select -> Display according to user defined range,縦軸のユーザー定義
+[3035],Toolbar,
+[3036],Select environmental parameter units ,環境単位の切替え
+[3037],"Pressed to display grid lines, released to hide grid lines ",グリッド表示
+[3038],"Pressed to display 3D graph, released to display 2D graph",3Dグラフ/数値の切替え
+[3039],Select environmental parameter type,環境値表示項目切替え
+[3040],Select the axis to be displayed,測定ライン表示切替え
+[3041],Select the data type of the time to be displayed,表示するデータ・タイプを選んでください
+[3042],Select the items to be displayed,表示対象を選んでください
+[3043],Enter the measurement point number for the zero position ,
+[3044],Select the conversion method of the error sign,
+[3045],Compensation value calculation method,
+[3046],Select the measurement unit format |It will effect on all the display values,測定単位を選んでください
+[3047],Length value correspond to one machine compensation value,
+[3048],Select compensation table location and generation method,
+[3049],Start position of the compensation table,
+[3050],End position of the compensation table,
+[3051],Interval of the compensation table,
+[3052],Select the expression form of the compensation value |It will affect the sign of the compensation value,
+[3053],Select the calculation methods for the forward and reverse compensation values |Combination: compensation value from the average of the two values |Forward/Reverse: calculate two compensation values separately,
+[3054],Click to enter ISO information menu,クリックでISO情報入力画面が開きます
+[3055],Click to enter Machine information menu,クリックで機械情報入力画面が開きます
+[3056],Click to enter measurement setup menu,クリックで測定セットアップ入力画面が開きます
+[3057],Click to enter data analysis menu,クリックでデータ解析メニューが開きます
+[3058],Select settings for the measurement |Default: Default for all the settings; suitable for new measurement |Saved: Save measurement and information setting; Suitable for the repeating measurement |Information: Save information settings only; Suitable for measurement for the same machine,"測定セットアップ|ﾃﾞﾌｫﾙﾄ:セットアップをデフォルトにもどします|Saved:セットアップ情報を保存します,繰返し測定に|Information:情報を保存します,同じマシンの繰返し測定に"
+[3059],Select display language,表示言語を選んでください
+[3060],Click to setup the default path for data files,測定データを保存するフォルダを選んでください
+[3061],Select the display method of the interface,
+[3062],Installed certificate,
+[3063],Select to open simulation mode,
+[3064],Select for auto recovery after signal loss,
+[3065],Select to enter demo mode,デモモードで動作します
+[3066],Select for beep on the data recording,データ取得時にビープが鳴ります
+[3067],Select for E1736A S/N,E1736Aをシリアル番号で選択します
+[3068],Select for E1735A S/N,E1735Aをシリアル番号で選択します
+[3069],Select for the second E1735A S/N,
+[3070],"Select for the operation of [Reset], [Start], [Record] and [Stop] applied to both E1735A",
+[3071],Enter the wavelength of the laser head,レーザーの波長
+[3072],User calibration value,
+[3073],Optics calibration parameter,光学系キャリブレーション係数
+[3074],Change laser position sign,符号反転
+[3075],Air parameter update method |Plug or unplug sensor will change the setting,波長補正パラメータの更新方法|センサーの有無で切り変わります
+[3076],Select air humidity update method,
+[3077],Select to enter the air humidity manually |Data from air sensor will be ignored,
+[3078],Material temperature update method |Plug or unplug sensor will change the setting,物体温度補正の更新方法|センサーの有無で切り変わります
+[3079],Average of the material temperatures,センサーの平均
+[3080],Compensation number for the laser wavelength in air,レーザー波長の補正値
+[3081],Total compensation number including wavelength and expansion compensations,波長補正と物体温度補正を合わせた値
+[3082],Expansion coefficient of the device under test or lead screw,位置決めに使用するリニアスケール/ボールねじの膨張係数
+[3083],Repetition number of measurement cycles,繰返し回数
+[3084],The length of the segment from point A to point C,A点からC点までの距離
+[3085],The length of the segment from point A to point G,A点からG点までの距離
+[3086],Diagonal length of the measurement area,対角線の距離
+[3087],Select the name of the axis for the next measurement,これから測定する軸を選んでください
+[3088],Number of stops on each axis,軸の測定回数
+[3089],Change the number of stops on AC,測定ステップ数の増減
+[3090],Change the number of stops on AG,測定ステップ数の増減
+[3091],Select the direction of the measurement on the axis,測定する方向を選んでください
+[3092],Enter the foot spacing of the measurement accessory,選択したフット・スペースの長さを入力してください
+[3093],The length of the guide under test |depends on the number of the stops and the foot spacing  ,進路の測定長|選択したフット・スペースと測定点数で決まります
+[3094],Number of stops for the measurement,
+[3095],Distance between the target positions,移動間隔を入力してください
+[3096],The first target position,開始位置を入力してください
+[3097],The last target position,終了位置を入力してください
+[3098],Number of target positions in one travel range,測定点数
+[3099],Data not available,
+[3100],Select to enable user defined target position,ユーザー定義のステップ設定|ランダム測定が定義できます
+[3101],Select measurement travel direction,
+[3102],Select direction and sequence of approaching each target positions,移動モードの選択
+[3103],Enter the name of the target axis,測定軸名を入力
+[3104],Repetition number of the measurement cycles for the second axis,繰返し回数を入力
+[3105],Select direction and sequence of approaching each target position on the second axis,移動モードの選択
+[3106],Enter the name of the target axis for the second axis,
+[3107],Delay time of the sampling after the object moves inside the target window ,トリガドゥエル時間を入力してください|ターゲットウインドウに入ってこの時間でトリガが掛かります
+[3108],Enter the resolution of the encoder,
+[3109],Select sampling trigger method,トリガ方法を選んでください
+[3110],Sampling by time,
+[3111],Enter target window number |Auto sampling happens after the dwell time since the object moves inside of the target window,ターゲットウインドウ値を入力してください
+[3112],Select encoder output format,エンコーダの出力タイプを選んでください
+[3113],Select the display accuracy of the data |It will affect accuracy of the  data in the data table and the saved file,表示分解能を選んでください|保存されるデータにも反映します
+[3114],Select the displayed unit of the error value,誤差単位を選んでください
+[3115],Select the displayed unit of the position value,位置単位を選んでください
+[3116],Select the type of the parallelism measurement,
+[3117],Enter the error of the optical square,光学系補正値を入力してください
+[3118],Enter the value of the dead path,デッドパス値を入力してください
+[3119],Rotary table resolution,ロータリーエンコーダーの分解能|55290Bの場合は0.36
+[3120],User defined reset position,プリセット値を入力してください
+[3121],Select average measurement time |Shorter average time will increase the measurement response speed |Longer average time will reduce the influence of the air turbulence,データの平均化処理時間を選んでください
+[3122],Select the type of linear measurement optics,光学系のタイプを選んでください
+[3123],Trigger sampling when the object stays in the start or end position for more than specified time ,折返し点でオーバーラン出来ない場合この時間待てばトリガが掛かります
+[3124],Allow user to enter target position value when doing manual sampling,
+[3125],Use extended resolution |It will increase measurement accuracy but reduce sampling speed,
+[3126],Target position interval for the second axis,
+[3127],The first target position for the second axis,
+[3128],The last target position for the second axis,
+[3129],The number of the target positions in one travel range for the second axis ,
+[3130],Data not available,
+[3131],Select to enable user defined target position for the second axis,
+[3132],Enter X-axis scale,
+[3133],Enter Y-axis scale,
+[3134],Enter Z-axis scale,
+[3135],Calculated angle Alpha value,
+[3136],Calculated angle Beta value,
+[3137],Calculated diagonal length,
+[3138],Enter sampling time interval,サンプリング間隔を入力してください
+[3139],Start sampling when the object passes the designated position (both directions),サンプリング開始位置を入力してください
+[3140],Select to enable sampling mode,サンプリング開始モードを選んでください
+[3141],Advanced setup,
+[3142],Stop sampling when the target passes the designated position (both direction),サンプリング停止位置を入力してください
+[3143],Enter total sampling points,集録点数を入力してください
+[3144],Enter total sampling time,集録時間を入力してください
+[3145],Stop sampling when data is lost,
+[3146],Stop sampling when error occurs,
+[3147],Select the mode of stop sampling,サンプリング停止モードを選んでください
+[3148],Enter the value of the cover factor,
+[3149],Select the calculation method of the flatness,
+[3150],Select the name of the printer,プリンターを選んでください
+[3151],Enter the number of the copies to be printed,コピー枚数を入力してください
+[3152],Select the orientation of the print,用紙　縦/横
+[3153],Select the content of the print,
+[3154],Select the display mode of the environmental parameters,
+[3155],Display data in the graph,
+[3156],Graphical analysis options,
+[3157],Data analysis options,
+[3158],Select to display the slope of the fitting line,
+[3159],Select measurement standard,
+[3160],Unselect to cancel the modification for the standard,
+[3161],Enter the name of the operator for the operation,
+[3162],Enter the location of the measurement,
+[3163],Enter the name of the machine,
+[3164],Enter the type of the machine,
+[3165],Enter the serial number of the machine,
+[3166],Enter the model number of the machine,
+[3167],Enter the property number of the machine,
+[3168],Enter the calibration date,
+[3169],The file name for the saved settings,
+[3170],Enter other notes to be saved,
+[3171],Enter the type of the device to be measured,
+[3172],Enter the compensation method for the device to be measured,
+[3173],Enter the feed speed for the measurement,
+[3174],Enter the dwell time for the object at each position,
+[3175],Enter the thermal coefficient of the device to be measured,
+[3176],Select if NDE correction is used,
+[3177],Enter the name and serial number of the instrument used for the measurement,
+[3178],Enter the locations of the axes not used in the calibration,
+[3179],Enter the reference bias of the tool in X direction,
+[3180],Enter the reference bias of the device in X direction,
+[3181],Enter the reference bias of the tool in Y direction,
+[3182],Enter the reference bias of the tool in Y direction,
+[3183],Enter the reference bias of the device in Y direction,
+[3184],Enter the reference bias of the device in Y direction,
+[3185],Enter the coordinate of the material sensor 1,
+[3186],Enter the coordinate of the material sensor 2,
+[3187],Enter the coordinate of the air sensor,
+[3188],Enter the coordinate of the material sensor 3,
+[3189],The update time of the sensor data in the compensation program,
+[3190],Enter the maximum difference between the environmental temperature and 20 degree C during the measurement,
+[3191],Enter the maximum error of the material sensors used during the measurement,
+[3192],The maximum length of the measurement,
+[3193],The error range of the instruments used in the measurement,
+[3194],Enter the estimated error from the optic alignment in the measurement,
+[3195],Enter the uncertainty of the expansion coefficient in the measurement,
+[3196],Enter the estimated error from the change of the environmental parameters in the measurement,
+[3197],Select if the instruments used in the measurement are calibrated,
+[3198],Select the serial number of the E1735A for the second axis,
+[3199],Select the serial number of the E1736A for the second axis,
+[3200],Select the serial number of the E1735A for the first axis,
+[3201],Select the serial number of the E1736A for the first axis,
+[3202],Display help information when the mouse cursor moves over an item,
+[3203],Leave extra margin on selected side of paper,
+
+[4001],Click to start linear measurement |Calibrate the accuracy of a linear guide,クリックすると「長さ」測定が始まります| 位置決め評価
+[4002],Click to start rotary measurement |Calibrate the accuracy of a rotary stage,クリックすると「角度位置」測定が始まります|角度光学系と角度位置測定キットを使用します
+[4003],Click to start angular measurement |Measure pitch or yaw along a linear path,クリックすると「角度」測定が始まります| ピッチ/ヨーの測定
+[4004],Click to start way straightness measurement |Use angular optics to make straightness measurements at multiple points along a machine part such as a milling machine way.,クリックすると「進路真直度」測定が始まります|角度光学系とフット・スペーシングキットを使用します
+[4005],Click to start time base linear measurement |Measure linear displacement over time,クリックすると「長さのタイムベース」測定が始まります|長さの時間軸測定
+[4006],Click to start straightness measurement |Use straightness optics to determine if a machine痴 moveable part is moving along a straight path,クリックすると「真直度」測定が始まります|真直度測定キットを使用します
+[4007],"Click to start diagonal measurement |Use for volumetric analysis, as described in ANSI standard B5.54",クリックすると「ダイアゴナル（対角線）」測定が始まります|長さ光学系とダイアゴナル測定キットを使用します
+[4008],"Click to start squareness measurement |Use to determine if two machine axes are oriented, and move, perpendicular to each other",クリックすると「直角度」測定が始まります|真直度光学系とオプティカルスクエアを使用します
+[4009],Click to start the parallelism measurement |Use to determine if two machine axes move parallel to each other,クリックすると「平行度」測定が始まります|真直度光学系を使用します
+[4010],Click to start the flatness measurement |Measure the flatness error of a surface plate,クリックすると「平面度」測定が始まります|角度光学系と平面度測定キットを使用します
+[4011],Click to start dual axis measurement |Calibrate the linear position accuracy of two linear guide synchronously,クリックすると「長さ２軸」測定が始まります|２組のレーザーを使用します
+[4012],Click to start time base angular measurement |Measure angle value over time,クリックすると「角度のタイムベース」測定が始まります|ピッチ/ヨーの時間軸測定
+[4013],Click to start time base straightness measurement |Measurement straightness value over time,クリックすると「真直度のタイムベース」測定が始まります|真直度の時間軸測定
+[4014],Setup basic options,基本的な設定のセットアップ
+[4015],Open the help file,
+[4016],Exit the program,プログラムを終了します
+[4017],Open an existing file |Start or review a measurement using saved data,既存の測定ファイルを開きます|測定結果が表示されます
+[4018],Display one less decimal place,小数点以下の表示を減らします
+[4019],Display one more decimal place,小数点以下の表示を増やします
+[4020],Change the sign of upper display number,符号反転
+[4021],Change the sign of lower display number,符号反転
+[4022],The status of the measurement module of second axis |Click to enter hardware setup menu,
+[4023],The software is running in demo mode |Click to enter hardware setup menu,
+[4024],The status of the laser head |Click to enter the hardware setup menu,レーザーヘッドのステータス|クリックでシステム設定メニューが開きます
+[4025],The status of the second laser head |Click to enter the hardware setup menu,
+[4026],The status of the single axis measurement module |Click to enter the hardware setup menu,アクシスモジュールのステータス|クリックでシステム設定メニューが開きます
+[4027],The status of the sensor interface card |Click to enter the hardware setup menu,センサーハブのステータス|クリックでシステム設定メニューが開きます
+[4028],The communication status of the single axis measurement module |Click to enter the hardware setup menu,
+[4029],Display the line correspond to the number on the right side as the first line,
+[4030],Select the program to use for the download operation,
+[4031],Run the selected download program,
+[4032],Increase font size,フォントの拡大
+[4033],Decrease font size,フォントの縮小
+[4034],Display the graph symmetrically,縦軸を上下対象にします
+[4035],Display the graph,表示を元にもどします
+[4036],"Enlarge the designated area |Press left button of the mouse, drag the pointer, and release the button",選択した部分を拡大|マウスの左ボタンを押してドラッグ
+[4037],Zoom in,拡大
+[4038],Zoom out,縮小
+[4039],Copy the current data or graph to the clipboard,表示されているグラフ/データをクリップボードにコピーします
+[4040],The status of the measurement,測定中
+[4041],The progress of the measurement,進捗状況(%)
+[4042],Compensation table |Double click to enlarge or reduce,補正テーブル
+[4043],Machine information |Double click to enter machine information menu,機械情報|ダブルクリックで入力画面が開きます
+[4044],Measurement setup |Double click to  enter measurement setup interface,測定セットアップ表示|ダブルクリックで設定画面が開きます
+[4045],Measurement results |Double click to enter the data analysis menu,測定統計データ表示|ダブルクリックでデータ解析メニューが開きます
+[4046],Save measurement settings or data,測定結果/設定を保存します
+[4047],Print measurement results or report,測定結果をプリントします
+[4048],Start or continue the measurement,測定開始/再開
+[4049],Record measurement data manually,手動トリガ
+[4050],Pause the measurement,測定中断
+[4051],Display help information,
+[4052],Stop the measurement,測定を終了します
+[4053],Erase the measurement data,測定データを削除します
+[4054],"Reset laser data, erase error mark",表示値リセット エラークリア
+[4055],"Input measurement settings, measurement data or machine information",保存データ/設定の読み出し
+[4056],Set up parameters,セットアップメニューを開く
+[4057],Hardware information of the connected equipment,
+[4058],The information of the connection and distribution of the sensors,接続されているセンサーの情報
+[4059],The list of the target positions,
+[4060],The list of the target positions of the second axis,
+i

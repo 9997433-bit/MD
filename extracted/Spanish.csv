@@ -1,0 +1,708 @@
+Keysight E1733A String Table
+Spanish
+
+[1],Linear,Lineal
+[2],Angular,Angular
+[3],Straightness,Rectitud
+[4],Squareness,Perpendic.
+[5],Parallelism,Paralelismo
+[6],Rotary,Giro
+[7],Way Straightness,Rectitud de Trayecto
+[8],Flatness,Planitud
+[9],Diagonal,Diagonal
+[10],Lin. Time Base,Lin. En Base a Tiempo
+[11],Ang. Time Base,Ang. En Base a Tiempo
+[12],Str. Time Base,Rect.En Base a Tiempo
+[13],Lin. Dual Axes,Lin. Dos Ejes
+[14],Start,Inicio
+[15],Max,Máx.
+[16],Min,Mín.
+[17],Mean,Media
+[18],End,Fin
+[19],Location,Ubicación
+[20],T start,T inicio
+[21],T end,T fin
+[22],Auto,Auto
+[23],Manual,Manual
+[24],Metric,Métricas
+[25],English,Inglesas
+[26],Bidirectional,Bidireccional
+[27],Unidirectional,Unidireccional
+[28],Pilgrim,Aleatorio
+[29],Spindle,Cabezal
+[30],Coplanar,Coplanar
+[31],Short Range,Rango corto
+[32],Long Range,Rango largo
+[33],Encoder,Encoder
+[34],Up/Down,Arriba/Abajo
+[35],Position,Posición
+[36],Total Time,Tiempo total
+[37],Total Points,T N. De Puntos
+[38],User,Usuario
+[39],Repeatability,Repetibilidad
+[40],Mean Reversal Error,Error med. rec. vuelta
+[41],Sys. Dev. Pos.,Pos.dev.sis.
+[42],Raw Accuracy,Precisión recorrido
+[43],Raw Repeatability,Repetibilidad recorrido
+[44],Max Reversal Error,Error máx. rec. vuelta
+[45],6 Sigma (total pop.),6 Sigma (total pobl.)
+[46],Slope,Pendnte
+[47],Least Squares,Mínimos cuadr.
+[48],End Points,Puntos finales
+[49],Forward Data Runs,Datos recorridos ida
+[50],Forward Mean,Media recorr. ida
+[51],Forward +/-n sigma,Recorr. ida +-n-sigma
+[52],Reverse Data Runs,Datos recorridos vuelta
+[53],Reverse Mean,Media recorr. vuelta
+[54],Reverse +/-n sigma,Recorr. vuelta +-n-sigma
+[55],Combined Mean,Media combinada
+[56],Combined +/-n sigma,Combinado +- n-sigma
+[57],Remove Raw Offset,Suprimir Offset recorrido
+[58],Mean Bidir. Pos. Dev.,Mean Bidir. Pos. Dev.
+[59],Backlash / pt.,Efecto react. / punto
+[60],Laser,LÁSER
+[61],Error,Error
+[62],Target,Posición
+[63],Rotary,Giro
+[64],Angle,Ángulo
+[65],Time,Hora
+[66],Velocity,Veloc.
+[67],Station,Estación
+[68],Correction,Corrección
+[69],Absolute,Absoluto
+[70],Incremental,Incremental
+[71],Algebraic,algebraica
+[72],Calibrator,calibrador
+[73],Acceleration,Aceleración
+[74],Statistics,estadísticas
+[75],Graph,Gráf.
+[76],Data,Data
+[77],Comp.,Comp.
+[78],Env.,Amb.
+[79],All,Todos
+[80],No,No
+[81],Yes,Si
+[82],Moody Analyzed,Analizado Moody
+[83],Licensed E1735A,Licensed E1735A
+[84],Keyboard Error,Error por teclado
+[85],Measurement Type,Tipo de medición
+[86],Current Date,Fecha actual
+[87],Error,Error
+[88],Standards,Normas
+[89],Modified,modificado
+[90],User Defined,Def. por usuario
+[91],Auto Reset After Error,Auto Reset Tras Error
+[92],Beep on Record,Bip en registro
+[93],Same As Axis 1,Igual que Eje 1
+[94],Auto Time Scale,Escala Auto Time 
+[95],Stop On Error,Parar con Error
+[96],Limit Lines,Límite Líneas
+[97],User Scale,Escala de Usuario
+[98],Legend,LEYENDA
+[99],Targets in Row,Puntos en fila
+[100],Goto Row,Ir a la Fila
+[101],Max. Elevation,Max. elevación
+[102],Air Pressure,Presión aire
+[103],Air Temperature,Temperatura aire
+[104],Relative Humidity,Humedad relativa
+[105],Material Temp. 1,Material Temp. 1
+[106],Material Temp. 2,Material Temp. 2
+[107],Material Temp. 3,Material Temp. 3
+[108],Update Method,Método actualización
+[109],Environmental Units,Unidades ambiente
+[110],Environmental Compensation,Compensación del ambiente
+[111],Laser Wavelength,Longitud de onda láser
+[112],Wavelength Compensation,Compensación Longitud de onda
+[113],Total Compensation Number,Número de compensación total
+[114],Travel,Recorrido
+[115],Measurement Axis,Eje de medición
+[116],Travel Mode,Modo recorrido
+[117],No. of Cycles,N?de ciclos
+[118],Direction,Direccion
+[119],Targets,Posiciones
+[120],Start Position,Posición inicial
+[121],End Position,Posición final
+[122],No. of Points,N?de puntos
+[123],Interval,Intervalo
+[124],Foot Spacing,Espacio patr.
+[125],Way Length,Longitud trayecto
+[126],# of Stations,N?estaciones
+[127],Analyze Data,Analizar datos
+[128],Material Compensation,Compensación del material
+[129],Expans. Coeff.,Coef. exp.
+[130],Units,Unidades
+[131],Error Units,Unid. error
+[132],Position Units,Unidades pos.
+[133],Display Resolution,Resolución Display
+[134],Measurement Units,Unidades de medida
+[135],Other,Otros
+[136],Rotary Resolution,Resolución giro
+[137],Optical Square,Escuadra óptico
+[138],Averaging,Promediado
+[139],Calibration Factor,Factor cal.
+[140],Dead Path,Zona muerta
+[141],Preset,Preest.
+[142],Trigger,Disparo
+[143],Encoder Resolution,Resol. encoder
+[144],Trigger Type,Tipo disparo
+[145],Target Window,Vent. valor. def.
+[146],Trigger Dwell,Deten. disparo
+[147],Test Conditions,Condiciones del test
+[148],Temperature Sensor,Sensor de Temperatura
+[149],Material Sensor #1,Sensor de Material  #1
+[150],Material Sensor #2,Sensor de Material  #2
+[151],Material Sensor #3,Sensor de Material  #3
+[152],Air Sensor,Sensor de Aire
+[153],Test Parameters,Test Parametros
+[154],Type of Scale,Tipo de regla
+[155],Compensation Used,Compensacion Usada
+[156],Feed Rate,Feed Rate
+[157],NDE Correction (yes or no),NDE Correccion (si o no)
+[158],Dwell Time at Each Target Position,Dwell Time en cada posición
+[159],Measuring Information,Información de Medición
+[160],Measuring Instrument and Serial No.,Equipo de Medición y No de serie.
+[161],Name of Inspector,Verificador
+[162],Date of Test,Fecha del Test
+[163],Machine Name,Nombre máq.
+[164],Machine Type,Tipo de Máquina
+[165],Machine Serial No.,No.Serie de Máquina
+[166],Machine Name; Type and Serial No.,
+[167],Test Location,Lugar del Test
+[168],Position of axes not under test,Posicion de ejes fuera del test
+[169],Coefficient of Thermal Expansion of Scale,Coeficiente de Expansión de la Regla
+[170],Offset to Tool Reference (X/Y/Z),Offset de la Ref. de Herramienta (X/Y/Z)
+[171],Offset to Workpiece Reference (X/Y/Z),Offset a la referencia de la pieza (X/Y/Z)
+[172],Stop Timer,Deten. contad.
+[173],Start Timer,Inic. contad.
+[174],Timer,Temporizador
+[175],No. of Points,N?de puntos
+[176],Total Time,Tiempo total
+[177],Coverage Factor,
+[178],Numerical Analysis,Análisis numérico
+[179],Graphic Analysis,Análisis Gráfico
+[180],Machine Model No.,N. de Modelo de Máquina.
+[181],Asset No.,N?producto
+[182],Filename,Nombre archivo
+[183],Comments,Comentarios
+[184],End Point Time Out,
+[185],Time Base,BASE DE TIEMPOS
+[186],Default Path,Ruta por Defecto
+[187],Language,Lenguaje
+[188],System,Sistema
+[189],Error Sign Convention,Convención del signo
+[190],Machine Zero Point,Pto cero máquina
+[191],Machine Units,Unidades máquina
+[192],Measurement Setup,Configurar medición
+[193],Machine Information,Información de la máquina
+[194],ISO Information,ISO Informacion
+[195],Data Analysis,Análisis de Datos
+[196],Axis:,Eje
+[197],Deviation,Desviación
+[198],Port,Puerta
+[199],Sensor,Sensor
+[200],Description,Descripción
+[201],Used for,Usado para
+[202],USB Axis Module,USB Módulo Eje
+[203],Sensor Hub,Sensor Hub
+[204],Material Sensor,Sensor Material
+[205],Air Sensor,Sensor Aire
+[206],Serial No.,N?de serie
+[207],Hardware,Hardware
+[208],Test Record Button,Prueba del botón Registrar
+[209],Hardware Not Ready,Hardware No Listo
+[210],No License,No Licencia
+[211],Laser Off or Warming Up,Láser desactivado o calentándose
+[212],No Return Beam,No Retorno del Haz
+[213],Reset Position,Reset posición
+[214],Optics Out Of Range,Óptica fuera del rango
+[215],Nameplate,Placa patrón
+[216],Step 1: Reset laser and rotary at 0 arcdeg,Step 1: Reset laser y rotar a 0 arcdeg
+[217],Step 2: Sample between -3 and -4 arcdeg,Step 2: Muestra entre -3 y -4 arcdeg
+[218],Step 3: Sample between +3 and +4 arcdeg,Step 3: Muestra entre +3 y +4 arcdeg
+[219],Agilent Technologies Inc.,Agilent Technologies Inc.
+[220],Revision,Revision
+[221],Dimensional Metrology Software,Software de Medición Dimensional
+[222],All Rights Reserved,Todos los derechos reservados
+[223],Open,Abrir
+[224],Setup,Configuración
+[225],Start,Inicio
+[226],Reset,Reset
+[227],Continue,Continuar
+[228],Stop,Stop
+[229],Save,Salvar
+[230],Print,Imprimir
+[231],Record,Registrar
+[232],Erase,Borrar
+[233],Help,Ayuda
+[234],Exit,Salir
+[235],OK,Aceptar
+[236],Cancel,Cancelar
+[237],Calibrate,Calibrar
+[238],Recalculate,Recalcular
+[239],Apply,Aplicar
+[240],Import,Importar
+[241],Setup + Data,Config. + datos
+[242],All Data,Todos
+[243],Last Run,Ultimo Recorrido
+[244],Last Data,Ultimos datos
+[245],Setup Only,Sólo config.
+[246],Raw Data,Raw Data
+[247],Compensation Table,Tabl de Compensación
+[248],Environmental Data,Datos del ambiente
+[249],Setup Printer,Conf. Impresora
+[250],Report,Informe
+[251],Collecting data . . .,Captando datos . . .
+[252],Text File,Text File
+[253],CSV (comma delimited),CSV (comma delimited)
+[254],Plus/Minus,Más/Menos
+[255],Closure,Cierre
+[256],Elevation,Elevación
+[257],Data Point,Punto
+[258],Combined,Combinado
+[259],Forward,Ida
+[260],Reverse,Vuelta
+[261],Warning,Precaución
+[262],Tested Axis,Eje Analizado
+[263],Axis Deviation,Desviación del Eje
+[264],Reversal Value,recor. de vuelta
+[265],Mean Reversal Value,Media valor rec. vuelta
+[266],Range Mean Bidirectional Positional Deviation,
+[267],Systematic Positional Deviation,Desviación Sistemática de Posicionado
+[268],Repeatability of Positioning,Repetitibilidad de posic.Repetitibilidad de posic.
+[269],Accuracy,Precisión
+[270],Unidirectional,Unidireccional
+[271],Bidirectional,Bidireccional
+[272],Not Applicable,No Aplica
+[273],Target Position,Posición objetivo
+[274],Approach Direction,Dirección
+[275],Positional Deviation,estándar Sj
+[276],Mean Unidir. Pos. Dev.,Dev. Pos. Unid. Media
+[277],Est. of Standard Uncertainty,Desviación
+[278],Unidir. Repeatability,Unidir. Repetibilidad
+[279],Bidir. Repeatability,Bidir. Repetibilidad
+[280],(Used for NDE Correction),
+[281],Data not saved,Datos no salvados
+[282],Measurement not completed,Medición Incompleta
+[283],Reset position?,Reset posición?
+[284],Measurement completed,Medición Completada
+[285],Measurement terminated,Medición Finalizada
+[286],Measurement completed with %d data lost,Medición completada pero con %d datos perdidos
+[287],Measurement of current axis completed,Medición del eje completada
+[288],Cannot open file,No puede abrir archivo
+[289],Cannot save file,No puede salvar archivo
+[290],%s / %s must be an integer,%s / %s: debe ser entero
+[291],Inconsistent values,valores Inconsistentes
+[292],Invalid entry,Entrada Invalida
+[293],No. of cycles doesn't comply ISO standard. Print?,No. of cycles doesn't comply ISO standard.¿Imprimir?
+[294],All Files,Tosdos los archivos
+[295],Legacy Files,Legacy Files
+[296],Firmware,Firmware
+[297],Driver,Driver
+[298],Library,Libreria
+[299],User Calibration,Calibracion de Usuario
+[300],Shift,Cambio
+[301],Modify data by user?,
+[302],Optics,Óptica
+[303],Default,predeterminado
+[304],Saved,guardado
+[305],Average Material Temp.,Temp. media material
+[306],Current Axis,Eje actual
+[307],Extended Resolution,Resolución ampliada
+[308],Data Lost,Datos perdidos
+[309],Information,Información
+[310],Keyboard Position,Posic. por teclado
+[311],Outside Target Window,Fuera de ventana de valores definidos
+[312],Inside Target Window,En ventana de valores definidos
+[313],Target List,Lista valores def.
+[314],Interpolate,Interpolar
+[315],Compensation Values,Valores de compensación
+[316],None,ninguno
+[317],Already running [%s] software,El programa de [%s] aún se est?ejecutando
+[318],Offline Mode,Modo Offline
+[319],Main Menu,Men?pral.
+[320],Numeric Display,Display numérico
+[321],Default Display Mode,Display de Men?defecto
+[322],Advanced Options,Opciones avanzadas
+[323],Pos. Uncertnty,Incertidumbre pos.
+[324],Sorted by position number,Ordenado por nº posición
+[325],Sorted by run number,Ordenado por nº recorrido
+[326],Sorted by line number,Ordenados por nº de línea
+[327],Number of total data pairs,Nº pares de datos totales
+[328],Number of total data runs,Nº datos recorridos totales
+[329],Axis 2 Data,Datos eje 2
+[330],Out of spec,Fuera espec.
+[331],Target Value,Valor definido
+[332],Error Value,Valor de error
+[333],Pos #,Nº pos.
+[334],Run #,Nº rec.
+[335],Line #,Línea Nº
+[336],Point #,N?punto
+[337],Position,Posición
+[338],Coefficient of Thermal Expansion,
+[339],Compensation Routine,
+[340],Update Each %s ,
+[341],Equation,
+[342],Parameter,
+[343],Air Conditions Used for Compensation of Laser Interferometer,
+[344],Positioning Measurement,
+[345],Estimation of Measurement Uncertainty,
+[346],Laser Interferometer Measurement,
+[347],Simplified Method,
+[348],Average Industial Conditions,
+[349],Improved Industrial Conditions,
+[350],Contributors,
+[351],Device,
+[352],Measurement Length,
+[353],Error Range,
+[354],Alignment,
+[355],Beam Alignment,
+[356],Misalignment,
+[357],Compensation of Workpiece Temperature,
+[358],Thermal Expansion Coefficient,
+[359],Difference to 20C,
+[360],Temperature Measurement,
+[361],Maximum,
+[362],Machine Tool,
+[363],Zero,
+[364],Included in U(%s),
+[365],Environmental Variation,
+[366],Correction of R Values Due to U(EVE),
+[367],Correction of Repeatability Values,
+[368],According to Table,
+[369],Typical Results,
+[370],At Target %s,
+[371],For R According to Table,
+[372],Corrected,
+[373],Uncorrected,
+[374],Assumed,
+[375],Calibrated Measuring Device,
+[376],Uncertainty of Expansion Coefficient,
+[377],Unit,
+[378],Amplitude,
+[379],Frequency,
+[380],Show Legend,Mostrar leyenda
+[381],Show Machine Info.,Mostrar info. máquina
+[382],Merge Data,Fusionar datos
+[383],Can't combine different data types or target lists,No se pueden combinar diferentes tipos de datos o listas de valores.
+[384],Synchronized Operation,
+[385],Demo Mode,
+[386],Rotary Table,
+[387],Printer,
+[388],Copies,
+[389],Orientation,
+[390],Portrait,
+[391],Landscape,
+[392],Download,
+[393],User defined download program,
+[394],File not found,No se ha encontrado el archivo
+[395],Show Hint,
+[396],Extra Margin,
+[397],Left,
+[398],Top,
+[399],Right,
+[400],Bottom,
+[401],Calibration Due,
+[402],Calibration Expired,
+[403],Calibration Period,
+[404],Month,
+[405],Dual Axis,
+[406],Single Axis,
+[407],Hysteresis,
+
+[1001],Install,Instalar
+[1002],[%s] will be installed in the following folder,[%s] se instalar?en la siguiente ubicación
+[1003],[%s] has been successfully installed,[%s] ha sido instalado correctamente
+[1004],Failed to install [%s],Fallo en la instalación [%s]
+[1005],Remove,Borrar
+[1006],Remove all components of [%s],Borrar todos los componentes de [%s]
+[1007],[%s] has been removed,[%s] ha sido eliminado
+[1008],Failed to remove [%s],Fallo al borrar [%s]
+[1009],Reinstall,Reinstalar
+[1010],Please close program [%s] first,Cierre primero el programa [%s]
+[1011],Install Path,Ruta de instalación
+[1012],User Data,Datos del usuario
+[1013],User data will not be deleted,No se borrarán los datos del usuario
+[1014],Agree,OK
+[1015],Do Not Agree,No OK
+[1016],Customize,Personalizar
+[1017],Customize user interface and advanced options of [%s],Personalizar el interface y las opciones avanzadas [%s]
+[1018],Repair,Reparar
+[1019],Repair system settings and reinstall driver,Reparar conf. Y reinstalar el driver
+
+[2001],Existing Calibration,Calibración existente
+[2002],New Calibration,Nueva Calibración
+[2003],Raw Value,
+[2004],Calibrated,Calibrado
+[2005],Reference,Referencia
+[2006],Temperature,temperatura
+[2007],Write Sensor,Escriba el sensor
+[2008],Sensor Calibration,Calibración del sensor
+[2009],Sensor has been updated,Sensor actualizado
+[2010],Discard changes,Descargar cambios
+[2011],Cannot access sensor,
+
+[3001],Laser position,
+[3002],Laser position 2,
+[3003],Error value,
+[3004],Target position,
+[3005],Encoder reading,
+[3006],Rotary table reading,
+[3007],Rotary angle,
+[3008],Elapsed time,
+[3009],Motion velocity,
+[3010],Target position number,
+[3011],Click to change lower display,
+[3012],Click to change upper display,
+[3013],Beam strength 2,
+[3014],beam strength,
+[3015],Simulated laser position,
+[3016],Rotary table status |Click to enter hardware setup menu,
+[3017],Air pressure,
+[3018],Air temperature,
+[3019],Material Temperature 1,
+[3020],Material Temperature 2,
+[3021],Material temperature 3,
+[3022],Air relative humidity,
+[3023],Environmental parameter display area |Double click to enlarge or recover,
+[3024],Measurement graph display area |Double click to enlarge or recover |Drag to change display area,
+[3025],Measurement data display area |Double click to enlarge or recover,
+[3026],Change error value sign,
+[3027],Enter limit line value,
+[3028],Select -> to display limit line,
+[3029],Enter line number |Press the left button to setup it as the first line,
+[3030],Select the display mode of the target position,
+[3031],Enter user defined Y-axis range,
+[3032],Select ->  Display graph,
+[3033],Auto select Y-axis range,
+[3034],Select -> Display according to user defined range,
+[3035],Toolbar,
+[3036],Select environmental parameter units ,
+[3037],"Pressed to display grid lines, released to hide grid lines ",
+[3038],"Pressed to display 3D graph, released to display 2D graph",
+[3039],Select environmental parameter type,
+[3040],Select the axis to be displayed,
+[3041],Select the data type of the time to be displayed,
+[3042],Select the items to be displayed,
+[3043],Enter the measurement point number for the zero position ,
+[3044],Select the conversion method of the error sign,
+[3045],Compensation value calculation method,
+[3046],Select the measurement unit format |It will effect on all the display values,
+[3047],Length value correspond to one machine compensation value,
+[3048],Select compensation table location and generation method,
+[3049],Start position of the compensation table,
+[3050],End position of the compensation table,
+[3051],Interval of the compensation table,
+[3052],Select the expression form of the compensation value |It will affect the sign of the compensation value,
+[3053],Select the calculation methods for the forward and reverse compensation values |Combination: compensation value from the average of the two values |Forward/Reverse: calculate two compensation values separately,
+[3054],Click to enter ISO information menu,
+[3055],Click to enter machine information menu,
+[3056],Click to enter measurement setup menu,
+[3057],Click to enter data analysis menu,
+[3058],Select settings for the measurement |Default: Default for all the settings; suitable for new measurement |Saved: Save measurement and information setting; Suitable for the repeating measurement |Information: Save information settings only; Suitable for measurement for the same machine,
+[3059],Select display language,
+[3060],Click to setup the default path for data files,
+[3061],Select the display method of the interface,
+[3062],Installed certificate,
+[3063],Select to open simulation mode,
+[3064],Select for auto recovery after signal loss,
+[3065],Select to enter demo mode,
+[3066],Select for beep on the data recording,
+[3067],Select for E1736A S/N,
+[3068],Select for E1735A S/N,
+[3069],Select for the second E1735A S/N,
+[3070],"Select for the operation of [Reset], [Start], [Record] and [Stop] applied to both E1735A",
+[3071],Enter the wavelength of the laser head,
+[3072],User calibration value,
+[3073],Optics calibration parameter,
+[3074],Change laser position sign,
+[3075],Air parameter update method |Plug or unplug sensor will change the setting,
+[3076],Select air humidity update method,
+[3077],Select to enter the air humidity manually |Data from air sensor will be ignored,
+[3078],Material temperature update method |Plug or unplug sensor will change the setting,
+[3079],Average of the material temperatures,
+[3080],Compensation number for the laser wavelength in air,
+[3081],Total compensation number including wavelength and expansion compensations,
+[3082],Expansion coefficient of the device under test or lead screw,
+[3083],Repetition number of measurement cycles,
+[3084],The length of the segment from point A to point C,
+[3085],The length of the segment from point A to point G,
+[3086],Diagonal length of the measurement area,
+[3087],Select the name of the axis for the next measurement,
+[3088],Number of stops on each axis,
+[3089],Change the number of stops on AC,
+[3090],Change the number of stops on AG,
+[3091],Select the direction of the measurement on the axis,
+[3092],Enter the foot spacing of the measurement accessory,
+[3093],The length of the guide under test |depends on the number of the stops and the foot spacing  ,
+[3094],Number of stops for the measurement,
+[3095],Distance between the target positions,
+[3096],The first target position,
+[3097],The last target position,
+[3098],Number of target positions in one travel range,
+[3099],Data not available,
+[3100],Select to enable user defined target position,
+[3101],Select measurement travel direction,
+[3102],Select direction and sequence of approaching each target positions,
+[3103],Enter the name of the target axis,
+[3104],Repetition number of the measurement cycles for the second axis,
+[3105],Select direction and sequence of approaching each target position on the second axis,
+[3106],Enter the name of the target axis for the second axis,
+[3107],Delay time of the sampling after the object moves inside the target window ,
+[3108],Enter the resolution of the encoder,
+[3109],Select sampling trigger method,
+[3110],Sampling by time,
+[3111],Enter target window number |Auto sampling happens after the dwell time since the object moves inside of the target window,
+[3112],Select encoder output format,
+[3113],Select the display accuracy of the data |It will affect accuracy of the  data in the data table and the saved file,
+[3114],Select the displayed unit of the error value,
+[3115],Select the displayed unit of the position value,
+[3116],Select the type of the parallelism measurement,
+[3117],Enter the error of the optical square,
+[3118],Enter the value of the dead path,
+[3119],Rotary table resolution,
+[3120],User defined reset position,
+[3121],Select average measurement time |Shorter average time will increase the measurement response speed |Longer average time will reduce the influence of the air turbulence,
+[3122],Select the type of linear measurement optics,
+[3123],Trigger sampling when the object stays in the start or end position for more than specified time ,
+[3124],Allow user to enter target position value when doing manual sampling,
+[3125],Use extended resolution |It will increase measurement accuracy but reduce sampling speed,
+[3126],Target position interval for the second axis,
+[3127],The first target position for the second axis,
+[3128],The last target position for the second axis,
+[3129],The number of the target positions in one travel range for the second axis ,
+[3130],Data not available,
+[3131],Select to enable user defined target position for the second axis,
+[3132],Enter X-axis scale,
+[3133],Enter Y-axis scale,
+[3134],Enter Z-axis scale,
+[3135],Calculated angle Alpha value,
+[3136],Calculated angle Beta value,
+[3137],Calculated diagonal length,
+[3138],Enter sampling time interval,
+[3139],Start sampling when the object passes the designated position (both directions),
+[3140],Select to enable sampling mode,
+[3141],Advanced setup,
+[3142],Stop sampling when the target passes the designated position (both direction),
+[3143],Enter total sampling points,
+[3144],Enter total sampling time,
+[3145],Stop sampling when data is lost,
+[3146],Stop sampling when error occurs,
+[3147],Select the mode of stop sampling,
+[3148],Enter the value of the cover factor,
+[3149],Select the calculation method of the flatness,
+[3150],Select the name of the printer,
+[3151],Enter the number of the copies to be printed,
+[3152],Select the orientation of the print,
+[3153],Select the content of the print,
+[3154],Select the display mode of the environmental parameters,
+[3155],Display data in the graph,
+[3156],Graphical analysis options,
+[3157],Data analysis options,
+[3158],Select to display the slope of the fitting line,
+[3159],Select measurement standard,
+[3160],Unselect to cancel the modification for the standard,
+[3161],Enter the name of the operator for the operation,
+[3162],Enter the location of the measurement,
+[3163],Enter the name of the machine,
+[3164],Enter the type of the machine,
+[3165],Enter the serial number of the machine,
+[3166],Enter the model number of the machine,
+[3167],Enter the property number of the machine,
+[3168],Enter the calibration date,
+[3169],The file name for the saved settings,
+[3170],Enter other notes to be saved,
+[3171],Enter the type of the device to be measured,
+[3172],Enter the compensation method for the device to be measured,
+[3173],Enter the feed speed for the measurement,
+[3174],Enter the dwell time for the object at each position,
+[3175],Enter the thermal coefficient of the device to be measured,
+[3176],Select if NDE correction is used,
+[3177],Enter the name and serial number of the instrument used for the measurement,
+[3178],Enter the locations of the axes not used in the calibration,
+[3179],Enter the reference bias of the tool in X direction,
+[3180],Enter the reference bias of the device in X direction,
+[3181],Enter the reference bias of the tool in Y direction,
+[3182],Enter the reference bias of the tool in Y direction,
+[3183],Enter the reference bias of the device in Y direction,
+[3184],Enter the reference bias of the device in Y direction,
+[3185],Enter the coordinate of the material sensor 1,
+[3186],Enter the coordinate of the material sensor 2,
+[3187],Enter the coordinate of the air sensor,
+[3188],Enter the coordinate of the material sensor 3,
+[3189],The update time of the sensor data in the compensation program,
+[3190],Enter the maximum difference between the environmental temperature and 20 degree C during the measurement,
+[3191],Enter the maximum error of the material sensors used during the measurement,
+[3192],The maximum length of the measurement,
+[3193],The error range of the instruments used in the measurement,
+[3194],Enter the estimated error from the optic alignment in the measurement,
+[3195],Enter the uncertainty of the expansion coefficient in the measurement,
+[3196],Enter the estimated error from the change of the environmental parameters in the measurement,
+[3197],Select if the instruments used in the measurement are calibrated,
+[3198],Select the serial number of the E1735A for the second axis,
+[3199],Select the serial number of the E1736A for the second axis,
+[3200],Select the serial number of the E1735A for the first axis,
+[3201],Select the serial number of the E1736A for the first axis,
+[3202],Display help information when the mouse cursor moves over an item,
+[3203],Leave extra margin on selected side of paper,
+
+[4001],Click to start linear measurement |Calibrate the accuracy of a linear guide,
+[4002],Click to start rotary measurement |Calibrate the accuracy of a rotary stage,
+[4003],Click to start angular measurement |Measure pitch or yaw along a linear path,
+[4004],Click to start way straightness measurement |Use angular optics to make straightness measurements at multiple points along a machine part such as a milling machine way.,
+[4005],Click to start time base linear measurement |Measure linear displacement over time,
+[4006],Click to start straightness measurement |Use straightness optics to determine if a machine’s moveable part is moving along a straight path,
+[4007],"Click to start diagonal measurement |Use for volumetric analysis, as described in ANSI standard B5.54",
+[4008],"Click to start squareness measurement |Use to determine if two machine axes are oriented, and move, perpendicular to each other",
+[4009],Click to start the parallelism measurement |Use to determine if two machine axes move parallel to each other,
+[4010],Click to start the flatness measurement |Measure the flatness error of a surface plate,
+[4011],Click to start dual axis measurement |Calibrate the linear position accuracy of two linear guide synchronously,
+[4012],Click to start time base angular measurement |Measure angle value over time,
+[4013],Click to start time base straightness measurement |Measurement straightness value over time,
+[4014],Setup basic options,
+[4015],Open the help file,
+[4016],Exit the program,
+[4017],Open an existing file |Start or review a measurement using saved data,
+[4018],Display one less decimal place,
+[4019],Display one more decimal place,
+[4020],Change the sign of upper display number,
+[4021],Change the sign of lower display number,
+[4022],The status of the measurement module of second axis |Click to enter hardware setup menu,
+[4023],The software is running in demo mode |Click to enter hardware setup menu,
+[4024],The status of the laser head |Click to enter the hardware setup menu,
+[4025],The status of the second laser head |Click to enter the hardware setup menu,
+[4026],The status of the single axis measurement module |Click to enter the hardware setup menu,
+[4027],The status of the sensor interface card |Click to enter the hardware setup menu,
+[4028],The communication status of the single axis measurement module |Click to enter the hardware setup menu,
+[4029],Display the line correspond to the number on the right side as the first line,
+[4030],Select the program to use for the download operation,
+[4031],Run the selected download program,
+[4032],Increase font size,
+[4033],Decrease font size,
+[4034],Display the graph symmetrically,
+[4035],Display the graph,
+[4036],"Enlarge the designated area |Press left button of the mouse, drag the pointer, and release the button",
+[4037],Zoom in,
+[4038],Zoom out,
+[4039],Copy the current data or graph to the clipboard,
+[4040],The status of the measurement,
+[4041],The progress of the measurement,
+[4042],Compensation table |Double click to enlarge or reduce,
+[4043],Machine information |Double click to enter machine information menu,
+[4044],Measurement setup |Double click to  enter measurement setup interface,
+[4045],Measurement results |Double click to enter the data analysis menu,
+[4046],Save measurement settings or data,
+[4047],Print measurement results or report,
+[4048],Start or continue the measurement,
+[4049],Record measurement data manually,
+[4050],Pause the measurement,
+[4051],Display help information,
+[4052],Stop the measurement,
+[4053],Erase the measurement data,
+[4054],"Reset laser data, erase error mark",
+[4055],"Input measurement settings, measurement data or machine information",
+[4056],Set up parameters,
+[4057],Hardware information of the connected equipment,
+[4058],The information of the connection and distribution of the sensors,
+[4059],The list of the target positions,
+[4060],The list of the target positions of the second axis,
+e                                                                          

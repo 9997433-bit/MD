@@ -1,0 +1,55 @@
+;; ComDrv64.inf
+
+[Version]
+Signature="$WINDOWS NT$"
+Provider=%ProviderName%
+DriverVer=07/23/2014, 3.0.1.2
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+CatalogFile.NTAMD64=ComDrv64.cat
+
+[SourceDisksNames]
+1 = "Install Disk",Disk1,,
+
+[SourceDisksFiles]
+ComDrv64.sys = 1,,
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%Keysight.Name%=Keysight,NTAMD64
+
+[Keysight.NTAMD64]
+%AE1735A.Name%=ComDrv64_DDI.NT, USB\VID_0957&PID_3518
+%AE1736A.Name%=ComDrv64_DDI.NT, USB\VID_0957&PID_3618
+
+;-----------------------------------------------------------------
+
+[ComDrv64_DDI.NT]
+CopyFiles=ComDrv64_Files_Driver
+
+[ComDrv64_Files_Driver]
+ComDrv64.sys
+
+[ComDrv64_DDI.NT.Services]
+Addservice = ComDrv64, 0x00000002, ComDrv64_AddService
+
+[ComDrv64_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ComDrv64.sys
+
+;----------------------------------------------------------------
+
+[Strings]
+ProviderName="Keysight Technologies, Inc."
+SvcDesc="Common USB Data Device"
+AE1735A.Name="E1735A USB Axis Module"
+AE1736A.Name="E1736A USB Sensor Hub"
+Keysight.Name="Keysight Technologies"

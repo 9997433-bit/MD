@@ -58,9 +58,9 @@
       "csv_id_range": "49-56, 57, 59",
       "description": "图形分析：正向/反向曲线、Backlash/pt、Remove Raw Offset",
       "suggested_prefix": "ANA-E1-STR-RUNS-*",
-      "status": "missing",
+      "status": "covered",
       "boundary": "remote_h_comprise_bits_unmapped",
-      "remote_h_candidates": ["ANASETUP_ANAGRAPH_COMPRISE=68"]
+      "ledger_entries_prefix": "ANA-E1-GRAPH-*"
     },
     {
       "block": "ACQ-TRIG-PARAMS",
@@ -92,18 +92,9 @@
       "csv_id_range": "147-171",
       "description": "ISO Information 报告字段（检验员、机床信息、传感器坐标等）",
       "suggested_prefix": "ANA-E1-STD-ISOFIELD-*",
-      "status": "missing",
+      "status": "covered",
       "boundary": "remote_h_constant_exists",
-      "remote_h_anchors": [
-        "ISOSETUP_MATSEN1_ITEMTEXT=104",
-        "ISOSETUP_MATSEN2_ITEMTEXT=105",
-        "ISOSETUP_MATSEN3_ITEMTEXT=107",
-        "ISOSETUP_ATSEN_ITEMTEXT=106",
-        "ISOSETUP_COMPUSED_CHOOSING=92",
-        "ISOSETUP_SCALETEMPCOEF_ITEMTEXT=89",
-        "ISOSETUP_PIECEX_ITEMTEXT=101",
-        "ISOSETUP_TOOLZ_ITEMTEXT=100"
-      ]
+      "ledger_entries_prefix": "ANA-E1-STD-ISOFIELD-*"
     }
   ],
   "top_priority_candidates": [

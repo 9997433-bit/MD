@@ -1,0 +1,708 @@
+Keysight E1733A String Table
+SimpChn
+
+[1],Linear,线性
+[2],Angular,角度
+[3],Straightness,直线度
+[4],Squareness,垂直度
+[5],Parallelism,平行度
+[6],Rotary,旋转
+[7],Way Straightness,导轨直线度
+[8],Flatness,平面度
+[9],Diagonal,对角线
+[10],Lin. Time Base,线性时基
+[11],Ang. Time Base,角度时基
+[12],Str. Time Base,直线度时基
+[13],Lin. Dual Axes,线性双轴
+[14],Start,起点
+[15],Max,最大
+[16],Min,最小
+[17],Mean,平均
+[18],End,终点
+[19],Location,位置
+[20],T start,开始温度
+[21],T end,结束温度
+[22],Auto,自动
+[23],Manual,手动
+[24],Metric,公制
+[25],English,英制
+[26],Bidirectional,双向
+[27],Unidirectional,单向
+[28],Pilgrim,阶梯循环
+[29],Spindle,主轴
+[30],Coplanar,共平面
+[31],Short Range,短量程
+[32],Long Range,长量程
+[33],Encoder,编码器
+[34],Up/Down,上/下
+[35],Position,位置
+[36],Total Time,总时间
+[37],Total Points,总点数
+[38],User,用户
+[39],Repeatability,重复性
+[40],Mean Reversal Error,平均反向差值
+[41],Sys. Dev. Pos.,定位系统偏差
+[42],Raw Accuracy,原始精度
+[43],Raw Repeatability,原始重复性
+[44],Max Reversal Error,最大反向误差
+[45],6 Sigma (total pop.),6 Sigma (全体)
+[46],Slope,斜率
+[47],Least Squares,最小二乘法
+[48],End Points,端点法
+[49],Forward Data Runs,正向数据
+[50],Forward Mean,正向平均值
+[51],Forward +/-n sigma,正向 ±n*sigma
+[52],Reverse Data Runs,反向数据
+[53],Reverse Mean,反向平均值
+[54],Reverse +/-n sigma,反向 ±n*sigma
+[55],Combined Mean,组合平均
+[56],Combined +/-n sigma,组合±n-sigma
+[57],Remove Raw Offset,去除原始偏移
+[58],Mean Bidir. Pos. Dev.,双向平均位置偏差
+[59],Backlash / pt.,间隙/点
+[60],Laser,激光
+[61],Error,误差
+[62],Target,目标
+[63],Rotary,转台
+[64],Angle,角度
+[65],Time,时间
+[66],Velocity,速度
+[67],Station,站点
+[68],Correction,修正
+[69],Absolute,绝对
+[70],Incremental,增量
+[71],Algebraic,几何
+[72],Calibrator,校准
+[73],Acceleration,加速度
+[74],Statistics,统计
+[75],Graph,图解
+[76],Data,数据
+[77],Comp.,补偿
+[78],Env.,环境
+[79],All,全
+[80],No,否
+[81],Yes,是
+[82],Moody Analyzed,穆迪分析
+[83],Licensed E1735A,已授权的E1735A
+[84],Keyboard Error,键入误差值
+[85],Measurement Type,测量类型
+[86],Current Date,当前日期
+[87],Error,误差
+[88],Standards,标准
+[89],Modified,修改
+[90],User Defined,用户定义
+[91],Auto Reset After Error,自动复位
+[92],Beep on Record,记录时鸣响
+[93],Same As Axis 1,与轴1相同
+[94],Auto Time Scale,自动时间坐标
+[95],Stop On Error,出错停止
+[96],Limit Lines,限制线
+[97],User Scale,用户比例
+[98],Legend,图例
+[99],Targets in Row,目标在竖行
+[100],Goto Row,跳转到行
+[101],Max. Elevation,最大高差
+[102],Air Pressure,气压
+[103],Air Temperature,气温
+[104],Relative Humidity,相对湿度
+[105],Material Temp. 1,材料温度1
+[106],Material Temp. 2,材料温度2
+[107],Material Temp. 3,材料温度3
+[108],Update Method,更新方式
+[109],Environmental Units,环境参数单位
+[110],Environmental Compensation,环境补偿
+[111],Laser Wavelength,激光波长
+[112],Wavelength Compensation,波长补偿
+[113],Total Compensation Number,总补偿值
+[114],Travel,行程
+[115],Measurement Axis,测量轴
+[116],Travel Mode,行进模式
+[117],No. of Cycles,重复次数
+[118],Direction,方向
+[119],Targets,目标
+[120],Start Position,起始位置
+[121],End Position,终点位置
+[122],No. of Points,测量点数
+[123],Interval,间隔
+[124],Foot Spacing,脚间距
+[125],Way Length,导轨长度
+[126],# of Stations,站点数
+[127],Analyze Data,分析数据
+[128],Material Compensation,材料修正
+[129],Expans. Coeff.,膨胀系数
+[130],Units,单位
+[131],Error Units,误差单位
+[132],Position Units,位置单位
+[133],Display Resolution,显示分辨率
+[134],Measurement Units,测量单位
+[135],Other,其它
+[136],Rotary Resolution,转台分辨率
+[137],Optical Square,光学直角镜
+[138],Averaging,平均化
+[139],Calibration Factor,校准因数
+[140],Dead Path,死径
+[141],Preset,预设
+[142],Trigger,触发装置
+[143],Encoder Resolution,编码器分辨率
+[144],Trigger Type,触发方式
+[145],Target Window,目标窗口
+[146],Trigger Dwell,触发停留
+[147],Test Conditions,检验条件
+[148],Temperature Sensor,温度传感器
+[149],Material Sensor #1,材料传感器#1
+[150],Material Sensor #2,材料传感器#2
+[151],Material Sensor #3,材料传感器#3
+[152],Air Sensor,空气传感器
+[153],Test Parameters,检验参数
+[154],Type of Scale,检测元件的类型
+[155],Compensation Used,使用补偿
+[156],Feed Rate,进给速度
+[157],NDE Correction (yes or no),NDE 修正(是或否)
+[158],Dwell Time at Each Target Position,在每一目标位置停留时间
+[159],Measuring Information,测量信息
+[160],Measuring Instrument and Serial No.,测量仪器及序号
+[161],Name of Inspector,检验员姓名
+[162],Date of Test,检验日期
+[163],Machine Name,机器名称
+[164],Machine Type,机器类型
+[165],Machine Serial No.,机器序号
+[166],Machine Name; Type and Serial No.,机器名称、类型和序号
+[167],Test Location,检验位置
+[168],Position of axes not under test,不在检验中的轴线位置
+[169],Coefficient of Thermal Expansion of Scale,检测元件的热膨胀系数
+[170],Offset to Tool Reference (X/Y/Z),刀具基准偏置 (X/Y/Z)
+[171],Offset to Workpiece Reference (X/Y/Z),工件基准偏置 (X/Y/Z)
+[172],Stop Timer,停止定时器
+[173],Start Timer,启动定时器
+[174],Timer,定时器
+[175],No. of Points,测量点数
+[176],Total Time,总时间
+[177],Coverage Factor,覆盖因子
+[178],Numerical Analysis,数值分析
+[179],Graphic Analysis,图形分析
+[180],Machine Model No.,机器型号
+[181],Asset No.,财产编号
+[182],Filename,文件名
+[183],Comments,注释
+[184],End Point Time Out,端点超时
+[185],Time Base,时间基准
+[186],Default Path,缺省路径
+[187],Language,语言
+[188],System,系统
+[189],Error Sign Convention,误差符号转换
+[190],Machine Zero Point,机器零点
+[191],Machine Units,机器单位
+[192],Measurement Setup,测量设置
+[193],Machine Information,机器信息
+[194],ISO Information,ISO信息
+[195],Data Analysis,数据分析
+[196],Axis:,轴:
+[197],Deviation,偏差
+[198],Port,端口
+[199],Sensor,传感器
+[200],Description,描述
+[201],Used for,用于
+[202],USB Axis Module,USB单轴测量卡
+[203],Sensor Hub,传感器适配器
+[204],Material Sensor,材料传感器
+[205],Air Sensor,空气传感器
+[206],Serial No.,序号
+[207],Hardware,硬件
+[208],Test Record Button,测试记录按钮
+[209],Hardware Not Ready,硬件未准备好
+[210],No License,无许可证
+[211],Laser Off or Warming Up,激光关闭或预热
+[212],No Return Beam,无返回光束
+[213],Reset Position,位置复位
+[214],Optics Out Of Range,光具超出范围
+[215],Nameplate,铭牌
+[216],Step 1: Reset laser and rotary at 0 arcdeg,步骤 1: 激光和转角复位到 0 arcdeg
+[217],Step 2: Sample between -3 and -4 arcdeg,步骤 2: 在 -3 到 -4 arcdeg 之间采样
+[218],Step 3: Sample between +3 and +4 arcdeg,步骤 3: 在 +3 到 +4 arcdeg 之间采样
+[219],Agilent Technologies Inc.,Agilent Technologies Inc.
+[220],Revision,Revision
+[221],Dimensional Metrology Software,Dimensional Metrology Software
+[222],All Rights Reserved,All Rights Reserved
+[223],Open,打开
+[224],Setup,设置
+[225],Start,开始
+[226],Reset,复位
+[227],Continue,继续
+[228],Stop,停止
+[229],Save,保存
+[230],Print,打印
+[231],Record,记录
+[232],Erase,删除
+[233],Help,帮助
+[234],Exit,退出
+[235],OK,确认
+[236],Cancel,取消
+[237],Calibrate,校准
+[238],Recalculate,重新计算
+[239],Apply,应用
+[240],Import,导入
+[241],Setup + Data,设置和数据
+[242],All Data,全部数据
+[243],Last Run,最后一组数据
+[244],Last Data,最后一个数据
+[245],Setup Only,仅有设置
+[246],Raw Data,原始数据
+[247],Compensation Table,补偿表
+[248],Environmental Data,环境数据
+[249],Setup Printer,设置打印机
+[250],Report,报告
+[251],Collecting data . . .,正在收集数据 . . .
+[252],Text File,文本文件
+[253],CSV (comma delimited),CSV (逗号分隔)
+[254],Plus/Minus,加/减
+[255],Closure,闭合
+[256],Elevation,高差
+[257],Data Point,数据点
+[258],Combined,组合
+[259],Forward,正向
+[260],Reverse,反向
+[261],Warning,警告
+[262],Tested Axis,检验的轴线
+[263],Axis Deviation,轴向偏差
+[264],Reversal Value,反向差值
+[265],Mean Reversal Value,平均反向差值
+[266],Range Mean Bidirectional Positional Deviation,双向平均位置偏差的范围
+[267],Systematic Positional Deviation,定位系统偏差
+[268],Repeatability of Positioning,重复定位精度
+[269],Accuracy,定位精度
+[270],Unidirectional,单向
+[271],Bidirectional,双向
+[272],Not Applicable,不适用
+[273],Target Position,目标位置
+[274],Approach Direction,趋近方向
+[275],Positional Deviation,位置偏差
+[276],Mean Unidir. Pos. Dev.,单向平均位置偏差
+[277],Est. of Standard Uncertainty,标准不确定度
+[278],Unidir. Repeatability,单向重复定位偏差
+[279],Bidir. Repeatability,双向重复定位精度
+[280],(Used for NDE Correction),(用于NDE修正)
+[281],Data not saved,数据未保存
+[282],Measurement not completed,测量未结束
+[283],Reset position?,位置复位？
+[284],Measurement completed,测量完成
+[285],Measurement terminated,测量中断
+[286],Measurement completed with %d data lost,测量完成但有 %d 个数据丢失
+[287],Measurement of current axis completed,当前轴测量完成
+[288],Cannot open file,无法打开文件
+[289],Cannot save file,无法保存文件
+[290],%s / %s must be an integer,%s / %s 必须为整数
+[291],Inconsistent values,数值不匹配
+[292],Invalid entry,无效输入
+[293],No. of cycles doesn't comply ISO standard. Print?,循环次数不符合ISO标准。打印？
+[294],All Files,所有文件
+[295],Legacy Files,遗留文件
+[296],Firmware,固件
+[297],Driver,驱动
+[298],Library,库文件
+[299],User Calibration,用户校准
+[300],Shift,偏移
+[301],Modify data by user?,用户修改数据？
+[302],Optics,光学组件
+[303],Default,缺省值
+[304],Saved,保存值
+[305],Average Material Temp.,平均材料温度
+[306],Current Axis,当前轴
+[307],Extended Resolution,扩展分辨率
+[308],Data Lost,数据丢失
+[309],Information,信息
+[310],Keyboard Position,键盘位置
+[311],Outside Target Window,在目标窗口外
+[312],Inside Target Window,在目标窗口中
+[313],Target List,目标列表
+[314],Interpolate,内插
+[315],Compensation Values,补偿值
+[316],None,无
+[317],Already running [%s] software,[%s] 软件已在运行
+[318],Offline Mode,离线模式
+[319],Main Menu,主菜单
+[320],Numeric Display,数值显示
+[321],Default Display Mode,缺省显示模式
+[322],Advanced Options,高级选项
+[323],Pos. Uncertnty,位置不确定度
+[324],Sorted by position number,按位置编号排序
+[325],Sorted by run number,按运行编号排序
+[326],Sorted by line number,按行号排序
+[327],Number of total data pairs,全部数据个数
+[328],Number of total data runs,全部运行次数
+[329],Axis 2 Data,轴 2 数据
+[330],Out of spec,超出范围
+[331],Target Value,目标值
+[332],Error Value,误差值
+[333],Pos #,位置#
+[334],Run #,运行#
+[335],Line #,行号
+[336],Point #,点号
+[337],Position,位置
+[338],Coefficient of Thermal Expansion,热膨胀系数
+[339],Compensation Routine,补偿程序
+[340],Update Each %s ,更新间隔 %s
+[341],Equation,公式
+[342],Parameter,参数
+[343],Air Conditions Used for Compensation of Laser Interferometer,用于补偿激光干涉仪的大气条件
+[344],Positioning Measurement,位置测量
+[345],Estimation of Measurement Uncertainty,测量不确定度估计
+[346],Laser Interferometer Measurement,激光干涉仪
+[347],Simplified Method,简化方法
+[348],Average Industial Conditions,普通的工业条件
+[349],Improved Industrial Conditions,改进的工业条件
+[350],Contributors,影响因素
+[351],Device,设备
+[352],Measurement Length,测量长度
+[353],Error Range,误差范围
+[354],Alignment,准直
+[355],Beam Alignment,光束准直
+[356],Misalignment,偏离准直
+[357],Compensation of Workpiece Temperature,工件温度补偿
+[358],Thermal Expansion Coefficient,热膨胀系数
+[359],Difference to 20C, 与 20C 的差异
+[360],Temperature Measurement,温度测量
+[361],Maximum,最大
+[362],Machine Tool,机床
+[363],Zero,零
+[364],Included in U(%s),已包含于U(%s)
+[365],Environmental Variation,环境变动?
+[366],Correction of R Values Due to U(EVE),由U(EVE)造成的R值修正
+[367],Correction of Repeatability Values,重复值的修正
+[368],According to Table,依照表格
+[369],Typical Results,典型结果
+[370],At Target %s,在目标%s
+[371],For R According to Table,依照表格应用于R
+[372],Corrected,修正后
+[373],Uncorrected,未修正
+[374],Assumed,假定的
+[375],Calibrated Measuring Device,已校准的测量设备
+[376],Uncertainty of Expansion Coefficient,膨胀系数的不确定度
+[377],Unit,单位
+[378],Amplitude,幅值
+[379],Frequency,频率
+[380],Show Legend,显示图例
+[381],Show Machine Info.,显示机器信息
+[382],Merge Data,合并数据
+[383],Can't combine different data types or target lists,不能组合不同数据类型或目标列表.
+[384],Synchronized Operation,同步操作
+[385],Demo Mode,演示模式
+[386],Rotary Table,转台
+[387],Printer,打印机
+[388],Copies,份数
+[389],Orientation,方向
+[390],Portrait,纵向
+[391],Landscape,横向
+[392],Download,下载
+[393],User defined download program,用户自定义的下载程序
+[394],File not found,找不到文件
+[395],Show Hint,显示提示
+[396],Extra Margin,额外空白
+[397],Left,左边
+[398],Top,顶边
+[399],Right,右边
+[400],Bottom,底边
+[401],Calibration Due,校准到期
+[402],Calibration Expired,校准过期
+[403],Calibration Period,校准周期
+[404],Month,月
+[405],Dual Axis,双轴
+[406],Single Axis,单轴
+[407],Hysteresis,滞后
+
+[1001],Install,安装
+[1002],[%s] will be installed in the following folder,[%s] 将被安装到下面的文件夹
+[1003],[%s] has been successfully installed,[%s] 已经成功安装完毕
+[1004],Failed to install [%s],安装 [%s] 失败
+[1005],Remove,移除
+[1006],Remove all components of [%s],移除 [%s] 的所有部件
+[1007],[%s] has been removed,[%s] 已经被删除
+[1008],Failed to remove [%s],删除 [%s] 失败
+[1009],Reinstall,重新安装
+[1010],Please close program [%s] first,请先关闭 [%s] 软件
+[1011],Install Path,安装路径
+[1012],User Data,用户数据
+[1013],User data will not be deleted,用户数据不会被删除
+[1014],Agree,同意
+[1015],Do Not Agree,不同意
+[1016],Customize,定制
+[1017],Customize user interface and advanced options of [%s],定制[%s]的用户界面和高级选项
+[1018],Repair,修复
+[1019],Repair system settings and reinstall driver,修复系统设定并重装驱动程序
+
+[2001],Existing Calibration,已有校准
+[2002],New Calibration,新建校准
+[2003],Raw Value,原始值
+[2004],Calibrated,修正值
+[2005],Reference,参考值
+[2006],Temperature,温度
+[2007],Write Sensor,写入传感器
+[2008],Sensor Calibration,传感器校准
+[2009],Sensor has been updated,传感器已更新
+[2010],Discard changes,放弃改变
+[2011],Cannot access sensor,无法存取传感器
+
+[3001],Laser position,激光位置
+[3002],Laser position 2,激光位置2
+[3003],Error value,误差值
+[3004],Target position,目标位置
+[3005],Encoder reading,编码器读数
+[3006],Rotary table reading,转台读数
+[3007],Rotary angle,旋转角度
+[3008],Elapsed time,经历的时间
+[3009],Motion velocity,运动速度
+[3010],Target position number,目标站点的编号
+[3011],Click to change lower display,单击改变下排显示项目
+[3012],Click to change upper display,单击改变上排显示项目
+[3013],Beam strength 2,光束强度2
+[3014],beam strength,光束强度
+[3015],Simulated laser position,模拟激光位置
+[3016],Rotary table status |Click to enter hardware setup menu,转台的工作状态|单击进入硬件设置页面
+[3017],Air pressure,空气压力
+[3018],Air temperature,空气温度
+[3019],Material Temperature 1,被测工件的温度1
+[3020],Material Temperature 2,被测工件的温度2
+[3021],Material temperature 3,被测工件的温度3
+[3022],Air relative humidity,空气的相对湿度
+[3023],Environmental parameter display area |Double click to enlarge or recover,环境参数显示区|双击进行放大或者复原
+[3024],Measurement graph display area |Double click to enlarge or recover |Drag to change display area,测量图形显示区|双击进行放大或者复原|拖动改变显示区域
+[3025],Measurement data display area |Double click to enlarge or recover,测量数据显示区|双击进行放大或者复原
+[3026],Change error value sign,改变误差数值的正负号
+[3027],Enter limit line value,输入限制线的数值
+[3028],Select -> to display limit line,选中->显示限制线
+[3029],Enter line number |Press the left button to setup it as the first line,输入行号|按左边的按钮将其设为第一行
+[3030],Select the display mode of the target position,选择目标位置的显示方式
+[3031],Enter user defined Y-axis range,输入用户自定义的纵轴范围
+[3032],Select ->  Display graph,选中->显示图例
+[3033],Auto select Y-axis range,自动选择纵轴显示范围
+[3034],Select -> Display according to user defined range,选中->按用户自定义的范围显示
+[3035],Toolbar,工具栏
+[3036],Select environmental parameter units ,选择环境参数使用的计量单位
+[3037],"Pressed to display grid lines, released to hide grid lines ",按下时显示网格线，弹起时隐藏网格线
+[3038],"Pressed to display 3D graph, released to display 2D graph",按下时显示3D图形，弹起时显示2D数据
+[3039],Select environmental parameter type,选择要显示的环境参数类型
+[3040],Select the axis to be displayed,选择要显示的轴
+[3041],Select the data type of the time to be displayed,选择要显示的时间数据类型
+[3042],Select the items to be displayed,选择要显示的项目
+[3043],Enter the measurement point number for the zero position ,输入机器零点所对应的测量点的编号
+[3044],Select the conversion method of the error sign,选择误差符号的转换方式
+[3045],Compensation value calculation method,补偿值的计算方法
+[3046],Select the measurement unit format |It will effect on all the display values,选择长度单位的制式|这将影响所有的数值显示
+[3047],Length value correspond to one machine compensation value,1个机器补偿值所对应的长度数值
+[3048],Select compensation table location and generation method,选择补偿表的目标位置的生成方式
+[3049],Start position of the compensation table,补偿表的起始位置
+[3050],End position of the compensation table,补偿表的终止位置
+[3051],Interval of the compensation table,补偿表的位置间隔
+[3052],Select the expression form of the compensation value |It will affect the sign of the compensation value,选择补偿值的表达形式|这会影响补偿值的正负号
+[3053],Select the calculation methods for the forward and reverse compensation values |Combination: compensation value from the average of the two values |Forward/Reverse: calculate two compensation values separately,选择正向补偿值和反向补偿值的计算方式|组合:取二者的平均值得到一组补偿值|正向/反向:分别计算得到两组补偿值
+[3054],Click to enter ISO information menu,单击进入ISO信息设置页面
+[3055],Click to enter machine information menu,单击进入机器信息设置页面
+[3056],Click to enter measurement setup menu,单击进入测量设置页面
+[3057],Click to enter data analysis menu,单击进入数据分析设置页面
+[3058],Select settings for the measurement |Default: Default for all the settings; suitable for new measurement |Saved: Save measurement and information setting; Suitable for the repeating measurement |Information: Save information settings only; Suitable for measurement for the same machine,选择进入测量时的设置状态|缺省值:全部刷新为缺省值;适用于开始全新测量|保存值:同时保留测量设置和信息设置;适用于在原有机器上重复上次测量|信息:只保留信息设置;适用于在原有机器上开始新的测量
+[3059],Select display language,选择显示语言
+[3060],Click to setup the default path for data files,点击设置用户数据文件的缺省路径
+[3061],Select the display method of the interface,选择界面的显示方式
+[3062],Installed certificate,已安装的许可证
+[3063],Select to open simulation mode,选中打开仿真模式
+[3064],Select for auto recovery after signal loss,选中后一旦发生信号错误软件将自动复位
+[3065],Select to enter demo mode,选中进入演示模式
+[3066],Select for beep on the data recording,选中后每次记录数据时计算机都将发出鸣响
+[3067],Select for E1736A S/N,选择想要使用的E1736A的系列号
+[3068],Select for E1735A S/N,选择想要使用的E1735A的系列号
+[3069],Select for the second E1735A S/N,选择想要使用的第二个E1735A的系列号
+[3070],"Select for the operation of [Reset], [Start], [Record] and [Stop] applied to both E1735A",选中后[复位];[开始];[记录]和[停止]操作将同时作用在两块E1735A上
+[3071],Enter the wavelength of the laser head,输入激光头的真空波长
+[3072],User calibration value,用户的校准值
+[3073],Optics calibration parameter,光具的校准参数
+[3074],Change laser position sign,改变激光位置的正负号
+[3075],Air parameter update method |Plug or unplug sensor will change the setting,空气参数的更新方式|插入或拔出传感器将自动改变这一设置
+[3076],Select air humidity update method,选择空气湿度的更新方式
+[3077],Select to enter the air humidity manually |Data from air sensor will be ignored,选中后用户可以手动输入空气湿度|传感器的测量数据将被忽略
+[3078],Material temperature update method |Plug or unplug sensor will change the setting,材料温度的更新方式|插入或拔出传感器将自动改变这一设置
+[3079],Average of the material temperatures,材料温度的平均值
+[3080],Compensation number for the laser wavelength in air,激光波长在空气中的补偿系数
+[3081],Total compensation number including wavelength and expansion compensations,总的长度补偿系数;包括波长补偿和膨胀补偿
+[3082],Expansion coefficient of the device under test or lead screw,被测工件的热膨胀系数
+[3083],Repetition number of measurement cycles,单个测量循环的重复次数
+[3084],The length of the segment from point A to point C,从点A到点C的线段长度
+[3085],The length of the segment from point A to point G,从点A到点G的线段长度
+[3086],Diagonal length of the measurement area,测量区域的对角线长度
+[3087],Select the name of the axis for the next measurement,选定下一个被测量的轴线代号
+[3088],Number of stops on each axis,各轴线上的站点数
+[3089],Change the number of stops on AC,改变AC之间的站点数目
+[3090],Change the number of stops on AG,改变AG之间的站点数目
+[3091],Select the direction of the measurement on the axis,选择该轴线的测量方向
+[3092],Enter the foot spacing of the measurement accessory,输入测量附件的脚间距
+[3093],The length of the guide under test |depends on the number of the stops and the foot spacing  ,被测的导轨长度|取决于站点数和脚间距
+[3094],Number of stops for the measurement,进行测量的站点数目
+[3095],Distance between the target positions,目标位置之间的间隔长度
+[3096],The first target position,第一个目标位置
+[3097],The last target position,最后一个目标位置
+[3098],Number of target positions in one travel range,单次行程中目标位置的数量
+[3099],Data not available,此数据无法提供
+[3100],Select to enable user defined target position,选中后用户可以自由定义目标位置
+[3101],Select measurement travel direction,选择测量的行进方向
+[3102],Select direction and sequence of approaching each target positions,选择接近各个目标位置的方向和次序
+[3103],Enter the name of the target axis,输入目标轴的名称
+[3104],Repetition number of the measurement cycles for the second axis,第二轴的单个测量循环的重复次数
+[3105],Select direction and sequence of approaching each target position on the second axis,接近第二轴的各个目标位置的方向和次序
+[3106],Enter the name of the target axis for the second axis,输入第二目标轴的名称
+[3107],Delay time of the sampling after the object moves inside the target window ,误差值小于目标窗口后进行采样之前的延迟时间
+[3108],Enter the resolution of the encoder,输入编码器的分辨率
+[3109],Select sampling trigger method,选择触发采样的方式
+[3110],Sampling by time,定时采样
+[3111],Enter target window number |Auto sampling happens after the dwell time since the object moves inside of the target window,输入目标窗口的大小|自动采样发生在误差值小于目标窗口后并延迟指定的时间之后
+[3112],Select encoder output format,选择编码器的输出信号格式
+[3113],Select the display accuracy of the data |It will affect accuracy of the  data in the data table and the saved file,选择数据的显示精度|这将影响数据表和保存文件的数据精度
+[3114],Select the displayed unit of the error value,选择误差数值的显示单位
+[3115],Select the displayed unit of the position value,选择位置数值的显示单位
+[3116],Select the type of the parallelism measurement,选择要测量的平行度的类型
+[3117],Enter the error of the optical square,输入光学直角镜的角度误差
+[3118],Enter the value of the dead path,输入死径长度的数值
+[3119],Rotary table resolution,转台的角度编码器的分辨率
+[3120],User defined reset position,用户设定的激光复位的位置值
+[3121],Select average measurement time |Shorter average time will increase the measurement response speed |Longer average time will reduce the influence of the air turbulence,选择测量的平均时间|较短的平均时间可以提高测量的响应速度|较长的平均时间可以降低空气扰动的影响
+[3122],Select the type of linear measurement optics,选择直线度光具的类型
+[3123],Trigger sampling when the object stays in the start or end position for more than specified time ,目标在起点或终点停留超出指定的时间后将触发自动采样
+[3124],Allow user to enter target position value when doing manual sampling,允许用户在手动采样时自行输入目标位置的数值
+[3125],Use extended resolution |It will increase measurement accuracy but reduce sampling speed,使用扩展分辨率|这将提高测量精度但降低采样速度
+[3126],Target position interval for the second axis,第二轴的目标位置间隔
+[3127],The first target position for the second axis,第二轴的第一个目标位置
+[3128],The last target position for the second axis,第二轴的最后一个目标位置
+[3129],The number of the target positions in one travel range for the second axis ,第二轴的单次行程中目标位置的数量
+[3130],Data not available,数据无法提供
+[3131],Select to enable user defined target position for the second axis,选中后用户可以自由定义第二轴的目标位置
+[3132],Enter X-axis scale,输入X轴方向的比例系数
+[3133],Enter Y-axis scale,输入Y轴方向的比例系数
+[3134],Enter Z-axis scale,输入Z轴方向的比例系数
+[3135],Calculated angle Alpha value,计算得到的Alfa角的数值
+[3136],Calculated angle Beta value,计算得到的Beta角的数值
+[3137],Calculated diagonal length,计算得到的对角线长度的数值
+[3138],Enter sampling time interval,输入采样的时间间隔
+[3139],Start sampling when the object passes the designated position (both directions),目标越过(双向)指定的位置后开始采样
+[3140],Select to enable sampling mode,选择启动采样的方式
+[3141],Advanced setup,高级设置
+[3142],Stop sampling when the target passes the designated position (both direction),目标越过(双向)指定的位置后停止采样
+[3143],Enter total sampling points,输入总的采样点数
+[3144],Enter total sampling time,输入总的采样时间
+[3145],Stop sampling when data is lost,数据丢失时停止采样
+[3146],Stop sampling when error occurs,发生错误时停止采样
+[3147],Select the mode of stop sampling,选择停止采样的方式
+[3148],Enter the value of the cover factor,输入覆盖因子的数值
+[3149],Select the calculation method of the flatness,选择平面度的计算方法
+[3150],Select the name of the printer,选择打印机的名称
+[3151],Enter the number of the copies to be printed,输入需要打印的份数
+[3152],Select the orientation of the print,选择纸张的方向
+[3153],Select the content of the print,选择需要打印的内容
+[3154],Select the display mode of the environmental parameters,选择环境参数的显示方式
+[3155],Display data in the graph,在图形中显示数据点
+[3156],Graphical analysis options,图形分析选项
+[3157],Data analysis options,数值分析选项
+[3158],Select to display the slope of the fitting line,选中后在结果中显示拟合直线的斜率
+[3159],Select measurement standard,选择使用的标准
+[3160],Unselect to cancel the modification for the standard,去掉这个选项将取消对于标准的修改
+[3161],Enter the name of the operator for the operation,输入完成本次测量的操作员的名字
+[3162],Enter the location of the measurement,输入本次测量所在的地点
+[3163],Enter the name of the machine,输入被测机器的名称
+[3164],Enter the type of the machine,输入被测机器的类别
+[3165],Enter the serial number of the machine,输入被测机器的系列号
+[3166],Enter the model number of the machine,输入被测机器的型号
+[3167],Enter the property number of the machine,输入被测机器的财产编号
+[3168],Enter the calibration date,输入测试的日期
+[3169],The file name for the saved settings,保存设置参数的文件名
+[3170],Enter other notes to be saved,输入其他任何需要保存的注释信息
+[3171],Enter the type of the device to be measured,输入被测的长度器件的类型
+[3172],Enter the compensation method for the device to be measured,输入被测的长度器件的补偿方法
+[3173],Enter the feed speed for the measurement,输入测试中使用的进给速度
+[3174],Enter the dwell time for the object at each position,输入测试中目标在各个位置的停留时间
+[3175],Enter the thermal coefficient of the device to be measured,输入被测的长度器件的热膨胀系数
+[3176],Select if NDE correction is used,选择是否采用了NDE修正
+[3177],Enter the name and serial number of the instrument used for the measurement,输入进行本次测量的仪器的名称及其系列号
+[3178],Enter the locations of the axes not used in the calibration,输入所有未参与本次检测的其他轴线所在的位置
+[3179],Enter the reference bias of the tool in X direction,输入X方向上的刀具的基准偏置
+[3180],Enter the reference bias of the device in X direction,输入X方向上的工件的基准偏置
+[3181],Enter the reference bias of the tool in Y direction,输入Y方向上的刀具的基准偏置
+[3182],Enter the reference bias of the tool in Y direction,输入Z方向上的刀具的基准偏置
+[3183],Enter the reference bias of the device in Y direction,输入Y方向上的工件的基准偏置
+[3184],Enter the reference bias of the device in Y direction,输入Z方向上的工件的基准偏置
+[3185],Enter the coordinate of the material sensor 1,输入第1材料传感器所在的坐标位置
+[3186],Enter the coordinate of the material sensor 2,输入第2材料传感器所在的坐标位置
+[3187],Enter the coordinate of the air sensor,输入空气传感器所在的坐标位置
+[3188],Enter the coordinate of the material sensor 3,输入第3材料传感器所在的坐标位置
+[3189],The update time of the sensor data in the compensation program,补偿程序中传感器数据的更新时间
+[3190],Enter the maximum difference between the environmental temperature and 20 degree C during the measurement,输入本次测试中环境温度与20C的最大差值
+[3191],Enter the maximum error of the material sensors used during the measurement,输入本次测试中使用的材料传感器的最大误差值
+[3192],The maximum length of the measurement,本次测量所涉及的最大长度
+[3193],The error range of the instruments used in the measurement,本次测量所使用的仪器的误差范围
+[3194],Enter the estimated error from the optic alignment in the measurement,输入本次测量中光路调整误差的估计值
+[3195],Enter the uncertainty of the expansion coefficient in the measurement,输入本次测量中所使用的热膨胀系数的不确定度
+[3196],Enter the estimated error from the change of the environmental parameters in the measurement,输入本次测量中由于环境参数变动所引起的误差的估计值
+[3197],Select if the instruments used in the measurement are calibrated,选择本次测试使用的仪器是否已经被校准过
+[3198],Select the serial number of the E1735A for the second axis,选择测量第2轴所用的E1735A的系列号
+[3199],Select the serial number of the E1736A for the second axis,选择测量第2轴所用的E1736A的系列号
+[3200],Select the serial number of the E1735A for the first axis,选择测量第1轴所用的E1735A的系列号
+[3201],Select the serial number of the E1736A for the first axis,选择测量第1轴所用的E1736A的系列号
+[3202],Display help information when the mouse cursor moves over an item,当鼠标经过某个项目的时候显示帮助信息
+[3203],Leave extra margin on selected side of paper,在选中的纸边留下额外的空白
+
+[4001],Click to start linear measurement |Calibrate the accuracy of a linear guide,单击开始线性测量|标定导轨的线性定位精度
+[4002],Click to start rotary measurement |Calibrate the accuracy of a rotary stage,单击开始转角测量|标定转台的旋转角度精度
+[4003],Click to start angular measurement |Measure pitch or yaw along a linear path,单击开始角度测量|测量导轨的偏摆角或俯仰角误差
+[4004],Click to start way straightness measurement |Use angular optics to make straightness measurements at multiple points along a machine part such as a milling machine way.,单击开始导轨直线度测量|采用角度光具测量导轨的直线度误差
+[4005],Click to start time base linear measurement |Measure linear displacement over time,单击开始基于时间的线性测量|测量随时间变化的位移数值
+[4006],Click to start straightness measurement |Use straightness optics to determine if a machine抯 moveable part is moving along a straight path,单击开始直线度测量|采用直线度光具测量导轨的直线度误差
+[4007],"Click to start diagonal measurement |Use for volumetric analysis, as described in ANSI standard B5.54",单击开始对角线测量|标定对角线上的定位精度
+[4008],"Click to start squareness measurement |Use to determine if two machine axes are oriented, and move, perpendicular to each other",单击开始垂直度测量|测量机床各主轴之间的垂直度误差
+[4009],Click to start the parallelism measurement |Use to determine if two machine axes move parallel to each other,单击开始平行度测量|测量机床的主轴平行度或共平面平行度
+[4010],Click to start the flatness measurement |Measure the flatness error of a surface plate,单击开始平面度测量|测量被测平面的平面度误差
+[4011],Click to start dual axis measurement |Calibrate the linear position accuracy of two linear guide synchronously,单击开始线性双轴测量|同步标定两条导轨的线性定位精度
+[4012],Click to start time base angular measurement |Measure angle value over time,单击开始基于时间的角度测量|测量随时间变化的角度数值
+[4013],Click to start time base straightness measurement |Measurement straightness value over time,单击开始基于时间的直线度测量|测量随时间变化的直线度数值
+[4014],Setup basic options,设置软件的基本选项
+[4015],Open the help file,打开帮助文件
+[4016],Exit the program,退出软件
+[4017],Open an existing file |Start or review a measurement using saved data,打开已有的文件|根据其中保存的内容开始测量
+[4018],Display one less decimal place,少显示一位数字
+[4019],Display one more decimal place,多显示一位数字
+[4020],Change the sign of upper display number,改变上显示数值的正负符号
+[4021],Change the sign of lower display number,改变下显示数值的正负符号
+[4022],The status of the measurement module of second axis |Click to enter hardware setup menu,第二单轴测量模块的工作状态|单击进入硬件设置页面
+[4023],The software is running in demo mode |Click to enter hardware setup menu,软件工作在演示模式|单击进入硬件设置页面
+[4024],The status of the laser head |Click to enter the hardware setup menu,激光头的工作状态|单击进入硬件设置页面
+[4025],The status of the second laser head |Click to enter the hardware setup menu,第二激光头的工作状态|单击进入硬件设置页面
+[4026],The status of the single axis measurement module |Click to enter the hardware setup menu,单轴测量模块的工作状态|单击进入硬件设置页面
+[4027],The status of the sensor interface card |Click to enter the hardware setup menu,传感器接口卡的工作状态|单击进入硬件设置页面
+[4028],The communication status of the single axis measurement module |Click to enter the hardware setup menu,单轴测量模块的通讯负荷状态|单击进入硬件设置页面
+[4029],Display the line correspond to the number on the right side as the first line,把右侧数字对应的行显示为第一行
+[4030],Select the program to use for the download operation,选择执行下载操作的运行文件
+[4031],Run the selected download program,执行用户自定义的下载操作
+[4032],Increase font size,放大字体
+[4033],Decrease font size,缩小字体
+[4034],Display the graph symmetrically,对称显示全图
+[4035],Display the graph,显示全图
+[4036],"Enlarge the designated area |Press left button of the mouse, drag the pointer, and release the button",放大指定区域|在图面上按住鼠标左键，然后拖动鼠标，最后放开左键
+[4037],Zoom in,放大显示比例
+[4038],Zoom out,缩小显示比例
+[4039],Copy the current data or graph to the clipboard,把当前数据表或图表复制到剪贴板
+[4040],The status of the measurement,测量的当前状态
+[4041],The progress of the measurement,测量的完成进度
+[4042],Compensation table |Double click to enlarge or reduce,补偿表|双击进行放大或者复原
+[4043],Machine information |Double click to enter machine information menu,机器信息|双击进入机器信息设置页面
+[4044],Measurement setup |Double click to  enter measurement setup interface,测量设置|双击进入测量设置页面
+[4045],Measurement results |Double click to enter the data analysis menu,测量结果|双击进入数据分析设置页面
+[4046],Save measurement settings or data,保存测量设置或数据
+[4047],Print measurement results or report,打印测量结果或报告
+[4048],Start or continue the measurement,开始或继续测量
+[4049],Record measurement data manually,手动记录测量数据
+[4050],Pause the measurement,暂时停止测量
+[4051],Display help information,显示帮助信息
+[4052],Stop the measurement,结束本次测量
+[4053],Erase the measurement data,删除测量数据
+[4054],"Reset laser data, erase error mark",激光数据归零、消除错误标志
+[4055],"Input measurement settings, measurement data or machine information",读入测量设置、测量数据或机器信息
+[4056],Set up parameters,设置参数
+[4057],Hardware information of the connected equipment,已连接设备的硬件信息
+[4058],The information of the connection and distribution of the sensors,传感器的端口的连接和分配情况
+[4059],The list of the target positions,目标位置列表
+[4060],The list of the target positions of the second axis,第二轴的目标位置列表
+                                                                                
