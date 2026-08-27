@@ -23,6 +23,8 @@ def main() -> None:
     pending = _load_json(ROOT / "manifests" / "pending_index.json")
     phase_b = _load_json(ROOT / "manifests" / "phase_b_status.json")
     bit_strings = _load_json(ROOT / "manifests" / "bit_strings.json")
+    entropy = _load_json(ROOT / "manifests" / "config_entropy.json")
+    crosswalk = _load_json(ROOT / "manifests" / "bom_crosswalk.json")
     board = bom.get("board_info", {})
 
     fa = frame.get("frame_analysis", {})
@@ -63,6 +65,11 @@ def main() -> None:
         f"- 帧估计：{fa.get('estimated_frame_count', 'N/A')}",
         f"- IOB candidate 配置字：{fa.get('candidate_iob_config_words', 'N/A')}",
         f"- 位流字符串（脱敏）：{bit_strings.get('unique_redacted_count', 'N/A')} 条",
+        f"- 配置段熵：{entropy.get('byte_entropy_bits', 'N/A')} bits/byte（零字节比 {entropy.get('zero_byte_ratio', 'N/A')}）",
+        "",
+        "## BOM 交叉对照",
+        "",
+        f"- 已链接组件：**{crosswalk.get('linked_count', 'N/A')}** / {crosswalk.get('component_count', 40)}",
         "",
         "## 待解项",
         "",
@@ -87,6 +94,7 @@ def main() -> None:
         "- USB 抓包 → `phase_b/captures/*.pcapng`",
         "- 实验验证 → 见 `phase_c/README.md`",
         "- 接入指南 → `HARDWARE_HANDOFF.md`",
+        "- 阶段路线图 → `manifests/phase_roadmap.json`",
         "",
         "## 重新生成",
         "",

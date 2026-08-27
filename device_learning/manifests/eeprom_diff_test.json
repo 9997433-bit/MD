@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-08-27T15:37:53.657298+00:00",
+  "file_a": "/workspace/device_learning/phase_b/fixtures/eeprom_synthetic_reference.bin",
+  "file_b": "/workspace/device_learning/phase_b/fixtures/eeprom_synthetic_reference.bin",
+  "compare": {
+    "size_a": 8192,
+    "size_b": 8192,
+    "size_match": true,
+    "sha256_a": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
+    "sha256_b": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
+    "identical": true,
+    "mismatch_count": 0,
+    "first_mismatches": []
+  },
+  "header_a": {
+    "boot_format": "C2",
+    "boot_config_byte": 194,
+    "vid": 0,
+    "pid": 0,
+    "did": 0,
+    "config_byte": 0,
+    "firmware_offset": 12,
+    "firmware_size_bytes": 16,
+    "firmware_header_hex": "02001000000102030405060708090a0b",
+    "c2_record_count": 2
+  },
+  "header_b": {
+    "boot_format": "C2",
+    "boot_config_byte": 194,
+    "vid": 0,
+    "pid": 0,
+    "did": 0,
+    "config_byte": 0,
+    "firmware_offset": 12,
+    "firmware_size_bytes": 16,
+    "firmware_header_hex": "02001000000102030405060708090a0b",
+    "c2_record_count": 2
+  }
+}

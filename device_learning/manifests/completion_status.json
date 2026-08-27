@@ -12,6 +12,7 @@
     "pending_index": true,
     "identifier_index": true,
     "bom_crosswalk": true,
+    "phase_roadmap": true,
     "no_captures_yet": true
   },
   "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"

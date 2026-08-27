@@ -35,6 +35,7 @@ FEEDERS = [
     ["build_system_map.py"],
     ["build_photo_index.py"],
     ["build_bom_crosswalk.py"],
+    ["build_phase_roadmap.py"],
     ["build_crossref.py"],
     ["build_pending_index.py"],
     ["ingest_phase_b.py"],

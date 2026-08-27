@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:36:05.521310+00:00",
+  "generated_at": "2026-08-27T15:37:53.065779+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -2155,7 +2155,7 @@
   },
   "manifests": {
     "bit_strings": {
-      "generated_at": "2026-08-27T15:36:04.214596+00:00",
+      "generated_at": "2026-08-27T15:37:51.640330+00:00",
       "source": "firmware/device.bit",
       "file_size_bytes": 131046,
       "min_string_length": 4,
@@ -2304,9 +2304,9 @@
       }
     },
     "bom_crosswalk": {
-      "generated_at": "2026-08-27T15:36:04.880923+00:00",
+      "generated_at": "2026-08-27T15:37:52.328612+00:00",
       "component_count": 40,
-      "linked_count": 29,
+      "linked_count": 27,
       "links": [
         {
           "ref_designator": "U-FPGA（丝印被器件遮挡，未读出）",
@@ -2331,11 +2331,6 @@
           "ref_designator": "U-SRAM（USB 控制器左下方，丝印未读出）",
           "part_marking": "ISSI IS62WV10248LL-15BLI（部分字符可读）",
           "hw_identifiers": [
-            "HW-001-FPGA-DEVICE",
-            "HW-002-FPGA-PACKAGE",
-            "HW-003-USB-CONTROLLER",
-            "HW-004-USB-PACKAGE",
-            "HW-017-INTERFACE-USB",
             "HW-023-MEMORY-SRAM"
           ],
           "bom_status": "candidate"
@@ -2344,10 +2339,7 @@
           "ref_designator": "XT600",
           "part_marking": "24.000M",
           "hw_identifiers": [
-            "HW-003-USB-CONTROLLER",
-            "HW-004-USB-PACKAGE",
-            "HW-014-CRYSTAL-USB",
-            "HW-017-INTERFACE-USB"
+            "HW-014-CRYSTAL-USB"
           ],
           "bom_status": "confirmed"
         },
@@ -2355,22 +2347,10 @@
           "ref_designator": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
           "part_marking": "不可辨认（小型 8 脚器件）",
           "hw_identifiers": [
-            "HW-003-USB-CONTROLLER",
-            "HW-004-USB-PACKAGE",
             "HW-012-EEPROM",
-            "HW-013-EEPROM-CAPACITY",
-            "HW-017-INTERFACE-USB"
+            "HW-013-EEPROM-CAPACITY"
           ],
           "bom_status": "candidate"
-        },
-        {
-          "ref_designator": "U-CLK-DIST（FPGA 周边，未逐一读出）",
-          "part_marking": "不可辨认",
-          "hw_identifiers": [
-            "HW-001-FPGA-DEVICE",
-            "HW-002-FPGA-PACKAGE"
-          ],
-          "bom_status": "unknown"
         },
         {
           "ref_designator": "U513",
@@ -2392,8 +2372,6 @@
           "ref_designator": "U622",
           "part_marking": "KS245 45K94 AXYR",
           "hw_identifiers": [
-            "HW-001-FPGA-DEVICE",
-            "HW-002-FPGA-PACKAGE",
             "HW-011-BUS-TRANSCEIVER"
           ],
           "bom_status": "confirmed"
@@ -2402,8 +2380,6 @@
           "ref_designator": "U6xx-a（FPGA 下方一排 4 只之一，丝印未读全）",
           "part_marking": "KS245 49K95 AXYR",
           "hw_identifiers": [
-            "HW-001-FPGA-DEVICE",
-            "HW-002-FPGA-PACKAGE",
             "HW-011-BUS-TRANSCEIVER"
           ],
           "bom_status": "confirmed"
@@ -2412,8 +2388,6 @@
           "ref_designator": "U6xx-b（FPGA 下方一排 4 只之二）",
           "part_marking": "KS245 49K95 AXYR",
           "hw_identifiers": [
-            "HW-001-FPGA-DEVICE",
-            "HW-002-FPGA-PACKAGE",
             "HW-011-BUS-TRANSCEIVER"
           ],
           "bom_status": "confirmed"
@@ -2422,8 +2396,6 @@
           "ref_designator": "U6xx-c（FPGA 下方一排 4 只之三）",
           "part_marking": "KS245 49K95 AXYR",
           "hw_identifiers": [
-            "HW-001-FPGA-DEVICE",
-            "HW-002-FPGA-PACKAGE",
             "HW-011-BUS-TRANSCEIVER"
           ],
           "bom_status": "confirmed"
@@ -2560,8 +2532,6 @@
           "ref_designator": "J600",
           "part_marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
           "hw_identifiers": [
-            "HW-003-USB-CONTROLLER",
-            "HW-004-USB-PACKAGE",
             "HW-017-INTERFACE-USB",
             "HW-031-CONNECTOR-J600"
           ],
@@ -2582,20 +2552,9 @@
             "HW-022-POWER-TANTALUM"
           ],
           "bom_status": "confirmed"
-        },
-        {
-          "ref_designator": "YC700 / U-SOT23-6（继电器驱动区多只）",
-          "part_marking": "YC7D0 等（SOT-23-6，字符部分可读）",
-          "hw_identifiers": [
-            "HW-008-RELAY-ARRAY",
-            "HW-009-RELAY-COUNT",
-            "HW-010-RELAY-VOLTAGE",
-            "HW-014-CRYSTAL-USB"
-          ],
-          "bom_status": "candidate"
         }
       ],
-      "boundary": "Keyword heuristic only; not a netlist"
+      "boundary": "Keyword heuristic on ref/marking only; not a netlist"
     },
     "completion_status": {
       "static_phase_complete": true,
@@ -2611,12 +2570,13 @@
         "pending_index": true,
         "identifier_index": true,
         "bom_crosswalk": true,
+        "phase_roadmap": true,
         "no_captures_yet": true
       },
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "config_entropy": {
-      "generated_at": "2026-08-27T15:36:04.303084+00:00",
+      "generated_at": "2026-08-27T15:37:51.730053+00:00",
       "source": "firmware/device.bit",
       "config_segment_bytes": 130948,
       "byte_entropy_bits": 4.3049,
@@ -2629,7 +2589,7 @@
       ]
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:36:04.959230+00:00",
+      "generated_at": "2026-08-27T15:37:52.493281+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -2786,7 +2746,7 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-27T15:36:04.516978+00:00",
+      "generated_at": "2026-08-27T15:37:51.947841+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
@@ -2808,7 +2768,7 @@
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-27T15:36:04.385384+00:00",
+      "generated_at": "2026-08-27T15:37:51.810407+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
       "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
@@ -2819,7 +2779,7 @@
       "layout_ref": "manifests/eeprom_layout_ref.json"
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:36:03.838283+00:00",
+      "generated_at": "2026-08-27T15:37:51.266071+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2881,7 +2841,7 @@
       ]
     },
     "firmware_scan": {
-      "generated_at": "2026-08-27T15:36:04.644224+00:00",
+      "generated_at": "2026-08-27T15:37:52.076134+00:00",
       "eeprom_size": 8192,
       "boot_format": "C2",
       "firmware_offset": 12,
@@ -2906,7 +2866,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:36:04.120857+00:00",
+      "generated_utc": "2026-08-27T15:37:51.547672+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -3162,7 +3122,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:36:04.020651+00:00",
+      "generated_utc": "2026-08-27T15:37:51.452807+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -4291,7 +4251,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:36:03.838283+00:00",
+      "generated_at": "2026-08-27T15:37:51.266071+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -4342,7 +4302,7 @@
       ]
     },
     "pending_index": {
-      "generated_at": "2026-08-27T15:36:05.038864+00:00",
+      "generated_at": "2026-08-27T15:37:52.573843+00:00",
       "blocked_statuses": [
         "missing",
         "not_started",
@@ -5234,7 +5194,7 @@
       "note": "Blocked items must not be upgraded without new evidence"
     },
     "phase_b_status": {
-      "generated_at": "2026-08-27T15:36:05.119729+00:00",
+      "generated_at": "2026-08-27T15:37:52.656687+00:00",
       "captures_dir": "phase_b/captures",
       "capture_count": 0,
       "captures": [],
@@ -5248,8 +5208,158 @@
         "Place eeprom.bin and/or *.pcapng in phase_b/captures/"
       ]
     },
+    "phase_roadmap": {
+      "generated_at": "2026-08-27T15:37:52.405552+00:00",
+      "phase_b": [
+        {
+          "action": "eeprom_dump",
+          "artifact": "phase_b/captures/eeprom.bin",
+          "unblocks": [
+            "FW-MCU-CORE-IMAGE",
+            "FW-MCU-RESET-VECTOR",
+            "FW-MCU-CODE-XRAM-MAP",
+            "FW-MCU-I2C-BOOT-PATH",
+            "FW-MCU-RENUMERATION",
+            "FW-EEPROM-IMAGE",
+            "FW-EEPROM-CONFIG-BYTE",
+            "FW-EEPROM-VIDPID",
+            "FW-EEPROM-DESC-OVERRIDE",
+            "FW-EEPROM-BOOT-FORMAT",
+            "FW-EEPROM-DID-FIELD",
+            "FW-EEPROM-FW-RECORDS"
+          ],
+          "feeds": [
+            "analyze_eeprom.py",
+            "scan_firmware_stub.py",
+            "EXP-010-8051-DISASM",
+            "EXP-012-VIDPID"
+          ]
+        },
+        {
+          "action": "usb_enum_capture",
+          "artifact": "phase_b/captures/usb_enum.pcapng",
+          "unblocks": [
+            "PROTO-DESC-DEVICE",
+            "PROTO-DESC-CONFIG",
+            "PROTO-DESC-INTERFACE",
+            "PROTO-DESC-STRING",
+            "PROTO-EP-MAP"
+          ],
+          "feeds": [
+            "analyze_pcap_stub.py",
+            "EXP-002-USB-ENUM",
+            "EXP-013-ENDPOINT-MAP"
+          ]
+        },
+        {
+          "action": "usb_session_capture",
+          "artifact": "phase_b/captures/usb_session.pcapng",
+          "unblocks": [
+            "EXP-003-USB-SESSION",
+            "EXP-011-PROTO-TABLE",
+            "EXP-014-DATA-FRAME"
+          ],
+          "feeds": [
+            "analyze_pcap_stub.py"
+          ]
+        }
+      ],
+      "phase_c": [
+        {
+          "experiment": "EXP-001-EEPROM-DUMP",
+          "description": "Read serial EEPROM to binary file",
+          "status": "not_started",
+          "depends": "Need programmer"
+        },
+        {
+          "experiment": "EXP-002-USB-ENUM",
+          "description": "Capture USB enumeration traffic",
+          "status": "not_started",
+          "depends": "Need device+host"
+        },
+        {
+          "experiment": "EXP-003-USB-SESSION",
+          "description": "Capture config+acquire session",
+          "status": "not_started",
+          "depends": "Need official driver"
+        },
+        {
+          "experiment": "EXP-004-PIN-FIFO",
+          "description": "Probe Slave FIFO signals vs REF catalog",
+          "status": "not_started",
+          "depends": "Need scope"
+        },
+        {
+          "experiment": "EXP-005-PIN-ADC",
+          "description": "Probe ADC serial interface timing",
+          "status": "not_started",
+          "depends": "Need scope"
+        },
+        {
+          "experiment": "EXP-006-RELAY-TOGGLE",
+          "description": "Toggle relay and measure coax path",
+          "status": "not_started",
+          "depends": "Need signal source"
+        },
+        {
+          "experiment": "EXP-007-COUPLING",
+          "description": "AC/DC coupling switch behavior",
+          "status": "not_started",
+          "depends": "Need relay command or manual"
+        },
+        {
+          "experiment": "EXP-008-SINE-IN",
+          "description": "Apply known sine, check digitized output",
+          "status": "not_started",
+          "depends": "Need AWG+driver"
+        },
+        {
+          "experiment": "EXP-009-CLOCK-IFCLK",
+          "description": "Measure IFCLK frequency at FPGA",
+          "status": "not_started",
+          "depends": "Need freq counter"
+        },
+        {
+          "experiment": "EXP-010-8051-DISASM",
+          "description": "Disassemble firmware from EEPROM slice",
+          "status": "not_started",
+          "depends": "Depends EXP-001"
+        },
+        {
+          "experiment": "EXP-011-PROTO-TABLE",
+          "description": "Build command byte table from pcap",
+          "status": "not_started",
+          "depends": "Depends EXP-003"
+        },
+        {
+          "experiment": "EXP-012-VIDPID",
+          "description": "Record VID/PID from descriptor or EEPROM",
+          "status": "not_started",
+          "depends": "Depends EXP-001/002"
+        },
+        {
+          "experiment": "EXP-013-ENDPOINT-MAP",
+          "description": "Map bulk IN/OUT endpoint numbers",
+          "status": "not_started",
+          "depends": "Depends EXP-002"
+        },
+        {
+          "experiment": "EXP-014-DATA-FRAME",
+          "description": "Determine sample packing in USB stream",
+          "status": "not_started",
+          "depends": "Depends EXP-008"
+        },
+        {
+          "experiment": "EXP-015-BRG-UPGRADE",
+          "description": "Upgrade hypothesis bridges to confirmed",
+          "status": "not_started",
+          "depends": "Needs EXP-004..008"
+        }
+      ],
+      "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
+    },
     "photo_index": {
-      "generated_at": "2026-08-27T15:36:04.802113+00:00",
+      "generated_at": "2026-08-27T15:37:52.244152+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -5970,7 +6080,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:36:04.723799+00:00",
+      "generated_at": "2026-08-27T15:37:52.167101+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -6106,7 +6216,7 @@
       "pin_bridge_count": 22
     },
     "usb_capture_meta": {
-      "generated_at": "2026-08-27T15:36:05.200533+00:00",
+      "generated_at": "2026-08-27T15:37:52.737117+00:00",
       "status": "missing",
       "path": "phase_b/captures",
       "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"

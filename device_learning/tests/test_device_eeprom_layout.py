@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -27,11 +28,32 @@ def test_eeprom_meta_uses_public_offsets():
     assert meta.get("firmware_offset") == 12
 
 
-def test_bom_crosswalk_exists():
-    path = ROOT / "manifests" / "bom_crosswalk.json"
+def test_bom_crosswalk_no_sram_fpga_false_positive():
+    data = json.loads((ROOT / "manifests" / "bom_crosswalk.json").read_text())
+    for link in data["links"]:
+        if "SRAM" in link.get("ref_designator", ""):
+            assert "HW-001-FPGA-DEVICE" not in link["hw_identifiers"]
+            assert "HW-003-USB-CONTROLLER" not in link["hw_identifiers"]
+
+
+def test_phase_roadmap_exists():
+    path = ROOT / "manifests" / "phase_roadmap.json"
     assert path.exists()
     data = json.loads(path.read_text())
-    assert data["linked_count"] >= 10
+    assert len(data["phase_b"]) >= 3
+    assert len(data["phase_c"]) >= 15
+
+
+def test_diff_eeprom_identical_synthetic():
+    import subprocess
+    synth = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
+    out = ROOT / "manifests" / "eeprom_diff_test.json"
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "diff_eeprom.py"), str(synth), str(synth), "-o", str(out)],
+        check=True,
+    )
+    data = json.loads(out.read_text())
+    assert data["compare"]["identical"] is True
 
 
 def test_config_entropy_manifest():
