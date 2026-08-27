@@ -5,12 +5,14 @@
 ```bash
 cd device_learning
 make verify         # 生成账本 + 验收
-make test           # 97 项 pytest
+make test           # 99 项 pytest
 make health         # 包健康检查
 make closure        # 静态阶段关闭摘要
 make intake         # 实机接入分步向导（有实物时入口）
 make handoff        # 实机交接摘要
-make bundle         # 导出 handoff_bundle.json
+make bundle         # handoff_bundle.json + pr_body_snapshot.md
+make resume         # Agent 恢复 JSON
+make finalize       # 全量收尾验收
 make readiness      # 阶段 B 就绪报告
 make check-captures # 采集预检
 make phase-b        # 实机采集后刷新

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -49,7 +51,19 @@ def main() -> None:
         "boundary": "Bundle for human/agent handoff; not a device truth claim",
     }
     OUT.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(json.dumps({"path": str(OUT.relative_to(ROOT)), "sections": len(bundle["sections"])}, indent=2))
+    pr_snapshot = ROOT / "manifests" / "pr_body_snapshot.md"
+    pr_snapshot.write_text(
+        subprocess.check_output([sys.executable, str(ROOT / "scripts" / "print_pr_body.py")], cwd=ROOT, text=True),
+        encoding="utf-8",
+    )
+    print(json.dumps(
+        {
+            "path": str(OUT.relative_to(ROOT)),
+            "sections": len(bundle["sections"]),
+            "pr_body_snapshot": str(pr_snapshot.relative_to(ROOT)),
+        },
+        indent=2,
+    ))
 
 
 if __name__ == "__main__":

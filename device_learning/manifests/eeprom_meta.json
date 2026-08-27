@@ -1,6 +1,6 @@
 {
   "status": "synthetic_pipeline_test",
-  "generated_at": "2026-08-27T16:25:54.230360+00:00",
+  "generated_at": "2026-08-27T16:29:31.738881+00:00",
   "warning": "Using synthetic fixture — NOT device data",
   "source": "synthetic_reference",
   "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",

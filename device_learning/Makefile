@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun handoff check-captures readiness closure bundle intake finalize proposals
+.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun handoff check-captures readiness closure bundle intake resume finalize proposals
 
 ledger:
 	python3 scripts/generate_ledger.py
@@ -25,6 +25,9 @@ handoff:
 
 intake:
 	python3 scripts/print_intake.py
+
+resume:
+	python3 scripts/agent_resume.py
 
 proposals:
 	python3 scripts/print_proposals.py
