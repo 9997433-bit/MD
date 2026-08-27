@@ -22,30 +22,36 @@ namespace Aetherboard.VR
         private GridPos _homePos;
         private Vector3 _dragOffset;
         private bool _dragging;
+        private bool _xrGrabbing;
         private Transform _coopBadge;
         private int _coopPlayer;
+        private GridSnapHighlighter _highlighter;
+        private CoopController _coop;
+
+        public bool IsBeingManipulated => _dragging || _xrGrabbing;
 
         public void InitProcedural(Renderer renderer)
         {
             body = renderer;
         }
 
-        public void Inject(BattleDirector director, BattleTableView table)
+        public void Inject(
+            BattleDirector director,
+            BattleTableView table,
+            GridSnapHighlighter highlighter = null,
+            CoopController coop = null)
         {
             _director = director;
             _table = table;
-            TryWireXRGrab();
+            _highlighter = highlighter;
+            _coop = coop;
+
+            var grab = GetComponent<PieceXRGrabController>();
+            if (grab == null) grab = gameObject.AddComponent<PieceXRGrabController>();
+            grab.Setup(this, director, table, coop, highlighter);
         }
 
-        private void TryWireXRGrab()
-        {
-            var grabType = System.Type.GetType(
-                "UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable, Unity.XR.Interaction.Toolkit");
-            if (grabType == null) return;
-            var grab = gameObject.GetComponent(grabType);
-            if (grab == null) grab = gameObject.AddComponent(grabType);
-            // XR release handled via DesktopBattleInput fallback when no XR rig
-        }
+        public void SetGrabbing(bool grabbing) => _xrGrabbing = grabbing;
 
         private Color _baseColor;
         private bool _hasBaseColor;
@@ -107,28 +113,45 @@ namespace Aetherboard.VR
 
         public void BeginDrag(Vector3 hitPoint)
         {
+            if (_coop != null && !_coop.CanControlUnit(UnitId)) return;
             _dragging = true;
             _dragOffset = transform.position - hitPoint;
+            SetSelected(true);
+            _highlighter?.Begin(_table, _table != null ? _table.CellSize * 0.28f : 0.03f);
         }
 
         public void DragTo(Vector3 hitPoint)
         {
             if (!_dragging) return;
             transform.position = hitPoint + _dragOffset;
+            if (_table != null)
+                _highlighter?.SetHover(_table.WorldToGrid(transform.position));
         }
 
         public void EndDrag()
         {
             if (!_dragging) return;
             _dragging = false;
-            if (_director == null || _table == null) return;
-            if (_director.State.Phase != BattlePhase.Move) return;
+            _highlighter?.End();
+            if (_director == null || _table == null)
+            {
+                SetSelected(false);
+                return;
+            }
+
+            if (_director.State.Phase != BattlePhase.Move)
+            {
+                SnapToGrid(_homePos);
+                SetSelected(false);
+                return;
+            }
 
             var dest = _table.WorldToGrid(transform.position);
             if (_director.TryMove(UnitId, dest))
                 SnapToGrid(dest);
             else
                 SnapToGrid(_homePos);
+            SetSelected(false);
         }
 
         public void SnapToGrid(GridPos pos)

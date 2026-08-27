@@ -22,17 +22,18 @@ namespace Aetherboard.VR
             var tableView = root.AddComponent<BattleTableView>();
             var telegraph = root.AddComponent<TelegraphVFXController>();
             var bossView = root.AddComponent<BossHologramView>();
+            var coop = root.AddComponent<CoopController>();
             root.AddComponent<VRBattleBootstrap>();
 
-            tableView.BuildProcedural(root.transform, director);
+            var highlighter = root.AddComponent<GridSnapHighlighter>();
+
+            tableView.SetCoop(coop);
+            tableView.BuildProcedural(root.transform, director, highlighter, coop);
             telegraph.InitializeProcedural(tableView);
             bossView.InitializeProcedural(root.transform);
 
             var skillRing = root.AddComponent<SkillRingController>();
             skillRing.Initialize(director, tableView, root.transform);
-
-            var coop = root.AddComponent<CoopController>();
-            tableView.SetCoop(coop);
 
             var hudGo = new GameObject("BattleHUD");
             hudGo.transform.SetParent(root.transform, false);
@@ -56,6 +57,13 @@ namespace Aetherboard.VR
 
             XRRigFactory.EnsureLighting();
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
+
+            var highlighter = root.GetComponent<GridSnapHighlighter>();
+            foreach (var piece in tableView.GetComponentsInChildren<PieceToken>(true))
+            {
+                var grab = piece.GetComponent<PieceXRGrabController>();
+                grab?.Setup(piece, director, tableView, coop, highlighter);
+            }
 
             director.SetBoss(bossId);
             return director;

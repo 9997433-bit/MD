@@ -31,8 +31,35 @@ namespace Aetherboard.VR
             SetColor(normalColor);
         }
 
+        private Color _baseColor;
+        private bool _hasBaseColor;
+        private bool _highlighted;
+
+        public void SetHighlight(Color color)
+        {
+            if (surface == null) return;
+            if (!_highlighted)
+            {
+                _baseColor = surface.material != null ? surface.material.color : normalColor;
+                _hasBaseColor = true;
+            }
+            _highlighted = true;
+            if (surface.material == null)
+                surface.material = ProceduralAssets.CreateUnlitMaterial(color);
+            else
+                surface.material.color = color;
+        }
+
+        public void ClearHighlight()
+        {
+            if (!_highlighted || surface == null) return;
+            _highlighted = false;
+            surface.material.color = _hasBaseColor ? _baseColor : normalColor;
+        }
+
         public void SetKind(CellKind kind, bool preview)
         {
+            if (_highlighted) return;
             if (preview) SetColor(previewColor);
             else if (kind == CellKind.Hazard) SetColor(hazardColor);
             else SetColor(normalColor);

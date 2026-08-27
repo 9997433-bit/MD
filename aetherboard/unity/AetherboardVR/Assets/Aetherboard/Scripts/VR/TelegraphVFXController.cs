@@ -37,8 +37,10 @@ namespace Aetherboard.VR
 
             if (telegraph == TelegraphKind.Shrink)
                 _pulseRoutine = StartCoroutine(PulseShrinkWalls(cells));
-            if (telegraph == TelegraphKind.Slam)
+            else if (telegraph == TelegraphKind.Slam)
                 _pulseRoutine = StartCoroutine(SlamShockwave());
+            else if (telegraph == TelegraphKind.Earthquake)
+                SpawnEarthquakeCracks(cells);
         }
 
         private GameObject CreateRing(GridPos pos, Color color)
@@ -69,6 +71,33 @@ namespace Aetherboard.VR
                 }
                 yield return null;
             }
+        }
+
+        private void SpawnEarthquakeCracks(List<GridPos> cells)
+        {
+            var crackColor = new Color(1f, 0.35f, 0.1f, 0.95f);
+            foreach (var pos in cells)
+            {
+                var center = _table.GridToWorld(pos.X, pos.Y) + Vector3.up * 0.025f;
+                var crack = CreateCrackLine(center, _table.CellSize * 0.42f, crackColor);
+                _active.Add(crack);
+            }
+        }
+
+        private static GameObject CreateCrackLine(Vector3 center, float halfLen, Color color)
+        {
+            var go = new GameObject("EarthquakeCrack");
+            var line = go.AddComponent<LineRenderer>();
+            line.positionCount = 2;
+            line.startWidth = 0.008f;
+            line.endWidth = 0.004f;
+            line.material = ProceduralAssets.CreateUnlitMaterial(color);
+            line.startColor = color;
+            line.endColor = color;
+            line.useWorldSpace = true;
+            line.SetPosition(0, center + new Vector3(-halfLen, 0, 0));
+            line.SetPosition(1, center + new Vector3(halfLen, 0, 0));
+            return go;
         }
 
         private IEnumerator SlamShockwave()

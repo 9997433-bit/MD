@@ -28,10 +28,15 @@ namespace Aetherboard.VR
                 BuildFromPrefabs();
         }
 
-        public void BuildProcedural(Transform parent, BattleDirector director)
+        public void BuildProcedural(
+            Transform parent,
+            BattleDirector director,
+            GridSnapHighlighter highlighter = null,
+            CoopController coop = null)
         {
             if (_built) return;
             _built = true;
+            _coop = coop ?? _coop;
 
             var tableRoot = new GameObject("Table").transform;
             tableRoot.SetParent(parent, false);
@@ -67,7 +72,7 @@ namespace Aetherboard.VR
                 var token = go.AddComponent<PieceToken>();
                 token.InitProcedural(go.GetComponent<Renderer>());
                 token.UnitId = id;
-                token.Inject(director, this);
+                token.Inject(director, this, highlighter, _coop);
                 _pieces[id] = token;
             }
         }
@@ -133,8 +138,11 @@ namespace Aetherboard.VR
                 if (!_pieces.TryGetValue(unit.Id, out var token)) continue;
                 token.gameObject.SetActive(unit.Alive);
                 if (!unit.Alive) continue;
-                var world = GridToWorld(unit.Pos.X, unit.Pos.Y);
-                token.transform.position = world + Vector3.up * (cellSize * 0.28f);
+                if (!token.IsBeingManipulated)
+                {
+                    var world = GridToWorld(unit.Pos.X, unit.Pos.Y);
+                    token.transform.position = world + Vector3.up * (cellSize * 0.28f);
+                }
                 token.SetJob(unit.Job);
                 token.RememberHome(unit.Pos);
                 token.SetCoopPlayer(GetCoopPlayer(unit.Id));

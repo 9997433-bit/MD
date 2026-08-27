@@ -34,6 +34,7 @@
 | **Unity WS 传输** | ✅ | Auto WS→TCP 回退，`B` 切换 |
 | **XR Origin 官方 Prefab** | ✅ | 菜单安装 + Resources 自动加载 |
 | **Unity WS Host** | ✅ | `BattleWebSocketHostServer` 8769 |
+| **XR 抓取吸附** | ✅ | `PieceXRGrabController` + 格子高亮 |
 | 在线多人传输层 | 🔲 | Netcode 生产级封装 |
 
 ## 技术栈
