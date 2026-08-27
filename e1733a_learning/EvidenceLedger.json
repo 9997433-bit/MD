@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T05:13:42.703785+00:00",
+  "generated_at": "2026-08-27T05:32:08.327854+00:00",
   "installer_source": "Montyzhang/-seed Install Keysight E1733A 1.14.1 (Win64).exe",
   "phases_completed": [
     "0",
@@ -189,6 +189,42 @@
         "status": "E1",
         "boundary": "remote_h_constant",
         "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-STR-TARGETWIN",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_TRIGWND_ITEMTEXT",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI string anchor in english_string_gaps; no formula"
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-STR-DWELL",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_TRIGDWELL_ITEMTEXT",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI string anchor in english_string_gaps; no formula"
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-STR-ENCRES",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_AQBRES_ITEMTEXT",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI string anchor in english_string_gaps; no formula"
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-STR-EPTIMEOUT",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_EPTIMEOUT_CHOOSING",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI string anchor in english_string_gaps; no formula"
       },
       {
         "identifier": "ACQ-E1-DLL-E1735A_BlinkLED",

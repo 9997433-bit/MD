@@ -245,6 +245,22 @@ def build_acq_catalog(pe_exports_map: dict) -> list[dict]:
                 None,
             )
         )
+    for ident, src in [
+        ("ACQ-E1-TRIG-STR-TARGETWIN", "MEASETUP_TRIGWND_ITEMTEXT"),
+        ("ACQ-E1-TRIG-STR-DWELL", "MEASETUP_TRIGDWELL_ITEMTEXT"),
+        ("ACQ-E1-TRIG-STR-ENCRES", "MEASETUP_AQBRES_ITEMTEXT"),
+        ("ACQ-E1-TRIG-STR-EPTIMEOUT", "MEASETUP_EPTIMEOUT_CHOOSING"),
+    ]:
+        rows.append(
+            entry(
+                ident,
+                "E1733A.exe/Remote.h",
+                src,
+                "candidate",
+                "remote_h_constant",
+                "UI string anchor in english_string_gaps; no formula",
+            )
+        )
     for sym in pe_exports_map.get("E1735A.dll", []):
         if sym.startswith("E1735A_"):
             rows.append(
