@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:24:17.977716+00:00",
-  "artifact_count": 53,
-  "present_count": 53,
+  "generated_at": "2026-08-27T16:25:57.247802+00:00",
+  "artifact_count": 57,
+  "present_count": 57,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 245790
+      "size_bytes": 246481
     },
     {
       "path": "coverage.json",
@@ -26,6 +26,12 @@
       "description": "静态摘要",
       "exists": true,
       "size_bytes": 1637
+    },
+    {
+      "path": "STATIC_CLOSURE.md",
+      "description": "静态阶段关闭摘要",
+      "exists": true,
+      "size_bytes": 854
     },
     {
       "path": "CONFIRMED_REPORT.md",
@@ -64,16 +70,46 @@
       "size_bytes": 2468
     },
     {
+      "path": "PHASE_B_READINESS.md",
+      "description": "阶段 B 就绪报告",
+      "exists": true,
+      "size_bytes": 705
+    },
+    {
+      "path": "PHASE_C_READINESS.md",
+      "description": "阶段 C 就绪报告",
+      "exists": true,
+      "size_bytes": 348
+    },
+    {
       "path": "phase_b/CHECKLIST.json",
       "description": "阶段 B 机器可读检查清单",
       "exists": true,
       "size_bytes": 1618
     },
     {
+      "path": "phase_c/CHECKLIST.json",
+      "description": "阶段 C 机器可读检查清单",
+      "exists": true,
+      "size_bytes": 1278
+    },
+    {
       "path": "manifests/static_freeze.json",
       "description": "静态阶段冻结记录",
       "exists": true,
       "size_bytes": 523
+    },
+    {
+      "path": "manifests/static_phase_closed.json",
+      "description": "静态阶段关闭标记",
+      "exists": true,
+      "size_bytes": 745
+    },
+    {
+      "path": "manifests/handoff_bundle.json",
+      "description": "一站式交接 JSON",
+      "exists": true,
+      "size_bytes": 15229
     },
     {
       "path": "manifests/output_hashes.json",
@@ -85,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 7961
+      "size_bytes": 8556
     },
     {
       "path": "manifests/bit_strings.json",
@@ -202,12 +238,6 @@
       "size_bytes": 14548
     },
     {
-      "path": "manifests/handoff_bundle.json",
-      "description": "generated manifest",
-      "exists": true,
-      "size_bytes": 15229
-    },
-    {
       "path": "manifests/hardware_bom.json",
       "description": "generated manifest",
       "exists": true,
@@ -302,12 +332,6 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 894
-    },
-    {
-      "path": "manifests/static_phase_closed.json",
-      "description": "generated manifest",
-      "exists": true,
-      "size_bytes": 745
     },
     {
       "path": "manifests/system_map.json",

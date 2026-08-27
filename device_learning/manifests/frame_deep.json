@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-08-27T16:24:14.582103+00:00",
+  "generated_utc": "2026-08-27T16:25:53.856444+00:00",
   "source_file": "firmware/device.bit",
   "file_size_bytes": 131046,
   "reference": "UG332 / XAPP452 (public Xilinx documentation)",

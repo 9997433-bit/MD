@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun handoff check-captures readiness
+.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun handoff check-captures readiness closure bundle intake finalize proposals
 
 ledger:
 	python3 scripts/generate_ledger.py
@@ -44,6 +44,9 @@ closure:
 
 bundle:
 	python3 scripts/build_handoff_bundle.py
+
+finalize: ci health closure bundle
+	@echo "Static package finalized. See STATIC_CLOSURE.md and manifests/handoff_bundle.json"
 
 freeze: verify
 	@echo "Static phase frozen — see manifests/static_freeze.json"
