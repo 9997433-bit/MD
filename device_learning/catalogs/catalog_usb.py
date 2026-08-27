@@ -18,6 +18,24 @@
 from catalogs import make_entry
 
 ENTRIES = [
+    make_entry(
+        "FW-EEPROM-LAYOUT-REF", "FW", "eeprom",
+        "Public FX2LP EEPROM field layout reference",
+        "candidate", "reference_only",
+        "manifests/eeprom_layout_ref.json",
+    ),
+    make_entry(
+        "FW-EEPROM-BOOT-BYTE-RULE", "FW", "eeprom",
+        "Boot config byte semantics (0xC0/0xC2)",
+        "candidate", "reference_only",
+        "manifests/eeprom_layout_ref.json offset 0",
+    ),
+    make_entry(
+        "FW-EEPROM-FW-OFFSET", "FW", "eeprom",
+        "Typical 8051 firmware start offset 0x10 in EEPROM",
+        "candidate", "reference_only",
+        "manifests/eeprom_layout_ref.json",
+    ),
     # ---- FW: MCU (8051-compatible core) firmware ----
     make_entry(
         "FW-MCU-CORE-IMAGE", "FW", "mcu",

@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from catalogs.catalog_arch import ENTRIES as ARCH_ENTRIES
 from catalogs.catalog_bit import ENTRIES as BIT_ENTRIES
 from catalogs.catalog_hw import ENTRIES as HW_ENTRIES
 from catalogs.catalog_ref import ENTRIES as REF_ENTRIES
@@ -49,7 +50,7 @@ def build_coverage(entries: list[dict]) -> dict:
         "1_no_empty_status": all(e.get("status") for e in entries),
         "2_all_layers_present": all(
             any(e["layer"] == layer for e in entries)
-            for layer in ("hw", "bit", "signal", "usb", "ref")
+            for layer in ("hw", "bit", "signal", "usb", "ref", "arch")
         ),
         "3_missing_documented": (ROOT / "OMISSIONS_AND_REMAINING.md").exists(),
         "4_null_bridges_intact": len(bridges["forced_null_bridges"]) >= 8
@@ -64,7 +65,7 @@ def build_coverage(entries: list[dict]) -> dict:
         "stop_conditions": stop,
         "all_pass": all(stop.values()),
         "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-        "phase": "A_complete_B_scaffolded",
+        "phase": "A_deep_B_scaffolded",
     }
 
 
@@ -76,21 +77,22 @@ def main() -> None:
          str(ROOT / "firmware" / "device.bit"), "-o", str(MANIFESTS / "bitstream_meta.json")],
         check=True,
     )
-    for script in ("parse_bitstream.py", "scan_spartan3_frames.py", "ingest_phase_b.py"):
+    for script in ("parse_bitstream.py", "scan_spartan3_frames.py", "analyze_eeprom.py", "build_system_map.py", "ingest_phase_b.py"):
         subprocess.run([sys.executable, str(ROOT / "scripts" / script)], check=False)
 
     usb_norm = [normalize_usb(e) for e in USB_ENTRIES]
-    all_entries = HW_ENTRIES + BIT_ENTRIES + SIG_ENTRIES + usb_norm + REF_ENTRIES
+    all_entries = HW_ENTRIES + BIT_ENTRIES + SIG_ENTRIES + usb_norm + REF_ENTRIES + ARCH_ENTRIES
     ledger = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-        "phase": "A_complete_B_scaffolded",
+        "phase": "A_deep_B_scaffolded",
         "catalogs": {
             "hw": HW_ENTRIES,
             "bit": BIT_ENTRIES,
             "signal": SIG_ENTRIES,
             "usb": usb_norm,
             "ref": REF_ENTRIES,
+            "arch": ARCH_ENTRIES,
         },
         "manifests": {
             "file_hashes": load_json("file_hashes.json"),
@@ -100,6 +102,9 @@ def main() -> None:
             "hardware_bom": load_json("hardware_bom.json"),
             "pin_hypothesis": load_json("pin_hypothesis.json"),
             "phase_b_status": load_json("phase_b_status.json"),
+            "eeprom_layout_ref": load_json("eeprom_layout_ref.json"),
+            "eeprom_meta": load_json("eeprom_meta.json"),
+            "system_map": load_json("system_map.json"),
         },
     }
     (ROOT / "EvidenceLedger.json").write_text(

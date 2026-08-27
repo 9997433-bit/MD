@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-27T15:18:32.431705+00:00",
+  "generated_at": "2026-08-27T15:21:32.418738+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-  "phase": "A_complete_B_scaffolded",
+  "phase": "A_deep_B_scaffolded",
   "catalogs": {
     "hw": [
       {
@@ -424,10 +424,82 @@
         "identifier": "BIT-015-CONFIG-OFFSET",
         "layer": "bit",
         "module": "header",
-        "description": "Configuration data byte offset",
+        "description": "Configuration data byte offset 94",
         "status": "confirmed",
         "boundary": null,
-        "evidence": "parse_bit_header.py"
+        "evidence": "frame_summary.json"
+      },
+      {
+        "identifier": "BIT-SYNC-WORD",
+        "layer": "bit",
+        "module": "packet",
+        "description": "Sync word 0xAA995566",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.config_data.sync_word"
+      },
+      {
+        "identifier": "BIT-IDCODE",
+        "layer": "bit",
+        "module": "packet",
+        "description": "IDCODE 0x01414093 (Spartan-3 XC3S200)",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.packet_stream.registers.IDCODE"
+      },
+      {
+        "identifier": "BIT-FLR",
+        "layer": "bit",
+        "module": "packet",
+        "description": "Frame Length Register = 52 words",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.packet_stream.registers.FLR"
+      },
+      {
+        "identifier": "BIT-COR",
+        "layer": "bit",
+        "module": "packet",
+        "description": "COR register 0x40003FE5",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.packet_stream.registers.COR"
+      },
+      {
+        "identifier": "BIT-CRC",
+        "layer": "bit",
+        "module": "packet",
+        "description": "CRC value 0x00005F57",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.packet_stream.registers.CRC"
+      },
+      {
+        "identifier": "BIT-CMD-SEQUENCE",
+        "layer": "bit",
+        "module": "packet",
+        "description": "RCRC→SWITCH→WCFG→GRESTORE→DGHIGH→START→DESYNCH",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.packet_stream.cmd_sequence"
+      },
+      {
+        "identifier": "BIT-FDRI-WORD-COUNT",
+        "layer": "bit",
+        "module": "packet",
+        "description": "FDRI payload 32648 words",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.packet_stream.fdri.word_count"
+      },
+      {
+        "identifier": "BIT-FRAME-COUNT-EST",
+        "layer": "bit",
+        "module": "packet",
+        "description": "Estimated 627 configuration frames",
+        "status": "candidate",
+        "boundary": "FDRI余数44字未对齐",
+        "evidence": "frame_summary.frame_analysis.estimated_frame_count"
       },
       {
         "identifier": "FRM-001-FORMAT",
@@ -442,10 +514,10 @@
         "identifier": "FRM-002-COUNT",
         "layer": "bit",
         "module": "frame",
-        "description": "Total configuration frame count",
+        "description": "Estimated 627 configuration frames",
         "status": "candidate",
-        "boundary": "需完整解码器",
-        "evidence": "frame scan"
+        "boundary": "FDRI非整除FLR",
+        "evidence": "frame_summary"
       },
       {
         "identifier": "FRM-003-WORD-WIDTH",
@@ -523,10 +595,10 @@
         "identifier": "IOB-001-ACTIVE-COUNT",
         "layer": "bit",
         "module": "iob",
-        "description": "Estimated active IOB count",
+        "description": "Candidate IOB config words: 223",
         "status": "candidate",
-        "boundary": "需IOB解码器",
-        "evidence": "heuristic"
+        "boundary": "启发式边缘列",
+        "evidence": "frame_summary candidate_iob_config_words"
       },
       {
         "identifier": "IOB-002-INPUTS",
@@ -1010,6 +1082,33 @@
     ],
     "usb": [
       {
+        "identifier": "FW-EEPROM-LAYOUT-REF",
+        "layer": "usb",
+        "module": "fw",
+        "description": "Public FX2LP EEPROM field layout reference",
+        "status": "candidate",
+        "boundary": "reference_only",
+        "evidence": "manifests/eeprom_layout_ref.json"
+      },
+      {
+        "identifier": "FW-EEPROM-BOOT-BYTE-RULE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "Boot config byte semantics (0xC0/0xC2)",
+        "status": "candidate",
+        "boundary": "reference_only",
+        "evidence": "manifests/eeprom_layout_ref.json offset 0"
+      },
+      {
+        "identifier": "FW-EEPROM-FW-OFFSET",
+        "layer": "usb",
+        "module": "fw",
+        "description": "Typical 8051 firmware start offset 0x10 in EEPROM",
+        "status": "candidate",
+        "boundary": "reference_only",
+        "evidence": "manifests/eeprom_layout_ref.json"
+      },
+      {
         "identifier": "FW-MCU-CORE-IMAGE",
         "layer": "usb",
         "module": "fw",
@@ -1470,11 +1569,148 @@
         "boundary": "需引脚对照实验",
         "evidence": "public datasheet (CY7C68013A boot loader); actual first byte on this board not dumped"
       }
+    ],
+    "arch": [
+      {
+        "identifier": "ARCH-001-LAYERS",
+        "layer": "arch",
+        "module": "topology",
+        "description": "Five-layer stack: HW → BIT → SIG → USB → HOST",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "system_map.json"
+      },
+      {
+        "identifier": "ARCH-002-DATA-PATH",
+        "layer": "arch",
+        "module": "topology",
+        "description": "Coax → relay → ADC → FPGA FIFO → USB → host",
+        "status": "candidate",
+        "boundary": "中间节点未实测",
+        "evidence": "system_map.json"
+      },
+      {
+        "identifier": "ARCH-003-CONFIG-CHAIN",
+        "layer": "arch",
+        "module": "config",
+        "description": "FPGA configured from bitstream at power-on",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "device.bit present"
+      },
+      {
+        "identifier": "ARCH-004-USB-BOOT",
+        "layer": "arch",
+        "module": "config",
+        "description": "USB MCU boots firmware from EEPROM over I2C",
+        "status": "candidate",
+        "boundary": "EEPROM未转储",
+        "evidence": "eeprom_layout_ref.json"
+      },
+      {
+        "identifier": "ARCH-005-CLOCK-USB",
+        "layer": "arch",
+        "module": "clock",
+        "description": "24 MHz oscillator feeds USB controller",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "hardware_bom XT600"
+      },
+      {
+        "identifier": "ARCH-006-CLOCK-IF",
+        "layer": "arch",
+        "module": "clock",
+        "description": "48 MHz IFCLK to FPGA from USB controller",
+        "status": "candidate",
+        "boundary": "未实测",
+        "evidence": "REF-USB-SLAVE-FIFO-IFCLK"
+      },
+      {
+        "identifier": "ARCH-007-CLOCK-FPGA",
+        "layer": "arch",
+        "module": "clock",
+        "description": "FPGA fabric clock domain(s)",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "ARCH-008-RESET-USB",
+        "layer": "arch",
+        "module": "reset",
+        "description": "USB controller reset domain",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "ARCH-009-RESET-FPGA",
+        "layer": "arch",
+        "module": "reset",
+        "description": "FPGA GRESTORE in config sequence",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary cmd_sequence"
+      },
+      {
+        "identifier": "ARCH-010-MEM-SRAM",
+        "layer": "arch",
+        "module": "memory",
+        "description": "External SRAM buffer between USB and FPGA",
+        "status": "candidate",
+        "boundary": "容量未读",
+        "evidence": "hardware_bom U-SRAM"
+      },
+      {
+        "identifier": "ARCH-011-MEM-FIFO",
+        "layer": "arch",
+        "module": "memory",
+        "description": "FPGA internal FIFO for sample buffering",
+        "status": "hypothesis",
+        "boundary": "需BRAM解码",
+        "evidence": "SIG-004-PATH-FIFO"
+      },
+      {
+        "identifier": "ARCH-012-CHANNELS",
+        "layer": "arch",
+        "module": "topology",
+        "description": "Four parallel input channels",
+        "status": "candidate",
+        "boundary": null,
+        "evidence": "four coax + four ADC"
+      },
+      {
+        "identifier": "ARCH-013-RELAY-CTRL",
+        "layer": "arch",
+        "module": "control",
+        "description": "FPGA GPIO drives relay coils",
+        "status": "hypothesis",
+        "boundary": "需实验",
+        "evidence": "BRG-013"
+      },
+      {
+        "identifier": "ARCH-014-DSUB-AUX",
+        "layer": "arch",
+        "module": "interface",
+        "description": "D-sub auxiliary port via KS245 transceiver",
+        "status": "candidate",
+        "boundary": "功能未知",
+        "evidence": "hardware_bom U513"
+      },
+      {
+        "identifier": "ARCH-015-BIT-LOAD",
+        "layer": "arch",
+        "module": "config",
+        "description": "WCFG→FDRI→START configuration pipeline",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary packets"
+      }
     ]
   },
   "manifests": {
     "file_hashes": {
-      "generated_at": "2026-08-27T15:18:32.059277+00:00",
+      "generated_at": "2026-08-27T15:21:31.888005+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -1594,7 +1830,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:18:32.243010+00:00",
+      "generated_utc": "2026-08-27T15:21:32.071656+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -2945,6 +3181,269 @@
     "phase_b_status": {
       "captures_found": [],
       "ready": false
+    },
+    "eeprom_layout_ref": {
+      "device": "CY7C68013A",
+      "artifact": "serial EEPROM boot image layout",
+      "source": "public datasheet",
+      "status": "reference",
+      "reference_note": "EZ-USB FX2LP serial-EEPROM boot formats as documented in the public device datasheet and technical reference manual. Offsets and field meanings are transcribed from public documentation only; no value here is derived from any device dump.",
+      "endianness_note": "Identifier fields (VID/PID/DID) are stored little-endian (LSB first). C2 firmware data-record length and address words are stored big-endian (MSB first).",
+      "boot_formats": {
+        "C0": "Identifier-only image: overrides VID/PID/DID and the configuration byte; no 8051 firmware is loaded from EEPROM.",
+        "C2": "Firmware image: identifier header followed by one or more code/data records loaded into internal RAM, terminated by a final record that releases the 8051 from reset."
+      },
+      "field_count": 9,
+      "fields": [
+        {
+          "name": "boot_config_byte",
+          "offset": 0,
+          "offset_hex": "0x00",
+          "size_bytes": 1,
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "expected_values": [
+            "0xC0",
+            "0xC2"
+          ],
+          "description": "Leading boot-configuration byte that selects the EEPROM boot format (0xC0 identifier-only, 0xC2 firmware load). Any other value means the controller ignores the EEPROM."
+        },
+        {
+          "name": "vid",
+          "offset": 1,
+          "offset_hex": "0x01",
+          "size_bytes": 2,
+          "endianness": "little",
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "USB Vendor ID override word (LSB at 0x01, MSB at 0x02)."
+        },
+        {
+          "name": "pid",
+          "offset": 3,
+          "offset_hex": "0x03",
+          "size_bytes": 2,
+          "endianness": "little",
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "USB Product ID override word (LSB at 0x03, MSB at 0x04)."
+        },
+        {
+          "name": "did",
+          "offset": 5,
+          "offset_hex": "0x05",
+          "size_bytes": 2,
+          "endianness": "little",
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "USB Device release / Device ID override word (LSB at 0x05, MSB at 0x06)."
+        },
+        {
+          "name": "config_byte",
+          "offset": 7,
+          "offset_hex": "0x07",
+          "size_bytes": 1,
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "Configuration byte holding the I2C bus-speed select bit and the disconnect (DISCON) control bit as defined in the public datasheet."
+        },
+        {
+          "name": "data_record_length",
+          "offset": 8,
+          "offset_hex": "0x08",
+          "size_bytes": 2,
+          "endianness": "big",
+          "applies_to": [
+            "C2"
+          ],
+          "description": "First C2 firmware data-record length word (MSB first). The high bit of this word on the final record flags the end of the record list."
+        },
+        {
+          "name": "data_record_address",
+          "offset": 10,
+          "offset_hex": "0x0A",
+          "size_bytes": 2,
+          "endianness": "big",
+          "applies_to": [
+            "C2"
+          ],
+          "description": "First C2 firmware data-record load address word (MSB first): the internal-RAM destination for the following payload bytes."
+        },
+        {
+          "name": "data_record_payload",
+          "offset": 12,
+          "offset_hex": "0x0C",
+          "size_bytes": "variable (data_record_length bytes)",
+          "applies_to": [
+            "C2"
+          ],
+          "description": "Payload bytes of the first C2 firmware data record. Records repeat (length, address, payload) until the final record is reached."
+        },
+        {
+          "name": "final_record",
+          "offset": "variable",
+          "applies_to": [
+            "C2"
+          ],
+          "final_record_length_word": "0x8001",
+          "final_record_address": "0xE600",
+          "size_bytes": 1,
+          "description": "Terminating C2 record: a single payload byte written to the reset-control register at 0xE600 to release the 8051 core from reset once all firmware records are loaded."
+        }
+      ]
+    },
+    "eeprom_meta": {
+      "status": "missing",
+      "path": "phase_b/captures/eeprom.bin",
+      "generated_at": "2026-08-27T15:21:32.261428+00:00",
+      "layout_ref": "manifests/eeprom_layout_ref.json",
+      "note": "Place eeprom.bin in phase_b/captures/ and re-run"
+    },
+    "system_map": {
+      "generated_at": "2026-08-27T15:21:32.338766+00:00",
+      "node_count": 6,
+      "edge_count": 5,
+      "nodes": [
+        {
+          "id": "NODE-IN",
+          "layer": "hw",
+          "name": "Analog input (coax)",
+          "evidence": [
+            "HW-016-INTERFACE-COAX",
+            "SIG-001-PATH-IN"
+          ],
+          "status": "confirmed"
+        },
+        {
+          "id": "NODE-RELAY",
+          "layer": "hw",
+          "name": "Relay matrix",
+          "evidence": [
+            "HW-008-RELAY-ARRAY",
+            "SIG-002-RELAY-MATRIX",
+            "BRG-013"
+          ],
+          "status": "candidate"
+        },
+        {
+          "id": "NODE-ADC",
+          "layer": "hw",
+          "name": "24-bit ADC",
+          "evidence": [
+            "HW-005-ADC-PRIMARY",
+            "SIG-003-PATH-ADC",
+            "REF-ADC-SPI-DOUT"
+          ],
+          "status": "candidate"
+        },
+        {
+          "id": "NODE-FPGA",
+          "layer": "bit",
+          "name": "FPGA fabric",
+          "evidence": [
+            "HW-001-FPGA-DEVICE",
+            "BIT-IDCODE",
+            "BIT-FDRI-WORD-COUNT"
+          ],
+          "status": "confirmed"
+        },
+        {
+          "id": "NODE-USB-CTL",
+          "layer": "hw",
+          "name": "USB controller",
+          "evidence": [
+            "HW-003-USB-CONTROLLER",
+            "REF-USB-SLAVE-FIFO-SLRD"
+          ],
+          "status": "confirmed"
+        },
+        {
+          "id": "NODE-HOST",
+          "layer": "usb",
+          "name": "Host PC",
+          "evidence": [
+            "PROTO-001-USB-DESCRIPTORS"
+          ],
+          "status": "not_started"
+        }
+      ],
+      "edges": [
+        {
+          "from": "NODE-IN",
+          "to": "NODE-RELAY",
+          "type": "analog",
+          "status": "candidate"
+        },
+        {
+          "from": "NODE-RELAY",
+          "to": "NODE-ADC",
+          "type": "analog",
+          "status": "candidate"
+        },
+        {
+          "from": "NODE-ADC",
+          "to": "NODE-FPGA",
+          "type": "digital",
+          "status": "hypothesis"
+        },
+        {
+          "from": "NODE-FPGA",
+          "to": "NODE-USB-CTL",
+          "type": "slave_fifo",
+          "status": "hypothesis"
+        },
+        {
+          "from": "NODE-USB-CTL",
+          "to": "NODE-HOST",
+          "type": "usb2",
+          "status": "not_started"
+        }
+      ],
+      "bit_facts": {
+        "idcode": {
+          "raw": "0x01414093",
+          "device_hint": "family=spartan3 device=xc3s200"
+        },
+        "frame_analysis": {
+          "confidence": "candidate",
+          "method": "FDRI payload split into fixed-length frames using the FLR register; outer (edge) frame columns treated as candidate IOB configuration region per Spartan-3 column-based frame layout",
+          "fdri_word_count": 32648,
+          "frame_length_words": 52,
+          "frame_length_source": "FLR register",
+          "active_config_words": 21631,
+          "active_config_words_note": "count of non-zero 32-bit words in the FDRI payload (upper bound on meaningfully-configured words)",
+          "estimated_frame_count": 627,
+          "trailing_words_after_last_full_frame": 44,
+          "frame_alignment": "candidate: FDRI word count not an exact multiple of FLR; remainder likely pad/CRC words",
+          "iob_edge_frame_window": 4,
+          "candidate_iob_config_words": 223,
+          "candidate_iob_confidence": "candidate/low",
+          "candidate_iob_note": "non-zero words within the first/last frame columns; exact IOB frame mapping for this specific device is unknown",
+          "max_frame_density": 52,
+          "nonzero_frame_count": 492
+        },
+        "cmd_sequence": [
+          "RCRC",
+          "SWITCH",
+          "WCFG",
+          "GRESTORE",
+          "DGHIGH/LFRM",
+          "START",
+          "DESYNCH"
+        ]
+      },
+      "bom_component_count": 40,
+      "pin_bridge_count": 22
     }
   }
 }

@@ -1,0 +1,7 @@
+{
+  "status": "missing",
+  "path": "phase_b/captures/eeprom.bin",
+  "generated_at": "2026-08-27T15:21:32.261428+00:00",
+  "layout_ref": "manifests/eeprom_layout_ref.json",
+  "note": "Place eeprom.bin in phase_b/captures/ and re-run"
+}

@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-08-27T15:21:32.338766+00:00",
+  "node_count": 6,
+  "edge_count": 5,
+  "nodes": [
+    {
+      "id": "NODE-IN",
+      "layer": "hw",
+      "name": "Analog input (coax)",
+      "evidence": [
+        "HW-016-INTERFACE-COAX",
+        "SIG-001-PATH-IN"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "NODE-RELAY",
+      "layer": "hw",
+      "name": "Relay matrix",
+      "evidence": [
+        "HW-008-RELAY-ARRAY",
+        "SIG-002-RELAY-MATRIX",
+        "BRG-013"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "NODE-ADC",
+      "layer": "hw",
+      "name": "24-bit ADC",
+      "evidence": [
+        "HW-005-ADC-PRIMARY",
+        "SIG-003-PATH-ADC",
+        "REF-ADC-SPI-DOUT"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "NODE-FPGA",
+      "layer": "bit",
+      "name": "FPGA fabric",
+      "evidence": [
+        "HW-001-FPGA-DEVICE",
+        "BIT-IDCODE",
+        "BIT-FDRI-WORD-COUNT"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "NODE-USB-CTL",
+      "layer": "hw",
+      "name": "USB controller",
+      "evidence": [
+        "HW-003-USB-CONTROLLER",
+        "REF-USB-SLAVE-FIFO-SLRD"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "NODE-HOST",
+      "layer": "usb",
+      "name": "Host PC",
+      "evidence": [
+        "PROTO-001-USB-DESCRIPTORS"
+      ],
+      "status": "not_started"
+    }
+  ],
+  "edges": [
+    {
+      "from": "NODE-IN",
+      "to": "NODE-RELAY",
+      "type": "analog",
+      "status": "candidate"
+    },
+    {
+      "from": "NODE-RELAY",
+      "to": "NODE-ADC",
+      "type": "analog",
+      "status": "candidate"
+    },
+    {
+      "from": "NODE-ADC",
+      "to": "NODE-FPGA",
+      "type": "digital",
+      "status": "hypothesis"
+    },
+    {
+      "from": "NODE-FPGA",
+      "to": "NODE-USB-CTL",
+      "type": "slave_fifo",
+      "status": "hypothesis"
+    },
+    {
+      "from": "NODE-USB-CTL",
+      "to": "NODE-HOST",
+      "type": "usb2",
+      "status": "not_started"
+    }
+  ],
+  "bit_facts": {
+    "idcode": {
+      "raw": "0x01414093",
+      "device_hint": "family=spartan3 device=xc3s200"
+    },
+    "frame_analysis": {
+      "confidence": "candidate",
+      "method": "FDRI payload split into fixed-length frames using the FLR register; outer (edge) frame columns treated as candidate IOB configuration region per Spartan-3 column-based frame layout",
+      "fdri_word_count": 32648,
+      "frame_length_words": 52,
+      "frame_length_source": "FLR register",
+      "active_config_words": 21631,
+      "active_config_words_note": "count of non-zero 32-bit words in the FDRI payload (upper bound on meaningfully-configured words)",
+      "estimated_frame_count": 627,
+      "trailing_words_after_last_full_frame": 44,
+      "frame_alignment": "candidate: FDRI word count not an exact multiple of FLR; remainder likely pad/CRC words",
+      "iob_edge_frame_window": 4,
+      "candidate_iob_config_words": 223,
+      "candidate_iob_confidence": "candidate/low",
+      "candidate_iob_note": "non-zero words within the first/last frame columns; exact IOB frame mapping for this specific device is unknown",
+      "max_frame_density": 52,
+      "nonzero_frame_count": 492
+    },
+    "cmd_sequence": [
+      "RCRC",
+      "SWITCH",
+      "WCFG",
+      "GRESTORE",
+      "DGHIGH/LFRM",
+      "START",
+      "DESYNCH"
+    ]
+  },
+  "bom_component_count": 40,
+  "pin_bridge_count": 22
+}

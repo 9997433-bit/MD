@@ -22,10 +22,10 @@ def test_stop_conditions():
 
 def test_total_identifiers():
     cov = json.loads((ROOT / "coverage.json").read_text())
-    assert cov["total_identifiers"] >= 150
+    assert cov["total_identifiers"] >= 180
 
 
 def test_ref_layer_present():
     cov = json.loads((ROOT / "coverage.json").read_text())
     assert cov["stop_conditions"]["2_all_layers_present"] is True
-    assert cov.get("phase") == "A_complete_B_scaffolded"
+    assert cov.get("phase") == "A_deep_B_scaffolded"

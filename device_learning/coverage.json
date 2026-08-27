@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-27T15:18:32.433870+00:00",
-  "total_identifiers": 162,
+  "generated_at": "2026-08-27T15:21:32.421389+00:00",
+  "total_identifiers": 188,
   "status_counts": {
-    "confirmed": 39,
-    "candidate": 47,
-    "unknown": 53,
-    "hypothesis": 4,
+    "confirmed": 51,
+    "candidate": 57,
+    "unknown": 55,
+    "hypothesis": 6,
     "not_started": 10,
     "missing": 9
   },
@@ -19,5 +19,5 @@
   },
   "all_pass": true,
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-  "phase": "A_complete_B_scaffolded"
+  "phase": "A_deep_B_scaffolded"
 }
