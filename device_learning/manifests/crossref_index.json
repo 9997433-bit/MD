@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-27T15:28:17.150019+00:00",
+  "generated_at": "2026-08-27T15:31:24.506099+00:00",
   "layer_counts": {
     "hw": 32,
-    "bit": 68,
+    "bit": 78,
     "signal": 19,
     "usb": 34,
     "ref": 24,
@@ -10,7 +10,7 @@
     "learn": 20,
     "exp": 15
   },
-  "total_identifiers": 227,
+  "total_identifiers": 237,
   "themes": {
     "usb_path": [
       "HW-003-USB-CONTROLLER",

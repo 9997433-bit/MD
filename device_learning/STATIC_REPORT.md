@@ -1,12 +1,12 @@
 # 静态分析报告（自动生成）
 
-**生成时间**：2026-08-27 15:28 UTC
+**生成时间**：2026-08-27 15:31 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
 ## 摘要
 
-- Identifier 总数：**227**
+- Identifier 总数：**237**
 - 停止条件：**全部通过**
 - 阶段：**static_complete_pending_hardware**
 
@@ -14,12 +14,12 @@
 
 | Status | 数量 |
 |--------|------|
-| candidate | 62 |
-| confirmed | 67 |
+| candidate | 65 |
+| confirmed | 68 |
 | hypothesis | 6 |
 | missing | 12 |
 | not_started | 30 |
-| unknown | 50 |
+| unknown | 56 |
 
 ## 硬件
 

@@ -13,6 +13,7 @@ MANIFESTS = ROOT / "manifests"
 REDACT_PATTERNS = [
     (re.compile(r"TopUsb\d+\.ncd", re.I), "[redacted].ncd"),
     (re.compile(r"Usb\d+", re.I), "[redacted]"),
+    (re.compile(r"4431"), "[redacted]"),
 ]
 
 

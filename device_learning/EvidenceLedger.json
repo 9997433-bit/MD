@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:28:17.543850+00:00",
+  "generated_at": "2026-08-27T15:31:24.906331+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -680,6 +680,96 @@
         "status": "confirmed",
         "boundary": null,
         "evidence": "frame_deep.json register inventory"
+      },
+      {
+        "identifier": "FRM-021-FAR-DIST",
+        "layer": "bit",
+        "module": "frame",
+        "description": "FAR address value distribution",
+        "status": "candidate",
+        "boundary": "启发式解码",
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-022-TYPE1-REG-TOP",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Top Type-1 register write targets",
+        "status": "candidate",
+        "boundary": "寄存器语义未映射",
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-023-ZERO-RATIO",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Zero-word padding ratio in config",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_deep.json scan"
+      },
+      {
+        "identifier": "FRM-024-CLASS-COUNTS",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Frame word class histogram",
+        "status": "candidate",
+        "boundary": null,
+        "evidence": "frame_deep.json scan"
+      },
+      {
+        "identifier": "FRM-025-IO-BLOCK-WRITES",
+        "layer": "bit",
+        "module": "frame",
+        "description": "IO block FAR writes",
+        "status": "unknown",
+        "boundary": "需FAR解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-026-CLB-BLOCK-WRITES",
+        "layer": "bit",
+        "module": "frame",
+        "description": "CLB block FAR writes",
+        "status": "unknown",
+        "boundary": "需FAR解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-027-BRAM-BLOCK-WRITES",
+        "layer": "bit",
+        "module": "frame",
+        "description": "BRAM block FAR writes",
+        "status": "unknown",
+        "boundary": "需FAR解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-028-CONFIG-ORDER",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Configuration write ordering",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-029-DONE-PIPE",
+        "layer": "bit",
+        "module": "frame",
+        "description": "DONE pipeline settings",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-030-WAKEUP",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Startup wakeup sequence",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
       },
       {
         "identifier": "IOB-001-ACTIVE-COUNT",
@@ -2064,6 +2154,98 @@
     ]
   },
   "manifests": {
+    "bit_strings": {
+      "generated_at": "2026-08-27T15:31:24.033689+00:00",
+      "source": "firmware/device.bit",
+      "file_size_bytes": 131046,
+      "min_string_length": 4,
+      "raw_string_count": 388,
+      "unique_redacted_count": 367,
+      "strings_redacted": [
+        "  !(",
+        " !@! ",
+        " !D0",
+        " \"G@",
+        " ($T",
+        " )Lx",
+        " ,P ",
+        " 4D2",
+        " 4D@2",
+        " 6`  ",
+        " 9A1",
+        " @(H",
+        " @` ",
+        " Xh,",
+        " r9&",
+        " |40",
+        " }0l",
+        "!1\\H",
+        "!@00P",
+        "!L(b",
+        "!TD8",
+        "![redacted].ncd;UserID=0xFFFFFFFF",
+        "\"  @",
+        "\"@$<",
+        "\"BD@",
+        "\"J\"08@",
+        "$  !",
+        "$ @@",
+        "$!\"\"",
+        "$\"!BD",
+        "$$BA",
+        "$(0D$",
+        "$(@4",
+        "$D!\"",
+        "$H$0",
+        "$TD\"",
+        "%=-0",
+        "%Z[1",
+        "&xzym",
+        "( < ",
+        "( @A",
+        "( A\"",
+        "( X0",
+        "(!  ",
+        "($I\"@",
+        "(0AF4",
+        "(<\\0",
+        "(>0z)x8",
+        "(@D)",
+        "(PK\\;\\-4h\\1",
+        "(U<9",
+        ")(OO",
+        ")02B",
+        ")8(0",
+        "):x\\",
+        ")@ 0",
+        ")Hhp+",
+        ")L&`",
+        ")T!R D",
+        ")s#C",
+        "*&8A",
+        "*98*B",
+        "*L88",
+        ",,QO",
+        ",0` 0",
+        ",<qDv",
+        ",F*f",
+        ",Pp8",
+        ",t /",
+        ",z|>",
+        "-X0=i",
+        ".@@@",
+        ".U0U03P3",
+        ".fhx",
+        ".p8i>",
+        ".z,*8|",
+        "0 .@H",
+        "0 4@D$",
+        "0! 4",
+        "0!@ "
+      ],
+      "truncated": true,
+      "boundary": "Heuristic ASCII scan; redacted before manifest write"
+    },
     "bitstream_meta": {
       "file": {
         "name": "device.bit",
@@ -2136,10 +2318,10 @@
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:28:17.150019+00:00",
+      "generated_at": "2026-08-27T15:31:24.506099+00:00",
       "layer_counts": {
         "hw": 32,
-        "bit": 68,
+        "bit": 78,
         "signal": 19,
         "usb": 34,
         "ref": 24,
@@ -2147,7 +2329,7 @@
         "learn": 20,
         "exp": 15
       },
-      "total_identifiers": 227,
+      "total_identifiers": 237,
       "themes": {
         "usb_path": [
           "HW-003-USB-CONTROLLER",
@@ -2293,7 +2475,7 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-27T15:28:16.841581+00:00",
+      "generated_at": "2026-08-27T15:31:24.193787+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
@@ -2310,7 +2492,7 @@
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-27T15:28:17.540442+00:00",
+      "generated_at": "2026-08-27T15:31:24.113621+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
       "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
@@ -2320,7 +2502,7 @@
       "firmware_offset": 16
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:28:16.402164+00:00",
+      "generated_at": "2026-08-27T15:31:23.666467+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2382,7 +2564,7 @@
       ]
     },
     "firmware_scan": {
-      "generated_at": "2026-08-27T15:28:16.918642+00:00",
+      "generated_at": "2026-08-27T15:31:24.272275+00:00",
       "eeprom_size": 8192,
       "firmware_offset": 16,
       "firmware_scan": {
@@ -2396,7 +2578,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:28:16.674293+00:00",
+      "generated_utc": "2026-08-27T15:31:23.941774+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -2652,7 +2834,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:28:16.582633+00:00",
+      "generated_utc": "2026-08-27T15:31:23.849446+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -3781,7 +3963,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:28:16.402164+00:00",
+      "generated_at": "2026-08-27T15:31:23.666467+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -3832,11 +4014,22 @@
       ]
     },
     "phase_b_status": {
-      "captures_found": [],
-      "ready": false
+      "generated_at": "2026-08-27T15:31:24.586343+00:00",
+      "captures_dir": "phase_b/captures",
+      "capture_count": 0,
+      "captures": [],
+      "flags": {
+        "eeprom_present": false,
+        "usb_capture_present": false,
+        "protocol_log_present": false
+      },
+      "ready_for_ledger_refresh": false,
+      "next_steps": [
+        "Place eeprom.bin and/or *.pcapng in phase_b/captures/"
+      ]
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:28:17.072591+00:00",
+      "generated_at": "2026-08-27T15:31:24.428057+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -4557,7 +4750,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:28:16.995458+00:00",
+      "generated_at": "2026-08-27T15:31:24.350204+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -4691,6 +4884,12 @@
       },
       "bom_component_count": 40,
       "pin_bridge_count": 22
+    },
+    "usb_capture_meta": {
+      "generated_at": "2026-08-27T15:31:24.666471+00:00",
+      "status": "missing",
+      "path": "phase_b/captures",
+      "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"
     }
   }
 }

@@ -19,7 +19,8 @@
 1. 按模板读取 EEPROM / 抓包
 2. 将文件放入 `phase_b/captures/`
 3. 运行 `python3 scripts/ingest_phase_b.py`
-4. 运行 `python3 scripts/generate_ledger.py`
+4. 运行 `python3 scripts/analyze_pcap_stub.py`
+5. 运行 `python3 scripts/generate_ledger.py`
 
 ## 诚实边界
 

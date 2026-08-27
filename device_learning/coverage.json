@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-27T15:28:17.548532+00:00",
-  "total_identifiers": 227,
+  "generated_at": "2026-08-27T15:31:24.911499+00:00",
+  "total_identifiers": 237,
   "by_layer": {
     "hw": 32,
-    "bit": 68,
+    "bit": 78,
     "signal": 19,
     "usb": 34,
     "ref": 24,
@@ -12,9 +12,9 @@
     "exp": 15
   },
   "status_counts": {
-    "confirmed": 67,
-    "candidate": 62,
-    "unknown": 50,
+    "confirmed": 68,
+    "candidate": 65,
+    "unknown": 56,
     "hypothesis": 6,
     "not_started": 30,
     "missing": 12
