@@ -1,25 +1,7 @@
-# 阶段 C 实验日志
+# 阶段 C 实验日志目录
 
-每次实验在此目录创建 JSON 文件，命名格式：`EXP-XXX-YYYY-MM-DD.json`
+每次实验在 `phase_c/logs/` 创建 JSON 记录，命名：`EXP-XXX-YYYYMMDD.json`。
 
-## 模板
+模板见 `phase_c/README.md` 中的记录格式。
 
-```json
-{
-  "experiment_id": "EXP-006",
-  "date": "2026-08-27",
-  "setup": "继电器切换 + 信号源",
-  "observation": "通道 1 切换后输出断开",
-  "conclusion": "confirmed",
-  "identifiers_upgraded": ["SIG-002-RELAY-MATRIX"],
-  "boundary": "仅对本次观察成立"
-}
-```
-
-## 结论取值
-
-- `confirmed` — 观察支持假设
-- `refuted` — 观察否定假设
-- `inconclusive` — 无法判定
-
-完成后运行 `python3 scripts/generate_ledger.py` 刷新账本。
+**诚实边界**：单次实验结论仅对本次观察范围成立；不得用日志条目自动升级 catalog（需人工审阅后编辑 `catalogs/*.py`）。

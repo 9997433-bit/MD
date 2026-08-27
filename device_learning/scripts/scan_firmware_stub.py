@@ -10,9 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from eeprom_parse import parse_eeprom  # noqa: E402
-
-REAL = ROOT / "phase_b" / "captures" / "eeprom.bin"
-SYNTH = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
+from eeprom_source import resolve_eeprom_path  # noqa: E402
 
 # 8051 opcode names for frequency histogram (subset)
 OPCODES = {
@@ -35,8 +33,9 @@ def scan_firmware(fw: bytes, source: str) -> dict:
         name = OPCODES.get(b, f"0x{b:02x}")
         hist[name] = hist.get(name, 0) + 1
     top = sorted(hist.items(), key=lambda x: -x[1])[:8]
+    observed = source == "device_capture"
     return {
-        "status": "observed" if source == "device_capture" else "synthetic_pipeline_test",
+        "status": "observed" if observed else "synthetic_pipeline_test",
         "source": source,
         "size_bytes": len(fw),
         "header_hex": fw[:32].hex(),
@@ -46,32 +45,29 @@ def scan_firmware(fw: bytes, source: str) -> dict:
 
 
 def main() -> None:
-    if REAL.exists():
-        data = REAL.read_bytes()
-        source = "device_capture"
-    elif SYNTH.exists():
-        data = SYNTH.read_bytes()
-        source = "synthetic_reference"
-    else:
-        meta = {"status": "missing", "path": str(REAL.relative_to(ROOT))}
+    path, kind = resolve_eeprom_path()
+    if path is None:
+        meta = {"status": "missing", "path": "phase_b/captures/eeprom.bin"}
         (ROOT / "manifests" / "firmware_scan.json").write_text(json.dumps(meta, indent=2) + "\n")
         print(json.dumps(meta, indent=2))
         return
 
+    data = path.read_bytes()
     hdr = parse_eeprom(data)
     if hdr.firmware_offset is None or hdr.firmware_size_bytes is None:
         fw = b""
     else:
         fw = data[hdr.firmware_offset : hdr.firmware_offset + hdr.firmware_size_bytes]
 
+    scan_source = "device_capture" if kind == "device_capture" else kind
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "eeprom_size": len(data),
         "boot_format": hdr.boot_format,
         "firmware_offset": hdr.firmware_offset,
-        "firmware_scan": scan_firmware(fw, source),
+        "firmware_scan": scan_firmware(fw, scan_source),
     }
-    if source == "synthetic_reference":
+    if kind != "device_capture":
         meta["warning"] = "NOT device firmware"
     out = ROOT / "manifests" / "firmware_scan.json"
     out.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

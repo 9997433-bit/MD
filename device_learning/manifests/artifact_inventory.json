@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:04:01.023316+00:00",
-  "artifact_count": 46,
-  "present_count": 46,
+  "generated_at": "2026-08-27T16:06:47.728843+00:00",
+  "artifact_count": 48,
+  "present_count": 48,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 223321
+      "size_bytes": 225304
     },
     {
       "path": "coverage.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 6890
+      "size_bytes": 7202
     },
     {
       "path": "manifests/bit_strings.json",
@@ -109,7 +109,7 @@
       "path": "manifests/capture_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1009
+      "size_bytes": 1039
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -157,7 +157,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 755
+      "size_bytes": 785
     },
     {
       "path": "manifests/file_hashes.json",
@@ -214,10 +214,22 @@
       "size_bytes": 23445
     },
     {
+      "path": "manifests/phase_b_readiness.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 990
+    },
+    {
       "path": "manifests/phase_b_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 370
+      "size_bytes": 400
+    },
+    {
+      "path": "manifests/phase_b_upgrade_proposals.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 295
     },
     {
       "path": "manifests/phase_roadmap.json",

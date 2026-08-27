@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import sys
 from datetime import datetime, timezone
@@ -12,21 +11,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from eeprom_parse import parse_eeprom  # noqa: E402
+from eeprom_source import is_synthetic_dump, sha256_bytes  # noqa: E402
 
 REAL = ROOT / "phase_b" / "captures" / "eeprom.bin"
-SYNTH = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
 DEFAULT_OUT = ROOT / "phase_b" / "analysis" / "firmware.bin"
 META_OUT = ROOT / "manifests" / "firmware_extract.json"
-
-
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def is_synthetic_dump(data: bytes) -> bool:
-    if not SYNTH.exists():
-        return False
-    return sha256_bytes(data) == sha256_bytes(SYNTH.read_bytes())
 
 
 def extract(data: bytes, source: str) -> dict:

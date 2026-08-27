@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:04:00.158238+00:00",
+  "generated_at": "2026-08-27T16:06:46.720339+00:00",
   "artifacts": [
     {
       "path": "phase_b/captures/eeprom.bin",
@@ -30,6 +30,7 @@
   "expected_count": 6,
   "flags": {
     "eeprom_present": false,
+    "eeprom_observed": false,
     "usb_capture_present": false,
     "protocol_log_present": false
   },

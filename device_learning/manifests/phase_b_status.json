@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-08-27T16:03:59.767252+00:00",
+  "generated_at": "2026-08-27T16:06:49.082745+00:00",
   "captures_dir": "phase_b/captures",
   "capture_count": 0,
   "captures": [],
   "flags": {
     "eeprom_present": false,
+    "eeprom_observed": false,
     "usb_capture_present": false,
     "protocol_log_present": false
   },

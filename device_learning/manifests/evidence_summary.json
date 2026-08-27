@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:04:00.477733+00:00",
+  "generated_at": "2026-08-27T16:06:47.191449+00:00",
   "phase": "static_complete_pending_hardware",
   "identifiers": 237,
   "status_counts": {
@@ -13,6 +13,7 @@
   "blocked": 98,
   "hardware_ready": {
     "eeprom_present": false,
+    "eeprom_observed": false,
     "usb_capture_present": false,
     "protocol_log_present": false
   },

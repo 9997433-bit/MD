@@ -44,6 +44,8 @@ FEEDERS = [
     ["analyze_protocol_log.py"],
     ["extract_firmware_slice.py"],
     ["build_capture_manifest.py"],
+    ["propose_phase_b_upgrades.py"],
+    ["build_phase_b_readiness.py"],
     ["redact_manifests.py"],
     ["audit_sensitive_tokens.py"],
     ["validate_catalog_integrity.py"],

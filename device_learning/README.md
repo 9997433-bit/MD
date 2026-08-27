@@ -15,6 +15,7 @@ make test      # 86 项 pytest
 make health    # 包健康检查
 make handoff   # 实机交接摘要
 make check-captures  # 采集文件预检
+make readiness   # 阶段 B 就绪报告
 make dryrun    # 合成流水线演练（非实机数据）
 make status    # 一行状态摘要
 make ci        # verify + test（同 CI）

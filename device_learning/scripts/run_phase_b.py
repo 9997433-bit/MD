@@ -47,6 +47,8 @@ def main() -> int:
         run("scan_firmware_stub.py")
         run("extract_firmware_slice.py")
     run("build_capture_manifest.py")
+    run("propose_phase_b_upgrades.py")
+    run("build_phase_b_readiness.py")
     run("sync_phase_b_checklist.py")
     run("detect_phase_transition.py")
     run("generate_ledger.py")

@@ -71,6 +71,7 @@ def main() -> None:
     print()
     print("── 详细文档 ──")
     print("  HARDWARE_HANDOFF.md")
+    print("  PHASE_B_READINESS.md")
     print("  phase_b/templates/eeprom_read.md")
     print("  phase_b/templates/usb_capture.md")
     print("=" * 60)
