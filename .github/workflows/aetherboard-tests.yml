@@ -41,3 +41,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate Quest verify script syntax
         run: bash -n aetherboard/scripts/quest_verify.sh
+      - name: Validate run_all_tests script syntax
+        run: bash -n aetherboard/scripts/run_all_tests.sh

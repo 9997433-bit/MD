@@ -19,6 +19,9 @@
 ## 测试
 
 ```bash
+# 一键本地测试（等同 CI）
+cd aetherboard && ./scripts/run_all_tests.sh
+
 # Python 19 tests
 cd aetherboard && PYTHONPATH=. python3 -m unittest discover -s tests -q
 
@@ -29,6 +32,10 @@ cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 CI：`.github/workflows/aetherboard-tests.yml`
 
 ## Unity 首次打开清单
+
+**一键（推荐）：** `Aetherboard → First Time Setup (Recommended)`
+
+或手动：
 
 1. `Aetherboard → Configure URP Pipeline`
 2. `Aetherboard → Install Battle Table Prefabs`

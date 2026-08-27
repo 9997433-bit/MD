@@ -33,15 +33,17 @@ cd web && python3 -m http.server 8765
 ### C# 核心测试（无需 Unity）
 
 ```bash
-cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
+cd aetherboard && ./scripts/run_all_tests.sh
+# 或仅 C#：cd csharp/Aetherboard.Core.Tests && dotnet test
 ```
 
 ### Unity VR
 
 1. Unity Hub 打开 `unity/AetherboardVR`
-2. 菜单：`Aetherboard → Configure URP Pipeline`
-3. `Install Battle Table Prefabs` + `Install XR Origin Prefab`
-4. **Play**（自动创建 7×7 战棋桌）
+2. 菜单：`Aetherboard → First Time Setup (Recommended)`（一键配置）
+3. **Play**（自动创建 7×7 战棋桌）
+
+分步配置：`Configure URP Pipeline` → `Install Battle Table Prefabs` → `Install XR Origin Prefab`
 
 Quest 打包与实机验收见 [`docs/QUEST_BUILD.md`](docs/QUEST_BUILD.md) · [`docs/QUEST_VERIFICATION.md`](docs/QUEST_VERIFICATION.md)
 
