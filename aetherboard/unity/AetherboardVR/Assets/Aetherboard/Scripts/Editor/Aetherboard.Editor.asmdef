@@ -1,0 +1,17 @@
+{
+  "name": "Aetherboard.Editor",
+  "rootNamespace": "Aetherboard.Editor",
+  "references": [
+    "Aetherboard.Core",
+    "Aetherboard.VR"
+  ],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -25,11 +25,25 @@ python3 -m http.server 8765
 
 | 路径 | 说明 |
 |------|------|
-| `sim/` | 确定性战斗状态机（Python，可单元测试） |
-| `web/` | 2D 浏览器原型（JS 引擎移植） |
-| `tests/` | 棋盘、战斗流、Boss 机制测试 |
-| `docs/GDD.md` | 策划文档：职业、阶段、机制 |
-| `docs/VR_ROADMAP.md` | Unity VR 迁移路线 |
+| `sim/` | Python 确定性战斗状态机 |
+| `web/` | 2D 浏览器可玩原型 |
+| `unity/AetherboardVR/` | **Unity VR 项目**（OpenXR + XRI） |
+| `csharp/` | C# 核心单元测试（无需 Unity） |
+| `schema/` | 战斗状态 JSON Schema |
+| `tests/` | Python 单元测试 |
+| `docs/` | GDD、VR 路线、Unity 设置指南 |
+
+## Unity VR 快速开始
+
+```bash
+# 1. C# 战斗核心测试
+cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
+
+# 2. Unity Hub 打开
+aetherboard/unity/AetherboardVR
+
+# 3. 详见 docs/UNITY_SETUP.md
+```
 
 ## 当前 MVP 内容
 
