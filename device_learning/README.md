@@ -11,7 +11,8 @@
 ```bash
 cd device_learning
 make verify    # 生成账本 + 验收
-make test      # 70 项 pytest
+make test      # 74 项 pytest
+make dryrun    # 合成流水线演练（非实机数据）
 make status    # 一行状态摘要
 make health    # 包健康检查
 make ci        # verify + test（同 CI）
