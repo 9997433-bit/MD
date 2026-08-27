@@ -132,6 +132,17 @@ class BattleEngine:
         if self.state.phase == Phase.MOVE:
             self.state.phase = Phase.ACTION
 
+    def end_phase(self) -> None:
+        if self.state.phase in {Phase.VICTORY, Phase.DEFEAT}:
+            return
+        self.auto_fill_missing_actions()
+        if self.state.phase == Phase.MOVE:
+            self.advance_after_moves()
+        elif self.state.phase == Phase.ACTION:
+            self.advance_after_actions()
+        elif self.state.phase == Phase.WEAVE:
+            self.advance_after_weaves()
+
     def can_use_skill(self, unit_id: str, skill_id: str, target: Optional[Pos] = None) -> bool:
         unit = self.unit_by_id(unit_id)
         if not unit.alive:

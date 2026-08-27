@@ -86,5 +86,64 @@ namespace Aetherboard.Core.Tests
             Assert.Equal(snapshot.Turn, engine.State.Turn);
             Assert.Equal(new GridPos(3, 3), engine.State.Party.Find(u => u.Id == "bard")!.Pos);
         }
+
+        [Fact]
+        public void HostAuthority_AppliesMove()
+        {
+            var host = new BattleHostAuthority("earth", 42);
+            var cmd = new BattleCommand
+            {
+                Type = BattleCommandType.Move,
+                UnitId = "knight",
+                TargetX = 3,
+                TargetY = 6
+            };
+            var (ok, _, err) = host.ApplyCommand(cmd);
+            Assert.True(ok);
+            Assert.Null(err);
+            Assert.Equal(new GridPos(3, 6), host.Engine.State.Party.Find(u => u.Id == "knight")!.Pos);
+        }
+
+        [Fact]
+        public void Replayer_MatchesLiveCommands()
+        {
+            var live = new BattleEngine("earth", 42);
+            live.BeginWarning();
+            var log = new BattleCommandLog { RandomSeed = 42, BossId = "earth" };
+            var move = new BattleCommand
+            {
+                Type = BattleCommandType.Move,
+                UnitId = "knight",
+                TargetX = 3,
+                TargetY = 6
+            };
+            BattleCommandExecutor.Apply(live, move);
+            log.Record(move);
+            log.Record(new BattleCommand { Type = BattleCommandType.EndPhase });
+
+            var replayed = BattleReplayer.Replay(log);
+            Assert.Equal(live.State.Turn, replayed.Turn);
+            Assert.Equal(
+                live.State.Party.Find(u => u.Id == "knight")!.Pos,
+                replayed.Party.Find(u => u.Id == "knight")!.Pos);
+        }
+
+        [Fact]
+        public void SyncProtocol_RoundTripCommand()
+        {
+            var cmd = new BattleCommand
+            {
+                Type = BattleCommandType.Skill,
+                UnitId = "knight",
+                SkillId = "shield_bash",
+                TargetX = 3,
+                TargetY = 3
+            };
+            var line = BattleSyncProtocol.EncodeCommand(cmd);
+            var parsed = BattleSyncProtocol.ExtractCommand(line);
+            Assert.NotNull(parsed);
+            Assert.Equal(BattleCommandType.Skill, parsed!.Type);
+            Assert.Equal("shield_bash", parsed.SkillId);
+        }
     }
 }

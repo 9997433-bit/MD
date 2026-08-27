@@ -56,6 +56,17 @@ namespace Aetherboard.VR
             if (GUILayout.Button("读档 (F9)", _btnW)) _director.RestoreLastSnapshot();
             GUILayout.EndHorizontal();
 
+            var net = FindObjectOfType<BattleNetSession>();
+            if (net != null)
+            {
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("离线", _btnW)) net.SetRole(NetSessionRole.Offline);
+                if (GUILayout.Button("Host", _btnW)) net.SetRole(NetSessionRole.Host);
+                if (GUILayout.Button("Client", _btnW)) net.SetRole(NetSessionRole.Client);
+                GUILayout.EndHorizontal();
+                GUILayout.Label($"网络: {net.Role}  ({net.HostAddress}:{net.HostPort})");
+            }
+
             GUILayout.Space(4);
             GUILayout.Label("<b>小队</b>", RichLabel());
             foreach (var u in state.Party)

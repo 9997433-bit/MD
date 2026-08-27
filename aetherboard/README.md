@@ -46,6 +46,8 @@ cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 
 Quest 打包见 `docs/QUEST_BUILD.md`
 
+在线同步见 `docs/NETWORK_SYNC.md`
+
 ## 当前 MVP 内容
 
 - **7×7 棋盘**，四职责小队：铁卫 / 白愈 / 黑炎 / 游弦

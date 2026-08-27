@@ -29,6 +29,9 @@ namespace Aetherboard.VR
 
         public BattleCommandLog CommandLog { get; } = new();
         private string _lastSnapshotJson;
+        private IBattleNetworkBridge _network;
+
+        public void SetNetworkBridge(IBattleNetworkBridge bridge) => _network = bridge;
 
         private void Awake()
         {
@@ -94,6 +97,9 @@ namespace Aetherboard.VR
 
         public bool TryMove(string unitId, GridPos dest)
         {
+            if (_network != null && !_network.IsAuthoritative)
+                return _network.SubmitMove(unitId, dest);
+
             if (!Engine.MoveUnit(unitId, dest)) return false;
             RecordCommand(BattleCommandType.Move, unitId, target: dest);
             tableView?.Bind(State);
@@ -103,6 +109,9 @@ namespace Aetherboard.VR
 
         public bool TryUseSkill(string unitId, string skillId, GridPos? target = null)
         {
+            if (_network != null && !_network.IsAuthoritative)
+                return _network.SubmitSkill(unitId, skillId, target);
+
             if (!Engine.UseSkill(unitId, skillId, target)) return false;
             RecordCommand(BattleCommandType.Skill, unitId, skillId, target);
             tableView?.Bind(State);
@@ -115,6 +124,12 @@ namespace Aetherboard.VR
 
         public void EndCurrentPhase()
         {
+            if (_network != null && !_network.IsAuthoritative)
+            {
+                _network.SubmitEndPhase();
+                return;
+            }
+
             RecordCommand(BattleCommandType.EndPhase);
             Engine.EndPhase();
             RefreshAllViews();
