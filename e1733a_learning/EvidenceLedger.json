@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T05:03:07.153618+00:00",
+  "generated_at": "2026-08-27T05:12:21.644971+00:00",
   "installer_source": "Montyzhang/-seed Install Keysight E1733A 1.14.1 (Win64).exe",
   "phases_completed": [
     "0",
@@ -1384,13 +1384,13 @@
         "missing": "function body not frozen"
       },
       {
-        "identifier": "CMP-E1-ENV-E1736A_ReadEnvironment",
+        "identifier": "CMP-UNK-ENV-E1736A_ReadEnvironment",
         "module": "E1736A.dll",
         "source_identifier": "E1736A_ReadEnvironment",
         "window_hash": null,
-        "status": "E1",
+        "status": "unknown",
         "boundary": "pe_export_symbol",
-        "missing": "function body not frozen"
+        "missing": "body_range.sha256 and instruction window"
       },
       {
         "identifier": "CMP-E1-ENV-E1736A_ReadSensor",
@@ -1441,6 +1441,105 @@
         "identifier": "CMP-E1-ENV-E1736A_SpecifyDevice",
         "module": "E1736A.dll",
         "source_identifier": "E1736A_SpecifyDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_CloseHandles",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_CloseHandles",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_ControlLEDs",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_ControlLEDs",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_GetCardHandle",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_GetCardHandle",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_GetCardNumber",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_GetCardNumber",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_GetDLLRevision",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_GetDLLRevision",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_GetDriverRevision",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_GetDriverRevision",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_GetLastError",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_GetLastError",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_GetResponse",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_GetResponse",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_ReadCardInfo",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_ReadCardInfo",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_SearchCards",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_SearchCards",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-E1736ACore_SendCommand",
+        "module": "E1736ACore.dll",
+        "source_identifier": "E1736ACore_SendCommand",
         "window_hash": null,
         "status": "E1",
         "boundary": "pe_export_symbol",

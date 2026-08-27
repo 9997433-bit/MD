@@ -16,5 +16,11 @@
 | 9 | 写 | test_catalog_completeness.py | +5 项测试 |
 | 10 | 写 | .static-analysis/ | README、schema、placeholders |
 
-**测试**：18 passed  
+**测试**：20 passed  
 **推送**：分支 `cursor/e1733a-static-analysis-a08f`
+
+## 子代理后续修复（主代理）
+
+- [阶段B未知导出复核](bc-0998dff5-3577-53cd-befa-ca64c573d676)：`E1736A_ReadEnvironment` 导出项改为 `unknown`（与 ProcessRawData 一致）
+- 补登记 `E1736ACore.dll` 11 个功能导出 → `CMP-E1-CORE-*`
+- [static-analysis占位层](bc-21d0a120-6fec-5ec6-962a-fb702072dc78)：子代理被策略拦截；主代理已写入 `.static-analysis/`

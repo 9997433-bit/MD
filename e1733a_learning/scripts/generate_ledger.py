@@ -386,17 +386,37 @@ def build_cmp_catalog(pe_exports_map: dict) -> list[dict]:
         )
     )
     for sym in pe_exports_map.get("E1736A.dll", []):
-        if sym.startswith("E1736A_"):
-            rows.append(
-                entry(
-                    f"CMP-E1-ENV-{sym}",
-                    "E1736A.dll",
-                    sym,
-                    "E1",
-                    "pe_export_symbol",
-                    "function body not frozen",
-                )
+        if not sym.startswith("E1736A_"):
+            continue
+        if sym == "E1736A_ReadEnvironment":
+            st, miss = "unknown", "body_range.sha256 and instruction window"
+            ident = "CMP-UNK-ENV-E1736A_ReadEnvironment"
+        else:
+            st, miss = "E1", "function body not frozen"
+            ident = f"CMP-E1-ENV-{sym}"
+        rows.append(
+            entry(
+                ident,
+                "E1736A.dll",
+                sym,
+                st,
+                "pe_export_symbol",
+                miss,
             )
+        )
+    for sym in pe_exports_map.get("E1736ACore.dll", []):
+        if not sym.startswith("E1736ACore_"):
+            continue
+        rows.append(
+            entry(
+                f"CMP-E1-CORE-{sym}",
+                "E1736ACore.dll",
+                sym,
+                "E1",
+                "pe_export_symbol",
+                "function body not frozen",
+            )
+        )
     return rows
 
 

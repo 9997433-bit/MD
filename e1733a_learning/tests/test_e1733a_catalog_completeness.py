@@ -23,11 +23,11 @@ def test_no_duplicate_identifiers():
 
 def test_minimum_identifier_count():
     entries, data = _all_entries()
-    assert len(entries) >= 178
+    assert len(entries) >= 188
     b = data["catalogs"]
     assert len(b["acquisition"]) >= 70
     assert len(b["analysis"]) >= 55
-    assert len(b["compensation"]) >= 20
+    assert len(b["compensation"]) >= 30
     assert len(b["formats"]) >= 15
 
 
@@ -51,3 +51,17 @@ def test_cmp_unk_all_unknown():
     for e in entries:
         if e["identifier"].startswith("CMP-UNK-"):
             assert e["status"] == "unknown", e["identifier"]
+
+
+def test_readenvironment_export_unknown():
+    entries, _ = _all_entries()
+    e = next(
+        x for x in entries
+        if x.get("source_identifier") == "E1736A_ReadEnvironment" and "ENV" in x["identifier"]
+    )
+    assert e["status"] == "unknown"
+
+
+def test_e1736acore_exports_registered():
+    entries, _ = _all_entries()
+    assert any(e["identifier"].startswith("CMP-E1-CORE-E1736ACore_") for e in entries)
