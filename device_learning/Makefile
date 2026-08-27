@@ -23,6 +23,9 @@ status:
 handoff:
 	python3 scripts/print_handoff.py
 
+intake:
+	python3 scripts/print_intake.py
+
 proposals:
 	python3 scripts/print_proposals.py
 

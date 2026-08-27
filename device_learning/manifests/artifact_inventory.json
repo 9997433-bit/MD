@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:18:20.009645+00:00",
+  "generated_at": "2026-08-27T16:20:57.520446+00:00",
   "artifact_count": 52,
   "present_count": 52,
   "artifacts": [
@@ -7,7 +7,7 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 228317
+      "size_bytes": 228364
     },
     {
       "path": "coverage.json",
@@ -121,7 +121,7 @@
       "path": "manifests/completion_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 905
+      "size_bytes": 940
     },
     {
       "path": "manifests/config_entropy.json",
@@ -301,7 +301,7 @@
       "path": "manifests/static_phase_closed.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 706
+      "size_bytes": 745
     },
     {
       "path": "manifests/system_map.json",

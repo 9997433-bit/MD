@@ -9,6 +9,8 @@
     "phase_b/captures/protocol_log.json"
   ],
   "commands": [
+    "make closure",
+    "make intake",
     "make handoff",
     "make readiness",
     "make check-captures",

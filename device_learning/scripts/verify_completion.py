@@ -28,6 +28,7 @@ def main() -> int:
         "checklist_report": (ROOT / "CHECKLIST_REPORT.md").exists(),
         "phase_transition": (ROOT / "manifests" / "phase_transition.json").exists(),
         "static_phase_closed": (ROOT / "manifests" / "static_phase_closed.json").exists(),
+        "static_closure_report": (ROOT / "STATIC_CLOSURE.md").exists(),
         "phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
         "phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
         "hardware_handoff": (ROOT / "HARDWARE_HANDOFF.md").exists(),
