@@ -1,0 +1,38 @@
+{
+  "note": "待冻结项；无 body_range.sha256 前不得升级 EvidenceLedger status",
+  "placeholders": [
+    {
+      "identifier": "CMP-UNK-AMBIENT-BODY",
+      "module": "E1736A.dll",
+      "export": "E1736A_ReadEnvironment",
+      "status": "unknown",
+      "missing": "function body instruction window"
+    },
+    {
+      "identifier": "CMP-UNK-LASERDIST-BODY",
+      "module": "E1735ACore.dll",
+      "export": "E1735ACore_ProcessRawData",
+      "status": "unknown",
+      "missing": "full laser distance formula window"
+    },
+    {
+      "identifier": "CMP-UNK-INTERPOLATE-ALG",
+      "module": "E1733A.exe",
+      "source": "CompSel=Interpolate",
+      "status": "unknown",
+      "missing": "interpolation implementation window"
+    },
+    {
+      "identifier": "ANA-UNK-ALG-ISO230-BODY",
+      "module": "E1733A.exe",
+      "status": "unknown",
+      "missing": "ISO 230-2 statistics computation body"
+    },
+    {
+      "identifier": "ACQ-UNK-DELPHI-COLLECTDOC",
+      "module": "E1733A.exe",
+      "status": "unknown",
+      "missing": "Delphi collect document class RVA"
+    }
+  ]
+}

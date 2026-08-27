@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "E1733A static-analysis freeze entry",
+  "type": "object",
+  "required": ["identifier", "module", "status"],
+  "properties": {
+    "identifier": { "type": "string" },
+    "module": { "type": "string" },
+    "rva": { "type": ["string", "null"] },
+    "body_range": {
+      "type": "object",
+      "properties": {
+        "start_rva": { "type": "string" },
+        "end_rva": { "type": "string" },
+        "sha256": { "type": "string" }
+      }
+    },
+    "instruction_window": {
+      "type": "object",
+      "properties": {
+        "sha256": { "type": "string" },
+        "instruction_count": { "type": "integer" }
+      }
+    },
+    "status": { "enum": ["unknown", "window_candidate", "E1"] },
+    "boundary": { "type": "string" },
+    "missing": { "type": ["string", "null"] }
+  }
+}
