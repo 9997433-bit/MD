@@ -38,6 +38,7 @@ namespace Aetherboard.VR
     /// </summary>
     public class BattleNetSession : MonoBehaviour, IBattleNetworkBridge
     {
+        public static event System.Action<NetSessionRole, string> OnRoleChanged;
         [SerializeField] private BattleDirector director;
         [SerializeField] private NetSessionRole role = NetSessionRole.Offline;
         [SerializeField] private string hostAddress = "127.0.0.1";
@@ -150,6 +151,7 @@ namespace Aetherboard.VR
             _activeTransport = "—";
             if (role == NetSessionRole.Host) StartHost();
             else if (role == NetSessionRole.Client) ConnectClient();
+            else OnRoleChanged?.Invoke(role, _activeTransport);
         }
 
         private void StartHost()
@@ -181,6 +183,7 @@ namespace Aetherboard.VR
             }
             _activeTransport = parts.Count > 0 ? $"Host ({string.Join(" ", parts)})" : "Host";
             Debug.Log($"[Aetherboard] Host mode — {string.Join(" | ", parts)}");
+            OnRoleChanged?.Invoke(role, _activeTransport);
         }
 
         public void NotifyLocalStateChanged() => PublishHostState();
@@ -212,6 +215,7 @@ namespace Aetherboard.VR
                 _readerThread = new Thread(TransportReadLoop) { IsBackground = true };
                 _readerThread.Start();
                 Debug.Log($"[Aetherboard] Connected via {_transport.Name} {hostAddress}:{port}");
+                OnRoleChanged?.Invoke(role, _activeTransport);
                 return true;
             }
             catch (Exception ex)

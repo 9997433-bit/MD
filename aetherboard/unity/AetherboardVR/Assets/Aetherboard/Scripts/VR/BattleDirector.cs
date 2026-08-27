@@ -28,6 +28,7 @@ namespace Aetherboard.VR
         public UnityEvent<string> OnLogAdded = new();
         public UnityEvent OnBattleEnded = new();
         public UnityEvent OnCastInterrupted = new();
+        public UnityEvent<string> OnBossChanged = new();
 
         public BattleCommandLog CommandLog { get; } = new();
         private string _lastSnapshotJson;
@@ -56,6 +57,7 @@ namespace Aetherboard.VR
             CommandLog.Commands.Clear();
             RecordCommand(BattleCommandType.SetBoss, bossId: bossId);
             RefreshAllViews();
+            OnBossChanged?.Invoke(bossId);
             _network?.NotifyLocalStateChanged();
         }
 

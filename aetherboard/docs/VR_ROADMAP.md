@@ -50,6 +50,8 @@
 | **Styled 美术 Prefab** | ✅ | 职业造型 + 材质 + 外部模型钩子 |
 | **Boss 全息 UI** | ✅ | 3D 铭牌 + 双 Boss 主题 + 轨道环 |
 | **战斗光照** | ✅ | 三色环境光 + Key/Fill/Rim + Quest 优化 |
+| **增强程序化音效** | ✅ | 读条滴答 + Boss 主题 + 联机/胜负音 |
+| **CI 测试** | ✅ | GitHub Actions Python + C# |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
 | Quest 实机验证 | 🔲 | 按 QUEST_VERIFICATION.md 人工验收 |
 

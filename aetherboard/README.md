@@ -46,9 +46,22 @@ python3 -m http.server 8765
 cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 ```
 
-Quest 打包见 `docs/QUEST_BUILD.md`
+Quest 打包见 `docs/QUEST_BUILD.md` · 实机验收见 `docs/QUEST_VERIFICATION.md`
 
-在线同步见 `docs/NETWORK_SYNC.md`
+在线同步见 `docs/NETWORK_SYNC.md` · Netcode 见 `docs/NETCODE.md` · 美术见 `docs/ART_ASSETS.md`
+
+### VR 桌面快捷键
+
+| 键 | 功能 |
+|----|------|
+| `E` / `A` | 结束阶段 / 自动一步 |
+| `1` / `2` | 土灵 / 风灵 Boss |
+| `C` / `Tab` | 双人模式 / 切换玩家 |
+| `H` / `N` / `B` | Host / Client / 切换传输 |
+| `F5` / `F9` | 存档 / 读档 |
+| `F6` / `F7` | 导出 / 回放命令日志 |
+
+Quest 端使用桌台右侧 **联机 VR 面板** 配置 Host IP。
 
 ## 当前 MVP 内容
 
