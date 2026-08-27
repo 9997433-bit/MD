@@ -1,0 +1,328 @@
+{
+  "manifest": "hardware_bom",
+  "description": "基于 10 张实物照片的电路板元器件清单（BOM）。功能描述采用中性措辞，仅记录可见丝印与器件本体标记。",
+  "generated_date": "2026-08-27",
+  "photo_directory": "device_learning/hardware/photos/",
+  "source_photos": [
+    "微信图片_20260824134434_84_144.jpg",
+    "微信图片_20260824134434_85_144.jpg",
+    "微信图片_20260824134434_86_144.jpg",
+    "微信图片_20260824134434_87_144.jpg",
+    "微信图片_20260824134434_88_144.jpg",
+    "微信图片_20260824134434_89_144.jpg",
+    "微信图片_20260824134434_90_144.jpg",
+    "微信图片_20260824134434_91_144.jpg",
+    "微信图片_20260824134434_92_144.jpg",
+    "微信图片_20260824134434_93_144.jpg"
+  ],
+  "board_info": {
+    "board_revision": "198755F-01L",
+    "pcb_fab_number": "195665E-01",
+    "serial_barcode": "2489960",
+    "silkscreen_marks": ["N114", "STM-5", "COPYRIGHT 2011", "CE 标志", "回收/警示符号"],
+    "notes": "板正面为主要数字/模拟电路与继电器阵列，背面以无源器件和模拟前端辅助电路为主；板边有接地簧片与镀金屏蔽边框。",
+    "photo_source": [
+      "微信图片_20260824134434_89_144.jpg",
+      "微信图片_20260824134434_91_144.jpg",
+      "微信图片_20260824134434_92_144.jpg"
+    ]
+  },
+  "components": [
+    {
+      "ref_designator": "U-FPGA（丝印被器件遮挡，未读出）",
+      "part_marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+      "function": "现场可编程逻辑器件（FPGA），BGA-256 封装，承担板上数字逻辑/时序控制",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_92_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U-USB（丝印未读出，位于 USB-B 座旁）",
+      "part_marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+      "function": "USB 2.0 高速接口控制器（带 8051 内核），TQFP-128 封装，主机通信接口",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_92_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U-SRAM（USB 控制器左下方，丝印未读出）",
+      "part_marking": "ISSI IS62WV10248LL-15BLI（部分字符可读）",
+      "function": "异步 SRAM 缓冲存储器，配合 USB 控制器/FPGA 做数据缓冲",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "XT600",
+      "part_marking": "24.000M",
+      "function": "24.000 MHz 有源晶体振荡器，为 USB 控制器提供主时钟",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
+      "part_marking": "不可辨认（小型 8 脚器件）",
+      "function": "串行 EEPROM（推测存放 USB VID/PID 与固件引导数据）",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U-CLK-DIST（FPGA 周边，未逐一读出）",
+      "part_marking": "不可辨认",
+      "function": "其他时钟源/时钟分配器件（照片分辨率不足，无法确认是否存在独立采样时钟晶振）",
+      "status": "unknown",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U513",
+      "part_marking": "KS245 49K95 AXYR",
+      "function": "八路总线收发器（245 型），数字总线电平缓冲/隔离",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_85_144.jpg"]
+    },
+    {
+      "ref_designator": "U613",
+      "part_marking": "KS245 49K94 AXYR",
+      "function": "八路总线收发器（245 型），数字总线电平缓冲/隔离",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_91_144.jpg"]
+    },
+    {
+      "ref_designator": "U622",
+      "part_marking": "KS245 45K94 AXYR",
+      "function": "八路总线收发器（245 型），位于 FPGA 左下方",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "U6xx-a（FPGA 下方一排 4 只之一，丝印未读全）",
+      "part_marking": "KS245 49K95 AXYR",
+      "function": "八路总线收发器（245 型），FPGA 与外围数字信号缓冲",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "U6xx-b（FPGA 下方一排 4 只之二）",
+      "part_marking": "KS245 49K95 AXYR",
+      "function": "八路总线收发器（245 型）",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "U6xx-c（FPGA 下方一排 4 只之三）",
+      "part_marking": "KS245 49K95 AXYR",
+      "function": "八路总线收发器（245 型）",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "U602（丝印部分可读）",
+      "part_marking": "VCT8C LCX245",
+      "function": "低压八路总线收发器（74LCX245 型），电平转换/总线缓冲",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "U4xx（输入通道 4 前端，丝印部分可读）",
+      "part_marking": "BB 1271B（TSSOP，字符部分可读）",
+      "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "U3xx（输入通道 3 前端）",
+      "part_marking": "同型 TSSOP，标记未逐字读出（外观与 U4xx 一致）",
+      "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U2xx（输入通道 2 前端）",
+      "part_marking": "同型 TSSOP，标记未逐字读出",
+      "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "U1xx（输入通道 1 前端）",
+      "part_marking": "同型 TSSOP，标记未逐字读出",
+      "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "RL200",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RL302",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RL402",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-04（丝印被继电器本体遮挡）",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-05",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-06",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-07",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-08",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-09",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-10",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-11",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "RLxxx-12",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "function": "信号继电器（双刀，3V 线圈），继电器阵列成员（阵列共约 12 只，3 列 × 4 行排布）",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+      "part_marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+      "function": "BNC 同轴连接器，模拟输入/输出信号接口（板边可见约 5 只）",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_92_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "J600",
+      "part_marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+      "function": "USB Type-B 接口，主机连接",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_91_144.jpg", "微信图片_20260824134434_92_144.jpg"]
+    },
+    {
+      "ref_designator": "J503（丝印部分可读）",
+      "part_marking": "AMP2313A 5747844-4",
+      "function": "D-sub 连接器（AMP/TE 系列），数字/辅助信号接口",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_92_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "GND500",
+      "part_marking": "无（金属接地端子/焊片）",
+      "function": "机壳/屏蔽接地端子",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_89_144.jpg"]
+    },
+    {
+      "ref_designator": "D-PWR-1 / D-PWR-2（电源区，丝印未读出）",
+      "part_marking": "15-50L R1（SMC 封装功率二极管，共 2 只）",
+      "function": "电源整流/防反接或续流二极管",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "C-BULK（电源区多只，含 C608/C811 附近）",
+      "part_marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+      "function": "电源大容量储能/滤波电容",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "L6xx / L9xx（电源区多只屏蔽功率电感）",
+      "part_marking": "本体标记不可辨认",
+      "function": "DC-DC 变换电感（多路开关电源）",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_87_144.jpg", "微信图片_20260824134434_89_144.jpg", "微信图片_20260824134434_93_144.jpg"]
+    },
+    {
+      "ref_designator": "RN602 / RN605 / RN608 / RN630 / RN44 / RN525-527 等",
+      "part_marking": "101 / 103 / 330 / 221 / 270（排阻阵列）",
+      "function": "总线串联端接/上拉电阻网络",
+      "status": "confirmed",
+      "photo_source": ["微信图片_20260824134434_84_144.jpg", "微信图片_20260824134434_85_144.jpg", "微信图片_20260824134434_90_144.jpg", "微信图片_20260824134434_91_144.jpg"]
+    },
+    {
+      "ref_designator": "U711（丝印部分可读）",
+      "part_marking": "…6221（SOIC-8，字符部分可读）",
+      "function": "模拟运算放大器（信号调理级）",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg"]
+    },
+    {
+      "ref_designator": "U9xx（背面模拟区多只 SOIC-8/TSSOP）",
+      "part_marking": "标记不可辨认（含 ADI 商标样式器件）",
+      "function": "模拟前端运放/基准/开关等辅助器件",
+      "status": "unknown",
+      "photo_source": ["微信图片_20260824134434_90_144.jpg", "微信图片_20260824134434_88_144.jpg"]
+    },
+    {
+      "ref_designator": "YC700 / U-SOT23-6（继电器驱动区多只）",
+      "part_marking": "YC7D0 等（SOT-23-6，字符部分可读）",
+      "function": "继电器驱动/小信号晶体管电路",
+      "status": "candidate",
+      "photo_source": ["微信图片_20260824134434_86_144.jpg", "微信图片_20260824134434_87_144.jpg"]
+    }
+  ],
+  "summary": {
+    "total_component_entries": 40,
+    "confirmed": 29,
+    "candidate": 9,
+    "unknown": 2,
+    "key_findings": [
+      "FPGA：Xilinx Spartan XC3S200（BGA-256，FTG256）",
+      "USB 控制器：Cypress CY7C68013A-128AXI，配 24.000 MHz 振荡器（XT600）",
+      "ADC：1271 系列 24-bit delta-sigma，按输入通道各一片（1 片标记可读，其余同型候选）",
+      "继电器：Omron G6JU-2FS-Y 3VDC 共约 12 只（3 列 × 4 行）",
+      "总线收发器：KS245 共 6 只（U513/U613/U622 及 FPGA 下方 3 只）",
+      "接口：约 5 只 BNC 同轴、1 只 USB-B（J600）、1 只 D-sub（AMP 5747844-4）",
+      "EEPROM：USB 控制器附近存在候选 SOIC-8，型号未读出",
+      "独立采样时钟晶振：照片中未能辨认，状态 unknown"
+    ]
+  }
+}

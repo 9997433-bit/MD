@@ -1,0 +1,25 @@
+{
+  "device": "3s200ft256",
+  "config_data_length": 130952,
+  "frame_scan": {
+    "word_count": 65476,
+    "type1_frame_words_estimate": 4598,
+    "type2_frame_words_estimate": 3796,
+    "unique_word_values": 8150,
+    "top_words_hex": [
+      "0x0000:25962",
+      "0x1000:794",
+      "0x0008:652",
+      "0x0004:638",
+      "0x4000:438",
+      "0x0100:437",
+      "0x040a:416",
+      "0x0001:415",
+      "0x5020:414",
+      "0x0800:411"
+    ],
+    "config_entropy_bits_per_byte": 4.305
+  },
+  "iob_active_pin_estimate": "unknown",
+  "notes": "Heuristic scan only; full IOB decode requires Spartan-3 frame parser."
+}

@@ -1,0 +1,1966 @@
+{
+  "generated_at": "2026-08-27T15:14:27.705753+00:00",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "catalogs": {
+    "hw": [
+      {
+        "identifier": "HW-001-FPGA-DEVICE",
+        "layer": "hw",
+        "module": "fpga",
+        "description": "Xilinx Spartan XC3S200 FPGA",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "bitstream header + photo"
+      },
+      {
+        "identifier": "HW-002-FPGA-PACKAGE",
+        "layer": "hw",
+        "module": "fpga",
+        "description": "FT256 fine-pitch BGA package",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "device string 3s200ft256"
+      },
+      {
+        "identifier": "HW-003-USB-CONTROLLER",
+        "layer": "hw",
+        "module": "usb",
+        "description": "Cypress CY7C68013A USB 2.0 controller",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo chip marking"
+      },
+      {
+        "identifier": "HW-004-USB-PACKAGE",
+        "layer": "hw",
+        "module": "usb",
+        "description": "128-pin TQFP package",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo marking 128AXI"
+      },
+      {
+        "identifier": "HW-005-ADC-PRIMARY",
+        "layer": "hw",
+        "module": "adc",
+        "description": "ADS1271 family 24-bit delta-sigma ADC",
+        "status": "candidate",
+        "boundary": "丝印需逐颗确认",
+        "evidence": "photo analog section"
+      },
+      {
+        "identifier": "HW-006-ADC-COUNT",
+        "layer": "hw",
+        "module": "adc",
+        "description": "Four ADC channels",
+        "status": "candidate",
+        "boundary": "需数芯片数量",
+        "evidence": "four coax inputs"
+      },
+      {
+        "identifier": "HW-007-ADC-RESOLUTION",
+        "layer": "hw",
+        "module": "adc",
+        "description": "24-bit sampling resolution",
+        "status": "candidate",
+        "boundary": "来自芯片系列规格",
+        "evidence": "ADS1271 datasheet family"
+      },
+      {
+        "identifier": "HW-008-RELAY-ARRAY",
+        "layer": "hw",
+        "module": "relay",
+        "description": "Omron G6JU-2FS-Y signal relay array",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo white relay packages"
+      },
+      {
+        "identifier": "HW-009-RELAY-COUNT",
+        "layer": "hw",
+        "module": "relay",
+        "description": "Twelve relay units",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo count"
+      },
+      {
+        "identifier": "HW-010-RELAY-VOLTAGE",
+        "layer": "hw",
+        "module": "relay",
+        "description": "3V DC coil drive",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "relay marking 3V DC"
+      },
+      {
+        "identifier": "HW-011-BUS-TRANSCEIVER",
+        "layer": "hw",
+        "module": "bus",
+        "description": "KS245 octal bus transceiver",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo U613 marking"
+      },
+      {
+        "identifier": "HW-012-EEPROM",
+        "layer": "hw",
+        "module": "storage",
+        "description": "Serial EEPROM for USB firmware boot",
+        "status": "candidate",
+        "boundary": "未直接拍到丝印",
+        "evidence": "standard design pattern"
+      },
+      {
+        "identifier": "HW-013-EEPROM-CAPACITY",
+        "layer": "hw",
+        "module": "storage",
+        "description": "Likely 24LC64 (8KB)",
+        "status": "unknown",
+        "boundary": "需读板",
+        "evidence": null
+      },
+      {
+        "identifier": "HW-014-CRYSTAL-USB",
+        "layer": "hw",
+        "module": "clock",
+        "description": "24MHz USB controller crystal",
+        "status": "candidate",
+        "boundary": "频率未实测",
+        "evidence": "reference design"
+      },
+      {
+        "identifier": "HW-015-CRYSTAL-FPGA",
+        "layer": "hw",
+        "module": "clock",
+        "description": "FPGA clock source",
+        "status": "unknown",
+        "boundary": "照片未清晰标注",
+        "evidence": null
+      },
+      {
+        "identifier": "HW-016-INTERFACE-COAX",
+        "layer": "hw",
+        "module": "interface",
+        "description": "Four coaxial analog inputs",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo BNC jacks"
+      },
+      {
+        "identifier": "HW-017-INTERFACE-USB",
+        "layer": "hw",
+        "module": "interface",
+        "description": "USB Type-B device port",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo bottom edge"
+      },
+      {
+        "identifier": "HW-018-INTERFACE-DSUB",
+        "layer": "hw",
+        "module": "interface",
+        "description": "D-sub multi-pin connector",
+        "status": "confirmed",
+        "boundary": "pin count TBD",
+        "evidence": "photo AMP connector"
+      },
+      {
+        "identifier": "HW-019-BOARD-REVISION",
+        "layer": "hw",
+        "module": "board",
+        "description": "PCB revision silkscreen",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo board labels"
+      },
+      {
+        "identifier": "HW-020-BOARD-SERIAL",
+        "layer": "hw",
+        "module": "board",
+        "description": "Barcode serial label",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo sticker"
+      },
+      {
+        "identifier": "HW-021-POWER-REGULATOR",
+        "layer": "hw",
+        "module": "power",
+        "description": "Voltage regulators",
+        "status": "candidate",
+        "boundary": "型号未全识别",
+        "evidence": "photo power section"
+      },
+      {
+        "identifier": "HW-022-POWER-TANTALUM",
+        "layer": "hw",
+        "module": "power",
+        "description": "470uF tantalum bulk capacitors",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo 477A marking"
+      },
+      {
+        "identifier": "HW-023-MEMORY-SRAM",
+        "layer": "hw",
+        "module": "memory",
+        "description": "ISSI SRAM near FPGA",
+        "status": "confirmed",
+        "boundary": "容量未读",
+        "evidence": "photo ISSI chip"
+      },
+      {
+        "identifier": "HW-024-MANUFACTURER-SILK",
+        "layer": "hw",
+        "module": "board",
+        "description": "OEM silkscreen logo",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo logo text"
+      },
+      {
+        "identifier": "HW-025-COPYRIGHT-YEAR",
+        "layer": "hw",
+        "module": "board",
+        "description": "Copyright 2011",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo + bitstream date"
+      },
+      {
+        "identifier": "HW-026-MOUNTING-HOLES",
+        "layer": "hw",
+        "module": "mechanical",
+        "description": "Four corner mounting holes",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo full board"
+      },
+      {
+        "identifier": "HW-027-GROUND-PLANE",
+        "layer": "hw",
+        "module": "mechanical",
+        "description": "Gold-plated ground frame",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo edge plating"
+      },
+      {
+        "identifier": "HW-028-SIGNAL-ROUTING",
+        "layer": "hw",
+        "module": "signal",
+        "description": "Relay matrix analog routing",
+        "status": "candidate",
+        "boundary": "路由未验证",
+        "evidence": "photo layout"
+      },
+      {
+        "identifier": "HW-029-ANALOG-FRONTEND",
+        "layer": "hw",
+        "module": "signal",
+        "description": "Passive RC/L before ADC",
+        "status": "candidate",
+        "boundary": "元件值未读",
+        "evidence": "photo analog clusters"
+      },
+      {
+        "identifier": "HW-030-COMPLIANCE",
+        "layer": "hw",
+        "module": "board",
+        "description": "CE / UL recognition marks",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo compliance logos"
+      },
+      {
+        "identifier": "HW-031-CONNECTOR-J600",
+        "layer": "hw",
+        "module": "connector",
+        "description": "J600 SMT pad array",
+        "status": "confirmed",
+        "boundary": "未焊接",
+        "evidence": "photo pads"
+      },
+      {
+        "identifier": "HW-032-CONNECTOR-J603",
+        "layer": "hw",
+        "module": "connector",
+        "description": "J603 SMT pad array",
+        "status": "confirmed",
+        "boundary": "未焊接",
+        "evidence": "photo pads"
+      }
+    ],
+    "bit": [
+      {
+        "identifier": "BIT-001-FORMAT",
+        "layer": "bit",
+        "module": "header",
+        "description": "Xilinx BIT bitstream format",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "file magic"
+      },
+      {
+        "identifier": "BIT-002-FILE-SIZE",
+        "layer": "bit",
+        "module": "header",
+        "description": "131046 bytes total",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "wc -c"
+      },
+      {
+        "identifier": "BIT-003-SHA256",
+        "layer": "bit",
+        "module": "header",
+        "description": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "sha256sum"
+      },
+      {
+        "identifier": "BIT-004-SOURCE-DESIGN",
+        "layer": "bit",
+        "module": "header",
+        "description": "Source NCD design name in section b",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "strings section b"
+      },
+      {
+        "identifier": "BIT-005-TARGET-DEVICE",
+        "layer": "bit",
+        "module": "header",
+        "description": "Spartan-3 XC3S200",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "section a"
+      },
+      {
+        "identifier": "BIT-006-PACKAGE",
+        "layer": "bit",
+        "module": "header",
+        "description": "FT256 package",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "device string"
+      },
+      {
+        "identifier": "BIT-007-BUILD-DATE",
+        "layer": "bit",
+        "module": "header",
+        "description": "2011/06/10",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "section b"
+      },
+      {
+        "identifier": "BIT-008-BUILD-TIME",
+        "layer": "bit",
+        "module": "header",
+        "description": "12:44:47",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "section b"
+      },
+      {
+        "identifier": "BIT-009-USER-ID",
+        "layer": "bit",
+        "module": "header",
+        "description": "0xFFFFFFFF",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "section b"
+      },
+      {
+        "identifier": "BIT-010-DATA-LENGTH",
+        "layer": "bit",
+        "module": "header",
+        "description": "Config data 0x1FF88 bytes",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "section d"
+      },
+      {
+        "identifier": "BIT-011-SECTION-A",
+        "layer": "bit",
+        "module": "header",
+        "description": "Section a device identifier",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "BIT parser"
+      },
+      {
+        "identifier": "BIT-012-SECTION-B",
+        "layer": "bit",
+        "module": "header",
+        "description": "Section b design metadata",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "BIT parser"
+      },
+      {
+        "identifier": "BIT-013-SECTION-C",
+        "layer": "bit",
+        "module": "header",
+        "description": "Section c part name",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "BIT parser"
+      },
+      {
+        "identifier": "BIT-014-SECTION-D",
+        "layer": "bit",
+        "module": "header",
+        "description": "Section d configuration data",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "BIT parser"
+      },
+      {
+        "identifier": "BIT-015-CONFIG-OFFSET",
+        "layer": "bit",
+        "module": "header",
+        "description": "Configuration data byte offset",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "parse_bit_header.py"
+      },
+      {
+        "identifier": "FRM-001-FORMAT",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Spartan-3 Type-1/Type-2 frame format",
+        "status": "candidate",
+        "boundary": "帧解析未完全验证",
+        "evidence": "UG332"
+      },
+      {
+        "identifier": "FRM-002-COUNT",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Total configuration frame count",
+        "status": "candidate",
+        "boundary": "需完整解码器",
+        "evidence": "frame scan"
+      },
+      {
+        "identifier": "FRM-003-WORD-WIDTH",
+        "layer": "bit",
+        "module": "frame",
+        "description": "16-bit frame words",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "Spartan-3 spec"
+      },
+      {
+        "identifier": "FRM-004-TYPE1",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Type-1 write frames",
+        "status": "candidate",
+        "boundary": "计数未闭合",
+        "evidence": "frame scan"
+      },
+      {
+        "identifier": "FRM-005-TYPE2",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Type-2 noop/pad frames",
+        "status": "candidate",
+        "boundary": "计数未闭合",
+        "evidence": "frame scan"
+      },
+      {
+        "identifier": "FRM-006-STARTUP",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Startup clock cycles",
+        "status": "unknown",
+        "boundary": "需帧级解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-007-CRC",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Embedded CRC check value",
+        "status": "candidate",
+        "boundary": "CRC未重算",
+        "evidence": "BIT trailer"
+      },
+      {
+        "identifier": "FRM-008-FAR",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Frame Address Register targets",
+        "status": "unknown",
+        "boundary": "需完整解析",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-009-PIPELINE",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Pipeline register settings",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-010-PADDING",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Padding/unused config bits",
+        "status": "candidate",
+        "boundary": null,
+        "evidence": "entropy analysis"
+      },
+      {
+        "identifier": "IOB-001-ACTIVE-COUNT",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Estimated active IOB count",
+        "status": "candidate",
+        "boundary": "需IOB解码器",
+        "evidence": "heuristic"
+      },
+      {
+        "identifier": "IOB-002-INPUTS",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Input-configured IOB pins",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-003-OUTPUTS",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Output-configured IOB pins",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-004-BIDIR",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Bidirectional IOB pins",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-005-USB-FIFO",
+        "layer": "bit",
+        "module": "iob",
+        "description": "USB Slave FIFO bus pins",
+        "status": "hypothesis",
+        "boundary": "需引脚对照",
+        "evidence": "pin_hypothesis.json"
+      },
+      {
+        "identifier": "IOB-006-ADC-IF",
+        "layer": "bit",
+        "module": "iob",
+        "description": "ADC interface pins",
+        "status": "hypothesis",
+        "boundary": "需引脚对照",
+        "evidence": "pin_hypothesis.json"
+      },
+      {
+        "identifier": "IOB-007-RELAY-GPIO",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Relay control GPIO",
+        "status": "hypothesis",
+        "boundary": "需切换实验",
+        "evidence": "pin_hypothesis.json"
+      },
+      {
+        "identifier": "IOB-008-CLOCK",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Global clock input pins",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-009-RESET",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Reset input pins",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-010-UNUSED",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Unconfigured pins",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-011-BANK-0",
+        "layer": "bit",
+        "module": "iob",
+        "description": "IO Bank 0 config",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-012-BANK-1",
+        "layer": "bit",
+        "module": "iob",
+        "description": "IO Bank 1 config",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-013-BANK-2",
+        "layer": "bit",
+        "module": "iob",
+        "description": "IO Bank 2 config",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-014-BANK-3",
+        "layer": "bit",
+        "module": "iob",
+        "description": "IO Bank 3 config",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "IOB-015-PULL",
+        "layer": "bit",
+        "module": "iob",
+        "description": "Pull-up/down settings",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "CLK-001-GCLK",
+        "layer": "bit",
+        "module": "clock",
+        "description": "Global clock buffer usage",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "CLK-002-DIST",
+        "layer": "bit",
+        "module": "clock",
+        "description": "Clock tree distribution",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "CLK-003-DLL",
+        "layer": "bit",
+        "module": "clock",
+        "description": "DLL configuration",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "CLK-004-RESET",
+        "layer": "bit",
+        "module": "clock",
+        "description": "Global reset network",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "CLK-005-DOMAINS",
+        "layer": "bit",
+        "module": "clock",
+        "description": "Clock domain count",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "MEM-001-BRAM",
+        "layer": "bit",
+        "module": "memory",
+        "description": "Block RAM instances",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "MEM-002-BRAM-INIT",
+        "layer": "bit",
+        "module": "memory",
+        "description": "BRAM init content",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "MEM-003-DIST-RAM",
+        "layer": "bit",
+        "module": "memory",
+        "description": "Distributed RAM",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "MEM-004-FIFO",
+        "layer": "bit",
+        "module": "memory",
+        "description": "FIFO blocks",
+        "status": "hypothesis",
+        "boundary": "需BRAM解码",
+        "evidence": "architecture expectation"
+      },
+      {
+        "identifier": "MEM-005-ROM",
+        "layer": "bit",
+        "module": "memory",
+        "description": "ROM init tables",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      }
+    ],
+    "signal": [
+      {
+        "identifier": "SIG-USB-DIFF-PAIR",
+        "layer": "signal",
+        "module": "usb",
+        "description": "USB differential data pair between the connector and the FPGA",
+        "status": "candidate",
+        "boundary": "no_capture",
+        "evidence": "implied by HW-USB-CONNECTOR + HW-FPGA-PACKAGE; not probed"
+      },
+      {
+        "identifier": "SIG-REF-CLOCK",
+        "layer": "signal",
+        "module": "clock",
+        "description": "Reference clock distributed from the on-board oscillator to the FPGA",
+        "status": "candidate",
+        "boundary": "no_capture",
+        "evidence": "implied by HW-CLOCK-OSC; frequency not measured"
+      },
+      {
+        "identifier": "SIG-CONFIG-BOOT",
+        "layer": "signal",
+        "module": "config",
+        "description": "FPGA configuration/boot lines from the config memory",
+        "status": "candidate",
+        "boundary": "no_capture",
+        "evidence": "implied by HW-CONFIG-FLASH + BIT-DESIGN-NAME; not probed"
+      },
+      {
+        "identifier": "SIG-ACQ-CHANNEL",
+        "layer": "signal",
+        "module": "frontend",
+        "description": "Acquisition channel from the analog front-end into the fabric",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": "front-end chain not traced; no waveform captured"
+      },
+      {
+        "identifier": "SIG-POWER-RAILS",
+        "layer": "signal",
+        "module": "power",
+        "description": "Core / I/O rail voltages presented to the FPGA",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "regulators visible but rail voltages not measured"
+      },
+      {
+        "identifier": "SIG-PROTOCOL-FRAMING",
+        "layer": "signal",
+        "module": "usb",
+        "description": "Application-level framing carried over the USB link",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": "no bus trace; framing not observed"
+      },
+      {
+        "identifier": "SIG-INPUT-CONNECTOR",
+        "layer": "signal",
+        "module": "input",
+        "description": "Analog input interface / connector at the board edge",
+        "status": "candidate",
+        "boundary": "photo_only",
+        "evidence": "implied by HW-ANALOG-FRONTEND; connector type/impedance not read"
+      },
+      {
+        "identifier": "SIG-INPUT-PROTECTION",
+        "layer": "signal",
+        "module": "input",
+        "description": "Input over-voltage protection / clamp on the front-end",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "protection devices and clamp level not confirmed from photos"
+      },
+      {
+        "identifier": "SIG-COUPLING-MODE",
+        "layer": "signal",
+        "module": "coupling",
+        "description": "Input coupling selection (AC / DC) ahead of the gain stage",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "AC/DC switch and DC-block capacitor not located"
+      },
+      {
+        "identifier": "SIG-COUPLING-RELAY",
+        "layer": "signal",
+        "module": "coupling",
+        "description": "Relay switching input coupling / range in the signal path",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "relay presence not confirmed in hw catalog; type/contacts unknown"
+      },
+      {
+        "identifier": "SIG-RELAY-DRIVE",
+        "layer": "signal",
+        "module": "coupling",
+        "description": "Control/drive line that actuates the signal-path relay",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "drive source (MCU/FPGA/latch) and level not traced"
+      },
+      {
+        "identifier": "SIG-ATTENUATOR",
+        "layer": "signal",
+        "module": "gain",
+        "description": "Input attenuator / divider setting the measurement range",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "division ratio and range steps not confirmed"
+      },
+      {
+        "identifier": "SIG-PREAMP-GAIN",
+        "layer": "signal",
+        "module": "gain",
+        "description": "Front-end amplifier / buffer (possibly programmable-gain) stage",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "amplifier part, gain and bandwidth not read from photos"
+      },
+      {
+        "identifier": "SIG-ANTIALIAS-FILTER",
+        "layer": "signal",
+        "module": "filter",
+        "description": "Anti-alias low-pass filter ahead of the ADC",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "cutoff frequency, order and topology not confirmed"
+      },
+      {
+        "identifier": "SIG-ADC-INTERFACE",
+        "layer": "signal",
+        "module": "adc",
+        "description": "ADC device and its digital data interface into the fabric",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "ADC part and bus form (parallel/LVDS/serial) not confirmed"
+      },
+      {
+        "identifier": "SIG-ADC-RESOLUTION",
+        "layer": "signal",
+        "module": "adc",
+        "description": "Sampling bit width / resolution of the ADC",
+        "status": "unknown",
+        "boundary": "no_datasheet",
+        "evidence": "resolution (8/12/14/16-bit?) has no supporting evidence"
+      },
+      {
+        "identifier": "SIG-ADC-SAMPLE-RATE",
+        "layer": "signal",
+        "module": "adc",
+        "description": "ADC sampling rate as configured on the board",
+        "status": "unknown",
+        "boundary": "no_datasheet",
+        "evidence": "max and configured sample rate unknown"
+      },
+      {
+        "identifier": "SIG-ADC-REFERENCE",
+        "layer": "signal",
+        "module": "adc",
+        "description": "ADC voltage reference source",
+        "status": "unknown",
+        "boundary": "no_measurement",
+        "evidence": "reference value and source device not identified"
+      },
+      {
+        "identifier": "SIG-ADC-TO-INTERFACE",
+        "layer": "signal",
+        "module": "path",
+        "description": "Data path from ADC through the fabric out to the host interface",
+        "status": "not_started",
+        "boundary": "cross_layer",
+        "evidence": "requires FW/PROTO evidence (see catalog_usb) to connect end-to-end"
+      }
+    ],
+    "usb": [
+      {
+        "identifier": "FW-MCU-CORE-IMAGE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "8051 兼容核固件镜像",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-MCU-RESET-VECTOR",
+        "layer": "usb",
+        "module": "fw",
+        "description": "复位向量 / 启动入口",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-MCU-CODE-XRAM-MAP",
+        "layer": "usb",
+        "module": "fw",
+        "description": "代码/XRAM 地址映射",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-MCU-I2C-BOOT-PATH",
+        "layer": "usb",
+        "module": "fw",
+        "description": "MCU 经 I2C 从 EEPROM 引导路径",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-MCU-RENUMERATION",
+        "layer": "usb",
+        "module": "fw",
+        "description": "重枚举（ReNumeration）行为",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-EEPROM-IMAGE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "串行 EEPROM 内容镜像",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-EEPROM-CONFIG-BYTE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "EEPROM 首字节引导配置",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-EEPROM-VIDPID",
+        "layer": "usb",
+        "module": "fw",
+        "description": "EEPROM 内 VID/PID 字段",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-EEPROM-DESC-OVERRIDE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "EEPROM 内描述符覆盖数据",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "FW-FPGA-BITSTREAM",
+        "layer": "usb",
+        "module": "fw",
+        "description": "FPGA 位流文件（firmware/device.bit）",
+        "status": "observed",
+        "boundary": "opaque_binary",
+        "evidence": "firmware/device.bit"
+      },
+      {
+        "identifier": "FW-FPGA-CONFIG-IFACE",
+        "layer": "usb",
+        "module": "fw",
+        "description": "FPGA 配置接口（加载来源）",
+        "status": "unknown",
+        "boundary": "no_dump",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-DESC-DEVICE",
+        "layer": "usb",
+        "module": "proto",
+        "description": "设备描述符（Device Descriptor）",
+        "status": "not_started",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-DESC-CONFIG",
+        "layer": "usb",
+        "module": "proto",
+        "description": "配置描述符（Configuration Descriptor）",
+        "status": "not_started",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-DESC-INTERFACE",
+        "layer": "usb",
+        "module": "proto",
+        "description": "接口描述符（Interface Descriptor）",
+        "status": "not_started",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-DESC-STRING",
+        "layer": "usb",
+        "module": "proto",
+        "description": "字符串描述符（String Descriptors）",
+        "status": "not_started",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-EP-MAP",
+        "layer": "usb",
+        "module": "proto",
+        "description": "端点总体映射表",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-EP-BULK-IN",
+        "layer": "usb",
+        "module": "proto",
+        "description": "批量 IN 端点（数据上行）",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-EP-BULK-OUT",
+        "layer": "usb",
+        "module": "proto",
+        "description": "批量 OUT 端点（命令下行）",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-EP-INTERRUPT",
+        "layer": "usb",
+        "module": "proto",
+        "description": "中断端点（状态/事件）",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-EP-ALT-SETTINGS",
+        "layer": "usb",
+        "module": "proto",
+        "description": "接口备用设置（Alt Settings）",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-XFER-MODE",
+        "layer": "usb",
+        "module": "proto",
+        "description": "数据传输模式（批量/同步）",
+        "status": "unknown",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "PROTO-CTRL-VENDOR-REQ",
+        "layer": "usb",
+        "module": "proto",
+        "description": "厂商自定义控制请求面",
+        "status": "not_started",
+        "boundary": "no_capture",
+        "evidence": null
+      },
+      {
+        "identifier": "DRV-HOST-MODULE",
+        "layer": "usb",
+        "module": "drv",
+        "description": "主机侧 USB 驱动模块",
+        "status": "not_started",
+        "boundary": "no_binary",
+        "evidence": null
+      },
+      {
+        "identifier": "DRV-INF-BINDING",
+        "layer": "usb",
+        "module": "drv",
+        "description": "驱动 INF 绑定（VID/PID 匹配）",
+        "status": "not_started",
+        "boundary": "no_binary",
+        "evidence": null
+      },
+      {
+        "identifier": "DRV-IOCTL-SURFACE",
+        "layer": "usb",
+        "module": "drv",
+        "description": "驱动 IOCTL 接口面",
+        "status": "not_started",
+        "boundary": "no_binary",
+        "evidence": null
+      },
+      {
+        "identifier": "DRV-FIRMWARE-LOADER",
+        "layer": "usb",
+        "module": "drv",
+        "description": "主机侧固件下载器",
+        "status": "not_started",
+        "boundary": "no_binary",
+        "evidence": null
+      },
+      {
+        "identifier": "DRV-PIPE-EP-BIND",
+        "layer": "usb",
+        "module": "drv",
+        "description": "驱动管道到端点的绑定",
+        "status": "unknown",
+        "boundary": "cross_layer",
+        "evidence": null
+      }
+    ]
+  },
+  "manifests": {
+    "file_hashes": {
+      "generated_at": "2026-08-27T15:14:27.482896+00:00",
+      "source_dir": "/workspace/device_learning",
+      "file_count": 11,
+      "files": [
+        {
+          "path": "firmware/device.bit",
+          "size_bytes": 131046,
+          "sha256": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_84_144.jpg",
+          "size_bytes": 2951647,
+          "sha256": "4bd31bf44adefc77cd78b9f24b337a967b03162bb78ad41f41a7b93ee994e91d"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_85_144.jpg",
+          "size_bytes": 2435663,
+          "sha256": "6b87ac2fdf331960887b771d6b0cd6a6c4c4c5d33c0c09f56c176e3229501d60"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_86_144.jpg",
+          "size_bytes": 2729039,
+          "sha256": "eadfdca511eb98c382811fb382e5b95fabd04ba06ea6d8babad7147fc1880190"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_87_144.jpg",
+          "size_bytes": 2881541,
+          "sha256": "ea963edd640561853947e68bf5d1b99ac46ee0c186fd6860a3bf58e215f05666"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_88_144.jpg",
+          "size_bytes": 3198749,
+          "sha256": "256698af6701fa8be2fb9a7b7791e2ede78244a868f9050b44b7355880e8bc78"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_89_144.jpg",
+          "size_bytes": 2686503,
+          "sha256": "8009cba49188a4cd8dabcbe5cb7030a41858fe9c30dec137245a45f47b902c7a"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_90_144.jpg",
+          "size_bytes": 2829380,
+          "sha256": "034875b60bc2039bd4412d62f9772e1c1e0d42d8c16dcaa0e4d22c24c6085060"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_91_144.jpg",
+          "size_bytes": 2412629,
+          "sha256": "76a6af44e7bb835f0df2713471c66f0b0070122ed805d1878e243508780402f3"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_92_144.jpg",
+          "size_bytes": 3099512,
+          "sha256": "094aa8f9867c272ea43930e01b45b38b2ae2da7d0f8ccb1e60647b78a1075bef"
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_93_144.jpg",
+          "size_bytes": 2860154,
+          "sha256": "7ef97909c574e636b48bc50fbaa028599ec87282687c938b47232d21dfb044a3"
+        }
+      ]
+    },
+    "bitstream_meta": {
+      "file": {
+        "name": "device.bit",
+        "path": "/workspace/device_learning/firmware/device.bit",
+        "size_bytes": 131046,
+        "sha256": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5"
+      },
+      "header": {
+        "format": "Xilinx BIT",
+        "magic": "0ff00ff00ff00ff000",
+        "marker": 1,
+        "sections": {
+          "a": {
+            "field": "source_design_name",
+            "declared_length": 33,
+            "value": "TopUsb4431.ncd;UserID=0xFFFFFFFF"
+          },
+          "b": {
+            "field": "part_name",
+            "declared_length": 11,
+            "value": "3s200ft256"
+          },
+          "c": {
+            "field": "build_date",
+            "declared_length": 11,
+            "value": "2011/06/10"
+          },
+          "d": {
+            "field": "build_time",
+            "declared_length": 9,
+            "value": "12:44:47"
+          },
+          "e": {
+            "field": "bitstream_data",
+            "declared_length": 130952,
+            "declared_length_hex": "0x1ff88",
+            "data_offset": 94,
+            "header_length": 94,
+            "matches_file_size": true
+          }
+        },
+        "source_design_name": "TopUsb4431.ncd;UserID=0xFFFFFFFF",
+        "part_name": "3s200ft256",
+        "part": {
+          "raw": "3s200ft256",
+          "family": "Spartan-3",
+          "device": "XC3S200",
+          "package": "FT256"
+        },
+        "build_date": "2011/06/10",
+        "build_time": "12:44:47",
+        "header_length": 94,
+        "bitstream_length": 130952,
+        "bitstream_length_hex": "0x1ff88",
+        "bitstream_data_offset": 94
+      }
+    },
+    "frame_summary": {
+      "device": "3s200ft256",
+      "config_data_length": 130952,
+      "frame_scan": {
+        "word_count": 65476,
+        "type1_frame_words_estimate": 4598,
+        "type2_frame_words_estimate": 3796,
+        "unique_word_values": 8150,
+        "top_words_hex": [
+          "0x0000:25962",
+          "0x1000:794",
+          "0x0008:652",
+          "0x0004:638",
+          "0x4000:438",
+          "0x0100:437",
+          "0x040a:416",
+          "0x0001:415",
+          "0x5020:414",
+          "0x0800:411"
+        ],
+        "config_entropy_bits_per_byte": 4.305
+      },
+      "iob_active_pin_estimate": "unknown",
+      "notes": "Heuristic scan only; full IOB decode requires Spartan-3 frame parser."
+    },
+    "hardware_bom": {
+      "manifest": "hardware_bom",
+      "description": "基于 10 张实物照片的电路板元器件清单（BOM）。功能描述采用中性措辞，仅记录可见丝印与器件本体标记。",
+      "generated_date": "2026-08-27",
+      "photo_directory": "device_learning/hardware/photos/",
+      "source_photos": [
+        "微信图片_20260824134434_84_144.jpg",
+        "微信图片_20260824134434_85_144.jpg",
+        "微信图片_20260824134434_86_144.jpg",
+        "微信图片_20260824134434_87_144.jpg",
+        "微信图片_20260824134434_88_144.jpg",
+        "微信图片_20260824134434_89_144.jpg",
+        "微信图片_20260824134434_90_144.jpg",
+        "微信图片_20260824134434_91_144.jpg",
+        "微信图片_20260824134434_92_144.jpg",
+        "微信图片_20260824134434_93_144.jpg"
+      ],
+      "board_info": {
+        "board_revision": "198755F-01L",
+        "pcb_fab_number": "195665E-01",
+        "serial_barcode": "2489960",
+        "silkscreen_marks": [
+          "N114",
+          "STM-5",
+          "COPYRIGHT 2011",
+          "CE 标志",
+          "回收/警示符号"
+        ],
+        "notes": "板正面为主要数字/模拟电路与继电器阵列，背面以无源器件和模拟前端辅助电路为主；板边有接地簧片与镀金屏蔽边框。",
+        "photo_source": [
+          "微信图片_20260824134434_89_144.jpg",
+          "微信图片_20260824134434_91_144.jpg",
+          "微信图片_20260824134434_92_144.jpg"
+        ]
+      },
+      "components": [
+        {
+          "ref_designator": "U-FPGA（丝印被器件遮挡，未读出）",
+          "part_marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+          "function": "现场可编程逻辑器件（FPGA），BGA-256 封装，承担板上数字逻辑/时序控制",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_92_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U-USB（丝印未读出，位于 USB-B 座旁）",
+          "part_marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+          "function": "USB 2.0 高速接口控制器（带 8051 内核），TQFP-128 封装，主机通信接口",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_92_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U-SRAM（USB 控制器左下方，丝印未读出）",
+          "part_marking": "ISSI IS62WV10248LL-15BLI（部分字符可读）",
+          "function": "异步 SRAM 缓冲存储器，配合 USB 控制器/FPGA 做数据缓冲",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "XT600",
+          "part_marking": "24.000M",
+          "function": "24.000 MHz 有源晶体振荡器，为 USB 控制器提供主时钟",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
+          "part_marking": "不可辨认（小型 8 脚器件）",
+          "function": "串行 EEPROM（推测存放 USB VID/PID 与固件引导数据）",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U-CLK-DIST（FPGA 周边，未逐一读出）",
+          "part_marking": "不可辨认",
+          "function": "其他时钟源/时钟分配器件（照片分辨率不足，无法确认是否存在独立采样时钟晶振）",
+          "status": "unknown",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U513",
+          "part_marking": "KS245 49K95 AXYR",
+          "function": "八路总线收发器（245 型），数字总线电平缓冲/隔离",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_85_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U613",
+          "part_marking": "KS245 49K94 AXYR",
+          "function": "八路总线收发器（245 型），数字总线电平缓冲/隔离",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_91_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U622",
+          "part_marking": "KS245 45K94 AXYR",
+          "function": "八路总线收发器（245 型），位于 FPGA 左下方",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U6xx-a（FPGA 下方一排 4 只之一，丝印未读全）",
+          "part_marking": "KS245 49K95 AXYR",
+          "function": "八路总线收发器（245 型），FPGA 与外围数字信号缓冲",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U6xx-b（FPGA 下方一排 4 只之二）",
+          "part_marking": "KS245 49K95 AXYR",
+          "function": "八路总线收发器（245 型）",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U6xx-c（FPGA 下方一排 4 只之三）",
+          "part_marking": "KS245 49K95 AXYR",
+          "function": "八路总线收发器（245 型）",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U602（丝印部分可读）",
+          "part_marking": "VCT8C LCX245",
+          "function": "低压八路总线收发器（74LCX245 型），电平转换/总线缓冲",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U4xx（输入通道 4 前端，丝印部分可读）",
+          "part_marking": "BB 1271B（TSSOP，字符部分可读）",
+          "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U3xx（输入通道 3 前端）",
+          "part_marking": "同型 TSSOP，标记未逐字读出（外观与 U4xx 一致）",
+          "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U2xx（输入通道 2 前端）",
+          "part_marking": "同型 TSSOP，标记未逐字读出",
+          "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U1xx（输入通道 1 前端）",
+          "part_marking": "同型 TSSOP，标记未逐字读出",
+          "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RL200",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RL302",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RL402",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-04（丝印被继电器本体遮挡）",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-05",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-06",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-07",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-08",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-09",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-10",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-11",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RLxxx-12",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "function": "信号继电器（双刀，3V 线圈），继电器阵列成员（阵列共约 12 只，3 列 × 4 行排布）",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+          "part_marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+          "function": "BNC 同轴连接器，模拟输入/输出信号接口（板边可见约 5 只）",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_92_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "J600",
+          "part_marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+          "function": "USB Type-B 接口，主机连接",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_91_144.jpg",
+            "微信图片_20260824134434_92_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "J503（丝印部分可读）",
+          "part_marking": "AMP2313A 5747844-4",
+          "function": "D-sub 连接器（AMP/TE 系列），数字/辅助信号接口",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_92_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "GND500",
+          "part_marking": "无（金属接地端子/焊片）",
+          "function": "机壳/屏蔽接地端子",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_89_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "D-PWR-1 / D-PWR-2（电源区，丝印未读出）",
+          "part_marking": "15-50L R1（SMC 封装功率二极管，共 2 只）",
+          "function": "电源整流/防反接或续流二极管",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "C-BULK（电源区多只，含 C608/C811 附近）",
+          "part_marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+          "function": "电源大容量储能/滤波电容",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "L6xx / L9xx（电源区多只屏蔽功率电感）",
+          "part_marking": "本体标记不可辨认",
+          "function": "DC-DC 变换电感（多路开关电源）",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_87_144.jpg",
+            "微信图片_20260824134434_89_144.jpg",
+            "微信图片_20260824134434_93_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "RN602 / RN605 / RN608 / RN630 / RN44 / RN525-527 等",
+          "part_marking": "101 / 103 / 330 / 221 / 270（排阻阵列）",
+          "function": "总线串联端接/上拉电阻网络",
+          "status": "confirmed",
+          "photo_source": [
+            "微信图片_20260824134434_84_144.jpg",
+            "微信图片_20260824134434_85_144.jpg",
+            "微信图片_20260824134434_90_144.jpg",
+            "微信图片_20260824134434_91_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U711（丝印部分可读）",
+          "part_marking": "…6221（SOIC-8，字符部分可读）",
+          "function": "模拟运算放大器（信号调理级）",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "U9xx（背面模拟区多只 SOIC-8/TSSOP）",
+          "part_marking": "标记不可辨认（含 ADI 商标样式器件）",
+          "function": "模拟前端运放/基准/开关等辅助器件",
+          "status": "unknown",
+          "photo_source": [
+            "微信图片_20260824134434_90_144.jpg",
+            "微信图片_20260824134434_88_144.jpg"
+          ]
+        },
+        {
+          "ref_designator": "YC700 / U-SOT23-6（继电器驱动区多只）",
+          "part_marking": "YC7D0 等（SOT-23-6，字符部分可读）",
+          "function": "继电器驱动/小信号晶体管电路",
+          "status": "candidate",
+          "photo_source": [
+            "微信图片_20260824134434_86_144.jpg",
+            "微信图片_20260824134434_87_144.jpg"
+          ]
+        }
+      ],
+      "summary": {
+        "total_component_entries": 34,
+        "confirmed": 24,
+        "candidate": 8,
+        "unknown": 2,
+        "key_findings": [
+          "FPGA：Xilinx Spartan XC3S200（BGA-256，FTG256）",
+          "USB 控制器：Cypress CY7C68013A-128AXI，配 24.000 MHz 振荡器（XT600）",
+          "ADC：1271 系列 24-bit delta-sigma，按输入通道各一片（1 片标记可读，其余同型候选）",
+          "继电器：Omron G6JU-2FS-Y 3VDC 共约 12 只（3 列 × 4 行）",
+          "总线收发器：KS245 共 6 只（U513/U613/U622 及 FPGA 下方 3 只）",
+          "接口：约 5 只 BNC 同轴、1 只 USB-B（J600）、1 只 D-sub（AMP 5747844-4）",
+          "EEPROM：USB 控制器附近存在候选 SOIC-8，型号未读出",
+          "独立采样时钟晶振：照片中未能辨认，状态 unknown"
+        ]
+      }
+    },
+    "pin_hypothesis": {
+      "generated_at": "2026-08-27T15:10:00Z",
+      "policy": "All entries are hypothesis or unknown until verified by experiment",
+      "bridges": [
+        {
+          "id": "BRG-001",
+          "signal": "FD[0:15]",
+          "target": "USB controller data bus",
+          "direction": "bidir",
+          "status": "hypothesis",
+          "boundary": "需网表",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-002",
+          "signal": "SLRD",
+          "target": "USB FIFO read strobe",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "标准Slave FIFO",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-003",
+          "signal": "SLWR",
+          "target": "USB FIFO write strobe",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "标准Slave FIFO",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-004",
+          "signal": "SLOE",
+          "target": "USB FIFO output enable",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "标准Slave FIFO",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-005",
+          "signal": "FLAGA",
+          "target": "USB FIFO almost-empty flag",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "需逻辑分析",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-006",
+          "signal": "FLAGB",
+          "target": "USB FIFO almost-full flag",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "需逻辑分析",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-007",
+          "signal": "FLAGC",
+          "target": "USB FIFO programmable flag",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "需逻辑分析",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-008",
+          "signal": "FIFOADR[1:0]",
+          "target": "USB endpoint select",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "需抓包对照",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-009",
+          "signal": "PKTEND",
+          "target": "USB packet end commit",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "标准Slave FIFO",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-010",
+          "signal": "ADC_DOUT",
+          "target": "ADC serial data output",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "需ADC时序验证",
+          "photo": "photo_86"
+        },
+        {
+          "id": "BRG-011",
+          "signal": "ADC_SCLK",
+          "target": "ADC serial clock",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "需ADC时序验证",
+          "photo": "photo_86"
+        },
+        {
+          "id": "BRG-012",
+          "signal": "ADC_SYNC",
+          "target": "ADC frame sync",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "需ADC时序验证",
+          "photo": "photo_86"
+        },
+        {
+          "id": "BRG-013",
+          "signal": "RELAY_CTRL[0:11]",
+          "target": "Relay coil drivers",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "需切换实验",
+          "photo": "photo_86"
+        },
+        {
+          "id": "BRG-014",
+          "signal": "GCLK",
+          "target": "Global clock input",
+          "direction": "input",
+          "status": "unknown",
+          "boundary": "频率未确认",
+          "photo": "photo_92"
+        },
+        {
+          "id": "BRG-015",
+          "signal": "GRESET",
+          "target": "Global reset",
+          "direction": "input",
+          "status": "unknown",
+          "boundary": "unknown",
+          "photo": "photo_92"
+        },
+        {
+          "id": "BRG-016",
+          "signal": "KS245_A[0:7]",
+          "target": "Bus transceiver to D-sub",
+          "direction": "bidir",
+          "status": "hypothesis",
+          "boundary": "D-sub功能未知",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-017",
+          "signal": "SRAM_ADDR",
+          "target": "External SRAM interface",
+          "direction": "output",
+          "status": "hypothesis",
+          "boundary": "容量未读",
+          "photo": "photo_92"
+        },
+        {
+          "id": "BRG-018",
+          "signal": "SRAM_DATA",
+          "target": "External SRAM data",
+          "direction": "bidir",
+          "status": "hypothesis",
+          "boundary": "容量未读",
+          "photo": "photo_92"
+        },
+        {
+          "id": "BRG-019",
+          "signal": "FPGA_CONFIG",
+          "target": "FPGA configuration pins",
+          "direction": "input",
+          "status": "candidate",
+          "boundary": "JTAG vs slave serial",
+          "photo": "photo_92"
+        },
+        {
+          "id": "BRG-020",
+          "signal": "COAX_CH[0:3]",
+          "target": "Relay input routing",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "路由矩阵未验证",
+          "photo": "photo_88"
+        },
+        {
+          "id": "BRG-021",
+          "signal": "IFCLK",
+          "target": "USB interface clock 48MHz",
+          "direction": "input",
+          "status": "hypothesis",
+          "boundary": "需频率测量",
+          "photo": "photo_85"
+        },
+        {
+          "id": "BRG-022",
+          "signal": "RELAY_CH0_AC",
+          "target": "Channel 0 AC coupling relay",
+          "direction": "output",
+          "status": "unknown",
+          "boundary": "需实验",
+          "photo": "photo_86"
+        }
+      ],
+      "count": 22
+    }
+  }
+}

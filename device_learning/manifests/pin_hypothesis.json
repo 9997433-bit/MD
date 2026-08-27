@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-08-27T15:10:00Z",
+  "policy": "All entries are hypothesis or unknown until verified by experiment",
+  "bridges": [
+    {"id": "BRG-001", "signal": "FD[0:15]", "target": "USB controller data bus", "direction": "bidir", "status": "hypothesis", "boundary": "需网表", "photo": "photo_85"},
+    {"id": "BRG-002", "signal": "SLRD", "target": "USB FIFO read strobe", "direction": "input", "status": "hypothesis", "boundary": "标准Slave FIFO", "photo": "photo_85"},
+    {"id": "BRG-003", "signal": "SLWR", "target": "USB FIFO write strobe", "direction": "input", "status": "hypothesis", "boundary": "标准Slave FIFO", "photo": "photo_85"},
+    {"id": "BRG-004", "signal": "SLOE", "target": "USB FIFO output enable", "direction": "input", "status": "hypothesis", "boundary": "标准Slave FIFO", "photo": "photo_85"},
+    {"id": "BRG-005", "signal": "FLAGA", "target": "USB FIFO almost-empty flag", "direction": "output", "status": "hypothesis", "boundary": "需逻辑分析", "photo": "photo_85"},
+    {"id": "BRG-006", "signal": "FLAGB", "target": "USB FIFO almost-full flag", "direction": "output", "status": "hypothesis", "boundary": "需逻辑分析", "photo": "photo_85"},
+    {"id": "BRG-007", "signal": "FLAGC", "target": "USB FIFO programmable flag", "direction": "output", "status": "hypothesis", "boundary": "需逻辑分析", "photo": "photo_85"},
+    {"id": "BRG-008", "signal": "FIFOADR[1:0]", "target": "USB endpoint select", "direction": "input", "status": "hypothesis", "boundary": "需抓包对照", "photo": "photo_85"},
+    {"id": "BRG-009", "signal": "PKTEND", "target": "USB packet end commit", "direction": "input", "status": "hypothesis", "boundary": "标准Slave FIFO", "photo": "photo_85"},
+    {"id": "BRG-010", "signal": "ADC_DOUT", "target": "ADC serial data output", "direction": "input", "status": "hypothesis", "boundary": "需ADC时序验证", "photo": "photo_86"},
+    {"id": "BRG-011", "signal": "ADC_SCLK", "target": "ADC serial clock", "direction": "output", "status": "hypothesis", "boundary": "需ADC时序验证", "photo": "photo_86"},
+    {"id": "BRG-012", "signal": "ADC_SYNC", "target": "ADC frame sync", "direction": "output", "status": "hypothesis", "boundary": "需ADC时序验证", "photo": "photo_86"},
+    {"id": "BRG-013", "signal": "RELAY_CTRL[0:11]", "target": "Relay coil drivers", "direction": "output", "status": "hypothesis", "boundary": "需切换实验", "photo": "photo_86"},
+    {"id": "BRG-014", "signal": "GCLK", "target": "Global clock input", "direction": "input", "status": "unknown", "boundary": "频率未确认", "photo": "photo_92"},
+    {"id": "BRG-015", "signal": "GRESET", "target": "Global reset", "direction": "input", "status": "unknown", "boundary": "unknown", "photo": "photo_92"},
+    {"id": "BRG-016", "signal": "KS245_A[0:7]", "target": "Bus transceiver to D-sub", "direction": "bidir", "status": "hypothesis", "boundary": "D-sub功能未知", "photo": "photo_85"},
+    {"id": "BRG-017", "signal": "SRAM_ADDR", "target": "External SRAM interface", "direction": "output", "status": "hypothesis", "boundary": "容量未读", "photo": "photo_92"},
+    {"id": "BRG-018", "signal": "SRAM_DATA", "target": "External SRAM data", "direction": "bidir", "status": "hypothesis", "boundary": "容量未读", "photo": "photo_92"},
+    {"id": "BRG-019", "signal": "FPGA_CONFIG", "target": "FPGA configuration pins", "direction": "input", "status": "candidate", "boundary": "JTAG vs slave serial", "photo": "photo_92"},
+    {"id": "BRG-020", "signal": "COAX_CH[0:3]", "target": "Relay input routing", "direction": "input", "status": "hypothesis", "boundary": "路由矩阵未验证", "photo": "photo_88"},
+    {"id": "BRG-021", "signal": "IFCLK", "target": "USB interface clock 48MHz", "direction": "input", "status": "hypothesis", "boundary": "需频率测量", "photo": "photo_85"},
+    {"id": "BRG-022", "signal": "RELAY_CH0_AC", "target": "Channel 0 AC coupling relay", "direction": "output", "status": "unknown", "boundary": "需实验", "photo": "photo_86"}
+  ],
+  "count": 22
+}
