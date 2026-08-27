@@ -45,7 +45,11 @@ DLL_IDS = [f"ACQ-E1-DLL-E1735A_{n}" for n in (
     "RefreshDevice", "RefreshStatus", "ResetDevice", "SelectDevice", "SetExternalPolarity",
     "SetOptics", "SetParameter", "SetSampleTriggers", "SetupAQB", "SetupTimer",
     "SpecifyDevice", "StartExternalSampling", "StartTimer", "StopExternalSampling", "StopTimer",
-)]
+)] + [
+    "ACQ-E1-DLL-TMethodImplementationIntercept",
+    "ACQ-E1-DLL-__dbk_fcall_wrapper",
+    "ACQ-E1-DLL-dbkFCallWrapperAddr",
+]
 # E1735ACore.dll 导出符号（含 Delphi 运行时导出）
 CORE_IDS = [f"ACQ-E1-CORE-E1735ACore_{n}" for n in (
     "CloseHandles", "ConfigureCard", "ControlLEDs", "GetCardHandle", "GetCardNumber",

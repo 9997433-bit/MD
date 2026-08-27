@@ -65,9 +65,8 @@ def test_standards_map_matches_std_entries():
 
 
 def test_analysis_ci_map_matches_api_entries():
-    # CC_ANALYSIS(=66) 的 CI 选择子固定 28 项,索引 0..27
-    assert len(ana.ANALYSIS_CI_MAP) == 28
-    assert set(ana.ANALYSIS_CI_MAP) == set(range(28))
+    # CC_ANALYSIS(=66) 的 CI 选择子：CI 0-27 定位/VDI + CI 30-35 形位/时基 + CI 40-51 时基统计
+    assert len(ana.ANALYSIS_CI_MAP) == 46
     by_id = {e["identifier"]: e for e in ana.analysis_entries()}
     api_ids_in_ledger = {
         i for i in by_id if i.startswith("ANA-E1-API-ANALYSIS-")

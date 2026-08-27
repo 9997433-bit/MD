@@ -1,8 +1,4 @@
 {
-  "schema_notes": {
-    "has_linear_err": "false 表示 LinearErr 字段存在但值为空(TextUnit=,Expanded=N)，非字段缺失",
-    "has_timebase_raw": "true 表示 ODF 之后含 <Time Base Raw Data> 原始数据块（见 sample_field_index.json unindexed_sections）"
-  },
   "samples": [
     {
       "file": "Sample.ATB",

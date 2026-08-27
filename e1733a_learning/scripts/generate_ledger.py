@@ -177,7 +177,31 @@ ANALYSIS_CI = {
     25: ("VDI_PA", "VDI Pa"),
     26: ("VDI_UMAX", "VDI U max"),
     27: ("VDI_UMEAN", "VDI U mean"),
+    30: ("MAX_ELEVATION", "max elevation"),
+    31: ("CLOSURE_DH", "closure DH flatness"),
+    32: ("CLOSURE_BF", "closure BF flatness"),
+    33: ("PAR_RESULT", "parallelism result"),
+    34: ("SQU_RESULT", "squareness result"),
+    35: ("PLUSMINUS", "plus/minus"),
+    40: ("POS_MAX", "TB position max"),
+    41: ("POS_MIN", "TB position min"),
+    42: ("POS_MEAN", "TB position mean"),
+    43: ("POS_NSIGMA", "TB position N*sigma"),
+    44: ("VEL_MAX", "TB velocity max"),
+    45: ("VEL_MIN", "TB velocity min"),
+    46: ("VEL_MEAN", "TB velocity mean"),
+    47: ("VEL_NSIGMA", "TB velocity N*sigma"),
+    48: ("ACC_MAX", "TB acceleration max"),
+    49: ("ACC_MIN", "TB acceleration min"),
+    50: ("ACC_MEAN", "TB acceleration mean"),
+    51: ("ACC_NSIGMA", "TB acceleration N*sigma"),
 }
+
+DELPHI_RUNTIME_EXPORTS = (
+    "TMethodImplementationIntercept",
+    "__dbk_fcall_wrapper",
+    "dbkFCallWrapperAddr",
+)
 
 
 def entry(identifier, module, source, status, boundary, missing, **kw):
@@ -191,6 +215,28 @@ def entry(identifier, module, source, status, boundary, missing, **kw):
         "missing": missing,
         **{k: v for k, v in kw.items() if k != "window_hash"},
     }
+
+
+def append_delphi_runtime_exports(
+    rows: list[dict],
+    dll_name: str,
+    exports: list[str],
+    id_prefix: str,
+) -> None:
+    """Register Delphi/RAD Studio runtime exports (same trio in each vendor DLL)."""
+    export_set = set(exports)
+    for sym in DELPHI_RUNTIME_EXPORTS:
+        if sym in export_set:
+            rows.append(
+                entry(
+                    f"{id_prefix}-{sym}",
+                    dll_name,
+                    sym,
+                    "E1",
+                    "pe_export_symbol",
+                    "Delphi runtime export; function body not frozen",
+                )
+            )
 
 
 def build_acq_catalog(pe_exports_map: dict) -> list[dict]:
@@ -273,6 +319,9 @@ def build_acq_catalog(pe_exports_map: dict) -> list[dict]:
                     "function body not frozen",
                 )
             )
+    append_delphi_runtime_exports(
+        rows, "E1735A.dll", pe_exports_map.get("E1735A.dll", []), "ACQ-E1-DLL"
+    )
     for sym in pe_exports_map.get("E1735ACore.dll", []):
         if sym == "E1735ACore_ProcessRawData":
             st = "unknown"
@@ -464,6 +513,9 @@ def build_cmp_catalog(pe_exports_map: dict) -> list[dict]:
                 miss,
             )
         )
+    append_delphi_runtime_exports(
+        rows, "E1736A.dll", pe_exports_map.get("E1736A.dll", []), "CMP-E1-ENV"
+    )
     for sym in pe_exports_map.get("E1736ACore.dll", []):
         if not sym.startswith("E1736ACore_"):
             continue
@@ -477,6 +529,9 @@ def build_cmp_catalog(pe_exports_map: dict) -> list[dict]:
                 "function body not frozen",
             )
         )
+    append_delphi_runtime_exports(
+        rows, "E1736ACore.dll", pe_exports_map.get("E1736ACore.dll", []), "CMP-E1-CORE"
+    )
     return rows
 
 

@@ -26,3 +26,14 @@ def test_interpolate_stays_unknown():
     data = json.loads((ROOT / "EvidenceLedger.json").read_text(encoding="utf-8"))
     e = next(x for x in data["catalogs"]["compensation"] if x["identifier"] == "CMP-UNK-INTERPOLATE-ALG")
     assert e["status"] == "unknown"
+
+
+def test_delphi_runtime_exports_registered_across_dlls():
+    """Four vendor DLLs each export the same Delphi runtime trio; all should be in ledger."""
+    data = json.loads((ROOT / "EvidenceLedger.json").read_text(encoding="utf-8"))
+    entries = data["catalogs"]["acquisition"] + data["catalogs"]["compensation"]
+    sym = "TMethodImplementationIntercept"
+    hits = [e for e in entries if e.get("source_identifier") == sym]
+    assert len(hits) == 4
+    modules = {e["module"] for e in hits}
+    assert modules == {"E1735A.dll", "E1735ACore.dll", "E1736A.dll", "E1736ACore.dll"}

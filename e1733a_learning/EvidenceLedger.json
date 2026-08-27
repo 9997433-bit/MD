@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T05:41:39.039983+00:00",
+  "generated_at": "2026-08-27T10:48:33.554219+00:00",
   "installer_source": "Montyzhang/-seed Install Keysight E1733A 1.14.1 (Win64).exe",
   "phases_completed": [
     "0",
@@ -220,7 +220,7 @@
       {
         "identifier": "ACQ-E1-TRIG-STR-EPTIMEOUT",
         "module": "E1733A.exe/Remote.h",
-        "source_identifier": "MEASETUP_EPTIMEOUT_CHOOSING",
+        "source_identifier": "MEASETUP_EPTIMEOUT_ITEMTEXT",
         "window_hash": null,
         "status": "candidate",
         "boundary": "remote_h_constant",
@@ -531,6 +531,33 @@
         "status": "E1",
         "boundary": "pe_export_symbol",
         "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-TMethodImplementationIntercept",
+        "module": "E1735A.dll",
+        "source_identifier": "TMethodImplementationIntercept",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-__dbk_fcall_wrapper",
+        "module": "E1735A.dll",
+        "source_identifier": "__dbk_fcall_wrapper",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-dbkFCallWrapperAddr",
+        "module": "E1735A.dll",
+        "source_identifier": "dbkFCallWrapperAddr",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
       },
       {
         "identifier": "ACQ-E1-CORE-E1735ACore_CloseHandles",
@@ -998,6 +1025,168 @@
         "identifier": "ANA-E1-API-ANALYSIS-VDI_UMEAN",
         "module": "Remote.h",
         "source_identifier": "CC_ANALYSIS=66 CI=27",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-MAX_ELEVATION",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=30",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-CLOSURE_DH",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=31",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-CLOSURE_BF",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=32",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-PAR_RESULT",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=33",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-SQU_RESULT",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=34",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-PLUSMINUS",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=35",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-POS_MAX",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=40",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-POS_MIN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=41",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-POS_MEAN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=42",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-POS_NSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=43",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VEL_MAX",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=44",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VEL_MIN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=45",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VEL_MEAN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=46",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VEL_NSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=47",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-ACC_MAX",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=48",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-ACC_MIN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=49",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-ACC_MEAN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=50",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-ACC_NSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=51",
         "window_hash": null,
         "status": "E1",
         "boundary": "remote_h_constant",
@@ -1483,6 +1672,33 @@
         "missing": "function body not frozen"
       },
       {
+        "identifier": "CMP-E1-ENV-TMethodImplementationIntercept",
+        "module": "E1736A.dll",
+        "source_identifier": "TMethodImplementationIntercept",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-__dbk_fcall_wrapper",
+        "module": "E1736A.dll",
+        "source_identifier": "__dbk_fcall_wrapper",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-dbkFCallWrapperAddr",
+        "module": "E1736A.dll",
+        "source_identifier": "dbkFCallWrapperAddr",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
         "identifier": "CMP-E1-CORE-E1736ACore_CloseHandles",
         "module": "E1736ACore.dll",
         "source_identifier": "E1736ACore_CloseHandles",
@@ -1580,6 +1796,33 @@
         "status": "E1",
         "boundary": "pe_export_symbol",
         "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-TMethodImplementationIntercept",
+        "module": "E1736ACore.dll",
+        "source_identifier": "TMethodImplementationIntercept",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-__dbk_fcall_wrapper",
+        "module": "E1736ACore.dll",
+        "source_identifier": "__dbk_fcall_wrapper",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-CORE-dbkFCallWrapperAddr",
+        "module": "E1736ACore.dll",
+        "source_identifier": "dbkFCallWrapperAddr",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "Delphi runtime export; function body not frozen"
       }
     ],
     "formats": [
