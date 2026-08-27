@@ -137,13 +137,31 @@ namespace Aetherboard.Core.Tests
                 UnitId = "knight",
                 SkillId = "shield_bash",
                 TargetX = 3,
-                TargetY = 3
+                TargetY = 3,
+                PlayerId = 1
             };
             var line = BattleSyncProtocol.EncodeCommand(cmd);
             var parsed = BattleSyncProtocol.ExtractCommand(line);
             Assert.NotNull(parsed);
             Assert.Equal(BattleCommandType.Skill, parsed!.Type);
             Assert.Equal("shield_bash", parsed.SkillId);
+            Assert.Equal(1, parsed.PlayerId);
+        }
+
+        [Fact]
+        public void CoopRules_BlocksWrongPlayer()
+        {
+            var host = new BattleHostAuthority("earth", 42, coop: true);
+            var (ok, _, err) = host.ApplyCommand(new BattleCommand
+            {
+                Type = BattleCommandType.Move,
+                UnitId = "knight",
+                PlayerId = 2,
+                TargetX = 3,
+                TargetY = 6
+            });
+            Assert.False(ok);
+            Assert.Contains("无权", err);
         }
     }
 }

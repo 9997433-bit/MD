@@ -23,6 +23,7 @@ namespace Aetherboard.Core
         public int TargetX = -1;
         public int TargetY = -1;
         public string BossId;
+        public int PlayerId;
     }
 
     /// <summary>

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Authoritative battle host — TCP + HTTP API for Unity / Web clients.
+"""Authoritative battle host — TCP + HTTP + WebSocket for Unity / Web clients.
 
 Usage:
     cd aetherboard
-    PYTHONPATH=. python3 scripts/battle_host.py --port 8767 --http-port 8768
+    pip install -r requirements.txt   # optional, for WebSocket
+    PYTHONPATH=. python3 scripts/battle_host.py --coop
 """
 
 from __future__ import annotations
@@ -17,18 +18,22 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
 from sim.battle import BattleEngine
+from sim.coop_rules import can_control, command_requires_unit
 from sim.state_codec import state_to_dict
 from sim.types import Pos
 
 
 class BattleHost:
-    def __init__(self, seed: int = 42, boss_id: str = "earth") -> None:
+    def __init__(self, seed: int = 42, boss_id: str = "earth", coop: bool = False) -> None:
         self.engine = BattleEngine(seed=seed, boss_id=boss_id)
         self.engine.begin_warning()
         self.seed = seed
         self.boss_id = boss_id
+        self.coop = coop
         self.lock = threading.Lock()
         self.clients: list[socket.socket] = []
+        self._ws_clients: list[Any] = []
+        self._ws_loop: Any = None
 
     def preview_cells(self) -> list[Pos]:
         state = self.engine.state
@@ -45,13 +50,19 @@ class BattleHost:
 
     def apply_command(self, cmd: dict[str, Any]) -> tuple[bool, str | None]:
         ctype = cmd.get("type")
+        player_id = int(cmd.get("playerId") or 0)
+        unit_id = cmd.get("unitId") or ""
+
+        if self.coop and command_requires_unit(ctype) and not can_control(player_id, unit_id, True):
+            return False, f"P{player_id} 无权控制 {unit_id}"
+
         if ctype == "Move":
-            ok = self.engine.move_unit(cmd["unitId"], Pos(cmd["targetX"], cmd["targetY"]))
+            ok = self.engine.move_unit(unit_id, Pos(cmd["targetX"], cmd["targetY"]))
         elif ctype == "Skill":
             target = None
             if cmd.get("targetX", -1) >= 0 and cmd.get("targetY", -1) >= 0:
                 target = Pos(cmd["targetX"], cmd["targetY"])
-            ok = self.engine.use_skill(cmd["unitId"], cmd["skillId"], target)
+            ok = self.engine.use_skill(unit_id, cmd["skillId"], target)
         elif ctype == "EndPhase":
             self.engine.end_phase()
             ok = True
@@ -85,6 +96,18 @@ class BattleHost:
             if sock in self.clients:
                 self.clients.remove(sock)
 
+    def register_ws(self, ws: Any) -> None:
+        with self.lock:
+            self._ws_clients.append(ws)
+
+    def unregister_ws(self, ws: Any) -> None:
+        with self.lock:
+            if ws in self._ws_clients:
+                self._ws_clients.remove(ws)
+
+    def set_ws_loop(self, loop: Any) -> None:
+        self._ws_loop = loop
+
     def broadcast(self, message: dict[str, Any]) -> None:
         line = json.dumps(message, ensure_ascii=False) + "\n"
         data = line.encode("utf-8")
@@ -98,6 +121,39 @@ class BattleHost:
             for client in dead:
                 self.clients.remove(client)
 
+        ws_text = json.dumps(message, ensure_ascii=False)
+        self._broadcast_ws(ws_text)
+
+    def _broadcast_ws(self, text: str) -> None:
+        import asyncio
+
+        with self.lock:
+            clients = list(self._ws_clients)
+            loop = self._ws_loop
+        if not loop or not clients:
+            return
+
+        async def _send_all() -> None:
+            dead: list[Any] = []
+            for ws in clients:
+                try:
+                    await ws.send(text)
+                except Exception:
+                    dead.append(ws)
+            if dead:
+                with self.lock:
+                    for ws in dead:
+                        if ws in self._ws_clients:
+                            self._ws_clients.remove(ws)
+
+        try:
+            asyncio.run_coroutine_threadsafe(_send_all(), loop)
+        except RuntimeError:
+            pass
+
+    def welcome_message(self) -> dict[str, Any]:
+        return {"type": "welcome", "seed": self.seed, "bossId": self.boss_id, "coop": self.coop}
+
 
 class BattleTCPHandler(socketserver.StreamRequestHandler):
     host: BattleHost
@@ -105,8 +161,7 @@ class BattleTCPHandler(socketserver.StreamRequestHandler):
     def handle(self) -> None:
         self.host.register(self.request)
         try:
-            welcome = {"type": "welcome", "seed": self.host.seed, "bossId": self.host.boss_id}
-            self._send(welcome)
+            self._send(self.host.welcome_message())
             self._send({"type": "state", "payload": self.host.export_state()})
 
             for line in self.rfile:
@@ -173,7 +228,10 @@ class BattleHTTPHandler(BaseHTTPRequestHandler):
             self._json_response(200, {"type": "state", "payload": state})
             return
         if self.path.rstrip("/") == "/api/health":
-            self._json_response(200, {"ok": True, "bossId": self.battle_host.boss_id})
+            self._json_response(
+                200,
+                {"ok": True, "bossId": self.battle_host.boss_id, "coop": self.battle_host.coop},
+            )
             return
         self._json_response(404, {"type": "error", "message": "Not found"})
 
@@ -205,25 +263,76 @@ class BattleHTTPServer(ThreadingHTTPServer):
         super().finish_request(request, client_address)
 
 
+def start_websocket_server(bind_host: str, port: int, battle_host: BattleHost) -> bool:
+    try:
+        import asyncio
+        import websockets
+    except ImportError:
+        print("WebSocket disabled: pip install websockets")
+        return False
+
+    async def handler(websocket: Any) -> None:
+        battle_host.register_ws(websocket)
+        try:
+            await websocket.send(json.dumps(battle_host.welcome_message(), ensure_ascii=False))
+            await websocket.send(
+                json.dumps({"type": "state", "payload": battle_host.export_state()}, ensure_ascii=False)
+            )
+            async for message in websocket:
+                try:
+                    envelope = json.loads(message)
+                except json.JSONDecodeError:
+                    await websocket.send(json.dumps({"type": "error", "message": "Invalid JSON"}))
+                    continue
+                ok, _, err = battle_host.handle_command_envelope(envelope)
+                if not ok:
+                    await websocket.send(
+                        json.dumps({"type": "error", "message": err or "rejected"}, ensure_ascii=False)
+                    )
+        finally:
+            battle_host.unregister_ws(websocket)
+
+    async def serve() -> None:
+        battle_host.set_ws_loop(asyncio.get_running_loop())
+        async with websockets.serve(handler, bind_host, port):
+            await asyncio.Future()
+
+    def run_loop() -> None:
+        asyncio.run(serve())
+
+    threading.Thread(target=run_loop, daemon=True).start()
+    return True
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Aetherboard authoritative battle host")
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8767, help="TCP port (Unity)")
-    parser.add_argument("--http-port", type=int, default=8768, help="HTTP port (Web browser)")
+    parser.add_argument("--http-port", type=int, default=8768, help="HTTP port (Web fallback)")
+    parser.add_argument("--ws-port", type=int, default=8769, help="WebSocket port (Web preferred)")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--boss", default="earth", choices=["earth", "wind"])
+    parser.add_argument("--coop", action="store_true", help="Enforce P1/P2 unit ownership")
     args = parser.parse_args()
 
-    battle_host = BattleHost(seed=args.seed, boss_id=args.boss)
+    battle_host = BattleHost(seed=args.seed, boss_id=args.boss, coop=args.coop)
 
     http_server = BattleHTTPServer((args.host, args.http_port), battle_host)
     http_thread = threading.Thread(target=http_server.serve_forever, daemon=True)
     http_thread.start()
 
+    ws_ok = start_websocket_server(args.host, args.ws_port, battle_host)
+
     tcp_server = BattleTCPServer((args.host, args.port), battle_host)
+    parts = [
+        f"TCP {args.host}:{args.port}",
+        f"HTTP {args.host}:{args.http_port}",
+    ]
+    if ws_ok:
+        parts.append(f"WS {args.host}:{args.ws_port}")
     print(
-        f"Aetherboard host: TCP {args.host}:{args.port} | "
-        f"HTTP {args.host}:{args.http_port} (boss={args.boss}, seed={args.seed})"
+        f"Aetherboard host: {' | '.join(parts)} "
+        f"(boss={args.boss}, seed={args.seed}, coop={args.coop})"
     )
     try:
         tcp_server.serve_forever()

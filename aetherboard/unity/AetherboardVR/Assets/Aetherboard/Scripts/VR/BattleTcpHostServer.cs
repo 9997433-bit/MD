@@ -19,6 +19,9 @@ namespace Aetherboard.VR
         [SerializeField] private int listenPort = 8767;
         [SerializeField] private bool startOnAwake = false;
 
+        [SerializeField] private bool enforceCoop = true;
+
+        private CoopController _coop;
         private TcpListener _listener;
         private Thread _acceptThread;
         private volatile bool _running;
@@ -28,6 +31,7 @@ namespace Aetherboard.VR
         private void Awake()
         {
             if (director == null) director = GetComponent<BattleDirector>();
+            _coop = GetComponent<CoopController>();
         }
 
         private void Start()
@@ -87,7 +91,8 @@ namespace Aetherboard.VR
                 var writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true };
 
                 writer.WriteLine(BattleSyncProtocol.EncodeWelcome(
-                    director.Engine.RandomSeed, director.Engine.BossId));
+                    director.Engine.RandomSeed, director.Engine.BossId,
+                    enforceCoop && _coop != null && _coop.Mode == CoopMode.SplitCoop));
                 writer.WriteLine(BattleSyncProtocol.EncodeState(director.ExportSnapshotJson()));
 
                 string line;
@@ -98,6 +103,14 @@ namespace Aetherboard.VR
                     if (cmd == null)
                     {
                         writer.WriteLine(BattleSyncProtocol.EncodeError("Invalid command"));
+                        continue;
+                    }
+
+                    var coopOn = enforceCoop && _coop != null && _coop.Mode == CoopMode.SplitCoop;
+                    if (coopOn && CoopRules.CommandRequiresUnit(cmd.Type) &&
+                        !CoopRules.CanControl(cmd.PlayerId, cmd.UnitId, true))
+                    {
+                        writer.WriteLine(BattleSyncProtocol.EncodeError($"P{cmd.PlayerId} 无权控制 {cmd.UnitId}"));
                         continue;
                     }
 

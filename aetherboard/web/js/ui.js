@@ -1,5 +1,6 @@
 import { BOSS_POS, JOB_SKILLS, Phase, SKILLS, TELEGRAPH_TEXT } from "./constants.js";
 import { importHostState } from "./hostState.js";
+import { canControl } from "./coop.js";
 
 const phaseLabel = {
   WARNING: "预警",
@@ -17,6 +18,8 @@ export class GameUI {
     this.onBossChange = onBossChange;
     this.remoteMode = options.remoteMode ?? false;
     this.hostClient = null;
+    this.coopEnabled = false;
+    this.playerId = 1;
     this.selectedUnitId = null;
     this.pendingSkillId = null;
 
@@ -48,13 +51,41 @@ export class GameUI {
     });
   }
 
-  setHostClient(client) {
+  setPlayerId(id) {
+    this.playerId = id === 2 ? 2 : 1;
+  }
+
+  setHostClient(client, coopEnabled = false) {
     this.hostClient = client;
+    this.coopEnabled = coopEnabled;
     this.remoteMode = true;
     this.bossSelect.disabled = true;
     document.getElementById("btn-auto").disabled = true;
     document.getElementById("btn-reset").disabled = true;
     this.netStatus?.classList.remove("hidden");
+    if (client.setPlayerId) client.setPlayerId(this.playerId);
+
+    const playerSelect = document.getElementById("player-select");
+    if (coopEnabled && playerSelect) {
+      playerSelect.classList.remove("hidden");
+      const btnP1 = document.getElementById("btn-p1");
+      const btnP2 = document.getElementById("btn-p2");
+      const syncButtons = () => {
+        btnP1?.classList.toggle("active", this.playerId === 1);
+        btnP2?.classList.toggle("active", this.playerId === 2);
+      };
+      btnP1?.addEventListener("click", () => {
+        this.playerId = 1;
+        client.setPlayerId?.(1);
+        syncButtons();
+      });
+      btnP2?.addEventListener("click", () => {
+        this.playerId = 2;
+        client.setPlayerId?.(2);
+        syncButtons();
+      });
+      syncButtons();
+    }
   }
 
   setStatus(text) {
@@ -160,6 +191,10 @@ export class GameUI {
       li.textContent = `${u.name} ${u.hp}/${u.maxHp}${u.alive ? "" : " (倒下)"}`;
       if (u.id === this.selectedUnitId) li.classList.add("selected");
       li.addEventListener("click", () => {
+        if (!canControl(this.playerId, u.id, this.coopEnabled)) {
+          this.setStatus(`P${this.playerId} 无权控制 ${u.name}`);
+          return;
+        }
         this.selectedUnitId = u.id;
         this.pendingSkillId = null;
         this.render();

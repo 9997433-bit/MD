@@ -33,7 +33,10 @@ namespace Aetherboard.VR
         [SerializeField] private string hostAddress = "127.0.0.1";
         [SerializeField] private int hostPort = 8767;
         [SerializeField] private bool startTcpHostWhenHosting = true;
+        [SerializeField] private bool enforceCoopOnNetwork = true;
 
+        private CoopController _coop;
+        private int _localPlayerId = 1;
         private TcpClient _client;
         private Thread _readerThread;
         private volatile bool _running;
@@ -47,7 +50,15 @@ namespace Aetherboard.VR
         private void Awake()
         {
             if (director == null) director = GetComponent<BattleDirector>();
+            _coop = GetComponent<CoopController>();
             director?.SetNetworkBridge(this);
+        }
+
+        public int LocalPlayerId => _localPlayerId;
+
+        public void SetLocalPlayerId(int playerId)
+        {
+            _localPlayerId = playerId == 2 ? 2 : 1;
         }
 
         private void Start()
@@ -131,6 +142,16 @@ namespace Aetherboard.VR
         private bool SubmitCommand(BattleCommand cmd)
         {
             if (role == NetSessionRole.Offline) return false;
+
+            var coopActive = enforceCoopOnNetwork && _coop != null && _coop.Mode == CoopMode.SplitCoop;
+            cmd.PlayerId = coopActive ? _localPlayerId : 0;
+
+            if (coopActive && CoopRules.CommandRequiresUnit(cmd.Type) &&
+                !CoopRules.CanControl(cmd.PlayerId, cmd.UnitId, true))
+            {
+                Debug.LogWarning($"[Aetherboard] P{cmd.PlayerId} 无权控制 {cmd.UnitId}");
+                return false;
+            }
 
             if (role == NetSessionRole.Host)
             {

@@ -64,7 +64,14 @@ namespace Aetherboard.VR
                 if (GUILayout.Button("Host", _btnW)) net.SetRole(NetSessionRole.Host);
                 if (GUILayout.Button("Client", _btnW)) net.SetRole(NetSessionRole.Client);
                 GUILayout.EndHorizontal();
-                GUILayout.Label($"网络: {net.Role}  ({net.HostAddress}:{net.HostPort})");
+                GUILayout.Label($"网络: {net.Role}  ({net.HostAddress}:{net.HostPort})  P{net.LocalPlayerId}");
+                if (_coop != null && _coop.Mode == CoopMode.SplitCoop)
+                {
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("网络 P1", _btnW)) net.SetLocalPlayerId(1);
+                    if (GUILayout.Button("网络 P2", _btnW)) net.SetLocalPlayerId(2);
+                    GUILayout.EndHorizontal();
+                }
             }
 
             GUILayout.Space(4);

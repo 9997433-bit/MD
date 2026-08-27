@@ -28,6 +28,8 @@
 | **TCP 客户端** | ✅ | Unity Client 模式 → Python Host |
 | **Unity TCP Host** | ✅ | `BattleTcpHostServer` — 内置 8767 服务 |
 | **Web HTTP 客户端** | ✅ | `?client=1` + `hostClient.js` |
+| **WebSocket 客户端** | ✅ | `hostWsClient.js` — 推送 state |
+| **双人权限校验** | ✅ | `--coop` + `CoopRules` + `playerId` |
 | XR Origin 官方 Prefab | 🔲 | 可替换为 `GameObject → XR → XR Origin` |
 | 在线多人传输层 | 🔲 | WebSocket / Netcode 生产级封装 |
 

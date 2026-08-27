@@ -12,8 +12,8 @@ namespace Aetherboard.Core
         public const string TypeCommand = "command";
         public const string TypeError = "error";
 
-        public static string EncodeWelcome(int seed, string bossId) =>
-            $"{{\"type\":\"{TypeWelcome}\",\"seed\":{seed},\"bossId\":\"{bossId}\"}}";
+        public static string EncodeWelcome(int seed, string bossId, bool coop = false) =>
+            $"{{\"type\":\"{TypeWelcome}\",\"seed\":{seed},\"bossId\":\"{bossId}\",\"coop\":{(coop ? "true" : "false")}}}";
 
         public static string EncodeState(string stateJson) =>
             $"{{\"type\":\"{TypeState}\",\"payload\":{stateJson}}}";
@@ -27,7 +27,8 @@ namespace Aetherboard.Core
             sb.Append("\"skillId\":\"").Append(cmd.SkillId ?? "").Append("\",");
             sb.Append("\"targetX\":").Append(cmd.TargetX).Append(',');
             sb.Append("\"targetY\":").Append(cmd.TargetY).Append(',');
-            sb.Append("\"bossId\":\"").Append(cmd.BossId ?? "").Append("\"");
+            sb.Append("\"bossId\":\"").Append(cmd.BossId ?? "").Append("\",");
+            sb.Append("\"playerId\":").Append(cmd.PlayerId);
             sb.Append("}}");
             return sb.ToString();
         }
@@ -64,7 +65,8 @@ namespace Aetherboard.Core
                 SkillId = cmd.GetString("skillId"),
                 TargetX = cmd.GetInt("targetX", -1),
                 TargetY = cmd.GetInt("targetY", -1),
-                BossId = cmd.GetString("bossId")
+                BossId = cmd.GetString("bossId"),
+                PlayerId = cmd.GetInt("playerId")
             };
         }
 
