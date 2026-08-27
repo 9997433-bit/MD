@@ -25,3 +25,4 @@ jobs:
       - run: make ci
       - run: make health
       - run: make closure
+      - run: make dryrun-all

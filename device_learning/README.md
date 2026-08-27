@@ -50,6 +50,6 @@ make check-captures && make phase-b && make proposals
 
 ## 规模
 
-**237 identifier** · **103 pytest** · 静态阶段 **已关闭冻结**
+**237 identifier** · **104 pytest** · 静态阶段 **已关闭冻结**
 
 详见 `STATIC_CLOSURE.md` 与 `manifests/handoff_bundle.json`。
