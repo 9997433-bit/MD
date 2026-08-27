@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-08-27T15:09:59.432507+00:00",
+  "source_dir": "/workspace/device_learning",
+  "file_count": 11,
+  "files": [
+    {
+      "path": "firmware/device.bit",
+      "size_bytes": 131046
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_84_144.jpg",
+      "size_bytes": 2951647
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_85_144.jpg",
+      "size_bytes": 2435663
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_86_144.jpg",
+      "size_bytes": 2729039
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_87_144.jpg",
+      "size_bytes": 2881541
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_88_144.jpg",
+      "size_bytes": 3198749
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_89_144.jpg",
+      "size_bytes": 2686503
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_90_144.jpg",
+      "size_bytes": 2829380
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_91_144.jpg",
+      "size_bytes": 2412629
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_92_144.jpg",
+      "size_bytes": 3099512
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_93_144.jpg",
+      "size_bytes": 2860154
+    }
+  ]
+}

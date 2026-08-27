@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-08-27T15:09:59.432507+00:00",
+  "source_dir": "/workspace/device_learning",
+  "file_count": 11,
+  "files": [
+    {
+      "path": "firmware/device.bit",
+      "size_bytes": 131046,
+      "sha256": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_84_144.jpg",
+      "size_bytes": 2951647,
+      "sha256": "4bd31bf44adefc77cd78b9f24b337a967b03162bb78ad41f41a7b93ee994e91d"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_85_144.jpg",
+      "size_bytes": 2435663,
+      "sha256": "6b87ac2fdf331960887b771d6b0cd6a6c4c4c5d33c0c09f56c176e3229501d60"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_86_144.jpg",
+      "size_bytes": 2729039,
+      "sha256": "eadfdca511eb98c382811fb382e5b95fabd04ba06ea6d8babad7147fc1880190"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_87_144.jpg",
+      "size_bytes": 2881541,
+      "sha256": "ea963edd640561853947e68bf5d1b99ac46ee0c186fd6860a3bf58e215f05666"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_88_144.jpg",
+      "size_bytes": 3198749,
+      "sha256": "256698af6701fa8be2fb9a7b7791e2ede78244a868f9050b44b7355880e8bc78"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_89_144.jpg",
+      "size_bytes": 2686503,
+      "sha256": "8009cba49188a4cd8dabcbe5cb7030a41858fe9c30dec137245a45f47b902c7a"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_90_144.jpg",
+      "size_bytes": 2829380,
+      "sha256": "034875b60bc2039bd4412d62f9772e1c1e0d42d8c16dcaa0e4d22c24c6085060"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_91_144.jpg",
+      "size_bytes": 2412629,
+      "sha256": "76a6af44e7bb835f0df2713471c66f0b0070122ed805d1878e243508780402f3"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_92_144.jpg",
+      "size_bytes": 3099512,
+      "sha256": "094aa8f9867c272ea43930e01b45b38b2ae2da7d0f8ccb1e60647b78a1075bef"
+    },
+    {
+      "path": "hardware/photos/微信图片_20260824134434_93_144.jpg",
+      "size_bytes": 2860154,
+      "sha256": "7ef97909c574e636b48bc50fbaa028599ec87282687c938b47232d21dfb044a3"
+    }
+  ]
+}
