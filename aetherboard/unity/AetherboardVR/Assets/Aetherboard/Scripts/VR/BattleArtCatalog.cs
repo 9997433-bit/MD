@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using Aetherboard.Core;
 
@@ -9,6 +10,12 @@ namespace Aetherboard.VR
     public static class BattleArtCatalog
     {
         private const string ModelRoot = "Aetherboard/Art/Models/";
+
+        private static readonly string[] ExpectedModels =
+        {
+            "Piece_Knight", "Piece_WhiteMage", "Piece_BlackMage", "Piece_Bard",
+            "Table_Base", "Grid_Cell", "Boss_earth", "Boss_wind"
+        };
 
         public static GameObject LoadPieceModel(JobType job)
         {
@@ -37,5 +44,21 @@ namespace Aetherboard.VR
 
         public static bool HasExternalArt =>
             LoadPieceModel(JobType.Knight) != null || LoadTableBase() != null;
+
+        public static string BuildInventoryReport()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("  External models (Resources/Aetherboard/Art/Models/):");
+            foreach (var name in ExpectedModels)
+            {
+                var loaded = Resources.Load<GameObject>(ModelRoot + name) != null;
+                sb.AppendLine($"    [{(loaded ? "OK" : "MISSING")}] {name}");
+            }
+
+            sb.AppendLine("  Styled prefabs:");
+            sb.AppendLine($"    [{(BattlePrefabLibrary.HasPrefabs ? "OK" : "MISSING")}] GridCell + PieceToken");
+            sb.AppendLine($"    TableBase: {(BattlePrefabLibrary.TableBasePrefab != null ? "OK" : "procedural")}");
+            return sb.ToString().TrimEnd();
+        }
     }
 }

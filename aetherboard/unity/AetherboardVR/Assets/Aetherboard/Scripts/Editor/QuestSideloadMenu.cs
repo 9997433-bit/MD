@@ -56,6 +56,36 @@ namespace Aetherboard.Editor
             else Debug.LogWarning("QUEST_VERIFICATION.md not found.");
         }
 
+        [MenuItem("Aetherboard/Quest/Tail Aetherboard Logs (ADB)")]
+        public static void TailAetherboardLogs()
+        {
+            if (!TryGetAdbPath(out var adb))
+            {
+                Debug.LogError("Aetherboard: adb not found.");
+                return;
+            }
+
+            var devices = RunProcess(adb, "devices");
+            if (devices == null || !devices.Contains("device"))
+            {
+                Debug.LogError("Aetherboard: No authorized device. Connect Quest and run Check Connected Device.");
+                return;
+            }
+
+            Debug.Log(
+                "Aetherboard: Tailing logcat (Unity | Aetherboard). Stop with Ctrl+C in terminal.\n" +
+                $"Command: {adb} logcat -s Unity | grep Aetherboard");
+            RunProcessStreaming(adb, "logcat -s Unity");
+        }
+
+        [MenuItem("Aetherboard/Quest/Clear Logcat Buffer")]
+        public static void ClearLogcat()
+        {
+            if (!TryGetAdbPath(out var adb)) return;
+            RunProcess(adb, "logcat -c");
+            Debug.Log("Aetherboard: logcat buffer cleared.");
+        }
+
         private static void InstallApk(string apkPath)
         {
             if (!TryGetAdbPath(out var adb))
@@ -123,6 +153,35 @@ namespace Aetherboard.Editor
             {
                 Debug.LogWarning($"Aetherboard: Process failed ({fileName}): {ex.Message}");
                 return null;
+            }
+        }
+
+        private static void RunProcessStreaming(string fileName, string arguments)
+        {
+            try
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = fileName,
+                    Arguments = arguments,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+                var process = Process.Start(psi);
+                if (process == null) return;
+
+                process.OutputDataReceived += (_, e) =>
+                {
+                    if (!string.IsNullOrEmpty(e.Data) && e.Data.Contains("Aetherboard"))
+                        Debug.Log($"[Quest logcat] {e.Data}");
+                };
+                process.BeginOutputReadLine();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Aetherboard: Streaming logcat failed: {ex.Message}");
             }
         }
     }

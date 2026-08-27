@@ -63,6 +63,17 @@ Assets/Aetherboard/Resources/Aetherboard/Art/Models/
 
 `BattleArtCatalog` 会在运行时优先加载上述模型；缺失时回退到 Styled Prefab / 程序化造型。
 
+## Editor 工具
+
+```
+Aetherboard → Art → Open Models Folder          # 打开模型目录
+Aetherboard → Art → Validate Art Inventory      # 检查 OK/MISSING 清单
+Aetherboard → Art → Convert FBX in Models Folder to Prefabs
+Aetherboard → Art → Convert Selected FBX to Prefab...  # 选中 FBX 后右键菜单
+```
+
+FBX 转换会自动将模型缩放到约 **0.1m** 高度并保存为同名 Prefab。
+
 ## 调色板
 
 `BattleArtPalette` 定义 FF14 风格配色，可在代码中调整金属度/光滑度：

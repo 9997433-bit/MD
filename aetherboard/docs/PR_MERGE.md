@@ -48,6 +48,7 @@ CI：`.github/workflows/aetherboard-tests.yml`
 ## 合并后待办（人工）
 
 - [ ] Quest 头显实机验收（10 项清单）
+- [x] FBX 导入向导（`Aetherboard → Art` 菜单）
 - [ ] 可选：替换 `Resources/Aetherboard/Art/Models/` 正式 FBX
 - [x] URP 后处理 Volume（Bloom / 色彩 / 暗角）
 

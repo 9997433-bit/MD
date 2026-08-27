@@ -18,9 +18,12 @@
 4. Aetherboard → Build Quest APK to build/                  （输出 build/AetherboardVR.apk）
 5. Aetherboard → Quest → Check Connected Device (ADB)       （确认设备在线）
 6. Aetherboard → Quest → Install Last Built APK             （侧载）
+7. Aetherboard → Quest → Tail Aetherboard Logs (ADB)        （实机日志）
 ```
 
 Quest 头显：**资料库 → 未知来源** → 启动 **Aetherboard VR**。
+
+也可在 Editor 中运行 `Aetherboard → Art → Validate Art Inventory` 检查美术资源是否齐全。
 
 ## 运行时诊断
 
