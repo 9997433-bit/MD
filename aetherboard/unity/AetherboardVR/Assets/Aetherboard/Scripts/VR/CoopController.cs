@@ -31,6 +31,12 @@ namespace Aetherboard.VR
             ActivePlayer = ActivePlayer == 1 ? 2 : 1;
         }
 
+        public void SetNetworkCoop(bool enabled)
+        {
+            Mode = enabled ? CoopMode.SplitCoop : CoopMode.Solo;
+            ActivePlayer = 1;
+        }
+
         public bool CanControlUnit(string unitId)
         {
             if (Mode == CoopMode.Solo) return true;

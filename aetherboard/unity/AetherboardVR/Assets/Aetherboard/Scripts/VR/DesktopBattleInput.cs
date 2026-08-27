@@ -52,6 +52,7 @@ namespace Aetherboard.VR
             var net = FindObjectOfType<BattleNetSession>();
             if (Input.GetKeyDown(KeyCode.H)) net?.SetRole(NetSessionRole.Host);
             if (Input.GetKeyDown(KeyCode.N)) net?.SetRole(NetSessionRole.Client);
+            if (Input.GetKeyDown(KeyCode.B)) net?.CycleClientTransport();
 
             if (_cam == null) _cam = Camera.main;
             if (_cam == null) return;

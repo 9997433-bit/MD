@@ -184,5 +184,24 @@ namespace Aetherboard.Core.Tests
             Assert.Equal(BattleCommandType.Move, parsed.Commands[0].Type);
             Assert.Equal("knight", parsed.Commands[0].UnitId);
         }
+
+        [Fact]
+        public void SyncProtocol_ParseWelcome()
+        {
+            var line = BattleSyncProtocol.EncodeWelcome(99, "wind", coop: true);
+            var welcome = BattleSyncProtocol.ParseWelcome(line);
+            Assert.NotNull(welcome);
+            Assert.Equal(99, welcome.Seed);
+            Assert.Equal("wind", welcome.BossId);
+            Assert.True(welcome.Coop);
+        }
+
+        [Fact]
+        public void SyncProtocol_ExtractError()
+        {
+            var line = BattleSyncProtocol.EncodeError("P2 无权控制 knight");
+            Assert.Equal(BattleSyncProtocol.TypeError, BattleSyncProtocol.ExtractType(line));
+            Assert.Contains("无权", BattleSyncProtocol.ExtractErrorMessage(line));
+        }
     }
 }

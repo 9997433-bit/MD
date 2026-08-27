@@ -27,7 +27,7 @@ PYTHONPATH=. python3 scripts/battle_host.py --coop
 |------|--------|
 | **8767** TCP | Unity Client |
 | **8768** HTTP | Web（CORS 回退） |
-| **8769** WebSocket | Web（推荐，推送 state） |
+| **8769** WebSocket | Web / Unity Client（推荐） |
 
 ## Web 浏览器联机
 
@@ -40,9 +40,12 @@ WebSocket 默认 `ws://127.0.0.1:8769`；加 `&http=1` 强制 HTTP。
 
 ## Unity 客户端
 
-1. Play → **Client**（`N`）连接 `127.0.0.1:8767`
-2. 双人模式（`C`）+ 网络 P1/P2 按钮设置 `playerId`
-3. **Host**（`H`）启动内置 `BattleTcpHostServer`
+1. Play → **Client**（`N`）连接 Python Host
+2. 传输层（`B` 切换）：
+   - **Auto**（默认）：WebSocket `8769` → TCP `8767` 回退
+   - **WebSocket** / **TCP** 固定
+3. 双人模式（`C`）+ 网络 P1/P2 按钮设置 `playerId`；Host `--coop` 时自动启用双人校验
+4. **Host**（`H`）启动内置 `BattleTcpHostServer`（TCP 8767）
 
 ## C# API
 

@@ -42,6 +42,31 @@ namespace Aetherboard.Core
             return root.GetString("type");
         }
 
+        public sealed class WelcomeInfo
+        {
+            public int Seed;
+            public string BossId = "earth";
+            public bool Coop;
+        }
+
+        public static WelcomeInfo ParseWelcome(string line)
+        {
+            var root = SimpleJson.ParseObject(line);
+            if (root.GetString("type") != TypeWelcome) return null;
+            return new WelcomeInfo
+            {
+                Seed = root.GetInt("seed", 42),
+                BossId = root.GetString("bossId") ?? "earth",
+                Coop = root.GetBool("coop")
+            };
+        }
+
+        public static string ExtractErrorMessage(string line)
+        {
+            var root = SimpleJson.ParseObject(line);
+            return root.GetString("message") ?? "Unknown error";
+        }
+
         public static string ExtractStatePayload(string line)
         {
             var root = SimpleJson.ParseObject(line);

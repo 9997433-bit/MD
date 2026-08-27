@@ -15,6 +15,13 @@ namespace Aetherboard.VR
         Client
     }
 
+    public enum NetClientTransport
+    {
+        Auto,
+        Tcp,
+        WebSocket
+    }
+
     public interface IBattleNetworkBridge
     {
         bool IsAuthoritative { get; }
@@ -25,6 +32,7 @@ namespace Aetherboard.VR
 
     /// <summary>
     /// Offline / Host / Client battle sync. Host is authoritative; clients send commands.
+    /// Client supports WebSocket (8769) with TCP (8767) fallback.
     /// </summary>
     public class BattleNetSession : MonoBehaviour, IBattleNetworkBridge
     {
@@ -32,20 +40,27 @@ namespace Aetherboard.VR
         [SerializeField] private NetSessionRole role = NetSessionRole.Offline;
         [SerializeField] private string hostAddress = "127.0.0.1";
         [SerializeField] private int hostPort = 8767;
+        [SerializeField] private int hostWsPort = 8769;
+        [SerializeField] private NetClientTransport clientTransport = NetClientTransport.Auto;
         [SerializeField] private bool startTcpHostWhenHosting = true;
         [SerializeField] private bool enforceCoopOnNetwork = true;
 
         private CoopController _coop;
         private int _localPlayerId = 1;
         private TcpClient _client;
+        private BattleWebSocketClient _wsClient;
         private Thread _readerThread;
         private volatile bool _running;
         private readonly object _sendLock = new();
+        private string _activeTransport = "—";
 
         public NetSessionRole Role => role;
         public bool IsAuthoritative => role != NetSessionRole.Client;
         public string HostAddress => hostAddress;
         public int HostPort => hostPort;
+        public int HostWsPort => hostWsPort;
+        public NetClientTransport ClientTransport => clientTransport;
+        public string ActiveTransport => _activeTransport;
 
         private void Awake()
         {
@@ -61,6 +76,17 @@ namespace Aetherboard.VR
             _localPlayerId = playerId == 2 ? 2 : 1;
         }
 
+        public void CycleClientTransport()
+        {
+            clientTransport = clientTransport switch
+            {
+                NetClientTransport.Auto => NetClientTransport.WebSocket,
+                NetClientTransport.WebSocket => NetClientTransport.Tcp,
+                _ => NetClientTransport.Auto
+            };
+            Debug.Log($"[Aetherboard] Client transport → {clientTransport}");
+        }
+
         private void Start()
         {
             if (role == NetSessionRole.Host)
@@ -73,6 +99,8 @@ namespace Aetherboard.VR
         {
             _running = false;
             try { _client?.Close(); } catch { /* ignore */ }
+            _wsClient?.Dispose();
+            _wsClient = null;
             var tcp = GetComponent<BattleTcpHostServer>();
             if (tcp != null) tcp.StopServer();
             _readerThread?.Join(200);
@@ -84,6 +112,8 @@ namespace Aetherboard.VR
             role = newRole;
             OnDestroy();
             _client = null;
+            _wsClient = null;
+            _activeTransport = "—";
             if (role == NetSessionRole.Host) StartHost();
             else if (role == NetSessionRole.Client) ConnectClient();
         }
@@ -91,29 +121,78 @@ namespace Aetherboard.VR
         private void StartHost()
         {
             if (director == null) return;
+            _activeTransport = "TCP Host";
             if (startTcpHostWhenHosting)
             {
                 var tcp = GetComponent<BattleTcpHostServer>();
                 if (tcp == null) tcp = gameObject.AddComponent<BattleTcpHostServer>();
                 tcp.StartServer();
             }
-            Debug.Log($"[Aetherboard] Host mode — TCP :{hostPort} | Python HTTP :8768 for Web");
+            Debug.Log($"[Aetherboard] Host mode — TCP :{hostPort} | Python WS :{hostWsPort} for Web/Unity");
         }
 
         private void ConnectClient()
+        {
+            _activeTransport = "—";
+            var connected = false;
+
+            if (clientTransport != NetClientTransport.Tcp)
+                connected = TryConnectWebSocket();
+
+            if (!connected && clientTransport != NetClientTransport.WebSocket)
+                connected = TryConnectTcp();
+
+            if (!connected)
+            {
+                Debug.LogWarning("[Aetherboard] Client connect failed (tried WS/TCP per transport setting).");
+                role = NetSessionRole.Offline;
+            }
+        }
+
+        private bool TryConnectWebSocket()
+        {
+            try
+            {
+                _wsClient = new BattleWebSocketClient();
+                if (!_wsClient.Connect(hostAddress, hostWsPort))
+                {
+                    _wsClient.Dispose();
+                    _wsClient = null;
+                    return false;
+                }
+
+                _running = true;
+                _activeTransport = "WebSocket";
+                _readerThread = new Thread(WsReadLoop) { IsBackground = true };
+                _readerThread.Start();
+                Debug.Log($"[Aetherboard] Connected via WebSocket {hostAddress}:{hostWsPort}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[Aetherboard] WebSocket connect failed: {ex.Message}");
+                _wsClient?.Dispose();
+                _wsClient = null;
+                return false;
+            }
+        }
+
+        private bool TryConnectTcp()
         {
             try
             {
                 _client = new TcpClient(hostAddress, hostPort);
                 _running = true;
-                _readerThread = new Thread(ReadLoop) { IsBackground = true };
+                _activeTransport = "TCP";
+                _readerThread = new Thread(TcpReadLoop) { IsBackground = true };
                 _readerThread.Start();
-                Debug.Log($"[Aetherboard] Connected to {hostAddress}:{hostPort}");
+                Debug.Log($"[Aetherboard] Connected via TCP {hostAddress}:{hostPort}");
+                return true;
             }
             catch (Exception ex)
             {
-                Debug.LogWarning($"[Aetherboard] Client connect failed: {ex.Message}");
-                role = NetSessionRole.Offline;
+                Debug.LogWarning($"[Aetherboard] TCP connect failed: {ex.Message}");
+                return false;
             }
         }
 
@@ -166,11 +245,14 @@ namespace Aetherboard.VR
                 return true;
             }
 
+            var line = BattleSyncProtocol.EncodeCommand(cmd);
+            if (_wsClient != null && _wsClient.IsConnected)
+                return _wsClient.SendText(line);
+
             if (_client == null || !_client.Connected) return false;
             try
             {
-                var line = BattleSyncProtocol.EncodeCommand(cmd) + "\n";
-                var bytes = Encoding.UTF8.GetBytes(line);
+                var bytes = Encoding.UTF8.GetBytes(line + "\n");
                 lock (_sendLock)
                     _client.GetStream().Write(bytes, 0, bytes.Length);
                 return true;
@@ -182,7 +264,16 @@ namespace Aetherboard.VR
             }
         }
 
-        private void ReadLoop()
+        private void WsReadLoop()
+        {
+            _wsClient?.RunReceiveLoop(line =>
+            {
+                HandleLine(line);
+                return _running;
+            });
+        }
+
+        private void TcpReadLoop()
         {
             try
             {
@@ -204,7 +295,13 @@ namespace Aetherboard.VR
         private void HandleLine(string line)
         {
             var type = BattleSyncProtocol.ExtractType(line);
-            if (type == BattleSyncProtocol.TypeState)
+            if (type == BattleSyncProtocol.TypeWelcome)
+            {
+                var welcome = BattleSyncProtocol.ParseWelcome(line);
+                if (welcome != null && welcome.Coop && _coop != null)
+                    UnityMainThreadDispatcher.Enqueue(() => _coop.SetNetworkCoop(true));
+            }
+            else if (type == BattleSyncProtocol.TypeState)
             {
                 var payload = BattleSyncProtocol.ExtractStatePayload(line);
                 if (payload != null)
@@ -212,7 +309,8 @@ namespace Aetherboard.VR
             }
             else if (type == BattleSyncProtocol.TypeError)
             {
-                Debug.LogWarning($"[Aetherboard] Server error: {line}");
+                var message = BattleSyncProtocol.ExtractErrorMessage(line);
+                Debug.LogWarning($"[Aetherboard] Server error: {message}");
             }
         }
 

@@ -58,6 +58,15 @@
    - `1` 土灵 Boss | `2` 风灵 Boss
    - `C` 双人模式 | `Tab` 切换玩家
    - `F5` 存档检查点 | `F9` 读档
+   - `H` Host | `N` Client | `B` 切换传输层（Auto/WS/TCP）
+
+## 联机（Quest → PC Host）
+
+1. PC 运行 Python Host：`PYTHONPATH=. python3 scripts/battle_host.py --coop`
+2. 确认 PC 与 Quest 在同一局域网
+3. Unity Client 模式，将 `hostAddress` 设为 PC 局域网 IP
+4. 传输层选 **Auto** 或 **WebSocket**（`ws://PC_IP:8769`）
+5. Android 需勾选 **Internet Access**（Player Settings）
 
 ## 性能建议（Quest）
 

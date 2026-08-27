@@ -74,7 +74,11 @@ namespace Aetherboard.VR
                 if (GUILayout.Button("Host", _btnW)) net.SetRole(NetSessionRole.Host);
                 if (GUILayout.Button("Client", _btnW)) net.SetRole(NetSessionRole.Client);
                 GUILayout.EndHorizontal();
-                GUILayout.Label($"网络: {net.Role}  ({net.HostAddress}:{net.HostPort})  P{net.LocalPlayerId}");
+                GUILayout.Label($"网络: {net.Role}  {net.ActiveTransport}  ({net.HostAddress})  P{net.LocalPlayerId}");
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button($"传输: {net.ClientTransport}", _btnW))
+                    net.CycleClientTransport();
+                GUILayout.EndHorizontal();
                 if (_coop != null && _coop.Mode == CoopMode.SplitCoop)
                 {
                     GUILayout.BeginHorizontal();
@@ -100,7 +104,7 @@ namespace Aetherboard.VR
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | F5/F9存读档 | F6/F7回放 | E/A/1/2</size>", RichLabel());
+            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | H/N联机 B传输 | F5/F9存读档 | F6/F7回放 | E/A/1/2</size>", RichLabel());
             GUILayout.EndArea();
         }
 
