@@ -34,5 +34,9 @@
 - Boss 主题和弦、读条紧迫滴答、联机连接提示音
 - 胜利琶音 / 失败下行滑音
 
+### 渲染与触觉
+- URP 14 可选迁移 + Editor 一键配置
+- Quest/PCVR 控制器触觉：抓取、落子、技能
+
 ### 文档
-- `VR_ROADMAP.md` · `NETCODE.md` · `ART_ASSETS.md` · `QUEST_BUILD.md` · `QUEST_VERIFICATION.md`
+- `VR_ROADMAP.md` · `NETCODE.md` · `ART_ASSETS.md` · `URP_SETUP.md` · `QUEST_BUILD.md` · `QUEST_VERIFICATION.md`

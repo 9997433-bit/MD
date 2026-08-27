@@ -117,15 +117,18 @@ namespace Aetherboard.VR
             {
                 _pendingSkillId = skillId;
                 _awaitingTarget = true;
+                VRHapticsUtility.PulseLight();
                 return true;
             }
 
             var target = BoardMath.BossPos(BoardMath.DefaultSize);
             if (_director.TryUseSkill(_activeUnitId, skillId, target))
             {
+                VRHapticsUtility.PulseMedium();
                 Hide();
                 return true;
             }
+            VRHapticsUtility.PulseReject();
             return false;
         }
 
@@ -134,9 +137,11 @@ namespace Aetherboard.VR
             if (!_awaitingTarget || string.IsNullOrEmpty(_pendingSkillId)) return false;
             if (_director.TryUseSkill(_activeUnitId, _pendingSkillId, dest))
             {
+                VRHapticsUtility.PulseMedium();
                 Hide();
                 return true;
             }
+            VRHapticsUtility.PulseReject();
             return false;
         }
 

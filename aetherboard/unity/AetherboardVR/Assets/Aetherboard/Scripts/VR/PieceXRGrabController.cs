@@ -146,6 +146,7 @@ namespace Aetherboard.VR
             _token.SetSelected(true);
             _token.SetGrabbing(true);
             _highlighter?.Begin(_table, _pieceYOffset);
+            VRHapticsUtility.PulseMedium();
         }
 
         private void UpdateGrabHover()
@@ -177,9 +178,15 @@ namespace Aetherboard.VR
 
             var dest = _table.WorldToGrid(transform.position);
             if (_director.TryMove(_token.UnitId, dest))
+            {
                 _token.SnapToGrid(dest);
+                VRHapticsUtility.PulseStrong();
+            }
             else
+            {
                 _token.SnapToGrid(_grabStartPos);
+                VRHapticsUtility.PulseReject();
+            }
 
             _token.SetSelected(false);
         }
