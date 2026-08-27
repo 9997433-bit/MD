@@ -22,8 +22,8 @@ def test_acq_entry_ids_match_ledger_exactly():
     assert len(acq.ACQ_ENTRY_IDS) == len(ledger_ids)
 
 
-def test_meatype_ids_length_13():
-    assert len(acq.meatype_ids()) == 13
+def test_meatype_ids_length_14():
+    assert len(acq.meatype_ids()) == 14
 
 
 def test_process_raw_data_status_unknown():

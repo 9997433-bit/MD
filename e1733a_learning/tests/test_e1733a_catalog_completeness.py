@@ -23,12 +23,12 @@ def test_no_duplicate_identifiers():
 
 def test_minimum_identifier_count():
     entries, data = _all_entries()
-    assert len(entries) >= 234
+    assert len(entries) >= 307
     b = data["catalogs"]
-    assert len(b["acquisition"]) >= 82
-    assert len(b["analysis"]) >= 80
-    assert len(b["compensation"]) >= 53
-    assert len(b["formats"]) >= 15
+    assert len(b["acquisition"]) >= 112
+    assert len(b["analysis"]) >= 116
+    assert len(b["compensation"]) >= 54
+    assert len(b["formats"]) >= 25
 
 
 def test_required_fields_present():
@@ -40,10 +40,17 @@ def test_required_fields_present():
                 assert e[f] is not None and e[f] != "", f"{e['identifier']}: empty {f}"
 
 
-def test_meatype_count_13():
+def test_meatype_count_14():
     entries, _ = _all_entries()
     meatypes = [e for e in entries if e["identifier"].startswith("ACQ-E1-MEATYPE-")]
-    assert len(meatypes) == 13
+    assert len(meatypes) == 14
+
+
+def test_forbidden_writers():
+    entries, _ = _all_entries()
+    forbidden = [e for e in entries if e["status"] == "forbidden_writer"]
+    ids = {e["identifier"] for e in forbidden}
+    assert ids == {"CMP-FORBID-CNC-WRITER", "CMP-FORBID-55291A-BINARY"}
 
 
 def test_cmp_unk_all_unknown():

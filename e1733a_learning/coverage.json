@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-08-27T12:14:55.208843+00:00",
-  "total_identifiers": 234,
+  "generated_at": "2026-08-27T12:40:32.662913+00:00",
+  "total_identifiers": 307,
   "by_status": {
-    "E1": 193,
-    "candidate": 19,
-    "unknown": 21,
-    "forbidden_writer": 1
+    "E1": 230,
+    "candidate": 53,
+    "unknown": 22,
+    "forbidden_writer": 2
   },
   "by_block": {
-    "acquisition": 82,
-    "analysis": 80,
-    "compensation": 53,
-    "formats": 19
+    "acquisition": 112,
+    "analysis": 116,
+    "compensation": 54,
+    "formats": 25
   },
-  "unknown_count": 21,
-  "e1_count": 193,
+  "unknown_count": 22,
+  "e1_count": 230,
   "stop_condition": {
     "catalog_no_empty_identifier": true,
     "unknown_exports_without_window": true,

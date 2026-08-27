@@ -5,34 +5,20 @@ Option Description File 格式
 E1733A 的 "Option Description File" 是仪器针对每一种测量选项(measurement
 option)导出的样本描述文件。每个逻辑测量槽位(logical slot)对应一个固定的
 文件扩展名,例如线性测量导出 ``Sample.Lin``、角度测量导出 ``Sample.Ang``。
-EvidenceLedger.json 的 ``catalogs.formats`` 段冻结了 19 条格式证据,可分为三类:
+EvidenceLedger.json 的 ``catalogs.formats`` 段冻结了 25 条格式证据,可分为四类:
 
-1. Sample 扩展名格式(13 条,identifier 形如 ``FMT-<EXT>``)
-   ``module == "Option Description File"``,每条携带 ``logical_slot`` 与该样本
-   文件的 ``sample_sha256``,由 ``sample_scope_parser`` 负责解析。这 13 条与
-   manifests/sample_manifest.json 中的 13 个样本一一对应,是本目录静态分析的
-   可解析范围(scope)。
-
-2. Remote.h 写盘子类型(5 条,identifier 形如 ``FMT-SAVE-*``)
-   来自 ``Remote.h`` 中 ``CC_SAVE`` 命令的各 subtype 常量,表示仪器可写出的
-   原始/补偿/环境数据文件格式。
-
-3. 强制断桥占位(1 条,``FMT-LTB-VELOCITY-BRIDGE``)
-   来自 policy,显式记录 LTB 时基不得桥接到速度公式的禁令。
+1. Sample 扩展名格式(13 条)
+2. Remote.h CC_SAVE 写盘子类型(10 条,forbidden_writer)
+3. 时基原始数据尾块(1 条,``FMT-TBRAWDATA-SECTION``,candidate)
+4. 强制断桥(1 条,``FMT-LTB-VELOCITY-BRIDGE``,forced_null)
 
 disposition 语义
 ================
 ``disposition`` 字段描述该格式在静态分析中的处置方式,共三种取值:
 
-- ``sample_scope_parser``:该格式在本包的可解析样本范围内,交由样本范围解析器
-  处理(仅限 13 条 Sample 扩展名格式)。
-- ``forbidden_writer``:该格式对应仪器的写盘路径,属于被禁止的写出行为,静态
-  分析不得将其纳入可解析范围(5 条 ``FMT-SAVE-*``)。
-- 断桥类条目(``FMT-LTB-VELOCITY-BRIDGE``)不带 ``disposition``,而以
-  ``boundary == "forced_null"`` 与 ``proven_bridge == None`` 记录强制断桥,
-  ``note`` 说明 "must not bridge to velocity formula"。
-
-因此 ``format_disposition()`` 对第 3 类回退到 ``status`` 值("E1")作为处置说明。
+- ``forbidden_writer``:10 条 ``FMT-SAVE-*`` 写盘路径（静态分析禁止实现写出）。
+- ``sample_scope_parser``:13 条 Sample 扩展名 + 1 条 ``FMT-TBRAWDATA-SECTION``（尾块 candidate）。
+- ``forced_null``:``FMT-LTB-VELOCITY-BRIDGE`` 不得桥接速度公式。
 """
 from __future__ import annotations
 
@@ -50,27 +36,14 @@ EXT_TO_SLOT = {
     ".atb": "ATB", ".stb": "STB", ".lda": "LDA",
 }
 
-# formats 段 19 条证据的 identifier,顺序与 EvidenceLedger.json 完全一致。
+# formats 段 25 条证据的 identifier,顺序与 EvidenceLedger.json 完全一致。
 FMT_ENTRY_IDS = [
-    "FMT-ATB",
-    "FMT-ANG",
-    "FMT-DIA",
-    "FMT-FLA",
-    "FMT-LDA",
-    "FMT-LTB",
-    "FMT-LIN",
-    "FMT-PAR",
-    "FMT-STB",
-    "FMT-SQU",
-    "FMT-WAY",
-    "FMT-ROT",
-    "FMT-STR",
-    "FMT-SAVE-RAWDATA_CSV",
-    "FMT-SAVE-RAWDATA_POS",
-    "FMT-SAVE-COMPTABLE_CSV",
-    "FMT-SAVE-COMPTABLE_POS",
-    "FMT-SAVE-ENVDATA_CSV",
-    "FMT-LTB-VELOCITY-BRIDGE",
+    "FMT-ATB", "FMT-ANG", "FMT-DIA", "FMT-FLA", "FMT-LDA", "FMT-LTB", "FMT-LIN",
+    "FMT-PAR", "FMT-STB", "FMT-SQU", "FMT-WAY", "FMT-ROT", "FMT-STR",
+    "FMT-SAVE-RAWDATA_TXT", "FMT-SAVE-RAWDATA_CSV", "FMT-SAVE-RAWDATA_POS",
+    "FMT-SAVE-RAWDATA_RUN", "FMT-SAVE-COMPTABLE_TXT", "FMT-SAVE-COMPTABLE_CSV",
+    "FMT-SAVE-COMPTABLE_POS", "FMT-SAVE-COMPTABLE_RUN", "FMT-SAVE-ENVDATA_TXT",
+    "FMT-SAVE-ENVDATA_CSV", "FMT-TBRAWDATA-SECTION", "FMT-LTB-VELOCITY-BRIDGE",
 ]
 
 

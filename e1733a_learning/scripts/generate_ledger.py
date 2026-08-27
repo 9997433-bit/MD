@@ -203,6 +203,64 @@ DELPHI_RUNTIME_EXPORTS = (
     "dbkFCallWrapperAddr",
 )
 
+READSTATUS_CI = {
+    0: "ACTIVEWINDOW",
+    1: "5519ABREADY",
+    3: "E1735AREADY",
+    5: "E1735ACOUNT",
+    9: "E1736AREADY",
+    10: "E1736ACOUNT",
+    12: "E1737ACOUNT",
+    16: "E1738ACOUNT",
+    18: "55290BREADY",
+    21: "BEAMSTRENGTH",
+    23: "MEASURESETUPOK",
+    24: "HASERRORMESSAGE",
+    25: "ERRORMESSAGE",
+    26: "ISMEASURING",
+    27: "SAMPLECOUNT",
+    28: "ACCOMPLISHED",
+    30: "UPPERDISPLAY",
+    31: "LOWERDISPLAY",
+    32: "UPPERSELECTION",
+    33: "LOWERSELECTION",
+    34: "UPPERUNITS",
+    35: "LOWERUNITS",
+    36: "UPPERSTRING",
+    37: "LOWERSTRING",
+    38: "CURRENTCYCLE",
+    39: "CURRENTAXIS",
+    40: "NEXTDIRECTION",
+    41: "NEXTINDEX",
+    42: "NEXTTARGET",
+}
+
+ANAGRAPH_COMPRISE_BITS = {
+    0: "FWD-RUNS",
+    1: "FWD-MEAN",
+    2: "FWD-NSIGMA",
+    3: "REV-RUNS",
+    4: "REV-MEAN",
+    5: "REV-NSIGMA",
+    6: "COMB-MEAN",
+    7: "COMB-NSIGMA",
+    8: "REMOVE-RAW-OFFSET",
+    9: "BACKLASH-PT",
+}
+
+ANANUM_COMPRISE_BITS = {
+    0: "ACCURACY",
+    1: "REPEATABILITY",
+    2: "MEAN-REV-ERR",
+    3: "SYS-DEV-POS",
+    4: "MEAN-BIDIR-POS-DEV",
+    5: "RAW-ACCURACY",
+    6: "RAW-REPEATABILITY",
+    7: "MAX-REV-ERR",
+    8: "SIXSIGMA",
+    9: "SLOPE",
+}
+
 
 def entry(identifier, module, source, status, boundary, missing, **kw):
     return {
@@ -254,6 +312,7 @@ def build_acq_catalog(pe_exports_map: dict) -> list[dict]:
         ("LTB", ".LTB"),
         ("ATB", ".ATB"),
         ("STB", ".STB"),
+        ("SINGLE", None),
         ("DUAL", ".LDA"),
     ]
     for name, ext in meatypes:
@@ -305,6 +364,17 @@ def build_acq_catalog(pe_exports_map: dict) -> list[dict]:
                 "candidate",
                 "remote_h_constant",
                 "UI string anchor in english_string_gaps; no formula",
+            )
+        )
+    for ci, name in READSTATUS_CI.items():
+        rows.append(
+            entry(
+                f"ACQ-E1-STATUS-{name}",
+                "Remote.h",
+                f"CC_READSTATUS=60 CI={ci}",
+                "E1",
+                "remote_h_constant",
+                "runtime status query; no vendor FSM",
             )
         )
     for sym in pe_exports_map.get("E1735A.dll", []):
@@ -383,6 +453,11 @@ def build_ana_catalog() -> list[dict]:
         rows.append(
             entry(ident, "Remote.h", src, "E1", "remote_h_constant", None)
         )
+    for ident, src in [
+        ("ANA-E1-VIEW-SHOWGRAPH", "CC_SHOWGRAPH=30"),
+        ("ANA-E1-VIEW-RAWDATATABLE", "CC_SHOWRAWDATATABLE=31"),
+    ]:
+        rows.append(entry(ident, "Remote.h", src, "E1", "remote_h_constant", None))
     for idx, (suffix, desc) in ANALYSIS_CI.items():
         rows.append(
             entry(
@@ -403,6 +478,48 @@ def build_ana_catalog() -> list[dict]:
                 "E1",
                 "remote_h_constant",
                 f"standard={name}",
+            )
+        )
+    for bit, label in ANAGRAPH_COMPRISE_BITS.items():
+        rows.append(
+            entry(
+                f"ANA-E1-GRAPH-{label}",
+                "Remote.h",
+                f"ANASETUP_ANAGRAPH_COMPRISE bit={bit}",
+                "candidate",
+                "remote_h_comprise_bit",
+                "Comprise string bit; no graph render formula",
+            )
+        )
+    for bit, label in ANANUM_COMPRISE_BITS.items():
+        rows.append(
+            entry(
+                f"ANA-E1-NUM-{label}",
+                "Remote.h",
+                f"ANASETUP_ANANUM_COMPRISE bit={bit}",
+                "candidate",
+                "remote_h_comprise_bit",
+                "Comprise string bit; no numeric render formula",
+            )
+        )
+    for ident, src in [
+        ("ANA-E1-STD-ISOFIELD-MATSEN1", "ISOSETUP_MATSEN1_ITEMTEXT=104"),
+        ("ANA-E1-STD-ISOFIELD-MATSEN2", "ISOSETUP_MATSEN2_ITEMTEXT=105"),
+        ("ANA-E1-STD-ISOFIELD-MATSEN3", "ISOSETUP_MATSEN3_ITEMTEXT=107"),
+        ("ANA-E1-STD-ISOFIELD-ATSEN", "ISOSETUP_ATSEN_ITEMTEXT=106"),
+        ("ANA-E1-STD-ISOFIELD-COMPUSED", "ISOSETUP_COMPUSED_CHOOSING=92"),
+        ("ANA-E1-STD-ISOFIELD-SCALETEMPCOEF", "ISOSETUP_SCALETEMPCOEF_ITEMTEXT=89"),
+        ("ANA-E1-STD-ISOFIELD-PIECEX", "ISOSETUP_PIECEX_ITEMTEXT=101"),
+        ("ANA-E1-STD-ISOFIELD-TOOLZ", "ISOSETUP_TOOLZ_ITEMTEXT=100"),
+    ]:
+        rows.append(
+            entry(
+                ident,
+                "Remote.h",
+                src,
+                "candidate",
+                "remote_h_constant",
+                "ISO report field; string_table + Remote.h anchor",
             )
         )
     slots = [
@@ -431,6 +548,16 @@ def build_ana_catalog() -> list[dict]:
     )
     rows.append(
         entry(
+            "ANA-UNK-ALG-VDI-BODY",
+            "E1733A.exe",
+            None,
+            "unknown",
+            "no_instruction_window",
+            "VDI 3441 computation body",
+        )
+    )
+    rows.append(
+        entry(
             "ANA-E1-FLA-MOODY",
             "Remote.h",
             "ANASETUP_FLAMETHOD_CHOOSING=0",
@@ -453,6 +580,31 @@ def build_ana_catalog() -> list[dict]:
         (
             "ANA-E1-UNC-ENVVAR",
             "ISOSETUP_ENVVARERR_ITEMTEXT=113",
+            "UI field only; no uncertainty formula",
+        ),
+        (
+            "ANA-E1-UNC-DIFF20CMAX",
+            "ISOSETUP_DIFF20CMAX_ITEMTEXT=112",
+            "UI field only; no uncertainty formula",
+        ),
+        (
+            "ANA-E1-UNC-MATTEMPDEV",
+            "ISOSETUP_MATTEMPDEV_ITEMTEXT=114",
+            "UI field only; no uncertainty formula",
+        ),
+        (
+            "ANA-E1-UNC-ERRORRANGE",
+            "ISOSETUP_ERRORRANGE_ITEMTEXT=108",
+            "UI field only; no uncertainty formula",
+        ),
+        (
+            "ANA-E1-UNC-ALIGNERR",
+            "ISOSETUP_ALIGNERR_ITEMTEXT=111",
+            "UI field only; no uncertainty formula",
+        ),
+        (
+            "ANA-E1-UNC-CALMEADEV",
+            "ISOSETUP_CALMEADEV_CHOOSING=109",
             "UI field only; no uncertainty formula",
         ),
     ]:
@@ -545,6 +697,16 @@ def build_cmp_catalog(pe_exports_map: dict) -> list[dict]:
             None,
         )
     )
+    rows.append(
+        entry(
+            "CMP-FORBID-55291A-BINARY",
+            "policy",
+            "forbidden",
+            "forbidden_writer",
+            "55291A proprietary binary; no parser in static scope",
+            None,
+        )
+    )
     for sym in pe_exports_map.get("E1736A.dll", []):
         if not sym.startswith("E1736A_"):
             continue
@@ -619,10 +781,15 @@ def build_formats(sample_manifest: dict) -> list[dict]:
             )
         )
     for sub, n in [
+        ("RAWDATA_TXT", 1),
         ("RAWDATA_CSV", 2),
         ("RAWDATA_POS", 3),
+        ("RAWDATA_RUN", 4),
+        ("COMPTABLE_TXT", 5),
         ("COMPTABLE_CSV", 6),
         ("COMPTABLE_POS", 7),
+        ("COMPTABLE_RUN", 8),
+        ("ENVDATA_TXT", 9),
         ("ENVDATA_CSV", 10),
     ]:
         rows.append(
@@ -636,6 +803,17 @@ def build_formats(sample_manifest: dict) -> list[dict]:
                 disposition="forbidden_writer",
             )
         )
+    rows.append(
+        entry(
+            "FMT-TBRAWDATA-SECTION",
+            "Sample.LTB/ATB/STB",
+            "<Time Base Raw Data>",
+            "candidate",
+            "odf_tail_section",
+            "Post-ODF raw float block; not in 191 Identify fields",
+            disposition="sample_scope_parser",
+        )
+    )
     rows.append(
         entry(
             "FMT-LTB-VELOCITY-BRIDGE",

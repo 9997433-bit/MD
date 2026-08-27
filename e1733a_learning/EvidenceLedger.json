@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T12:14:55.208843+00:00",
+  "generated_at": "2026-08-27T12:40:32.662913+00:00",
   "installer_source": "Montyzhang/-seed Install Keysight E1733A 1.14.1 (Win64).exe",
   "phases_completed": [
     "0",
@@ -119,6 +119,15 @@
         "missing": "Delphi view class unknown"
       },
       {
+        "identifier": "ACQ-E1-MEATYPE-SINGLE",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_SINGLE",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
         "identifier": "ACQ-E1-MEATYPE-DUAL",
         "module": "E1733A.exe/Remote.h",
         "source_identifier": "E1733A_CC_NEW / CI_DUAL",
@@ -225,6 +234,267 @@
         "status": "candidate",
         "boundary": "remote_h_constant",
         "missing": "UI string anchor in english_string_gaps; no formula"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-ACTIVEWINDOW",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=0",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-5519ABREADY",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=1",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-E1735AREADY",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=3",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-E1735ACOUNT",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=5",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-E1736AREADY",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=9",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-E1736ACOUNT",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=10",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-E1737ACOUNT",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=12",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-E1738ACOUNT",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=16",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-55290BREADY",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=18",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-BEAMSTRENGTH",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=21",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-MEASURESETUPOK",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=23",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-HASERRORMESSAGE",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=24",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-ERRORMESSAGE",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=25",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-ISMEASURING",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=26",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-SAMPLECOUNT",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=27",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-ACCOMPLISHED",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=28",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-UPPERDISPLAY",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=30",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-LOWERDISPLAY",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=31",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-UPPERSELECTION",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=32",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-LOWERSELECTION",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=33",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-UPPERUNITS",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=34",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-LOWERUNITS",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=35",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-UPPERSTRING",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=36",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-LOWERSTRING",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=37",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-CURRENTCYCLE",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=38",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-CURRENTAXIS",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=39",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-NEXTDIRECTION",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=40",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-NEXTINDEX",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=41",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
+      },
+      {
+        "identifier": "ACQ-E1-STATUS-NEXTTARGET",
+        "module": "Remote.h",
+        "source_identifier": "CC_READSTATUS=60 CI=42",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "runtime status query; no vendor FSM"
       },
       {
         "identifier": "ACQ-E1-DLL-E1735A_BlinkLED",
@@ -779,6 +1049,24 @@
         "missing": null
       },
       {
+        "identifier": "ANA-E1-VIEW-SHOWGRAPH",
+        "module": "Remote.h",
+        "source_identifier": "CC_SHOWGRAPH=30",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ANA-E1-VIEW-RAWDATATABLE",
+        "module": "Remote.h",
+        "source_identifier": "CC_SHOWRAWDATATABLE=31",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
         "identifier": "ANA-E1-API-ANALYSIS-BIMAXREV",
         "module": "Remote.h",
         "source_identifier": "CC_ANALYSIS=66 CI=0",
@@ -1310,6 +1598,258 @@
         "missing": "standard=ISO 230-2 2014"
       },
       {
+        "identifier": "ANA-E1-GRAPH-FWD-RUNS",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=0",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-FWD-MEAN",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=1",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-FWD-NSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=2",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-REV-RUNS",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=3",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-REV-MEAN",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=4",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-REV-NSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=5",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-COMB-MEAN",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=6",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-COMB-NSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=7",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-REMOVE-RAW-OFFSET",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=8",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-GRAPH-BACKLASH-PT",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANAGRAPH_COMPRISE bit=9",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no graph render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-ACCURACY",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=0",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-REPEATABILITY",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=1",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-MEAN-REV-ERR",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=2",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-SYS-DEV-POS",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=3",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-MEAN-BIDIR-POS-DEV",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=4",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-RAW-ACCURACY",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=5",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-RAW-REPEATABILITY",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=6",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-MAX-REV-ERR",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=7",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-SIXSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=8",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-NUM-SLOPE",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_ANANUM_COMPRISE bit=9",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_comprise_bit",
+        "missing": "Comprise string bit; no numeric render formula"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-MATSEN1",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_MATSEN1_ITEMTEXT=104",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-MATSEN2",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_MATSEN2_ITEMTEXT=105",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-MATSEN3",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_MATSEN3_ITEMTEXT=107",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-ATSEN",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_ATSEN_ITEMTEXT=106",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-COMPUSED",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_COMPUSED_CHOOSING=92",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-SCALETEMPCOEF",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_SCALETEMPCOEF_ITEMTEXT=89",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-PIECEX",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_PIECEX_ITEMTEXT=101",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOFIELD-TOOLZ",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_TOOLZ_ITEMTEXT=100",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report field; string_table + Remote.h anchor"
+      },
+      {
         "identifier": "ANA-UNK-DELPHI-LINDOC",
         "module": "E1733A.exe",
         "source_identifier": "logical_slot=Lin",
@@ -1436,6 +1976,15 @@
         "missing": "ISO 230-2 computation body"
       },
       {
+        "identifier": "ANA-UNK-ALG-VDI-BODY",
+        "module": "E1733A.exe",
+        "source_identifier": null,
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_instruction_window",
+        "missing": "VDI 3441 computation body"
+      },
+      {
         "identifier": "ANA-E1-FLA-MOODY",
         "module": "Remote.h",
         "source_identifier": "ANASETUP_FLAMETHOD_CHOOSING=0",
@@ -1466,6 +2015,51 @@
         "identifier": "ANA-E1-UNC-ENVVAR",
         "module": "Remote.h",
         "source_identifier": "ISOSETUP_ENVVARERR_ITEMTEXT=113",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
+      },
+      {
+        "identifier": "ANA-E1-UNC-DIFF20CMAX",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_DIFF20CMAX_ITEMTEXT=112",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
+      },
+      {
+        "identifier": "ANA-E1-UNC-MATTEMPDEV",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_MATTEMPDEV_ITEMTEXT=114",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
+      },
+      {
+        "identifier": "ANA-E1-UNC-ERRORRANGE",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_ERRORRANGE_ITEMTEXT=108",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
+      },
+      {
+        "identifier": "ANA-E1-UNC-ALIGNERR",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_ALIGNERR_ITEMTEXT=111",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
+      },
+      {
+        "identifier": "ANA-E1-UNC-CALMEADEV",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_CALMEADEV_CHOOSING=109",
         "window_hash": null,
         "status": "candidate",
         "boundary": "remote_h_constant",
@@ -1669,6 +2263,15 @@
         "window_hash": null,
         "status": "forbidden_writer",
         "boundary": "no CNC download in static learning scope",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-FORBID-55291A-BINARY",
+        "module": "policy",
+        "source_identifier": "forbidden",
+        "window_hash": null,
+        "status": "forbidden_writer",
+        "boundary": "55291A proprietary binary; no parser in static scope",
         "missing": null
       },
       {
@@ -2109,6 +2712,16 @@
         "sample_sha256": "b699f1309b151ce8927f7da408b09293a18ce334bdaf2b4c645afbe27e5b97be"
       },
       {
+        "identifier": "FMT-SAVE-RAWDATA_TXT",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=1",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
         "identifier": "FMT-SAVE-RAWDATA_CSV",
         "module": "Remote.h",
         "source_identifier": "CC_SAVE subtype=2",
@@ -2122,6 +2735,26 @@
         "identifier": "FMT-SAVE-RAWDATA_POS",
         "module": "Remote.h",
         "source_identifier": "CC_SAVE subtype=3",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-RAWDATA_RUN",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=4",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-COMPTABLE_TXT",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=5",
         "window_hash": null,
         "status": "E1",
         "boundary": "remote_h_constant",
@@ -2149,6 +2782,26 @@
         "disposition": "forbidden_writer"
       },
       {
+        "identifier": "FMT-SAVE-COMPTABLE_RUN",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=8",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-ENVDATA_TXT",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=9",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
         "identifier": "FMT-SAVE-ENVDATA_CSV",
         "module": "Remote.h",
         "source_identifier": "CC_SAVE subtype=10",
@@ -2157,6 +2810,16 @@
         "boundary": "remote_h_constant",
         "missing": null,
         "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-TBRAWDATA-SECTION",
+        "module": "Sample.LTB/ATB/STB",
+        "source_identifier": "<Time Base Raw Data>",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "odf_tail_section",
+        "missing": "Post-ODF raw float block; not in 191 Identify fields",
+        "disposition": "sample_scope_parser"
       },
       {
         "identifier": "FMT-LTB-VELOCITY-BRIDGE",
