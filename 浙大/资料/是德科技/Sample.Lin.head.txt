@@ -1,0 +1,5 @@
+<Option Description File - Rev. 1.00a - Keysight E1733A 1.12>
+UserSetup
+
+Identify=MeaType,Choosing=0
+Identify=FileName,ItemText=Sample.Lin
