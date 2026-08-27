@@ -1,13 +1,13 @@
 {
   "generated_from": "English.csv static mapping (subagent bc-4c25db37; revised bc-53aee810)",
   "note": "概念级映射；账本仍以 Remote.h/PE 为锚。字符串 ID 仅作 UI 参考，不证明算法。",
-  "ledger_has_string_id_anchors": false,
+  "ledger_has_string_id_anchors": true,
   "audit_summary": {
-    "mapped_to_ledger": 21,
-    "gap_with_remote_h_anchor": 41,
+    "mapped_to_ledger": 35,
+    "gap_with_remote_h_anchor": 27,
     "gap_string_table_only": 30,
     "forced_null": 1,
-    "ledger_identifier_count": 193
+    "ledger_identifier_count": 234
   },
   "gap_blocks": [
     {
@@ -37,12 +37,12 @@
         "CMP-E1-CFG-TABLE-END",
         "CMP-E1-CFG-TABLE-INTERVAL"
       ],
-      "status": "missing",
+      "status": "covered",
       "boundary": "remote_h_constant_exists",
-      "remote_h_anchors": [
-        "CMPSETUP_COMPSTART_ITEMTEXT=132",
-        "CMPSETUP_COMPEND_ITEMTEXT=133",
-        "CMPSETUP_COMPINTVL_ITEMTEXT=134"
+      "ledger_entries": [
+        "CMP-E1-CFG-TABLE-START",
+        "CMP-E1-CFG-TABLE-END",
+        "CMP-E1-CFG-TABLE-INTERVAL"
       ]
     },
     {
@@ -124,8 +124,8 @@
   ],
   "coverage_summary": {
     "analysis_core_metrics": "covered via ANA-E1-API-ANALYSIS-* and ANA-E1-STD-*",
-    "compensation_ui_cfg": "partial via CMP-E1-CFG-*",
-    "environment_exports": "partial via CMP-E1-ENV-E1736A_*",
+    "compensation_ui_cfg": "partial via CMP-E1-CFG-* and CMP-E1-ENV-CFG-* (candidate)",
+    "environment_exports": "partial via CMP-E1-ENV-E1736A_* and CMP-E1-ENV-CFG-* (candidate)",
     "trigger_modes": "covered via ACQ-E1-TRIG-MANUAL/ENCODER/AUTO",
     "trigger_string_params": "covered via ACQ-E1-TRIG-STR-* (candidate)"
   }

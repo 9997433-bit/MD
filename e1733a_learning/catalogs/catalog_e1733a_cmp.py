@@ -34,7 +34,10 @@ def cmp_setup_fields() -> list[dict[str, Any]]:
         for e in compensation_entries()
         if e["identifier"].startswith("CMP-E1-CFG-")
         or e["identifier"].startswith("CMP-E1-UI-")
+        or e["identifier"].startswith("CMP-E1-ENV-CFG-")
+        or e["identifier"].startswith("CMP-E1-ENV-UI-")
         or "ENVSETUP" in (e.get("source_identifier") or "")
+        or "CMPSETUP" in (e.get("source_identifier") or "")
     ]
 
 

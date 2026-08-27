@@ -129,9 +129,12 @@ def verify_standards_map():
 
 
 def standard_entries():
-    """Return the ANA-E1-STD-* ledger entries (analysis standard slots)."""
+    """Return the ANA-E1-STD-{0..12} ledger entries (analysis standard slots)."""
     return [
-        e for e in analysis_entries() if e["identifier"].startswith("ANA-E1-STD-")
+        e
+        for e in analysis_entries()
+        if e["identifier"].startswith("ANA-E1-STD-")
+        and e["identifier"].replace("ANA-E1-STD-", "").isdigit()
     ]
 
 

@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-27T10:48:33.554219+00:00",
-  "total_identifiers": 220,
+  "generated_at": "2026-08-27T12:14:55.208843+00:00",
+  "total_identifiers": 234,
   "by_status": {
     "E1": 193,
-    "candidate": 5,
+    "candidate": 19,
     "unknown": 21,
     "forbidden_writer": 1
   },
   "by_block": {
     "acquisition": 82,
-    "analysis": 77,
-    "compensation": 42,
+    "analysis": 80,
+    "compensation": 53,
     "formats": 19
   },
   "unknown_count": 21,

@@ -23,11 +23,11 @@ def test_no_duplicate_identifiers():
 
 def test_minimum_identifier_count():
     entries, data = _all_entries()
-    assert len(entries) >= 220
+    assert len(entries) >= 234
     b = data["catalogs"]
     assert len(b["acquisition"]) >= 82
-    assert len(b["analysis"]) >= 77
-    assert len(b["compensation"]) >= 39
+    assert len(b["analysis"]) >= 80
+    assert len(b["compensation"]) >= 53
     assert len(b["formats"]) >= 15
 
 

@@ -439,6 +439,33 @@ def build_ana_catalog() -> list[dict]:
             "Moody algorithm body unknown",
         )
     )
+    for ident, src, miss in [
+        (
+            "ANA-E1-STD-ISOINFO-ENTRY",
+            "CI_ISOINFO=7",
+            "ISO report section selector only",
+        ),
+        (
+            "ANA-E1-UNC-EXPCOEF",
+            "ISOSETUP_UNCEXPCOEF_ITEMTEXT=110",
+            "UI field only; no uncertainty formula",
+        ),
+        (
+            "ANA-E1-UNC-ENVVAR",
+            "ISOSETUP_ENVVARERR_ITEMTEXT=113",
+            "UI field only; no uncertainty formula",
+        ),
+    ]:
+        rows.append(
+            entry(
+                ident,
+                "Remote.h",
+                src,
+                "candidate",
+                "remote_h_constant",
+                miss,
+            )
+        )
     return rows
 
 
@@ -454,6 +481,30 @@ def build_cmp_catalog(pe_exports_map: dict) -> list[dict]:
         ("CMP-E1-SAMPLE-LINEARERR", "Sample.Lin LinearErr field"),
     ]:
         rows.append(entry(ident, "Remote.h/Sample.Lin", src, "E1", "remote_h_or_sample", None))
+    # English.csv Top 10 优先 candidate（Remote.h 锚点存在，不推断公式）
+    for ident, src in [
+        ("CMP-E1-ENV-UI-SHOWENV", "CC_SHOWENVIRONMENT=33"),
+        ("CMP-E1-ENV-CFG-AIRPRES", "ENVSETUP_AIRPRES_ITEMTEXT=9"),
+        ("CMP-E1-ENV-CFG-AIRTEMP", "ENVSETUP_AIRTEMP_ITEMTEXT=10"),
+        ("CMP-E1-ENV-CFG-RELHUMI", "ENVSETUP_RELHUMI_ITEMTEXT=11"),
+        ("CMP-E1-ENV-CFG-MATTEMP1", "ENVSETUP_MATTEMP1_ITEMTEXT=13"),
+        ("CMP-E1-ENV-CFG-MATTEMP2", "ENVSETUP_MATTEMP2_ITEMTEXT=14"),
+        ("CMP-E1-ENV-CFG-MATTEMP3", "ENVSETUP_MATTEMP3_ITEMTEXT=15"),
+        ("CMP-E1-ENV-CFG-UNITSEL", "ENVSETUP_ENVUNITSEL_CHOOSING=8"),
+        ("CMP-E1-CFG-TABLE-START", "CMPSETUP_COMPSTART_ITEMTEXT=132"),
+        ("CMP-E1-CFG-TABLE-END", "CMPSETUP_COMPEND_ITEMTEXT=133"),
+        ("CMP-E1-CFG-TABLE-INTERVAL", "CMPSETUP_COMPINTVL_ITEMTEXT=134"),
+    ]:
+        rows.append(
+            entry(
+                ident,
+                "E1733A.exe/Remote.h",
+                src,
+                "candidate",
+                "remote_h_constant",
+                "English.csv UI anchor; no Edlen/Ciddor or interpolation formula",
+            )
+        )
     rows.append(
         entry(
             "CMP-UNK-AMBIENT-BODY",

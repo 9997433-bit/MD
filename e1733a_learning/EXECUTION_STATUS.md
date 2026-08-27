@@ -1,14 +1,14 @@
 # 大纲执行状态
 
 **执行时间**：2026-08-27  
-**结论**：阶段 0 / A / B / C / D 已完成；**目录完整**（193 条 identifier）  
-**子代理轮次**：第二轮 10 路并行（#1–#5 只读，#6–#10 只写）+ 主代理汇总
+**结论**：阶段 0 / A / B / C / D 已完成；**目录完整**（234 条 identifier）  
+**子代理轮次**：第二轮 10 路并行 + 主代理汇总 + 第三轮扩展（Delphi 运行时 + CC_ANALYSIS CI 30–51）
 
 ## 停止条件检查
 
 | # | 条件 | 结果 |
 |---|------|------|
-| 1 | 采集/分析/补偿目录无空 identifier | ✅ 193 条 |
+| 1 | 采集/分析/补偿目录无空 identifier | ✅ 234 条 |
 | 2 | 无新指令窗的导出仍为 unknown | ✅ ProcessRawData / Ambient / Interpolate |
 | 3 | 强制 null 桥仍为 null | ✅ bridge_matrix.json |
 | 4 | forbidden_writer 未破坏 | ✅ CMP-FORBID-CNC-WRITER |
@@ -22,7 +22,7 @@
 - `coverage.json` — 状态统计
 - `bridge_matrix.json` — 桥矩阵
 - `manifests/` — 文件哈希、PE 导出、Remote.h 常量、样本清单
-- `tests/` — 29 项 pytest 全部通过
+- `tests/` — 31 项 pytest 全部通过
 
 ## 仍为 unknown（预期）
 

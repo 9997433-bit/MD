@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T10:48:33.554219+00:00",
+  "generated_at": "2026-08-27T12:14:55.208843+00:00",
   "installer_source": "Montyzhang/-seed Install Keysight E1733A 1.14.1 (Win64).exe",
   "phases_completed": [
     "0",
@@ -1443,6 +1443,33 @@
         "status": "E1",
         "boundary": "remote_h_constant",
         "missing": "Moody algorithm body unknown"
+      },
+      {
+        "identifier": "ANA-E1-STD-ISOINFO-ENTRY",
+        "module": "Remote.h",
+        "source_identifier": "CI_ISOINFO=7",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "ISO report section selector only"
+      },
+      {
+        "identifier": "ANA-E1-UNC-EXPCOEF",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_UNCEXPCOEF_ITEMTEXT=110",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
+      },
+      {
+        "identifier": "ANA-E1-UNC-ENVVAR",
+        "module": "Remote.h",
+        "source_identifier": "ISOSETUP_ENVVARERR_ITEMTEXT=113",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "UI field only; no uncertainty formula"
       }
     ],
     "compensation": [
@@ -1508,6 +1535,105 @@
         "status": "E1",
         "boundary": "remote_h_or_sample",
         "missing": null
+      },
+      {
+        "identifier": "CMP-E1-ENV-UI-SHOWENV",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CC_SHOWENVIRONMENT=33",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-AIRPRES",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_AIRPRES_ITEMTEXT=9",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-AIRTEMP",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_AIRTEMP_ITEMTEXT=10",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-RELHUMI",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_RELHUMI_ITEMTEXT=11",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-MATTEMP1",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_MATTEMP1_ITEMTEXT=13",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-MATTEMP2",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_MATTEMP2_ITEMTEXT=14",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-MATTEMP3",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_MATTEMP3_ITEMTEXT=15",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-ENV-CFG-UNITSEL",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "ENVSETUP_ENVUNITSEL_CHOOSING=8",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-CFG-TABLE-START",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CMPSETUP_COMPSTART_ITEMTEXT=132",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-CFG-TABLE-END",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CMPSETUP_COMPEND_ITEMTEXT=133",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
+      },
+      {
+        "identifier": "CMP-E1-CFG-TABLE-INTERVAL",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CMPSETUP_COMPINTVL_ITEMTEXT=134",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "remote_h_constant",
+        "missing": "English.csv UI anchor; no Edlen/Ciddor or interpolation formula"
       },
       {
         "identifier": "CMP-UNK-AMBIENT-BODY",

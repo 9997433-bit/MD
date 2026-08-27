@@ -18,7 +18,8 @@
 
 **主代理汇总**：
 - 修复 `generate_ledger.py` TRIG-STR 插入顺序 → ACQ_ENTRY_IDS 对齐
-- 账本 **193** 条 identifier；**31** 项 pytest 全部通过
+- 账本 **220** 条 identifier（acq 82 + ana 77 + cmp 42 + fmt 19）
+- **30** 项 pytest 全部通过
 - 推送分支 `cursor/e1733a-static-analysis-a08f`
 
 ## 第一轮记录（同日早些时候）

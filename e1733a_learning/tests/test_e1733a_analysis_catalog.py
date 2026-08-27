@@ -25,6 +25,12 @@ DELPHI_SLOTS = [
     "Fla", "Dia", "LTB", "ATB", "STB", "LDA",
 ]
 TAIL_IDS = ["ANA-UNK-ALG-ISO230-BODY", "ANA-E1-FLA-MOODY"]
+# English.csv Top 10 candidate 中落在 analysis 段的 3 条
+CANDIDATE_IDS = [
+    "ANA-E1-STD-ISOINFO-ENTRY",
+    "ANA-E1-UNC-EXPCOEF",
+    "ANA-E1-UNC-ENVVAR",
+]
 
 
 def _api_id(ci_constant_name):
@@ -38,6 +44,7 @@ ANA_ENTRY_IDS = (
     + [f"ANA-E1-STD-{i}" for i in sorted(ana.STANDARDS_MAP)]
     + [f"ANA-UNK-DELPHI-{s.upper()}DOC" for s in DELPHI_SLOTS]
     + TAIL_IDS
+    + CANDIDATE_IDS
 )
 
 
