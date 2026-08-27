@@ -92,6 +92,26 @@ ENTRIES = [
         "missing", "no_dump",
         "presence of custom descriptors unknown",
     ),
+    # ---- FW: EEPROM layout fields (offsets from public datasheet reference,
+    #      see manifests/eeprom_layout_ref.json); values missing until a dump ----
+    make_entry(
+        "FW-EEPROM-BOOT-FORMAT", "FW", "eeprom",
+        "EEPROM boot-format selector (boot_config_byte at offset 0x00)",
+        "missing", "no_dump",
+        "whether the image is identifier-only or a firmware load not read out",
+    ),
+    make_entry(
+        "FW-EEPROM-DID-FIELD", "FW", "eeprom",
+        "Device release / Device ID override word (did field at offset 0x05)",
+        "missing", "no_dump",
+        "DID value not dumped and not guessed",
+    ),
+    make_entry(
+        "FW-EEPROM-FW-RECORDS", "FW", "eeprom",
+        "Firmware image data records / firmware size (C2 data-record region)",
+        "missing", "no_dump",
+        "record layout and firmware size undetermined without a dump",
+    ),
     # ---- FW: FPGA bitstream ----
     make_entry(
         "FW-FPGA-BITSTREAM", "FW", "fpga",

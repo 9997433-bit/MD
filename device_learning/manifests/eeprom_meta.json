@@ -1,7 +1,8 @@
 {
+  "generated_at": "2026-08-27T15:22:29.623829+00:00",
+  "capture_path": "phase_b/captures/eeprom.bin",
   "status": "missing",
-  "path": "phase_b/captures/eeprom.bin",
-  "generated_at": "2026-08-27T15:21:32.261428+00:00",
+  "reason": "phase_b/captures/eeprom.bin not present",
   "layout_ref": "manifests/eeprom_layout_ref.json",
-  "note": "Place eeprom.bin in phase_b/captures/ and re-run"
+  "note": "no EEPROM dump available; no field values inferred"
 }
