@@ -1,0 +1,37 @@
+{
+  "$schema_note": "命令记录空模板；每次实机抓包后复制一份填写，禁止填入未采集的推断值",
+  "meta": {
+    "capture_source": "",
+    "capture_file": "",
+    "capture_sha256": "",
+    "captured_at": "",
+    "captured_by": "",
+    "host_os": "",
+    "tool_version": "",
+    "device_vid_pid": "",
+    "notes": ""
+  },
+  "commands": [
+    {
+      "seq": 0,
+      "timestamp": "",
+      "direction": "host_to_device | device_to_host",
+      "transfer_type": "control | bulk | interrupt | isochronous",
+      "endpoint": "",
+      "request_hex": "",
+      "response_hex": "",
+      "length_bytes": null,
+      "scenario": "",
+      "interpretation": "",
+      "confidence": "unknown | hypothesis | confirmed",
+      "evidence_ref": ""
+    }
+  ],
+  "unresolved": [
+    {
+      "field": "",
+      "reason": "",
+      "status": "unknown | missing"
+    }
+  ]
+}

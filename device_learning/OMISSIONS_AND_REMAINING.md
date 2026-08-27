@@ -29,7 +29,20 @@
 ## 强制 null 桥（禁止升级）
 见 `bridge_matrix.json` — 10 条桥接在无新证据前保持 null。
 
-## 后续阶段（不在本轮范围）
-- 阶段 B：EEPROM 读取 + USB 抓包
+## 后续阶段（不在本轮静态范围）
+
+- **阶段 B（已搭脚手架）**：EEPROM 读取 + USB 抓包 → 见 `phase_b/README.md`
 - 阶段 C：实验验证 hypothesis
 - 阶段 D：开源行为复现
+
+## 阶段 B 脚手架
+
+```
+phase_b/
+├── README.md
+├── templates/
+│   ├── eeprom_read.md
+│   ├── usb_capture.md
+│   └── protocol_log_template.json
+└── captures/          # 待用户填入实机数据
+```

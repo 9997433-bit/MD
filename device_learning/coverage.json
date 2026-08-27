@@ -1,22 +1,23 @@
 {
-  "generated_at": "2026-08-27T15:14:27.707301+00:00",
-  "total_identifiers": 128,
+  "generated_at": "2026-08-27T15:18:32.433870+00:00",
+  "total_identifiers": 162,
   "status_counts": {
-    "confirmed": 38,
-    "candidate": 19,
-    "unknown": 47,
+    "confirmed": 39,
+    "candidate": 47,
+    "unknown": 53,
     "hypothesis": 4,
     "not_started": 10,
-    "missing": 9,
-    "observed": 1
+    "missing": 9
   },
   "stop_conditions": {
     "1_no_empty_status": true,
     "2_all_layers_present": true,
     "3_missing_documented": true,
     "4_null_bridges_intact": true,
-    "5_no_false_confirmed_bridges": true
+    "5_no_false_confirmed_bridges": true,
+    "6_phase_b_scaffold": true
   },
   "all_pass": true,
-  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "phase": "A_complete_B_scaffolded"
 }

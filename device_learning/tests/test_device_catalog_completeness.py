@@ -9,16 +9,17 @@ sys.path.insert(0, str(ROOT))
 
 from catalogs.catalog_bit import ENTRIES as BIT_ENTRIES
 from catalogs.catalog_hw import ENTRIES as HW_ENTRIES
+from catalogs.catalog_ref import ENTRIES as REF_ENTRIES
 from catalogs.catalog_signal import ENTRIES as SIG_ENTRIES
 from catalogs.catalog_usb import ENTRIES as USB_ENTRIES
 
 
 def test_no_empty_status():
-    all_entries = HW_ENTRIES + BIT_ENTRIES + SIG_ENTRIES + USB_ENTRIES
+    all_entries = HW_ENTRIES + BIT_ENTRIES + SIG_ENTRIES + USB_ENTRIES + REF_ENTRIES
     empty = [e["identifier"] for e in all_entries if not e.get("status")]
     assert not empty, f"Empty status: {empty}"
 
 
 def test_minimum_entry_count():
-    total = len(HW_ENTRIES) + len(BIT_ENTRIES) + len(SIG_ENTRIES) + len(USB_ENTRIES)
-    assert total >= 100, f"Only {total} entries, need >= 100"
+    total = len(HW_ENTRIES) + len(BIT_ENTRIES) + len(SIG_ENTRIES) + len(USB_ENTRIES) + len(REF_ENTRIES)
+    assert total >= 150, f"Only {total} entries, need >= 150"

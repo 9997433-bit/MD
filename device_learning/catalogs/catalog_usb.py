@@ -1,6 +1,6 @@
 """USB subsystem evidence catalog — FW / DRV / PROTO layers.
 
-登记被测采集板 USB 子系统三层可辨识对象：
+登记 USB 子系统三层可辨识对象：
 
 - ``FW``    固件层：MCU（8051 兼容核）固件、串行 EEPROM 引导镜像、FPGA 位流的存在性与边界。
 - ``PROTO`` 协议层：USB 描述符、端点映射、控制/批量传输面。

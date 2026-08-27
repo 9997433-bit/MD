@@ -1,0 +1,15 @@
+{
+  "device": "3s200ft256",
+  "config_length": 130952,
+  "scan": {
+    "word_count": 65476,
+    "class_counts": {
+      "other": 31120,
+      "type2": 3796,
+      "type1": 4598,
+      "zero": 25962
+    },
+    "zero_word_ratio": 0.3965
+  },
+  "notes": "Heuristic Spartan-3 frame classifier."
+}

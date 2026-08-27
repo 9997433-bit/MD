@@ -1,6 +1,7 @@
 {
-  "generated_at": "2026-08-27T15:14:27.705753+00:00",
+  "generated_at": "2026-08-27T15:18:32.431705+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "phase": "A_complete_B_scaffolded",
   "catalogs": {
     "hw": [
       {
@@ -742,6 +743,96 @@
         "status": "unknown",
         "boundary": null,
         "evidence": null
+      },
+      {
+        "identifier": "FRM-011-FAR-DIST",
+        "layer": "bit",
+        "module": "frame",
+        "description": "FAR address value distribution",
+        "status": "candidate",
+        "boundary": "启发式解码",
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-012-TYPE1-REG-TOP",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Top Type-1 register write targets",
+        "status": "candidate",
+        "boundary": "寄存器语义未映射",
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-013-ZERO-RATIO",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Zero-word padding ratio in config",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-014-CLASS-COUNTS",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Frame word class histogram",
+        "status": "candidate",
+        "boundary": null,
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-015-IO-BLOCK-WRITES",
+        "layer": "bit",
+        "module": "frame",
+        "description": "IO block FAR writes",
+        "status": "unknown",
+        "boundary": "需FAR解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-016-CLB-BLOCK-WRITES",
+        "layer": "bit",
+        "module": "frame",
+        "description": "CLB block FAR writes",
+        "status": "unknown",
+        "boundary": "需FAR解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-017-BRAM-BLOCK-WRITES",
+        "layer": "bit",
+        "module": "frame",
+        "description": "BRAM block FAR writes",
+        "status": "unknown",
+        "boundary": "需FAR解码",
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-018-CONFIG-ORDER",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Configuration write ordering",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-019-DONE-PIPE",
+        "layer": "bit",
+        "module": "frame",
+        "description": "DONE pipeline settings",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
+      },
+      {
+        "identifier": "FRM-020-WAKEUP",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Startup wakeup sequence",
+        "status": "unknown",
+        "boundary": null,
+        "evidence": null
       }
     ],
     "signal": [
@@ -922,250 +1013,468 @@
         "identifier": "FW-MCU-CORE-IMAGE",
         "layer": "usb",
         "module": "fw",
-        "description": "8051 兼容核固件镜像",
+        "description": "8051-compatible microcontroller firmware image",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "no firmware binary dumped; nothing to disassemble"
       },
       {
         "identifier": "FW-MCU-RESET-VECTOR",
         "layer": "usb",
         "module": "fw",
-        "description": "复位向量 / 启动入口",
+        "description": "Reset vector / boot entry of the MCU firmware",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "no image available; entry address undetermined"
       },
       {
         "identifier": "FW-MCU-CODE-XRAM-MAP",
         "layer": "usb",
         "module": "fw",
-        "description": "代码/XRAM 地址映射",
+        "description": "Code / external-RAM address map of the MCU",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "memory layout and XRAM mapping unknown without a dump"
       },
       {
         "identifier": "FW-MCU-I2C-BOOT-PATH",
         "layer": "usb",
         "module": "fw",
-        "description": "MCU 经 I2C 从 EEPROM 引导路径",
+        "description": "MCU boot path loading from the serial EEPROM over I2C",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "boot decision and load flow have no evidence"
       },
       {
         "identifier": "FW-MCU-RENUMERATION",
         "layer": "usb",
         "module": "fw",
-        "description": "重枚举（ReNumeration）行为",
+        "description": "USB re-numeration behaviour after firmware load",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "whether/when the device re-enumerates is unknown"
       },
       {
         "identifier": "FW-EEPROM-IMAGE",
         "layer": "usb",
         "module": "fw",
-        "description": "串行 EEPROM 内容镜像",
+        "description": "Serial EEPROM contents image",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "EEPROM not dumped; contents entirely unknown"
       },
       {
         "identifier": "FW-EEPROM-CONFIG-BYTE",
         "layer": "usb",
         "module": "fw",
-        "description": "EEPROM 首字节引导配置",
+        "description": "EEPROM leading boot-configuration byte",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "boot-mode configuration byte not read out"
       },
       {
         "identifier": "FW-EEPROM-VIDPID",
         "layer": "usb",
         "module": "fw",
-        "description": "EEPROM 内 VID/PID 字段",
+        "description": "VID/PID fields possibly stored in the EEPROM",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "identifier values not dumped and not guessed"
       },
       {
         "identifier": "FW-EEPROM-DESC-OVERRIDE",
         "layer": "usb",
         "module": "fw",
-        "description": "EEPROM 内描述符覆盖数据",
+        "description": "Descriptor-override data possibly held in the EEPROM",
         "status": "missing",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "presence of custom descriptors unknown"
       },
       {
         "identifier": "FW-FPGA-BITSTREAM",
         "layer": "usb",
         "module": "fw",
-        "description": "FPGA 位流文件（firmware/device.bit）",
-        "status": "observed",
+        "description": "FPGA bitstream file (firmware/device.bit)",
+        "status": "candidate",
         "boundary": "opaque_binary",
-        "evidence": "firmware/device.bit"
+        "evidence": "file present (see catalog_bit); payload not reversed"
       },
       {
         "identifier": "FW-FPGA-CONFIG-IFACE",
         "layer": "usb",
         "module": "fw",
-        "description": "FPGA 配置接口（加载来源）",
+        "description": "FPGA configuration interface / load source",
         "status": "unknown",
         "boundary": "no_dump",
-        "evidence": null
+        "evidence": "configured by MCU or flash not confirmed"
       },
       {
         "identifier": "PROTO-DESC-DEVICE",
         "layer": "usb",
         "module": "proto",
-        "description": "设备描述符（Device Descriptor）",
+        "description": "USB device descriptor",
         "status": "not_started",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "enumeration not captured; fields unparsed"
       },
       {
         "identifier": "PROTO-DESC-CONFIG",
         "layer": "usb",
         "module": "proto",
-        "description": "配置描述符（Configuration Descriptor）",
+        "description": "USB configuration descriptor",
         "status": "not_started",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "power/interface counts unparsed"
       },
       {
         "identifier": "PROTO-DESC-INTERFACE",
         "layer": "usb",
         "module": "proto",
-        "description": "接口描述符（Interface Descriptor）",
+        "description": "USB interface descriptor",
         "status": "not_started",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "class/subclass/protocol fields unparsed"
       },
       {
         "identifier": "PROTO-DESC-STRING",
         "layer": "usb",
         "module": "proto",
-        "description": "字符串描述符（String Descriptors）",
+        "description": "USB string descriptors",
         "status": "not_started",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "vendor/product strings not read"
       },
       {
         "identifier": "PROTO-EP-MAP",
         "layer": "usb",
         "module": "proto",
-        "description": "端点总体映射表",
+        "description": "Overall endpoint map",
         "status": "unknown",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "endpoint count/direction/type have no evidence"
       },
       {
         "identifier": "PROTO-EP-BULK-IN",
         "layer": "usb",
         "module": "proto",
-        "description": "批量 IN 端点（数据上行）",
+        "description": "Bulk IN endpoint (data upstream to host)",
         "status": "unknown",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "endpoint number and max packet size unknown"
       },
       {
         "identifier": "PROTO-EP-BULK-OUT",
         "layer": "usb",
         "module": "proto",
-        "description": "批量 OUT 端点（命令下行）",
+        "description": "Bulk OUT endpoint (commands downstream)",
         "status": "unknown",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "endpoint number and purpose not confirmed"
       },
       {
         "identifier": "PROTO-EP-INTERRUPT",
         "layer": "usb",
         "module": "proto",
-        "description": "中断端点（状态/事件）",
+        "description": "Interrupt endpoint (status / events)",
         "status": "unknown",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "existence of an interrupt endpoint unknown"
       },
       {
         "identifier": "PROTO-EP-ALT-SETTINGS",
         "layer": "usb",
         "module": "proto",
-        "description": "接口备用设置（Alt Settings）",
+        "description": "Interface alternate settings",
         "status": "unknown",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "bandwidth/endpoint changes per alt-setting unknown"
       },
       {
         "identifier": "PROTO-XFER-MODE",
         "layer": "usb",
         "module": "proto",
-        "description": "数据传输模式（批量/同步）",
+        "description": "Data transfer mode for the acquisition stream (bulk vs isochronous)",
         "status": "unknown",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "whether the stream uses bulk or isochronous not confirmed"
       },
       {
         "identifier": "PROTO-CTRL-VENDOR-REQ",
         "layer": "usb",
         "module": "proto",
-        "description": "厂商自定义控制请求面",
+        "description": "Vendor-specific control-request surface",
         "status": "not_started",
         "boundary": "no_capture",
-        "evidence": null
+        "evidence": "bRequest/wValue semantics unparsed"
       },
       {
         "identifier": "DRV-HOST-MODULE",
         "layer": "usb",
         "module": "drv",
-        "description": "主机侧 USB 驱动模块",
+        "description": "Host-side USB driver module",
         "status": "not_started",
         "boundary": "no_binary",
-        "evidence": null
+        "evidence": "driver binary not obtained; not reversed"
       },
       {
         "identifier": "DRV-INF-BINDING",
         "layer": "usb",
         "module": "drv",
-        "description": "驱动 INF 绑定（VID/PID 匹配）",
+        "description": "Driver INF binding (VID/PID match)",
         "status": "not_started",
         "boundary": "no_binary",
-        "evidence": null
+        "evidence": "match ids and install info not obtained"
       },
       {
         "identifier": "DRV-IOCTL-SURFACE",
         "layer": "usb",
         "module": "drv",
-        "description": "驱动 IOCTL 接口面",
+        "description": "Driver IOCTL interface surface",
         "status": "not_started",
         "boundary": "no_binary",
-        "evidence": null
+        "evidence": "IOCTL codes and structures not reversed"
       },
       {
         "identifier": "DRV-FIRMWARE-LOADER",
         "layer": "usb",
         "module": "drv",
-        "description": "主机侧固件下载器",
+        "description": "Host-side firmware downloader",
         "status": "not_started",
         "boundary": "no_binary",
-        "evidence": null
+        "evidence": "whether firmware is downloaded at attach, and its format, unknown"
       },
       {
         "identifier": "DRV-PIPE-EP-BIND",
         "layer": "usb",
         "module": "drv",
-        "description": "驱动管道到端点的绑定",
+        "description": "Driver pipe-to-endpoint binding",
         "status": "unknown",
         "boundary": "cross_layer",
-        "evidence": null
+        "evidence": "depends on PROTO endpoint map; no evidence yet"
+      }
+    ],
+    "ref": [
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-SLRD",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "SLRD: slave FIFO read strobe driven by the external master (FPGA)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); board-level hookup not verified"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-SLWR",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "SLWR: slave FIFO write strobe driven by the external master (FPGA)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); board-level hookup not verified"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-SLOE",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "SLOE: slave FIFO output enable gating the FD data bus drivers",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); board-level hookup not verified"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-SLCS",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "SLCS#: slave FIFO chip select qualifying SLRD/SLWR/PKTEND",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); board-level hookup not verified"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-FLAGA",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "FLAGA: FIFO status flag (indexed/programmable, e.g. programmable-level)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); flag configuration on this board unknown"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-FLAGB",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "FLAGB: FIFO status flag (typically full flag in default config)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); flag configuration on this board unknown"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-FLAGC",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "FLAGC: FIFO status flag (typically empty flag in default config)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); flag configuration on this board unknown"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-FIFOADR",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "FIFOADR[1:0]: 2-bit address selecting the active endpoint FIFO (EP2/4/6/8)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); endpoint selection wiring not verified"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-FD-BUS",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "FD[15:0]: bidirectional slave FIFO data bus (8-bit or 16-bit word mode)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); bus width used on this board unknown"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-PKTEND",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "PKTEND: strobe committing a short (non-full) IN packet to USB",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); board-level hookup not verified"
+      },
+      {
+        "identifier": "REF-USB-SLAVE-FIFO-IFCLK",
+        "layer": "ref",
+        "module": "usb_slave_fifo",
+        "description": "IFCLK: interface clock, internal 30/48 MHz output or 5-48 MHz external input",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A slave FIFO mode); clock direction/source on this board unknown"
+      },
+      {
+        "identifier": "REF-ADC-SPI-DOUT",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "DOUT: serial conversion data output from the ADC toward the fabric",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271 serial interface); pin destination on this board not traced"
+      },
+      {
+        "identifier": "REF-ADC-SPI-DRDY",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "DRDY: data-ready indication (shared DOUT/DRDY pin in SPI format)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271 serial interface); interface format used on this board unknown"
+      },
+      {
+        "identifier": "REF-ADC-SPI-SCLK",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "SCLK: serial shift clock for the ADC data interface",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271 serial interface); clock source/frequency on this board unknown"
+      },
+      {
+        "identifier": "REF-ADC-SPI-FSYNC",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "FSYNC: frame-sync signal framing each conversion word (frame-sync format)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271 serial interface); frame-sync usage on this board unknown"
+      },
+      {
+        "identifier": "REF-ADC-SPI-DIN",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "DIN: serial data input used for daisy-chaining multiple ADCs",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271 serial interface); daisy-chain topology on this board unknown"
+      },
+      {
+        "identifier": "REF-ADC-MASTER-CLK",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "CLK: ADC master/modulator clock input setting the data rate",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271); clock source and frequency on this board not measured"
+      },
+      {
+        "identifier": "REF-ADC-MODE-PINS",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "MODE pin(s): operating-mode strap (high-speed / high-resolution / low-power)",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271); strap level on this board not read"
+      },
+      {
+        "identifier": "REF-ADC-FORMAT-PINS",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "FORMAT[2:0]: interface-format straps selecting SPI vs frame-sync and chaining",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271); strap levels on this board not read"
+      },
+      {
+        "identifier": "REF-ADC-SYNC-PIN",
+        "layer": "ref",
+        "module": "adc_serial",
+        "description": "SYNC/PDWN: conversion synchronisation / power-down control input",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (ADS1271); control source on this board not traced"
+      },
+      {
+        "identifier": "REF-EEPROM-I2C-SCL",
+        "layer": "ref",
+        "module": "eeprom_boot",
+        "description": "SCL: I2C clock line between the USB controller and the boot EEPROM",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A boot loader); pull-ups and routing on this board not verified"
+      },
+      {
+        "identifier": "REF-EEPROM-I2C-SDA",
+        "layer": "ref",
+        "module": "eeprom_boot",
+        "description": "SDA: I2C data line between the USB controller and the boot EEPROM",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A boot loader); pull-ups and routing on this board not verified"
+      },
+      {
+        "identifier": "REF-EEPROM-I2C-BOOT-ADDR",
+        "layer": "ref",
+        "module": "eeprom_boot",
+        "description": "EEPROM I2C device address convention distinguishing small/large boot EEPROMs",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A boot loader); address strap on this board not read"
+      },
+      {
+        "identifier": "REF-EEPROM-I2C-BOOT-BYTE",
+        "layer": "ref",
+        "module": "eeprom_boot",
+        "description": "Leading boot-configuration byte (0xC0/0xC2 convention) selecting the boot mode",
+        "status": "candidate",
+        "boundary": "需引脚对照实验",
+        "evidence": "public datasheet (CY7C68013A boot loader); actual first byte on this board not dumped"
       }
     ]
   },
   "manifests": {
     "file_hashes": {
-      "generated_at": "2026-08-27T15:14:27.482896+00:00",
+      "generated_at": "2026-08-27T15:18:32.059277+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -1284,29 +1593,700 @@
       }
     },
     "frame_summary": {
-      "device": "3s200ft256",
-      "config_data_length": 130952,
-      "frame_scan": {
-        "word_count": 65476,
-        "type1_frame_words_estimate": 4598,
-        "type2_frame_words_estimate": 3796,
-        "unique_word_values": 8150,
-        "top_words_hex": [
-          "0x0000:25962",
-          "0x1000:794",
-          "0x0008:652",
-          "0x0004:638",
-          "0x4000:438",
-          "0x0100:437",
-          "0x040a:416",
-          "0x0001:415",
-          "0x5020:414",
-          "0x0800:411"
-        ],
-        "config_entropy_bits_per_byte": 4.305
+      "schema_version": "1.0",
+      "generated_utc": "2026-08-27T15:18:32.243010+00:00",
+      "source_file": "firmware/device.bit",
+      "file_size_bytes": 131046,
+      "parse_status": "partial-ok",
+      "family": "spartan3 (candidate, per part/IDCODE)",
+      "bit_container": {
+        "magic_valid": true,
+        "sections": {
+          "a_design_name": {
+            "present": true,
+            "offset": 13,
+            "length": 33,
+            "value_redacted": "[redacted].ncd;UserID=0xFFFFFFFF",
+            "redaction_applied": true
+          },
+          "b_part_name": {
+            "present": true,
+            "offset": 49,
+            "length": 11,
+            "value": "3s200ft256"
+          },
+          "c_date": {
+            "present": true,
+            "offset": 63,
+            "length": 11,
+            "value": "2011/06/10"
+          },
+          "d_time": {
+            "present": true,
+            "offset": 77,
+            "length": 9,
+            "value": "12:44:47"
+          },
+          "e_config_data": {
+            "present": true,
+            "offset": 94,
+            "length_bytes": 130952,
+            "length_hex": "0x1ff88"
+          }
+        },
+        "config_data_offset": 94,
+        "config_data_declared_length": 130952,
+        "parse_notes": [],
+        "preamble_hex": "00090ff00ff00ff00ff0000001"
       },
-      "iob_active_pin_estimate": "unknown",
-      "notes": "Heuristic scan only; full IOB decode requires Spartan-3 frame parser."
+      "config_data": {
+        "declared_length_bytes": 130952,
+        "declared_length_hex": "0x1ff88",
+        "sync_found": true,
+        "sync_word": "0xaa995566",
+        "sync_offset_in_file": 98
+      },
+      "packet_stream": {
+        "sync_offset_in_config": 4,
+        "packet_count": 73,
+        "cmd_sequence": [
+          "RCRC",
+          "SWITCH",
+          "WCFG",
+          "GRESTORE",
+          "DGHIGH/LFRM",
+          "START",
+          "DESYNCH"
+        ],
+        "registers": {
+          "FLR": {
+            "value": 52,
+            "note": "frame length register"
+          },
+          "COR": {
+            "value": "0x40003fe5"
+          },
+          "IDCODE": {
+            "raw": "0x01414093",
+            "device_hint": "family=spartan3 device=xc3s200"
+          },
+          "other_writes": [
+            {
+              "register": "MASK",
+              "value": "0x00000000"
+            },
+            {
+              "register": "CTL",
+              "value": "0x00000000"
+            }
+          ],
+          "FAR_writes": [
+            "0x00000000"
+          ],
+          "CRC": {
+            "value": "0x00005f57"
+          }
+        },
+        "fdri": {
+          "word_count": 32648,
+          "data_offset_in_config": 80,
+          "data_length_bytes": 130592
+        },
+        "parse_notes": [],
+        "packets": [
+          {
+            "offset": 8,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000007"
+            ]
+          },
+          {
+            "offset": 16,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "FLR",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000034"
+            ]
+          },
+          {
+            "offset": 24,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "COR",
+            "word_count": 1,
+            "payload_hex": [
+              "0x40003fe5"
+            ]
+          },
+          {
+            "offset": 32,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "IDCODE",
+            "word_count": 1,
+            "payload_hex": [
+              "0x01414093"
+            ]
+          },
+          {
+            "offset": 40,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "MASK",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000000"
+            ]
+          },
+          {
+            "offset": 48,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000009"
+            ]
+          },
+          {
+            "offset": 56,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "FAR",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000000"
+            ]
+          },
+          {
+            "offset": 64,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000001"
+            ]
+          },
+          {
+            "offset": 72,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "FDRI",
+            "word_count": 0
+          },
+          {
+            "offset": 76,
+            "type": 2,
+            "opcode": "WRITE",
+            "follows_register": "FDRI",
+            "word_count": 32648,
+            "is_frame_data": true
+          },
+          {
+            "offset": 130676,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x0000000a"
+            ]
+          },
+          {
+            "offset": 130684,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000003"
+            ]
+          },
+          {
+            "offset": 130692,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130696,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130700,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130704,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130708,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130712,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130716,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130720,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130724,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130728,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130732,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130736,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130740,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130744,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130748,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130752,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130756,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130760,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130764,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130768,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130772,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130776,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130780,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130784,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130788,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130792,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130796,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130800,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130804,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130808,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130812,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130816,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130820,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130824,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130828,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130832,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130836,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130840,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130844,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130848,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130852,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130856,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130860,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130864,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130868,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130872,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130876,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130880,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130884,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130888,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130892,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130896,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130900,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130904,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000005"
+            ]
+          },
+          {
+            "offset": 130912,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CTL",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000000"
+            ]
+          },
+          {
+            "offset": 130920,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CRC",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00005f57"
+            ]
+          },
+          {
+            "offset": 130928,
+            "type": 1,
+            "opcode": "WRITE",
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x0000000d"
+            ]
+          },
+          {
+            "offset": 130936,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130940,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130944,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          },
+          {
+            "offset": 130948,
+            "type": 1,
+            "opcode": "NOP",
+            "register": "CRC",
+            "word_count": 0
+          }
+        ]
+      },
+      "frame_analysis": {
+        "confidence": "candidate",
+        "method": "FDRI payload split into fixed-length frames using the FLR register; outer (edge) frame columns treated as candidate IOB configuration region per Spartan-3 column-based frame layout",
+        "fdri_word_count": 32648,
+        "frame_length_words": 52,
+        "frame_length_source": "FLR register",
+        "active_config_words": 21631,
+        "active_config_words_note": "count of non-zero 32-bit words in the FDRI payload (upper bound on meaningfully-configured words)",
+        "estimated_frame_count": 627,
+        "trailing_words_after_last_full_frame": 44,
+        "frame_alignment": "candidate: FDRI word count not an exact multiple of FLR; remainder likely pad/CRC words",
+        "iob_edge_frame_window": 4,
+        "candidate_iob_config_words": 223,
+        "candidate_iob_confidence": "candidate/low",
+        "candidate_iob_note": "non-zero words within the first/last frame columns; exact IOB frame mapping for this specific device is unknown",
+        "max_frame_density": 52,
+        "nonzero_frame_count": 492
+      },
+      "unknowns": [
+        "FDRI word count not an exact multiple of frame length; frame count is a candidate estimate",
+        "exact per-column IOB frame mapping for the specific device is not reconstructed (candidate heuristic only)"
+      ]
+    },
+    "frame_deep": {
+      "device": "3s200ft256",
+      "config_length": 130952,
+      "scan": {
+        "word_count": 65476,
+        "class_counts": {
+          "other": 31120,
+          "type2": 3796,
+          "type1": 4598,
+          "zero": 25962
+        },
+        "zero_word_ratio": 0.3965
+      },
+      "notes": "Heuristic Spartan-3 frame classifier."
     },
     "hardware_bom": {
       "manifest": "hardware_bom",
@@ -1741,9 +2721,9 @@
         }
       ],
       "summary": {
-        "total_component_entries": 34,
-        "confirmed": 24,
-        "candidate": 8,
+        "total_component_entries": 40,
+        "confirmed": 29,
+        "candidate": 9,
         "unknown": 2,
         "key_findings": [
           "FPGA：Xilinx Spartan XC3S200（BGA-256，FTG256）",
@@ -1961,6 +2941,10 @@
         }
       ],
       "count": 22
+    },
+    "phase_b_status": {
+      "captures_found": [],
+      "ready": false
     }
   }
 }
