@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**86 pytest**，静态阶段 **已关闭并冻结**
+**规模**：**237 条 identifier**，**90 pytest**，静态阶段 **已关闭并冻结**
 
 ## 八层目录
 
@@ -45,6 +45,8 @@ python3 scripts/verify_completion.py
 | `manifests/pending_index.json` | 98 条阻塞项 |
 | `manifests/phase_roadmap.json` | 阶段 B/C 解锁路线 |
 | `HARDWARE_HANDOFF.md` | 实机接入步骤 |
+| `PHASE_B_READINESS.md` | 阶段 B 阻塞项与就绪状态 |
+| `manifests/phase_b_upgrade_proposals.json` | 采集后 catalog 升级建议（需人工审阅） |
 
 ## 一键命令
 
