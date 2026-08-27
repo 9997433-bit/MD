@@ -1,23 +1,49 @@
 {
-  "generated_from": "English.csv static mapping (subagent bc-4c25db37)",
+  "generated_from": "English.csv static mapping (subagent bc-4c25db37; revised bc-53aee810)",
   "note": "概念级映射；账本仍以 Remote.h/PE 为锚。字符串 ID 仅作 UI 参考，不证明算法。",
   "ledger_has_string_id_anchors": false,
+  "audit_summary": {
+    "mapped_to_ledger": 21,
+    "gap_with_remote_h_anchor": 41,
+    "gap_string_table_only": 30,
+    "forced_null": 1,
+    "ledger_identifier_count": 193
+  },
   "gap_blocks": [
     {
       "block": "ANA-UNC-ISO230",
       "csv_id_range": "343-376, 3190-3196",
-      "description": "ISO 230-2 测量不确定度估算 UI 整块",
+      "description": "ISO 230-2 测量不确定度估算 UI",
       "suggested_prefix": "ANA-E1-UNC-*",
-      "status": "missing",
-      "boundary": "string_table_only"
+      "status": "partial",
+      "boundary": "mixed",
+      "remote_h_anchors": [
+        "ISOSETUP_UNCEXPCOEF_ITEMTEXT=110",
+        "ISOSETUP_ENVVARERR_ITEMTEXT=113",
+        "ISOSETUP_DIFF20CMAX_ITEMTEXT=112",
+        "ISOSETUP_MATTEMPDEV_ITEMTEXT=114",
+        "ISOSETUP_ERRORRANGE_ITEMTEXT=108",
+        "ISOSETUP_ALIGNERR_ITEMTEXT=111",
+        "ISOSETUP_CALMEADEV_CHOOSING=109"
+      ],
+      "string_table_only_range": "343-357, 366-374"
     },
     {
       "block": "CMP-TABLE-PARAMS",
       "csv_id_range": "3047-3051",
       "description": "补偿表起止/间隔/位置生成参数提示",
-      "suggested_ids": ["CMP-E1-HINT-TABLE-START", "CMP-E1-HINT-TABLE-END", "CMP-E1-HINT-TABLE-INTERVAL"],
+      "suggested_ids": [
+        "CMP-E1-CFG-TABLE-START",
+        "CMP-E1-CFG-TABLE-END",
+        "CMP-E1-CFG-TABLE-INTERVAL"
+      ],
       "status": "missing",
-      "boundary": "string_table_only"
+      "boundary": "remote_h_constant_exists",
+      "remote_h_anchors": [
+        "CMPSETUP_COMPSTART_ITEMTEXT=132",
+        "CMPSETUP_COMPEND_ITEMTEXT=133",
+        "CMPSETUP_COMPINTVL_ITEMTEXT=134"
+      ]
     },
     {
       "block": "CMP-E1-ENV-CAL",
@@ -33,16 +59,33 @@
       "description": "图形分析：正向/反向曲线、Backlash/pt、Remove Raw Offset",
       "suggested_prefix": "ANA-E1-STR-RUNS-*",
       "status": "missing",
-      "boundary": "remote_h_comprise_bits_unmapped"
+      "boundary": "remote_h_comprise_bits_unmapped",
+      "remote_h_candidates": ["ANASETUP_ANAGRAPH_COMPRISE=68"]
     },
     {
       "block": "ACQ-TRIG-PARAMS",
       "csv_id_range": "145-146, 311-312",
       "description": "Target Window、Trigger Dwell、窗内外",
-      "suggested_ids": ["ACQ-E1-TRIG-STR-TARGETWIN", "ACQ-E1-TRIG-STR-DWELL"],
-      "remote_h_candidates": ["MEASETUP_TRIGWND_ITEMTEXT", "MEASETUP_TRIGDWELL_ITEMTEXT"],
-      "status": "candidate",
-      "boundary": "remote_h_constant_exists_in_setup_constants"
+      "suggested_ids": [
+        "ACQ-E1-TRIG-STR-TARGETWIN",
+        "ACQ-E1-TRIG-STR-DWELL",
+        "ACQ-E1-TRIG-STR-ENCRES",
+        "ACQ-E1-TRIG-STR-EPTIMEOUT"
+      ],
+      "remote_h_candidates": [
+        "MEASETUP_TRIGWND_ITEMTEXT",
+        "MEASETUP_TRIGDWELL_ITEMTEXT",
+        "MEASETUP_AQBRES_ITEMTEXT",
+        "MEASETUP_EPTIMEOUT_CHOOSING"
+      ],
+      "status": "covered",
+      "boundary": "remote_h_constant_exists_in_setup_constants",
+      "ledger_entries": [
+        "ACQ-E1-TRIG-STR-TARGETWIN",
+        "ACQ-E1-TRIG-STR-DWELL",
+        "ACQ-E1-TRIG-STR-ENCRES",
+        "ACQ-E1-TRIG-STR-EPTIMEOUT"
+      ]
     },
     {
       "block": "ANA-STD-ISOFIELDS",
@@ -50,8 +93,30 @@
       "description": "ISO Information 报告字段（检验员、机床信息、传感器坐标等）",
       "suggested_prefix": "ANA-E1-STD-ISOFIELD-*",
       "status": "missing",
-      "boundary": "string_table_only"
+      "boundary": "remote_h_constant_exists",
+      "remote_h_anchors": [
+        "ISOSETUP_MATSEN1_ITEMTEXT=104",
+        "ISOSETUP_MATSEN2_ITEMTEXT=105",
+        "ISOSETUP_MATSEN3_ITEMTEXT=107",
+        "ISOSETUP_ATSEN_ITEMTEXT=106",
+        "ISOSETUP_COMPUSED_CHOOSING=92",
+        "ISOSETUP_SCALETEMPCOEF_ITEMTEXT=89",
+        "ISOSETUP_PIECEX_ITEMTEXT=101",
+        "ISOSETUP_TOOLZ_ITEMTEXT=100"
+      ]
     }
+  ],
+  "top_priority_candidates": [
+    {"csv_id": 110, "ui": "Environmental Compensation", "suggested_id": "CMP-E1-ENV-UI-SHOWENV", "anchor": "E1733A_CC_SHOWENVIRONMENT=33"},
+    {"csv_id": 102, "ui": "Air Pressure", "suggested_id": "CMP-E1-ENV-CFG-AIRPRES", "anchor": "ENVSETUP_AIRPRES_ITEMTEXT=9"},
+    {"csv_id": 103, "ui": "Air Temperature", "suggested_id": "CMP-E1-ENV-CFG-AIRTEMP", "anchor": "ENVSETUP_AIRTEMP_ITEMTEXT=10"},
+    {"csv_id": 104, "ui": "Relative Humidity", "suggested_id": "CMP-E1-ENV-CFG-RELHUMI", "anchor": "ENVSETUP_RELHUMI_ITEMTEXT=11"},
+    {"csv_id": "105-107", "ui": "Material Temp. 1/2/3", "suggested_id": "CMP-E1-ENV-CFG-MATTEMP1/2/3", "anchor": "ENVSETUP_MATTEMP1/2/3_ITEMTEXT=13/14/15"},
+    {"csv_id": 109, "ui": "Environmental Units", "suggested_id": "CMP-E1-ENV-CFG-UNITSEL", "anchor": "ENVSETUP_ENVUNITSEL_CHOOSING=8"},
+    {"csv_id": "3049-3051", "ui": "补偿表起始/终止/间隔", "suggested_id": "CMP-E1-CFG-TABLE-START/END/INTERVAL", "anchor": "CMPSETUP_COMPSTART/COMPEND/COMPINTVL_ITEMTEXT=132/133/134"},
+    {"csv_id": 194, "ui": "ISO Information", "suggested_id": "ANA-E1-STD-ISOINFO-ENTRY", "anchor": "E1733A_CI_ISOINFO=7"},
+    {"csv_id": 376, "ui": "Uncertainty of Expansion Coefficient", "suggested_id": "ANA-E1-UNC-EXPCOEF", "anchor": "ISOSETUP_UNCEXPCOEF_ITEMTEXT=110"},
+    {"csv_id": 365, "ui": "Environmental Variation", "suggested_id": "ANA-E1-UNC-ENVVAR", "anchor": "ISOSETUP_ENVVARERR_ITEMTEXT=113"}
   ],
   "forced_null_reminders": [
     "Wavelength Compensation [112] must not bridge to Edlen/Ciddor formula",
@@ -61,6 +126,7 @@
     "analysis_core_metrics": "covered via ANA-E1-API-ANALYSIS-* and ANA-E1-STD-*",
     "compensation_ui_cfg": "partial via CMP-E1-CFG-*",
     "environment_exports": "partial via CMP-E1-ENV-E1736A_*",
-    "trigger_modes": "covered via ACQ-E1-TRIG-MANUAL/ENCODER/AUTO"
+    "trigger_modes": "covered via ACQ-E1-TRIG-MANUAL/ENCODER/AUTO",
+    "trigger_string_params": "covered via ACQ-E1-TRIG-STR-* (candidate)"
   }
 }
