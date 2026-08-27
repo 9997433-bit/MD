@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aetherboard — VR 战棋原型</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Aetherboard</h1>
+      <p class="subtitle">FF14 风格 GCD 战棋 · 2D 可玩原型（VR 前验证）</p>
+    </header>
+
+    <section class="hud">
+      <div class="panel">
+        <h2>战斗状态</h2>
+        <div id="turn-info">回合 1</div>
+        <div id="phase-info">阶段：预警</div>
+        <div id="telegraph-info">—</div>
+      </div>
+      <div class="panel boss-panel">
+        <h2 id="boss-name">土灵守护者</h2>
+        <div class="bar-wrap"><div id="boss-hp-bar" class="bar boss"></div></div>
+        <div id="boss-hp-text">6000 / 6000</div>
+        <div id="boss-phase">P1</div>
+        <div id="fury-indicator" class="hidden">土神之怒读条中！</div>
+      </div>
+    </section>
+
+    <main class="battle-area">
+      <div id="board" class="board" aria-label="7x7 战棋棋盘"></div>
+      <aside class="side-panel">
+        <div class="panel">
+          <h2>小队</h2>
+          <ul id="party-list"></ul>
+        </div>
+        <div class="panel">
+          <h2>行动</h2>
+          <div id="selected-unit">选择单位</div>
+          <div id="skill-buttons" class="skill-buttons"></div>
+          <button id="btn-end-phase" class="primary">结束当前阶段</button>
+          <button id="btn-auto" class="secondary">自动演示一步</button>
+          <button id="btn-reset" class="secondary">重新开始</button>
+        </div>
+        <div class="panel log-panel">
+          <h2>战斗日志</h2>
+          <ol id="battle-log" reversed></ol>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>操作：点击棋子选中 → 点击格子移动 / 施法 → 「结束当前阶段」推进。危险格为红色，Boss 在棋盘上方中央。</p>
+    </footer>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
