@@ -18,9 +18,17 @@ namespace Aetherboard.VR
         {
             X = x;
             Y = y;
+            if (surface == null) surface = GetComponent<Renderer>();
             var isBoss = x == BoardMath.BossPos(BoardMath.DefaultSize).X &&
                          y == BoardMath.BossPos(BoardMath.DefaultSize).Y;
             if (isBoss) SetColor(bossColor);
+        }
+
+        public void InitProcedural(int x, int y, Renderer renderer)
+        {
+            surface = renderer;
+            Init(x, y);
+            SetColor(normalColor);
         }
 
         public void SetKind(CellKind kind, bool preview)
@@ -34,7 +42,10 @@ namespace Aetherboard.VR
         {
             if (surface != null)
             {
-                surface.material.color = c;
+                if (surface.material == null)
+                    surface.material = ProceduralAssets.CreateUnlitMaterial(c);
+                else
+                    surface.material.color = c;
             }
         }
     }

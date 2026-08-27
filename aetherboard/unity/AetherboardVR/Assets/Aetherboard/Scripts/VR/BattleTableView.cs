@@ -4,13 +4,10 @@ using Aetherboard.Core;
 
 namespace Aetherboard.VR
 {
-    /// <summary>
-    /// Renders the 7x7 board, cell states, and piece tokens.
-    /// </summary>
     public class BattleTableView : MonoBehaviour
     {
         [SerializeField] private float cellSize = 0.12f;
-        [SerializeField] private float tableHeight = 0.8f;
+        [SerializeField] private float tableHeight = 0.02f;
         [SerializeField] private GridCell cellPrefab;
         [SerializeField] private PieceToken piecePrefab;
         [SerializeField] private Transform cellsRoot;
@@ -18,17 +15,67 @@ namespace Aetherboard.VR
 
         private readonly Dictionary<(int, int), GridCell> _cells = new();
         private readonly Dictionary<string, PieceToken> _pieces = new();
+        private bool _built;
+
+        public float CellSize => cellSize;
 
         private void Awake()
         {
-            if (cellsRoot == null) cellsRoot = transform;
-            if (piecesRoot == null) piecesRoot = transform;
-            BuildGrid();
-            BuildPieces();
+            if (cellPrefab != null && piecePrefab != null && !_built)
+                BuildFromPrefabs();
         }
 
-        private void BuildGrid()
+        public void BuildProcedural(Transform parent, BattleDirector director)
         {
+            if (_built) return;
+            _built = true;
+
+            var tableRoot = new GameObject("Table").transform;
+            tableRoot.SetParent(parent, false);
+
+            cellsRoot = new GameObject("Cells").transform;
+            cellsRoot.SetParent(tableRoot, false);
+            piecesRoot = new GameObject("Pieces").transform;
+            piecesRoot.SetParent(tableRoot, false);
+
+            ProceduralAssets.CreateTableBase(tableRoot, cellSize * 7.5f);
+
+            for (var y = 0; y < BoardMath.DefaultSize; y++)
+            for (var x = 0; x < BoardMath.DefaultSize; x++)
+            {
+                var go = ProceduralAssets.CreateCell(cellsRoot, cellSize, tableHeight);
+                go.transform.localPosition = GridToLocal(x, y);
+                var cell = go.AddComponent<GridCell>();
+                cell.InitProcedural(x, y, go.GetComponent<Renderer>());
+                _cells[(x, y)] = cell;
+
+                if (x == BoardMath.BossPos(BoardMath.DefaultSize).X &&
+                    y == BoardMath.BossPos(BoardMath.DefaultSize).Y)
+                {
+                    var boss = ProceduralAssets.CreateBossMarker(go.transform, cellSize);
+                    boss.transform.localPosition = new Vector3(0, 0.08f, 0);
+                }
+            }
+
+            foreach (var id in new[] { "knight", "white_mage", "black_mage", "bard" })
+            {
+                var go = ProceduralAssets.CreatePiece(piecesRoot, cellSize);
+                go.name = $"Piece_{id}";
+                var token = go.AddComponent<PieceToken>();
+                token.InitProcedural(go.GetComponent<Renderer>());
+                token.UnitId = id;
+                token.Inject(director, this);
+                _pieces[id] = token;
+            }
+        }
+
+        private void BuildFromPrefabs()
+        {
+            if (_built) return;
+            _built = true;
+            if (cellsRoot == null) cellsRoot = transform;
+            if (piecesRoot == null) piecesRoot = transform;
+
             for (var y = 0; y < BoardMath.DefaultSize; y++)
             for (var x = 0; x < BoardMath.DefaultSize; x++)
             {
@@ -38,10 +85,7 @@ namespace Aetherboard.VR
                 cell.Init(x, y);
                 _cells[(x, y)] = cell;
             }
-        }
 
-        private void BuildPieces()
-        {
             foreach (var job in new[] { "knight", "white_mage", "black_mage", "bard" })
             {
                 var token = Instantiate(piecePrefab, piecesRoot);
@@ -54,14 +98,26 @@ namespace Aetherboard.VR
         public Vector3 GridToWorld(int x, int y) =>
             transform.TransformPoint(GridToLocal(x, y));
 
-        private Vector3 GridToLocal(int x, int y)
+        public Vector3 GridToLocal(int x, int y)
         {
             var offset = (BoardMath.DefaultSize - 1) * cellSize * 0.5f;
             return new Vector3(x * cellSize - offset, tableHeight, y * cellSize - offset);
         }
 
+        public GridPos WorldToGrid(Vector3 worldPos)
+        {
+            var local = transform.InverseTransformPoint(worldPos);
+            var offset = (BoardMath.DefaultSize - 1) * cellSize * 0.5f;
+            var x = Mathf.RoundToInt((local.x + offset) / cellSize);
+            var y = Mathf.RoundToInt((local.z + offset) / cellSize);
+            return new GridPos(
+                Mathf.Clamp(x, 0, BoardMath.DefaultSize - 1),
+                Mathf.Clamp(y, 0, BoardMath.DefaultSize - 1));
+        }
+
         public void Bind(BattleState state)
         {
+            if (!_built) return;
             for (var y = 0; y < state.BoardSize; y++)
             for (var x = 0; x < state.BoardSize; x++)
             {
@@ -74,8 +130,10 @@ namespace Aetherboard.VR
                 if (!_pieces.TryGetValue(unit.Id, out var token)) continue;
                 token.gameObject.SetActive(unit.Alive);
                 if (!unit.Alive) continue;
-                token.transform.position = GridToWorld(unit.Pos.X, unit.Pos.Y);
+                var world = GridToWorld(unit.Pos.X, unit.Pos.Y);
+                token.transform.position = world + Vector3.up * (cellSize * 0.28f);
                 token.SetJob(unit.Job);
+                token.RememberHome(unit.Pos);
             }
         }
 
@@ -84,5 +142,8 @@ namespace Aetherboard.VR
 
         public GridCell GetCell(int x, int y) =>
             _cells.TryGetValue((x, y), out var c) ? c : null;
+
+        public PieceToken GetPiece(string unitId) =>
+            _pieces.TryGetValue(unitId, out var p) ? p : null;
     }
 }

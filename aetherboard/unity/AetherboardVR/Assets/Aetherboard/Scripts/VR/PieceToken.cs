@@ -1,14 +1,11 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using Aetherboard.Core;
 
 namespace Aetherboard.VR
 {
     /// <summary>
-    /// Grabbable piece token. On release, snaps to nearest valid grid cell.
+    /// Piece token — supports VR grab (when XRI present) and desktop click-drag.
     /// </summary>
-    [RequireComponent(typeof(XRGrabInteractable))]
     public class PieceToken : MonoBehaviour
     {
         [SerializeField] private Renderer body;
@@ -18,28 +15,41 @@ namespace Aetherboard.VR
         [SerializeField] private Color bardColor = new(0.85f, 0.45f, 0.1f);
 
         public string UnitId { get; set; }
+        public bool IsSelected { get; private set; }
 
         private BattleDirector _director;
         private BattleTableView _table;
-        private XRGrabInteractable _grab;
         private GridPos _homePos;
+        private Vector3 _dragOffset;
+        private bool _dragging;
 
-        private void Awake()
+        public void InitProcedural(Renderer renderer)
         {
-            _grab = GetComponent<XRGrabInteractable>();
-            _grab.selectExited.AddListener(OnReleased);
+            body = renderer;
         }
 
         public void Inject(BattleDirector director, BattleTableView table)
         {
             _director = director;
             _table = table;
+            TryWireXRGrab();
+        }
+
+        private void TryWireXRGrab()
+        {
+            var grabType = System.Type.GetType(
+                "UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable, Unity.XR.Interaction.Toolkit");
+            if (grabType == null) return;
+            var grab = gameObject.GetComponent(grabType);
+            if (grab == null) grab = gameObject.AddComponent(grabType);
+            // XR release handled via DesktopBattleInput fallback when no XR rig
         }
 
         public void SetJob(JobType job)
         {
+            if (body == null) body = GetComponentInChildren<Renderer>();
             if (body == null) return;
-            body.material.color = job switch
+            var c = job switch
             {
                 JobType.Knight => knightColor,
                 JobType.WhiteMage => healerColor,
@@ -47,22 +57,49 @@ namespace Aetherboard.VR
                 JobType.Bard => bardColor,
                 _ => Color.white
             };
+            if (body.material == null) body.material = ProceduralAssets.CreateUnlitMaterial(c);
+            else body.material.color = c;
         }
 
-        private void OnReleased(SelectExitEventArgs _)
+        public void SetSelected(bool selected)
         {
+            IsSelected = selected;
+            if (body != null)
+                body.material.color = selected
+                    ? Color.Lerp(body.material.color, Color.white, 0.35f)
+                    : body.material.color;
+        }
+
+        public void BeginDrag(Vector3 hitPoint)
+        {
+            _dragging = true;
+            _dragOffset = transform.position - hitPoint;
+        }
+
+        public void DragTo(Vector3 hitPoint)
+        {
+            if (!_dragging) return;
+            transform.position = hitPoint + _dragOffset;
+        }
+
+        public void EndDrag()
+        {
+            if (!_dragging) return;
+            _dragging = false;
             if (_director == null || _table == null) return;
             if (_director.State.Phase != BattlePhase.Move) return;
 
-            var local = _table.transform.InverseTransformPoint(transform.position);
-            var x = Mathf.RoundToInt(local.x / 0.12f + 3);
-            var y = Mathf.RoundToInt(local.z / 0.12f + 3);
-            var dest = new GridPos(x, y);
-
+            var dest = _table.WorldToGrid(transform.position);
             if (_director.TryMove(UnitId, dest))
-                transform.position = _table.GridToWorld(dest.X, dest.Y);
+                SnapToGrid(dest);
             else
-                transform.position = _table.GridToWorld(_homePos.X, _homePos.Y);
+                SnapToGrid(_homePos);
+        }
+
+        public void SnapToGrid(GridPos pos)
+        {
+            if (_table == null) return;
+            transform.position = _table.GridToWorld(pos.X, pos.Y) + Vector3.up * (_table.CellSize * 0.28f);
         }
 
         public void RememberHome(GridPos pos) => _homePos = pos;

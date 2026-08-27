@@ -35,15 +35,14 @@ python3 -m http.server 8765
 
 ## Unity VR 快速开始
 
+**最快路径**：Unity Hub 打开 `unity/AetherboardVR` → 按 **Play**（自动创建战棋桌）
+
 ```bash
-# 1. C# 战斗核心测试
+# C# 核心测试（无需 Unity）
 cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
-
-# 2. Unity Hub 打开
-aetherboard/unity/AetherboardVR
-
-# 3. 详见 docs/UNITY_SETUP.md
 ```
+
+Quest 打包见 `docs/QUEST_BUILD.md`
 
 ## 当前 MVP 内容
 

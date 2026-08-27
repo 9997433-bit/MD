@@ -10,7 +10,10 @@
 | C# 战斗核心移植 | ✅ | `unity/.../Scripts/Core/` |
 | C# 单元测试 | ✅ | `csharp/Aetherboard.Core.Tests/` |
 | VR 交互脚本 | ✅ | `unity/.../Scripts/VR/` |
-| Unity 场景 / Prefab | 🔲 | 需在 Editor 中完成（见 UNITY_SETUP.md） |
+| **运行时自动场景** | ✅ | `RuntimeSceneBootstrap` — 按 Play 即可 |
+| **桌面键鼠测试** | ✅ | `DesktopBattleInput` + IMGUI HUD |
+| Quest 打包向导 | ✅ | Editor 菜单 + `QUEST_BUILD.md` |
+| XR Origin Prefab 场景 | 🔲 | 需替换自动相机为 XR Rig |
 | 机制 VFX 美术 | 🔲 | Telegraph 圈 / 读条条 |
 | 在线多人 | 🔲 | Host 权威同步 |
 

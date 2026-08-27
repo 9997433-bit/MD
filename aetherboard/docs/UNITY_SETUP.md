@@ -18,9 +18,18 @@ aetherboard/unity/AetherboardVR
 
 首次打开会自动解析 `Packages/manifest.json` 中的 OpenXR 与 XRI 依赖。
 
-## 场景搭建（5 分钟）
+## 最快验证：直接 Play
 
-### 1. XR Origin
+1. 打开任意空场景（默认场景即可）
+2. **按 Play** — 系统自动创建战棋桌、棋子、HUD、相机
+3. 桌面操作：
+   - 点击棋子 → 点击格子移动
+   - `E` 结束阶段 | `A` 自动一步
+   - `1` 土灵 Boss | `2` 风灵 Boss
+
+也可通过菜单 `Aetherboard → Create Battle Scene File` 保存正式场景。
+
+## VR 场景搭建（Quest / PCVR）
 
 1. `GameObject > XR > XR Origin (VR)` 创建玩家 Rig
 2. `Project Settings > XR Plug-in Management` 勾选 **OpenXR**

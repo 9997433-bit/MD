@@ -1,33 +1,33 @@
 using UnityEngine;
+using Aetherboard.Core;
 
 namespace Aetherboard.VR
 {
     /// <summary>
-    /// Scene bootstrap: wires references and configures seated table height.
+    /// Legacy bootstrap — use RuntimeSceneBootstrap for full auto setup.
     /// </summary>
     public class VRBattleBootstrap : MonoBehaviour
     {
         [SerializeField] private BattleDirector director;
         [SerializeField] private BattleTableView table;
-        [SerializeField] private SkillRingController skillRing;
         [SerializeField] private bool seatedMode = true;
-        [SerializeField] private float seatedTableYOffset = 0.75f;
 
         private void Start()
         {
+            if (director == null) director = GetComponent<BattleDirector>();
+            if (table == null) table = GetComponent<BattleTableView>();
+
+            if (table != null && director != null)
+            {
+                foreach (var piece in FindObjectsOfType<PieceToken>())
+                    piece.Inject(director, table);
+            }
+
             if (seatedMode && table != null)
             {
                 var pos = table.transform.position;
-                table.transform.position = new Vector3(pos.x, seatedTableYOffset, pos.z);
+                table.transform.position = new Vector3(pos.x, 0.75f, pos.z);
             }
-
-            foreach (var piece in FindObjectsOfType<PieceToken>())
-            {
-                piece.Inject(director, table);
-            }
-
-            if (skillRing != null && director != null)
-                skillRing.GetComponent<SkillRingController>();
         }
     }
 }
