@@ -10,7 +10,8 @@ namespace Aetherboard.VR
         public static BattleDirector Build(
             string bossId = "earth",
             bool seatedMode = true,
-            float tableDistance = 1.1f)
+            float tableDistance = 1.1f,
+            XRRigSource rigSource = XRRigSource.Auto)
         {
             var tableCenter = new Vector3(0, seatedMode ? 0.75f : 1.0f, tableDistance);
 
@@ -54,7 +55,7 @@ namespace Aetherboard.VR
             root.AddComponent<QuestPerformanceSettings>();
 
             XRRigFactory.EnsureLighting();
-            XRRigFactory.CreateRig(tableCenter, seatedMode, out _);
+            XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
 
             director.SetBoss(bossId);
             return director;

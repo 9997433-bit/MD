@@ -20,12 +20,17 @@ namespace Aetherboard.VR
         [SerializeField] private string bossId = "earth";
         [SerializeField] private bool seatedMode = true;
         [SerializeField] private float tableDistance = 1.1f;
+        [SerializeField] private XRRigSource rigSource = XRRigSource.Auto;
 
         private void Start()
         {
-            BattleSceneBuilder.Build(bossId, seatedMode, tableDistance);
-            var mode = XRRigFactory.XrActive ? "XR" : "Desktop";
-            Debug.Log($"[Aetherboard] Ready ({mode}). C=双人 | Tab=切换玩家 | RMB=技能环");
+            BattleSceneBuilder.Build(bossId, seatedMode, tableDistance, rigSource);
+            var rigLabel = XRRigFactory.LastRigSource switch
+            {
+                XRRigSource.Prefab => "XR Prefab",
+                _ => XRRigFactory.XrActive ? "XR Procedural" : "Desktop"
+            };
+            Debug.Log($"[Aetherboard] Ready ({rigLabel}). C=双人 | Tab=切换 | H/N联机 | RMB=技能环");
         }
     }
 }

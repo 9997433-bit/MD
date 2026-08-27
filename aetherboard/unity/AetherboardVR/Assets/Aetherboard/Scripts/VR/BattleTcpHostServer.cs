@@ -140,6 +140,11 @@ namespace Aetherboard.VR
 
         private void Broadcast(string line)
         {
+            BroadcastState(line);
+        }
+
+        public void BroadcastState(string line)
+        {
             var bytes = Encoding.UTF8.GetBytes(line + "\n");
             List<TcpClient> dead = new();
             lock (_clientLock)

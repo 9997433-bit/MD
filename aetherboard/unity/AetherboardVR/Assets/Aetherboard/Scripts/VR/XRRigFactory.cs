@@ -1,21 +1,119 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Aetherboard.VR
 {
+    public enum XRRigSource
+    {
+        Auto,
+        Prefab,
+        Procedural
+    }
+
     /// <summary>
-    /// Spawns XR Origin when XRI is available; otherwise positions a desktop camera rig.
+    /// Spawns XR Origin from official prefab (Resources) or procedural fallback.
     /// </summary>
     public static class XRRigFactory
     {
-        public static bool XrActive { get; private set; }
+        public const string PrefabResourcePath = "Aetherboard/XROriginRig";
 
-        public static Transform CreateRig(Vector3 tableCenter, bool seated, out Camera camera)
+        public static bool XrActive { get; private set; }
+        public static XRRigSource LastRigSource { get; private set; } = XRRigSource.Procedural;
+
+        public static Transform CreateRig(
+            Vector3 tableCenter,
+            bool seated,
+            out Camera camera,
+            XRRigSource source = XRRigSource.Auto)
         {
+            XrActive = false;
+            camera = null;
+
+            if (source != XRRigSource.Procedural && TryCreatePrefabRig(tableCenter, seated, out var prefabRoot, out camera))
+            {
+                XrActive = true;
+                LastRigSource = XRRigSource.Prefab;
+                return prefabRoot;
+            }
+
+            if (source == XRRigSource.Prefab)
+            {
+                Debug.LogWarning(
+                    $"[Aetherboard] XR prefab not found at Resources/{PrefabResourcePath}. " +
+                    "Run menu Aetherboard → Install XR Origin Prefab, or switch to Auto.");
+                camera = SetupDesktopCamera(tableCenter);
+                LastRigSource = XRRigSource.Procedural;
+                return camera.transform;
+            }
+
             XrActive = TryCreateXriOrigin(tableCenter, seated, out var rigRoot, out camera);
+            LastRigSource = XRRigSource.Procedural;
             if (XrActive) return rigRoot;
 
             camera = SetupDesktopCamera(tableCenter);
             return camera.transform;
+        }
+
+        private static bool TryCreatePrefabRig(
+            Vector3 tableCenter,
+            bool seated,
+            out Transform root,
+            out Camera cam)
+        {
+            root = null;
+            cam = null;
+
+            var prefab = Resources.Load<GameObject>(PrefabResourcePath);
+            if (prefab == null) return false;
+
+            var instance = Object.Instantiate(prefab);
+            instance.name = "XR Origin (Prefab)";
+            PositionRig(instance.transform, tableCenter, seated);
+
+            cam = instance.GetComponentInChildren<Camera>();
+            if (cam == null)
+            {
+                Object.Destroy(instance);
+                return false;
+            }
+
+            if (cam.tag != "MainCamera") cam.tag = "MainCamera";
+            if (cam.GetComponent<AudioListener>() == null)
+                cam.gameObject.AddComponent<AudioListener>();
+
+            TryBindXrOriginCamera(instance, cam);
+            TryEnsureInteractionManager();
+            root = instance.transform;
+            Debug.Log($"[Aetherboard] XR rig loaded from Resources/{PrefabResourcePath}");
+            return true;
+        }
+
+        private static void PositionRig(Transform rig, Vector3 tableCenter, bool seated)
+        {
+            var eyeHeight = seated ? 1.35f : 1.65f;
+            rig.position = tableCenter + new Vector3(0, eyeHeight, -0.85f);
+            rig.LookAt(tableCenter + Vector3.up * 0.05f);
+        }
+
+        private static void TryBindXrOriginCamera(GameObject rigRoot, Camera cam)
+        {
+            var originType = Type.GetType("Unity.XR.CoreUtils.XROrigin, Unity.XR.CoreUtils");
+            if (originType == null) return;
+            var origin = rigRoot.GetComponent(originType);
+            if (origin == null) return;
+            originType.GetProperty("Camera")?.SetValue(origin, cam);
+        }
+
+        private static void TryEnsureInteractionManager()
+        {
+            var managerType = Type.GetType(
+                "UnityEngine.XR.Interaction.Toolkit.XRInteractionManager, Unity.XR.Interaction.Toolkit");
+            if (managerType == null) return;
+            if (Object.FindObjectOfType(managerType) != null) return;
+
+            var go = new GameObject("XR Interaction Manager");
+            go.AddComponent(managerType);
         }
 
         private static bool TryCreateXriOrigin(Vector3 tableCenter, bool seated, out Transform root, out Camera cam)
@@ -23,10 +121,10 @@ namespace Aetherboard.VR
             root = null;
             cam = null;
 
-            var originType = System.Type.GetType("Unity.XR.CoreUtils.XROrigin, Unity.XR.CoreUtils");
+            var originType = Type.GetType("Unity.XR.CoreUtils.XROrigin, Unity.XR.CoreUtils");
             if (originType == null) return false;
 
-            var rigGo = new GameObject("XR Origin");
+            var rigGo = new GameObject("XR Origin (Procedural)");
             var origin = rigGo.AddComponent(originType);
 
             var cameraOffset = new GameObject("Camera Offset").transform;
@@ -42,12 +140,11 @@ namespace Aetherboard.VR
 
             TryAddTrackedPoseDriver(camGo);
             TryAddXriRayInteractor(cameraOffset);
+            TryEnsureInteractionManager();
 
-            rigGo.transform.position = tableCenter + new Vector3(0, 0, -0.85f);
-            rigGo.transform.LookAt(tableCenter);
+            PositionRig(rigGo.transform, tableCenter, seated);
 
-            var originCameraProp = originType.GetProperty("Camera");
-            originCameraProp?.SetValue(origin, cam);
+            originType.GetProperty("Camera")?.SetValue(origin, cam);
 
             root = rigGo.transform;
             return true;
@@ -55,16 +152,15 @@ namespace Aetherboard.VR
 
         private static void TryAddTrackedPoseDriver(GameObject camGo)
         {
-            var tpdType = System.Type.GetType(
+            var tpdType = Type.GetType(
                 "UnityEngine.InputSystem.XR.TrackedPoseDriver, Unity.InputSystem");
             if (tpdType == null) return;
-            var tpd = camGo.AddComponent(tpdType);
-            // Default bindings apply when XR device is present.
+            camGo.AddComponent(tpdType);
         }
 
         private static void TryAddXriRayInteractor(Transform cameraOffset)
         {
-            var rayType = System.Type.GetType(
+            var rayType = Type.GetType(
                 "UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor, Unity.XR.Interaction.Toolkit");
             if (rayType == null) return;
 

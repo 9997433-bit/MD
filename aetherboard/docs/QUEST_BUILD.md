@@ -60,6 +60,12 @@
    - `F5` 存档检查点 | `F9` 读档
    - `H` Host | `N` Client | `B` 切换传输层（Auto/WS/TCP）
 
+### Unity 作 Host（无需 Python）
+
+1. Unity Play → `H` 开启 Host（TCP 8767 + WS 8769）
+2. Web 浏览器：`http://PC_IP:8765/?client=1&player=1`（需本地起静态服）
+3. 或另一 Unity 实例 Client 模式连接同一 IP
+
 ## 联机（Quest → PC Host）
 
 1. PC 运行 Python Host：`PYTHONPATH=. python3 scripts/battle_host.py --coop`

@@ -40,6 +40,13 @@ aetherboard/unity/AetherboardVR
 
 也可通过菜单 `Aetherboard → Create Battle Scene File` 保存正式场景。
 
+### 官方 XR Origin 预制体（推荐）
+
+1. 菜单 **Aetherboard → Install XR Origin Prefab**（从 XRI 包复制官方 Rig）
+2. 预制体保存至 `Assets/Aetherboard/Resources/Aetherboard/XROriginRig.prefab`
+3. 运行时 `XRRigFactory` 优先加载该预制体（`RuntimeSceneBootstrap.rigSource = Auto`）
+4. 若未安装，自动回退到程序化 XR Rig 或桌面相机
+
 ## VR 场景搭建（Quest / PCVR）
 
 1. `GameObject > XR > XR Origin (VR)` 创建玩家 Rig

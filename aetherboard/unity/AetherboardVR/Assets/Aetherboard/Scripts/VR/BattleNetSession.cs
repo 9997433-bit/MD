@@ -25,9 +25,11 @@ namespace Aetherboard.VR
     public interface IBattleNetworkBridge
     {
         bool IsAuthoritative { get; }
+        bool IsHosting { get; }
         bool SubmitMove(string unitId, GridPos dest);
         bool SubmitSkill(string unitId, string skillId, GridPos? target);
         void SubmitEndPhase();
+        void NotifyLocalStateChanged();
     }
 
     /// <summary>
@@ -43,6 +45,7 @@ namespace Aetherboard.VR
         [SerializeField] private int hostWsPort = 8769;
         [SerializeField] private NetClientTransport clientTransport = NetClientTransport.Auto;
         [SerializeField] private bool startTcpHostWhenHosting = true;
+        [SerializeField] private bool startWsHostWhenHosting = true;
         [SerializeField] private bool enforceCoopOnNetwork = true;
 
         private CoopController _coop;
@@ -56,6 +59,7 @@ namespace Aetherboard.VR
 
         public NetSessionRole Role => role;
         public bool IsAuthoritative => role != NetSessionRole.Client;
+        public bool IsHosting => role == NetSessionRole.Host;
         public string HostAddress => hostAddress;
         public int HostPort => hostPort;
         public int HostWsPort => hostWsPort;
@@ -103,6 +107,8 @@ namespace Aetherboard.VR
             _wsClient = null;
             var tcp = GetComponent<BattleTcpHostServer>();
             if (tcp != null) tcp.StopServer();
+            var ws = GetComponent<BattleWebSocketHostServer>();
+            if (ws != null) ws.StopServer();
             _readerThread?.Join(200);
         }
 
@@ -121,14 +127,33 @@ namespace Aetherboard.VR
         private void StartHost()
         {
             if (director == null) return;
-            _activeTransport = "TCP Host";
+            var parts = new System.Collections.Generic.List<string>();
             if (startTcpHostWhenHosting)
             {
                 var tcp = GetComponent<BattleTcpHostServer>();
                 if (tcp == null) tcp = gameObject.AddComponent<BattleTcpHostServer>();
                 tcp.StartServer();
+                parts.Add($"TCP:{hostPort}");
             }
-            Debug.Log($"[Aetherboard] Host mode — TCP :{hostPort} | Python WS :{hostWsPort} for Web/Unity");
+            if (startWsHostWhenHosting)
+            {
+                var ws = GetComponent<BattleWebSocketHostServer>();
+                if (ws == null) ws = gameObject.AddComponent<BattleWebSocketHostServer>();
+                ws.StartServer();
+                parts.Add($"WS:{hostWsPort}");
+            }
+            _activeTransport = parts.Count > 0 ? $"Host ({string.Join(" ", parts)})" : "Host";
+            Debug.Log($"[Aetherboard] Host mode — {string.Join(" | ", parts)}");
+        }
+
+        public void NotifyLocalStateChanged() => PublishHostState();
+
+        public void PublishHostState()
+        {
+            if (role != NetSessionRole.Host || director == null) return;
+            var line = BattleSyncProtocol.EncodeState(director.ExportSnapshotJson());
+            GetComponent<BattleTcpHostServer>()?.BroadcastState(line);
+            GetComponent<BattleWebSocketHostServer>()?.BroadcastState(line);
         }
 
         private void ConnectClient()
@@ -242,6 +267,7 @@ namespace Aetherboard.VR
                     return false;
                 }
                 director.RefreshAllViews();
+                PublishHostState();
                 return true;
             }
 

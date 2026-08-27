@@ -55,6 +55,7 @@ namespace Aetherboard.VR
             CommandLog.Commands.Clear();
             RecordCommand(BattleCommandType.SetBoss, bossId: bossId);
             RefreshAllViews();
+            _network?.NotifyLocalStateChanged();
         }
 
         public string ExportSnapshotJson()
@@ -184,6 +185,7 @@ namespace Aetherboard.VR
             RecordCommand(BattleCommandType.Move, unitId, target: dest);
             tableView?.Bind(State);
             LogLatest();
+            _network?.NotifyLocalStateChanged();
             return true;
         }
 
@@ -199,6 +201,7 @@ namespace Aetherboard.VR
             LogLatest();
             if (State.Phase == BattlePhase.Victory || State.Phase == BattlePhase.Defeat)
                 OnBattleEnded?.Invoke();
+            _network?.NotifyLocalStateChanged();
             return true;
         }
 
@@ -216,6 +219,7 @@ namespace Aetherboard.VR
             LogLatest();
             if (State.Phase == BattlePhase.Victory || State.Phase == BattlePhase.Defeat)
                 OnBattleEnded?.Invoke();
+            _network?.NotifyLocalStateChanged();
         }
 
         public void StepAuto()
@@ -225,6 +229,7 @@ namespace Aetherboard.VR
             LogLatest();
             if (State.Phase == BattlePhase.Victory || State.Phase == BattlePhase.Defeat)
                 OnBattleEnded?.Invoke();
+            _network?.NotifyLocalStateChanged();
         }
 
         private void LogLatest()

@@ -45,7 +45,10 @@ WebSocket 默认 `ws://127.0.0.1:8769`；加 `&http=1` 强制 HTTP。
    - **Auto**（默认）：WebSocket `8769` → TCP `8767` 回退
    - **WebSocket** / **TCP** 固定
 3. 双人模式（`C`）+ 网络 P1/P2 按钮设置 `playerId`；Host `--coop` 时自动启用双人校验
-4. **Host**（`H`）启动内置 `BattleTcpHostServer`（TCP 8767）
+4. **Host**（`H`）启动内置服务：
+   - TCP `8767`（`BattleTcpHostServer`）
+   - WebSocket `8769`（`BattleWebSocketHostServer`，Web 浏览器可直接联机）
+5. Host 本地操作会自动广播 state 给所有已连接客户端
 
 ## C# API
 

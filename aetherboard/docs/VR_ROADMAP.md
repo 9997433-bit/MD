@@ -32,8 +32,9 @@
 | **双人权限校验** | ✅ | `--coop` + `CoopRules` + `playerId` |
 | **命令回放 UI** | ✅ | F6/F7 导出回放 · Web JSON 导入/导出 |
 | **Unity WS 传输** | ✅ | Auto WS→TCP 回退，`B` 切换 |
-| XR Origin 官方 Prefab | 🔲 | 可替换为 `GameObject → XR → XR Origin` |
-| 在线多人传输层 | 🔲 | WebSocket / Netcode 生产级封装 |
+| **XR Origin 官方 Prefab** | ✅ | 菜单安装 + Resources 自动加载 |
+| **Unity WS Host** | ✅ | `BattleWebSocketHostServer` 8769 |
+| 在线多人传输层 | 🔲 | Netcode 生产级封装 |
 
 ## 技术栈
 
