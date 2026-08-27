@@ -43,6 +43,9 @@ namespace Aetherboard.Editor
             Debug.Log("Aetherboard: Battle scene built in editor (use Play to test).");
         }
 
+        [MenuItem("Aetherboard/Open PR Body Template")]
+        public static void OpenPrBodyTemplate() => OpenDoc("GITHUB_PR_BODY.md");
+
         [MenuItem("Aetherboard/Open Setup Guide")]
         public static void OpenSetupGuide() => OpenDoc("UNITY_SETUP.md");
 

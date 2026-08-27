@@ -109,6 +109,7 @@ Quest 端使用桌台右侧 **联机 VR 面板** 配置 Host IP。
 | [ART_ASSETS.md](docs/ART_ASSETS.md) | 美术替换与 FBX 导入 |
 | [URP_SETUP.md](docs/URP_SETUP.md) | URP 渲染管线 |
 | [PR_MERGE.md](docs/PR_MERGE.md) | PR 合并指南 |
+| [GITHUB_PR_BODY.md](docs/GITHUB_PR_BODY.md) | PR #5 描述模板 |
 | [CHANGELOG.md](CHANGELOG.md) | 版本记录 |
 
 ## CI

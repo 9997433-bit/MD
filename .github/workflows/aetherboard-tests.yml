@@ -45,3 +45,5 @@ jobs:
         run: bash -n aetherboard/scripts/run_all_tests.sh
       - name: Validate release_preflight script syntax
         run: bash -n aetherboard/scripts/release_preflight.sh
+      - name: Validate print_merge_instructions script syntax
+        run: bash -n aetherboard/scripts/print_merge_instructions.sh

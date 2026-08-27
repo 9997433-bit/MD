@@ -25,6 +25,9 @@ cd aetherboard && ./scripts/run_all_tests.sh
 # 合并前预检（测试 + 人工清单提示）
 cd aetherboard && ./scripts/release_preflight.sh
 
+# 打印 PR 合并步骤与链接
+cd aetherboard && ./scripts/print_merge_instructions.sh
+
 # Python 19 tests
 cd aetherboard && PYTHONPATH=. python3 -m unittest discover -s tests -q
 
@@ -51,6 +54,7 @@ CI：`.github/workflows/aetherboard-tests.yml`
 
 - [VR_ROADMAP.md](./VR_ROADMAP.md) — 功能清单
 - [CHANGELOG.md](../CHANGELOG.md) — 版本记录
+- [GITHUB_PR_BODY.md](./GITHUB_PR_BODY.md) — **PR #5 描述模板（复制粘贴）**
 - [NETCODE.md](./NETCODE.md) — 联机架构
 - [QUEST_VERIFICATION.md](./QUEST_VERIFICATION.md) — 实机验收
 - [ART_ASSETS.md](./ART_ASSETS.md) — 美术替换
