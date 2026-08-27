@@ -6,6 +6,9 @@
     "phase_b/captures/eeprom.bin",
     "phase_b/captures/*.pcapng"
   ],
-  "commands": ["make handoff", "make phase-b"],
+  "commands": [
+    "make handoff",
+    "make phase-b"
+  ],
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
 }

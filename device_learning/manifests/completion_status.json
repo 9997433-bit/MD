@@ -16,6 +16,7 @@
     "phase_c_checklist": true,
     "checklist_report": true,
     "phase_transition": true,
+    "static_phase_closed": true,
     "phase_b_scaffold": true,
     "phase_c_scaffold": true,
     "hardware_handoff": true,

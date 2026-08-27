@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**76 pytest**，静态阶段 **已冻结**
+**规模**：**237 条 identifier**，**78 pytest**，静态阶段 **已关闭并冻结**
 
 ## 八层目录
 
@@ -38,7 +38,8 @@ python3 scripts/verify_completion.py
 | `BLOCKED_REPORT.md` | 98 条阻塞项人类可读表 |
 | `ARCHITECTURE.md` | 系统数据路径 mermaid 图 |
 | `BRIDGE_REPORT.md` | 10 条 null 桥策略 |
-| `manifests/package_manifest.json` | 统一包清单（版本、指标、下一步） |
+| `manifests/static_phase_closed.json` | 静态阶段关闭标记 |
+| `manifests/static_freeze.json` | 冻结快照 |
 | `manifests/output_hashes.json` | 产物 SHA256 清单 |
 | `phase_b/CHECKLIST.json` | 阶段 B 机器可读检查清单 |
 | `manifests/pending_index.json` | 98 条阻塞项 |
