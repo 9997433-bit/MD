@@ -61,6 +61,7 @@
 | **首次设置向导** | ✅ | `First Time Setup (Recommended)` 一键配置 |
 | **VR Boss 选择面板** | ✅ | 世界空间 UI，Quest 无需键盘 |
 | **VR 操作提示** | ✅ | 首次启动可关闭的 cheat sheet |
+| **第三 Boss（冰灵女皇）** | ✅ | 冰枪/霜冻/冰环/暴雪 · Web/VR/C#/Python 对齐 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
 | Quest 实机验证 | 🔲 | 人工 10 项（工具链已就绪，见 QUEST_VERIFICATION.md） |
 

@@ -25,6 +25,7 @@ namespace Aetherboard.Core
         string VictoryMessage { get; }
         bool IsSpread(TelegraphKind t) => false;
         bool IsStack(TelegraphKind t) => false;
+        bool IsIceRing(TelegraphKind t) => false;
     }
 
     public class EarthGuardianProfile : IBossProfile
@@ -217,12 +218,131 @@ namespace Aetherboard.Core
         public bool IsStack(TelegraphKind t) => t == TelegraphKind.Stack;
     }
 
+    public class IceEmpressProfile : IBossProfile
+    {
+        public string BossId => "ice";
+
+        public BossState Create() => new()
+        {
+            BossId = BossId,
+            Name = "冰灵女皇",
+            Hp = 4800,
+            MaxHp = 4800,
+            Alive = true
+        };
+
+        public void UpdatePhase(BossState boss)
+        {
+            if (boss.HpRatio <= 0.4f) boss.Phase = 3;
+            else if (boss.HpRatio <= 0.7f) boss.Phase = 2;
+            else boss.Phase = 1;
+        }
+
+        public TelegraphKind PickTelegraph(BossState boss, Random rng)
+        {
+            if (boss.Phase == 1) return TelegraphKind.IceLance;
+            if (boss.Phase == 2) return TelegraphKind.FrozenGround;
+            if (boss.FuryCastTurns > 0) return TelegraphKind.Blizzard;
+            if (boss.ShrinkLevel < 1) return TelegraphKind.IceRing;
+            return TelegraphKind.Blizzard;
+        }
+
+        public TelegraphPreview Preview(TelegraphKind telegraph, int boardSize, BossState boss)
+        {
+            var preview = new TelegraphPreview { Telegraph = telegraph };
+            preview.Message = telegraph switch
+            {
+                TelegraphKind.IceLance => "Boss 预备冰枪：十字路径高伤。",
+                TelegraphKind.FrozenGround => "Boss 预备霜冻：2×2 危险区。",
+                TelegraphKind.IceRing => "Boss 预备冰环：必须站在距离中心 2 格的环上。",
+                TelegraphKind.Blizzard => "Boss 读条「暴雪」：2 回合内必须打断！",
+                _ => ""
+            };
+
+            var bossPos = BoardMath.BossPos(boardSize);
+            var center = BoardMath.BoardCenter(boardSize);
+            if (telegraph == TelegraphKind.IceLance)
+            {
+                for (var x = 0; x < boardSize; x++) preview.DangerCells.Add(new GridPos(x, bossPos.Y));
+                for (var y = 0; y < boardSize; y++)
+                {
+                    var p = new GridPos(bossPos.X, y);
+                    if (!preview.DangerCells.Contains(p)) preview.DangerCells.Add(p);
+                }
+            }
+            else if (telegraph == TelegraphKind.IceRing)
+            {
+                var ring = new HashSet<GridPos>(BoardMath.PositionsAtDistance(center, 2, boardSize));
+                for (var x = 0; x < boardSize; x++)
+                for (var y = 0; y < boardSize; y++)
+                {
+                    var p = new GridPos(x, y);
+                    if (!ring.Contains(p)) preview.DangerCells.Add(p);
+                }
+            }
+            return preview;
+        }
+
+        public (List<GridPos>, List<string>) ResolveMechanic(
+            TelegraphKind telegraph, BossState boss, int boardSize, Random rng)
+        {
+            var hazards = new List<GridPos>();
+            var logs = new List<string>();
+            var bossPos = BoardMath.BossPos(boardSize);
+            switch (telegraph)
+            {
+                case TelegraphKind.IceLance:
+                    for (var x = 0; x < boardSize; x++) hazards.Add(new GridPos(x, bossPos.Y));
+                    for (var y = 0; y < boardSize; y++)
+                    {
+                        var p = new GridPos(bossPos.X, y);
+                        if (!hazards.Contains(p)) hazards.Add(p);
+                    }
+                    logs.Add("冰枪十字扫过棋盘！");
+                    break;
+                case TelegraphKind.FrozenGround:
+                    logs.Add("霜冻区域爆发！");
+                    break;
+                case TelegraphKind.IceRing:
+                    boss.ShrinkLevel += 1;
+                    logs.Add("冰环收缩：未站在环上者受创！");
+                    break;
+                case TelegraphKind.Blizzard when boss.FuryCastTurns > 0:
+                    boss.FuryCastTurns -= 1;
+                    if (boss.FuryCastTurns == 0) logs.Add("暴雪发动！");
+                    break;
+            }
+            return (hazards, logs);
+        }
+
+        public int MechanicDamage(TelegraphKind telegraph) => telegraph switch
+        {
+            TelegraphKind.IceLance => 160,
+            TelegraphKind.FrozenGround => 140,
+            TelegraphKind.IceRing => 210,
+            TelegraphKind.Blizzard => 9999,
+            _ => 0
+        };
+
+        public int BasicDamage(BossState boss) => boss.Phase switch
+        {
+            1 => 110,
+            2 => 140,
+            _ => 170
+        };
+
+        public string FuryName => "暴雪";
+        public string VictoryMessage => "胜利！冰灵女皇被击败。";
+        public bool IsIceRing(TelegraphKind t) => t == TelegraphKind.IceRing;
+    }
+
     public static class BossRegistry
     {
         private static readonly Dictionary<string, IBossProfile> Profiles = new()
         {
             ["earth"] = new EarthGuardianProfile(),
             ["wind"] = new WindSovereignProfile(),
+            ["ice"] = new IceEmpressProfile(),
         };
 
         public static IBossProfile Get(string bossId) =>

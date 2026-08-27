@@ -30,6 +30,30 @@ namespace Aetherboard.Core
             return list;
         }
 
+        public static List<GridPos> PositionsAtDistance(GridPos center, int distance, int size)
+        {
+            var list = new List<GridPos>();
+            for (var x = 0; x < size; x++)
+            for (var y = 0; y < size; y++)
+            {
+                var p = new GridPos(x, y);
+                if (p.Distance(center) == distance) list.Add(p);
+            }
+            return list;
+        }
+
+        public static List<GridPos> Positions2x2(GridPos topLeft, int size)
+        {
+            var list = new List<GridPos>();
+            for (var dx = 0; dx < 2; dx++)
+            for (var dy = 0; dy < 2; dy++)
+            {
+                var p = new GridPos(topLeft.X + dx, topLeft.Y + dy);
+                if (p.InBounds(size)) list.Add(p);
+            }
+            return list;
+        }
+
         public static List<GridPos> RingPositions(int size, int shrinkLevel)
         {
             var list = new List<GridPos>();

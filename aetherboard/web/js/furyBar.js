@@ -19,8 +19,10 @@ export function updateFuryBar(elements, boss, profile, lastFury = 0) {
   const casting = fury > 0;
 
   elements.container.classList.toggle("hidden", !casting && !interrupted);
-  elements.container.classList.toggle("earth", profile?.bossId !== "wind");
-  elements.container.classList.toggle("wind", profile?.bossId === "wind");
+  const bossKind = profile?.id ?? profile?.bossId ?? "earth";
+  elements.container.classList.toggle("earth", bossKind === "earth");
+  elements.container.classList.toggle("wind", bossKind === "wind");
+  elements.container.classList.toggle("ice", bossKind === "ice");
   elements.container.classList.toggle("urgent", casting && fury === 1);
   elements.container.classList.toggle("casting", casting);
 

@@ -6,7 +6,7 @@ import random
 from dataclasses import dataclass
 from typing import Protocol
 
-from ..board import positions_in_radius
+from ..board import positions_at_distance, positions_in_radius, positions_2x2
 from ..types import BossState, Pos, Telegraph
 
 
@@ -222,13 +222,114 @@ class WindSovereignBoss:
         return "胜利！风灵领主被击败。"
 
 
-BOSS_PROFILES: dict[str, EarthGuardianBoss | WindSovereignBoss] = {
+class IceEmpressBoss:
+    boss_id = "ice"
+
+    def create(self) -> BossState:
+        return BossState(name="冰灵女皇", hp=4800, max_hp=4800, boss_id=self.boss_id)
+
+    def update_phase(self, boss: BossState) -> None:
+        ratio = boss.hp_ratio
+        if ratio <= 0.4:
+            boss.phase = 3
+        elif ratio <= 0.7:
+            boss.phase = 2
+        else:
+            boss.phase = 1
+
+    def pick_telegraph(self, boss: BossState, rng: random.Random) -> Telegraph:
+        if boss.phase == 1:
+            return Telegraph.ICE_LANCE
+        if boss.phase == 2:
+            return Telegraph.FROZEN_GROUND
+        if boss.fury_cast_turns > 0:
+            return Telegraph.BLIZZARD
+        if boss.shrink_level < 1:
+            return Telegraph.ICE_RING
+        return Telegraph.BLIZZARD
+
+    def preview(self, telegraph: Telegraph, board_size: int, boss: BossState) -> TelegraphPreview:
+        messages = {
+            Telegraph.ICE_LANCE: "Boss 预备冰枪：十字路径高伤。",
+            Telegraph.FROZEN_GROUND: "Boss 预备霜冻：2×2 危险区。",
+            Telegraph.ICE_RING: "Boss 预备冰环：必须站在距离中心 2 格的环上。",
+            Telegraph.BLIZZARD: "Boss 读条「暴雪」：2 回合内必须打断！",
+        }
+        danger: list[Pos] = []
+        boss_pos = Pos(board_size // 2, 2)
+        center = _center(board_size)
+        if telegraph == Telegraph.ICE_LANCE:
+            for x in range(board_size):
+                danger.append(Pos(x, boss_pos.y))
+            for y in range(board_size):
+                p = Pos(boss_pos.x, y)
+                if p not in danger:
+                    danger.append(p)
+        elif telegraph == Telegraph.ICE_RING:
+            ring = set(positions_at_distance(center, 2, board_size))
+            for x in range(board_size):
+                for y in range(board_size):
+                    p = Pos(x, y)
+                    if p not in ring:
+                        danger.append(p)
+        return TelegraphPreview(telegraph, messages.get(telegraph, ""), danger)
+
+    def resolve_mechanic(
+        self,
+        telegraph: Telegraph,
+        boss: BossState,
+        board_size: int,
+        rng: random.Random,
+    ) -> tuple[list[Pos], list[str]]:
+        logs: list[str] = []
+        hazards: list[Pos] = []
+        boss_pos = Pos(board_size // 2, 2)
+        if telegraph == Telegraph.ICE_LANCE:
+            for x in range(board_size):
+                hazards.append(Pos(x, boss_pos.y))
+            for y in range(board_size):
+                p = Pos(boss_pos.x, y)
+                if p not in hazards:
+                    hazards.append(p)
+            logs.append("冰枪十字扫过棋盘！")
+        elif telegraph == Telegraph.FROZEN_GROUND:
+            logs.append("霜冻区域爆发！")
+        elif telegraph == Telegraph.ICE_RING:
+            boss.shrink_level += 1
+            logs.append("冰环收缩：未站在环上者受创！")
+        elif telegraph == Telegraph.BLIZZARD:
+            if boss.fury_cast_turns > 0:
+                boss.fury_cast_turns -= 1
+                if boss.fury_cast_turns == 0:
+                    logs.append("暴雪发动！")
+        return hazards, logs
+
+    def mechanic_damage(self, telegraph: Telegraph) -> int:
+        return {
+            Telegraph.ICE_LANCE: 160,
+            Telegraph.FROZEN_GROUND: 140,
+            Telegraph.ICE_RING: 210,
+            Telegraph.BLIZZARD: 9999,
+        }.get(telegraph, 0)
+
+    def basic_damage(self, boss: BossState) -> int:
+        return {1: 110, 2: 140, 3: 170}.get(boss.phase, 110)
+
+    def fury_name(self) -> str:
+        return "暴雪"
+
+    def victory_message(self) -> str:
+        return "胜利！冰灵女皇被击败。"
+
+
+BOSS_PROFILES: dict[str, EarthGuardianBoss | WindSovereignBoss | IceEmpressBoss] = {
     "earth": EarthGuardianBoss(),
     "wind": WindSovereignBoss(),
+    "ice": IceEmpressBoss(),
 }
 
 
-def get_boss_profile(boss_id: str) -> EarthGuardianBoss | WindSovereignBoss:
+def get_boss_profile(boss_id: str) -> EarthGuardianBoss | WindSovereignBoss | IceEmpressBoss:
     return BOSS_PROFILES.get(boss_id, BOSS_PROFILES["earth"])
 
 

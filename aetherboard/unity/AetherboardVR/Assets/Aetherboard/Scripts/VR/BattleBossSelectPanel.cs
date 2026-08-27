@@ -45,6 +45,7 @@ namespace Aetherboard.VR
             _statusText.text = id switch
             {
                 "wind" => $"<b>{profile.Create().Name}</b>\n风刃 · 分散 · 集合读条",
+                "ice" => $"<b>{profile.Create().Name}</b>\n冰枪 · 霜冻 · 冰环读条",
                 _ => $"<b>{profile.Create().Name}</b>\n重击 · 地震 · 缩圈读条"
             };
         }
@@ -61,7 +62,7 @@ namespace Aetherboard.VR
             gameObject.AddComponent<GraphicRaycaster>();
 
             var rect = gameObject.GetComponent<RectTransform>() ?? gameObject.AddComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(380, 240);
+            rect.sizeDelta = new Vector2(380, 280);
             transform.localScale = Vector3.one * 0.0012f;
 
             var panel = CreatePanel(transform, new Color(0.08f, 0.1f, 0.14f, 0.92f));
@@ -80,6 +81,7 @@ namespace Aetherboard.VR
             var row = CreateRow(panel);
             CreateButton(row, "土灵", () => SelectBoss("earth"), new Color(0.45f, 0.32f, 0.18f));
             CreateButton(row, "风灵", () => SelectBoss("wind"), new Color(0.18f, 0.38f, 0.52f));
+            CreateButton(row, "冰灵", () => SelectBoss("ice"), new Color(0.35f, 0.55f, 0.85f));
         }
 
         private static void EnsureEventSystem()

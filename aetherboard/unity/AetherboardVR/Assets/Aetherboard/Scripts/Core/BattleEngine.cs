@@ -77,7 +77,7 @@ namespace Aetherboard.Core
             _profile.UpdatePhase(State.Boss);
             var telegraph = _profile.PickTelegraph(State.Boss, _rng);
             State.Boss.Telegraph = telegraph;
-            if (telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone && State.Boss.FuryCastTurns == 0)
+            if (telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone or TelegraphKind.Blizzard && State.Boss.FuryCastTurns == 0)
                 State.Boss.FuryCastTurns = 2;
 
             State.PendingHazards = RollPendingHazards(telegraph);
@@ -93,6 +93,11 @@ namespace Aetherboard.Core
                 var c = State.PendingHazards[State.PendingHazards.Count / 2];
                 AddLog($"[预警] 地震中心约在 ({c.X}, {c.Y})。");
             }
+            if (telegraph == TelegraphKind.FrozenGround && State.PendingHazards.Count > 0)
+            {
+                var c = State.PendingHazards[0];
+                AddLog($"[预警] 霜冻区域约在 ({c.X}, {c.Y}) 附近。");
+            }
             State.Phase = BattlePhase.Move;
         }
 
@@ -102,6 +107,11 @@ namespace Aetherboard.Core
             {
                 var center = new GridPos(_rng.Next(1, State.BoardSize - 1), _rng.Next(1, State.BoardSize - 1));
                 return BoardMath.PositionsInRadius(center, 1, State.BoardSize);
+            }
+            if (telegraph == TelegraphKind.FrozenGround)
+            {
+                var topLeft = new GridPos(_rng.Next(1, State.BoardSize - 3), _rng.Next(1, State.BoardSize - 3));
+                return BoardMath.Positions2x2(topLeft, State.BoardSize);
             }
             return new List<GridPos>(_profile.Preview(telegraph, State.BoardSize, State.Boss).DangerCells);
         }
@@ -295,9 +305,11 @@ namespace Aetherboard.Core
             var (hazards, logs) = _profile.ResolveMechanic(telegraph, State.Boss, State.BoardSize, _rng);
             if (telegraph == TelegraphKind.Earthquake && State.PendingHazards.Count > 0)
                 hazards = new List<GridPos>(State.PendingHazards);
+            if (telegraph == TelegraphKind.FrozenGround && State.PendingHazards.Count > 0)
+                hazards = new List<GridPos>(State.PendingHazards);
             foreach (var entry in logs) AddLog(entry);
 
-            if (hazards.Count > 0 && telegraph is TelegraphKind.Shrink or TelegraphKind.Earthquake)
+            if (hazards.Count > 0 && telegraph is TelegraphKind.Shrink or TelegraphKind.Earthquake or TelegraphKind.FrozenGround)
             {
                 BoardMath.ApplyHazards(State.Cells, hazards);
                 var mechDmg = _profile.MechanicDamage(telegraph);
@@ -316,7 +328,7 @@ namespace Aetherboard.Core
                         HitUnit(unit, mechDmg);
             }
 
-            if (telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone && State.Boss.FuryCastTurns == 0)
+            if (telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone or TelegraphKind.Blizzard && State.Boss.FuryCastTurns == 0)
             {
                 var dmg = _profile.MechanicDamage(telegraph);
                 foreach (var unit in LivingParty()) HitUnit(unit, dmg);
@@ -327,6 +339,8 @@ namespace Aetherboard.Core
                 if (wind.IsSpread(telegraph)) ResolveSpread();
                 if (wind.IsStack(telegraph)) ResolveStack();
             }
+
+            if (_profile.IsIceRing(telegraph)) ResolveIceRing();
 
             var tank = LivingParty().FirstOrDefault(u => u.Job == JobType.Knight);
             var living = LivingParty();
@@ -401,6 +415,20 @@ namespace Aetherboard.Core
                 {
                     HitUnit(unit, dmg);
                     AddLog($"{unit.DisplayName} 未能集合，受到 {dmg} 伤害。");
+                }
+            }
+        }
+
+        private void ResolveIceRing()
+        {
+            var center = BoardMath.BoardCenter(State.BoardSize);
+            var dmg = _profile.MechanicDamage(TelegraphKind.IceRing);
+            foreach (var unit in LivingParty())
+            {
+                if (unit.Pos.Distance(center) != 2)
+                {
+                    HitUnit(unit, dmg);
+                    AddLog($"{unit.DisplayName} 未站在冰环上，受到 {dmg} 伤害。");
                 }
             }
         }

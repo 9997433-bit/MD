@@ -108,6 +108,16 @@ export class BattleEngine {
       const center = { x: this.randInt(1, 5), y: this.randInt(1, 5) };
       return inRadius(center, 1);
     }
+    if (telegraph === Telegraph.FROZEN_GROUND) {
+      const topLeft = { x: this.randInt(1, BOARD_SIZE - 3), y: this.randInt(1, BOARD_SIZE - 3) };
+      const out = [];
+      for (let dx = 0; dx < 2; dx++) {
+        for (let dy = 0; dy < 2; dy++) {
+          out.push({ x: topLeft.x + dx, y: topLeft.y + dy });
+        }
+      }
+      return out;
+    }
     return this.profile.preview(telegraph, this.boss, []).danger;
   }
 
@@ -116,7 +126,7 @@ export class BattleEngine {
     this.updateBossPhase();
     const telegraph = this.profile.pickTelegraph(this.boss);
     this.boss.telegraph = telegraph;
-    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE].includes(telegraph) && this.boss.fury === 0) {
+    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD].includes(telegraph) && this.boss.fury === 0) {
       this.boss.fury = 2;
     }
     this.pendingHazards = this.rollPendingHazards(telegraph);
@@ -126,6 +136,10 @@ export class BattleEngine {
     if (telegraph === Telegraph.EARTHQUAKE && this.pendingHazards.length) {
       const c = this.pendingHazards[Math.floor(this.pendingHazards.length / 2)];
       this.addLog(`[预警] 地震中心约在 (${c.x}, ${c.y})。`);
+    }
+    if (telegraph === Telegraph.FROZEN_GROUND && this.pendingHazards.length) {
+      const c = this.pendingHazards[0];
+      this.addLog(`[预警] 霜冻区域约在 (${c.x}, ${c.y}) 附近。`);
     }
     this.phase = Phase.MOVE;
   }
@@ -309,7 +323,7 @@ export class BattleEngine {
     const result = this.profile.resolve(telegraph, this.boss, this.pendingHazards, this);
     result.logs.forEach((l) => this.addLog(l));
 
-    const persist = [Telegraph.SHRINK, Telegraph.EARTHQUAKE];
+    const persist = [Telegraph.SHRINK, Telegraph.EARTHQUAKE, Telegraph.FROZEN_GROUND];
     if (result.hazards?.length && persist.includes(telegraph)) {
       this.applyHazards(result.hazards);
       if (result.dmg > 0) {
@@ -323,8 +337,15 @@ export class BattleEngine {
       });
     }
 
-    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE].includes(telegraph) && this.boss.fury === 0) {
+    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD].includes(telegraph) && this.boss.fury === 0) {
       this.living().forEach((u) => this.hitUnit(u, result.dmg));
+    }
+
+    if (result.iceRing) {
+      const center = { x: 3, y: 3 };
+      this.living().forEach((u) => {
+        if (dist(u.pos, center) !== 2) this.hitUnit(u, result.dmg);
+      });
     }
 
     if (result.spread) {

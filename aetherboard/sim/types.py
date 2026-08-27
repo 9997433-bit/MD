@@ -40,11 +40,16 @@ class Telegraph(Enum):
     SPREAD = auto()
     STACK = auto()
     CYCLONE = auto()
+    ICE_LANCE = auto()
+    FROZEN_GROUND = auto()
+    ICE_RING = auto()
+    BLIZZARD = auto()
 
 
 class BossId(Enum):
     EARTH = "earth"
     WIND = "wind"
+    ICE = "ice"
 
 
 @dataclass(frozen=True)
