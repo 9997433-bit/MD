@@ -1,0 +1,1707 @@
+{
+  "generated_at": "2026-08-27T05:03:07.153618+00:00",
+  "installer_source": "Montyzhang/-seed Install Keysight E1733A 1.14.1 (Win64).exe",
+  "phases_completed": [
+    "0",
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "catalogs": {
+    "acquisition": [
+      {
+        "identifier": "ACQ-E1-MEATYPE-LINEAR",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_LINEAR",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-ANGULAR",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_ANGULAR",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-STR",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_STR",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-SQU",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_SQU",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-PAR",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_PAR",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-ROT",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_ROT",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-WAY",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_WAY",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-FLA",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_FLA",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-DIA",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_DIA",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-LTB",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_LTB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-ATB",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_ATB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-STB",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_STB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-MEATYPE-DUAL",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "E1733A_CC_NEW / CI_DUAL",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Delphi view class unknown"
+      },
+      {
+        "identifier": "ACQ-E1-CMD-START",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CC_START=53",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-CMD-RECORD",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CC_RECORD=54",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-CMD-RESET",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CC_RESET=52",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-CMD-STOP",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "CC_STOP=55",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-MANUAL",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_TRIGTYPE_CHOOSING=0",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-ENCODER",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_TRIGTYPE_CHOOSING=1",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-TRIG-AUTO",
+        "module": "E1733A.exe/Remote.h",
+        "source_identifier": "MEASETUP_TRIGTYPE_CHOOSING=2",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_BlinkLED",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_BlinkLED",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_GetAllRevisions",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_GetAllRevisions",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_GetOptics",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_GetOptics",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_GetParameter",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_GetParameter",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_GetSampleTriggers",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_GetSampleTriggers",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_QueryTBStatus",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_QueryTBStatus",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadAQB",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadAQB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadAllSamples",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadAllSamples",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadBeamStrength",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadBeamStrength",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadButtonClicked",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadButtonClicked",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadDeviceCount",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadDeviceCount",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadLastError",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadLastError",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadLastTimeStamp",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadLastTimeStamp",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadLastTrigger",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadLastTrigger",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadSample",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadSample",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadSampleAndAQB",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadSampleAndAQB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadSampleCount",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadSampleCount",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadSerialNo",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadSerialNo",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ReadTimerSamples",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ReadTimerSamples",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_RefreshDevice",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_RefreshDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_RefreshStatus",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_RefreshStatus",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_ResetDevice",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_ResetDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SelectDevice",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SelectDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SetExternalPolarity",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SetExternalPolarity",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SetOptics",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SetOptics",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SetParameter",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SetParameter",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SetSampleTriggers",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SetSampleTriggers",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SetupAQB",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SetupAQB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SetupTimer",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SetupTimer",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_SpecifyDevice",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_SpecifyDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_StartExternalSampling",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_StartExternalSampling",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_StartTimer",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_StartTimer",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_StopExternalSampling",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_StopExternalSampling",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-DLL-E1735A_StopTimer",
+        "module": "E1735A.dll",
+        "source_identifier": "E1735A_StopTimer",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_CloseHandles",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_CloseHandles",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_ConfigureCard",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ConfigureCard",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_ControlLEDs",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ControlLEDs",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_GetCardHandle",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_GetCardHandle",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_GetCardNumber",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_GetCardNumber",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_GetDLLRevision",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_GetDLLRevision",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_GetDriverRevision",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_GetDriverRevision",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_GetLastError",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_GetLastError",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_GetRegRevision",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_GetRegRevision",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_ProcessRawData",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ProcessRawData",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "pe_export_symbol",
+        "missing": "body_range.sha256 and instruction window"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_ReadCardInfo",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ReadCardInfo",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_ReadRawData",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ReadRawData",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_ReadRegisters",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ReadRegisters",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_SearchCards",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_SearchCards",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-E1735ACore_WriteRegisters",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_WriteRegisters",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-TMethodImplementationIntercept",
+        "module": "E1735ACore.dll",
+        "source_identifier": "TMethodImplementationIntercept",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-__dbk_fcall_wrapper",
+        "module": "E1735ACore.dll",
+        "source_identifier": "__dbk_fcall_wrapper",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-E1-CORE-dbkFCallWrapperAddr",
+        "module": "E1735ACore.dll",
+        "source_identifier": "dbkFCallWrapperAddr",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "ACQ-UNK-DELPHI-COLLECTDOC",
+        "module": "E1733A.exe",
+        "source_identifier": null,
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi class name and RVA"
+      },
+      {
+        "identifier": "ACQ-UNK-PAUSE-RESUME",
+        "module": "E1735A.dll",
+        "source_identifier": null,
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "export_absent",
+        "missing": "no pauseSimTask/resumeSimTask equivalent in exports"
+      },
+      {
+        "identifier": "ACQ-BRIDGE-GUI-TO-E1735A",
+        "module": "E1733A.exe",
+        "source_identifier": "imports E1735A.dll",
+        "window_hash": null,
+        "status": "candidate",
+        "boundary": "pe_import_only",
+        "missing": "proven_bridge=null; no CFG call chain",
+        "proven_bridge": null
+      }
+    ],
+    "analysis": [
+      {
+        "identifier": "ANA-E1-ENTRY-SETUP-ANALYSIS",
+        "module": "Remote.h",
+        "source_identifier": "CI_ANALYSIS=5",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ANA-E1-ENTRY-OPEN-DATA",
+        "module": "Remote.h",
+        "source_identifier": "CC_OPEN SETUPDATA=1",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ANA-E1-API-READERRORDATA",
+        "module": "Remote.h",
+        "source_identifier": "CC_READERRORDATA=62",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIMAXREV",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=0",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIMEANREV",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=1",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIMEANDEV",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=2",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-REVSYSPOSDEV",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=3",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-FWDSYSPOSDEV",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=4",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BISYSPOSDEV",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=5",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-REVREPEATPOS",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=6",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-FWDREPEATPOS",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=7",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIREPEATPOS",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=8",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-REVACCURACY",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=9",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-FWDACCURACY",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=10",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIACCURACY",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=11",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-REVRAWREP",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=12",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-FWDRAWREP",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=13",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIRAWREP",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=14",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-REVRAWACC",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=15",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-FWDRAWACC",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=16",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-BIRAWACC",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=17",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-SIXSIGMA",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=18",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-SLOPELS",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=19",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-SLOPEEP",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=20",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_P",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=21",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_PSMAX",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=22",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_PSMEAN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=23",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_PSU",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=24",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_PA",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=25",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_UMAX",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=26",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-API-ANALYSIS-VDI_UMEAN",
+        "module": "Remote.h",
+        "source_identifier": "CC_ANALYSIS=66 CI=27",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "formula window unknown"
+      },
+      {
+        "identifier": "ANA-E1-STD-0",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=0",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=NMTBA w/o Offset"
+      },
+      {
+        "identifier": "ANA-E1-STD-1",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=1",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=NMTBA"
+      },
+      {
+        "identifier": "ANA-E1-STD-2",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=2",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=ANSI B5.54/B5.57"
+      },
+      {
+        "identifier": "ANA-E1-STD-3",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=3",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=VDI 3441/2617"
+      },
+      {
+        "identifier": "ANA-E1-STD-4",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=4",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=BSI 3800"
+      },
+      {
+        "identifier": "ANA-E1-STD-5",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=5",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=JIS B6330"
+      },
+      {
+        "identifier": "ANA-E1-STD-6",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=6",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=ISO 230-2 1988"
+      },
+      {
+        "identifier": "ANA-E1-STD-7",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=7",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=ISO 230-2 1997"
+      },
+      {
+        "identifier": "ANA-E1-STD-8",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=8",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=GB10931-89"
+      },
+      {
+        "identifier": "ANA-E1-STD-9",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=9",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=GB/T 17421.2-2000"
+      },
+      {
+        "identifier": "ANA-E1-STD-10",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=10",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=User"
+      },
+      {
+        "identifier": "ANA-E1-STD-11",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=11",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=ISO 230-2 2006"
+      },
+      {
+        "identifier": "ANA-E1-STD-12",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_STANDARD_CHOOSING=12",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "standard=ISO 230-2 2014"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-LINDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Lin",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-ANGDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Ang",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-STRDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Str",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-SQUDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Squ",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-PARDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Par",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-ROTDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Rot",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-WAYDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Way",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-FLADOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Fla",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-DIADOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=Dia",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-LTBDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=LTB",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-ATBDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=ATB",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-STBDOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=STB",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-DELPHI-LDADOC",
+        "module": "E1733A.exe",
+        "source_identifier": "logical_slot=LDA",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_rtti",
+        "missing": "Delphi document class RVA"
+      },
+      {
+        "identifier": "ANA-UNK-ALG-ISO230-BODY",
+        "module": "E1733A.exe",
+        "source_identifier": null,
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "no_instruction_window",
+        "missing": "ISO 230-2 computation body"
+      },
+      {
+        "identifier": "ANA-E1-FLA-MOODY",
+        "module": "Remote.h",
+        "source_identifier": "ANASETUP_FLAMETHOD_CHOOSING=0",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": "Moody algorithm body unknown"
+      }
+    ],
+    "compensation": [
+      {
+        "identifier": "CMP-E1-UI-SHOWCOMP",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "CC_SHOWCOMPENSATION=32",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-CFG-SIGN-CORRECTION",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "CompSign=0 Correction",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-CFG-ABS-INCREMENTAL",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "CompCalc Absolute/Incremental",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-CFG-DIR-COMBINED",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "CompDir Combined/Fwd-Rev",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-CFG-SEL-TARGETLIST",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "CompSel TargetList/Interpolate",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-EXPORT-COMPTABLE-CSV",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "CC_SAVE COMPTABLE_CSV=6",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-SAMPLE-LINEARERR",
+        "module": "Remote.h/Sample.Lin",
+        "source_identifier": "Sample.Lin LinearErr field",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_or_sample",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-UNK-AMBIENT-BODY",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadEnvironment",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "export_symbol_only",
+        "missing": "Edlen/Ciddor selection not proven"
+      },
+      {
+        "identifier": "CMP-UNK-LASERDIST-BODY",
+        "module": "E1735ACore.dll",
+        "source_identifier": "E1735ACore_ProcessRawData",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "export_symbol_only",
+        "missing": "full laser distance formula window"
+      },
+      {
+        "identifier": "CMP-UNK-INTERPOLATE-ALG",
+        "module": "E1733A.exe",
+        "source_identifier": "CompSel=Interpolate",
+        "window_hash": null,
+        "status": "unknown",
+        "boundary": "remote_h_constant_only",
+        "missing": "interpolation algorithm not frozen"
+      },
+      {
+        "identifier": "CMP-FORBID-CNC-WRITER",
+        "module": "policy",
+        "source_identifier": "forbidden",
+        "window_hash": null,
+        "status": "forbidden_writer",
+        "boundary": "no CNC download in static learning scope",
+        "missing": null
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_BlinkLED",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_BlinkLED",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_GetAllRevisions",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_GetAllRevisions",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_GetAllSensorInfo",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_GetAllSensorInfo",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_GetSensorInfo",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_GetSensorInfo",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_GetSensorMisc",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_GetSensorMisc",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_ReadAllSensors",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadAllSensors",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_ReadDeviceCount",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadDeviceCount",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_ReadEnvironment",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadEnvironment",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_ReadSensor",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadSensor",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_ReadSensorCount",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadSensorCount",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_ReadSerialNo",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_ReadSerialNo",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_RefreshDevice",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_RefreshDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_SelectDevice",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_SelectDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      },
+      {
+        "identifier": "CMP-E1-ENV-E1736A_SpecifyDevice",
+        "module": "E1736A.dll",
+        "source_identifier": "E1736A_SpecifyDevice",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "pe_export_symbol",
+        "missing": "function body not frozen"
+      }
+    ],
+    "formats": [
+      {
+        "identifier": "FMT-ATB",
+        "module": "Option Description File",
+        "source_identifier": "Sample.ATB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "ATB",
+        "sample_sha256": "2e5c180e7003b3d3eddf061d71c26e0afa162551ab91cf128356c11630294fe1"
+      },
+      {
+        "identifier": "FMT-ANG",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Ang",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Ang",
+        "sample_sha256": "432077dc346f53eed37651220b173401b09cc2c44a681fac76143267770711e5"
+      },
+      {
+        "identifier": "FMT-DIA",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Dia",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Dia",
+        "sample_sha256": "99f29367d668b2a9b8283af040f8e2f835d3acbc20feeb7b8bf329cb412a0ebf"
+      },
+      {
+        "identifier": "FMT-FLA",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Fla",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Fla",
+        "sample_sha256": "9c76fb399e74c92c8f717ba8ee286b759ff5e35601355e532d3605c0989c0b71"
+      },
+      {
+        "identifier": "FMT-LDA",
+        "module": "Option Description File",
+        "source_identifier": "Sample.LDA",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "LDA",
+        "sample_sha256": "c7ca3b174562eddf56901e348411a650f2b77d2ed6bc9b11b6823087e042e8e9"
+      },
+      {
+        "identifier": "FMT-LTB",
+        "module": "Option Description File",
+        "source_identifier": "Sample.LTB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "LTB",
+        "sample_sha256": "3c15ad8988ee4e329d6ab8aa9465169df42a0b5811c2299c1e98ebf7d02be24c"
+      },
+      {
+        "identifier": "FMT-LIN",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Lin",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Lin",
+        "sample_sha256": "e1d8092046ba3ae2d9f70f8c8090420046883d12e1d5ef31fbad8ab33b8933b5"
+      },
+      {
+        "identifier": "FMT-PAR",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Par",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Par",
+        "sample_sha256": "308bcb39b180e3d23d85940bde64d33a1c689092d5e95395d45b3a7fbae0f42a"
+      },
+      {
+        "identifier": "FMT-STB",
+        "module": "Option Description File",
+        "source_identifier": "Sample.STB",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "STB",
+        "sample_sha256": "0b137dfab7a89c32e6d8ee8bf0d3d380526b10431d1bfb5b2ec4c1894a724f1c"
+      },
+      {
+        "identifier": "FMT-SQU",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Squ",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Squ",
+        "sample_sha256": "d80778fbcb921e636d8bd881855e271c71c3d1022d1b06da6491f9ca1aaa09cb"
+      },
+      {
+        "identifier": "FMT-WAY",
+        "module": "Option Description File",
+        "source_identifier": "Sample.Way",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Way",
+        "sample_sha256": "e4b96488a0912d1c5b794a384d7977a44312b97ef39d7d553aad6158841f6be9"
+      },
+      {
+        "identifier": "FMT-ROT",
+        "module": "Option Description File",
+        "source_identifier": "Sample.rot",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Rot",
+        "sample_sha256": "5acdd15ac990eaa5f81cd35926e88dcadc63042c193174b0267b2bb24c544b5d"
+      },
+      {
+        "identifier": "FMT-STR",
+        "module": "Option Description File",
+        "source_identifier": "Sample.str",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "sample_scope_parser",
+        "missing": null,
+        "disposition": "sample_scope_parser",
+        "logical_slot": "Str",
+        "sample_sha256": "b699f1309b151ce8927f7da408b09293a18ce334bdaf2b4c645afbe27e5b97be"
+      },
+      {
+        "identifier": "FMT-SAVE-RAWDATA_CSV",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=2",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-RAWDATA_POS",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=3",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-COMPTABLE_CSV",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=6",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-COMPTABLE_POS",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=7",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-SAVE-ENVDATA_CSV",
+        "module": "Remote.h",
+        "source_identifier": "CC_SAVE subtype=10",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "remote_h_constant",
+        "missing": null,
+        "disposition": "forbidden_writer"
+      },
+      {
+        "identifier": "FMT-LTB-VELOCITY-BRIDGE",
+        "module": "policy",
+        "source_identifier": "LTB timebase",
+        "window_hash": null,
+        "status": "E1",
+        "boundary": "forced_null",
+        "missing": null,
+        "proven_bridge": null,
+        "note": "must not bridge to velocity formula"
+      }
+    ]
+  },
+  "bridge_matrix": {
+    "forced_null_bridges": [
+      "FMT-LTB -> ALG-VELOCITY",
+      "CMP-UNK-AMBIENT-BODY -> CMP-UNK-LASERDIST-BODY same path",
+      "CompSel Interpolate -> spline evaluation",
+      "ACQ-E1-CMD-START -> E1735A task instance continuity",
+      "E4/self ISO script -> vendor acquisition FSM",
+      "LinearErr field -> CC_ANALYSIS implementation",
+      "Wavelength Compensation string -> Edlen/Ciddor formula"
+    ],
+    "cells": {
+      "acq_to_ana": {
+        "proven_bridge": null,
+        "reason": "no frozen CFG from E1735A_ReadSample to CC_ANALYSIS"
+      },
+      "acq_to_cmp": {
+        "proven_bridge": null,
+        "reason": "no frozen path to CompCalc"
+      },
+      "ana_to_cmp": {
+        "proven_bridge": null,
+        "reason": "Comp table generation body unknown"
+      },
+      "open_lin_to_alg": {
+        "proven_bridge": null,
+        "reason": "Sample.Lin parse only; no algorithm window"
+      },
+      "open_ltb_to_velocity": {
+        "proven_bridge": null,
+        "reason": "forced null"
+      },
+      "ambient_to_laserdist": {
+        "proven_bridge": null,
+        "reason": "forced null separate modules"
+      }
+    }
+  }
+}

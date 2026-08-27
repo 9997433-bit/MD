@@ -1,0 +1,121 @@
+{
+  "samples": [
+    {
+      "file": "Sample.ATB",
+      "extension": ".atb",
+      "sha256": "2e5c180e7003b3d3eddf061d71c26e0afa162551ab91cf128356c11630294fe1",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Ang",
+      "extension": ".ang",
+      "sha256": "432077dc346f53eed37651220b173401b09cc2c44a681fac76143267770711e5",
+      "mea_type_choosing": null,
+      "field_count": 165,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Dia",
+      "extension": ".dia",
+      "sha256": "99f29367d668b2a9b8283af040f8e2f835d3acbc20feeb7b8bf329cb412a0ebf",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Fla",
+      "extension": ".fla",
+      "sha256": "9c76fb399e74c92c8f717ba8ee286b759ff5e35601355e532d3605c0989c0b71",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.LDA",
+      "extension": ".lda",
+      "sha256": "c7ca3b174562eddf56901e348411a650f2b77d2ed6bc9b11b6823087e042e8e9",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.LTB",
+      "extension": ".ltb",
+      "sha256": "3c15ad8988ee4e329d6ab8aa9465169df42a0b5811c2299c1e98ebf7d02be24c",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Lin",
+      "extension": ".lin",
+      "sha256": "e1d8092046ba3ae2d9f70f8c8090420046883d12e1d5ef31fbad8ab33b8933b5",
+      "mea_type_choosing": null,
+      "field_count": 189,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Par",
+      "extension": ".par",
+      "sha256": "308bcb39b180e3d23d85940bde64d33a1c689092d5e95395d45b3a7fbae0f42a",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.STB",
+      "extension": ".stb",
+      "sha256": "0b137dfab7a89c32e6d8ee8bf0d3d380526b10431d1bfb5b2ec4c1894a724f1c",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Squ",
+      "extension": ".squ",
+      "sha256": "d80778fbcb921e636d8bd881855e271c71c3d1022d1b06da6491f9ca1aaa09cb",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.Way",
+      "extension": ".way",
+      "sha256": "e4b96488a0912d1c5b794a384d7977a44312b97ef39d7d553aad6158841f6be9",
+      "mea_type_choosing": null,
+      "field_count": 166,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.rot",
+      "extension": ".rot",
+      "sha256": "5acdd15ac990eaa5f81cd35926e88dcadc63042c193174b0267b2bb24c544b5d",
+      "mea_type_choosing": null,
+      "field_count": 165,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    },
+    {
+      "file": "Sample.str",
+      "extension": ".str",
+      "sha256": "b699f1309b151ce8927f7da408b09293a18ce334bdaf2b4c645afbe27e5b97be",
+      "mea_type_choosing": null,
+      "field_count": 165,
+      "has_linear_err": true,
+      "has_comp_fields": true
+    }
+  ]
+}

@@ -1,0 +1,2071 @@
+{
+  "source": "/workspace/浙大/资料/是德科技/E1733A_Remote.h",
+  "count": 413,
+  "constants": [
+    {
+      "name": "E1733A_CS_REMOTENAME",
+      "value": "\"",
+      "comment": "result is single precision float number"
+    },
+    {
+      "name": "E1733A_WM_REMOTECOMMAND",
+      "value": "0x0500",
+      "comment": "command line parameter, followed by a text as the user defined name for E1733A Automation"
+    },
+    {
+      "name": "E1733A_RC_SUCCESSFUL",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_INVALIDCOMMAND",
+      "value": "1",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_UNEXPECTEDERROR",
+      "value": "2",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_INVALIDPARAMETER",
+      "value": "3",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_INDEXOUTOFRANGE",
+      "value": "4",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_NULLPOINTER",
+      "value": "5",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_STRINGNOTEXISTS",
+      "value": "6",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_NOTENOUGHSPACE",
+      "value": "7",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_SIZENOTMATCH",
+      "value": "8",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_CANNOTOPENFILE",
+      "value": "9",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_ALREADYOPENED",
+      "value": "10",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_NOSUCHDIRECTORY",
+      "value": "11",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_FAILEDTOSAVEFILE",
+      "value": "12",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_WRITETOREADONLY",
+      "value": "13",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_FUNCTIONDISABLED",
+      "value": "14",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_RC_INDEXISDISABLED",
+      "value": "15",
+      "comment": "change status of"
+    },
+    {
+      "name": "E1733A_RC_INVALIDINDEX",
+      "value": "16",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_RC_FILENOTFOUND",
+      "value": "17",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_RC_CANNOTACCESSFILE",
+      "value": "18",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_RC_STRINGTRUNCATED",
+      "value": "19",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_RC_FAILEDTOWRITE",
+      "value": "20",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_CC_SETE1733ASTATUS",
+      "value": "10",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_ENABLED",
+      "value": "0",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_CI_DISABLED",
+      "value": "1",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_CI_SHOW",
+      "value": "2",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_CI_HIDE",
+      "value": "3",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_CI_MAXIMIZE",
+      "value": "4",
+      "comment": "change status of E1733A software"
+    },
+    {
+      "name": "E1733A_CI_MINIMIZE",
+      "value": "5",
+      "comment": "use second parameter, LParam, to define the size of window in pixel, X for width, Y for height"
+    },
+    {
+      "name": "E1733A_CI_RESTORE",
+      "value": "6",
+      "comment": "use second parameter, LParam, to define the size of window in pixel, X for width, Y for height"
+    },
+    {
+      "name": "E1733A_CI_RESIZE",
+      "value": "7",
+      "comment": "use second parameter, LParam, to define the size of window in pixel, X for width, Y for height"
+    },
+    {
+      "name": "E1733A_CI_MOVETO",
+      "value": "8",
+      "comment": "use second parameter, LParam, to define the size of window in pixel, X for width, Y for height"
+    },
+    {
+      "name": "E1733A_CI_MOVESETUP",
+      "value": "9",
+      "comment": "use second parameter, LParam, to move to screen position (X,Y) in pixel, X=0 and Y=0 to for top-left corner of screen"
+    },
+    {
+      "name": "E1733A_CC_CHANGEDISPLAY",
+      "value": "11",
+      "comment": "use second parameter, LParam, to move to screen position (X,Y) in pixel, X=0 and Y=0 to for top-left corner of screen"
+    },
+    {
+      "name": "E1733A_CI_NORMALDISPLAY",
+      "value": "0",
+      "comment": "change display style"
+    },
+    {
+      "name": "E1733A_CI_ENLARGENUMERIC",
+      "value": "1",
+      "comment": "change display style"
+    },
+    {
+      "name": "E1733A_CI_ENLARGEGRAPH",
+      "value": "2",
+      "comment": "change display style"
+    },
+    {
+      "name": "E1733A_CC_SELECTUPPERDISP",
+      "value": "20",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CC_SELECTLOWERDISP",
+      "value": "21",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_LASER",
+      "value": "0",
+      "comment": "change numeric display"
+    },
+    {
+      "name": "E1733A_CI_ERROR",
+      "value": "2",
+      "comment": "change numeric display"
+    },
+    {
+      "name": "E1733A_CI_TARGET",
+      "value": "3",
+      "comment": "change numeric display"
+    },
+    {
+      "name": "E1733A_CI_ENCODER",
+      "value": "4",
+      "comment": "change numeric display"
+    },
+    {
+      "name": "E1733A_CI_ANGLE",
+      "value": "6",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_TIME",
+      "value": "7",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_VELOCITY",
+      "value": "8",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_STATION",
+      "value": "9",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CC_CHANGENUMERIC",
+      "value": "22",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_INCUPPER",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_DECUPPER",
+      "value": "1",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_INCLOWER",
+      "value": "2",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_DECLOWER",
+      "value": "3",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_POSUPPER",
+      "value": "4",
+      "comment": "for buttons on numeric display area"
+    },
+    {
+      "name": "E1733A_CI_NEGUPPER",
+      "value": "5",
+      "comment": "for [Graph] button"
+    },
+    {
+      "name": "E1733A_CI_POSLOWER",
+      "value": "6",
+      "comment": "for [Graph] button"
+    },
+    {
+      "name": "E1733A_CI_NEGLOWER",
+      "value": "7",
+      "comment": "for [Graph] button"
+    },
+    {
+      "name": "E1733A_CC_SHOWGRAPH",
+      "value": "30",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAALL",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS1",
+      "value": "1",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS2",
+      "value": "2",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS3",
+      "value": "3",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS4",
+      "value": "4",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS5",
+      "value": "5",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS6",
+      "value": "6",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS7",
+      "value": "7",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_GRAAXIS8",
+      "value": "8",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_GRAPOS",
+      "value": "10",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_GRAVEL",
+      "value": "11",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_GRAACC",
+      "value": "12",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_GRAFFT",
+      "value": "13",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CC_SHOWRAWDATATABLE",
+      "value": "31",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_DATALL",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_DATAXIS1",
+      "value": "1",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_DATAXIS2",
+      "value": "2",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_DATAXIS3",
+      "value": "3",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_DATAXIS4",
+      "value": "4",
+      "comment": "for [Data] button"
+    },
+    {
+      "name": "E1733A_CI_DATAXIS5",
+      "value": "5",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_DATAXIS6",
+      "value": "6",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_DATAXIS7",
+      "value": "7",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_DATAXIS8",
+      "value": "8",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CC_SHOWCOMPENSATION",
+      "value": "32",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_COMPALL",
+      "value": "0",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_COMPAXIS1",
+      "value": "1",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_COMPAXIS2",
+      "value": "2",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CC_SHOWENVIRONMENT",
+      "value": "33",
+      "comment": "for [Comp] button"
+    },
+    {
+      "name": "E1733A_CI_STAT",
+      "value": "0",
+      "comment": "for [Env] button"
+    },
+    {
+      "name": "E1733A_CI_AT",
+      "value": "1",
+      "comment": "for [Env] button"
+    },
+    {
+      "name": "E1733A_CI_AP",
+      "value": "2",
+      "comment": "for [Env] button"
+    },
+    {
+      "name": "E1733A_CI_RH",
+      "value": "3",
+      "comment": "for [Env] button"
+    },
+    {
+      "name": "E1733A_CI_MAT",
+      "value": "4",
+      "comment": "for [Env] button"
+    },
+    {
+      "name": "E1733A_CC_NEW",
+      "value": "40",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_LINEAR",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_ANGULAR",
+      "value": "1",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_STRAIGHTNESS",
+      "value": "2",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_SQUARENESS",
+      "value": "3",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_PARALLELISM",
+      "value": "4",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_ROTARY",
+      "value": "5",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_WAYSTRAIGHTNESS",
+      "value": "6",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_FLATNESS",
+      "value": "7",
+      "comment": "for [O"
+    },
+    {
+      "name": "E1733A_CI_DIAGONAL",
+      "value": "8",
+      "comment": "for [Open] button"
+    },
+    {
+      "name": "E1733A_CI_LINTIMEBASE",
+      "value": "9",
+      "comment": "for [Open] button"
+    },
+    {
+      "name": "E1733A_CI_ANGTIMEBASE",
+      "value": "10",
+      "comment": "for [Open] button"
+    },
+    {
+      "name": "E1733A_CI_STRTIMEBASE",
+      "value": "11",
+      "comment": "for [Open] button"
+    },
+    {
+      "name": "E1733A_CI_SINGLEAXIS",
+      "value": "13",
+      "comment": "for [Open] button"
+    },
+    {
+      "name": "E1733A_CI_DUALAXIS",
+      "value": "14",
+      "comment": "for [Open] button"
+    },
+    {
+      "name": "E1733A_CC_OPEN",
+      "value": "50",
+      "comment": "file name is send to E1733A via shared memory file, WParam.Num=length of string"
+    },
+    {
+      "name": "E1733A_CI_SETUPONLY",
+      "value": "0",
+      "comment": "user should open a shared memory file and make sure its size enough"
+    },
+    {
+      "name": "E1733A_CI_SETUPDATA",
+      "value": "1",
+      "comment": "user should open a shared memory file and make sure its size enough"
+    },
+    {
+      "name": "E1733A_CI_INFOONLY",
+      "value": "2",
+      "comment": "user should open a shared memory file and make sure its size enough"
+    },
+    {
+      "name": "E1733A_CI_MERGEDATA",
+      "value": "3",
+      "comment": "check demo program for more information"
+    },
+    {
+      "name": "E1733A_CI_COMBINED",
+      "value": "4",
+      "comment": "only in data window"
+    },
+    {
+      "name": "E1733A_CI_COMBINEDPAR",
+      "value": "5",
+      "comment": "only in data window, just for linear, angular, straightness and Rotary"
+    },
+    {
+      "name": "E1733A_CI_COMBINEDSQU",
+      "value": "6",
+      "comment": "only in data window, just for parallelism/squareness, use comma to split two file names"
+    },
+    {
+      "name": "E1733A_CC_SETUP",
+      "value": "51",
+      "comment": "only in main window, for squareness, use comma to split two file names"
+    },
+    {
+      "name": "E1733A_CI_PROGRAM",
+      "value": "0",
+      "comment": "only in main window, for squareness, use comma to split two file names"
+    },
+    {
+      "name": "E1733A_CI_SYSTEM",
+      "value": "1",
+      "comment": "only in main window, for squareness, use comma to split two file names"
+    },
+    {
+      "name": "E1733A_CI_ENVIRONMENT",
+      "value": "2",
+      "comment": "for [Setup] button"
+    },
+    {
+      "name": "E1733A_CI_MEASUREMENT",
+      "value": "3",
+      "comment": "only in main window"
+    },
+    {
+      "name": "E1733A_CI_ANALYSIS",
+      "value": "5",
+      "comment": "only in main window"
+    },
+    {
+      "name": "E1733A_CI_MACHINEINFO",
+      "value": "6",
+      "comment": "only in main window"
+    },
+    {
+      "name": "E1733A_CI_ISOINFO",
+      "value": "7",
+      "comment": "this and below are only in data window"
+    },
+    {
+      "name": "E1733A_CI_SETUPOK",
+      "value": "9",
+      "comment": "this and below are only in data window"
+    },
+    {
+      "name": "E1733A_CI_SETUPCANCEL",
+      "value": "10",
+      "comment": "press [OK] button on setup form"
+    },
+    {
+      "name": "E1733A_CI_TOGGLELASER",
+      "value": "11",
+      "comment": "press [OK] button on setup form"
+    },
+    {
+      "name": "E1733A_CI_CALISTEP1",
+      "value": "12",
+      "comment": "press [OK] button on setup form"
+    },
+    {
+      "name": "E1733A_CI_CALISTEP2",
+      "value": "13",
+      "comment": "press [Cancel] button on setup form"
+    },
+    {
+      "name": "E1733A_CI_CALISTEP3",
+      "value": "14",
+      "comment": "toggle the sign of the laser value"
+    },
+    {
+      "name": "E1733A_CI_APPLYCALI",
+      "value": "15",
+      "comment": "do step 1 of rotary table calibration"
+    },
+    {
+      "name": "E1733A_CI_APPLY",
+      "value": "16",
+      "comment": "do step 3 of rotary table calibration"
+    },
+    {
+      "name": "E1733A_CI_IMPORT",
+      "value": "17",
+      "comment": "do step 3 of rotary table calibration"
+    },
+    {
+      "name": "E1733A_CC_RESET",
+      "value": "52",
+      "comment": "apply user defined target positions"
+    },
+    {
+      "name": "E1733A_CC_START",
+      "value": "53",
+      "comment": "for [Reset] button, only in data window"
+    },
+    {
+      "name": "E1733A_CC_RECORD",
+      "value": "54",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CC_STOP",
+      "value": "55",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CC_ERASE",
+      "value": "56",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ALL",
+      "value": "0",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_RUN",
+      "value": "1",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ONE",
+      "value": "2",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_MER",
+      "value": "3",
+      "comment": "for [Erase] button, only in data window, no warning"
+    },
+    {
+      "name": "E1733A_CC_SAVE",
+      "value": "57",
+      "comment": "for [Save] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_STEUPDATA",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_RAWDATA_TXT",
+      "value": "1",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_RAWDATA_CSV",
+      "value": "2",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_RAWDATA_POS",
+      "value": "3",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_RAWDATA_RUN",
+      "value": "4",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_COMPTABLE_TXT",
+      "value": "5",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_COMPTABLE_CSV",
+      "value": "6",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_COMPTABLE_POS",
+      "value": "7",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_COMPTABLE_RUN",
+      "value": "8",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_ENVDATA_TXT",
+      "value": "9",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_ENVDATA_CSV",
+      "value": "10",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CC_PRINT",
+      "value": "58",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_REPORT",
+      "value": "0",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_RAWBYPOS",
+      "value": "1",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_RAWBYRUN",
+      "value": "2",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_ISO1988",
+      "value": "3",
+      "comment": "for [Print] button, only in data window"
+    },
+    {
+      "name": "E1733A_CI_ISO1997",
+      "value": "4",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ISO2006",
+      "value": "5",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ISO2014",
+      "value": "7",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_GB2000",
+      "value": "6",
+      "comment": "for [Exit] button"
+    },
+    {
+      "name": "E1733A_CC_EXIT",
+      "value": "59",
+      "comment": "for [Exit] button"
+    },
+    {
+      "name": "E1733A_CI_MAIN",
+      "value": "0",
+      "comment": "for [Exit] button"
+    },
+    {
+      "name": "E1733A_CI_DATA",
+      "value": "1",
+      "comment": "for [Exit] button"
+    },
+    {
+      "name": "E1733A_CI_SETUP",
+      "value": "2",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CC_READSTATUS",
+      "value": "60",
+      "comment": "exit data window and return to main window"
+    },
+    {
+      "name": "E1733A_CI_ACTIVEWINDOW",
+      "value": "0",
+      "comment": "exit setup window, all setup changes will be accepted"
+    },
+    {
+      "name": "E1733A_CI_5519ABREADY",
+      "value": "1",
+      "comment": "exit setup window, all setup changes will be accepted"
+    },
+    {
+      "name": "E1733A_CI_E1735AREADY",
+      "value": "3",
+      "comment": "result: 0=main, 1=data, 2=setup"
+    },
+    {
+      "name": "E1733A_CI_E1735ACOUNT",
+      "value": "5",
+      "comment": "result: 0=main, 1=data, 2=setup"
+    },
+    {
+      "name": "E1733A_CI_E1736AREADY",
+      "value": "9",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_E1736ACOUNT",
+      "value": "10",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_E1737ACOUNT",
+      "value": "12",
+      "comment": "result: number of connected E1735A"
+    },
+    {
+      "name": "E1733A_CI_E1738ACOUNT",
+      "value": "16",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_55290BREADY",
+      "value": "18",
+      "comment": "result: number of connected E1736A"
+    },
+    {
+      "name": "E1733A_CI_BEAMSTRENGTH",
+      "value": "21",
+      "comment": "result: number of connected E1737A"
+    },
+    {
+      "name": "E1733A_CI_MEASURESETUPOK",
+      "value": "23",
+      "comment": "result: number of connected E1738A"
+    },
+    {
+      "name": "E1733A_CI_HASERRORMESSAGE",
+      "value": "24",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_ERRORMESSAGE",
+      "value": "25",
+      "comment": "result: beam strength in %, 0=None, 100=full"
+    },
+    {
+      "name": "E1733A_CI_ISMEASURING",
+      "value": "26",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_SAMPLECOUNT",
+      "value": "27",
+      "comment": "result: string is returned via memory shared file, WParam.Num = buffer size"
+    },
+    {
+      "name": "E1733A_CI_ACCOMPLISHED",
+      "value": "28",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_UPPERDISPLAY",
+      "value": "30",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_LOWERDISPLAY",
+      "value": "31",
+      "comment": "result: 0=false, 1=true"
+    },
+    {
+      "name": "E1733A_CI_UPPERSELECTION",
+      "value": "32",
+      "comment": "result: upper display value as float (4-byte), NAN when error"
+    },
+    {
+      "name": "E1733A_CI_LOWERSELECTION",
+      "value": "33",
+      "comment": "result: CI_xxxx that are defined for E1733A_CC_SELECTUPPERDISP, Laser=0, Error=2, Target=3, Encoder=4, Angle=6, Time=7, Velocity=8, Station=9"
+    },
+    {
+      "name": "E1733A_CI_UPPERUNITS",
+      "value": "34",
+      "comment": "result: same as E1733A_CI_UPPERSELECTION"
+    },
+    {
+      "name": "E1733A_CI_LOWERUNITS",
+      "value": "35",
+      "comment": "result: same as E1733A_CI_UPPERSELECTION"
+    },
+    {
+      "name": "E1733A_CI_UPPERSTRING",
+      "value": "36",
+      "comment": "result: string is returned via memory shared file, WParam.Num = buffer size"
+    },
+    {
+      "name": "E1733A_CI_LOWERSTRING",
+      "value": "37",
+      "comment": "result: same as CI_UpperUnits"
+    },
+    {
+      "name": "E1733A_CI_CURRENTCYCLE",
+      "value": "38",
+      "comment": "result: E1733A_RC_xxxx, and shared memory file: lower display value as string"
+    },
+    {
+      "name": "E1733A_CI_CURRENTAXIS",
+      "value": "39",
+      "comment": "result: E1733A_RC_xxxx, and shared memory file: lower display value as string"
+    },
+    {
+      "name": "E1733A_CI_NEXTDIRECTION",
+      "value": "40",
+      "comment": "result: 1=first cycle, ..."
+    },
+    {
+      "name": "E1733A_CI_NEXTINDEX",
+      "value": "41",
+      "comment": "result: 1=first cycle, ..."
+    },
+    {
+      "name": "E1733A_CI_NEXTTARGET",
+      "value": "42",
+      "comment": "result: 0=none, 1=first axis, ..."
+    },
+    {
+      "name": "E1733A_CC_READERRORDATA",
+      "value": "62",
+      "comment": "the value is returned as result of the message, in 4-byte, transfer it to float"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS1",
+      "value": "1",
+      "comment": ""
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS2",
+      "value": "2",
+      "comment": "if the functin fails, for example, index out of range, NAN will be returned"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS3",
+      "value": "3",
+      "comment": "if the functin fails, for example, index out of range, NAN will be returned"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS4",
+      "value": "4",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS5",
+      "value": "5",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS6",
+      "value": "6",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS7",
+      "value": "7",
+      "comment": "result: E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ERRAXIS8",
+      "value": "8",
+      "comment": "access setup values of E1733A"
+    },
+    {
+      "name": "E1733A_CC_READSETUPVALUE",
+      "value": "64",
+      "comment": "access setup values of E1733A"
+    },
+    {
+      "name": "E1733A_CC_WRITESETUPVALUE",
+      "value": "65",
+      "comment": "message result is defnied by E1733A_RC_xxxx"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_ANAGRAPH_COMPRISE",
+      "value": "68",
+      "comment": "User can read back the value to check if the value is properly assigned."
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_ANAMOD_CHOOSING",
+      "value": "80",
+      "comment": "[Data Analysis] -> \"Modified\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_ANANUM_COMPRISE",
+      "value": "71",
+      "comment": "[Data Analysis] -> \"Modified\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_ANASIGMA_ITEMTEXT",
+      "value": "74",
+      "comment": "[Data Analysis] -> \"Coverage Factor (Sigma)\";"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_ANASLOPE_CHOOSING",
+      "value": "72",
+      "comment": "[Data Analysis] -> \"Coverage Factor (Sigma)\";"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_COMPZERO_ITEMTEXT",
+      "value": "70",
+      "comment": "[Data Analysis] -> \"Coverage Factor (Sigma)\";"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_FLAMETHOD_CHOOSING",
+      "value": "73",
+      "comment": "[Data Analysis] -> \"Slope\"; 0: Least Squares, 1: End Points,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_PRNCOPIES_ITEMTEXT",
+      "value": "78",
+      "comment": "[Data Analysis] -> \"Machine Zero Point\";"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_PRNENVSEL_CHOOSING",
+      "value": "76",
+      "comment": "[Data Analysis] -> \"Analyze Data\"; 0: Moody,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_PRNNAME_CHOOSING",
+      "value": "77",
+      "comment": "[Data Analysis] -> \"Copies\";"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_PRNORIENT_CHOOSING",
+      "value": "79",
+      "comment": "[Data Analysis] -> \"Printer\"; 0,1,2...: Index of installed printers,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_PRNSHOWSEL_COMPRISE",
+      "value": "75",
+      "comment": "[Data Analysis] -> \"Printer\"; 0,1,2...: Index of installed printers,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_PRNMARGIN_CHOOSING",
+      "value": "152",
+      "comment": "[Data Analysis] -> \"Print\"; 0: Show Legend, 1: Show Machine Info, 2: Numerical Analysis, 3: Environmental Data,"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_STANDARD_CHOOSING",
+      "value": "81",
+      "comment": "[Data Analysis] -> \"Extra Margin\"; 0: None, 1: Left, 2: Top; 3: Right; 4: Bottom"
+    },
+    {
+      "name": "E1733A_CI_ANASETUP_TBDATAPNT_CHOOSING",
+      "value": "69",
+      "comment": "[Data Analysis] -> \"Data Point\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPABS_CHOOSING",
+      "value": "126",
+      "comment": "[Data Analysis] -> \"Data Point\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPCALC_CHOOSING",
+      "value": "127",
+      "comment": "[Compensation Table] -> \"Error Sign Convention\"; 0: Algebraic, 1: Calibrator,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPDIR_CHOOSING",
+      "value": "129",
+      "comment": "[Compensation Table] -> \"Compensation Values\"; 0: Absolute, 1: Incremental,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPEND_ITEMTEXT",
+      "value": "133",
+      "comment": "[Compensation Table] -> \"Direction\"; 0: Combined, 1: Forward/Reverse,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPINTVL_ITEMTEXT",
+      "value": "134",
+      "comment": "[Compensation Table] -> \"Direction\"; 0: Combined, 1: Forward/Reverse,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPPROG_ITEMTEXT",
+      "value": "120",
+      "comment": "[Compensation Table] -> \"End Position\";"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPSEL_CHOOSING",
+      "value": "131",
+      "comment": "[Compensation Table] -> \"Interval\";"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPSIGN_CHOOSING",
+      "value": "128",
+      "comment": "[Compensation Table] -> \"Download\";"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_COMPSTART_ITEMTEXT",
+      "value": "132",
+      "comment": "[Compensation Table] -> \"Target Position\"; 0: Target List , 1: Interpolate,"
+    },
+    {
+      "name": "E1733A_CI_CMPSETUP_MACHUNIT_ITEMTEXT",
+      "value": "130",
+      "comment": "[Compensation Table] -> \"Type\"; 0: Correction, 1: Error,"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_ERRORSIGN_CHOOSING",
+      "value": "121",
+      "comment": "[Compensation Table] -> \"Start Position\";"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_FIRSTROW_ITEMTEXT",
+      "value": "122",
+      "comment": "[Compensation Table] -> \"Machine Units\";"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_FLAGRASEL_CHOOSING",
+      "value": "125",
+      "comment": "[Data Display] -> \"ErrorSign\"; 0: +X, 1: -X,"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_GRIDLINES_CHOOSING",
+      "value": "124",
+      "comment": "[Data Display] -> \"Goto Row\";"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_LEGEND_CHOOSING",
+      "value": "115",
+      "comment": "[Data Display] -> \"3D\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_LIMITLINE_ITEMTEXT",
+      "value": "116",
+      "comment": "[Data Display] -> \"Grid Lines\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_LIMITSEL_CHOOSING",
+      "value": "117",
+      "comment": "[Data Display] -> \"Legend\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_TARINROW_CHOOSING",
+      "value": "123",
+      "comment": "[Data Display] -> \"Limit Lines\";"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_USERSCALE_ITEMTEXT",
+      "value": "119",
+      "comment": "[Data Display] -> \"Limit Lines\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_DATSETUP_USERSEL_CHOOSING",
+      "value": "118",
+      "comment": "[Data Display] -> \"Targets in Row\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_AIRPRES_ITEMTEXT",
+      "value": "9",
+      "comment": "[Data Display] -> \"User Scale\";"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_AIRTEMP_ITEMTEXT",
+      "value": "10",
+      "comment": "[Data Display] -> \"User Scale\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_ENVUNITSEL_CHOOSING",
+      "value": "8",
+      "comment": "[Environmental Compensation] -> \"Air Pressure\";"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_MANUALRH_CHOOSING",
+      "value": "12",
+      "comment": "[Environmental Compensation] -> \"Environmental Units\"; 0: Metric (C; mmHg), 1: English (F; inHg), 2: SI (C; kPa),"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_MATTEMP1_ITEMTEXT",
+      "value": "13",
+      "comment": "[Environmental Compensation] -> \"Manual\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_MATTEMP2_ITEMTEXT",
+      "value": "14",
+      "comment": "[Environmental Compensation] -> \"Manual\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_MATTEMP3_ITEMTEXT",
+      "value": "15",
+      "comment": "[Environmental Compensation] -> \"Material Temp. 1\";"
+    },
+    {
+      "name": "E1733A_CI_ENVSETUP_RELHUMI_ITEMTEXT",
+      "value": "11",
+      "comment": "[Environmental Compensation] -> \"Material Temp. 2\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_ASSETNO_ITEMTEXT",
+      "value": "83",
+      "comment": "[Environmental Compensation] -> \"Material Sensor -> Update Method\"; 1: Manual, 2: Import; just for dual axis without sensor"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_COMMENTS_ITEMTEXT",
+      "value": "82",
+      "comment": "[Machine Information] -> \"Asset No.\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_LOCATION_ITEMTEXT",
+      "value": "88",
+      "comment": "[Machine Information] -> \"Asset No.\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_MACHMODEL_ITEMTEXT",
+      "value": "84",
+      "comment": "[Machine Information] -> \"Comments\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_MACHNAME_ITEMTEXT",
+      "value": "87",
+      "comment": "[Machine Information] -> \"Location\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_MACHSN_ITEMTEXT",
+      "value": "85",
+      "comment": "[Machine Information] -> \"Machine Model No.\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_MACHTYPE_ITEMTEXT",
+      "value": "86",
+      "comment": "[Machine Information] -> \"Machine Name\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_DATETEST_ITEMTEXT",
+      "value": "147",
+      "comment": "[Machine Information] -> \"Machine Serial No.\";"
+    },
+    {
+      "name": "E1733A_CI_INFSETUP_OPERATOR_ITEMTEXT",
+      "value": "89",
+      "comment": "[Machine Information] -> \"Machine Type\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_ALIGNERR_ITEMTEXT",
+      "value": "111",
+      "comment": "[Machine Information] -> \"Date of Test\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_ATSEN_ITEMTEXT",
+      "value": "106",
+      "comment": "[ISO Information] -> \"Name of Inspector\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_CALMEADEV_CHOOSING",
+      "value": "109",
+      "comment": "[ISO Information] -> \"Alignment; Assumed\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_COEFSCALE_ITEMTEXT",
+      "value": "95",
+      "comment": "[ISO Information] -> \"Air Sensor\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_COMPUSED_ITEMTEXT",
+      "value": "92",
+      "comment": "[ISO Information] -> \"Calibrated Measuring Device\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_DIFF20CMAX_ITEMTEXT",
+      "value": "112",
+      "comment": "[ISO Information] -> \"Coefficient of Thermal Expansion of Scale\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_DWELLTIME_ITEMTEXT",
+      "value": "91",
+      "comment": "[ISO Information] -> \"Compensation Used\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_ENVVARERR_ITEMTEXT",
+      "value": "113",
+      "comment": "[ISO Information] -> \"Difference to 20C; Maximum\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_ERRORRANGE_ITEMTEXT",
+      "value": "108",
+      "comment": "[ISO Information] -> \"Dwell Time at Each Target Position\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_ERRORRANGE_ITEMUNIT",
+      "value": "148",
+      "comment": "[ISO Information] -> \"Environmental Variation\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_FEEDRATE_ITEMTEXT",
+      "value": "94",
+      "comment": "[ISO Information] -> \"Error Range\" (value);"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_MATSEN1_ITEMTEXT",
+      "value": "104",
+      "comment": "[ISO Information] -> \"Error Range\" (unit);"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_MATSEN2_ITEMTEXT",
+      "value": "105",
+      "comment": "[ISO Information] -> \"Feed Rate\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_MATSEN3_ITEMTEXT",
+      "value": "107",
+      "comment": "[ISO Information] -> \"Material Sensor #1\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_MATTEMPDEV_ITEMTEXT",
+      "value": "114",
+      "comment": "[ISO Information] -> \"Material Sensor #2\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_MEAINST_ITEMTEXT",
+      "value": "96",
+      "comment": "[ISO Information] -> \"Material Sensor #3\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_NDECORR_CHOOSING",
+      "value": "90",
+      "comment": "[ISO Information] -> \"(Material Sensor) Deviation; Maximum\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_PIECEX_ITEMTEXT",
+      "value": "101",
+      "comment": "[ISO Information] -> \"Measuring Instrument and Serial No.\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_PIECEY_ITEMTEXT",
+      "value": "102",
+      "comment": "[ISO Information] -> \"NDE Correction (yes or no)\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_PIECEZ_ITEMTEXT",
+      "value": "103",
+      "comment": "[ISO Information] -> \"Offset to Workpiece Reference (X/Y/Z)\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_POSAXES_ITEMTEXT",
+      "value": "97",
+      "comment": "[ISO Information] -> \"PieceY\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_TOOLX_ITEMTEXT",
+      "value": "98",
+      "comment": "[ISO Information] -> \"PieceZ\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_TOOLY_ITEMTEXT",
+      "value": "99",
+      "comment": "[ISO Information] -> \"Position of axes not under test\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_TOOLZ_ITEMTEXT",
+      "value": "100",
+      "comment": "[ISO Information] -> \"Offset to Tool Reference (X/Y/Z)\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_TYPESCALE_ITEMTEXT",
+      "value": "93",
+      "comment": "[ISO Information] -> \"ToolY\";"
+    },
+    {
+      "name": "E1733A_CI_ISOSETUP_UNCEXPCOEF_ITEMTEXT",
+      "value": "110",
+      "comment": "[ISO Information] -> \"ToolZ\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_ALLOWKBPOS_CHOOSING",
+      "value": "42",
+      "comment": "[ISO Information] -> \"Type of Scale\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AQBMODE_CHOOSING",
+      "value": "33",
+      "comment": "[Measurement Setup] -> \"Keyboard Position\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_HYSTERESIS_ITEMTEXT",
+      "value": "= 162",
+      "comment": "[Measurement Setup] -> \"Keyboard Position\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AQBRES_ITEMTEXT",
+      "value": "31",
+      "comment": "[Measurement Setup] -> \"Encoder\"; 0: AQB, 1: Up/Down,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AQBRES_ITEMUNIT",
+      "value": "139",
+      "comment": "[Measurement Setup] -> \"Hysteresis\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AVERAGE_ITEMTEXT",
+      "value": "48",
+      "comment": "[Measurement Setup] -> \"Encoder Resolution\" (value);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AXIS_ITEMTEXT",
+      "value": "25",
+      "comment": "[Measurement Setup] -> \"Encoder Resolution\" (unit);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AUTOTITLE_CHOOSING",
+      "value": "150",
+      "comment": "[Measurement Setup] -> \"Averaging\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_AXIS2_ITEMTEXT",
+      "value": "30",
+      "comment": "[Measurement Setup] -> \"Measurement Axis\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_CYCLES_ITEMTEXT",
+      "value": "22",
+      "comment": "[Measurement Setup] -> \"Measurement Axis\";  0: user's, 1: auto graph caption"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_DEADPATH_ITEMTEXT",
+      "value": "46",
+      "comment": "[Measurement Setup] -> \"Measurement Axis\" (Axis 2);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_DIASCALEX_ITEMTEXT",
+      "value": "58",
+      "comment": "[Measurement Setup] -> \"No. of Cycles\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_DIASCALEY_ITEMTEXT",
+      "value": "59",
+      "comment": "[Measurement Setup] -> \"Dead Path\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_DIASCALEZ_ITEMTEXT",
+      "value": "60",
+      "comment": "[Measurement Setup] -> \"X\"; (Diagonal)"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_ENDPOS_ITEMTEXT",
+      "value": "19",
+      "comment": "[Measurement Setup] -> \"Y\"; (Diagonal)"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_ENDPOS2_ITEMTEXT",
+      "value": "56",
+      "comment": "[Measurement Setup] -> \"Z\"; (Diagonal)"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_EPTIMEOUT_ITEMTEXT",
+      "value": "43",
+      "comment": "[Measurement Setup] -> \"End Position\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_ERRUNIT_CHOOSING",
+      "value": "41",
+      "comment": "[Measurement Setup] -> \"End Position\" (Axis 2);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_EXPCOEF_ITEMTEXT",
+      "value": "37",
+      "comment": "[Measurement Setup] -> \"Error Units\"; 0: mm, 1: um, 2: nm, 3: inches, 4: thous, 5: uin, 6: arcdeg, 7: arcsec, 8: um/m, 9: uin/in,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_FLAAXISDIR_CHOOSING",
+      "value": "29",
+      "comment": "[Measurement Setup] -> \"Expans. Coeff.\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_FLALENAC_ITEMTEXT",
+      "value": "137",
+      "comment": "[Measurement Setup] -> \"Expans. Coeff.\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_FLALENAG_ITEMTEXT",
+      "value": "138",
+      "comment": "[Measurement Setup] -> \"Direction\"; 0: A->E, 1: E->A,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_FLASTAAC_ITEMTEXT",
+      "value": "26",
+      "comment": "[Measurement Setup] -> \"AC\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_FLASTAAG_ITEMTEXT",
+      "value": "28",
+      "comment": "[Measurement Setup] -> \"AG\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_FOOTSPACE_ITEMTEXT",
+      "value": "47",
+      "comment": "[Measurement Setup] -> \"AC\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_INTERVAL_ITEMTEXT",
+      "value": "17",
+      "comment": "[Measurement Setup] -> \"AG\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_INTERVAL2_ITEMTEXT",
+      "value": "53",
+      "comment": "[Measurement Setup] -> \"Foot Spacing\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_MEAAXISSEL_CHOOSING",
+      "value": "27",
+      "comment": "[Measurement Setup] -> \"Interval\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_MODE_CHOOSING",
+      "value": "24",
+      "comment": "[Measurement Setup] -> \"Interval\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_OCFACTOR_ITEMTEXT",
+      "value": "49",
+      "comment": "[Measurement Setup] -> \"Travel Mode\"; 0: Bidirectional, 1: Unidirectional, 2: Pilgrim,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_PARATYPE_CHOOSING",
+      "value": "52",
+      "comment": "[Measurement Setup] -> \"Travel Mode\"; 0: Bidirectional, 1: Unidirectional, 2: Pilgrim,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_POINTS_ITEMTEXT",
+      "value": "18",
+      "comment": "[Measurement Setup] -> \"Calibration Factor\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_POINTS2_ITEMTEXT",
+      "value": "55",
+      "comment": "[Measurement Setup] -> \"Parallelism\"; 0: Spindle, 1: Coplanar,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_POSITIONS_ITEMTEXT",
+      "value": "135",
+      "comment": "[Measurement Setup] -> \"No. of Points\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_POSITIONS2_ITEMTEXT",
+      "value": "136",
+      "comment": "[Measurement Setup] -> \"No. of Points\" (Axis 2);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_POSUNIT_CHOOSING",
+      "value": "40",
+      "comment": "[Measurement Setup] -> \"Target Position\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_PRESET_ITEMTEXT",
+      "value": "44",
+      "comment": "[Measurement Setup] -> \"Target Position\" (Axis 2);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_RANGETYPE_CHOOSING",
+      "value": "50",
+      "comment": "[Measurement Setup] -> \"Position Units\"; 0: mm, 1: inches, 2: arcdeg,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_RESULTRES_CHOOSING",
+      "value": "38",
+      "comment": "[Measurement Setup] -> \"Preset\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_ROTAQBRES_ITEMTEXT",
+      "value": "51",
+      "comment": "[Measurement Setup] -> \"Display Resolution\"; 0: 1, 1: 0.1, 2: 0.01, 3: 0.001, 4: 0.0001, 5: 0.00001, 6: 0.000001, 7: 0.0000001, 8: 0.00000001,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_SQUAREERR_ITEMTEXT",
+      "value": "45",
+      "comment": "[Measurement Setup] -> \"Rotary Resolution\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_STARTPOS_ITEMTEXT",
+      "value": "20",
+      "comment": "[Measurement Setup] -> \"Rotary Resolution\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_STARTPOS2_ITEMTEXT",
+      "value": "57",
+      "comment": "[Measurement Setup] -> \"Optical Square\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_TRIGDWELL_ITEMTEXT",
+      "value": "32",
+      "comment": "[Measurement Setup] -> \"Start Position\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_TRIGTYPE_CHOOSING",
+      "value": "34",
+      "comment": "[Measurement Setup] -> \"Start Position\" (Axis 2);"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_TRIGWND_ITEMTEXT",
+      "value": "36",
+      "comment": "[Measurement Setup] -> \"Trigger Dwell\";"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_UNITSYSSEL_CHOOSING",
+      "value": "39",
+      "comment": "[Measurement Setup] -> \"Trigger Type\"; 0: Manual, 1: Encoder, 2: Auto"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_USERDEF_CHOOSING",
+      "value": "21",
+      "comment": "[Measurement Setup] -> \"Measurement Units\"; 0: Metric, 1: English, 2: Metric , 3: English , 4: Metric  , 5: English  , 6: Angle & Metric, 7: Angle & English,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_USERDEF2_CHOOSING",
+      "value": "54",
+      "comment": "[Measurement Setup] -> \"User Defined\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_WAYDIR_CHOOSING",
+      "value": "23",
+      "comment": "[Measurement Setup] -> \"User Defined\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_MEASETUP_WAYSTANUM_ITEMTEXT",
+      "value": "16",
+      "comment": "[Measurement Setup] -> \"User Defined\" (Axis 2); 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_BEEPREC_CHOOSING",
+      "value": "4",
+      "comment": "[Measurement Setup] -> \"Direction\"; 0: A->B, 1: B->A,"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_DEMOMODE_CHOOSING",
+      "value": "3",
+      "comment": "[Measurement Setup] -> \"# of Stations\";"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_ROTARYDEV_CHOOSING",
+      "value": "7",
+      "comment": "[System] -> \"Beep on Record\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_SYNCHOP_CHOOSING",
+      "value": "5",
+      "comment": "[System] -> \"Demo Mode\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_WAVELENGTH_ITEMTEXT",
+      "value": "6",
+      "comment": "[System] -> \"Rotary Table\"; 0: 55290A, 1: 55290B,"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_E1735ASN_ITEMTEXT",
+      "value": "144",
+      "comment": "[System] -> \"Synchronized Operation\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_E1735ASN_CHOOSING",
+      "value": "153",
+      "comment": "[System] -> \"Laser Wavelength\";"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_E1736ASN_ITEMTEXT",
+      "value": "145",
+      "comment": "[System] -> \"E1735A: Serial No.\"; S/N string"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_E1736ASN_CHOOSING",
+      "value": "154",
+      "comment": "[System] -> \"E1735A: Serial No.\"; 0: 1st device, 1: 2nd device, et. al."
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_USERCALI_ITEMTEXT",
+      "value": "149",
+      "comment": "[System] -> \"E1736A: Serial No.\"; S/N string"
+    },
+    {
+      "name": "E1733A_CI_SYSSETUP_CALIPERIOD_ITEMTEXT",
+      "value": "159",
+      "comment": "[System] -> \"E1736A: Serial No.\"; 0: 1st device, 1: 2nd device, et. al."
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_POINTNUM_ITEMTEXT",
+      "value": "65",
+      "comment": "[System] -> \"User Calibration\"; for 55290B"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_STARTTYPE_CHOOSING",
+      "value": "63",
+      "comment": "[System] -> [System] -> \"Calibration Period\"; in month"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_STOPTYPE_CHOOSING",
+      "value": "67",
+      "comment": "[Time Base] -> \"No. of Points\";"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_TBINTERVAL_ITEMTEXT",
+      "value": "61",
+      "comment": "[Time Base] -> \"Stop Timer\"; 0: Manual, 1: Position, 2: Total Time, 3: Total Points,"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_TBINTERVAL_ITEMUNIT",
+      "value": "146",
+      "comment": "[Time Base] -> \"Stop Timer\"; 0: Manual, 1: Position, 2: Total Time, 3: Total Points,"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_TBSTARTPOS_ITEMTEXT",
+      "value": "62",
+      "comment": "[Time Base] -> \"Interval\" (value);"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_TBSTOPPOS_ITEMTEXT",
+      "value": "64",
+      "comment": "[Time Base] -> \"Interval\" (unit); \"ms\" or \"sec\", for all kinds of time-based"
+    },
+    {
+      "name": "E1733A_CI_TIMSETUP_TOTALTIME_ITEMTEXT",
+      "value": "66",
+      "comment": "[Time Base] -> \"Position\" (Start);"
+    },
+    {
+      "name": "E1733A_CI_TOPSETUP_DATAPATH_ITEMTEXT",
+      "value": "2",
+      "comment": "[Time Base] -> \"Position\" (Stop);"
+    },
+    {
+      "name": "E1733A_CI_TOPSETUP_LANGUAGE_CHOOSING",
+      "value": "1",
+      "comment": "[Time Base] -> \"Total Time\";"
+    },
+    {
+      "name": "E1733A_CI_TOPSETUP_OPENSTYLE_CHOOSING",
+      "value": "0",
+      "comment": "[E1733A] -> \"Language\"; 0: English, 1: French, 3: German, 4: Spanish, 5: SimpChn, 6: TradChn, 7: Korean, 8: Japanese,"
+    },
+    {
+      "name": "E1733A_CI_TOPSETUP_SHOWHINT_CHOOSING",
+      "value": "151",
+      "comment": "[E1733A] -> \"Setup\"; 1: Default, 2: Saved, 4: Information,"
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDACARD1_ITEMTEXT",
+      "value": "140",
+      "comment": "[E1733A] -> \"Setup\"; 1: Default, 2: Saved, 4: Information,"
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDACARD1_CHOOSING",
+      "value": "155",
+      "comment": "[E1733A] -> \"Show Hint\"; 0: No, 1: Yes,"
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDAHUB1_ITEMTEXT",
+      "value": "141",
+      "comment": "[Dual Axes] -> \"E1735A #1 Serial No.\"; S/N string"
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDAHUB1_CHOOSING",
+      "value": "156",
+      "comment": "[Dual Axes] -> \"E1735A #1 Serial No.\"; 0: (None), 1: 1st device, 2: 2nd device, et. al."
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDACARD2_ITEMTEXT",
+      "value": "142",
+      "comment": "[Dual Axes] -> \"E1736A #1 Serial No.\"; S/N string"
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDACARD2_CHOOSING",
+      "value": "157",
+      "comment": "[Dual Axes] -> \"E1736A #1 Serial No.\"; 0: (None), 1: 1st device, 2: 2nd device, et. al."
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDAHUB2_ITEMTEXT",
+      "value": "143",
+      "comment": "[Dual Axes] -> \"E1735A #2 Serial No.\"; S/N string"
+    },
+    {
+      "name": "E1733A_CI_XDASETUP_XDAHUB2_CHOOSING",
+      "value": "158",
+      "comment": "[Dual Axes] -> \"E1735A #2 Serial No.\"; 0: (None), 1: 1st device, 2: 2nd device, et. al."
+    },
+    {
+      "name": "E1733A_CC_ANALYSIS",
+      "value": "66",
+      "comment": "assign axis number to WParam.Num, 0 for all axes, 1 for axis 1, et. al."
+    },
+    {
+      "name": "E1733A_CI_BIMAXREV",
+      "value": "0",
+      "comment": "the value is returned by the message result, as a 4-byte integer, transfer it to float using TIntFloat"
+    },
+    {
+      "name": "E1733A_CI_BIMEANREV",
+      "value": "1",
+      "comment": "the value is returned by the message result, as a 4-byte integer, transfer it to float using TIntFloat"
+    },
+    {
+      "name": "E1733A_CI_BIMEANDEV",
+      "value": "2",
+      "comment": "B, max reversl error"
+    },
+    {
+      "name": "E1733A_CI_REVSYSPOSDEV",
+      "value": "3",
+      "comment": "B, max reversl error"
+    },
+    {
+      "name": "E1733A_CI_FWDSYSPOSDEV",
+      "value": "4",
+      "comment": "~B, mean reversal error"
+    },
+    {
+      "name": "E1733A_CI_BISYSPOSDEV",
+      "value": "5",
+      "comment": "M, mean bi-directional positin deviation"
+    },
+    {
+      "name": "E1733A_CI_REVREPEATPOS",
+      "value": "6",
+      "comment": "E-, Mean positional deviation, backward"
+    },
+    {
+      "name": "E1733A_CI_FWDREPEATPOS",
+      "value": "7",
+      "comment": "E+, Mean positional deviation, forward"
+    },
+    {
+      "name": "E1733A_CI_BIREPEATPOS",
+      "value": "8",
+      "comment": "E, Mean positional deviation, bi-directional"
+    },
+    {
+      "name": "E1733A_CI_REVACCURACY",
+      "value": "9",
+      "comment": "R-, Repeatabolity, backward"
+    },
+    {
+      "name": "E1733A_CI_FWDACCURACY",
+      "value": "10",
+      "comment": "R+, Repeatabolity, forward"
+    },
+    {
+      "name": "E1733A_CI_BIACCURACY",
+      "value": "11",
+      "comment": "R, Repeatabolity, bi-directional"
+    },
+    {
+      "name": "E1733A_CI_REVRAWREP",
+      "value": "12",
+      "comment": "A-, Accuracy, backward"
+    },
+    {
+      "name": "E1733A_CI_FWDRAWREP",
+      "value": "13",
+      "comment": "A+, Accuracy, forward"
+    },
+    {
+      "name": "E1733A_CI_BIRAWREP",
+      "value": "14",
+      "comment": "A, Accuracy, bi-directional"
+    },
+    {
+      "name": "E1733A_CI_REVRAWACC",
+      "value": "15",
+      "comment": "R-', Raw Repeatabolity, backward"
+    },
+    {
+      "name": "E1733A_CI_FWDRAWACC",
+      "value": "16",
+      "comment": "R+', Raw Repeatabolity, forward"
+    },
+    {
+      "name": "E1733A_CI_BIRAWACC",
+      "value": "17",
+      "comment": "R', Raw Repeatabolity, bi-directional"
+    },
+    {
+      "name": "E1733A_CI_SIXSIGMA",
+      "value": "18",
+      "comment": "A-', Raw Accuracy, backward"
+    },
+    {
+      "name": "E1733A_CI_SLOPELS",
+      "value": "19",
+      "comment": "A+', Raw Accuracy, forward"
+    },
+    {
+      "name": "E1733A_CI_SLOPEEP",
+      "value": "20",
+      "comment": "A', Raw Accuracy, bi-directional"
+    },
+    {
+      "name": "E1733A_CI_VDI_P",
+      "value": "21",
+      "comment": "6*sigma, six times of standard deviation"
+    },
+    {
+      "name": "E1733A_CI_VDI_PSMAX",
+      "value": "22",
+      "comment": "slope, least square method"
+    },
+    {
+      "name": "E1733A_CI_VDI_PSMEAN",
+      "value": "23",
+      "comment": "slope, end point method"
+    },
+    {
+      "name": "E1733A_CI_VDI_PSU",
+      "value": "24",
+      "comment": "VDI standard, positional uncertainty"
+    },
+    {
+      "name": "E1733A_CI_VDI_PA",
+      "value": "25",
+      "comment": "VDI standard, mean positional scatter"
+    },
+    {
+      "name": "E1733A_CI_VDI_UMAX",
+      "value": "26",
+      "comment": "VDI standard, mean positional scatter"
+    },
+    {
+      "name": "E1733A_CI_VDI_UMEAN",
+      "value": "27",
+      "comment": "VDI standard, positional scatter and uncertainty"
+    },
+    {
+      "name": "E1733A_CI_MAX_ELEVATION",
+      "value": "30",
+      "comment": "VDI standard, position deviation"
+    },
+    {
+      "name": "E1733A_CI_PLUSMINUS",
+      "value": "35",
+      "comment": "VDI standard, reversal error"
+    },
+    {
+      "name": "E1733A_CI_CLOSURE_DH",
+      "value": "31",
+      "comment": "VDI standard, mean reversal error"
+    },
+    {
+      "name": "E1733A_CI_CLOSURE_BF",
+      "value": "32",
+      "comment": "Num=0 for all axes, 1 for axis 1, ..."
+    },
+    {
+      "name": "E1733A_CI_PAR_RESULT",
+      "value": "33",
+      "comment": "Plus/Minus value"
+    },
+    {
+      "name": "E1733A_CI_SQU_RESULT",
+      "value": "34",
+      "comment": "Closure between DH, flatness only"
+    },
+    {
+      "name": "E1733A_CI_POS_MAX",
+      "value": "40",
+      "comment": "Closure between BF, flatness only"
+    },
+    {
+      "name": "E1733A_CI_POS_MIN",
+      "value": "41",
+      "comment": "parallelism result"
+    },
+    {
+      "name": "E1733A_CI_POS_MEAN",
+      "value": "42",
+      "comment": "squareness result"
+    },
+    {
+      "name": "E1733A_CI_POS_NSIGMA",
+      "value": "43",
+      "comment": "maximum position, time base only"
+    },
+    {
+      "name": "E1733A_CI_VEL_MAX",
+      "value": "44",
+      "comment": "minimum position, time base only"
+    },
+    {
+      "name": "E1733A_CI_VEL_MIN",
+      "value": "45",
+      "comment": "mean position, time base only"
+    },
+    {
+      "name": "E1733A_CI_VEL_MEAN",
+      "value": "46",
+      "comment": "N*Sigma position, time base only"
+    },
+    {
+      "name": "E1733A_CI_VEL_NSIGMA",
+      "value": "47",
+      "comment": "maximum velocity, time base only"
+    },
+    {
+      "name": "E1733A_CI_ACC_MAX",
+      "value": "48",
+      "comment": "minimum velocity, time base only"
+    },
+    {
+      "name": "E1733A_CI_ACC_MIN",
+      "value": "49",
+      "comment": "mean velocity, time base only"
+    },
+    {
+      "name": "E1733A_CI_ACC_MEAN",
+      "value": "50",
+      "comment": "N*Sigma velocity, time base only"
+    },
+    {
+      "name": "E1733A_CI_ACC_NSIGMA",
+      "value": "51",
+      "comment": "maximum acceleration, time base only"
+    }
+  ]
+}

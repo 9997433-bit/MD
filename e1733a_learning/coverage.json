@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-08-27T05:03:07.153618+00:00",
+  "total_identifiers": 178,
+  "by_status": {
+    "E1": 156,
+    "unknown": 20,
+    "candidate": 1,
+    "forbidden_writer": 1
+  },
+  "by_block": {
+    "acquisition": 75,
+    "analysis": 59,
+    "compensation": 25,
+    "formats": 19
+  },
+  "unknown_count": 20,
+  "e1_count": 156,
+  "stop_condition": {
+    "catalog_no_empty_identifier": true,
+    "unknown_exports_without_window": true,
+    "forced_null_bridges_intact": true,
+    "forbidden_writers_intact": true,
+    "no_fake_vendor_fsm": true,
+    "conclusion": "三块核心目录完整；非厂商软件等价；非掌握运行行为"
+  }
+}

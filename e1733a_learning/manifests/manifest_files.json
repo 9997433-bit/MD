@@ -1,0 +1,272 @@
+{
+  "generated_at": "2026-08-27T05:03:02.532166+00:00",
+  "source_dir": "/tmp/seed-repo/extracted",
+  "file_count": 53,
+  "files": [
+    {
+      "path": "ComDrv64.inf",
+      "size_bytes": 1363,
+      "sha256": "4061aede8162f5f4543f2820c4922d2b0c935503cff426b9dd664cca3ec9d899"
+    },
+    {
+      "path": "ComDrv64.sys",
+      "size_bytes": 63752,
+      "sha256": "06b73ca336901845304e6606fd8ca9c572d205ae77ba19eb8ffce4fd893e33cc"
+    },
+    {
+      "path": "E1733A.exe",
+      "size_bytes": 7731576,
+      "sha256": "0884c95a7d94e978c2bf21ee76338a88e92d1b9f3ddb55ae921fe619db29865e"
+    },
+    {
+      "path": "E1733A_Automation.pdf",
+      "size_bytes": 1259497,
+      "sha256": "6703b4d4e97aa65ef9d0bdb2be894ceff7baa8919cbca6783f4424517000255e"
+    },
+    {
+      "path": "E1733A_Help_English.pdf",
+      "size_bytes": 962032,
+      "sha256": "af274c31f0e84b05cc3433470eaf9b3f348b06d007a893584c0abc380d490e21"
+    },
+    {
+      "path": "E1733A_Remote.h",
+      "size_bytes": 37821,
+      "sha256": "bfa3e6c177f3ca0a7b82d6e34371879568ae5440f4a3bcc5e01cfef617bbc1d1"
+    },
+    {
+      "path": "E1735A.dll",
+      "size_bytes": 3573112,
+      "sha256": "8611026528a746af7cc43a2b65fca6fea4f3d3b99f16804e43c09ee7de8fa8c7"
+    },
+    {
+      "path": "E1735ACore.dll",
+      "size_bytes": 3718520,
+      "sha256": "4e7aa8153306b763ea5255bff97b76c58bf58142b0755ab3f42208a8a1a2647f"
+    },
+    {
+      "path": "E1736A.dll",
+      "size_bytes": 1650552,
+      "sha256": "d2b0080cf089205d547f890d49df72c7ce00601b747e29dff25c883880e1e032"
+    },
+    {
+      "path": "E1736ACore.dll",
+      "size_bytes": 3556728,
+      "sha256": "a18808333154ffe74aed1f310e5b6e79722e75ba25ba35127a61aec581ac60cc"
+    },
+    {
+      "path": "English.csv",
+      "size_bytes": 44281,
+      "sha256": "8d7812706314b89f890ebd9fab81f64ca31dcf2e7cd256f33bc7eb9bf74e3bac"
+    },
+    {
+      "path": "French.csv",
+      "size_bytes": 46611,
+      "sha256": "b705cfd4d9eccaf03d0d2263e440412ebf297462c91e1cfd5969c6d2df8d6c3c"
+    },
+    {
+      "path": "German.csv",
+      "size_bytes": 45374,
+      "sha256": "8529d27754bb013204af2fa3e0485c0baf4f1539880bad98e41daeab6f4631b6"
+    },
+    {
+      "path": "Italian.csv",
+      "size_bytes": 27847,
+      "sha256": "50e6c395790596c99123e6a228a6fca8be7ce9c4c990e5da03a3d0914ab41791"
+    },
+    {
+      "path": "Japanese.csv",
+      "size_bytes": 34290,
+      "sha256": "c87791a893ce777a6406af0f8b3018cd78d305d73f1432afa5d66635293c4bb4"
+    },
+    {
+      "path": "KSE173xA.inf",
+      "size_bytes": 2864,
+      "sha256": "de0b2defe11eb101dd68d952dee74ae5fc2503a3283ae96a3262e499162814af"
+    },
+    {
+      "path": "Korean.csv",
+      "size_bytes": 39178,
+      "sha256": "d77e92beaf6db4202c26fe1b621c6b4a878746a02f49665c6c5a5b36d4edd11d"
+    },
+    {
+      "path": "PTComDrv.inf",
+      "size_bytes": 2175,
+      "sha256": "b66b75df95170e333a702c5a3410bbe8dec1a83a9319a20ec2d7eb009dfe487b"
+    },
+    {
+      "path": "PTComDrv.sys",
+      "size_bytes": 39560,
+      "sha256": "45d493bbed4814cdbfac7e424779f2c3cce8c8957d3185edd26c2b72edd64e33"
+    },
+    {
+      "path": "Sample.ATB",
+      "size_bytes": 8547,
+      "sha256": "2e5c180e7003b3d3eddf061d71c26e0afa162551ab91cf128356c11630294fe1"
+    },
+    {
+      "path": "Sample.Ang",
+      "size_bytes": 7457,
+      "sha256": "432077dc346f53eed37651220b173401b09cc2c44a681fac76143267770711e5"
+    },
+    {
+      "path": "Sample.Dia",
+      "size_bytes": 8713,
+      "sha256": "99f29367d668b2a9b8283af040f8e2f835d3acbc20feeb7b8bf329cb412a0ebf"
+    },
+    {
+      "path": "Sample.Fla",
+      "size_bytes": 7691,
+      "sha256": "9c76fb399e74c92c8f717ba8ee286b759ff5e35601355e532d3605c0989c0b71"
+    },
+    {
+      "path": "Sample.LDA",
+      "size_bytes": 7248,
+      "sha256": "c7ca3b174562eddf56901e348411a650f2b77d2ed6bc9b11b6823087e042e8e9"
+    },
+    {
+      "path": "Sample.LTB",
+      "size_bytes": 143216,
+      "sha256": "3c15ad8988ee4e329d6ab8aa9465169df42a0b5811c2299c1e98ebf7d02be24c"
+    },
+    {
+      "path": "Sample.Lin",
+      "size_bytes": 7834,
+      "sha256": "e1d8092046ba3ae2d9f70f8c8090420046883d12e1d5ef31fbad8ab33b8933b5"
+    },
+    {
+      "path": "Sample.Par",
+      "size_bytes": 7159,
+      "sha256": "308bcb39b180e3d23d85940bde64d33a1c689092d5e95395d45b3a7fbae0f42a"
+    },
+    {
+      "path": "Sample.STB",
+      "size_bytes": 8137,
+      "sha256": "0b137dfab7a89c32e6d8ee8bf0d3d380526b10431d1bfb5b2ec4c1894a724f1c"
+    },
+    {
+      "path": "Sample.Squ",
+      "size_bytes": 7501,
+      "sha256": "d80778fbcb921e636d8bd881855e271c71c3d1022d1b06da6491f9ca1aaa09cb"
+    },
+    {
+      "path": "Sample.Way",
+      "size_bytes": 7105,
+      "sha256": "e4b96488a0912d1c5b794a384d7977a44312b97ef39d7d553aad6158841f6be9"
+    },
+    {
+      "path": "Sample.rot",
+      "size_bytes": 7103,
+      "sha256": "5acdd15ac990eaa5f81cd35926e88dcadc63042c193174b0267b2bb24c544b5d"
+    },
+    {
+      "path": "Sample.str",
+      "size_bytes": 7517,
+      "sha256": "b699f1309b151ce8927f7da408b09293a18ce334bdaf2b4c645afbe27e5b97be"
+    },
+    {
+      "path": "Setup.exe",
+      "size_bytes": 2487672,
+      "sha256": "4e5e8ad136a4ee537d88bbe012689765918b0a9d09d3a57dd6e3609bfb8eca0b"
+    },
+    {
+      "path": "SimpChn.csv",
+      "size_bytes": 36188,
+      "sha256": "ad238f1cfb943ea73b0170e212222994170441314d50c1040595c49b23f95b0a"
+    },
+    {
+      "path": "Spanish.csv",
+      "size_bytes": 31009,
+      "sha256": "1d6b89a957fdc262bf9a35b4d90f470bb01f12d685b5997ab652f69453c0e2fd"
+    },
+    {
+      "path": "TradChn.csv",
+      "size_bytes": 35763,
+      "sha256": "8c9247f90dfdf5ee7abb9c1a7d2fa560fe52a4af6796c378916d2590f90130ad"
+    },
+    {
+      "path": "Uninst.exe",
+      "size_bytes": 3691384,
+      "sha256": "ad97bcd76a39ae3d89326fdbdedcd51417a0e0708f6571405760ab3f767a6195"
+    },
+    {
+      "path": "comdrv64.cat",
+      "size_bytes": 9590,
+      "sha256": "747f797d1cb9eb4d0c6b79aef2a43aa9c6d8d2310f5e6a5d7d1fd903dd9f136b"
+    },
+    {
+      "path": "ptcomdrv.cat",
+      "size_bytes": 9558,
+      "sha256": "3b398339378b3dbf59b9e667b18e4dedbfff48b448dab779479b5f60b8c69986"
+    },
+    {
+      "path": "w10x64~KSE173xA.inf",
+      "size_bytes": 2587,
+      "sha256": "495d56ca6ff5c749419923def6dfe613e59b3d3f74601e51b2187fd1541d8e8a"
+    },
+    {
+      "path": "w10x64~KSE173xA.sys",
+      "size_bytes": 33840,
+      "sha256": "66f33bd575833806d49b2529a973111244432ea2270dfb780ff4738434ca883e"
+    },
+    {
+      "path": "w10x64~WdfCoInstaller01011.dll",
+      "size_bytes": 1805352,
+      "sha256": "29ef9335b303b285f42929399df4f212d6d309c6f94b8b8902fa08709b31fa18"
+    },
+    {
+      "path": "w10x64~kse173xa.cat",
+      "size_bytes": 11085,
+      "sha256": "d3096033f947c04c4c8290b1a40747a6b2d6b57660e36fde80dd004c3c8aa5de"
+    },
+    {
+      "path": "w10x86~KSE173xA.inf",
+      "size_bytes": 2583,
+      "sha256": "dac7b3da1b48e45d70879581f2997d41c4921a568ffb9b3a5a0293d0b01f0227"
+    },
+    {
+      "path": "w10x86~KSE173xA.sys",
+      "size_bytes": 29232,
+      "sha256": "265ad7d07e8cad0f57df22f3144eb11449a98ed1e5603c5819ae9d9cb3272d50"
+    },
+    {
+      "path": "w10x86~WdfCoinstaller01011.dll",
+      "size_bytes": 1638440,
+      "sha256": "2e09e411ca825e179abea2275cac65b79100f21960ce6ae4c84479c086fd0cec"
+    },
+    {
+      "path": "w10x86~kse173xa.cat",
+      "size_bytes": 11069,
+      "sha256": "a3806d14064a984f0d509ec821b7173587dfd8ca102b41c2adada2e55570164b"
+    },
+    {
+      "path": "w7x64~KSE173xA.sys",
+      "size_bytes": 27912,
+      "sha256": "18b3a807101babb0a190abe9980ced2c48221f27584dfb3384a73b6495ef006a"
+    },
+    {
+      "path": "w7x64~WdfCoinstaller01011.dll",
+      "size_bytes": 1804440,
+      "sha256": "422de34d79084813a7548b3e4c1fb11e3340f8d23159625ec9c84752a83d5344"
+    },
+    {
+      "path": "w7x64~kse173xa.cat",
+      "size_bytes": 10758,
+      "sha256": "2c94910cb56453ba6af7029d50ea4bd47d36e9e9c684ad98d235d62aab76c05e"
+    },
+    {
+      "path": "w7x86~KSE173xA.sys",
+      "size_bytes": 23304,
+      "sha256": "911f877bcf201df293d0bbf3231fc9bae4aa8b1e77f6f424affd2a447697847f"
+    },
+    {
+      "path": "w7x86~WdfCoinstaller01011.dll",
+      "size_bytes": 1637528,
+      "sha256": "8ae60cf12c252c879994dbd858799d3cee8abe36972e2628d63cee59074ec51c"
+    },
+    {
+      "path": "w7x86~kse173xa.cat",
+      "size_bytes": 10749,
+      "sha256": "fe7137a990afb4b52661a63334c1a2c4633589be3d865a0cf7f90271784e9769"
+    }
+  ]
+}

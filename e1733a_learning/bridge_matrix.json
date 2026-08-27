@@ -1,0 +1,37 @@
+{
+  "forced_null_bridges": [
+    "FMT-LTB -> ALG-VELOCITY",
+    "CMP-UNK-AMBIENT-BODY -> CMP-UNK-LASERDIST-BODY same path",
+    "CompSel Interpolate -> spline evaluation",
+    "ACQ-E1-CMD-START -> E1735A task instance continuity",
+    "E4/self ISO script -> vendor acquisition FSM",
+    "LinearErr field -> CC_ANALYSIS implementation",
+    "Wavelength Compensation string -> Edlen/Ciddor formula"
+  ],
+  "cells": {
+    "acq_to_ana": {
+      "proven_bridge": null,
+      "reason": "no frozen CFG from E1735A_ReadSample to CC_ANALYSIS"
+    },
+    "acq_to_cmp": {
+      "proven_bridge": null,
+      "reason": "no frozen path to CompCalc"
+    },
+    "ana_to_cmp": {
+      "proven_bridge": null,
+      "reason": "Comp table generation body unknown"
+    },
+    "open_lin_to_alg": {
+      "proven_bridge": null,
+      "reason": "Sample.Lin parse only; no algorithm window"
+    },
+    "open_ltb_to_velocity": {
+      "proven_bridge": null,
+      "reason": "forced null"
+    },
+    "ambient_to_laserdist": {
+      "proven_bridge": null,
+      "reason": "forced null separate modules"
+    }
+  }
+}
