@@ -24,6 +24,10 @@ def main() -> int:
         "identifier_index": (ROOT / "IDENTIFIER_INDEX.md").exists(),
         "bom_crosswalk": (ROOT / "manifests" / "bom_crosswalk.json").exists(),
         "phase_roadmap": (ROOT / "manifests" / "phase_roadmap.json").exists(),
+        "catalog_integrity": (ROOT / "manifests" / "catalog_integrity.json").exists(),
+        "sensitive_audit_clean": json.loads(
+            (ROOT / "manifests" / "sensitive_audit.json").read_text(encoding="utf-8")
+        ).get("ok", False),
         "no_captures_yet": not (ROOT / "phase_b" / "captures" / "eeprom.bin").exists(),
     }
     result = {

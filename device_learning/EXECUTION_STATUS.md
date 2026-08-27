@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**42 pytest**，停止条件 **10/10 pass**
+**规模**：**237 条 identifier**，**52 pytest**，停止条件 **10/10 pass**
 
 ## 八层目录
 
@@ -20,15 +20,30 @@
 ## 静态阶段验收
 
 ```bash
+make verify
+# 或
 python3 scripts/verify_completion.py
 # → static_phase_complete: true
 ```
 
-## 自动报告
+## 关键产物
 
-- `STATIC_REPORT.md` — 人类可读摘要
-- `manifests/completion_status.json` — 机器可读验收
-- `HARDWARE_HANDOFF.md` — 实机接入步骤
+| 文件 | 用途 |
+|------|------|
+| `STATIC_REPORT.md` | 人类可读摘要 |
+| `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
+| `manifests/evidence_summary.json` | 一页式证据摘要 |
+| `manifests/pending_index.json` | 98 条阻塞项 |
+| `manifests/phase_roadmap.json` | 阶段 B/C 解锁路线 |
+| `HARDWARE_HANDOFF.md` | 实机接入步骤 |
+
+## 一键命令
+
+```bash
+make ledger    # 生成账本
+make test      # 运行测试
+make phase-b   # 实机采集后刷新
+```
 
 ## 下一步（需实物）
 

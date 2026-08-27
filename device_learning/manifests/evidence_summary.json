@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-08-27T15:39:18.930017+00:00",
+  "phase": "static_complete_pending_hardware",
+  "identifiers": 237,
+  "status_counts": {
+    "confirmed": 68,
+    "candidate": 65,
+    "unknown": 56,
+    "hypothesis": 6,
+    "not_started": 30,
+    "missing": 12
+  },
+  "blocked": 98,
+  "hardware_ready": {
+    "eeprom_present": false,
+    "usb_capture_present": false,
+    "protocol_log_present": false
+  },
+  "bitstream": {
+    "idcode": null,
+    "frames_est": 627,
+    "iob_candidate": 223
+  },
+  "eeprom_status": "synthetic_pipeline_test",
+  "stop_conditions_pass": true,
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}
