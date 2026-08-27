@@ -61,6 +61,16 @@ namespace Aetherboard.VR
             netPanelGo.transform.localRotation = Quaternion.Euler(0f, -28f, 0f);
             netPanelGo.AddComponent<BattleNetVRPanel>().Bind(net);
 
+            var bossPanelGo = new GameObject("BattleBossSelectPanel");
+            bossPanelGo.transform.SetParent(root.transform, false);
+            bossPanelGo.transform.localPosition = new Vector3(-0.58f, 0.22f, -0.35f);
+            bossPanelGo.transform.localRotation = Quaternion.Euler(0f, 28f, 0f);
+            bossPanelGo.AddComponent<BattleBossSelectPanel>().Bind(director);
+
+            var hintGo = new GameObject("BattleControlsHint");
+            hintGo.transform.SetParent(root.transform, false);
+            hintGo.AddComponent<BattleControlsHint>();
+
             var resultGo = new GameObject("BattleResultOverlay");
             resultGo.transform.SetParent(root.transform, false);
             resultGo.AddComponent<BattleResultOverlay>().Bind(director);

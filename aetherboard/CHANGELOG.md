@@ -1,5 +1,12 @@
 # Aetherboard 更新日志
 
+## [0.2.1-vr] — 2026-08-27
+
+### VR UX（Phase 2）
+- 世界空间 **Boss 选择面板**（桌台左侧，Quest 无需键盘）
+- 首次启动 **操作提示** 面板（PlayerPrefs 记住关闭状态）
+- Quest 验收报告增加 BossSelectPanel 检查
+
 ## [0.2.0-vr] — 2026-08-27
 
 ### 发布
