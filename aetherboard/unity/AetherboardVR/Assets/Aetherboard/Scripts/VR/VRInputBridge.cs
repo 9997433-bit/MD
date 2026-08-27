@@ -10,21 +10,21 @@ namespace Aetherboard.VR
     public class VRInputBridge : MonoBehaviour
     {
         private BattleDirector _director;
-        private BattleTableView _table;
         private SkillRingController _skillRing;
         private DesktopBattleInput _desktop;
-        private PieceToken _lastSelected;
+        private CoopController _coop;
 
         public void Bind(
             BattleDirector director,
             BattleTableView table,
             SkillRingController skillRing,
-            DesktopBattleInput desktop)
+            DesktopBattleInput desktop,
+            CoopController coop = null)
         {
             _director = director;
-            _table = table;
             _skillRing = skillRing;
             _desktop = desktop;
+            _coop = coop;
         }
 
         private void Update()
@@ -60,6 +60,7 @@ namespace Aetherboard.VR
                 }
             }
             if (nearest == null) return;
+            if (_coop != null && !_coop.CanControlUnit(nearest.UnitId)) return;
             _desktop.SelectPiece(nearest);
             var unit = _director.State.Party.Find(u => u.Id == nearest.UnitId);
             if (unit != null)

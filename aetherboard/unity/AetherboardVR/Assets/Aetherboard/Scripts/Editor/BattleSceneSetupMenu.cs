@@ -10,26 +10,37 @@ namespace Aetherboard.Editor
     {
         private const string ScenePath = "Assets/Aetherboard/Scenes/BattleTable.unity";
 
-        [MenuItem("Aetherboard/Create Battle Root")]
-        public static void CreateBattleRoot()
-        {
-            var root = new GameObject("BattleRoot");
-            root.AddComponent<RuntimeSceneBootstrap>();
-            Selection.activeGameObject = root;
-            Debug.Log("Aetherboard: BattleRoot with RuntimeSceneBootstrap created. Press Play to build table.");
-        }
-
         [MenuItem("Aetherboard/Create Battle Scene File")]
         public static void CreateBattleScene()
         {
             System.IO.Directory.CreateDirectory("Assets/Aetherboard/Scenes");
             var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
-            var root = new GameObject("AetherboardBootstrap");
-            root.AddComponent<RuntimeSceneBootstrap>();
+
+            var bootstrap = new GameObject("AetherboardBootstrap");
+            bootstrap.AddComponent<RuntimeSceneBootstrap>();
+
             EditorSceneManager.SaveScene(scene, ScenePath);
-            var scenes = new[] { ScenePath };
-            EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
-            Debug.Log($"Aetherboard: Scene saved to {ScenePath} and added to Build Settings.");
+            var scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
+            EditorBuildSettings.scenes = scenes;
+            Debug.Log($"Aetherboard: Saved {ScenePath} and registered in Build Settings.");
+        }
+
+        [MenuItem("Aetherboard/Build Full Battle (Edit Mode Preview)")]
+        public static void BuildFullBattleInEditor()
+        {
+            if (Application.isPlaying)
+            {
+                Debug.LogWarning("Exit Play mode first.");
+                return;
+            }
+            var existing = Object.FindObjectOfType<BattleDirector>();
+            if (existing != null)
+            {
+                Debug.LogWarning("BattleDirector already exists in scene.");
+                return;
+            }
+            BattleSceneBuilder.Build();
+            Debug.Log("Aetherboard: Battle scene built in editor (use Play to test).");
         }
 
         [MenuItem("Aetherboard/Open Setup Guide")]
@@ -42,10 +53,8 @@ namespace Aetherboard.Editor
         {
             var path = System.IO.Path.GetFullPath(
                 System.IO.Path.Combine(Application.dataPath, $"../../docs/{filename}"));
-            if (System.IO.File.Exists(path))
-                EditorUtility.RevealInFinder(path);
-            else
-                Debug.LogWarning($"{filename} not found at " + path);
+            if (System.IO.File.Exists(path)) EditorUtility.RevealInFinder(path);
+            else Debug.LogWarning($"{filename} not found.");
         }
     }
 }

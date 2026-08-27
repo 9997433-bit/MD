@@ -3,20 +3,17 @@ using Aetherboard.Core;
 
 namespace Aetherboard.VR
 {
-    /// <summary>
-    /// IMGUI overlay for phase control — works without Canvas prefab.
-    /// </summary>
     public class BattleHUDController : MonoBehaviour
     {
         private BattleDirector _director;
-        private DesktopBattleInput _desktop;
+        private CoopController _coop;
         private Vector2 _scroll;
-        private readonly GUILayoutOption _btnW = GUILayout.Width(120);
+        private readonly GUILayoutOption _btnW = GUILayout.Width(118);
 
-        public void Bind(BattleDirector director)
+        public void Bind(BattleDirector director, CoopController coop)
         {
             _director = director;
-            _desktop = director.GetComponent<DesktopBattleInput>();
+            _coop = coop;
         }
 
         private void OnGUI()
@@ -25,10 +22,12 @@ namespace Aetherboard.VR
             var state = _director.State;
             var boss = state.Boss;
 
-            GUILayout.BeginArea(new Rect(12, 12, 320, Screen.height - 24), GUI.skin.box);
+            GUILayout.BeginArea(new Rect(12, 12, 340, Screen.height - 24), GUI.skin.box);
             GUILayout.Label("<b>Aetherboard</b>", RichLabel());
             GUILayout.Label($"Boss: {boss.Name}  HP {boss.Hp}/{boss.MaxHp}  P{boss.Phase}");
             GUILayout.Label($"回合 {state.Turn}  |  阶段: {PhaseLabel(state.Phase)}");
+            if (_coop != null)
+                GUILayout.Label($"模式: {_coop.ActivePlayerLabel}", RichLabel());
             GUILayout.Label($"机制: {TelegraphLabel(boss.Telegraph)}");
             if (boss.FuryCastTurns > 0)
                 GUILayout.Label($"<color=red>读条剩余 {boss.FuryCastTurns} 回合</color>", RichLabel());
@@ -40,34 +39,42 @@ namespace Aetherboard.VR
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("土灵 Boss (1)", _btnW)) _director.SetBoss("earth");
-            if (GUILayout.Button("风灵 Boss (2)", _btnW)) _director.SetBoss("wind");
+            if (GUILayout.Button("土灵 (1)", _btnW)) _director.SetBoss("earth");
+            if (GUILayout.Button("风灵 (2)", _btnW)) _director.SetBoss("wind");
             GUILayout.EndHorizontal();
+
+            if (_coop != null)
+            {
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("双人模式 (C)", _btnW)) _coop.ToggleMode();
+                if (GUILayout.Button("切换玩家 (Tab)", _btnW)) _coop.SwitchActivePlayer();
+                GUILayout.EndHorizontal();
+            }
 
             GUILayout.Space(4);
             GUILayout.Label("<b>小队</b>", RichLabel());
             foreach (var u in state.Party)
             {
+                var tag = UnitOwnerTag(u.Id);
                 var status = u.Alive ? $"{u.Hp}/{u.MaxHp}" : "倒下";
-                GUILayout.Label($"• {u.DisplayName}  {status}");
+                GUILayout.Label($"• [{tag}] {u.DisplayName}  {status}");
             }
 
             GUILayout.Space(4);
             GUILayout.Label("<b>战斗日志</b>", RichLabel());
-            _scroll = GUILayout.BeginScrollView(_scroll, GUILayout.Height(160));
+            _scroll = GUILayout.BeginScrollView(_scroll, GUILayout.Height(150));
             for (var i = Mathf.Max(0, state.Log.Count - 12); i < state.Log.Count; i++)
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>桌面: 左键选/移 | 右键技能环 | E结束 A自动 1/2换Boss</size>", RichLabel());
+            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | E/A/1/2</size>", RichLabel());
             GUILayout.EndArea();
         }
 
-        private static GUIStyle RichLabel()
-        {
-            var s = new GUIStyle(GUI.skin.label) { richText = true };
-            return s;
-        }
+        private string UnitOwnerTag(string unitId) => unitId is "knight" or "bard" ? "P1" : "P2";
+
+        private static GUIStyle RichLabel() =>
+            new(GUI.skin.label) { richText = true };
 
         private static string PhaseLabel(BattlePhase phase) => phase switch
         {

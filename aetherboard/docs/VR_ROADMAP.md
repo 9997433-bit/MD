@@ -12,9 +12,15 @@
 | VR 交互脚本 | ✅ | `unity/.../Scripts/VR/` |
 | **运行时自动场景** | ✅ | `RuntimeSceneBootstrap` — 按 Play 即可 |
 | **桌面键鼠测试** | ✅ | `DesktopBattleInput` + IMGUI HUD |
+| **XR Rig 自动创建** | ✅ | `XRRigFactory`（XRI 可用时） |
+| **技能环 UI** | ✅ | `SkillRingController` 世界空间芯片 |
+| **读条 / 机制 VFX** | ✅ | `FuryCastBarVFX` + 缩圈脉冲 / 重击震波 |
 | Quest 打包向导 | ✅ | Editor 菜单 + `QUEST_BUILD.md` |
-| XR Origin Prefab 场景 | 🔲 | 需替换自动相机为 XR Rig |
-| 机制 VFX 美术 | 🔲 | Telegraph 圈 / 读条条 |
+| **本地双人协作** | ✅ | `CoopController` — P1 铁卫/游弦，P2 白愈/黑炎 |
+| **程序化音效** | ✅ | `BattleAudioController` — 阶段/伤害/读条提示音 |
+| **机制粒子 VFX** | ✅ | `BattleParticleVFX` — 预警格粒子爆发 |
+| **BattleTable 场景** | ✅ | `Scenes/BattleTable.unity` + `BattleSceneBuilder` |
+| XR Origin 官方 Prefab | 🔲 | 可替换为 `GameObject → XR → XR Origin` |
 | 在线多人 | 🔲 | Host 权威同步 |
 
 ## 技术栈
@@ -47,7 +53,7 @@ cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 
 # Unity 项目
 # Unity Hub → 打开 aetherboard/unity/AetherboardVR
-# 菜单 Aetherboard → Create Battle Root
+# 菜单 Aetherboard → Create Battle Scene File
 ```
 
 完整步骤见 [UNITY_SETUP.md](./UNITY_SETUP.md)。

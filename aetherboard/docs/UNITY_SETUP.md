@@ -26,6 +26,7 @@ aetherboard/unity/AetherboardVR
    - 点击棋子 → 点击格子移动
    - `E` 结束阶段 | `A` 自动一步
    - `1` 土灵 Boss | `2` 风灵 Boss
+   - `C` 切换双人模式 | `Tab` 切换 P1/P2
    - **右键** 打开技能环（GCD/oGCD 阶段）→ 点击技能芯片 → 点击目标格
 
 ### VR 操作（头显模式）

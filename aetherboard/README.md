@@ -35,7 +35,9 @@ python3 -m http.server 8765
 
 ## Unity VR 快速开始
 
-**最快路径**：Unity Hub 打开 `unity/AetherboardVR` → 按 **Play**（自动创建战棋桌）
+**最快路径**：Unity Hub 打开 `unity/AetherboardVR` → 打开 `BattleTable` 场景或按 **Play**（自动创建战棋桌）
+
+桌面快捷键：`C` 双人模式 | `Tab` 切换 P1/P2
 
 ```bash
 # C# 核心测试（无需 Unity）
