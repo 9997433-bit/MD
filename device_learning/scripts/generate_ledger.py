@@ -50,6 +50,7 @@ FEEDERS = [
     ["build_experiment_index.py"],
     ["build_phase_c_readiness.py"],
     ["build_static_closure.py"],
+    ["build_handoff_bundle.py"],
     ["redact_manifests.py"],
     ["audit_sensitive_tokens.py"],
     ["validate_catalog_integrity.py"],

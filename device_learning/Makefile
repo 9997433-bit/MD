@@ -42,6 +42,9 @@ closure:
 	@echo "---"
 	@head -24 STATIC_CLOSURE.md
 
+bundle:
+	python3 scripts/build_handoff_bundle.py
+
 freeze: verify
 	@echo "Static phase frozen — see manifests/static_freeze.json"
 

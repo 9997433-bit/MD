@@ -1,13 +1,13 @@
 {
-  "frozen_at": "2026-08-27T16:20:58.104234+00:00",
+  "frozen_at": "2026-08-27T16:24:18.559977+00:00",
   "phase": "static_complete_pending_hardware",
   "static_phase_complete": true,
   "identifiers": 237,
   "confirmed": 68,
   "blocked": 98,
-  "git_commit": "969cef18847f7c580ef640fe1774f5323cfa0a0c",
+  "git_commit": "230b7d13d446d2cd74e17cdcf72fea52d0d98ca5",
   "input_file_count": 11,
-  "output_combined_sha256": "922c97ed10d3eccd61811c94ece1d7dd3a60a8145580dff76947f4e4e1837e56",
+  "output_combined_sha256": "379e5d5366648ac894f519a797bd5cbdd8a4b5d7dc2112459434a667afcf4903",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "next_phase": "phase_b_hardware_capture",
   "stop_conditions_pass": true

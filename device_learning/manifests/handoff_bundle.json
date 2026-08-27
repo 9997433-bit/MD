@@ -1,0 +1,491 @@
+{
+  "generated_at": "2026-08-27T16:24:17.112242+00:00",
+  "package": "device_learning",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "resume_commands": [
+    "make intake",
+    "make check-captures",
+    "make phase-b",
+    "make proposals"
+  ],
+  "sections": {
+    "manifests_static_closure": {
+      "generated_at": "2026-08-27T16:24:17.033886+00:00",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+      "static_phase_closed": true,
+      "frozen": true,
+      "identifiers": 237,
+      "status_counts": {
+        "confirmed": 68,
+        "candidate": 65,
+        "unknown": 56,
+        "hypothesis": 6,
+        "not_started": 30,
+        "missing": 12
+      },
+      "pytest_count": 97,
+      "manifest_json_count": 42,
+      "phase_b_blockers_remaining": 3,
+      "upgrade_proposals_pending": 0,
+      "resume_commands": [
+        "make handoff",
+        "make readiness",
+        "make check-captures",
+        "make phase-b",
+        "make proposals",
+        "make phase-c"
+      ],
+      "resume_artifacts": [
+        "phase_b/captures/eeprom.bin",
+        "phase_b/captures/usb_enum.pcapng",
+        "phase_b/captures/usb_session.pcapng",
+        "phase_b/captures/protocol_log.json"
+      ],
+      "boundary": "No further catalog status upgrades without hardware evidence"
+    },
+    "manifests_static_phase_closed": {
+      "static_phase_closed": true,
+      "closed_at": "2026-08-27T15:52:00Z",
+      "reason": "All static stop conditions pass; further identifier work requires hardware captures",
+      "resume_with": [
+        "phase_b/captures/eeprom.bin",
+        "phase_b/captures/usb_enum.pcapng",
+        "phase_b/captures/usb_session.pcapng",
+        "phase_b/captures/protocol_log.json"
+      ],
+      "commands": [
+        "make closure",
+        "make intake",
+        "make handoff",
+        "make readiness",
+        "make check-captures",
+        "make phase-b",
+        "make proposals",
+        "make phase-c"
+      ],
+      "reports": [
+        "STATIC_CLOSURE.md",
+        "PHASE_B_READINESS.md",
+        "PHASE_C_READINESS.md",
+        "HARDWARE_HANDOFF.md"
+      ],
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+    },
+    "manifests_phase_b_readiness": {
+      "generated_at": "2026-08-27T16:24:16.263939+00:00",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+      "blockers": [
+        {
+          "id": "eeprom",
+          "label": "EEPROM 全片镜像",
+          "artifact": "phase_b/captures/eeprom.bin",
+          "unblocks": "FW-EEPROM-*, FW-MCU-* (partial)",
+          "present": false,
+          "size_bytes": null
+        },
+        {
+          "id": "usb_enum",
+          "label": "USB 枚举抓包",
+          "artifact": "phase_b/captures/usb_enum.pcapng",
+          "unblocks": "PROTO-DESC-*",
+          "present": false,
+          "size_bytes": null
+        },
+        {
+          "id": "usb_session",
+          "label": "USB 工作会话抓包",
+          "artifact": "phase_b/captures/usb_session.pcapng",
+          "unblocks": "PROTO-EP-*, SIG-* (partial)",
+          "present": false,
+          "size_bytes": null
+        }
+      ],
+      "ready_count": 0,
+      "blocker_count": 3,
+      "deep_analysis_ready": false,
+      "checklist": "0/6",
+      "upgrade_proposals_pending": 0,
+      "next_command": "make check-captures"
+    },
+    "manifests_phase_c_readiness": {
+      "generated_at": "2026-08-27T16:24:16.495021+00:00",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+      "phase_b_prerequisite_met": false,
+      "checklist": "0/6",
+      "experiment_logs": 0,
+      "recommended_action": "complete phase B captures first"
+    },
+    "manifests_phase_transition": {
+      "generated_at": "2026-08-27T16:24:14.105267+00:00",
+      "current_phase": "static_complete_pending_hardware",
+      "recommended_phase": "static_complete_pending_hardware",
+      "transition_ready": false,
+      "capture_flags": {
+        "eeprom_file": false,
+        "eeprom_observed": false,
+        "eeprom_synthetic": false,
+        "usb_enum": false,
+        "usb_session": false,
+        "any_pcap": false
+      },
+      "warnings": [],
+      "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
+    },
+    "manifests_capture_manifest": {
+      "generated_at": "2026-08-27T16:24:16.107496+00:00",
+      "artifacts": [
+        {
+          "path": "phase_b/captures/eeprom.bin",
+          "exists": false
+        },
+        {
+          "path": "phase_b/captures/usb_enum.pcapng",
+          "exists": false
+        },
+        {
+          "path": "phase_b/captures/usb_session.pcapng",
+          "exists": false
+        },
+        {
+          "path": "phase_b/captures/protocol_log.json",
+          "exists": false
+        },
+        {
+          "path": "phase_b/analysis/firmware.bin",
+          "exists": false
+        },
+        {
+          "path": "phase_b/analysis/mcu_disasm.txt",
+          "exists": false
+        }
+      ],
+      "present_count": 0,
+      "expected_count": 6,
+      "flags": {
+        "eeprom_present": false,
+        "eeprom_observed": false,
+        "usb_capture_present": false,
+        "protocol_log_present": false
+      },
+      "eeprom_status": "synthetic_pipeline_test",
+      "usb_capture_status": "missing",
+      "protocol_log_status": "missing",
+      "firmware_extract_status": "missing",
+      "ready_for_deep_analysis": false,
+      "boundary": "Inventory only; status upgrades require ledger refresh"
+    },
+    "manifests_phase_b_upgrade_proposals": {
+      "generated_at": "2026-08-27T16:24:16.185911+00:00",
+      "applicable": false,
+      "proposal_count": 0,
+      "proposals": [],
+      "notes": [
+        "Only synthetic EEPROM available — no upgrade proposals."
+      ],
+      "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
+    },
+    "manifests_phase_roadmap": {
+      "generated_at": "2026-08-27T16:24:15.477759+00:00",
+      "phase_b": [
+        {
+          "action": "eeprom_dump",
+          "artifact": "phase_b/captures/eeprom.bin",
+          "unblocks": [
+            "FW-MCU-CORE-IMAGE",
+            "FW-MCU-RESET-VECTOR",
+            "FW-MCU-CODE-XRAM-MAP",
+            "FW-MCU-I2C-BOOT-PATH",
+            "FW-MCU-RENUMERATION",
+            "FW-EEPROM-IMAGE",
+            "FW-EEPROM-CONFIG-BYTE",
+            "FW-EEPROM-VIDPID",
+            "FW-EEPROM-DESC-OVERRIDE",
+            "FW-EEPROM-BOOT-FORMAT",
+            "FW-EEPROM-DID-FIELD",
+            "FW-EEPROM-FW-RECORDS"
+          ],
+          "feeds": [
+            "analyze_eeprom.py",
+            "scan_firmware_stub.py",
+            "EXP-010-8051-DISASM",
+            "EXP-012-VIDPID"
+          ]
+        },
+        {
+          "action": "usb_enum_capture",
+          "artifact": "phase_b/captures/usb_enum.pcapng",
+          "unblocks": [
+            "PROTO-DESC-DEVICE",
+            "PROTO-DESC-CONFIG",
+            "PROTO-DESC-INTERFACE",
+            "PROTO-DESC-STRING",
+            "PROTO-EP-MAP"
+          ],
+          "feeds": [
+            "analyze_pcap_stub.py",
+            "EXP-002-USB-ENUM",
+            "EXP-013-ENDPOINT-MAP"
+          ]
+        },
+        {
+          "action": "usb_session_capture",
+          "artifact": "phase_b/captures/usb_session.pcapng",
+          "unblocks": [
+            "EXP-003-USB-SESSION",
+            "EXP-011-PROTO-TABLE",
+            "EXP-014-DATA-FRAME"
+          ],
+          "feeds": [
+            "analyze_pcap_stub.py"
+          ]
+        }
+      ],
+      "phase_c": [
+        {
+          "experiment": "EXP-001-EEPROM-DUMP",
+          "description": "Read serial EEPROM to binary file",
+          "status": "not_started",
+          "depends": "Need programmer"
+        },
+        {
+          "experiment": "EXP-002-USB-ENUM",
+          "description": "Capture USB enumeration traffic",
+          "status": "not_started",
+          "depends": "Need device+host"
+        },
+        {
+          "experiment": "EXP-003-USB-SESSION",
+          "description": "Capture config+acquire session",
+          "status": "not_started",
+          "depends": "Need official driver"
+        },
+        {
+          "experiment": "EXP-004-PIN-FIFO",
+          "description": "Probe Slave FIFO signals vs REF catalog",
+          "status": "not_started",
+          "depends": "Need scope"
+        },
+        {
+          "experiment": "EXP-005-PIN-ADC",
+          "description": "Probe ADC serial interface timing",
+          "status": "not_started",
+          "depends": "Need scope"
+        },
+        {
+          "experiment": "EXP-006-RELAY-TOGGLE",
+          "description": "Toggle relay and measure coax path",
+          "status": "not_started",
+          "depends": "Need signal source"
+        },
+        {
+          "experiment": "EXP-007-COUPLING",
+          "description": "AC/DC coupling switch behavior",
+          "status": "not_started",
+          "depends": "Need relay command or manual"
+        },
+        {
+          "experiment": "EXP-008-SINE-IN",
+          "description": "Apply known sine, check digitized output",
+          "status": "not_started",
+          "depends": "Need AWG+driver"
+        },
+        {
+          "experiment": "EXP-009-CLOCK-IFCLK",
+          "description": "Measure IFCLK frequency at FPGA",
+          "status": "not_started",
+          "depends": "Need freq counter"
+        },
+        {
+          "experiment": "EXP-010-8051-DISASM",
+          "description": "Disassemble firmware from EEPROM slice",
+          "status": "not_started",
+          "depends": "Depends EXP-001"
+        },
+        {
+          "experiment": "EXP-011-PROTO-TABLE",
+          "description": "Build command byte table from pcap",
+          "status": "not_started",
+          "depends": "Depends EXP-003"
+        },
+        {
+          "experiment": "EXP-012-VIDPID",
+          "description": "Record VID/PID from descriptor or EEPROM",
+          "status": "not_started",
+          "depends": "Depends EXP-001/002"
+        },
+        {
+          "experiment": "EXP-013-ENDPOINT-MAP",
+          "description": "Map bulk IN/OUT endpoint numbers",
+          "status": "not_started",
+          "depends": "Depends EXP-002"
+        },
+        {
+          "experiment": "EXP-014-DATA-FRAME",
+          "description": "Determine sample packing in USB stream",
+          "status": "not_started",
+          "depends": "Depends EXP-008"
+        },
+        {
+          "experiment": "EXP-015-BRG-UPGRADE",
+          "description": "Upgrade hypothesis bridges to confirmed",
+          "status": "not_started",
+          "depends": "Needs EXP-004..008"
+        }
+      ],
+      "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
+    },
+    "manifests_evidence_summary": {
+      "generated_at": "2026-08-27T16:23:38.550358+00:00",
+      "phase": "static_complete_pending_hardware",
+      "identifiers": 237,
+      "status_counts": {
+        "confirmed": 68,
+        "candidate": 65,
+        "unknown": 56,
+        "hypothesis": 6,
+        "not_started": 30,
+        "missing": 12
+      },
+      "blocked": 98,
+      "hardware_ready": {
+        "eeprom_present": false,
+        "eeprom_observed": false,
+        "usb_capture_present": false,
+        "protocol_log_present": false
+      },
+      "bitstream": {
+        "idcode": "0x01414093",
+        "part": "3s200ft256",
+        "build_date": "2011/06/10",
+        "frames_est": 627,
+        "iob_candidate": 223
+      },
+      "eeprom_status": "synthetic_pipeline_test",
+      "catalog_integrity_ok": true,
+      "stop_conditions_pass": true,
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+    },
+    "phase_b_CHECKLIST": {
+      "version": "1.0",
+      "phase": "B",
+      "status": "not_started",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+      "prerequisites": [
+        "legal_authorization",
+        "physical_device",
+        "eeprom_reader",
+        "usb_capture_host"
+      ],
+      "tasks": [
+        {
+          "id": "B1",
+          "name": "eeprom_dump",
+          "artifact": "phase_b/captures/eeprom.bin",
+          "expected_size_bytes": 8192,
+          "template": "phase_b/templates/eeprom_read.md",
+          "verify": "python3 scripts/diff_eeprom.py read1.bin read2.bin",
+          "done": false
+        },
+        {
+          "id": "B2",
+          "name": "usb_enum_capture",
+          "artifact": "phase_b/captures/usb_enum.pcapng",
+          "template": "phase_b/templates/usb_capture.md",
+          "done": false
+        },
+        {
+          "id": "B3",
+          "name": "usb_session_capture",
+          "artifact": "phase_b/captures/usb_session.pcapng",
+          "template": "phase_b/templates/usb_capture.md",
+          "done": false
+        },
+        {
+          "id": "B4",
+          "name": "protocol_log",
+          "artifact": "phase_b/captures/protocol_log.json",
+          "template": "phase_b/templates/protocol_log_template.json",
+          "optional": true,
+          "done": false
+        },
+        {
+          "id": "B5",
+          "name": "ledger_refresh",
+          "command": "make phase-b",
+          "done": false
+        },
+        {
+          "id": "B6",
+          "name": "8051_disasm",
+          "artifact": "phase_b/analysis/mcu_disasm.txt",
+          "template": "phase_b/templates/ghidra_8051.md",
+          "depends": [
+            "B1"
+          ],
+          "done": false
+        }
+      ],
+      "updated_at": "2026-08-27T16:24:14.025196+00:00",
+      "done_count": 0,
+      "total_count": 6
+    },
+    "phase_c_CHECKLIST": {
+      "version": "1.0",
+      "phase": "C",
+      "status": "not_started",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+      "prerequisites": [
+        "phase_b_eeprom_or_pcap",
+        "test_equipment"
+      ],
+      "tasks": [
+        {
+          "id": "C1",
+          "name": "pin_fifo_probe",
+          "experiment": "EXP-004-PIN-FIFO",
+          "equipment": "oscilloscope",
+          "done": false
+        },
+        {
+          "id": "C2",
+          "name": "adc_timing_probe",
+          "experiment": "EXP-005-PIN-ADC",
+          "equipment": "oscilloscope",
+          "done": false
+        },
+        {
+          "id": "C3",
+          "name": "relay_toggle",
+          "experiment": "EXP-006-RELAY-TOGGLE",
+          "equipment": "signal_source",
+          "done": false
+        },
+        {
+          "id": "C4",
+          "name": "sine_input_test",
+          "experiment": "EXP-008-SINE-IN",
+          "equipment": "awg",
+          "done": false
+        },
+        {
+          "id": "C5",
+          "name": "ifclk_measure",
+          "experiment": "EXP-009-CLOCK-IFCLK",
+          "equipment": "frequency_counter",
+          "done": false
+        },
+        {
+          "id": "C6",
+          "name": "experiment_log",
+          "artifact": "phase_c/logs/",
+          "template": "phase_c/logs/README.md",
+          "done": false
+        }
+      ],
+      "updated_at": "2026-08-27T16:24:13.135510+00:00",
+      "done_count": 0,
+      "total_count": 6
+    }
+  },
+  "boundary": "Bundle for human/agent handoff; not a device truth claim"
+}

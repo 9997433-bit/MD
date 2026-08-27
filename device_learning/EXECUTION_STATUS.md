@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**96 pytest**，静态阶段 **已关闭并冻结**
+**规模**：**237 条 identifier**，**97 pytest**，静态阶段 **已关闭并冻结**
 
 ## 八层目录
 
@@ -47,6 +47,7 @@ python3 scripts/verify_completion.py
 | `HARDWARE_HANDOFF.md` | 实机接入步骤 |
 | `STATIC_CLOSURE.md` | 静态阶段关闭摘要 |
 | `PHASE_B_READINESS.md` | 阶段 B 阻塞项与就绪状态 |
+| `manifests/handoff_bundle.json` | 实机恢复一站式 JSON 包 |
 | `manifests/phase_b_upgrade_proposals.json` | 采集后 catalog 升级建议（需人工审阅） |
 
 ## 一键命令
@@ -54,10 +55,12 @@ python3 scripts/verify_completion.py
 ```bash
 make ledger    # 生成账本
 make test      # 运行测试
-make handoff   # 实机交接摘要
 make closure   # 静态关闭摘要
+make intake    # 实机接入分步向导
+make handoff   # 实机交接摘要
 make readiness # 阶段 B 就绪报告
 make check-captures  # 采集文件预检
+make bundle    # 导出 handoff_bundle.json
 make phase-b   # 实机采集后刷新
 make phase-c   # 实验日志校验
 ```

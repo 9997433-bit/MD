@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:20:57.520446+00:00",
-  "artifact_count": 52,
-  "present_count": 52,
+  "generated_at": "2026-08-27T16:24:17.977716+00:00",
+  "artifact_count": 53,
+  "present_count": 53,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 228364
+      "size_bytes": 245790
     },
     {
       "path": "coverage.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 7810
+      "size_bytes": 7961
     },
     {
       "path": "manifests/bit_strings.json",
@@ -200,6 +200,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 14548
+    },
+    {
+      "path": "manifests/handoff_bundle.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 15229
     },
     {
       "path": "manifests/hardware_bom.json",

@@ -44,7 +44,10 @@
 ```bash
 cd device_learning
 make verify          # 生成账本 + 验收
-make test            # 95 项 pytest
+make test            # 97 项 pytest
+make closure         # 静态阶段关闭摘要
+make intake          # 实机接入分步向导
+make bundle          # 导出 handoff_bundle.json
 make health          # 包健康检查
 make handoff         # 实机交接摘要
 make readiness       # 阶段 B 就绪报告
