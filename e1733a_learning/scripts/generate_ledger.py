@@ -53,21 +53,64 @@ def pe_exports(path: Path) -> list[str]:
     return sorted(out)
 
 
+def parse_odf_body(text: str) -> str:
+    end = text.find("<End of Option Description File")
+    return text[:end] if end >= 0 else text
+
+
+def parse_odf_fields(text: str) -> dict:
+    """Parse Option Description File Identify= lines (ODF header only)."""
+    fields: dict = {}
+    for line in parse_odf_body(text).splitlines():
+        if not line.startswith("Identify="):
+            continue
+        rest = line[len("Identify=") :]
+        key, _, valpart = rest.partition(",")
+        typ, _, val = valpart.partition("=")
+        val = val.strip()
+        if val.startswith('"') and val.endswith('"'):
+            val = val[1:-1]
+        fields[key.strip()] = {"type": typ.strip(), "value": val}
+    return fields
+
+
+def _choosing_int(field: dict | None) -> int | None:
+    if not field:
+        return None
+    if field.get("type") == "Choosing":
+        try:
+            return int(field["value"])
+        except ValueError:
+            return None
+    m = re.search(r"Choosing=(\d+)", field.get("value", ""))
+    return int(m.group(1)) if m else None
+
+
+def _has_linear_err_data(field: dict | None) -> bool:
+    if not field:
+        return False
+    v = field.get("value", "")
+    return bool(re.search(r"[-\d]", v))
+
+
 def parse_sample(path: Path) -> dict:
     text = path.read_text(encoding="utf-8", errors="replace")
-    fields = {}
-    for m in re.finditer(r"Identify=([^,]+),([^=\n]+)=([^\n]+)", text):
-        fields[m.group(1)] = {"type": m.group(2), "value": m.group(3).strip()}
-    mea = fields.get("MeaType", {}).get("value", "")
-    mea_match = re.search(r"Choosing=(\d+)", mea)
+    fields = parse_odf_fields(text)
+    mt = _choosing_int(fields.get("MeaType"))
     return {
         "file": path.name,
         "extension": path.suffix.lower(),
         "sha256": sha256_file(path),
-        "mea_type_choosing": int(mea_match.group(1)) if mea_match else None,
+        "mea_type_choosing": mt,
+        "mea_type_name": MEATYPE_MAP.get(mt, (None, None))[0] if mt is not None else None,
+        "trig_type": _choosing_int(fields.get("TrigType")),
+        "standard": _choosing_int(fields.get("Standard")),
+        "comp_calc": _choosing_int(fields.get("CompCalc")),
+        "comp_sel": _choosing_int(fields.get("CompSel")),
         "field_count": len(fields),
-        "has_linear_err": "LinearErr" in fields,
+        "has_linear_err": _has_linear_err_data(fields.get("LinearErr")),
         "has_comp_fields": any(k.startswith("Comp") for k in fields),
+        "has_timebase_raw": "<Time Base Raw Data>" in text,
     }
 
 
@@ -84,8 +127,9 @@ MEATYPE_MAP = {
     9: ("LIN_TIMEBASE", ".LTB"),
     10: ("ANG_TIMEBASE", ".ATB"),
     11: ("STR_TIMEBASE", ".STB"),
+    12: ("LDA", ".LDA"),
     13: ("SINGLE_AXIS", None),
-    14: ("DUAL_AXIS", ".LDA"),
+    14: ("DUAL_AXIS", None),
 }
 
 STANDARDS = {
