@@ -249,7 +249,7 @@ def build_acq_catalog(pe_exports_map: dict) -> list[dict]:
         ("ACQ-E1-TRIG-STR-TARGETWIN", "MEASETUP_TRIGWND_ITEMTEXT"),
         ("ACQ-E1-TRIG-STR-DWELL", "MEASETUP_TRIGDWELL_ITEMTEXT"),
         ("ACQ-E1-TRIG-STR-ENCRES", "MEASETUP_AQBRES_ITEMTEXT"),
-        ("ACQ-E1-TRIG-STR-EPTIMEOUT", "MEASETUP_EPTIMEOUT_CHOOSING"),
+        ("ACQ-E1-TRIG-STR-EPTIMEOUT", "MEASETUP_EPTIMEOUT_ITEMTEXT"),
     ]:
         rows.append(
             entry(

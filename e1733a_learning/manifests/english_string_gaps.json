@@ -76,7 +76,7 @@
         "MEASETUP_TRIGWND_ITEMTEXT",
         "MEASETUP_TRIGDWELL_ITEMTEXT",
         "MEASETUP_AQBRES_ITEMTEXT",
-        "MEASETUP_EPTIMEOUT_CHOOSING"
+        "MEASETUP_EPTIMEOUT_ITEMTEXT"
       ],
       "status": "covered",
       "boundary": "remote_h_constant_exists_in_setup_constants",
