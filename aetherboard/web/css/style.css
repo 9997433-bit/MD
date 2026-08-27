@@ -212,6 +212,22 @@ button.secondary { background: #2f4058; color: var(--text); }
 button.skill { background: #344861; color: var(--text); font-size: 0.85rem; }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
 
+label.replay-import {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  background: #2f4058;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+label.replay-import:has(input:disabled) {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .log-panel ol {
   margin: 0;
   padding-left: 1.1rem;

@@ -56,6 +56,16 @@ namespace Aetherboard.VR
             if (GUILayout.Button("读档 (F9)", _btnW)) _director.RestoreLastSnapshot();
             GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("导出回放 (F6)", _btnW))
+            {
+                GUIUtility.systemCopyBuffer = _director.ExportCommandLogJson();
+                _director.SaveCommandLogToFile();
+            }
+            if (GUILayout.Button("回放 (F7)", _btnW)) _director.LoadAndReplayFromFile();
+            GUILayout.EndHorizontal();
+            GUILayout.Label($"命令记录: {_director.CommandLog.Commands.Count} 条", RichLabel());
+
             var net = FindObjectOfType<BattleNetSession>();
             if (net != null)
             {
@@ -90,7 +100,7 @@ namespace Aetherboard.VR
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | F5/F9存读档 | E/A/1/2</size>", RichLabel());
+            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | F5/F9存读档 | F6/F7回放 | E/A/1/2</size>", RichLabel());
             GUILayout.EndArea();
         }
 

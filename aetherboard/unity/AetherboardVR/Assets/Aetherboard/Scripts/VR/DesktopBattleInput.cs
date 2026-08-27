@@ -42,6 +42,12 @@ namespace Aetherboard.VR
             if (Input.GetKeyDown(KeyCode.Tab)) _coop?.SwitchActivePlayer();
             if (Input.GetKeyDown(KeyCode.F5)) _director.SaveCheckpoint();
             if (Input.GetKeyDown(KeyCode.F9)) _director.RestoreLastSnapshot();
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                GUIUtility.systemCopyBuffer = _director.ExportCommandLogJson();
+                _director.SaveCommandLogToFile();
+            }
+            if (Input.GetKeyDown(KeyCode.F7)) _director.LoadAndReplayFromFile();
 
             var net = FindObjectOfType<BattleNetSession>();
             if (Input.GetKeyDown(KeyCode.H)) net?.SetRole(NetSessionRole.Host);

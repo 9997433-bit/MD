@@ -1,6 +1,7 @@
 import { BOSS_POS, JOB_SKILLS, Phase, SKILLS, TELEGRAPH_TEXT } from "./constants.js";
 import { importHostState } from "./hostState.js";
 import { canControl } from "./coop.js";
+import { CommandLog, downloadReplayJson, replayCommands } from "./replay.js";
 
 const phaseLabel = {
   WARNING: "预警",
@@ -22,6 +23,7 @@ export class GameUI {
     this.playerId = 1;
     this.selectedUnitId = null;
     this.pendingSkillId = null;
+    this.commandLog = new CommandLog(engine.seed, engine.bossId);
 
     this.boardEl = document.getElementById("board");
     this.bossNameEl = document.getElementById("boss-name");
@@ -42,9 +44,13 @@ export class GameUI {
     document.getElementById("btn-end-phase").addEventListener("click", () => this.handleEndPhase());
     document.getElementById("btn-auto").addEventListener("click", () => this.handleAuto());
     document.getElementById("btn-reset").addEventListener("click", () => this.handleReset());
+    document.getElementById("btn-export-replay")?.addEventListener("click", () => this.handleExportReplay());
+    document.getElementById("btn-replay")?.addEventListener("click", () => this.handleReplay());
+    document.getElementById("btn-import-replay")?.addEventListener("change", (e) => this.handleImportReplay(e));
     this.bossSelect.addEventListener("change", () => {
       if (this.remoteMode) return;
       this.onBossChange(this.bossSelect.value);
+      this.recordCommand({ type: "SetBoss", bossId: this.bossSelect.value });
       this.selectedUnitId = null;
       this.pendingSkillId = null;
       this.render();
@@ -62,6 +68,9 @@ export class GameUI {
     this.bossSelect.disabled = true;
     document.getElementById("btn-auto").disabled = true;
     document.getElementById("btn-reset").disabled = true;
+    document.getElementById("btn-export-replay")?.setAttribute("disabled", "true");
+    document.getElementById("btn-replay")?.setAttribute("disabled", "true");
+    document.getElementById("btn-import-replay")?.setAttribute("disabled", "true");
     this.netStatus?.classList.remove("hidden");
     if (client.setPlayerId) client.setPlayerId(this.playerId);
 
@@ -105,6 +114,7 @@ export class GameUI {
       }
     } else {
       this.engine.endPhase();
+      this.recordCommand({ type: "EndPhase" });
     }
     this.render();
   }
@@ -118,9 +128,54 @@ export class GameUI {
   async handleReset() {
     if (this.hostClient) return;
     this.engine.reset(this.bossSelect.value);
+    this.commandLog = new CommandLog(this.engine.seed, this.engine.bossId);
     this.selectedUnitId = null;
     this.pendingSkillId = null;
     this.render();
+  }
+
+  recordCommand(cmd) {
+    if (this.remoteMode) return;
+    this.commandLog.record({
+      turn: this.engine.turn,
+      phase: this.engine.phase,
+      ...cmd,
+    });
+  }
+
+  handleExportReplay() {
+    if (this.remoteMode || this.commandLog.commands.length === 0) return;
+    downloadReplayJson(this.commandLog);
+    navigator.clipboard?.writeText(this.commandLog.toJson()).catch(() => {});
+  }
+
+  handleReplay() {
+    if (this.remoteMode || this.commandLog.commands.length === 0) return;
+    this.engine = replayCommands(this.commandLog);
+    this.selectedUnitId = null;
+    this.pendingSkillId = null;
+    this.render();
+  }
+
+  handleImportReplay(event) {
+    if (this.remoteMode) return;
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const log = CommandLog.fromJson(reader.result);
+        this.commandLog = log;
+        this.engine = replayCommands(log);
+        this.selectedUnitId = null;
+        this.pendingSkillId = null;
+        this.render();
+      } catch (err) {
+        this.setStatus(`回放导入失败: ${err.message}`);
+      }
+      event.target.value = "";
+    };
+    reader.readAsText(file);
   }
 
   render() {
@@ -257,7 +312,16 @@ export class GameUI {
         return;
       }
       const ok = this.engine.useSkill(unit.id, this.pendingSkillId, dest);
-      if (ok) this.pendingSkillId = null;
+      if (ok) {
+        this.recordCommand({
+          type: "Skill",
+          unitId: unit.id,
+          skillId: this.pendingSkillId,
+          targetX: x,
+          targetY: y,
+        });
+        this.pendingSkillId = null;
+      }
       this.render();
       return;
     }
@@ -274,6 +338,12 @@ export class GameUI {
         return;
       }
       this.engine.moveUnit(unit.id, dest);
+      this.recordCommand({
+        type: "Move",
+        unitId: unit.id,
+        targetX: x,
+        targetY: y,
+      });
       this.render();
     }
   }

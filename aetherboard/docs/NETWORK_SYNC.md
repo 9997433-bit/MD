@@ -4,64 +4,77 @@ Aetherboard 使用 **Host 权威** 模型：Host 运行战斗状态机，客户�
 
 ## 协议
 
-每行一条 JSON（换行分隔，适合 TCP）：
-
 | type | 方向 | 说明 |
 |------|------|------|
-| `welcome` | Host → Client | `seed`, `bossId` |
-| `state` | Host → All | `payload` = 完整战斗状态（对齐 `schema/battle_state.schema.json`） |
-| `command` | Client → Host | `cmd` = `{type, unitId, skillId, targetX, targetY, bossId}` |
+| `welcome` | Host → Client | `seed`, `bossId`, `coop` |
+| `state` | Host → All | `payload` = 完整战斗状态 |
+| `command` | Client → Host | `cmd` 含 `playerId`（双人模式） |
 | `error` | Host → Client | `message` |
 
-命令 `type` 取值：`Move` | `Skill` | `EndPhase` | `SetBoss`
+命令 `type`：`Move` | `Skill` | `EndPhase` | `SetBoss`
 
-## 启动 Python Host（LAN 测试）
+双人权限（`--coop`）：P1 = 铁卫/游弦，P2 = 白愈/黑炎
+
+## 启动 Python Host
 
 ```bash
 cd aetherboard
-PYTHONPATH=. python3 scripts/battle_host.py --port 8767 --http-port 8768 --boss earth --seed 42
+pip install -r requirements.txt
+PYTHONPATH=. python3 scripts/battle_host.py --coop
 ```
 
 | 端口 | 客户端 |
 |------|--------|
-| **8767** TCP | Unity Client 模式 |
-| **8768** HTTP | Web 浏览器（CORS 已开启） |
+| **8767** TCP | Unity Client |
+| **8768** HTTP | Web（CORS 回退） |
+| **8769** WebSocket | Web（推荐，推送 state） |
 
 ## Web 浏览器联机
 
-1. 启动 Host（见上）
+1. 启动 Host（`--coop` 开启双人校验）
 2. `cd web && python3 -m http.server 8765`
-3. 打开 http://localhost:8765/?client=1
-4. 操作通过 HTTP 发往 Host，棋盘由返回的 `state` 更新
+3. P1：http://localhost:8765/?client=1&player=1
+4. P2：http://localhost:8765/?client=1&player=2
 
-可选：`?client=1&host=http://192.168.1.10:8768`
+WebSocket 默认 `ws://127.0.0.1:8769`；加 `&http=1` 强制 HTTP。
 
 ## Unity 客户端
 
-1. Play 进入战斗场景
-2. HUD 点击 **Client**，或按 `N`（默认连接 `127.0.0.1:8767`）
-3. 操作会发送到 Host；棋盘由 Host 广播的 `state` 更新
+1. Play → **Client**（`N`）连接 `127.0.0.1:8767`
+2. 双人模式（`C`）+ 网络 P1/P2 按钮设置 `playerId`
+3. **Host**（`H`）启动内置 `BattleTcpHostServer`
 
-### 纯本地 Host（Unity 内置 TCP）
-
-- HUD 点 **Host** 或按 `H` — 自动启动 `BattleTcpHostServer`（端口 8767）
-- 另一台 Unity 实例选 **Client** 连接同一局域网 IP
-
-### Python Host（Web + Unity）
-
-- 运行 `battle_host.py` — TCP 8767 + HTTP 8768
-
-## C# 核心 API
+## C# API
 
 ```csharp
-var host = new BattleHostAuthority("earth", 42);
-var (ok, json, err) = host.ApplyCommand(cmd);
-
-var replayed = BattleReplayer.Replay(commandLog);
+var host = new BattleHostAuthority("earth", 42, coop: true);
+CoopRules.CanControl(playerId, unitId, coopEnabled);
 ```
 
 ## 后续
 
-- WebSocket 长连接（替代 HTTP 轮询）
-- Unity Netcode 传输层替换 TCP
-- 玩家身份与回合归属校验（Coop P1/P2）
+- Unity Netcode 传输层
+- Quest 实机 WebSocket/TCP
+
+## 命令回放
+
+本地战斗会自动记录玩家命令（`BattleCommandLog`），格式与 Host 同步协议一致。
+
+### Unity
+
+| 快捷键 | 功能 |
+|--------|------|
+| **F6** | 导出 JSON 到剪贴板 + `persistentDataPath/aetherboard_last_replay.json` |
+| **F7** | 从默认路径加载并回放 |
+
+```csharp
+director.ReplayFromCommandLogJson(json);
+director.ExportCommandLogJson();
+```
+
+### Web（单机模式）
+
+- **导出回放**：下载 JSON 并复制到剪贴板
+- **回放当前记录** / **导入回放**：从文件重放命令序列
+
+回放使用与 C# `BattleReplayer` 相同的确定性逻辑（相同 seed + bossId + 命令列表）。

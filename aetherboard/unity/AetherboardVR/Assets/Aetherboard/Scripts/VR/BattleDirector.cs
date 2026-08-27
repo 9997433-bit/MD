@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 using Aetherboard.Core;
@@ -86,6 +87,85 @@ namespace Aetherboard.VR
             !string.IsNullOrEmpty(_lastSnapshotJson) && ImportSnapshotJson(_lastSnapshotJson);
 
         public void SaveCheckpoint() => ExportSnapshotJson();
+
+        public string ExportCommandLogJson() => CommandLog.ToJson();
+
+        public bool ReplayFromCommandLogJson(string json)
+        {
+            try
+            {
+                return ReplayFromCommandLog(BattleCommandLog.FromJson(json));
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[Aetherboard] Replay import failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool ReplayFromCommandLog(BattleCommandLog log)
+        {
+            if (log == null || log.Commands.Count == 0)
+            {
+                Debug.LogWarning("[Aetherboard] Replay log is empty.");
+                return false;
+            }
+
+            randomSeed = log.RandomSeed;
+            bossId = log.BossId;
+            CommandLog.RandomSeed = log.RandomSeed;
+            CommandLog.BossId = log.BossId;
+            CommandLog.Commands.Clear();
+            foreach (var cmd in log.Commands)
+                CommandLog.Record(cmd);
+
+            var replayed = BattleReplayer.Replay(log);
+            Engine.RestoreState(replayed, log.BossId);
+            RefreshAllViews();
+            LogLatest();
+            if (State.Phase == BattlePhase.Victory || State.Phase == BattlePhase.Defeat)
+                OnBattleEnded?.Invoke();
+            Debug.Log($"[Aetherboard] Replayed {log.Commands.Count} commands (seed={log.RandomSeed}, boss={log.BossId}).");
+            return true;
+        }
+
+        public string DefaultReplayFilePath =>
+            Path.Combine(Application.persistentDataPath, "aetherboard_last_replay.json");
+
+        public bool SaveCommandLogToFile(string path = null)
+        {
+            path ??= DefaultReplayFilePath;
+            try
+            {
+                File.WriteAllText(path, ExportCommandLogJson());
+                Debug.Log($"[Aetherboard] Command log saved: {path}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[Aetherboard] Save replay failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool LoadAndReplayFromFile(string path = null)
+        {
+            path ??= DefaultReplayFilePath;
+            try
+            {
+                if (!File.Exists(path))
+                {
+                    Debug.LogWarning($"[Aetherboard] Replay file not found: {path}");
+                    return false;
+                }
+                return ReplayFromCommandLogJson(File.ReadAllText(path));
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[Aetherboard] Load replay failed: {ex.Message}");
+                return false;
+            }
+        }
 
         public void RefreshAllViews()
         {

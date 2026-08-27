@@ -45,20 +45,60 @@ namespace Aetherboard.Core
             for (var i = 0; i < Commands.Count; i++)
             {
                 if (i > 0) sb.Append(',');
-                var c = Commands[i];
-                sb.Append('{')
-                    .Append("\"turn\":").Append(c.Turn).Append(',')
-                    .Append("\"phase\":\"").Append(c.Phase).Append("\",")
-                    .Append("\"type\":\"").Append(c.Type).Append("\",")
-                    .Append("\"unitId\":\"").Append(c.UnitId ?? "").Append("\",")
-                    .Append("\"skillId\":\"").Append(c.SkillId ?? "").Append("\",")
-                    .Append("\"targetX\":").Append(c.TargetX).Append(',')
-                    .Append("\"targetY\":").Append(c.TargetY).Append(',')
-                    .Append("\"bossId\":\"").Append(c.BossId ?? "").Append("\"")
-                    .Append('}');
+                AppendCommandJson(sb, Commands[i]);
             }
             sb.Append("]}");
             return sb.ToString();
         }
+
+        public static BattleCommandLog FromJson(string json)
+        {
+            var root = SimpleJson.ParseObject(json);
+            var log = new BattleCommandLog
+            {
+                RandomSeed = root.GetInt("seed", 42),
+                BossId = root.GetString("bossId") ?? "earth"
+            };
+            var commands = root.GetArray("commands");
+            if (commands == null) return log;
+
+            foreach (var item in commands)
+            {
+                if (item is not Dictionary<string, object> obj) continue;
+                log.Commands.Add(ParseCommand(obj));
+            }
+            return log;
+        }
+
+        private static void AppendCommandJson(StringBuilder sb, BattleCommand c)
+        {
+            sb.Append('{')
+                .Append("\"turn\":").Append(c.Turn).Append(',')
+                .Append("\"phase\":\"").Append(c.Phase).Append("\",")
+                .Append("\"type\":\"").Append(c.Type).Append("\",")
+                .Append("\"unitId\":\"").Append(c.UnitId ?? "").Append("\",")
+                .Append("\"skillId\":\"").Append(c.SkillId ?? "").Append("\",")
+                .Append("\"targetX\":").Append(c.TargetX).Append(',')
+                .Append("\"targetY\":").Append(c.TargetY).Append(',')
+                .Append("\"bossId\":\"").Append(c.BossId ?? "").Append("\"")
+                .Append('}');
+        }
+
+        private static BattleCommand ParseCommand(Dictionary<string, object> obj) => new()
+        {
+            Turn = obj.GetInt("turn"),
+            Phase = Enum.TryParse<BattlePhase>(obj.GetString("phase"), out var phase)
+                ? phase
+                : BattlePhase.Warning,
+            Type = Enum.TryParse<BattleCommandType>(obj.GetString("type"), out var type)
+                ? type
+                : BattleCommandType.EndPhase,
+            UnitId = obj.GetString("unitId"),
+            SkillId = obj.GetString("skillId"),
+            TargetX = obj.GetInt("targetX", -1),
+            TargetY = obj.GetInt("targetY", -1),
+            BossId = obj.GetString("bossId"),
+            PlayerId = obj.GetInt("playerId")
+        };
     }
 }

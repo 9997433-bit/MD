@@ -163,5 +163,26 @@ namespace Aetherboard.Core.Tests
             Assert.False(ok);
             Assert.Contains("无权", err);
         }
+
+        [Fact]
+        public void CommandLog_JsonRoundTrip()
+        {
+            var log = new BattleCommandLog { RandomSeed = 42, BossId = "earth" };
+            log.Record(new BattleCommand
+            {
+                Type = BattleCommandType.Move,
+                UnitId = "knight",
+                TargetX = 3,
+                TargetY = 6
+            });
+            log.Record(new BattleCommand { Type = BattleCommandType.EndPhase });
+
+            var parsed = BattleCommandLog.FromJson(log.ToJson());
+            Assert.Equal(log.RandomSeed, parsed.RandomSeed);
+            Assert.Equal(log.BossId, parsed.BossId);
+            Assert.Equal(2, parsed.Commands.Count);
+            Assert.Equal(BattleCommandType.Move, parsed.Commands[0].Type);
+            Assert.Equal("knight", parsed.Commands[0].UnitId);
+        }
     }
 }

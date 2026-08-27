@@ -30,6 +30,7 @@
 | **Web HTTP 客户端** | ✅ | `?client=1` + `hostClient.js` |
 | **WebSocket 客户端** | ✅ | `hostWsClient.js` — 推送 state |
 | **双人权限校验** | ✅ | `--coop` + `CoopRules` + `playerId` |
+| **命令回放 UI** | ✅ | F6/F7 导出回放 · Web JSON 导入/导出 |
 | XR Origin 官方 Prefab | 🔲 | 可替换为 `GameObject → XR → XR Origin` |
 | 在线多人传输层 | 🔲 | WebSocket / Netcode 生产级封装 |
 
