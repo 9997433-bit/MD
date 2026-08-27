@@ -61,6 +61,10 @@ namespace Aetherboard.VR
             netPanelGo.transform.localRotation = Quaternion.Euler(0f, -28f, 0f);
             netPanelGo.AddComponent<BattleNetVRPanel>().Bind(net);
 
+            var resultGo = new GameObject("BattleResultOverlay");
+            resultGo.transform.SetParent(root.transform, false);
+            resultGo.AddComponent<BattleResultOverlay>().Bind(director);
+
             XRRigFactory.EnsureLightingAt(tableCenter);
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
 

@@ -49,6 +49,9 @@ namespace Aetherboard.Editor
         [MenuItem("Aetherboard/Open Quest Build Guide")]
         public static void OpenQuestGuide() => OpenDoc("QUEST_BUILD.md");
 
+        [MenuItem("Aetherboard/Open PR Merge Guide")]
+        public static void OpenPrMergeGuide() => OpenDoc("PR_MERGE.md");
+
         [MenuItem("Aetherboard/Open URP Setup Guide")]
         public static void OpenUrpGuide() => OpenDoc("URP_SETUP.md");
 
