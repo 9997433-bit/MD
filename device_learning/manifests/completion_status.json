@@ -14,6 +14,8 @@
     "output_hashes": true,
     "phase_b_checklist": true,
     "phase_c_checklist": true,
+    "checklist_report": true,
+    "phase_transition": true,
     "phase_b_scaffold": true,
     "phase_c_scaffold": true,
     "hardware_handoff": true,

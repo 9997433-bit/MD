@@ -25,6 +25,8 @@ def main() -> int:
         "output_hashes": (ROOT / "manifests" / "output_hashes.json").exists(),
         "phase_b_checklist": (ROOT / "phase_b" / "CHECKLIST.json").exists(),
         "phase_c_checklist": (ROOT / "phase_c" / "CHECKLIST.json").exists(),
+        "checklist_report": (ROOT / "CHECKLIST_REPORT.md").exists(),
+        "phase_transition": (ROOT / "manifests" / "phase_transition.json").exists(),
         "phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
         "phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
         "hardware_handoff": (ROOT / "HARDWARE_HANDOFF.md").exists(),

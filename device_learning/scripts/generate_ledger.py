@@ -55,6 +55,8 @@ FEEDERS = [
     ["build_output_hashes.py"],
     ["sync_phase_b_checklist.py"],
     ["sync_phase_c_checklist.py"],
+    ["detect_phase_transition.py"],
+    ["build_checklist_report.py"],
 ]
 
 

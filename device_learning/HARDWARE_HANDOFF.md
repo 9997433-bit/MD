@@ -35,6 +35,8 @@ python3 scripts/run_phase_b.py
 
 进度追踪：`phase_b/CHECKLIST.json`（自动由流水线同步）
 
+或分步执行：
+
 ```bash
 cd device_learning
 python3 scripts/ingest_phase_b.py
@@ -67,4 +69,4 @@ python3 -m pytest tests/ -q
 
 ## 阶段 C
 
-采集完成后按 `phase_c/README.md` 设计实验，将 `hypothesis` / `candidate` 升级为 `confirmed` 或 `refuted`。
+采集完成后按 `phase_c/README.md` 设计实验，进度见 `phase_c/CHECKLIST.json`。

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:46:01.005940+00:00",
+  "generated_at": "2026-08-27T15:47:05.801468+00:00",
   "artifact_count": 40,
   "present_count": 40,
   "artifacts": [
@@ -7,7 +7,7 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 218386
+      "size_bytes": 218390
     },
     {
       "path": "coverage.json",
@@ -61,7 +61,7 @@
       "path": "HARDWARE_HANDOFF.md",
       "description": "实机接入指南",
       "exists": true,
-      "size_bytes": 2183
+      "size_bytes": 2171
     },
     {
       "path": "phase_b/CHECKLIST.json",
@@ -115,7 +115,7 @@
       "path": "manifests/completion_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 781
+      "size_bytes": 812
     },
     {
       "path": "manifests/config_entropy.json",

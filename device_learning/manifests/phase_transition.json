@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-08-27T15:47:06.115474+00:00",
+  "current_phase": "static_complete_pending_hardware",
+  "recommended_phase": "static_complete_pending_hardware",
+  "transition_ready": false,
+  "capture_flags": {
+    "eeprom": false,
+    "usb_enum": false,
+    "usb_session": false,
+    "any_pcap": false
+  },
+  "action": "place files in phase_b/captures/"
+}
