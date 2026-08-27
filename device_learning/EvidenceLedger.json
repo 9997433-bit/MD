@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-27T15:23:54.738136+00:00",
+  "generated_at": "2026-08-27T15:26:02.746972+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-  "phase": "A_deep_B_scaffolded",
+  "phase": "static_complete_pending_hardware",
   "catalogs": {
     "hw": [
       {
@@ -2005,6 +2005,143 @@
         "boundary": null,
         "evidence": "OMISSIONS_AND_REMAINING.md"
       }
+    ],
+    "exp": [
+      {
+        "identifier": "EXP-001-EEPROM-DUMP",
+        "layer": "exp",
+        "module": "capture",
+        "description": "Read serial EEPROM to binary file",
+        "status": "not_started",
+        "boundary": "Need programmer",
+        "evidence": "phase_b/templates/eeprom_read.md"
+      },
+      {
+        "identifier": "EXP-002-USB-ENUM",
+        "layer": "exp",
+        "module": "capture",
+        "description": "Capture USB enumeration traffic",
+        "status": "not_started",
+        "boundary": "Need device+host",
+        "evidence": "phase_b/templates/usb_capture.md"
+      },
+      {
+        "identifier": "EXP-003-USB-SESSION",
+        "layer": "exp",
+        "module": "capture",
+        "description": "Capture config+acquire session",
+        "status": "not_started",
+        "boundary": "Need official driver",
+        "evidence": "phase_b/templates/usb_capture.md"
+      },
+      {
+        "identifier": "EXP-004-PIN-FIFO",
+        "layer": "exp",
+        "module": "verify",
+        "description": "Probe Slave FIFO signals vs REF catalog",
+        "status": "not_started",
+        "boundary": "Need scope",
+        "evidence": "pin_hypothesis.json BRG-001..009"
+      },
+      {
+        "identifier": "EXP-005-PIN-ADC",
+        "layer": "exp",
+        "module": "verify",
+        "description": "Probe ADC serial interface timing",
+        "status": "not_started",
+        "boundary": "Need scope",
+        "evidence": "REF-ADC-SPI-*"
+      },
+      {
+        "identifier": "EXP-006-RELAY-TOGGLE",
+        "layer": "exp",
+        "module": "verify",
+        "description": "Toggle relay and measure coax path",
+        "status": "not_started",
+        "boundary": "Need signal source",
+        "evidence": "SIG-002-RELAY-MATRIX"
+      },
+      {
+        "identifier": "EXP-007-COUPLING",
+        "layer": "exp",
+        "module": "verify",
+        "description": "AC/DC coupling switch behavior",
+        "status": "not_started",
+        "boundary": "Need relay command or manual",
+        "evidence": "SIG-006-COUPLING"
+      },
+      {
+        "identifier": "EXP-008-SINE-IN",
+        "layer": "exp",
+        "module": "verify",
+        "description": "Apply known sine, check digitized output",
+        "status": "not_started",
+        "boundary": "Need AWG+driver",
+        "evidence": "SIG-007-SAMPLE-WIDTH"
+      },
+      {
+        "identifier": "EXP-009-CLOCK-IFCLK",
+        "layer": "exp",
+        "module": "verify",
+        "description": "Measure IFCLK frequency at FPGA",
+        "status": "not_started",
+        "boundary": "Need freq counter",
+        "evidence": "REF-USB-SLAVE-FIFO-IFCLK"
+      },
+      {
+        "identifier": "EXP-010-8051-DISASM",
+        "layer": "exp",
+        "module": "analysis",
+        "description": "Disassemble firmware from EEPROM slice",
+        "status": "not_started",
+        "boundary": "Depends EXP-001",
+        "evidence": "scan_firmware_stub.py"
+      },
+      {
+        "identifier": "EXP-011-PROTO-TABLE",
+        "layer": "exp",
+        "module": "analysis",
+        "description": "Build command byte table from pcap",
+        "status": "not_started",
+        "boundary": "Depends EXP-003",
+        "evidence": "protocol_log_template.json"
+      },
+      {
+        "identifier": "EXP-012-VIDPID",
+        "layer": "exp",
+        "module": "analysis",
+        "description": "Record VID/PID from descriptor or EEPROM",
+        "status": "not_started",
+        "boundary": "Depends EXP-001/002",
+        "evidence": "eeprom_layout_ref.json"
+      },
+      {
+        "identifier": "EXP-013-ENDPOINT-MAP",
+        "layer": "exp",
+        "module": "analysis",
+        "description": "Map bulk IN/OUT endpoint numbers",
+        "status": "not_started",
+        "boundary": "Depends EXP-002",
+        "evidence": "PROTO-EP-MAP"
+      },
+      {
+        "identifier": "EXP-014-DATA-FRAME",
+        "layer": "exp",
+        "module": "analysis",
+        "description": "Determine sample packing in USB stream",
+        "status": "not_started",
+        "boundary": "Depends EXP-008",
+        "evidence": "SIG-018-DATA-PACK"
+      },
+      {
+        "identifier": "EXP-015-BRG-UPGRADE",
+        "layer": "exp",
+        "module": "meta",
+        "description": "Upgrade hypothesis bridges to confirmed",
+        "status": "not_started",
+        "boundary": "Needs EXP-004..008",
+        "evidence": "bridge_matrix.json"
+      }
     ]
   },
   "manifests": {
@@ -2065,8 +2202,22 @@
         "bitstream_data_offset": 94
       }
     },
+    "completion_status": {
+      "static_phase_complete": true,
+      "checks": {
+        "ledger_exists": true,
+        "coverage_pass": true,
+        "min_identifiers": true,
+        "learning_guide": true,
+        "static_report": true,
+        "phase_b_scaffold": true,
+        "phase_c_scaffold": true,
+        "no_captures_yet": true
+      },
+      "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
+    },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:23:54.576250+00:00",
+      "generated_at": "2026-08-27T15:26:02.431881+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -2254,7 +2405,7 @@
       ]
     },
     "eeprom_meta": {
-      "generated_at": "2026-08-27T15:23:54.268637+00:00",
+      "generated_at": "2026-08-27T15:26:02.121767+00:00",
       "capture_path": "phase_b/captures/eeprom.bin",
       "status": "missing",
       "reason": "phase_b/captures/eeprom.bin not present",
@@ -2262,7 +2413,7 @@
       "note": "no EEPROM dump available; no field values inferred"
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:23:53.912120+00:00",
+      "generated_at": "2026-08-27T15:26:01.767094+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2329,7 +2480,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:23:54.185014+00:00",
+      "generated_utc": "2026-08-27T15:26:02.037992+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -2571,7 +2722,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:23:54.093623+00:00",
+      "generated_utc": "2026-08-27T15:26:01.945956+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -3700,7 +3851,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:23:53.912120+00:00",
+      "generated_at": "2026-08-27T15:26:01.767094+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -3755,7 +3906,7 @@
       "ready": false
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:23:54.498690+00:00",
+      "generated_at": "2026-08-27T15:26:02.352501+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -4476,7 +4627,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:23:54.422016+00:00",
+      "generated_at": "2026-08-27T15:26:02.275575+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [

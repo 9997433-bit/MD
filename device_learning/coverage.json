@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-27T15:23:54.742534+00:00",
-  "total_identifiers": 221,
+  "generated_at": "2026-08-27T15:26:02.751643+00:00",
+  "total_identifiers": 236,
   "by_layer": {
     "hw": 32,
     "bit": 78,
@@ -8,14 +8,15 @@
     "usb": 33,
     "ref": 24,
     "arch": 15,
-    "learn": 20
+    "learn": 20,
+    "exp": 15
   },
   "status_counts": {
     "confirmed": 68,
     "candidate": 64,
     "unknown": 56,
     "hypothesis": 6,
-    "not_started": 15,
+    "not_started": 30,
     "missing": 12
   },
   "stop_conditions": {
@@ -30,5 +31,5 @@
   },
   "all_pass": true,
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-  "phase": "A_deep_B_scaffolded"
+  "phase": "static_complete_pending_hardware"
 }

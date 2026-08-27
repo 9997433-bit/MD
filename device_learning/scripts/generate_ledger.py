@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 
 from catalogs.catalog_arch import ENTRIES as ARCH_ENTRIES
 from catalogs.catalog_bit import ENTRIES as BIT_ENTRIES
+from catalogs.catalog_exp import ENTRIES as EXP_ENTRIES
 from catalogs.catalog_hw import ENTRIES as HW_ENTRIES
 from catalogs.catalog_learn import ENTRIES as LEARN_ENTRIES
 from catalogs.catalog_ref import ENTRIES as REF_ENTRIES
@@ -20,6 +21,7 @@ from catalogs.catalog_signal import ENTRIES as SIG_ENTRIES
 from catalogs.catalog_usb import ENTRIES as USB_ENTRIES
 
 MANIFESTS = ROOT / "manifests"
+DECLARATION = "\u76ee\u5f55\u5b8c\u6574 \u2260 \u5382\u5546\u7b49\u4ef7 \u2260 \u638c\u63e1\u8fd0\u884c\u884c\u4e3a"
 FEEDERS = [
     ["build_manifests.py"],
     ["parse_bit_header.py", str(ROOT / "firmware" / "device.bit"), "-o", str(MANIFESTS / "bitstream_meta.json")],
@@ -32,6 +34,8 @@ FEEDERS = [
     ["build_crossref.py"],
     ["ingest_phase_b.py"],
     ["redact_manifests.py"],
+    ["build_learning_report.py"],
+    ["verify_completion.py"],
 ]
 
 
@@ -73,16 +77,19 @@ def build_coverage(entries: list[dict], catalogs: dict) -> dict:
     for e in entries:
         counts[e["status"]] = counts.get(e["status"], 0) + 1
     bridges = json.loads((ROOT / "bridge_matrix.json").read_text(encoding="utf-8"))
+    manifests_blob = json.dumps(load_manifests()).lower()
     stop = {
         "1_no_empty_status": all(e.get("status") for e in entries),
-        "2_all_layers_present": all(len(catalogs.get(l, [])) > 0 for l in ("hw", "bit", "signal", "usb", "ref", "arch", "learn")),
+        "2_all_layers_present": all(len(catalogs.get(l, [])) > 0 for l in ("hw", "bit", "signal", "usb", "ref", "arch", "learn", "exp")),
         "3_missing_documented": (ROOT / "OMISSIONS_AND_REMAINING.md").exists(),
         "4_null_bridges_intact": len(bridges.get("forced_null_bridges", [])) >= 8
         and all(x.get("status") is None for x in bridges.get("entries", [])),
         "5_no_false_confirmed_bridges": True,
         "6_phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
         "7_learning_guide": (ROOT / "LEARNING_GUIDE.md").exists(),
-        "8_no_sensitive_tokens": "topusb" not in json.dumps(load_manifests()).lower(),
+        "8_no_sensitive_tokens": "topusb" not in manifests_blob,
+        "9_phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
+        "10_static_report": (ROOT / "STATIC_REPORT.md").exists(),
     }
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -91,8 +98,8 @@ def build_coverage(entries: list[dict], catalogs: dict) -> dict:
         "status_counts": counts,
         "stop_conditions": stop,
         "all_pass": all(stop.values()),
-        "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-        "phase": "A_deep_B_scaffolded",
+        "declaration": DECLARATION,
+        "phase": "static_complete_pending_hardware",
     }
 
 
@@ -107,12 +114,14 @@ def main() -> None:
         "ref": REF_ENTRIES,
         "arch": ARCH_ENTRIES,
         "learn": LEARN_ENTRIES,
+        "exp": EXP_ENTRIES,
     }
     all_entries = [e for cat in catalogs.values() for e in cat]
+    generated_at = datetime.now(timezone.utc).isoformat()
     ledger = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-        "phase": "A_deep_B_scaffolded",
+        "generated_at": generated_at,
+        "declaration": DECLARATION,
+        "phase": "static_complete_pending_hardware",
         "catalogs": catalogs,
         "manifests": load_manifests(),
     }

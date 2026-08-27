@@ -1,0 +1,14 @@
+{
+  "static_phase_complete": true,
+  "checks": {
+    "ledger_exists": true,
+    "coverage_pass": true,
+    "min_identifiers": true,
+    "learning_guide": true,
+    "static_report": true,
+    "phase_b_scaffold": true,
+    "phase_c_scaffold": true,
+    "no_captures_yet": true
+  },
+  "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
+}
