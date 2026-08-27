@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-08-27T16:38:57.104956+00:00",
+  "current_phase": "static_complete_pending_hardware",
+  "recommended_phase": "static_complete_pending_hardware",
+  "transition_ready": false,
+  "capture_flags": {
+    "eeprom_file": false,
+    "eeprom_observed": false,
+    "eeprom_synthetic": false,
+    "usb_enum": false,
+    "usb_enum_synthetic": false,
+    "usb_session": false,
+    "any_pcap": false,
+    "any_pcap_observed": false
+  },
+  "warnings": [],
+  "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
+}

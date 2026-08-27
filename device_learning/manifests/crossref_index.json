@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-08-27T16:38:49.567477+00:00",
+  "layer_counts": {
+    "hw": 32,
+    "bit": 78,
+    "signal": 19,
+    "usb": 34,
+    "ref": 24,
+    "arch": 15,
+    "learn": 20,
+    "exp": 15
+  },
+  "total_identifiers": 237,
+  "themes": {
+    "usb_path": [
+      "HW-003-USB-CONTROLLER",
+      "REF-USB-SLAVE-FIFO-SLRD",
+      "ARCH-002-DATA-PATH"
+    ],
+    "adc_path": [
+      "HW-005-ADC-PRIMARY",
+      "REF-ADC-SPI-DOUT",
+      "SIG-003-PATH-ADC"
+    ],
+    "fpga_config": [
+      "BIT-IDCODE",
+      "BIT-CMD-SEQUENCE",
+      "ARCH-015-BIT-LOAD"
+    ],
+    "eeprom_boot": [
+      "FW-EEPROM-IMAGE",
+      "FW-EEPROM-LAYOUT-REF",
+      "EXP-001-EEPROM-DUMP"
+    ]
+  }
+}

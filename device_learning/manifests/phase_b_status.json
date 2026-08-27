@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-08-27T16:38:56.946668+00:00",
+  "captures_dir": "phase_b/captures",
+  "capture_count": 0,
+  "captures": [],
+  "flags": {
+    "eeprom_present": false,
+    "eeprom_observed": false,
+    "usb_capture_present": false,
+    "usb_capture_observed": false,
+    "protocol_log_present": false
+  },
+  "ready_for_ledger_refresh": false,
+  "next_steps": [
+    "Place eeprom.bin and/or *.pcapng in phase_b/captures/"
+  ]
+}

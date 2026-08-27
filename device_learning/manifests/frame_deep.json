@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-08-27T16:38:48.513658+00:00",
+  "source_file": "firmware/device.bit",
+  "file_size_bytes": 131046,
+  "reference": "UG332 / XAPP452 (public Xilinx documentation)",
+  "scan_status": "partial-ok",
+  "device": "3s200ft256",
+  "config_length": 130952,
+  "scan": {
+    "confidence": "candidate (heuristic 16-bit classifier)",
+    "word_count": 65476,
+    "class_counts": {
+      "zero": 25962,
+      "type1": 4598,
+      "type2": 3796,
+      "other": 31120
+    },
+    "zero_word_ratio": 0.3965
+  },
+  "notes": "Heuristic Spartan-3 frame classifier (16-bit word top-3-bit header class); see far_address_distribution / frame_type_counts / register_write_inventory for packet-accurate detail.",
+  "config_segment": {
+    "offset_in_file": 94,
+    "declared_length_bytes": 130952,
+    "sync_offset_in_file": 98,
+    "sync_word": "0xaa995566"
+  },
+  "far_address_distribution": {
+    "confidence": "confirmed (explicit writes) / candidate (per-frame)",
+    "explicit_far_write_count": 1,
+    "unique_far_values": 1,
+    "explicit_far_writes": [
+      {
+        "raw": "0x00000000",
+        "reserved": 0,
+        "column_address": 0,
+        "column_address_type": "CLB/IOB/IOI/TERM/GCLK (logic & I/O block)",
+        "major_address": 0,
+        "minor_address": 0,
+        "frm_byte": 0
+      }
+    ],
+    "column_address_histogram": {
+      "CLB/IOB/IOI/TERM/GCLK (logic & I/O block)": 1
+    },
+    "distinct_major_addresses": [
+      0
+    ],
+    "distinct_minor_addresses": [
+      0
+    ],
+    "auto_increment_note": "only the explicit FAR write(s) above are encoded; all remaining frame addresses are produced by the device's internal minor->major->block auto-increment during the FDRI burst and are not present in the bitstream (per XAPP452)"
+  },
+  "frame_type_counts": {
+    "confidence": "confirmed (packets) / candidate (frame estimates)",
+    "packet_type_counts": {
+      "type_1": 72,
+      "type_2": 1
+    },
+    "opcode_counts": {
+      "WRITE": 16,
+      "NOP": 57
+    },
+    "total_packets": 73,
+    "trailing_filler_words": 1,
+    "fdri_frame_data_word_count": 32648,
+    "frame_length_words": 52,
+    "estimated_frame_count": 627,
+    "trailing_words_after_last_full_frame": 44,
+    "frame_alignment": "candidate: FDRI word count not an exact multiple of FLR; remainder likely pad/CRC words",
+    "nonzero_frame_count": 492,
+    "active_config_words": 21631,
+    "implied_logic_column_count_candidate": 33,
+    "implied_logic_column_count_note": "estimated_frame_count / 19 (CLB/IOI frames-per-column); candidate only, exact per-device column inventory is not encoded in the bitstream",
+    "pad_frame_present": "candidate: last configuration frame is a pad frame per spec"
+  },
+  "register_write_inventory": {
+    "confidence": "confirmed",
+    "register_write_counts": {
+      "CMD": 7,
+      "FLR": 1,
+      "COR": 1,
+      "IDCODE": 1,
+      "MASK": 1,
+      "FAR": 1,
+      "CTL": 1,
+      "CRC": 1
+    },
+    "distinct_registers_written": [
+      "CMD",
+      "COR",
+      "CRC",
+      "CTL",
+      "FAR",
+      "FLR",
+      "IDCODE",
+      "MASK"
+    ],
+    "cmd_sequence": [
+      "RCRC",
+      "SWITCH",
+      "WCFG",
+      "GRESTORE",
+      "DGHIGH/LFRM",
+      "START",
+      "DESYNCH"
+    ],
+    "decoded_registers": {
+      "FLR": {
+        "value": 52,
+        "note": "frame length register"
+      },
+      "COR": {
+        "value": "0x40003fe5"
+      },
+      "IDCODE": {
+        "raw": "0x01414093",
+        "device_hint": "family=spartan3 device=xc3s200"
+      },
+      "other_writes": [
+        {
+          "register": "MASK",
+          "value": "0x00000000"
+        },
+        {
+          "register": "CTL",
+          "value": "0x00000000"
+        }
+      ],
+      "FAR_writes": [
+        "0x00000000"
+      ],
+      "CRC": {
+        "value": "0x00005f57"
+      }
+    },
+    "writes": [
+      {
+        "offset": 8,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000007"
+        ]
+      },
+      {
+        "offset": 16,
+        "register": "FLR",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000034"
+        ]
+      },
+      {
+        "offset": 24,
+        "register": "COR",
+        "word_count": 1,
+        "payload_hex": [
+          "0x40003fe5"
+        ]
+      },
+      {
+        "offset": 32,
+        "register": "IDCODE",
+        "word_count": 1,
+        "payload_hex": [
+          "0x01414093"
+        ]
+      },
+      {
+        "offset": 40,
+        "register": "MASK",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000000"
+        ]
+      },
+      {
+        "offset": 48,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000009"
+        ]
+      },
+      {
+        "offset": 56,
+        "register": "FAR",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000000"
+        ]
+      },
+      {
+        "offset": 64,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000001"
+        ]
+      },
+      {
+        "offset": 130676,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x0000000a"
+        ]
+      },
+      {
+        "offset": 130684,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000003"
+        ]
+      },
+      {
+        "offset": 130904,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000005"
+        ]
+      },
+      {
+        "offset": 130912,
+        "register": "CTL",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000000"
+        ]
+      },
+      {
+        "offset": 130920,
+        "register": "CRC",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00005f57"
+        ]
+      },
+      {
+        "offset": 130928,
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x0000000d"
+        ]
+      }
+    ]
+  },
+  "unknowns": [
+    "per-frame FAR addresses are auto-incremented internally and not encoded in the bitstream (candidate reconstruction only)",
+    "exact per-device column inventory (major-address range) is not reconstructed; column-count estimate is a candidate heuristic"
+  ]
+}

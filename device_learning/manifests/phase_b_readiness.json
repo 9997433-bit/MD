@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-08-27T16:38:50.275777+00:00",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "blockers": [
+    {
+      "id": "eeprom",
+      "label": "EEPROM 全片镜像",
+      "artifact": "phase_b/captures/eeprom.bin",
+      "unblocks": "FW-EEPROM-*, FW-MCU-* (partial)",
+      "present": false,
+      "size_bytes": null
+    },
+    {
+      "id": "usb_enum",
+      "label": "USB 枚举抓包",
+      "artifact": "phase_b/captures/usb_enum.pcapng",
+      "unblocks": "PROTO-DESC-*",
+      "present": false,
+      "size_bytes": null
+    },
+    {
+      "id": "usb_session",
+      "label": "USB 工作会话抓包",
+      "artifact": "phase_b/captures/usb_session.pcapng",
+      "unblocks": "PROTO-EP-*, SIG-* (partial)",
+      "present": false,
+      "size_bytes": null
+    }
+  ],
+  "ready_count": 0,
+  "blocker_count": 3,
+  "deep_analysis_ready": false,
+  "checklist": "0/6",
+  "upgrade_proposals_pending": 0,
+  "next_command": "make check-captures"
+}

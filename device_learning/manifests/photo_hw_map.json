@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-08-27T16:38:49.334897+00:00",
+  "photo_count": 10,
+  "photos_with_hw_links": 7,
+  "photos": [
+    {
+      "file": "微信图片_20260824134434_84_144.jpg",
+      "component_count": 1,
+      "hw_identifiers": []
+    },
+    {
+      "file": "微信图片_20260824134434_85_144.jpg",
+      "component_count": 2,
+      "hw_identifiers": [
+        "HW-011-BUS-TRANSCEIVER"
+      ]
+    },
+    {
+      "file": "微信图片_20260824134434_86_144.jpg",
+      "component_count": 8,
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-005-ADC-PRIMARY",
+        "HW-006-ADC-COUNT",
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-011-BUS-TRANSCEIVER",
+        "HW-016-INTERFACE-COAX"
+      ]
+    },
+    {
+      "file": "微信图片_20260824134434_87_144.jpg",
+      "component_count": 21,
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-005-ADC-PRIMARY",
+        "HW-006-ADC-COUNT",
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT"
+      ]
+    },
+    {
+      "file": "微信图片_20260824134434_88_144.jpg",
+      "component_count": 1,
+      "hw_identifiers": []
+    },
+    {
+      "file": "微信图片_20260824134434_89_144.jpg",
+      "component_count": 16,
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-003-USB-CONTROLLER",
+        "HW-011-BUS-TRANSCEIVER",
+        "HW-014-CRYSTAL-USB",
+        "HW-017-INTERFACE-USB",
+        "HW-023-MEMORY-SRAM"
+      ]
+    },
+    {
+      "file": "微信图片_20260824134434_90_144.jpg",
+      "component_count": 2,
+      "hw_identifiers": []
+    },
+    {
+      "file": "微信图片_20260824134434_91_144.jpg",
+      "component_count": 3,
+      "hw_identifiers": [
+        "HW-003-USB-CONTROLLER",
+        "HW-011-BUS-TRANSCEIVER",
+        "HW-017-INTERFACE-USB"
+      ]
+    },
+    {
+      "file": "微信图片_20260824134434_92_144.jpg",
+      "component_count": 5,
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-003-USB-CONTROLLER",
+        "HW-016-INTERFACE-COAX",
+        "HW-017-INTERFACE-USB"
+      ]
+    },
+    {
+      "file": "微信图片_20260824134434_93_144.jpg",
+      "component_count": 16,
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-003-USB-CONTROLLER",
+        "HW-005-ADC-PRIMARY",
+        "HW-006-ADC-COUNT",
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-014-CRYSTAL-USB",
+        "HW-016-INTERFACE-COAX",
+        "HW-017-INTERFACE-USB"
+      ]
+    }
+  ],
+  "boundary": "Keyword match on photo_index components only"
+}

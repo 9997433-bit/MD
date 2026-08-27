@@ -1,0 +1,16 @@
+{
+  "$schema_note": "阶段 C 实验日志模板；复制到 phase_c/logs/EXP-XXX-YYYYMMDD.json 后填写",
+  "experiment_id": "EXP-000",
+  "date": "YYYY-MM-DD",
+  "operator": "",
+  "equipment": [],
+  "setup": "",
+  "procedure": "",
+  "observation": "",
+  "raw_artifacts": [],
+  "conclusion": "inconclusive",
+  "identifiers_touched": [],
+  "identifiers_proposed_upgrade": [],
+  "confidence": "unknown",
+  "boundary": "Single experiment scope only; human review before catalog edit"
+}

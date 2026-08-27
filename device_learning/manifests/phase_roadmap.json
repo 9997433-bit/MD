@@ -1,0 +1,150 @@
+{
+  "generated_at": "2026-08-27T16:38:49.490373+00:00",
+  "phase_b": [
+    {
+      "action": "eeprom_dump",
+      "artifact": "phase_b/captures/eeprom.bin",
+      "unblocks": [
+        "FW-MCU-CORE-IMAGE",
+        "FW-MCU-RESET-VECTOR",
+        "FW-MCU-CODE-XRAM-MAP",
+        "FW-MCU-I2C-BOOT-PATH",
+        "FW-MCU-RENUMERATION",
+        "FW-EEPROM-IMAGE",
+        "FW-EEPROM-CONFIG-BYTE",
+        "FW-EEPROM-VIDPID",
+        "FW-EEPROM-DESC-OVERRIDE",
+        "FW-EEPROM-BOOT-FORMAT",
+        "FW-EEPROM-DID-FIELD",
+        "FW-EEPROM-FW-RECORDS"
+      ],
+      "feeds": [
+        "analyze_eeprom.py",
+        "scan_firmware_stub.py",
+        "EXP-010-8051-DISASM",
+        "EXP-012-VIDPID"
+      ]
+    },
+    {
+      "action": "usb_enum_capture",
+      "artifact": "phase_b/captures/usb_enum.pcapng",
+      "unblocks": [
+        "PROTO-DESC-DEVICE",
+        "PROTO-DESC-CONFIG",
+        "PROTO-DESC-INTERFACE",
+        "PROTO-DESC-STRING",
+        "PROTO-EP-MAP"
+      ],
+      "feeds": [
+        "analyze_pcap_stub.py",
+        "EXP-002-USB-ENUM",
+        "EXP-013-ENDPOINT-MAP"
+      ]
+    },
+    {
+      "action": "usb_session_capture",
+      "artifact": "phase_b/captures/usb_session.pcapng",
+      "unblocks": [
+        "EXP-003-USB-SESSION",
+        "EXP-011-PROTO-TABLE",
+        "EXP-014-DATA-FRAME"
+      ],
+      "feeds": [
+        "analyze_pcap_stub.py"
+      ]
+    }
+  ],
+  "phase_c": [
+    {
+      "experiment": "EXP-001-EEPROM-DUMP",
+      "description": "Read serial EEPROM to binary file",
+      "status": "not_started",
+      "depends": "Need programmer"
+    },
+    {
+      "experiment": "EXP-002-USB-ENUM",
+      "description": "Capture USB enumeration traffic",
+      "status": "not_started",
+      "depends": "Need device+host"
+    },
+    {
+      "experiment": "EXP-003-USB-SESSION",
+      "description": "Capture config+acquire session",
+      "status": "not_started",
+      "depends": "Need official driver"
+    },
+    {
+      "experiment": "EXP-004-PIN-FIFO",
+      "description": "Probe Slave FIFO signals vs REF catalog",
+      "status": "not_started",
+      "depends": "Need scope"
+    },
+    {
+      "experiment": "EXP-005-PIN-ADC",
+      "description": "Probe ADC serial interface timing",
+      "status": "not_started",
+      "depends": "Need scope"
+    },
+    {
+      "experiment": "EXP-006-RELAY-TOGGLE",
+      "description": "Toggle relay and measure coax path",
+      "status": "not_started",
+      "depends": "Need signal source"
+    },
+    {
+      "experiment": "EXP-007-COUPLING",
+      "description": "AC/DC coupling switch behavior",
+      "status": "not_started",
+      "depends": "Need relay command or manual"
+    },
+    {
+      "experiment": "EXP-008-SINE-IN",
+      "description": "Apply known sine, check digitized output",
+      "status": "not_started",
+      "depends": "Need AWG+driver"
+    },
+    {
+      "experiment": "EXP-009-CLOCK-IFCLK",
+      "description": "Measure IFCLK frequency at FPGA",
+      "status": "not_started",
+      "depends": "Need freq counter"
+    },
+    {
+      "experiment": "EXP-010-8051-DISASM",
+      "description": "Disassemble firmware from EEPROM slice",
+      "status": "not_started",
+      "depends": "Depends EXP-001"
+    },
+    {
+      "experiment": "EXP-011-PROTO-TABLE",
+      "description": "Build command byte table from pcap",
+      "status": "not_started",
+      "depends": "Depends EXP-003"
+    },
+    {
+      "experiment": "EXP-012-VIDPID",
+      "description": "Record VID/PID from descriptor or EEPROM",
+      "status": "not_started",
+      "depends": "Depends EXP-001/002"
+    },
+    {
+      "experiment": "EXP-013-ENDPOINT-MAP",
+      "description": "Map bulk IN/OUT endpoint numbers",
+      "status": "not_started",
+      "depends": "Depends EXP-002"
+    },
+    {
+      "experiment": "EXP-014-DATA-FRAME",
+      "description": "Determine sample packing in USB stream",
+      "status": "not_started",
+      "depends": "Depends EXP-008"
+    },
+    {
+      "experiment": "EXP-015-BRG-UPGRADE",
+      "description": "Upgrade hypothesis bridges to confirmed",
+      "status": "not_started",
+      "depends": "Needs EXP-004..008"
+    }
+  ],
+  "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
+}

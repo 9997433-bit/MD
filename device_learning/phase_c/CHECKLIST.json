@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "phase": "C",
+  "status": "not_started",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "prerequisites": [
+    "phase_b_eeprom_or_pcap",
+    "test_equipment"
+  ],
+  "tasks": [
+    {
+      "id": "C1",
+      "name": "pin_fifo_probe",
+      "experiment": "EXP-004-PIN-FIFO",
+      "equipment": "oscilloscope",
+      "done": false
+    },
+    {
+      "id": "C2",
+      "name": "adc_timing_probe",
+      "experiment": "EXP-005-PIN-ADC",
+      "equipment": "oscilloscope",
+      "done": false
+    },
+    {
+      "id": "C3",
+      "name": "relay_toggle",
+      "experiment": "EXP-006-RELAY-TOGGLE",
+      "equipment": "signal_source",
+      "done": false
+    },
+    {
+      "id": "C4",
+      "name": "sine_input_test",
+      "experiment": "EXP-008-SINE-IN",
+      "equipment": "awg",
+      "done": false
+    },
+    {
+      "id": "C5",
+      "name": "ifclk_measure",
+      "experiment": "EXP-009-CLOCK-IFCLK",
+      "equipment": "frequency_counter",
+      "done": false
+    },
+    {
+      "id": "C6",
+      "name": "experiment_log",
+      "artifact": "phase_c/logs/",
+      "template": "phase_c/logs/README.md",
+      "done": false
+    }
+  ],
+  "updated_at": "2026-08-27T16:38:56.867424+00:00",
+  "done_count": 0,
+  "total_count": 6
+}

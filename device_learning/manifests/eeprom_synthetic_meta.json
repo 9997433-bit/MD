@@ -1,0 +1,13 @@
+{
+  "type": "synthetic_reference",
+  "warning": "NOT a device dump — pipeline test fixture only",
+  "generated_at": "2026-08-27T16:38:48.764347+00:00",
+  "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
+  "size_bytes": 8192,
+  "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
+  "boot_format": "C2",
+  "boot_config_byte": "0xc2",
+  "vid_hex": "0x0000",
+  "pid_hex": "0x0000",
+  "layout_ref": "manifests/eeprom_layout_ref.json"
+}

@@ -1,0 +1,27 @@
+{
+  "forced_null_bridges": [
+    "bitstream_frame → verilog_module",
+    "usb_command → fpga_register",
+    "photo_trace → pin_constraint",
+    "iob_pin → relay_control_bit",
+    "frame_word → clb_netlist",
+    "cypress_firmware → usb_protocol_table",
+    "adc_sample → usb_data_frame",
+    "relay_command → gpio_bit",
+    "sample_rate_config → clock_divider",
+    "bram_init → lookup_table_function"
+  ],
+  "policy": "无新证据前禁止将 null 桥升级为 proven_bridge",
+  "entries": [
+    {"bridge": "bitstream_frame → verilog_module", "status": null, "reason": "无RTL源码，位流解码未闭合"},
+    {"bridge": "usb_command → fpga_register", "status": null, "reason": "无USB抓包"},
+    {"bridge": "photo_trace → pin_constraint", "status": null, "reason": "无网表"},
+    {"bridge": "iob_pin → relay_control_bit", "status": null, "reason": "无切换实验"},
+    {"bridge": "frame_word → clb_netlist", "status": null, "reason": "帧解析未完整"},
+    {"bridge": "cypress_firmware → usb_protocol_table", "status": null, "reason": "固件镜像缺失"},
+    {"bridge": "adc_sample → usb_data_frame", "status": null, "reason": "无数据流抓包"},
+    {"bridge": "relay_command → gpio_bit", "status": null, "reason": "无协议逆向"},
+    {"bridge": "sample_rate_config → clock_divider", "status": null, "reason": "无时钟域分析"},
+    {"bridge": "bram_init → lookup_table_function", "status": null, "reason": "BRAM内容未解码"}
+  ]
+}

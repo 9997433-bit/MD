@@ -1,0 +1,21 @@
+{
+  "status": "synthetic_pipeline_test",
+  "generated_at": "2026-08-27T16:38:48.970862+00:00",
+  "warning": "Using synthetic fixture — NOT device data",
+  "source": "synthetic_reference",
+  "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
+  "size_bytes": 8192,
+  "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
+  "boot_format": "C2",
+  "boot_config_byte": "0xc2",
+  "vid_hex": "0x0000",
+  "pid_hex": "0x0000",
+  "did_hex": "0x0000",
+  "config_byte": "0x00",
+  "firmware_offset": 12,
+  "firmware_size_bytes": 16,
+  "firmware_header_hex": "02001000000102030405060708090a0b",
+  "c2_record_count": 2,
+  "layout_ref": "manifests/eeprom_layout_ref.json",
+  "boundary": "Values observed from file only; synthetic fixture is NOT device truth"
+}

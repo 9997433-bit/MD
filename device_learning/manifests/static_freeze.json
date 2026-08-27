@@ -1,0 +1,14 @@
+{
+  "frozen_at": "2026-08-27T16:38:53.155522+00:00",
+  "phase": "static_complete_pending_hardware",
+  "static_phase_complete": true,
+  "identifiers": 237,
+  "confirmed": 68,
+  "blocked": 98,
+  "git_commit": "8dca15fff292e41d824325b97a396ecfb5145858",
+  "input_file_count": 11,
+  "output_combined_sha256": "f024b9b98047c6a3b599e688bcc405cf48bee20261d39c2df6bdad85105e1f02",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "next_phase": "phase_b_hardware_capture",
+  "stop_conditions_pass": true
+}

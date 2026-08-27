@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-08-27T16:38:52.032205+00:00",
+  "phase": "static_complete_pending_hardware",
+  "identifiers": 237,
+  "status_counts": {
+    "confirmed": 68,
+    "candidate": 65,
+    "unknown": 56,
+    "hypothesis": 6,
+    "not_started": 30,
+    "missing": 12
+  },
+  "blocked": 98,
+  "hardware_ready": {
+    "eeprom_present": false,
+    "eeprom_observed": false,
+    "usb_capture_present": false,
+    "usb_capture_observed": false,
+    "protocol_log_present": false
+  },
+  "bitstream": {
+    "idcode": "0x01414093",
+    "part": "3s200ft256",
+    "build_date": "2011/06/10",
+    "frames_est": 627,
+    "iob_candidate": 223
+  },
+  "eeprom_status": "synthetic_pipeline_test",
+  "catalog_integrity_ok": true,
+  "stop_conditions_pass": true,
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

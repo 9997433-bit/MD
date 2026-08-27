@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-08-27T16:38:53.259625+00:00",
+  "package": "device_learning",
+  "version": "static-1.0",
+  "phase": "static_complete_pending_hardware",
+  "static_phase_complete": true,
+  "frozen_at": "2026-08-27T16:38:53.155522+00:00",
+  "metrics": {
+    "identifiers": 237,
+    "confirmed": 68,
+    "blocked": 98,
+    "pytest_count": 104,
+    "manifest_json_count": 43
+  },
+  "input_hashes": {
+    "combined_output_sha256": "f024b9b98047c6a3b599e688bcc405cf48bee20261d39c2df6bdad85105e1f02"
+  },
+  "checklists": {
+    "phase_b": "0/6",
+    "phase_b_status": "not_started"
+  },
+  "recommended_next_phase": "static_complete_pending_hardware",
+  "next_actions": [
+    "Place phase_b/captures/eeprom.bin (8192 bytes, real device dump)",
+    "Place phase_b/captures/*.pcapng (USB captures)",
+    "Run: make phase-b",
+    "See: HARDWARE_HANDOFF.md"
+  ],
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "boundary": "Static phase frozen; no further status upgrades without hardware evidence"
+}

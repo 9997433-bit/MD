@@ -1,0 +1,681 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-08-27T16:38:48.421532+00:00",
+  "source_file": "firmware/device.bit",
+  "file_size_bytes": 131046,
+  "parse_status": "partial-ok",
+  "family": "spartan3 (candidate, per part/IDCODE)",
+  "bit_container": {
+    "magic_valid": true,
+    "sections": {
+      "a_design_name": {
+        "present": true,
+        "offset": 13,
+        "length": 33,
+        "value_redacted": "[redacted].ncd;UserID=0xFFFFFFFF",
+        "redaction_applied": true
+      },
+      "b_part_name": {
+        "present": true,
+        "offset": 49,
+        "length": 11,
+        "value": "3s200ft256"
+      },
+      "c_date": {
+        "present": true,
+        "offset": 63,
+        "length": 11,
+        "value": "2011/06/10"
+      },
+      "d_time": {
+        "present": true,
+        "offset": 77,
+        "length": 9,
+        "value": "12:44:47"
+      },
+      "e_config_data": {
+        "present": true,
+        "offset": 94,
+        "length_bytes": 130952,
+        "length_hex": "0x1ff88"
+      }
+    },
+    "config_data_offset": 94,
+    "config_data_declared_length": 130952,
+    "parse_notes": [],
+    "preamble_hex": "00090ff00ff00ff00ff0000001"
+  },
+  "config_data": {
+    "declared_length_bytes": 130952,
+    "declared_length_hex": "0x1ff88",
+    "sync_found": true,
+    "sync_word": "0xaa995566",
+    "sync_offset_in_file": 98
+  },
+  "packet_stream": {
+    "sync_offset_in_config": 4,
+    "packet_count": 73,
+    "cmd_sequence": [
+      "RCRC",
+      "SWITCH",
+      "WCFG",
+      "GRESTORE",
+      "DGHIGH/LFRM",
+      "START",
+      "DESYNCH"
+    ],
+    "registers": {
+      "FLR": {
+        "value": 52,
+        "note": "frame length register"
+      },
+      "COR": {
+        "value": "0x40003fe5"
+      },
+      "IDCODE": {
+        "raw": "0x01414093",
+        "device_hint": "family=spartan3 device=xc3s200"
+      },
+      "other_writes": [
+        {
+          "register": "MASK",
+          "value": "0x00000000"
+        },
+        {
+          "register": "CTL",
+          "value": "0x00000000"
+        }
+      ],
+      "FAR_writes": [
+        "0x00000000"
+      ],
+      "CRC": {
+        "value": "0x00005f57"
+      }
+    },
+    "fdri": {
+      "word_count": 32648,
+      "data_offset_in_config": 80,
+      "data_length_bytes": 130592
+    },
+    "parse_notes": [],
+    "packets": [
+      {
+        "offset": 8,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000007"
+        ]
+      },
+      {
+        "offset": 16,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "FLR",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000034"
+        ]
+      },
+      {
+        "offset": 24,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "COR",
+        "word_count": 1,
+        "payload_hex": [
+          "0x40003fe5"
+        ]
+      },
+      {
+        "offset": 32,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "IDCODE",
+        "word_count": 1,
+        "payload_hex": [
+          "0x01414093"
+        ]
+      },
+      {
+        "offset": 40,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "MASK",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000000"
+        ]
+      },
+      {
+        "offset": 48,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000009"
+        ]
+      },
+      {
+        "offset": 56,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "FAR",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000000"
+        ]
+      },
+      {
+        "offset": 64,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000001"
+        ]
+      },
+      {
+        "offset": 72,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "FDRI",
+        "word_count": 0
+      },
+      {
+        "offset": 76,
+        "type": 2,
+        "opcode": "WRITE",
+        "follows_register": "FDRI",
+        "word_count": 32648,
+        "is_frame_data": true
+      },
+      {
+        "offset": 130676,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x0000000a"
+        ]
+      },
+      {
+        "offset": 130684,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000003"
+        ]
+      },
+      {
+        "offset": 130692,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130696,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130700,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130704,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130708,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130712,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130716,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130720,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130724,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130728,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130732,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130736,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130740,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130744,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130748,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130752,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130756,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130760,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130764,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130768,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130772,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130776,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130780,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130784,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130788,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130792,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130796,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130800,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130804,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130808,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130812,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130816,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130820,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130824,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130828,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130832,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130836,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130840,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130844,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130848,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130852,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130856,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130860,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130864,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130868,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130872,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130876,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130880,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130884,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130888,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130892,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130896,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130900,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130904,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000005"
+        ]
+      },
+      {
+        "offset": 130912,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CTL",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00000000"
+        ]
+      },
+      {
+        "offset": 130920,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CRC",
+        "word_count": 1,
+        "payload_hex": [
+          "0x00005f57"
+        ]
+      },
+      {
+        "offset": 130928,
+        "type": 1,
+        "opcode": "WRITE",
+        "register": "CMD",
+        "word_count": 1,
+        "payload_hex": [
+          "0x0000000d"
+        ]
+      },
+      {
+        "offset": 130936,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130940,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130944,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      },
+      {
+        "offset": 130948,
+        "type": 1,
+        "opcode": "NOP",
+        "register": "CRC",
+        "word_count": 0
+      }
+    ]
+  },
+  "frame_analysis": {
+    "confidence": "candidate",
+    "method": "FDRI payload split into fixed-length frames using the FLR register; outer (edge) frame columns treated as candidate IOB configuration region per Spartan-3 column-based frame layout",
+    "fdri_word_count": 32648,
+    "frame_length_words": 52,
+    "frame_length_source": "FLR register",
+    "active_config_words": 21631,
+    "active_config_words_note": "count of non-zero 32-bit words in the FDRI payload (upper bound on meaningfully-configured words)",
+    "estimated_frame_count": 627,
+    "trailing_words_after_last_full_frame": 44,
+    "frame_alignment": "candidate: FDRI word count not an exact multiple of FLR; remainder likely pad/CRC words",
+    "iob_edge_frame_window": 4,
+    "candidate_iob_config_words": 223,
+    "candidate_iob_confidence": "candidate/low",
+    "candidate_iob_note": "non-zero words within the first/last frame columns; exact IOB frame mapping for this specific device is unknown",
+    "max_frame_density": 52,
+    "nonzero_frame_count": 492
+  },
+  "unknowns": [
+    "FDRI word count not an exact multiple of frame length; frame count is a candidate estimate",
+    "exact per-column IOB frame mapping for the specific device is not reconstructed (candidate heuristic only)"
+  ]
+}

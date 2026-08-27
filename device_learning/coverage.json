@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-08-27T16:38:52.979054+00:00",
+  "total_identifiers": 237,
+  "by_layer": {
+    "hw": 32,
+    "bit": 78,
+    "signal": 19,
+    "usb": 34,
+    "ref": 24,
+    "arch": 15,
+    "learn": 20,
+    "exp": 15
+  },
+  "status_counts": {
+    "confirmed": 68,
+    "candidate": 65,
+    "unknown": 56,
+    "hypothesis": 6,
+    "not_started": 30,
+    "missing": 12
+  },
+  "stop_conditions": {
+    "1_no_empty_status": true,
+    "2_all_layers_present": true,
+    "3_missing_documented": true,
+    "4_null_bridges_intact": true,
+    "5_no_false_confirmed_bridges": true,
+    "6_phase_b_scaffold": true,
+    "7_learning_guide": true,
+    "8_no_sensitive_tokens": true,
+    "9_phase_c_scaffold": true,
+    "10_static_report": true
+  },
+  "all_pass": true,
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "phase": "static_complete_pending_hardware"
+}
