@@ -7,6 +7,7 @@ namespace Aetherboard.VR
     {
         [SerializeField] private Transform hologramRoot;
         private BossState _last;
+        private FuryCastBarVFX _furyBar;
 
         public void InitializeProcedural(Transform parent)
         {
@@ -18,8 +19,11 @@ namespace Aetherboard.VR
             sphere.transform.localScale = Vector3.one * 0.18f;
             var col = sphere.GetComponent<Collider>();
             if (col != null) Destroy(col);
-            var r = sphere.GetComponent<Renderer>();
-            r.material = ProceduralAssets.CreateUnlitMaterial(new Color(0.9f, 0.25f, 0.2f, 0.75f));
+            sphere.GetComponent<Renderer>().material =
+                ProceduralAssets.CreateUnlitMaterial(new Color(0.9f, 0.25f, 0.2f, 0.75f));
+
+            _furyBar = hologramRoot.gameObject.AddComponent<FuryCastBarVFX>();
+            _furyBar.Initialize(hologramRoot);
         }
 
         public void Bind(BossState boss)
@@ -30,8 +34,9 @@ namespace Aetherboard.VR
                 var scale = 0.14f + 0.08f * (boss.Hp / (float)boss.MaxHp);
                 hologramRoot.localScale = Vector3.one * scale;
                 if (boss.FuryCastTurns > 0)
-                    hologramRoot.Rotate(Vector3.up, 90f * Time.deltaTime);
+                    hologramRoot.Rotate(Vector3.up, 45f * Time.deltaTime);
             }
+            _furyBar?.Bind(boss);
         }
 
         private void OnGUI()

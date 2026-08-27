@@ -26,6 +26,16 @@ aetherboard/unity/AetherboardVR
    - 点击棋子 → 点击格子移动
    - `E` 结束阶段 | `A` 自动一步
    - `1` 土灵 Boss | `2` 风灵 Boss
+   - **右键** 打开技能环（GCD/oGCD 阶段）→ 点击技能芯片 → 点击目标格
+
+### VR 操作（头显模式）
+
+| 输入 | 功能 |
+|------|------|
+| 视线 + 扳机 | 选中棋子 |
+| Grip（抓取键） | 对最近棋子打开技能环 |
+| A / Primary | 结束当前阶段 |
+| B / Secondary | 自动演示一步 |
 
 也可通过菜单 `Aetherboard → Create Battle Scene File` 保存正式场景。
 

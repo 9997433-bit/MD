@@ -4,9 +4,6 @@ using Aetherboard.Core;
 
 namespace Aetherboard.VR
 {
-    /// <summary>
-    /// Auto-spawns the full battle scene when no BattleDirector exists (press Play in empty scene).
-    /// </summary>
     public static class AetherboardRuntimeLoader
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -19,71 +16,54 @@ namespace Aetherboard.VR
         }
     }
 
-    /// <summary>
-    /// Procedurally builds table, HUD, camera, and battle systems.
-    /// </summary>
     public class RuntimeSceneBootstrap : MonoBehaviour
     {
         [SerializeField] private string bossId = "earth";
         [SerializeField] private bool seatedMode = true;
         [SerializeField] private float tableDistance = 1.1f;
 
-        private void Start()
-        {
-            BuildScene();
-        }
+        private BattleDirector _director;
+        private SkillRingController _skillRing;
+
+        private void Start() => BuildScene();
 
         public void BuildScene()
         {
-            var root = new GameObject("BattleRoot");
-            root.transform.position = new Vector3(0, seatedMode ? 0.75f : 1.0f, tableDistance);
+            var tableCenter = new Vector3(0, seatedMode ? 0.75f : 1.0f, tableDistance);
 
-            var director = root.AddComponent<BattleDirector>();
+            var root = new GameObject("BattleRoot");
+            root.transform.position = tableCenter;
+
+            _director = root.AddComponent<BattleDirector>();
             var tableView = root.AddComponent<BattleTableView>();
             var telegraph = root.AddComponent<TelegraphVFXController>();
             var bossView = root.AddComponent<BossHologramView>();
             root.AddComponent<VRBattleBootstrap>();
 
-            tableView.BuildProcedural(root.transform, director);
+            tableView.BuildProcedural(root.transform, _director);
             telegraph.InitializeProcedural(tableView);
             bossView.InitializeProcedural(root.transform);
+
+            _skillRing = root.AddComponent<SkillRingController>();
+            _skillRing.Initialize(_director, tableView, root.transform);
 
             var hud = new GameObject("BattleHUD");
             hud.transform.SetParent(root.transform, false);
             hud.transform.localPosition = new Vector3(0, 0.35f, -0.55f);
             var hudCtrl = hud.AddComponent<BattleHUDController>();
-            hudCtrl.Bind(director);
+            hudCtrl.Bind(_director);
 
             var desktop = root.AddComponent<DesktopBattleInput>();
-            desktop.Bind(director, tableView);
+            desktop.Bind(_director, tableView, _skillRing);
 
-            SetupCamera(root.transform.position);
+            root.AddComponent<VRInputBridge>().Bind(_director, tableView, _skillRing, desktop);
 
-            director.SetBoss(bossId);
-            Debug.Log("[Aetherboard] Runtime scene ready. Desktop: click piece → click cell. Keys: E=End Phase, A=Auto.");
-        }
+            XRRigFactory.EnsureLighting();
+            XRRigFactory.CreateRig(tableCenter, seatedMode, out _);
 
-        private static void SetupCamera(Vector3 lookTarget)
-        {
-            var cam = Camera.main;
-            if (cam == null)
-            {
-                var camGo = new GameObject("Main Camera");
-                cam = camGo.AddComponent<Camera>();
-                camGo.tag = "MainCamera";
-                camGo.AddComponent<AudioListener>();
-            }
-            cam.transform.position = lookTarget + new Vector3(0, 0.65f, -0.85f);
-            cam.transform.LookAt(lookTarget + Vector3.up * 0.05f);
-
-            if (Object.FindObjectOfType<Light>() == null)
-            {
-                var lightGo = new GameObject("Directional Light");
-                var light = lightGo.AddComponent<Light>();
-                light.type = LightType.Directional;
-                light.intensity = 1.1f;
-                lightGo.transform.rotation = Quaternion.Euler(50, -30, 0);
-            }
+            _director.SetBoss(bossId);
+            var mode = XRRigFactory.XrActive ? "XR" : "Desktop";
+            Debug.Log($"[Aetherboard] Ready ({mode}). LMB: select/move | RMB: skills | E/A/1/2");
         }
     }
 }

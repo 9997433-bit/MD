@@ -59,7 +59,7 @@ namespace Aetherboard.VR
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>桌面操作: 点击棋子 → 点击格子移动 | E/A/1/2</size>", RichLabel());
+            GUILayout.Label("<size=10>桌面: 左键选/移 | 右键技能环 | E结束 A自动 1/2换Boss</size>", RichLabel());
             GUILayout.EndArea();
         }
 

@@ -45,11 +45,14 @@ namespace Aetherboard.VR
             // XR release handled via DesktopBattleInput fallback when no XR rig
         }
 
+        private Color _baseColor;
+        private bool _hasBaseColor;
+
         public void SetJob(JobType job)
         {
             if (body == null) body = GetComponentInChildren<Renderer>();
             if (body == null) return;
-            var c = job switch
+            _baseColor = job switch
             {
                 JobType.Knight => knightColor,
                 JobType.WhiteMage => healerColor,
@@ -57,17 +60,18 @@ namespace Aetherboard.VR
                 JobType.Bard => bardColor,
                 _ => Color.white
             };
-            if (body.material == null) body.material = ProceduralAssets.CreateUnlitMaterial(c);
-            else body.material.color = c;
+            _hasBaseColor = true;
+            if (body.material == null) body.material = ProceduralAssets.CreateUnlitMaterial(_baseColor);
+            else body.material.color = _baseColor;
         }
 
         public void SetSelected(bool selected)
         {
             IsSelected = selected;
-            if (body != null)
-                body.material.color = selected
-                    ? Color.Lerp(body.material.color, Color.white, 0.35f)
-                    : body.material.color;
+            if (body == null || !_hasBaseColor) return;
+            body.material.color = selected
+                ? Color.Lerp(_baseColor, Color.white, 0.35f)
+                : _baseColor;
         }
 
         public void BeginDrag(Vector3 hitPoint)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Aetherboard.Core;
@@ -5,73 +6,159 @@ using Aetherboard.Core;
 namespace Aetherboard.VR
 {
     /// <summary>
-    /// Radial GCD / oGCD skill menu attached near the active piece or on the off-hand wrist.
+    /// World-space radial skill menu — procedural chips, clickable via mouse or VR ray.
     /// </summary>
     public class SkillRingController : MonoBehaviour
     {
-        [SerializeField] private BattleDirector director;
-        [SerializeField] private Transform ringAnchor;
-        [SerializeField] private float radius = 0.08f;
-        [SerializeField] private SkillRingButton buttonPrefab;
+        [SerializeField] private float radius = 0.09f;
+        [SerializeField] private float chipSize = 0.035f;
 
-        private readonly List<SkillRingButton> _buttons = new();
+        private BattleDirector _director;
+        private BattleTableView _table;
+        private Transform _ringAnchor;
+        private readonly List<SkillChip> _chips = new();
         private string _activeUnitId;
+        private string _pendingSkillId;
+        private bool _awaitingTarget;
 
-        public void ShowForUnit(string unitId, JobType job)
+        public bool AwaitingTarget => _awaitingTarget;
+        public string PendingSkillId => _pendingSkillId;
+
+        public void Initialize(BattleDirector director, BattleTableView table, Transform parent)
+        {
+            _director = director;
+            _table = table;
+            _ringAnchor = new GameObject("SkillRing").transform;
+            _ringAnchor.SetParent(parent, false);
+            _ringAnchor.gameObject.SetActive(false);
+        }
+
+        public void ShowForUnit(string unitId, JobType job, Vector3 worldPos)
         {
             _activeUnitId = unitId;
-            ClearButtons();
-            var skills = JobCatalog.JobSkills[job];
-            for (var i = 0; i < skills.Length; i++)
+            _pendingSkillId = null;
+            _awaitingTarget = false;
+            ClearChips();
+
+            var skills = new List<string>(JobCatalog.JobSkills[job]);
+            if (_director.State.Boss.FuryCastTurns > 0) skills.Add("interrupt");
+
+            for (var i = 0; i < skills.Count; i++)
             {
                 var skillId = skills[i];
-                var def = SkillCatalog.Get(skillId);
-                var angle = i * (360f / skills.Length) * Mathf.Deg2Rad;
-                var pos = new Vector3(Mathf.Cos(angle), 0.02f, Mathf.Sin(angle)) * radius;
-                var btn = Instantiate(buttonPrefab, ringAnchor);
-                btn.transform.localPosition = pos;
-                btn.Setup(def.Name, def.Kind, () => OnSkillSelected(skillId));
-                _buttons.Add(btn);
+                var def = SkillCatalog.Skills.TryGetValue(skillId, out var s) ? s : null;
+                if (def == null) continue;
+
+                var angle = (i / (float)skills.Count) * Mathf.PI * 2f;
+                var local = new Vector3(Mathf.Cos(angle), 0.04f, Mathf.Sin(angle)) * radius;
+                var chip = CreateChip(def.Name, def.Kind, local, skillId);
+                _chips.Add(chip);
             }
-            if (director.State.Boss.FuryCastTurns > 0)
-            {
-                var btn = Instantiate(buttonPrefab, ringAnchor);
-                btn.transform.localPosition = Vector3.up * 0.06f;
-                btn.Setup("打断", "ogcd", () => OnSkillSelected("interrupt"));
-                _buttons.Add(btn);
-            }
-            ringAnchor.gameObject.SetActive(true);
+
+            _ringAnchor.position = worldPos + Vector3.up * 0.12f;
+            _ringAnchor.gameObject.SetActive(true);
+            FaceCamera();
         }
 
         public void Hide()
         {
-            ringAnchor.gameObject.SetActive(false);
-            ClearButtons();
+            _ringAnchor.gameObject.SetActive(false);
+            _pendingSkillId = null;
+            _awaitingTarget = false;
+            ClearChips();
         }
 
-        private void OnSkillSelected(string skillId)
+        public bool TrySelectChip(RaycastHit hit)
         {
+            var chip = hit.collider.GetComponent<SkillChip>();
+            if (chip == null) return false;
+            return ActivateSkill(chip.SkillId);
+        }
+
+        public bool ActivateSkill(string skillId)
+        {
+            var def = SkillCatalog.Skills[skillId];
+            var unit = _director.State.Party.Find(u => u.Id == _activeUnitId);
+            if (unit == null) return false;
+
+            if (def.Heal > 0)
+            {
+                _pendingSkillId = skillId;
+                _awaitingTarget = true;
+                return true;
+            }
+
             var target = BoardMath.BossPos(BoardMath.DefaultSize);
-            director.TryUseSkill(_activeUnitId, skillId, target);
-            Hide();
+            if (_director.TryUseSkill(_activeUnitId, skillId, target))
+            {
+                Hide();
+                return true;
+            }
+            return false;
         }
 
-        private void ClearButtons()
+        public bool TryTargetCell(GridPos dest)
         {
-            foreach (var b in _buttons)
-                if (b != null) Destroy(b.gameObject);
-            _buttons.Clear();
+            if (!_awaitingTarget || string.IsNullOrEmpty(_pendingSkillId)) return false;
+            if (_director.TryUseSkill(_activeUnitId, _pendingSkillId, dest))
+            {
+                Hide();
+                return true;
+            }
+            return false;
+        }
+
+        private SkillChip CreateChip(string label, string kind, Vector3 localPos, string skillId)
+        {
+            var go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            go.name = $"Skill_{skillId}";
+            go.transform.SetParent(_ringAnchor, false);
+            go.transform.localPosition = localPos;
+            go.transform.localScale = new Vector3(chipSize, 0.008f, chipSize);
+            var r = go.GetComponent<Renderer>();
+            r.material = ProceduralAssets.CreateUnlitMaterial(
+                kind == "ogcd" ? new Color(0.9f, 0.55f, 0.1f) : new Color(0.2f, 0.55f, 0.95f));
+
+            var textGo = new GameObject("Label");
+            textGo.transform.SetParent(go.transform, false);
+            textGo.transform.localPosition = new Vector3(0, 1.5f, 0);
+            textGo.transform.localScale = Vector3.one * 0.25f;
+            var text = textGo.AddComponent<TextMesh>();
+            text.text = label;
+            text.fontSize = 32;
+            text.characterSize = 0.05f;
+            text.anchor = TextAnchor.MiddleCenter;
+            text.color = Color.white;
+
+            var chip = go.AddComponent<SkillChip>();
+            chip.SkillId = skillId;
+            return chip;
+        }
+
+        private void ClearChips()
+        {
+            foreach (var c in _chips)
+                if (c != null) Destroy(c.gameObject);
+            _chips.Clear();
+        }
+
+        private void LateUpdate()
+        {
+            if (_ringAnchor != null && _ringAnchor.gameObject.activeSelf)
+                FaceCamera();
+        }
+
+        private void FaceCamera()
+        {
+            var cam = Camera.main;
+            if (cam == null) return;
+            _ringAnchor.rotation = Quaternion.LookRotation(
+                _ringAnchor.position - cam.transform.position, Vector3.up);
         }
     }
 
-    public class SkillRingButton : MonoBehaviour
+    public class SkillChip : MonoBehaviour
     {
-        [SerializeField] private UnityEngine.UI.Text label;
-
-        public void Setup(string text, string kind, System.Action onClick)
-        {
-            if (label != null) label.text = $"{text}\n({kind})";
-            // Wire XR simple push button or Unity UI onClick in prefab.
-        }
+        public string SkillId;
     }
 }
