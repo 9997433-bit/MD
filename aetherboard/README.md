@@ -12,6 +12,7 @@
 | Unity VR 交互 / VFX / 音效 | ✅ |
 | 三路联机（TCP / WS / NGO） | ✅ |
 | Quest 打包 / 侧载 / 验收工具链 | ✅ |
+| **PR #5 合并至 main** | ✅ 2026-08-27 |
 | Quest 实机 10 项人工验收 | 🔲 见 `docs/QUEST_VERIFICATION.md` |
 
 完整功能清单见 [`docs/VR_ROADMAP.md`](docs/VR_ROADMAP.md)。
