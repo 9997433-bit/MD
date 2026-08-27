@@ -21,6 +21,7 @@ namespace Aetherboard.VR
             _director.OnPhaseChanged.AddListener(OnPhaseChanged);
             _director.OnLogAdded.AddListener(OnLog);
             _director.OnBattleEnded.AddListener(OnBattleEnded);
+            _director.OnCastInterrupted.AddListener(OnCastInterrupted);
         }
 
         private void OnDestroy()
@@ -29,6 +30,7 @@ namespace Aetherboard.VR
             _director.OnPhaseChanged.RemoveListener(OnPhaseChanged);
             _director.OnLogAdded.RemoveListener(OnLog);
             _director.OnBattleEnded.RemoveListener(OnBattleEnded);
+            _director.OnCastInterrupted.RemoveListener(OnCastInterrupted);
         }
 
         private void OnPhaseChanged(BattlePhase phase)
@@ -50,6 +52,12 @@ namespace Aetherboard.VR
             else if (msg.Contains("打断")) PlayTone(1200f, 0.04f, 0.2f);
             else if (msg.Contains("预警")) PlayTone(180f, 0.1f, 0.25f);
             else if (msg.Contains("即死") || msg.Contains("倒下")) PlayTone(110f, 0.12f, 0.3f);
+        }
+
+        private void OnCastInterrupted()
+        {
+            PlayTone(1400f, 0.08f, 0.28f);
+            PlayTone(880f, 0.05f, 0.18f);
         }
 
         private void OnBattleEnded()

@@ -26,7 +26,7 @@ namespace Aetherboard.VR
             _furyBar.Initialize(hologramRoot);
         }
 
-        public void Bind(BossState boss)
+        public void Bind(BossState boss, string bossId = "earth")
         {
             _last = boss;
             if (hologramRoot != null)
@@ -36,7 +36,7 @@ namespace Aetherboard.VR
                 if (boss.FuryCastTurns > 0)
                     hologramRoot.Rotate(Vector3.up, 45f * Time.deltaTime);
             }
-            _furyBar?.Bind(boss);
+            _furyBar?.Bind(boss, bossId);
         }
 
         private void OnGUI()

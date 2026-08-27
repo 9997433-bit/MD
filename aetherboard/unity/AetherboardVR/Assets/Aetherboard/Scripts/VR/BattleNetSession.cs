@@ -1,7 +1,4 @@
 using System;
-using System.IO;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using UnityEngine;
 using Aetherboard.Core;
@@ -50,11 +47,9 @@ namespace Aetherboard.VR
 
         private CoopController _coop;
         private int _localPlayerId = 1;
-        private TcpClient _client;
-        private BattleWebSocketClient _wsClient;
+        private IBattleNetTransport _transport;
         private Thread _readerThread;
         private volatile bool _running;
-        private readonly object _sendLock = new();
         private string _activeTransport = "—";
 
         public NetSessionRole Role => role;
@@ -102,9 +97,8 @@ namespace Aetherboard.VR
         private void OnDestroy()
         {
             _running = false;
-            try { _client?.Close(); } catch { /* ignore */ }
-            _wsClient?.Dispose();
-            _wsClient = null;
+            _transport?.Dispose();
+            _transport = null;
             var tcp = GetComponent<BattleTcpHostServer>();
             if (tcp != null) tcp.StopServer();
             var ws = GetComponent<BattleWebSocketHostServer>();
@@ -117,8 +111,7 @@ namespace Aetherboard.VR
             if (role == newRole) return;
             role = newRole;
             OnDestroy();
-            _client = null;
-            _wsClient = null;
+            _transport = null;
             _activeTransport = "—";
             if (role == NetSessionRole.Host) StartHost();
             else if (role == NetSessionRole.Client) ConnectClient();
@@ -156,16 +149,45 @@ namespace Aetherboard.VR
             GetComponent<BattleWebSocketHostServer>()?.BroadcastState(line);
         }
 
+        private bool TryConnectTransport(BattleNetTransportKind kind, int port)
+        {
+            try
+            {
+                _transport?.Dispose();
+                _transport = BattleNetTransportFactory.Create(kind);
+                if (!_transport.Connect(hostAddress, port))
+                {
+                    _transport.Dispose();
+                    _transport = null;
+                    return false;
+                }
+
+                _running = true;
+                _activeTransport = _transport.Name;
+                _readerThread = new Thread(TransportReadLoop) { IsBackground = true };
+                _readerThread.Start();
+                Debug.Log($"[Aetherboard] Connected via {_transport.Name} {hostAddress}:{port}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[Aetherboard] {kind} connect failed: {ex.Message}");
+                _transport?.Dispose();
+                _transport = null;
+                return false;
+            }
+        }
+
         private void ConnectClient()
         {
             _activeTransport = "—";
             var connected = false;
 
             if (clientTransport != NetClientTransport.Tcp)
-                connected = TryConnectWebSocket();
+                connected = TryConnectTransport(BattleNetTransportKind.WebSocket, hostWsPort);
 
             if (!connected && clientTransport != NetClientTransport.WebSocket)
-                connected = TryConnectTcp();
+                connected = TryConnectTransport(BattleNetTransportKind.Tcp, hostPort);
 
             if (!connected)
             {
@@ -174,51 +196,13 @@ namespace Aetherboard.VR
             }
         }
 
-        private bool TryConnectWebSocket()
+        private void TransportReadLoop()
         {
-            try
+            _transport?.StartReceiveLoop(line =>
             {
-                _wsClient = new BattleWebSocketClient();
-                if (!_wsClient.Connect(hostAddress, hostWsPort))
-                {
-                    _wsClient.Dispose();
-                    _wsClient = null;
-                    return false;
-                }
-
-                _running = true;
-                _activeTransport = "WebSocket";
-                _readerThread = new Thread(WsReadLoop) { IsBackground = true };
-                _readerThread.Start();
-                Debug.Log($"[Aetherboard] Connected via WebSocket {hostAddress}:{hostWsPort}");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning($"[Aetherboard] WebSocket connect failed: {ex.Message}");
-                _wsClient?.Dispose();
-                _wsClient = null;
-                return false;
-            }
-        }
-
-        private bool TryConnectTcp()
-        {
-            try
-            {
-                _client = new TcpClient(hostAddress, hostPort);
-                _running = true;
-                _activeTransport = "TCP";
-                _readerThread = new Thread(TcpReadLoop) { IsBackground = true };
-                _readerThread.Start();
-                Debug.Log($"[Aetherboard] Connected via TCP {hostAddress}:{hostPort}");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning($"[Aetherboard] TCP connect failed: {ex.Message}");
-                return false;
-            }
+                HandleLine(line);
+                return _running;
+            });
         }
 
         public bool SubmitMove(string unitId, GridPos dest) =>
@@ -272,50 +256,9 @@ namespace Aetherboard.VR
             }
 
             var line = BattleSyncProtocol.EncodeCommand(cmd);
-            if (_wsClient != null && _wsClient.IsConnected)
-                return _wsClient.SendText(line);
-
-            if (_client == null || !_client.Connected) return false;
-            try
-            {
-                var bytes = Encoding.UTF8.GetBytes(line + "\n");
-                lock (_sendLock)
-                    _client.GetStream().Write(bytes, 0, bytes.Length);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning($"[Aetherboard] Send failed: {ex.Message}");
-                return false;
-            }
-        }
-
-        private void WsReadLoop()
-        {
-            _wsClient?.RunReceiveLoop(line =>
-            {
-                HandleLine(line);
-                return _running;
-            });
-        }
-
-        private void TcpReadLoop()
-        {
-            try
-            {
-                using var stream = _client.GetStream();
-                using var reader = new StreamReader(stream, Encoding.UTF8);
-                while (_running && _client.Connected)
-                {
-                    var line = reader.ReadLine();
-                    if (line == null) break;
-                    HandleLine(line);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_running) Debug.LogWarning($"[Aetherboard] Reader stopped: {ex.Message}");
-            }
+            if (_transport == null || !_transport.IsConnected) return false;
+            var lineDelimited = _transport.Name == "TCP";
+            return _transport.Send(line, lineDelimited);
         }
 
         private void HandleLine(string line)

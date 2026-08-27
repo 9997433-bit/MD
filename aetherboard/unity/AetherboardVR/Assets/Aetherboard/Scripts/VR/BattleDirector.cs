@@ -27,6 +27,7 @@ namespace Aetherboard.VR
         public UnityEvent<BattlePhase> OnPhaseChanged = new();
         public UnityEvent<string> OnLogAdded = new();
         public UnityEvent OnBattleEnded = new();
+        public UnityEvent OnCastInterrupted = new();
 
         public BattleCommandLog CommandLog { get; } = new();
         private string _lastSnapshotJson;
@@ -172,7 +173,7 @@ namespace Aetherboard.VR
         {
             tableView?.Bind(State);
             telegraphVfx?.ShowPreview(State.PreviewCells, State.Boss.Telegraph);
-            bossView?.Bind(State.Boss);
+            bossView?.Bind(State.Boss, Engine.BossId);
             OnPhaseChanged?.Invoke(State.Phase);
         }
 
@@ -195,9 +196,11 @@ namespace Aetherboard.VR
                 return _network.SubmitSkill(unitId, skillId, target);
 
             if (!Engine.UseSkill(unitId, skillId, target)) return false;
+            if (skillId == "interrupt" && State.Boss.FuryCastTurns < 0)
+                OnCastInterrupted?.Invoke();
             RecordCommand(BattleCommandType.Skill, unitId, skillId, target);
             tableView?.Bind(State);
-            bossView?.Bind(State.Boss);
+            bossView?.Bind(State.Boss, Engine.BossId);
             LogLatest();
             if (State.Phase == BattlePhase.Victory || State.Phase == BattlePhase.Defeat)
                 OnBattleEnded?.Invoke();

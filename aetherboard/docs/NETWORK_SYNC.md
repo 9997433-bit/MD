@@ -84,3 +84,14 @@ director.ExportCommandLogJson();
 - **回放当前记录** / **导入回放**：从文件重放命令序列
 
 回放使用与 C# `BattleReplayer` 相同的确定性逻辑（相同 seed + bossId + 命令列表）。
+
+## 传输层抽象
+
+客户端连接通过 `IBattleNetTransport` 封装，当前实现：
+
+| 实现 | 说明 |
+|------|------|
+| `BattleTcpNetTransport` | 行分隔 JSON（8767） |
+| `BattleWebSocketNetTransport` | 消息帧 JSON（8769） |
+
+`BattleNetTransportFactory` 可按类型创建，便于后续接入 Unity Netcode 适配器而不改动 `BattleNetSession`。
