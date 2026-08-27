@@ -19,7 +19,8 @@ namespace Aetherboard.VR
     {
         Tcp,
         WebSocket,
-        NetcodeRelay
+        NetcodeRelay,
+        NetcodeNative
     }
 
     public static class BattleNetTransportFactory
@@ -28,6 +29,7 @@ namespace Aetherboard.VR
         {
             BattleNetTransportKind.WebSocket => new BattleWebSocketNetTransport(),
             BattleNetTransportKind.NetcodeRelay => new BattleNetcodeRelayTransport(),
+            BattleNetTransportKind.NetcodeNative => new BattleNetcodeNativeTransport(),
             _ => new BattleTcpNetTransport()
         };
     }

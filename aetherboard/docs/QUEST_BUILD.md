@@ -59,7 +59,7 @@
    - `1` 土灵 Boss | `2` 风灵 Boss
    - `C` 双人模式 | `Tab` 切换玩家
    - `F5` 存档检查点 | `F9` 读档
-   - `H` Host | `N` Client | `B` 切换传输层（Auto/WS/TCP）
+   - `H` Host | `N` Client | `B` 切换传输层（Auto/WS/TCP/NetcodeRelay/NetcodeNative）
 
 ### Unity 作 Host（无需 Python）
 

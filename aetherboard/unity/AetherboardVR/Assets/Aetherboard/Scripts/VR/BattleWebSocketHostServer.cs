@@ -165,23 +165,15 @@ namespace Aetherboard.VR
                         continue;
                     }
 
-                    if (coopOn && CoopRules.CommandRequiresUnit(cmd.Type) &&
-                        !CoopRules.CanControl(cmd.PlayerId, cmd.UnitId, true))
+                    var result = BattleHostCommandProcessor.TryApply(director, _coop, enforceCoop, line);
+                    if (!result.Ok)
                     {
-                        SendText(ws, BattleSyncProtocol.EncodeError($"P{cmd.PlayerId} 无权控制 {cmd.UnitId}"));
-                        continue;
-                    }
-
-                    var ok = BattleCommandExecutor.Apply(director.Engine, cmd);
-                    var stateJson = director.ExportSnapshotJson();
-                    if (!ok)
-                    {
-                        SendText(ws, BattleSyncProtocol.EncodeError("Command rejected"));
+                        SendText(ws, BattleSyncProtocol.EncodeError(result.ErrorMessage));
                         continue;
                     }
 
                     UnityMainThreadDispatcher.Enqueue(() => director.RefreshAllViews());
-                    var stateLine = BattleSyncProtocol.EncodeState(stateJson);
+                    var stateLine = BattleSyncProtocol.EncodeState(director.ExportSnapshotJson());
                     BroadcastText(stateLine);
                 }
             }

@@ -43,7 +43,9 @@
 | **Web 读条 UI** | ✅ | 进度条 + 紧急脉冲 + 打断爆发 |
 | **NGO CustomMessaging** | ✅ | `BattleNetcodeFacade` + HostCoordinator |
 | **Quest APK 构建菜单** | ✅ | `QuestApkBuilder` Editor 菜单 |
-| 在线多人传输层 | 🔲 | NGO UnityTransport 替代 WS 中继 |
+| **NGO UnityTransport** | ✅ | `BattleNetcodeNativeTransport` 端口 7777 |
+| 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
+| Quest 实机验证 | 🔲 | 侧载 APK 联机测试 |
 
 ## 技术栈
 

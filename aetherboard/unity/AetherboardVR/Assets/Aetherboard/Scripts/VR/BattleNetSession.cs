@@ -18,7 +18,8 @@ namespace Aetherboard.VR
         Auto,
         WebSocket,
         Tcp,
-        NetcodeRelay
+        NetcodeRelay,
+        NetcodeNative
     }
 
     public interface IBattleNetworkBridge
@@ -42,9 +43,11 @@ namespace Aetherboard.VR
         [SerializeField] private string hostAddress = "127.0.0.1";
         [SerializeField] private int hostPort = 8767;
         [SerializeField] private int hostWsPort = 8769;
+        [SerializeField] private int hostNgoPort = 7777;
         [SerializeField] private NetClientTransport clientTransport = NetClientTransport.Auto;
         [SerializeField] private bool startTcpHostWhenHosting = true;
         [SerializeField] private bool startWsHostWhenHosting = true;
+        [SerializeField] private bool startNgoHostWhenHosting = true;
         [SerializeField] private bool enforceCoopOnNetwork = true;
 
         private CoopController _coop;
@@ -60,6 +63,7 @@ namespace Aetherboard.VR
         public string HostAddress => hostAddress;
         public int HostPort => hostPort;
         public int HostWsPort => hostWsPort;
+        public int HostNgoPort => hostNgoPort;
         public NetClientTransport ClientTransport => clientTransport;
         public string ActiveTransport => _activeTransport;
 
@@ -84,6 +88,7 @@ namespace Aetherboard.VR
                 NetClientTransport.Auto => NetClientTransport.WebSocket,
                 NetClientTransport.WebSocket => NetClientTransport.Tcp,
                 NetClientTransport.Tcp => NetClientTransport.NetcodeRelay,
+                NetClientTransport.NetcodeRelay => NetClientTransport.NetcodeNative,
                 _ => NetClientTransport.Auto
             };
             Debug.Log($"[Aetherboard] Client transport → {clientTransport}");
@@ -107,6 +112,9 @@ namespace Aetherboard.VR
             var ws = GetComponent<BattleWebSocketHostServer>();
             if (ws != null) ws.StopServer();
             _readerThread?.Join(200);
+            BattleNetcodeNativeBridge.Shutdown();
+            BattleNetcodeHostCoordinator.OnCommandReceived = null;
+            BattleNetcodeHostCoordinator.GetInitialHandshake = null;
         }
 
         public void SetRole(NetSessionRole newRole)
@@ -137,6 +145,15 @@ namespace Aetherboard.VR
                 if (ws == null) ws = gameObject.AddComponent<BattleWebSocketHostServer>();
                 ws.StartServer();
                 parts.Add($"WS:{hostWsPort}");
+            }
+            if (startNgoHostWhenHosting && BattleNetcodeRuntime.IsAvailable)
+            {
+                BattleNetcodeHostCoordinator.OnCommandReceived = HandleNgoCommand;
+                BattleNetcodeHostCoordinator.GetInitialHandshake = BuildNgoHandshake;
+                if (BattleNetcodeNativeBridge.StartHost(hostAddress, hostNgoPort))
+                    parts.Add($"NGO:{hostNgoPort}");
+                else
+                    Debug.LogWarning("[Aetherboard] NGO host failed to start — TCP/WS still active.");
             }
             _activeTransport = parts.Count > 0 ? $"Host ({string.Join(" ", parts)})" : "Host";
             Debug.Log($"[Aetherboard] Host mode — {string.Join(" | ", parts)}");
@@ -187,6 +204,8 @@ namespace Aetherboard.VR
             _activeTransport = "—";
             var connected = clientTransport switch
             {
+                NetClientTransport.NetcodeNative =>
+                    TryConnectTransport(BattleNetTransportKind.NetcodeNative, hostNgoPort),
                 NetClientTransport.NetcodeRelay =>
                     TryConnectTransport(BattleNetTransportKind.NetcodeRelay, hostWsPort),
                 NetClientTransport.Tcp =>
@@ -296,6 +315,32 @@ namespace Aetherboard.VR
         public bool ClientApplyState(string json) => director != null && director.ImportSnapshotJson(json);
 
         public string ExportCommandLog() => director?.CommandLog.ToJson();
+
+        private string[] BuildNgoHandshake()
+        {
+            if (director == null) return Array.Empty<string>();
+            var coopOn = enforceCoopOnNetwork && _coop != null && _coop.Mode == CoopMode.SplitCoop;
+            return new[]
+            {
+                BattleSyncProtocol.EncodeWelcome(
+                    director.Engine.RandomSeed, director.Engine.BossId, coopOn),
+                BattleSyncProtocol.EncodeState(director.ExportSnapshotJson())
+            };
+        }
+
+        private string HandleNgoCommand(string line, ulong clientId)
+        {
+            var result = BattleHostCommandProcessor.TryApply(director, _coop, enforceCoopOnNetwork, line);
+            if (!result.Ok) return result.ErrorMessage;
+
+            if (result.StateChanged)
+            {
+                UnityMainThreadDispatcher.Enqueue(() => director?.RefreshAllViews());
+                PublishHostState();
+            }
+
+            return null;
+        }
     }
 
     /// <summary>
