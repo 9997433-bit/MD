@@ -38,6 +38,7 @@ namespace Aetherboard.VR
 
         private void Awake()
         {
+            bossId = BattleBossPrefs.LoadBoss(bossId);
             Engine = new BattleEngine(bossId, randomSeed);
             CommandLog.RandomSeed = randomSeed;
             CommandLog.BossId = bossId;
@@ -52,6 +53,7 @@ namespace Aetherboard.VR
         public void SetBoss(string id)
         {
             bossId = id;
+            BattleBossPrefs.SaveBoss(bossId);
             Engine.Reset(randomSeed, bossId);
             CommandLog.BossId = bossId;
             CommandLog.Commands.Clear();

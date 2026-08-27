@@ -43,6 +43,13 @@ namespace Aetherboard.Editor
             Debug.Log("Aetherboard: Battle scene built in editor (use Play to test).");
         }
 
+        [MenuItem("Aetherboard/Reset Controls Hint")]
+        public static void ResetControlsHint()
+        {
+            BattleControlsHint.ResetDismissedFlag();
+            Debug.Log("Aetherboard: Controls hint will show on next Play.");
+        }
+
         [MenuItem("Aetherboard/Open PR Body Template")]
         public static void OpenPrBodyTemplate() => OpenDoc("GITHUB_PR_BODY.md");
 

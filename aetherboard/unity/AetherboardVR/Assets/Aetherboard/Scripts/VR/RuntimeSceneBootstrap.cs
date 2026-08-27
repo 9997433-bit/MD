@@ -24,6 +24,7 @@ namespace Aetherboard.VR
 
         private void Start()
         {
+            bossId = BattleBossPrefs.LoadBoss(bossId);
             BattleSceneBuilder.Build(bossId, seatedMode, tableDistance, rigSource);
             var rigLabel = XRRigFactory.LastRigSource switch
             {
