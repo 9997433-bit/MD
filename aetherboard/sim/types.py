@@ -36,6 +36,15 @@ class Telegraph(Enum):
     EARTHQUAKE = auto()
     SHRINK = auto()
     EARTHEN_FURY = auto()
+    GALE = auto()
+    SPREAD = auto()
+    STACK = auto()
+    CYCLONE = auto()
+
+
+class BossId(Enum):
+    EARTH = "earth"
+    WIND = "wind"
 
 
 @dataclass(frozen=True)
@@ -92,6 +101,7 @@ class BossState:
     name: str
     hp: int
     max_hp: int
+    boss_id: str = "earth"
     phase: int = 1
     telegraph: Telegraph = Telegraph.NONE
     fury_cast_turns: int = 0

@@ -2,13 +2,12 @@ import {
   BOARD_SIZE,
   BOSS_POS,
   CellKind,
-  JOB_SKILLS,
-  MOVE_RANGE,
   Phase,
   SKILLS,
   Telegraph,
-  TELEGRAPH_TEXT,
 } from "./constants.js";
+import { BOSS_PROFILES } from "./bosses.js";
+import { pickGcdSkill, pickGcdTarget, pickMoveDest, pickOgcd } from "./ai.js";
 
 function posEq(a, b) {
   return a.x === b.x && a.y === b.y;
@@ -16,35 +15,6 @@ function posEq(a, b) {
 
 function dist(a, b) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
-}
-
-function makeBoard() {
-  return Array.from({ length: BOARD_SIZE }, () =>
-    Array.from({ length: BOARD_SIZE }, () => CellKind.NORMAL)
-  );
-}
-
-function createParty() {
-  return [
-    { id: "knight", name: "铁卫", job: "knight", pos: { x: 3, y: 5 }, hp: 1200, maxHp: 1200, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
-    { id: "white_mage", name: "白愈", job: "white_mage", pos: { x: 2, y: 6 }, hp: 900, maxHp: 900, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
-    { id: "black_mage", name: "黑炎", job: "black_mage", pos: { x: 4, y: 6 }, hp: 800, maxHp: 800, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
-    { id: "bard", name: "游弦", job: "bard", pos: { x: 3, y: 6 }, hp: 850, maxHp: 850, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
-  ];
-}
-
-function ringPositions(shrinkLevel) {
-  if (shrinkLevel <= 0) return [];
-  const depth = shrinkLevel - 1;
-  const out = [];
-  for (let x = 0; x < BOARD_SIZE; x++) {
-    for (let y = 0; y < BOARD_SIZE; y++) {
-      if (x <= depth || y <= depth || x >= BOARD_SIZE - 1 - depth || y >= BOARD_SIZE - 1 - depth) {
-        out.push({ x, y });
-      }
-    }
-  }
-  return out;
 }
 
 function inRadius(center, radius) {
@@ -57,10 +27,27 @@ function inRadius(center, radius) {
   return out;
 }
 
+function makeBoard() {
+  return Array.from({ length: BOARD_SIZE }, () =>
+    Array.from({ length: BOARD_SIZE }, () => CellKind.NORMAL)
+  );
+}
+
+function createParty() {
+  return [
+    { id: "knight", name: "铁卫", job: "knight", pos: { x: 3, y: 5 }, hp: 1200, maxHp: 1200, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
+    { id: "white_mage", name: "白愈", job: "white_mage", pos: { x: 2, y: 5 }, hp: 900, maxHp: 900, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
+    { id: "black_mage", name: "黑炎", job: "black_mage", pos: { x: 4, y: 5 }, hp: 800, maxHp: 800, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
+    { id: "bard", name: "游弦", job: "bard", pos: { x: 3, y: 4 }, hp: 850, maxHp: 850, alive: true, moved: false, gcd: false, ogcd: false, mit: 0, song: 0, taunt: 0 },
+  ];
+}
+
 export class BattleEngine {
-  constructor(seed = 7) {
+  constructor(seed = 42, bossId = "earth") {
     this.seed = seed;
     this.rngState = seed;
+    this.bossId = bossId;
+    this.profile = BOSS_PROFILES[bossId] || BOSS_PROFILES.earth;
     this.reset();
   }
 
@@ -73,14 +60,26 @@ export class BattleEngine {
     return Math.floor(this.rand() * (max - min + 1)) + min;
   }
 
-  reset() {
+  reset(bossId = this.bossId) {
+    this.bossId = bossId;
+    this.profile = BOSS_PROFILES[bossId] || BOSS_PROFILES.earth;
     this.turn = 1;
     this.phase = Phase.WARNING;
     this.cells = makeBoard();
     this.party = createParty();
-    this.boss = { name: "土灵守护者", hp: 6000, maxHp: 6000, phase: 1, telegraph: Telegraph.NONE, fury: 0, shrink: 0, alive: true };
+    this.boss = {
+      name: this.profile.name,
+      hp: this.profile.maxHp,
+      maxHp: this.profile.maxHp,
+      phase: 1,
+      telegraph: Telegraph.NONE,
+      fury: 0,
+      shrink: 0,
+      alive: true,
+    };
     this.log = [];
-    this.pendingSkill = null;
+    this.pendingHazards = [];
+    this.previewCells = [];
     this.beginWarning();
   }
 
@@ -94,7 +93,7 @@ export class BattleEngine {
 
   addLog(msg) {
     this.log.push(msg);
-    if (this.log.length > 80) this.log.shift();
+    if (this.log.length > 100) this.log.shift();
   }
 
   updateBossPhase() {
@@ -104,22 +103,30 @@ export class BattleEngine {
     else this.boss.phase = 1;
   }
 
-  pickTelegraph() {
-    if (this.boss.phase === 1) return Telegraph.SLAM;
-    if (this.boss.phase === 2) return Telegraph.EARTHQUAKE;
-    if (this.boss.fury > 0) return Telegraph.EARTHEN_FURY;
-    if (this.boss.shrink < 1) return Telegraph.SHRINK;
-    return Telegraph.EARTHEN_FURY;
+  rollPendingHazards(telegraph) {
+    if (telegraph === Telegraph.EARTHQUAKE) {
+      const center = { x: this.randInt(1, 5), y: this.randInt(1, 5) };
+      return inRadius(center, 1);
+    }
+    return this.profile.preview(telegraph, this.boss, []).danger;
   }
 
   beginWarning() {
     if (this.phase === Phase.VICTORY || this.phase === Phase.DEFEAT) return;
     this.updateBossPhase();
-    const telegraph = this.pickTelegraph();
+    const telegraph = this.profile.pickTelegraph(this.boss);
     this.boss.telegraph = telegraph;
-    if (telegraph === Telegraph.EARTHEN_FURY && this.boss.fury === 0) this.boss.fury = 2;
-    const text = TELEGRAPH_TEXT[telegraph];
-    if (text) this.addLog(`[预警] ${text}`);
+    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE].includes(telegraph) && this.boss.fury === 0) {
+      this.boss.fury = 2;
+    }
+    this.pendingHazards = this.rollPendingHazards(telegraph);
+    const preview = this.profile.preview(telegraph, this.boss, this.pendingHazards);
+    this.previewCells = preview.danger;
+    if (preview.text) this.addLog(`[预警] ${preview.text}`);
+    if (telegraph === Telegraph.EARTHQUAKE && this.pendingHazards.length) {
+      const c = this.pendingHazards[Math.floor(this.pendingHazards.length / 2)];
+      this.addLog(`[预警] 地震中心约在 (${c.x}, ${c.y})。`);
+    }
     this.phase = Phase.MOVE;
   }
 
@@ -135,6 +142,7 @@ export class BattleEngine {
     if (posEq(dest, u.pos)) return false;
     if (this.party.some((p) => p.alive && p.id !== unitId && posEq(p.pos, dest))) return false;
     if (posEq(dest, BOSS_POS)) return false;
+    const MOVE_RANGE = { knight: 1, white_mage: 1, black_mage: 1, bard: 2 };
     return dist(u.pos, dest) <= MOVE_RANGE[u.job];
   }
 
@@ -155,13 +163,15 @@ export class BattleEngine {
     const u = this.unit(unitId);
     const skill = SKILLS[skillId];
     if (!u || !u.alive || !skill) return false;
+    if (skillId === "interrupt") {
+      return this.phase === Phase.WEAVE && !u.ogcd && this.boss.fury > 0;
+    }
     if (skill.kind === "gcd") {
       if (this.phase !== Phase.ACTION || u.gcd) return false;
     } else if (this.phase !== Phase.WEAVE || u.ogcd) {
       return false;
     }
-    if (skillId === "interrupt") return this.boss.fury > 0;
-    const allowed = JOB_SKILLS[u.job] || [];
+    const allowed = { knight: ["shield_bash", "rampart", "provoke"], white_mage: ["cure", "medica", "benediction"], black_mage: ["fire", "blizzard", "manaward"], bard: ["straight_shot", "mages_ballad", "repelling_shot"] }[u.job];
     if (!allowed.includes(skillId)) return false;
     if (skill.range === 0) return true;
     if (!target) return false;
@@ -185,8 +195,8 @@ export class BattleEngine {
       });
       this.addLog(`${u.name} 使用 ${skill.name}`);
     } else if (skillId === "interrupt") {
-      this.boss.fury = 0;
-      this.addLog(`${u.name} 打断了土神之怒！`);
+      this.boss.fury = -1;
+      this.addLog(`${u.name} 打断了${this.profile.furyName}！`);
     } else if (skill.mit > 0) {
       u.mit = skill.mit;
       this.addLog(`${u.name} 获得减伤`);
@@ -206,7 +216,7 @@ export class BattleEngine {
     if (this.boss.hp <= 0) {
       this.boss.alive = false;
       this.phase = Phase.VICTORY;
-      this.addLog("胜利！土灵守护者被击败。");
+      this.addLog(this.profile.victory);
     }
     return true;
   }
@@ -235,13 +245,12 @@ export class BattleEngine {
     if (dest.x >= 0 && dest.y >= 0 && dest.x < BOARD_SIZE && dest.y < BOARD_SIZE && !this.isDeadly(dest)) {
       if (!this.party.some((p) => p.alive && p.id !== unit.id && posEq(p.pos, dest))) {
         unit.pos = dest;
-        this.addLog(`${unit.name} 后跃`);
       }
     }
   }
 
   hitUnit(unit, raw) {
-    let dmg = unit.mit > 0 ? Math.floor(raw * 0.6) : raw;
+    const dmg = unit.mit > 0 ? Math.floor(raw * 0.6) : raw;
     unit.hp = Math.max(0, unit.hp - dmg);
     if (unit.hp === 0) {
       unit.alive = false;
@@ -261,17 +270,35 @@ export class BattleEngine {
     list.forEach((p) => { this.cells[p.y][p.x] = CellKind.HAZARD; });
   }
 
+  autoFill() {
+    if (this.phase === Phase.WEAVE && this.boss.fury > 0) {
+      const knight = this.living().find((u) => u.job === "knight" && !u.ogcd);
+      if (knight) this.useSkill(knight.id, "interrupt", BOSS_POS);
+    }
+    for (const unit of this.living()) {
+      if (this.phase === Phase.MOVE && !unit.moved) {
+        const dest = pickMoveDest(unit, this);
+        if (!posEq(dest, unit.pos)) this.moveUnit(unit.id, dest);
+        else unit.moved = true;
+      } else if (this.phase === Phase.ACTION && !unit.gcd) {
+        this.useSkill(unit.id, pickGcdSkill(unit, this), pickGcdTarget(unit, this));
+      } else if (this.phase === Phase.WEAVE && !unit.ogcd) {
+        const choice = pickOgcd(unit, this);
+        if (choice) this.useSkill(unit.id, choice[0], choice[1]);
+      }
+    }
+  }
+
   endPhase() {
     if (this.phase === Phase.VICTORY || this.phase === Phase.DEFEAT) return;
     if (this.phase === Phase.MOVE) {
-      this.living().forEach((u) => { if (!u.moved) u.moved = true; });
+      this.autoFill();
       this.phase = Phase.ACTION;
     } else if (this.phase === Phase.ACTION) {
-      this.living().forEach((u) => {
-        if (!u.gcd) this.useSkill(u.id, JOB_SKILLS[u.job][0], u.job === "white_mage" ? u.pos : BOSS_POS);
-      });
+      this.autoFill();
       this.phase = Phase.WEAVE;
     } else if (this.phase === Phase.WEAVE) {
+      this.autoFill();
       this.resolveTurn();
     }
   }
@@ -279,33 +306,51 @@ export class BattleEngine {
   resolveTurn() {
     const telegraph = this.boss.telegraph;
     this.clearHazards();
+    const result = this.profile.resolve(telegraph, this.boss, this.pendingHazards, this);
+    result.logs.forEach((l) => this.addLog(l));
 
-    if (telegraph === Telegraph.SLAM) {
-      inRadius(BOSS_POS, 1).forEach((pos) => {
-        this.living().forEach((u) => { if (posEq(u.pos, pos)) this.hitUnit(u, 220); });
-      });
-    } else if (telegraph === Telegraph.EARTHQUAKE) {
-      const center = { x: this.randInt(1, 5), y: this.randInt(1, 5) };
-      const hazards = inRadius(center, 1);
-      this.applyHazards(hazards);
-      this.living().forEach((u) => { if (hazards.some((h) => posEq(h, u.pos))) this.hitUnit(u, 160); });
-    } else if (telegraph === Telegraph.SHRINK) {
-      this.boss.shrink += 1;
-      this.applyHazards(ringPositions(this.boss.shrink));
-      this.addLog("外圈变为即死区！");
-    } else if (telegraph === Telegraph.EARTHEN_FURY && this.boss.fury > 0) {
-      this.boss.fury -= 1;
-      if (this.boss.fury === 0) {
-        this.living().forEach((u) => this.hitUnit(u, 9999));
-        this.addLog("土神之怒发动！");
+    const persist = [Telegraph.SHRINK, Telegraph.EARTHQUAKE];
+    if (result.hazards?.length && persist.includes(telegraph)) {
+      this.applyHazards(result.hazards);
+      if (result.dmg > 0) {
+        this.living().forEach((u) => {
+          if (result.hazards.some((h) => posEq(h, u.pos))) this.hitUnit(u, result.dmg);
+        });
       }
+    } else if (result.dmg > 0 && result.hazards?.length) {
+      this.living().forEach((u) => {
+        if (result.hazards.some((h) => posEq(h, u.pos))) this.hitUnit(u, result.dmg);
+      });
+    }
+
+    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE].includes(telegraph) && this.boss.fury === 0) {
+      this.living().forEach((u) => this.hitUnit(u, result.dmg));
+    }
+
+    if (result.spread) {
+      const living = this.living();
+      const hit = new Set();
+      for (let i = 0; i < living.length; i++) {
+        for (let j = i + 1; j < living.length; j++) {
+          if (dist(living[i].pos, living[j].pos) <= 1) {
+            hit.add(living[i].id);
+            hit.add(living[j].id);
+          }
+        }
+      }
+      living.forEach((u) => { if (hit.has(u.id)) this.hitUnit(u, result.dmg); });
+    }
+    if (result.stack) {
+      const center = { x: 3, y: 3 };
+      this.living().forEach((u) => {
+        if (dist(u.pos, center) > 1) this.hitUnit(u, result.dmg);
+      });
     }
 
     const tank = this.living().find((u) => u.job === "knight");
-    const target = tank && tank.taunt > 0 ? tank : this.living()[Math.floor(this.rand() * this.living().length)];
-    if (target) {
-      const base = this.boss.phase === 1 ? 140 : this.boss.phase === 2 ? 180 : 220;
-      this.hitUnit(target, base);
+    if (this.living().length) {
+      const target = tank && tank.taunt > 0 ? tank : this.living()[Math.floor(this.rand() * this.living().length)];
+      this.hitUnit(target, this.profile.basicDamage(this.boss));
       this.addLog(`Boss 攻击 ${target.name}`);
     }
 
@@ -338,33 +383,21 @@ export class BattleEngine {
 
     this.turn += 1;
     this.boss.telegraph = Telegraph.NONE;
-    this.phase = Phase.RESOLVE;
+    this.previewCells = [];
     this.beginWarning();
   }
 
   stepAuto() {
     if (this.phase === Phase.MOVE) {
-      this.living().forEach((u) => { if (!u.moved) u.moved = true; });
+      this.autoFill();
       this.phase = Phase.ACTION;
     }
     if (this.phase === Phase.ACTION) {
-      this.living().forEach((u) => {
-        if (!u.gcd) {
-          if (u.job === "white_mage") {
-            const wounded = [...this.living()].sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp)[0];
-            this.useSkill(u.id, "cure", wounded.pos);
-          } else {
-            this.useSkill(u.id, JOB_SKILLS[u.job][0], BOSS_POS);
-          }
-        }
-      });
+      this.autoFill();
       this.phase = Phase.WEAVE;
     }
     if (this.phase === Phase.WEAVE) {
-      if (this.boss.fury > 0) {
-        const interrupter = this.living().find((u) => u.job === "knight") || this.living()[0];
-        if (interrupter) this.useSkill(interrupter.id, "interrupt", BOSS_POS);
-      }
+      this.autoFill();
       this.resolveTurn();
     }
   }

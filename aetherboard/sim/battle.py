@@ -6,34 +6,14 @@ import random
 from copy import deepcopy
 from typing import Optional
 
-from .board import (
-    apply_hazards,
-    apply_shrink,
-    clear_hazards,
-    is_deadly,
-    make_board,
-    neighbors,
-    positions_in_radius,
-)
-from .boss import (
-    boss_basic_damage,
-    boss_fury_damage,
-    boss_quake_damage,
-    boss_slam_damage,
-    create_boss,
-    earthquake_hazards,
-    slam_targets,
-    telegraph_for_phase,
-    update_boss_phase,
-    warning_message,
-)
-from .jobs import MOVE_RANGE, create_party, skill_for, unit_skills
+from .ai import pick_gcd_skill, pick_gcd_target, pick_move_dest, pick_ogcd, boss_center
+from .board import apply_hazards, clear_hazards, is_deadly, make_board, positions_in_radius
+from .bosses import create_boss, get_boss_profile
+from .jobs import create_party, skill_for, unit_skills
 from .skills import SKILLS
 from .types import (
-    ActionChoice,
     BattleLog,
     BattleState,
-    BossState,
     CellKind,
     Phase,
     Pos,
@@ -45,30 +25,34 @@ from .types import (
 class BattleEngine:
     """Turn-based battle with FF14-inspired phase pacing."""
 
-    def __init__(self, seed: int = 7) -> None:
+    def __init__(self, seed: int = 7, boss_id: str = "earth") -> None:
         self.rng = random.Random(seed)
+        self.boss_id = boss_id
+        self.profile = get_boss_profile(boss_id)
         self.state = self._new_state()
 
     def _new_state(self) -> BattleState:
-        board = make_board()
-        boss = create_boss()
         return BattleState(
             turn=1,
             phase=Phase.WARNING,
             board_size=7,
-            cells=board,
+            cells=make_board(),
             party=create_party(),
-            boss=boss,
+            boss=create_boss(self.boss_id),
             log=BattleLog(),
         )
 
     def clone_state(self) -> BattleState:
         return deepcopy(self.state)
 
-    def reset(self, seed: Optional[int] = None) -> BattleState:
+    def reset(self, seed: Optional[int] = None, boss_id: Optional[str] = None) -> BattleState:
         if seed is not None:
             self.rng = random.Random(seed)
+        if boss_id is not None:
+            self.boss_id = boss_id
+            self.profile = get_boss_profile(boss_id)
         self.state = self._new_state()
+        self.begin_warning()
         return self.state
 
     def unit_by_id(self, unit_id: str) -> UnitState:
@@ -85,20 +69,41 @@ class BattleEngine:
             return 1.2
         return 1.0
 
+    def telegraph_preview(self) -> list[Pos]:
+        preview = self.profile.preview(
+            self.state.boss.telegraph, self.state.board_size, self.state.boss
+        )
+        return preview.danger_cells
+
     def begin_warning(self) -> None:
-        update_boss_phase(self.state.boss)
-        telegraph = telegraph_for_phase(self.state.boss, self.rng)
+        if self.state.phase in {Phase.VICTORY, Phase.DEFEAT}:
+            return
+        self.profile.update_phase(self.state.boss)
+        telegraph = self.profile.pick_telegraph(self.state.boss, self.rng)
         self.state.boss.telegraph = telegraph
-        if telegraph == Telegraph.EARTHEN_FURY and self.state.boss.fury_cast_turns == 0:
+        if telegraph in {Telegraph.EARTHEN_FURY, Telegraph.CYCLONE} and self.state.boss.fury_cast_turns == 0:
             self.state.boss.fury_cast_turns = 2
-        message = warning_message(telegraph)
-        if message:
-            self.state.log.add(f"[预警] {message}")
+        self.state.pending_hazards = self._pending_mechanic_cells(telegraph)
+        preview = self.profile.preview(telegraph, self.state.board_size, self.state.boss)
+        danger = self.state.pending_hazards or preview.danger_cells
+        if preview.message:
+            self.state.log.add(f"[预警] {preview.message}")
+        if telegraph == Telegraph.EARTHQUAKE and self.state.pending_hazards:
+            center = self.state.pending_hazards[len(self.state.pending_hazards) // 2]
+            self.state.log.add(f"[预警] 地震中心约在 ({center.x}, {center.y})。")
         self.state.phase = Phase.MOVE
+
+    def _pending_mechanic_cells(self, telegraph: Telegraph) -> list[Pos]:
+        size = self.state.board_size
+        if telegraph == Telegraph.EARTHQUAKE:
+            center = Pos(self.rng.randint(1, size - 2), self.rng.randint(1, size - 2))
+            return positions_in_radius(center, 1, size)
+        preview = self.profile.preview(telegraph, size, self.state.boss)
+        return preview.danger_cells
 
     def can_move(self, unit_id: str, dest: Pos) -> bool:
         unit = self.unit_by_id(unit_id)
-        if not unit.alive or unit.moved_this_turn:
+        if not unit.alive or unit.moved_this_turn or self.state.phase != Phase.MOVE:
             return False
         if not dest.in_bounds(self.state.board_size):
             return False
@@ -106,10 +111,13 @@ class BattleEngine:
             return False
         if dest == unit.pos:
             return False
+        if dest == self._boss_pos():
+            return False
         if any(u.alive and u.id != unit.id and u.pos == dest for u in self.state.party):
             return False
-        max_range = MOVE_RANGE[unit.job]
-        return unit.pos.distance(dest) <= max_range
+        from .jobs import MOVE_RANGE
+
+        return unit.pos.distance(dest) <= MOVE_RANGE[unit.job]
 
     def move_unit(self, unit_id: str, dest: Pos) -> bool:
         if not self.can_move(unit_id, dest):
@@ -128,15 +136,16 @@ class BattleEngine:
         unit = self.unit_by_id(unit_id)
         if not unit.alive:
             return False
+        if skill_id == "interrupt":
+            if self.state.phase != Phase.WEAVE or unit.ogcd_used:
+                return False
+            return self.state.boss.fury_cast_turns > 0
         skill = skill_for(unit, skill_id)
         if skill.kind == "gcd":
             if self.state.phase != Phase.ACTION or unit.gcd_used:
                 return False
-        else:
-            if self.state.phase != Phase.WEAVE or unit.ogcd_used:
-                return False
-        if skill_id == "interrupt":
-            return self.state.boss.fury_cast_turns > 0
+        elif self.state.phase != Phase.WEAVE or unit.ogcd_used:
+            return False
         if skill_id not in unit_skills(unit):
             return False
         if skill.range == 0:
@@ -160,21 +169,20 @@ class BattleEngine:
         if skill.heal > 0 and target is not None:
             self._apply_heal(unit, skill, target)
         elif skill_id == "interrupt":
-            self.state.boss.fury_cast_turns = 0
-            self.state.log.add(f"{unit.name} 打断了土神之怒！")
+            self.state.boss.fury_cast_turns = -1
+            self.state.log.add(f"{unit.name} 打断了{self.profile.fury_name()}！")
         elif skill_id in {"rampart", "manaward"}:
             unit.mit_turns = skill.mit_duration
             self.state.log.add(f"{unit.name} 获得 {skill.mit_duration} 回合减伤。")
         elif skill_id == "provoke":
             unit.taunt_turns = 1
-            self.state.log.add(f"{unit.name} 挑衅 Boss，下回合优先承受攻击。")
+            self.state.log.add(f"{unit.name} 挑衅 Boss。")
         elif skill_id == "mages_ballad":
-            unit.bard_song_turns = 3
             for ally in self.living_party():
                 ally.bard_song_turns = 3
-            self.state.log.add(f"{unit.name} 开启魔人歌，全队伤害提升。")
+            self.state.log.add(f"{unit.name} 开启魔人歌。")
         elif skill_id == "repelling_shot":
-            self._apply_damage(unit, skill, self.state.boss.pos if hasattr(self.state.boss, "pos") else Pos(3, 2))
+            self._apply_boss_damage(int(skill.power * self.party_damage_multiplier()))
             self._repel(unit)
         else:
             self._apply_party_offensive(unit, skill)
@@ -182,52 +190,43 @@ class BattleEngine:
         return True
 
     def _boss_pos(self) -> Pos:
-        return Pos(self.state.board_size // 2, 2)
+        return boss_center(self.state.board_size)
 
     def _apply_party_offensive(self, unit: UnitState, skill) -> None:
         power = skill.power
-        multiplier = self.party_damage_multiplier()
         if unit.job.value == "black_mage" and skill.id == "fire" and not unit.moved_this_turn:
             power = int(power * 1.5)
-            self.state.log.add(f"{unit.name} 站桩读条，火炎伤害提升。")
+            self.state.log.add(f"{unit.name} 站桩读条，火炎强化。")
         if unit.job.value == "bard" and skill.id == "straight_shot" and unit.bard_song_turns > 0:
             power = int(power * 1.3)
-        damage = int(power * multiplier)
-        self.state.boss.hp = max(0, self.state.boss.hp - damage)
+        damage = int(power * self.party_damage_multiplier())
+        self._apply_boss_damage(damage)
         self.state.log.add(f"{unit.name} 使用 {skill.name}，造成 {damage} 点伤害。")
+
+    def _apply_boss_damage(self, damage: int) -> None:
+        self.state.boss.hp = max(0, self.state.boss.hp - damage)
         if self.state.boss.hp == 0:
             self.state.boss.alive = False
             self.state.phase = Phase.VICTORY
-            self.state.log.add("胜利！土灵守护者被击败。")
+            self.state.log.add(self.profile.victory_message())
 
     def _apply_damage_to_unit(self, unit: UnitState, raw: int) -> None:
-        damage = raw
-        if unit.mit_turns > 0:
-            damage = int(damage * 0.6)
+        damage = int(raw * 0.6) if unit.mit_turns > 0 else raw
         unit.hp = max(0, unit.hp - damage)
         if unit.hp == 0:
             unit.alive = False
             self.state.log.add(f"{unit.name} 倒下了。")
 
     def _apply_heal(self, unit: UnitState, skill, target: Pos) -> None:
-        targets = []
         if skill.aoe_radius > 0:
-            for ally in self.living_party():
-                if ally.pos.distance(target) <= skill.aoe_radius:
-                    targets.append(ally)
+            targets = [
+                u for u in self.living_party() if u.pos.distance(target) <= skill.aoe_radius
+            ]
         else:
             targets = [u for u in self.living_party() if u.pos == target]
         for ally in targets:
-            if skill.heal >= 9999:
-                ally.hp = ally.max_hp
-            else:
-                ally.hp = min(ally.max_hp, ally.hp + skill.heal)
+            ally.hp = ally.max_hp if skill.heal >= 9999 else min(ally.max_hp, ally.hp + skill.heal)
             self.state.log.add(f"{unit.name} 治疗 {ally.name}。")
-
-    def _apply_damage(self, unit: UnitState, skill, target_pos: Pos) -> None:
-        if skill.power > 0:
-            damage = int(skill.power * self.party_damage_multiplier())
-            self.state.boss.hp = max(0, self.state.boss.hp - damage)
 
     def _repel(self, unit: UnitState) -> None:
         boss = self._boss_pos()
@@ -241,7 +240,6 @@ class BattleEngine:
         if dest.in_bounds(self.state.board_size) and not is_deadly(self.state.cells, dest):
             if not any(u.alive and u.id != unit.id and u.pos == dest for u in self.state.party):
                 unit.pos = dest
-                self.state.log.add(f"{unit.name} 后跃到 ({dest.x}, {dest.y})。")
 
     def advance_after_actions(self) -> None:
         if self.state.phase == Phase.ACTION:
@@ -252,37 +250,53 @@ class BattleEngine:
             self.state.phase = Phase.RESOLVE
             self.resolve_turn()
 
-    def all_party_ready_for_phase(self) -> bool:
-        living = self.living_party()
-        if not living:
-            return True
-        if self.state.phase == Phase.MOVE:
-            return all(u.moved_this_turn for u in living)
-        if self.state.phase == Phase.ACTION:
-            return all(u.gcd_used for u in living)
-        if self.state.phase == Phase.WEAVE:
-            return True
-        return True
-
     def auto_fill_missing_actions(self) -> None:
-        """Simple AI defaults for demo/testing."""
+        if self.state.phase == Phase.WEAVE and self.state.boss.fury_cast_turns > 0:
+            knight = next(
+                (u for u in self.living_party() if u.job.value == "knight" and not u.ogcd_used),
+                None,
+            )
+            if knight:
+                self.use_skill(knight.id, "interrupt", self._boss_pos())
+
         for unit in self.living_party():
             if self.state.phase == Phase.MOVE and not unit.moved_this_turn:
-                self.move_unit(unit.id, unit.pos)
+                dest = pick_move_dest(unit, self.state)
+                if dest != unit.pos:
+                    self.move_unit(unit.id, dest)
+                else:
+                    unit.moved_this_turn = True
             elif self.state.phase == Phase.ACTION and not unit.gcd_used:
-                default = unit_skills(unit)[0]
-                if unit.job.value == "white_mage":
-                    wounded = min(self.living_party(), key=lambda u: u.hp / u.max_hp)
-                    self.use_skill(unit.id, default, wounded.pos)
-                else:
-                    self.use_skill(unit.id, default, self._boss_pos())
+                skill_id = pick_gcd_skill(unit, self.state)
+                target = pick_gcd_target(unit, self.state)
+                self.use_skill(unit.id, skill_id, target)
             elif self.state.phase == Phase.WEAVE and not unit.ogcd_used:
-                if self.state.boss.fury_cast_turns > 0 and unit.job.value == "bard":
-                    self.use_skill(unit.id, "repelling_shot", self._boss_pos())
-                elif unit.job.value == "knight" and unit.mit_turns == 0:
-                    self.use_skill(unit.id, "rampart", unit.pos)
-                else:
-                    pass
+                choice = pick_ogcd(unit, self.state)
+                if choice:
+                    skill_id, target = choice
+                    self.use_skill(unit.id, skill_id, target)
+
+    def _resolve_spread(self) -> None:
+        living = self.living_party()
+        damage = self.profile.mechanic_damage(Telegraph.SPREAD)
+        hit: set[str] = set()
+        for i, a in enumerate(living):
+            for b in living[i + 1 :]:
+                if a.pos.distance(b.pos) <= 1:
+                    hit.add(a.id)
+                    hit.add(b.id)
+        for unit in living:
+            if unit.id in hit:
+                self._apply_damage_to_unit(unit, damage)
+                self.state.log.add(f"{unit.name} 未能分散，受到 {damage} 伤害。")
+
+    def _resolve_stack(self) -> None:
+        center = Pos(self.state.board_size // 2, self.state.board_size // 2)
+        damage = self.profile.mechanic_damage(Telegraph.STACK)
+        for unit in self.living_party():
+            if unit.pos.distance(center) > 1:
+                self._apply_damage_to_unit(unit, damage)
+                self.state.log.add(f"{unit.name} 未能集合，受到 {damage} 伤害。")
 
     def resolve_turn(self) -> None:
         if self.state.phase != Phase.RESOLVE:
@@ -290,33 +304,38 @@ class BattleEngine:
         telegraph = self.state.boss.telegraph
         clear_hazards(self.state.cells, self.state.board_size)
 
-        if telegraph == Telegraph.SLAM:
-            for pos in slam_targets(self.state.board_size):
-                for unit in self.living_party():
-                    if unit.pos == pos:
-                        self._apply_damage_to_unit(unit, boss_slam_damage())
-        elif telegraph == Telegraph.EARTHQUAKE:
-            hazards = earthquake_hazards(self.state.board_size, self.rng)
-            self.state.pending_hazards = hazards
+        hazards, logs = self.profile.resolve_mechanic(
+            telegraph, self.state.boss, self.state.board_size, self.rng
+        )
+        if telegraph == Telegraph.EARTHQUAKE and self.state.pending_hazards:
+            hazards = list(self.state.pending_hazards)
+        for entry in logs:
+            self.state.log.add(entry)
+
+        if hazards and telegraph in {Telegraph.SHRINK, Telegraph.EARTHQUAKE}:
             apply_hazards(self.state.cells, hazards, self.state.board_size)
+            mech_dmg = self.profile.mechanic_damage(telegraph)
+            if mech_dmg > 0 and telegraph not in {Telegraph.SPREAD, Telegraph.STACK}:
+                for unit in self.living_party():
+                    if unit.pos in hazards:
+                        self._apply_damage_to_unit(unit, mech_dmg)
+
+        if telegraph == Telegraph.EARTHEN_FURY and self.state.boss.fury_cast_turns == 0:
             for unit in self.living_party():
-                if unit.pos in hazards:
-                    self._apply_damage_to_unit(unit, boss_quake_damage())
-        elif telegraph == Telegraph.SHRINK:
-            self.state.boss.shrink_level += 1
-            apply_shrink(self.state.cells, self.state.board_size, self.state.boss.shrink_level)
-            self.state.log.add("外圈变为即死区！")
-        elif telegraph == Telegraph.EARTHEN_FURY:
-            if self.state.boss.fury_cast_turns > 0:
-                self.state.boss.fury_cast_turns -= 1
-                if self.state.boss.fury_cast_turns == 0:
-                    for unit in self.living_party():
-                        self._apply_damage_to_unit(unit, boss_fury_damage())
+                self._apply_damage_to_unit(unit, self.profile.mechanic_damage(telegraph))
+        if telegraph == Telegraph.CYCLONE and self.state.boss.fury_cast_turns == 0:
+            for unit in self.living_party():
+                self._apply_damage_to_unit(unit, self.profile.mechanic_damage(telegraph))
+
+        if telegraph == Telegraph.SPREAD:
+            self._resolve_spread()
+        elif telegraph == Telegraph.STACK:
+            self._resolve_stack()
 
         tank = next((u for u in self.living_party() if u.job.value == "knight"), None)
-        target = tank if tank and tank.taunt_turns > 0 else self.rng.choice(self.living_party()) if self.living_party() else None
-        if target:
-            self._apply_damage_to_unit(target, boss_basic_damage(self.state.boss))
+        if self.living_party():
+            target = tank if tank and tank.taunt_turns > 0 else self.rng.choice(self.living_party())
+            self._apply_damage_to_unit(target, self.profile.basic_damage(self.state.boss))
             self.state.log.add(f"Boss 攻击 {target.name}。")
 
         for unit in self.living_party():
@@ -338,7 +357,6 @@ class BattleEngine:
             self.state.phase = Phase.DEFEAT
             self.state.log.add("全队阵亡，战斗失败。")
             return
-
         if not self.state.boss.alive:
             self.state.phase = Phase.VICTORY
             return
@@ -348,14 +366,14 @@ class BattleEngine:
         self.begin_warning()
 
     def step_auto(self) -> BattleState:
-        """Run one full turn with default AI choices."""
         if self.state.phase in {Phase.VICTORY, Phase.DEFEAT}:
             return self.state
         if self.state.phase == Phase.WARNING:
             self.begin_warning()
         while self.state.phase == Phase.MOVE:
             self.auto_fill_missing_actions()
-            self.advance_after_moves()
+            if all(u.moved_this_turn or not u.alive for u in self.state.party):
+                self.advance_after_moves()
         while self.state.phase == Phase.ACTION:
             self.auto_fill_missing_actions()
             if all(u.gcd_used or not u.alive for u in self.state.party):

@@ -3,30 +3,41 @@
 import random
 import unittest
 
-from sim.boss import earthquake_hazards, telegraph_for_phase, update_boss_phase
-from sim.types import BossState, Telegraph
+from sim.bosses import create_boss, get_boss_profile
+from sim.types import Telegraph
 
 
 class BossTests(unittest.TestCase):
-    def test_phase_thresholds(self) -> None:
-        boss = BossState(name="test", hp=3000, max_hp=6000)
-        update_boss_phase(boss)
+    def test_earth_phase_thresholds(self) -> None:
+        profile = get_boss_profile("earth")
+        boss = create_boss("earth")
+        boss.hp = 2800
+        profile.update_phase(boss)
         self.assertEqual(boss.phase, 2)
-        boss.hp = 2000
-        update_boss_phase(boss)
+        boss.hp = 1600
+        profile.update_phase(boss)
         self.assertEqual(boss.phase, 3)
 
-    def test_phase_one_telegraph(self) -> None:
-        boss = BossState(name="test", hp=6000, max_hp=6000, phase=1)
-        telegraph = telegraph_for_phase(boss, random.Random(0))
-        self.assertEqual(telegraph, Telegraph.SLAM)
+    def test_wind_phase_two_spread(self) -> None:
+        profile = get_boss_profile("wind")
+        boss = create_boss("wind")
+        boss.hp = 3000
+        profile.update_phase(boss)
+        telegraph = profile.pick_telegraph(boss, random.Random(0))
+        self.assertEqual(telegraph, Telegraph.SPREAD)
 
-    def test_earthquake_hazards_in_bounds(self) -> None:
-        rng = random.Random(3)
-        hazards = earthquake_hazards(7, rng)
-        self.assertGreater(len(hazards), 0)
-        for pos in hazards:
-            self.assertTrue(pos.in_bounds(7))
+    def test_wind_preview_stack_marks_center(self) -> None:
+        profile = get_boss_profile("wind")
+        boss = create_boss("wind")
+        preview = profile.preview(Telegraph.STACK, 7, boss)
+        self.assertTrue(any(p.x == 3 and p.y == 3 for p in preview.danger_cells))
+
+    def test_earth_slam_preview(self) -> None:
+        profile = get_boss_profile("earth")
+        boss = create_boss("earth")
+        preview = profile.preview(Telegraph.SLAM, 7, boss)
+        self.assertIn(Telegraph.SLAM, [preview.telegraph])
+        self.assertGreater(len(preview.danger_cells), 0)
 
 
 if __name__ == "__main__":

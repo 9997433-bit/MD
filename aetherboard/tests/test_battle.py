@@ -19,7 +19,7 @@ class BattleTests(unittest.TestCase):
         self.engine.begin_warning()
         knight = self.engine.unit_by_id("knight")
         dest = Pos(knight.pos.x, knight.pos.y - 2)
-        self.assertTrue(self.engine.can_move("bard", Pos(3, 4)))
+        self.assertTrue(self.engine.can_move("bard", Pos(2, 3)))
         self.assertFalse(self.engine.can_move("knight", dest))
 
     def test_fire_bonus_when_stationary(self) -> None:
@@ -43,9 +43,9 @@ class BattleTests(unittest.TestCase):
         self.engine.state.boss.phase = 3
         self.engine.state.boss.fury_cast_turns = 2
         self.engine.state.phase = Phase.WEAVE
-        self.engine.use_skill("bard", "repelling_shot", Pos(3, 2))
-        self.engine.use_skill("knight", "provoke", Pos(3, 2))
-        self.assertTrue(True)
+        ok = self.engine.use_skill("knight", "interrupt", self.engine._boss_pos())
+        self.assertTrue(ok)
+        self.assertEqual(self.engine.state.boss.fury_cast_turns, -1)
 
 
 if __name__ == "__main__":

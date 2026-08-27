@@ -11,7 +11,7 @@ export const Phase = {
   DEFEAT: "DEFEAT",
 };
 
-export const CellKind = { NORMAL: "NORMAL", HAZARD: "HAZARD" };
+export const CellKind = { NORMAL: "NORMAL", HAZARD: "HAZARD", PREVIEW: "PREVIEW" };
 
 export const Telegraph = {
   NONE: "NONE",
@@ -19,6 +19,10 @@ export const Telegraph = {
   EARTHQUAKE: "EARTHQUAKE",
   SHRINK: "SHRINK",
   EARTHEN_FURY: "EARTHEN_FURY",
+  GALE: "GALE",
+  SPREAD: "SPREAD",
+  STACK: "STACK",
+  CYCLONE: "CYCLONE",
 };
 
 export const SKILLS = {
@@ -28,7 +32,7 @@ export const SKILLS = {
   cure: { id: "cure", name: "治疗", kind: "gcd", range: 7, power: 0, heal: 180, aoe: 0, mit: 0 },
   medica: { id: "medica", name: "医技", kind: "gcd", range: 7, power: 0, heal: 90, aoe: 2, mit: 0 },
   benediction: { id: "benediction", name: "天赐", kind: "ogcd", range: 7, power: 0, heal: 9999, aoe: 0, mit: 0 },
-  fire: { id: "fire", name: "火炎", kind: "gcd", range: 7, power: 120, heal: 0, aoe: 0, mit: 0 },
+  fire: { id: "fire", name: "火炎", kind: "gcd", range: 7, power: 140, heal: 0, aoe: 0, mit: 0 },
   blizzard: { id: "blizzard", name: "冰结", kind: "gcd", range: 7, power: 70, heal: 0, aoe: 0, mit: 0 },
   manaward: { id: "manaward", name: "魔罩", kind: "ogcd", range: 0, power: 0, heal: 0, aoe: 0, mit: 2 },
   straight_shot: { id: "straight_shot", name: "强力射击", kind: "gcd", range: 7, power: 95, heal: 0, aoe: 0, mit: 0 },
@@ -47,8 +51,12 @@ export const JOB_SKILLS = {
 export const MOVE_RANGE = { knight: 1, white_mage: 1, black_mage: 1, bard: 2 };
 
 export const TELEGRAPH_TEXT = {
-  SLAM: "重击：中心 3x3 受创",
-  EARTHQUAKE: "地震：随机区域危险",
+  SLAM: "重击：中心 3×3 受创",
+  EARTHQUAKE: "地震：预告区域危险",
   SHRINK: "缩圈：外圈即死",
   EARTHEN_FURY: "土神之怒：2 回合内打断",
+  GALE: "风刃：中央列高伤",
+  SPREAD: "分散：相邻友军受罚",
+  STACK: "集合：必须靠近中心",
+  CYCLONE: "旋风：2 回合内打断",
 };

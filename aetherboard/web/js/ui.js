@@ -11,12 +11,14 @@ const phaseLabel = {
 };
 
 export class GameUI {
-  constructor(engine) {
+  constructor(engine, onBossChange) {
     this.engine = engine;
+    this.onBossChange = onBossChange;
     this.selectedUnitId = null;
     this.pendingSkillId = null;
 
     this.boardEl = document.getElementById("board");
+    this.bossNameEl = document.getElementById("boss-name");
     this.turnInfo = document.getElementById("turn-info");
     this.phaseInfo = document.getElementById("phase-info");
     this.telegraphInfo = document.getElementById("telegraph-info");
@@ -28,6 +30,7 @@ export class GameUI {
     this.selectedUnit = document.getElementById("selected-unit");
     this.skillButtons = document.getElementById("skill-buttons");
     this.battleLog = document.getElementById("battle-log");
+    this.bossSelect = document.getElementById("boss-select");
 
     document.getElementById("btn-end-phase").addEventListener("click", () => {
       this.engine.endPhase();
@@ -38,7 +41,13 @@ export class GameUI {
       this.render();
     });
     document.getElementById("btn-reset").addEventListener("click", () => {
-      this.engine.reset();
+      this.engine.reset(this.bossSelect.value);
+      this.selectedUnitId = null;
+      this.pendingSkillId = null;
+      this.render();
+    });
+    this.bossSelect.addEventListener("change", () => {
+      this.onBossChange(this.bossSelect.value);
       this.selectedUnitId = null;
       this.pendingSkillId = null;
       this.render();
@@ -55,6 +64,7 @@ export class GameUI {
 
   renderHud() {
     const { turn, phase, boss } = this.engine;
+    this.bossNameEl.textContent = boss.name;
     this.turnInfo.textContent = `回合 ${turn}`;
     this.phaseInfo.textContent = `阶段：${phaseLabel[phase] || phase}`;
     this.telegraphInfo.textContent = boss.telegraph !== "NONE"
@@ -65,7 +75,14 @@ export class GameUI {
     this.bossHpText.textContent = `${boss.hp} / ${boss.maxHp}`;
     this.bossPhase.textContent = `Phase ${boss.phase}`;
     this.furyIndicator.classList.toggle("hidden", boss.fury <= 0);
-    if (boss.fury > 0) this.furyIndicator.textContent = `土神之怒读条：剩余 ${boss.fury} 回合`;
+    if (boss.fury > 0) {
+      this.furyIndicator.textContent = `${this.engine.profile.furyName}读条：剩余 ${boss.fury} 回合`;
+    }
+    this.bossSelect.value = this.engine.bossId;
+  }
+
+  isPreviewCell(x, y) {
+    return (this.engine.previewCells || []).some((p) => p.x === x && p.y === y);
   }
 
   renderBoard() {
@@ -77,6 +94,7 @@ export class GameUI {
         cell.dataset.x = x;
         cell.dataset.y = y;
         if (this.engine.cells[y][x] === "HAZARD") cell.classList.add("hazard");
+        if (this.isPreviewCell(x, y)) cell.classList.add("preview");
         if (x === BOSS_POS.x && y === BOSS_POS.y) {
           cell.classList.add("boss-cell");
           const bossToken = document.createElement("div");

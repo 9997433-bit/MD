@@ -63,7 +63,7 @@ SKILLS: dict[str, SkillDef] = {
         name="火炎",
         kind="gcd",
         range=7,
-        power=120,
+        power=140,
         description="远程伤害；本回合未移动时伤害 +50%。",
     ),
     "blizzard": SkillDef(
