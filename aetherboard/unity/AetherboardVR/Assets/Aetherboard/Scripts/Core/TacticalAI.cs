@@ -52,6 +52,15 @@ namespace Aetherboard.Core
                     if (pos.X == boss.X) score -= 10;
                     score += pos.Distance(boss) * 2;
                     break;
+                case TelegraphKind.IceLance:
+                    if (pos.X == boss.X || pos.Y == boss.Y) score -= 60;
+                    break;
+                case TelegraphKind.FrozenGround:
+                    if (state.PendingHazards.Any(p => p.Equals(pos))) score -= 80;
+                    break;
+                case TelegraphKind.IceRing:
+                    score += pos.Distance(center) == 2 ? 40 : -30;
+                    break;
                 default:
                     score += MinDist(unit, pos, party);
                     break;

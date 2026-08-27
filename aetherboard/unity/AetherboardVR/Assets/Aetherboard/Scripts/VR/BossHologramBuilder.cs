@@ -131,6 +131,16 @@ namespace Aetherboard.VR
                 swirl.transform.localRotation = Quaternion.Euler(15, 0, 0);
                 _coreRenderer = body.GetComponent<Renderer>();
             }
+            else if (_bossId == "ice")
+            {
+                var body = CreatePrimitive(PrimitiveType.Cube, _coreRoot, "IceCore",
+                    new Vector3(0.14f, 0.18f, 0.14f), Vector3.zero);
+                body.transform.localRotation = Quaternion.Euler(0, 45, 0);
+                var spike = CreatePrimitive(PrimitiveType.Cube, _coreRoot, "IceSpike",
+                    new Vector3(0.06f, 0.12f, 0.06f), new Vector3(0.05f, 0.1f, 0));
+                spike.transform.localRotation = Quaternion.Euler(25, -20, 15);
+                _coreRenderer = body.GetComponent<Renderer>();
+            }
             else
             {
                 var body = CreatePrimitive(PrimitiveType.Sphere, _coreRoot, "EarthCore",
@@ -234,6 +244,7 @@ namespace Aetherboard.VR
         private static Color PaletteForBoss(string bossId) => bossId switch
         {
             "wind" => new Color(0.4f, 0.78f, 1f),
+            "ice" => new Color(0.55f, 0.82f, 1f),
             _ => new Color(0.92f, 0.32f, 0.12f)
         };
     }

@@ -138,4 +138,77 @@ export const BOSS_PROFILES = {
       return boss.phase === 1 ? 100 : boss.phase === 2 ? 130 : 160;
     },
   },
+  ice: {
+    id: "ice",
+    name: "冰灵女皇",
+    maxHp: 4800,
+    victory: "胜利！冰灵女皇被击败。",
+    furyName: "暴雪",
+    pickTelegraph(boss) {
+      if (boss.phase === 1) return Telegraph.ICE_LANCE;
+      if (boss.phase === 2) return Telegraph.FROZEN_GROUND;
+      if (boss.fury > 0) return Telegraph.BLIZZARD;
+      if (boss.shrink < 1) return Telegraph.ICE_RING;
+      return Telegraph.BLIZZARD;
+    },
+    preview(telegraph, boss, pending) {
+      const text = {
+        [Telegraph.ICE_LANCE]: "冰枪：十字路径高伤",
+        [Telegraph.FROZEN_GROUND]: "霜冻：2×2 危险区",
+        [Telegraph.ICE_RING]: "冰环：站在距中心 2 格",
+        [Telegraph.BLIZZARD]: "暴雪：2 回合内打断",
+      }[telegraph] || "";
+      let danger = pending?.length ? pending : [];
+      const center = { x: 3, y: 3 };
+      if (telegraph === Telegraph.ICE_LANCE) {
+        danger = [];
+        for (let x = 0; x < BOARD_SIZE; x++) danger.push({ x, y: BOSS_POS.y });
+        for (let y = 0; y < BOARD_SIZE; y++) danger.push({ x: BOSS_POS.x, y });
+      } else if (telegraph === Telegraph.ICE_RING) {
+        danger = [];
+        for (let x = 0; x < BOARD_SIZE; x++)
+          for (let y = 0; y < BOARD_SIZE; y++) {
+            const d = Math.abs(x - center.x) + Math.abs(y - center.y);
+            if (d !== 2) danger.push({ x, y });
+          }
+      }
+      return { text, danger };
+    },
+    resolve(telegraph, boss, pending) {
+      const hazards = [];
+      const logs = [];
+      if (telegraph === Telegraph.ICE_LANCE) {
+        for (let x = 0; x < BOARD_SIZE; x++) hazards.push({ x, y: BOSS_POS.y });
+        for (let y = 0; y < BOARD_SIZE; y++) hazards.push({ x: BOSS_POS.x, y });
+        logs.push("冰枪十字扫过！");
+      } else if (telegraph === Telegraph.FROZEN_GROUND) {
+        hazards = pending || [];
+        logs.push("霜冻爆发！");
+      }
+      else if (telegraph === Telegraph.ICE_RING) {
+        boss.shrink += 1;
+        logs.push("冰环判定！");
+      } else if (telegraph === Telegraph.BLIZZARD && boss.fury > 0) {
+        boss.fury -= 1;
+        if (boss.fury === 0) logs.push("暴雪发动！");
+      }
+      const dmg = {
+        [Telegraph.ICE_LANCE]: 160,
+        [Telegraph.FROZEN_GROUND]: 140,
+        [Telegraph.ICE_RING]: 210,
+        [Telegraph.BLIZZARD]: 9999,
+      }[telegraph] || 0;
+      return {
+        hazards,
+        logs,
+        dmg,
+        spread: false,
+        stack: false,
+        iceRing: telegraph === Telegraph.ICE_RING,
+      };
+    },
+    basicDamage(boss) {
+      return boss.phase === 1 ? 110 : boss.phase === 2 ? 140 : 170;
+    },
+  },
 };

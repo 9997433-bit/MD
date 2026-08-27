@@ -23,6 +23,10 @@ export const Telegraph = {
   SPREAD: "SPREAD",
   STACK: "STACK",
   CYCLONE: "CYCLONE",
+  ICE_LANCE: "ICE_LANCE",
+  FROZEN_GROUND: "FROZEN_GROUND",
+  ICE_RING: "ICE_RING",
+  BLIZZARD: "BLIZZARD",
 };
 
 export const SKILLS = {
@@ -59,4 +63,8 @@ export const TELEGRAPH_TEXT = {
   SPREAD: "分散：相邻友军受罚",
   STACK: "集合：必须靠近中心",
   CYCLONE: "旋风：2 回合内打断",
+  ICE_LANCE: "冰枪：十字路径高伤",
+  FROZEN_GROUND: "霜冻：2×2 危险区",
+  ICE_RING: "冰环：站在距中心 2 格",
+  BLIZZARD: "暴雪：2 回合内打断",
 };

@@ -263,6 +263,10 @@ namespace Aetherboard.Core
             TelegraphKind.Spread => "SPREAD",
             TelegraphKind.Stack => "STACK",
             TelegraphKind.Cyclone => "CYCLONE",
+            TelegraphKind.IceLance => "ICE_LANCE",
+            TelegraphKind.FrozenGround => "FROZEN_GROUND",
+            TelegraphKind.IceRing => "ICE_RING",
+            TelegraphKind.Blizzard => "BLIZZARD",
             _ => "NONE"
         };
 
@@ -276,6 +280,10 @@ namespace Aetherboard.Core
             "SPREAD" => TelegraphKind.Spread,
             "STACK" => TelegraphKind.Stack,
             "CYCLONE" => TelegraphKind.Cyclone,
+            "ICE_LANCE" => TelegraphKind.IceLance,
+            "FROZEN_GROUND" => TelegraphKind.FrozenGround,
+            "ICE_RING" => TelegraphKind.IceRing,
+            "BLIZZARD" => TelegraphKind.Blizzard,
             _ => TelegraphKind.None
         };
 

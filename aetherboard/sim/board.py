@@ -74,3 +74,23 @@ def positions_in_radius(center: Pos, radius: int, size: int) -> list[Pos]:
             if candidate.distance(center) <= radius:
                 positions.append(candidate)
     return positions
+
+
+def positions_at_distance(center: Pos, distance: int, size: int) -> list[Pos]:
+    positions: list[Pos] = []
+    for x in range(size):
+        for y in range(size):
+            candidate = Pos(x, y)
+            if candidate.distance(center) == distance:
+                positions.append(candidate)
+    return positions
+
+
+def positions_2x2(top_left: Pos, size: int) -> list[Pos]:
+    positions: list[Pos] = []
+    for dx in range(2):
+        for dy in range(2):
+            candidate = Pos(top_left.x + dx, top_left.y + dy)
+            if candidate.in_bounds(size):
+                positions.append(candidate)
+    return positions

@@ -43,6 +43,24 @@ namespace Aetherboard.Core.Tests
         }
 
         [Fact]
+        public void Ice_AutoPlay_CanWin()
+        {
+            var wins = 0;
+            for (var seed = 0; seed < 20; seed++)
+            {
+                var engine = new BattleEngine("ice", seed);
+                engine.BeginWarning();
+                for (var i = 0; i < 100; i++)
+                {
+                    if (engine.State.Phase is BattlePhase.Victory or BattlePhase.Defeat) break;
+                    engine.StepAuto();
+                }
+                if (engine.State.Phase == BattlePhase.Victory) wins++;
+            }
+            Assert.True(wins > 0);
+        }
+
+        [Fact]
         public void Interrupt_PreventsFuryWipe()
         {
             var engine = new BattleEngine("earth", 0);

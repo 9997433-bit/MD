@@ -81,6 +81,17 @@ def score_position(unit: UnitState, pos: Pos, state) -> int:
         if pos.x == boss.x:
             score -= 10
         score += pos.distance(boss) * 2
+    elif telegraph == Telegraph.ICE_LANCE:
+        if pos.x == boss.x or pos.y == boss.y:
+            score -= 60
+    elif telegraph == Telegraph.FROZEN_GROUND:
+        if any(p.x == pos.x and p.y == pos.y for p in state.pending_hazards):
+            score -= 80
+    elif telegraph == Telegraph.ICE_RING:
+        if pos.distance(center) == 2:
+            score += 40
+        else:
+            score -= 30
     else:
         score += _min_dist_to_others(unit, pos, party)
 

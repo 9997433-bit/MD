@@ -39,7 +39,11 @@ namespace Aetherboard.Core
         Gale,
         Spread,
         Stack,
-        Cyclone
+        Cyclone,
+        IceLance,
+        FrozenGround,
+        IceRing,
+        Blizzard
     }
 
     [Serializable]

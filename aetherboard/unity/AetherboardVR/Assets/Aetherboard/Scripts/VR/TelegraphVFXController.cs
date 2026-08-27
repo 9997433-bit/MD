@@ -64,7 +64,20 @@ namespace Aetherboard.VR
                     break;
                 case TelegraphKind.EarthenFury:
                 case TelegraphKind.Cyclone:
+                case TelegraphKind.Blizzard:
                     _pulseRoutine = StartCoroutine(FuryPulse());
+                    break;
+                case TelegraphKind.IceLance:
+                    SpawnIceCross(cells);
+                    _pulseRoutine = StartCoroutine(PulseActive(2.2f, 0.08f));
+                    break;
+                case TelegraphKind.FrozenGround:
+                    SpawnFrozenGround(cells);
+                    _pulseRoutine = StartCoroutine(PulseActive(2.4f, 0.07f));
+                    break;
+                case TelegraphKind.IceRing:
+                    SpawnIceRing(cells);
+                    _pulseRoutine = StartCoroutine(PulseActive(2f, 0.1f));
                     break;
             }
         }
@@ -79,6 +92,10 @@ namespace Aetherboard.VR
             TelegraphKind.Stack => new Color(0.25f, 0.95f, 0.55f, 0.9f),
             TelegraphKind.EarthenFury => new Color(1f, 0.15f, 0.1f, 0.95f),
             TelegraphKind.Cyclone => new Color(0.7f, 0.85f, 1f, 0.95f),
+            TelegraphKind.IceLance => new Color(0.55f, 0.85f, 1f, 0.92f),
+            TelegraphKind.FrozenGround => new Color(0.35f, 0.65f, 1f, 0.88f),
+            TelegraphKind.IceRing => new Color(0.65f, 0.92f, 1f, 0.9f),
+            TelegraphKind.Blizzard => new Color(0.75f, 0.9f, 1f, 0.95f),
             _ => new Color(1f, 0.65f, 0.1f, 0.85f)
         };
 
@@ -169,6 +186,68 @@ namespace Aetherboard.VR
                 ProceduralAssets.CreateUnlitMaterial(new Color(0.2f, 1f, 0.55f, 0.55f));
             Destroy(pillar.GetComponent<Collider>());
             _active.Add(pillar);
+        }
+
+        private void SpawnIceCross(List<GridPos> cells)
+        {
+            if (cells.Count == 0) return;
+            var boss = _table.GridToWorld(3, 2);
+            var iceColor = new Color(0.45f, 0.85f, 1f, 0.95f);
+            var horiz = new GameObject("IceLanceH");
+            horiz.transform.SetParent(vfxRoot, false);
+            var hLine = horiz.AddComponent<LineRenderer>();
+            hLine.positionCount = 2;
+            hLine.startWidth = 0.012f;
+            hLine.endWidth = 0.005f;
+            hLine.material = ProceduralAssets.CreateUnlitMaterial(iceColor);
+            hLine.startColor = hLine.endColor = iceColor;
+            hLine.useWorldSpace = true;
+            hLine.SetPosition(0, _table.GridToWorld(0, 2) + Vector3.up * 0.04f);
+            hLine.SetPosition(1, _table.GridToWorld(6, 2) + Vector3.up * 0.04f);
+            _active.Add(horiz);
+
+            var vert = new GameObject("IceLanceV");
+            vert.transform.SetParent(vfxRoot, false);
+            var vLine = vert.AddComponent<LineRenderer>();
+            vLine.positionCount = 2;
+            vLine.startWidth = 0.012f;
+            vLine.endWidth = 0.005f;
+            vLine.material = ProceduralAssets.CreateUnlitMaterial(iceColor);
+            vLine.startColor = vLine.endColor = iceColor;
+            vLine.useWorldSpace = true;
+            vLine.SetPosition(0, _table.GridToWorld(3, 0) + Vector3.up * 0.04f);
+            vLine.SetPosition(1, _table.GridToWorld(3, 6) + Vector3.up * 0.04f);
+            _active.Add(vert);
+        }
+
+        private void SpawnFrozenGround(List<GridPos> cells)
+        {
+            var frostColor = new Color(0.4f, 0.75f, 1f, 0.85f);
+            foreach (var pos in cells)
+            {
+                var slab = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                slab.name = "FrozenSlab";
+                slab.transform.SetParent(vfxRoot, false);
+                slab.transform.position = _table.GridToWorld(pos.X, pos.Y) + Vector3.up * 0.02f;
+                slab.transform.localScale = new Vector3(_table.CellSize * 0.88f, 0.003f, _table.CellSize * 0.88f);
+                slab.GetComponent<Renderer>().material = ProceduralAssets.CreateUnlitMaterial(frostColor);
+                Destroy(slab.GetComponent<Collider>());
+                _active.Add(slab);
+            }
+        }
+
+        private void SpawnIceRing(List<GridPos> cells)
+        {
+            var ringColor = new Color(0.55f, 0.9f, 1f, 0.75f);
+            var center = _table.GridToWorld(3, 3);
+            var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            ring.name = "IceRing";
+            ring.transform.SetParent(vfxRoot, false);
+            ring.transform.position = center + Vector3.up * 0.025f;
+            ring.transform.localScale = new Vector3(_table.CellSize * 1.05f, 0.003f, _table.CellSize * 1.05f);
+            ring.GetComponent<Renderer>().material = ProceduralAssets.CreateUnlitMaterial(ringColor);
+            Destroy(ring.GetComponent<Collider>());
+            _active.Add(ring);
         }
 
         private static GameObject CreateCrackLine(Vector3 center, float halfLen, Color color, float yawDeg)
