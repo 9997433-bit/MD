@@ -9,7 +9,7 @@
 | 指标 | 值 |
 |------|-----|
 | Identifier | **237**（八层 catalog） |
-| pytest | **100** |
+| pytest | **104** |
 | confirmed / blocked | 68 / 98 |
 | 静态阶段 | **已关闭冻结** |
 

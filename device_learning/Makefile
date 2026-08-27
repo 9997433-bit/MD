@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun dryrun-usb handoff check-captures readiness closure bundle intake resume finalize proposals help
+.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun dryrun-usb dryrun-all handoff check-captures readiness closure bundle intake resume finalize proposals help
 
 help:
 	@echo "device_learning — 常用命令"
@@ -25,7 +25,7 @@ help:
 	@echo ""
 	@echo "  其他"
 	@echo "    make dryrun      合成 EEPROM 流水线演练（非实机）"
-	@echo "    make dryrun-usb  合成 USB 抓包演练（非实机）"
+	@echo "    make dryrun-all  EEPROM + USB 合成演练"
 	@echo "    make bundle      handoff_bundle + pr_body_snapshot"
 	@echo "    make readiness   阶段 B 就绪报告"
 
@@ -88,6 +88,9 @@ dryrun:
 
 dryrun-usb:
 	python3 scripts/dryrun_usb.py
+
+dryrun-all: dryrun dryrun-usb
+	@echo "Both synthetic dry-runs complete (NOT device data)."
 
 health:
 	python3 scripts/health_check.py

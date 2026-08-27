@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:34:20.460441+00:00",
+  "generated_at": "2026-08-27T16:36:35.485146+00:00",
   "artifact_count": 58,
   "present_count": 58,
   "artifacts": [
@@ -7,7 +7,7 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 247426
+      "size_bytes": 247428
     },
     {
       "path": "coverage.json",

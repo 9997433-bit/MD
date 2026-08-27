@@ -10,21 +10,20 @@
 
 ```bash
 cd device_learning
-make verify    # 生成账本 + 验收
-make test      # 100 项 pytest
-make help      # 命令列表
-make health    # 包健康检查
-make closure   # 静态阶段关闭摘要
-make intake    # 实机接入分步向导
-make handoff   # 实机交接摘要
-make check-captures  # 采集文件预检
-make readiness   # 阶段 B 就绪报告
-make phase-c     # 阶段 C 实验日志处理
-make proposals   # 查看 catalog 升级建议
+make help        # 全部命令
+make verify      # 生成账本 + 验收
+make test        # 104 项 pytest
+make dryrun-all  # 合成 EEPROM + USB 演练
+make finalize    # ci + health + closure + bundle
 make closure     # 静态阶段关闭摘要
-make dryrun    # 合成流水线演练（非实机数据）
-make status    # 一行状态摘要
-make ci        # verify + test（同 CI）
+make dryrun-all  # 合成 EEPROM + USB 流水线演练（非实机）
+```
+
+## 有实物时
+
+```bash
+make intake
+make check-captures && make phase-b && make proposals
 ```
 
 ## 目录结构
@@ -34,18 +33,11 @@ make ci        # verify + test（同 CI）
 | `firmware/device.bit` | Xilinx Spartan-3 位流 |
 | `hardware/photos/` | 硬件拆解照片（10 张） |
 | `catalogs/` | HW/BIT/SIG/USB/REF/ARCH/LEARN/EXP 八层 identifier |
-| `manifests/` | 哈希、BOM、帧分析、交叉对照（25+ JSON） |
+| `manifests/` | 哈希、BOM、帧分析、交接包（43+ JSON） |
 | `EvidenceLedger.json` | 主账本 |
-| `coverage.json` | 完成度 + 停止条件 |
-| `bridge_matrix.json` | 强制 null 桥（10 条） |
-| `STATIC_REPORT.md` | 自动摘要 |
-| `CONFIRMED_REPORT.md` | 68 条 confirmed 项 |
-| `BLOCKED_REPORT.md` | 98 条阻塞项 |
-| `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
-| `HARDWARE_HANDOFF.md` | 实机接入指南 |
-| `OMISSIONS_AND_REMAINING.md` | 遗漏登记 |
-| `phase_b/` | 实机采集脚手架 |
-| `phase_c/` | 实验验证脚手架 |
+| `STATIC_CLOSURE.md` | 静态阶段关闭摘要 |
+| `phase_b/captures/` | 实机采集放置目录 |
+| `phase_c/logs/` | 实验日志目录 |
 
 ## 停止条件
 
@@ -56,10 +48,8 @@ make ci        # verify + test（同 CI）
 5. 无证据不升级 confirmed
 6. 敏感词审计通过（`manifests/sensitive_audit.json`）
 
-## 实机下一步
+## 规模
 
-见 `HARDWARE_HANDOFF.md`，采集后运行 `make phase-b`。
+**237 identifier** · **103 pytest** · 静态阶段 **已关闭冻结**
 
-## 模型
-
-本项目分析采用 Fable 5 模型。
+详见 `STATIC_CLOSURE.md` 与 `manifests/handoff_bundle.json`。

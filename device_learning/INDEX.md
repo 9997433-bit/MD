@@ -5,7 +5,7 @@
 ```bash
 cd device_learning
 make verify         # 生成账本 + 验收
-make test           # 100 项 pytest
+make test           # 103 项 pytest
 make help           # 命令列表
 make health         # 包健康检查
 make closure        # 静态阶段关闭摘要
