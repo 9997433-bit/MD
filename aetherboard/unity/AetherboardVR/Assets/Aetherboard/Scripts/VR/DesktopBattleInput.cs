@@ -34,8 +34,14 @@ namespace Aetherboard.VR
             if (Input.GetKeyDown(KeyCode.Alpha1)) _director.SetBoss("earth");
             if (Input.GetKeyDown(KeyCode.Alpha2)) _director.SetBoss("wind");
             if (Input.GetKeyDown(KeyCode.Escape)) CancelSelection();
-            if (Input.GetKeyDown(KeyCode.C)) _coop?.ToggleMode();
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                _coop?.ToggleMode();
+                _director.RefreshAllViews();
+            }
             if (Input.GetKeyDown(KeyCode.Tab)) _coop?.SwitchActivePlayer();
+            if (Input.GetKeyDown(KeyCode.F5)) _director.SaveCheckpoint();
+            if (Input.GetKeyDown(KeyCode.F9)) _director.RestoreLastSnapshot();
 
             if (_cam == null) _cam = Camera.main;
             if (_cam == null) return;

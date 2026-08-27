@@ -46,10 +46,15 @@ namespace Aetherboard.VR
             if (_coop != null)
             {
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button("双人模式 (C)", _btnW)) _coop.ToggleMode();
+                if (GUILayout.Button("双人模式 (C)", _btnW)) { _coop.ToggleMode(); _director.RefreshAllViews(); }
                 if (GUILayout.Button("切换玩家 (Tab)", _btnW)) _coop.SwitchActivePlayer();
                 GUILayout.EndHorizontal();
             }
+
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("存档 (F5)", _btnW)) _director.SaveCheckpoint();
+            if (GUILayout.Button("读档 (F9)", _btnW)) _director.RestoreLastSnapshot();
+            GUILayout.EndHorizontal();
 
             GUILayout.Space(4);
             GUILayout.Label("<b>小队</b>", RichLabel());
@@ -67,7 +72,7 @@ namespace Aetherboard.VR
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | E/A/1/2</size>", RichLabel());
+            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | F5/F9存读档 | E/A/1/2</size>", RichLabel());
             GUILayout.EndArea();
         }
 

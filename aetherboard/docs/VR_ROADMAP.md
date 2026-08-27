@@ -20,8 +20,11 @@
 | **程序化音效** | ✅ | `BattleAudioController` — 阶段/伤害/读条提示音 |
 | **机制粒子 VFX** | ✅ | `BattleParticleVFX` — 预警格粒子爆发 |
 | **BattleTable 场景** | ✅ | `Scenes/BattleTable.unity` + `BattleSceneBuilder` |
+| **状态 JSON 编解码** | ✅ | `BattleStateCodec` — 对齐 Schema，支持存档/同步 |
+| **命令日志** | ✅ | `BattleCommandLog` — 回放与 Host 同步基础 |
+| **本地网络桩** | ✅ | `BattleNetSession` — JSON 快照交换 |
 | XR Origin 官方 Prefab | 🔲 | 可替换为 `GameObject → XR → XR Origin` |
-| 在线多人 | 🔲 | Host 权威同步 |
+| 在线多人传输层 | 🔲 | WebSocket / Netcode 实装 |
 
 ## 技术栈
 

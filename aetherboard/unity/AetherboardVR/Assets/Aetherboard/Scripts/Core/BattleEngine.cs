@@ -8,13 +8,16 @@ namespace Aetherboard.Core
     {
         private Random _rng;
         private IBossProfile _profile;
+        private int _seed;
 
         public BattleState State { get; private set; }
         public string BossId { get; private set; }
+        public int RandomSeed => _seed;
 
         public BattleEngine(string bossId = "earth", int seed = 7)
         {
             BossId = bossId;
+            _seed = seed;
             _profile = BossRegistry.Get(bossId);
             _rng = new Random(seed);
             State = NewState();
@@ -35,7 +38,11 @@ namespace Aetherboard.Core
 
         public void Reset(int? seed = null, string bossId = null)
         {
-            if (seed.HasValue) _rng = new Random(seed.Value);
+            if (seed.HasValue)
+            {
+                _seed = seed.Value;
+                _rng = new Random(seed.Value);
+            }
             if (!string.IsNullOrEmpty(bossId))
             {
                 BossId = bossId;
@@ -43,6 +50,18 @@ namespace Aetherboard.Core
             }
             State = NewState();
             BeginWarning();
+        }
+
+        public void RestoreState(BattleState snapshot, string bossId)
+        {
+            if (!string.IsNullOrEmpty(bossId))
+            {
+                BossId = bossId;
+                _profile = BossRegistry.Get(bossId);
+            }
+            State = BattleStateCodec.Clone(snapshot);
+            if (string.IsNullOrEmpty(State.Boss.BossId))
+                State.Boss.BossId = BossId;
         }
 
         public void AddLog(string msg) => State.Log.Add(msg);

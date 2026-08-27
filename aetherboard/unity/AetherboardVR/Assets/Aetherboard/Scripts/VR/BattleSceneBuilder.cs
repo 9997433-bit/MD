@@ -31,6 +31,7 @@ namespace Aetherboard.VR
             skillRing.Initialize(director, tableView, root.transform);
 
             var coop = root.AddComponent<CoopController>();
+            tableView.SetCoop(coop);
 
             var hudGo = new GameObject("BattleHUD");
             hudGo.transform.SetParent(root.transform, false);
@@ -49,6 +50,8 @@ namespace Aetherboard.VR
             audioGo.AddComponent<BattleAudioController>().Bind(director);
 
             root.AddComponent<BattleParticleVFX>().Bind(director, tableView);
+            root.AddComponent<BattleNetSession>();
+            root.AddComponent<QuestPerformanceSettings>();
 
             XRRigFactory.EnsureLighting();
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _);

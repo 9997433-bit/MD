@@ -31,7 +31,9 @@ namespace Aetherboard.VR
         {
             if (!XRRigFactory.XrActive || _director == null) return;
 
-            // Common XR bindings (Oculus / OpenXR via legacy axis names when mapped)
+            if (Input.GetButtonDown("XRI_Right_TriggerButton") || Input.GetKeyDown(KeyCode.JoystickButton2))
+                TrySelectUnderGaze();
+
             if (Input.GetButtonDown("XRI_Right_GripButton") || Input.GetKeyDown(KeyCode.JoystickButton4))
                 TryShowSkillRingForNearestPiece();
 
@@ -40,6 +42,39 @@ namespace Aetherboard.VR
 
             if (Input.GetButtonDown("XRI_Right_SecondaryButton") || Input.GetKeyDown(KeyCode.JoystickButton1))
                 _director.StepAuto();
+        }
+
+        private void TrySelectUnderGaze()
+        {
+            var cam = Camera.main;
+            if (cam == null) return;
+            var ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            if (!Physics.Raycast(ray, out var hit, 8f)) return;
+
+            var piece = hit.collider.GetComponentInParent<PieceToken>();
+            if (piece != null)
+            {
+                if (_coop != null && !_coop.CanControlUnit(piece.UnitId)) return;
+                _desktop.SelectPiece(piece);
+                if (_director.State.Phase == BattlePhase.Move)
+                    piece.BeginDrag(hit.point);
+                else if (_director.State.Phase is BattlePhase.Action or BattlePhase.Weave)
+                {
+                    var unit = _director.State.Party.Find(u => u.Id == piece.UnitId);
+                    if (unit != null)
+                        _skillRing.ShowForUnit(unit.Id, unit.Job, piece.transform.position);
+                }
+                return;
+            }
+
+            var cell = hit.collider.GetComponentInParent<GridCell>();
+            if (cell == null) return;
+            var dest = new GridPos(cell.X, cell.Y);
+            if (_skillRing != null && _skillRing.AwaitingTarget)
+            {
+                if (_skillRing.TryTargetCell(dest))
+                    _desktop.CancelSelection();
+            }
         }
 
         private void TryShowSkillRingForNearestPiece()

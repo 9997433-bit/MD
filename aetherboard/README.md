@@ -37,7 +37,7 @@ python3 -m http.server 8765
 
 **最快路径**：Unity Hub 打开 `unity/AetherboardVR` → 打开 `BattleTable` 场景或按 **Play**（自动创建战棋桌）
 
-桌面快捷键：`C` 双人模式 | `Tab` 切换 P1/P2
+桌面快捷键：`C` 双人模式 | `Tab` 切换 P1/P2 | `F5`/`F9` 存读档
 
 ```bash
 # C# 核心测试（无需 Unity）

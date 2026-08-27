@@ -16,8 +16,11 @@ namespace Aetherboard.VR
         private readonly Dictionary<(int, int), GridCell> _cells = new();
         private readonly Dictionary<string, PieceToken> _pieces = new();
         private bool _built;
+        private CoopController _coop;
 
         public float CellSize => cellSize;
+
+        public void SetCoop(CoopController coop) => _coop = coop;
 
         private void Awake()
         {
@@ -134,7 +137,14 @@ namespace Aetherboard.VR
                 token.transform.position = world + Vector3.up * (cellSize * 0.28f);
                 token.SetJob(unit.Job);
                 token.RememberHome(unit.Pos);
+                token.SetCoopPlayer(GetCoopPlayer(unit.Id));
             }
+        }
+
+        private int GetCoopPlayer(string unitId)
+        {
+            if (_coop == null || _coop.Mode != CoopMode.SplitCoop) return 0;
+            return unitId is "knight" or "bard" ? 1 : 2;
         }
 
         private static bool IsPreview(BattleState state, int x, int y) =>

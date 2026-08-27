@@ -22,6 +22,8 @@ namespace Aetherboard.VR
         private GridPos _homePos;
         private Vector3 _dragOffset;
         private bool _dragging;
+        private Transform _coopBadge;
+        private int _coopPlayer;
 
         public void InitProcedural(Renderer renderer)
         {
@@ -65,13 +67,42 @@ namespace Aetherboard.VR
             else body.material.color = _baseColor;
         }
 
+        public void SetCoopPlayer(int player)
+        {
+            _coopPlayer = player;
+            if (player <= 0)
+            {
+                if (_coopBadge != null) _coopBadge.gameObject.SetActive(false);
+                return;
+            }
+
+            if (_coopBadge == null)
+            {
+                var badgeGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                badgeGo.name = "CoopBadge";
+                badgeGo.transform.SetParent(transform, false);
+                badgeGo.transform.localPosition = new Vector3(0, 0.14f, 0);
+                badgeGo.transform.localScale = Vector3.one * 0.035f;
+                var col = badgeGo.GetComponent<Collider>();
+                if (col != null) Destroy(col);
+                _coopBadge = badgeGo.transform;
+            }
+
+            _coopBadge.gameObject.SetActive(true);
+            var color = player == 1 ? new Color(0.3f, 0.6f, 1f) : new Color(1f, 0.45f, 0.35f);
+            _coopBadge.GetComponent<Renderer>().material = ProceduralAssets.CreateUnlitMaterial(color);
+        }
+
         public void SetSelected(bool selected)
         {
             IsSelected = selected;
             if (body == null || !_hasBaseColor) return;
-            body.material.color = selected
-                ? Color.Lerp(_baseColor, Color.white, 0.35f)
+            var tint = _coopPlayer > 0
+                ? Color.Lerp(_baseColor, _coopPlayer == 1 ? new Color(0.3f, 0.6f, 1f) : new Color(1f, 0.45f, 0.35f), 0.15f)
                 : _baseColor;
+            body.material.color = selected
+                ? Color.Lerp(tint, Color.white, 0.35f)
+                : tint;
         }
 
         public void BeginDrag(Vector3 hitPoint)
