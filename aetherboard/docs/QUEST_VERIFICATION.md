@@ -19,11 +19,21 @@
 5. Aetherboard → Quest → Check Connected Device (ADB)       （确认设备在线）
 6. Aetherboard → Quest → Install Last Built APK             （侧载）
 7. Aetherboard → Quest → Tail Aetherboard Logs (ADB)        （实机日志）
+8. Aetherboard → Quest → Run Pre-Build Readiness Check      （打包前预检）
+9. Aetherboard → Quest → Quest Ready — Install + Launch + Pull Report  （一键烟测）
 ```
 
-Quest 头显：**资料库 → 未知来源** → 启动 **Aetherboard VR**。
+**命令行烟测（无需 Unity Editor）：**
 
-也可在 Editor 中运行 `Aetherboard → Art → Validate Art Inventory` 检查美术资源是否齐全。
+```bash
+cd aetherboard
+chmod +x scripts/quest_verify.sh
+./scripts/quest_verify.sh
+```
+
+报告输出：`build/quest_reports/quest_verification.txt`（设备端副本：`/sdcard/Download/quest_verification.txt`）
+
+Quest 头显：**资料库 → 未知来源** → 启动 **Aetherboard VR**。
 
 ## 运行时诊断
 
@@ -39,6 +49,17 @@ Quest 启动后，`QuestRuntimeDiagnostics` 自动在 logcat 输出：
 # 查看 Android 日志
 adb logcat -s Unity | grep Aetherboard
 ```
+
+## Editor 预检菜单
+
+| 菜单 | 用途 |
+|------|------|
+| Run Pre-Build Readiness Check | 检查场景/Prefab/APK/Android 目标 |
+| Launch App on Device | adb 启动应用 |
+| Pull Verification Report | 拉取 `/sdcard/Download/quest_verification.txt` |
+| Quest Ready — Install + Launch + Pull Report | 一键安装+启动+拉报告 |
+
+也可运行 `Aetherboard → Art → Validate Art Inventory` 检查美术资源是否齐全。
 
 ## 功能验证清单
 

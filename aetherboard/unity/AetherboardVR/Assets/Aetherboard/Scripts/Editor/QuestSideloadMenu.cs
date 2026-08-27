@@ -4,12 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Aetherboard.VR;
 
 namespace Aetherboard.Editor
 {
     public static class QuestSideloadMenu
     {
         private const string DefaultApkName = "AetherboardVR.apk";
+        private const string UnityActivity = "com.unity3d.player.UnityPlayerActivity";
 
         [MenuItem("Aetherboard/Quest/Check Connected Device (ADB)")]
         public static void CheckDevice()
@@ -37,7 +39,7 @@ namespace Aetherboard.Editor
                 return;
             }
 
-            InstallApk(path);
+            InstallApkPublic(path);
         }
 
         [MenuItem("Aetherboard/Quest/Install APK to Device...")]
@@ -45,8 +47,14 @@ namespace Aetherboard.Editor
         {
             var path = EditorUtility.OpenFilePanel("Select Quest APK", "", "apk");
             if (string.IsNullOrEmpty(path)) return;
-            InstallApk(path);
+            InstallApkPublic(path);
         }
+
+        [MenuItem("Aetherboard/Quest/Launch App on Device")]
+        public static void LaunchAppMenu() => LaunchAppPublic();
+
+        [MenuItem("Aetherboard/Quest/Pull Verification Report")]
+        public static void PullReportMenu() => PullVerificationReportPublic();
 
         [MenuItem("Aetherboard/Quest/Open Quest Verification Guide")]
         public static void OpenVerificationGuide()
@@ -65,8 +73,7 @@ namespace Aetherboard.Editor
                 return;
             }
 
-            var devices = RunProcess(adb, "devices");
-            if (devices == null || !devices.Contains("device"))
+            if (!HasAuthorizedDevice(adb))
             {
                 Debug.LogError("Aetherboard: No authorized device. Connect Quest and run Check Connected Device.");
                 return;
@@ -79,14 +86,11 @@ namespace Aetherboard.Editor
         }
 
         [MenuItem("Aetherboard/Quest/Clear Logcat Buffer")]
-        public static void ClearLogcat()
-        {
-            if (!TryGetAdbPath(out var adb)) return;
-            RunProcess(adb, "logcat -c");
-            Debug.Log("Aetherboard: logcat buffer cleared.");
-        }
+        public static void ClearLogcat() => ClearLogcatPublic();
 
-        private static void InstallApk(string apkPath)
+        public static bool TryGetAdbPathPublic(out string adbPath) => TryGetAdbPath(out adbPath);
+
+        public static void InstallApkPublic(string apkPath)
         {
             if (!TryGetAdbPath(out var adb))
             {
@@ -94,8 +98,7 @@ namespace Aetherboard.Editor
                 return;
             }
 
-            var devices = RunProcess(adb, "devices");
-            if (devices == null || !devices.Contains("device"))
+            if (!HasAuthorizedDevice(adb))
             {
                 Debug.LogError("Aetherboard: No authorized device. Run Check Connected Device first.");
                 return;
@@ -107,6 +110,91 @@ namespace Aetherboard.Editor
                 Debug.Log("Aetherboard: APK installed. Launch from Quest Library → Unknown Sources.");
             else
                 Debug.LogError($"Aetherboard: adb install failed:\n{result}");
+        }
+
+        public static void LaunchAppPublic()
+        {
+            if (!TryGetAdbPath(out var adb))
+            {
+                Debug.LogError("Aetherboard: adb not found.");
+                return;
+            }
+
+            if (!HasAuthorizedDevice(adb))
+            {
+                Debug.LogError("Aetherboard: No authorized device.");
+                return;
+            }
+
+            var component = $"{QuestVerificationReport.PackageId}/{UnityActivity}";
+            var result = RunProcess(adb, $"shell am start -n {component}");
+            Debug.Log($"Aetherboard: Launched {component}\n{result}");
+        }
+
+        public static void ClearLogcatPublic()
+        {
+            if (!TryGetAdbPath(out var adb)) return;
+            RunProcess(adb, "logcat -c");
+            Debug.Log("Aetherboard: logcat buffer cleared.");
+        }
+
+        public static void PullVerificationReportPublic()
+        {
+            if (!TryGetAdbPath(out var adb))
+            {
+                Debug.LogError("Aetherboard: adb not found.");
+                return;
+            }
+
+            var localDir = Path.GetFullPath(Path.Combine(Application.dataPath, "../../build/quest_reports"));
+            Directory.CreateDirectory(localDir);
+            var localPath = Path.Combine(localDir, QuestVerificationReport.ReportFileName);
+
+            var remotePath = QuestVerificationReport.PublicReportPath;
+            var pullResult = RunProcess(adb, $"pull \"{remotePath}\" \"{localPath}\"");
+            if (File.Exists(localPath))
+            {
+                var text = File.ReadAllText(localPath);
+                var failures = QuestVerificationReport.CountFailures(text);
+                Debug.Log(
+                    $"Aetherboard: Pulled verification report → {localPath}\n" +
+                    $"Automated FAIL count: {failures}\n{text}");
+                return;
+            }
+
+            Debug.LogWarning(
+                $"Aetherboard: Report not found at {remotePath}. Launch app and wait for diagnostics.\n{pullResult}");
+        }
+
+        public static void TailRecentLogsPublic(string adb, int lineCount)
+        {
+            var output = RunProcess(adb, "logcat -d -s Unity");
+            if (string.IsNullOrEmpty(output))
+            {
+                Debug.LogWarning("Aetherboard: No Unity logcat output.");
+                return;
+            }
+
+            var lines = output.Split('\n');
+            var matched = 0;
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("Aetherboard: Recent Quest logcat (filtered):");
+            for (var i = Math.Max(0, lines.Length - lineCount); i < lines.Length; i++)
+            {
+                if (!lines[i].Contains("Aetherboard", StringComparison.Ordinal)) continue;
+                sb.AppendLine(lines[i]);
+                matched++;
+            }
+
+            if (matched == 0)
+                sb.AppendLine("  (no Aetherboard lines in recent logcat — launch app first)");
+            Debug.Log(sb.ToString());
+        }
+
+        private static bool HasAuthorizedDevice(string adb)
+        {
+            var devices = RunProcess(adb, "devices");
+            return devices != null && devices.Contains("device");
         }
 
         private static bool TryGetAdbPath(out string adbPath)

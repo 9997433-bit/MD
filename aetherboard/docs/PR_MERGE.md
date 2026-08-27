@@ -35,6 +35,7 @@ CI：`.github/workflows/aetherboard-tests.yml`
 3. `Aetherboard → Install XR Origin Prefab`
 4. Play 验证桌面模式
 5. `Build Quest APK to build/` + `Quest → Install Last Built APK`
+6. `Quest → Run Pre-Build Readiness Check` 或 `./scripts/quest_verify.sh`
 
 ## 文档索引
 
