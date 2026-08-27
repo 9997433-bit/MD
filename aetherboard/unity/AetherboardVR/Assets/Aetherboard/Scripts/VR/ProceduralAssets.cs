@@ -7,15 +7,8 @@ namespace Aetherboard.VR
     /// </summary>
     public static class ProceduralAssets
     {
-        public static Material CreateUnlitMaterial(Color color)
-        {
-            var shader = Shader.Find("Universal Render Pipeline/Unlit")
-                         ?? Shader.Find("Unlit/Color")
-                         ?? Shader.Find("Standard");
-            var mat = new Material(shader);
-            mat.color = color;
-            return mat;
-        }
+        public static Material CreateUnlitMaterial(Color color) =>
+            BattleArtPalette.CreateSurfaceMaterial(color, 0.1f, 0.45f);
 
         public static GameObject CreateCell(Transform parent, float cellSize, float height)
         {
@@ -69,7 +62,7 @@ namespace Aetherboard.VR
             go.transform.localScale = new Vector3(size, 0.04f, size);
             go.transform.localPosition = new Vector3(0, -0.02f, 0);
             var renderer = go.GetComponent<Renderer>();
-            renderer.sharedMaterial = CreateUnlitMaterial(new Color(0.12f, 0.16f, 0.22f));
+            renderer.sharedMaterial = BattleArtPalette.CreateSurfaceMaterial(BattleArtPalette.TableStone);
             return go;
         }
 
@@ -80,7 +73,7 @@ namespace Aetherboard.VR
             go.transform.SetParent(parent, false);
             go.transform.localScale = Vector3.one * cellSize * 0.7f;
             var renderer = go.GetComponent<Renderer>();
-            renderer.sharedMaterial = CreateUnlitMaterial(new Color(0.85f, 0.2f, 0.15f));
+            renderer.sharedMaterial = BattleArtPalette.CreateEmissiveMaterial(new Color(0.85f, 0.2f, 0.15f));
             var col = go.GetComponent<Collider>();
             if (col != null) Object.Destroy(col);
             return go;

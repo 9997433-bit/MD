@@ -77,18 +77,15 @@ namespace Aetherboard.VR
 
                 if (x == BoardMath.BossPos(BoardMath.DefaultSize).X &&
                     y == BoardMath.BossPos(BoardMath.DefaultSize).Y)
-                {
-                    var boss = ProceduralAssets.CreateBossMarker(go.transform, cellSize);
-                    boss.transform.localPosition = new Vector3(0, 0.08f, 0);
-                }
+                    SpawnBossMarker(go.transform);
             }
 
             foreach (var id in new[] { "knight", "white_mage", "black_mage", "bard" })
             {
-                var go = ProceduralAssets.CreatePiece(piecesRoot, cellSize);
-                go.name = $"Piece_{id}";
+                var go = new GameObject($"Piece_{id}");
+                go.transform.SetParent(piecesRoot, false);
+                go.AddComponent<PieceVisualBuilder>();
                 var token = go.AddComponent<PieceToken>();
-                token.InitProcedural(go.GetComponent<Renderer>());
                 token.UnitId = id;
                 token.Inject(director, this, highlighter, _coop);
                 _pieces[id] = token;
@@ -132,8 +129,7 @@ namespace Aetherboard.VR
                 if (x == BoardMath.BossPos(BoardMath.DefaultSize).X &&
                     y == BoardMath.BossPos(BoardMath.DefaultSize).Y)
                 {
-                    var boss = ProceduralAssets.CreateBossMarker(cell.transform, cellSize);
-                    boss.transform.localPosition = new Vector3(0, 0.08f, 0);
+                    SpawnBossMarker(cell.transform);
                 }
             }
 
@@ -235,5 +231,18 @@ namespace Aetherboard.VR
 
         public PieceToken GetPiece(string unitId) =>
             _pieces.TryGetValue(unitId, out var p) ? p : null;
+
+        private void SpawnBossMarker(Transform parent)
+        {
+            if (BattlePrefabLibrary.BossMarkerPrefab != null)
+            {
+                var boss = Instantiate(BattlePrefabLibrary.BossMarkerPrefab, parent);
+                boss.transform.localPosition = new Vector3(0, 0.08f, 0);
+                return;
+            }
+
+            var procedural = ProceduralAssets.CreateBossMarker(parent, cellSize);
+            procedural.transform.localPosition = new Vector3(0, 0.08f, 0);
+        }
     }
 }

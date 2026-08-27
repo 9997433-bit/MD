@@ -49,6 +49,15 @@ namespace Aetherboard.VR
             var grab = GetComponent<PieceXRGrabController>();
             if (grab == null) grab = gameObject.AddComponent<PieceXRGrabController>();
             grab.Setup(this, director, table, coop, highlighter);
+            EnsureCollider();
+        }
+
+        private void EnsureCollider()
+        {
+            if (GetComponent<Collider>() != null) return;
+            var box = gameObject.AddComponent<BoxCollider>();
+            box.center = new Vector3(0, 0.05f, 0);
+            box.size = new Vector3(0.08f, 0.1f, 0.08f);
         }
 
         public void SetGrabbing(bool grabbing) => _xrGrabbing = grabbing;
@@ -58,6 +67,18 @@ namespace Aetherboard.VR
 
         public void SetJob(JobType job)
         {
+            var builder = GetComponent<PieceVisualBuilder>();
+            if (builder != null)
+            {
+                builder.Apply(job);
+                body = builder.PrimaryRenderer ?? body;
+                _baseColor = BattleArtPalette.ForJob(job);
+                _hasBaseColor = body != null;
+                if (body != null && body.material != null)
+                    body.material.color = _baseColor;
+                return;
+            }
+
             if (body == null) body = GetComponentInChildren<Renderer>();
             if (body == null) return;
             _baseColor = job switch
@@ -69,7 +90,7 @@ namespace Aetherboard.VR
                 _ => Color.white
             };
             _hasBaseColor = true;
-            if (body.material == null) body.material = ProceduralAssets.CreateUnlitMaterial(_baseColor);
+            if (body.material == null) body.material = BattleArtPalette.CreateSurfaceMaterial(_baseColor);
             else body.material.color = _baseColor;
         }
 

@@ -15,7 +15,11 @@ namespace Aetherboard.Editor
         private const string PreviewRingPath = ResourceDir + "/PreviewRing.prefab";
 
         [MenuItem("Aetherboard/Install Battle Table Prefabs")]
-        public static void InstallBattleTablePrefabs()
+        public static void InstallBattleTablePrefabs() =>
+            BattleArtPrefabFactory.InstallStyledPrefabs();
+
+        [MenuItem("Aetherboard/Install Basic Battle Table Prefabs (Legacy)")]
+        public static void InstallLegacyBattleTablePrefabs()
         {
             Directory.CreateDirectory(ResourceDir);
 
