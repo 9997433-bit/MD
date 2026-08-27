@@ -9,6 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _idcode(frame: dict) -> str:
+    reg = frame.get("packet_stream", {}).get("registers", {}).get("IDCODE", {})
+    return reg.get("raw") or frame.get("idcode", {}).get("raw") or "N/A"
+
+
 def _load_json(path: Path) -> dict:
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
@@ -59,7 +64,7 @@ def main() -> None:
         "",
         "## 位流",
         "",
-        f"- IDCODE：`{fa.get('idcode', {}).get('raw', frame.get('packet_stream', {}).get('registers', {}).get('IDCODE', {}).get('raw', 'N/A'))}`",
+        f"- IDCODE：`{_idcode(frame)}`",
         f"- 帧长 FLR：{fa.get('frame_length_words', 'N/A')} words",
         f"- FDRI 字数：{fa.get('fdri_word_count', 'N/A')}",
         f"- 帧估计：{fa.get('estimated_frame_count', 'N/A')}",
@@ -95,6 +100,8 @@ def main() -> None:
         "- 实验验证 → 见 `phase_c/README.md`",
         "- 接入指南 → `HARDWARE_HANDOFF.md`",
         "- 阶段路线图 → `manifests/phase_roadmap.json`",
+        "- 架构图 → `ARCHITECTURE.md`",
+        "- Null 桥 → `BRIDGE_REPORT.md`",
         "",
         "## 重新生成",
         "",

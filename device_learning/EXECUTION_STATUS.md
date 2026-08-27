@@ -34,7 +34,9 @@ python3 scripts/verify_completion.py
 | `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
 | `manifests/evidence_summary.json` | 一页式证据摘要 |
 | `manifests/catalog_integrity.json` | 目录 schema 校验 |
+| `CONFIRMED_REPORT.md` | 68 条 confirmed 项 |
 | `BLOCKED_REPORT.md` | 98 条阻塞项人类可读表 |
+| `manifests/photo_hw_map.json` | 照片 → HW 标识符映射 |
 | `manifests/pending_index.json` | 98 条阻塞项 |
 | `manifests/phase_roadmap.json` | 阶段 B/C 解锁路线 |
 | `HARDWARE_HANDOFF.md` | 实机接入步骤 |

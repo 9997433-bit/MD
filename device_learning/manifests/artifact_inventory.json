@@ -1,0 +1,127 @@
+{
+  "generated_at": "2026-08-27T15:42:31.191185+00:00",
+  "artifact_count": 20,
+  "present_count": 20,
+  "artifacts": [
+    {
+      "path": "EvidenceLedger.json",
+      "description": "主账本",
+      "exists": true,
+      "size_bytes": 207589
+    },
+    {
+      "path": "coverage.json",
+      "description": "完成度统计",
+      "exists": true,
+      "size_bytes": 881
+    },
+    {
+      "path": "bridge_matrix.json",
+      "description": "强制 null 桥",
+      "exists": true,
+      "size_bytes": 1509
+    },
+    {
+      "path": "STATIC_REPORT.md",
+      "description": "静态摘要",
+      "exists": true,
+      "size_bytes": 1569
+    },
+    {
+      "path": "CONFIRMED_REPORT.md",
+      "description": "confirmed 项报告",
+      "exists": true,
+      "size_bytes": 3771
+    },
+    {
+      "path": "BLOCKED_REPORT.md",
+      "description": "阻塞项报告",
+      "exists": true,
+      "size_bytes": 4746
+    },
+    {
+      "path": "BRIDGE_REPORT.md",
+      "description": "null 桥报告",
+      "exists": true,
+      "size_bytes": 969
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "description": "系统架构 mermaid 图",
+      "exists": true,
+      "size_bytes": 731
+    },
+    {
+      "path": "IDENTIFIER_INDEX.md",
+      "description": "identifier 全表",
+      "exists": true,
+      "size_bytes": 18696
+    },
+    {
+      "path": "HARDWARE_HANDOFF.md",
+      "description": "实机接入指南",
+      "exists": true,
+      "size_bytes": 2132
+    },
+    {
+      "path": "manifests/evidence_summary.json",
+      "description": "一页式证据摘要",
+      "exists": true,
+      "size_bytes": 755
+    },
+    {
+      "path": "manifests/pending_index.json",
+      "description": "阻塞项索引",
+      "exists": true,
+      "size_bytes": 23445
+    },
+    {
+      "path": "manifests/phase_roadmap.json",
+      "description": "阶段路线图",
+      "exists": true,
+      "size_bytes": 4218
+    },
+    {
+      "path": "manifests/catalog_integrity.json",
+      "description": "目录完整性校验",
+      "exists": true,
+      "size_bytes": 182
+    },
+    {
+      "path": "manifests/sensitive_audit.json",
+      "description": "敏感词审计",
+      "exists": true,
+      "size_bytes": 162
+    },
+    {
+      "path": "manifests/frame_summary.json",
+      "description": "位流帧摘要",
+      "exists": true,
+      "size_bytes": 14548
+    },
+    {
+      "path": "manifests/frame_deep.json",
+      "description": "位流深层扫描",
+      "exists": true,
+      "size_bytes": 6274
+    },
+    {
+      "path": "manifests/hardware_bom.json",
+      "description": "硬件 BOM",
+      "exists": true,
+      "size_bytes": 16994
+    },
+    {
+      "path": "manifests/eeprom_meta.json",
+      "description": "EEPROM 元数据",
+      "exists": true,
+      "size_bytes": 779
+    },
+    {
+      "path": "manifests/photo_hw_map.json",
+      "description": "照片 HW 映射",
+      "exists": true,
+      "size_bytes": 2716
+    }
+  ]
+}

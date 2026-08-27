@@ -1,6 +1,6 @@
 # 静态分析报告（自动生成）
 
-**生成时间**：2026-08-27 15:41 UTC
+**生成时间**：2026-08-27 15:42 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -65,6 +65,8 @@
 - 实验验证 → 见 `phase_c/README.md`
 - 接入指南 → `HARDWARE_HANDOFF.md`
 - 阶段路线图 → `manifests/phase_roadmap.json`
+- 架构图 → `ARCHITECTURE.md`
+- Null 桥 → `BRIDGE_REPORT.md`
 
 ## 重新生成
 
