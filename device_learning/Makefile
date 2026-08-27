@@ -34,6 +34,11 @@ readiness:
 	@echo "---"
 	@head -20 PHASE_B_READINESS.md
 
+closure:
+	python3 scripts/build_static_closure.py
+	@echo "---"
+	@head -24 STATIC_CLOSURE.md
+
 freeze: verify
 	@echo "Static phase frozen — see manifests/static_freeze.json"
 

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:14:44.444130+00:00",
-  "artifact_count": 51,
-  "present_count": 51,
+  "generated_at": "2026-08-27T16:18:20.009645+00:00",
+  "artifact_count": 52,
+  "present_count": 52,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 226737
+      "size_bytes": 228317
     },
     {
       "path": "coverage.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 7661
+      "size_bytes": 7810
     },
     {
       "path": "manifests/bit_strings.json",
@@ -292,10 +292,16 @@
       "size_bytes": 162
     },
     {
+      "path": "manifests/static_closure.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 894
+    },
+    {
       "path": "manifests/static_phase_closed.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 396
+      "size_bytes": 706
     },
     {
       "path": "manifests/system_map.json",

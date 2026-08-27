@@ -49,6 +49,7 @@ def main() -> int:
 
     ok &= check("phase_b_readiness", (ROOT / "PHASE_B_READINESS.md").exists())
     ok &= check("phase_c_readiness", (ROOT / "PHASE_C_READINESS.md").exists())
+    ok &= check("static_closure", (ROOT / "STATIC_CLOSURE.md").exists())
     clean, detail = captures_clean()
     ok &= check("captures_dir_clean", clean, detail)
     ok &= check("captures_gitkeep", GITKEEP.is_file())

@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-08-27T16:18:25.112955+00:00",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "static_phase_closed": true,
+  "frozen": true,
+  "identifiers": 237,
+  "status_counts": {
+    "confirmed": 68,
+    "candidate": 65,
+    "unknown": 56,
+    "hypothesis": 6,
+    "not_started": 30,
+    "missing": 12
+  },
+  "pytest_count": 95,
+  "manifest_json_count": 41,
+  "phase_b_blockers_remaining": 3,
+  "upgrade_proposals_pending": 0,
+  "resume_commands": [
+    "make handoff",
+    "make readiness",
+    "make check-captures",
+    "make phase-b",
+    "make proposals",
+    "make phase-c"
+  ],
+  "resume_artifacts": [
+    "phase_b/captures/eeprom.bin",
+    "phase_b/captures/usb_enum.pcapng",
+    "phase_b/captures/usb_session.pcapng",
+    "phase_b/captures/protocol_log.json"
+  ],
+  "boundary": "No further catalog status upgrades without hardware evidence"
+}
