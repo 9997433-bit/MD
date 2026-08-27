@@ -227,5 +227,10 @@ namespace Aetherboard.Core
 
         public static IBossProfile Get(string bossId) =>
             Profiles.TryGetValue(bossId, out var p) ? p : Profiles["earth"];
+
+        public static IReadOnlyList<string> AllBossIds { get; } =
+            new List<string>(Profiles.Keys);
+
+        public static string DisplayName(string bossId) => Get(bossId).Create().Name;
     }
 }

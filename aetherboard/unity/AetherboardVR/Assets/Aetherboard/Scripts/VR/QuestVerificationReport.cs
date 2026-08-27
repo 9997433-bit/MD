@@ -81,6 +81,7 @@ namespace Aetherboard.VR
             LogCheck(sb, "SkillRing", UnityEngine.Object.FindObjectOfType<SkillRingController>() != null);
             LogCheck(sb, "BattleNetSession", UnityEngine.Object.FindObjectOfType<BattleNetSession>() != null);
             LogCheck(sb, "ResultOverlay", UnityEngine.Object.FindObjectOfType<BattleResultOverlay>() != null);
+            LogCheck(sb, "BossSelectPanel", UnityEngine.Object.FindObjectOfType<BattleBossSelectPanel>() != null);
 
             var pieces = UnityEngine.Object.FindObjectsOfType<PieceToken>();
             LogCheck(sb, "PieceTokens>=4", pieces != null && pieces.Length >= 4);
