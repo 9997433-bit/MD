@@ -20,6 +20,9 @@ namespace Aetherboard.VR
         public void InitializeProcedural(BattleTableView table)
         {
             _table = table;
+            previewRingPrefab = previewRingPrefab != null
+                ? previewRingPrefab
+                : BattlePrefabLibrary.PreviewRingPrefab;
             vfxRoot = new GameObject("TelegraphVFX").transform;
             vfxRoot.SetParent(table.transform, false);
         }

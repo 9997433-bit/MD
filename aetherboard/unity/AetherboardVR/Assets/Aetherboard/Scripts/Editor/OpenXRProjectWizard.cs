@@ -25,6 +25,7 @@ namespace Aetherboard.Editor
 
             EditorUserBuildSettings.androidBuildSubtarget = MobileTextureSubtarget.ASTC;
             PlayerSettings.Android.bundleVersionCode = 1;
+            PlayerSettings.Android.forceInternetPermission = true;
 
             EnsureBattleSceneInBuildSettings();
             Debug.Log(

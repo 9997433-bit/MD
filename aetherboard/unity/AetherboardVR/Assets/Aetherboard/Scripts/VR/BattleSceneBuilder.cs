@@ -28,7 +28,7 @@ namespace Aetherboard.VR
             var highlighter = root.AddComponent<GridSnapHighlighter>();
 
             tableView.SetCoop(coop);
-            tableView.BuildProcedural(root.transform, director, highlighter, coop);
+            tableView.Build(root.transform, director, highlighter, coop);
             telegraph.InitializeProcedural(tableView);
             bossView.InitializeProcedural(root.transform);
 
@@ -58,7 +58,6 @@ namespace Aetherboard.VR
             XRRigFactory.EnsureLighting();
             XRRigFactory.CreateRig(tableCenter, seatedMode, out _, rigSource);
 
-            var highlighter = root.GetComponent<GridSnapHighlighter>();
             foreach (var piece in tableView.GetComponentsInChildren<PieceToken>(true))
             {
                 var grab = piece.GetComponent<PieceXRGrabController>();

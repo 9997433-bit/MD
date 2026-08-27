@@ -30,7 +30,10 @@ namespace Aetherboard.VR
                 XRRigSource.Prefab => "XR Prefab",
                 _ => XRRigFactory.XrActive ? "XR Procedural" : "Desktop"
             };
-            Debug.Log($"[Aetherboard] Ready ({rigLabel}). C=双人 | Tab=切换 | H/N联机 | RMB=技能环");
+            Debug.Log($"[Aetherboard] Ready ({rigLabel}, table={GetTableSourceLabel()}). C=双人 | Tab=切换 | H/N联机 | RMB=技能环");
         }
+
+        private static string GetTableSourceLabel() =>
+            BattlePrefabLibrary.HasPrefabs ? "Prefab" : "Procedural";
     }
 }

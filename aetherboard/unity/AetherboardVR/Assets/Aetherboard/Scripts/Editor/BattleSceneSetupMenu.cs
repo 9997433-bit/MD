@@ -49,6 +49,9 @@ namespace Aetherboard.Editor
         [MenuItem("Aetherboard/Open Quest Build Guide")]
         public static void OpenQuestGuide() => OpenDoc("QUEST_BUILD.md");
 
+        [MenuItem("Aetherboard/Open Quest Verification Guide")]
+        public static void OpenQuestVerificationGuide() => OpenDoc("QUEST_VERIFICATION.md");
+
         private static void OpenDoc(string filename)
         {
             var path = System.IO.Path.GetFullPath(

@@ -49,6 +49,8 @@
    （或任意空场景 + Runtime 自动加载）
 4. `Build And Run`（Quest 通过 USB 连接并开启开发者模式）
 
+实机验证步骤见 [QUEST_VERIFICATION.md](./QUEST_VERIFICATION.md)。
+
 ## 桌面快速验证（无需头显）
 
 1. 打开项目，直接 **Play**

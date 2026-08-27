@@ -44,8 +44,10 @@
 | **NGO CustomMessaging** | ✅ | `BattleNetcodeFacade` + HostCoordinator |
 | **Quest APK 构建菜单** | ✅ | `QuestApkBuilder` Editor 菜单 |
 | **NGO UnityTransport** | ✅ | `BattleNetcodeNativeTransport` 端口 7777 |
+| **Battle Table Prefabs** | ✅ | Editor 安装 + Resources 自动加载 |
+| **Quest 侧载工具** | ✅ | ADB 检查 / 安装 + 实机诊断日志 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
-| Quest 实机验证 | 🔲 | 侧载 APK 联机测试 |
+| Quest 实机验证 | 🔲 | 按 QUEST_VERIFICATION.md 人工验收 |
 
 ## 技术栈
 

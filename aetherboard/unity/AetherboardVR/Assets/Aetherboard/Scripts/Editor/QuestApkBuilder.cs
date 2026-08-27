@@ -10,6 +10,15 @@ namespace Aetherboard.Editor
     {
         private const string DefaultApkName = "AetherboardVR.apk";
 
+        [MenuItem("Aetherboard/Build Quest APK to build/")]
+        public static void BuildQuestApkToBuildFolder()
+        {
+            OpenXRProjectWizard.ConfigureQuestBuild();
+            var outputPath = Path.GetFullPath(Path.Combine(Application.dataPath, $"../../build/{DefaultApkName}"));
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath) ?? ".");
+            BuildApkAtPath(outputPath);
+        }
+
         [MenuItem("Aetherboard/Build Quest APK...")]
         public static void BuildQuestApk()
         {
@@ -26,7 +35,11 @@ namespace Aetherboard.Editor
                 "apk");
 
             if (string.IsNullOrEmpty(outputPath)) return;
+            BuildApkAtPath(outputPath);
+        }
 
+        private static void BuildApkAtPath(string outputPath)
+        {
             var scenes = EditorBuildSettings.scenes;
             if (scenes == null || scenes.Length == 0)
             {

@@ -22,6 +22,24 @@ namespace Aetherboard.VR
 
         public void SetCoop(CoopController coop) => _coop = coop;
 
+        /// <summary>
+        /// Prefab-first build used by BattleSceneBuilder; falls back to procedural primitives.
+        /// </summary>
+        public void Build(
+            Transform parent,
+            BattleDirector director,
+            GridSnapHighlighter highlighter = null,
+            CoopController coop = null)
+        {
+            if (_built) return;
+            _coop = coop ?? _coop;
+
+            if (BattlePrefabLibrary.HasPrefabs)
+                BuildFromLibrary(parent, director, highlighter, coop);
+            else
+                BuildProcedural(parent, director, highlighter, coop);
+        }
+
         private void Awake()
         {
             if (cellPrefab != null && piecePrefab != null && !_built)
@@ -75,6 +93,60 @@ namespace Aetherboard.VR
                 token.Inject(director, this, highlighter, _coop);
                 _pieces[id] = token;
             }
+        }
+
+        private void BuildFromLibrary(
+            Transform parent,
+            BattleDirector director,
+            GridSnapHighlighter highlighter,
+            CoopController coop)
+        {
+            if (_built) return;
+            _built = true;
+
+            var tableRoot = new GameObject("Table").transform;
+            tableRoot.SetParent(parent, false);
+
+            cellsRoot = new GameObject("Cells").transform;
+            cellsRoot.SetParent(tableRoot, false);
+            piecesRoot = new GameObject("Pieces").transform;
+            piecesRoot.SetParent(tableRoot, false);
+
+            if (BattlePrefabLibrary.TableBasePrefab != null)
+                Instantiate(BattlePrefabLibrary.TableBasePrefab, tableRoot);
+            else
+                ProceduralAssets.CreateTableBase(tableRoot, cellSize * 7.5f);
+
+            var cellPrefab = BattlePrefabLibrary.GridCellPrefab;
+            var piecePrefab = BattlePrefabLibrary.PieceTokenPrefab;
+
+            for (var y = 0; y < BoardMath.DefaultSize; y++)
+            for (var x = 0; x < BoardMath.DefaultSize; x++)
+            {
+                var cell = Instantiate(cellPrefab, cellsRoot);
+                cell.name = $"Cell_{x}_{y}";
+                cell.transform.localPosition = GridToLocal(x, y);
+                cell.Init(x, y);
+                _cells[(x, y)] = cell;
+
+                if (x == BoardMath.BossPos(BoardMath.DefaultSize).X &&
+                    y == BoardMath.BossPos(BoardMath.DefaultSize).Y)
+                {
+                    var boss = ProceduralAssets.CreateBossMarker(cell.transform, cellSize);
+                    boss.transform.localPosition = new Vector3(0, 0.08f, 0);
+                }
+            }
+
+            foreach (var id in new[] { "knight", "white_mage", "black_mage", "bard" })
+            {
+                var token = Instantiate(piecePrefab, piecesRoot);
+                token.name = $"Piece_{id}";
+                token.UnitId = id;
+                token.Inject(director, this, highlighter, coop);
+                _pieces[id] = token;
+            }
+
+            Debug.Log("[Aetherboard] Battle table built from Resources prefabs.");
         }
 
         private void BuildFromPrefabs()
