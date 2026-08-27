@@ -67,7 +67,10 @@ namespace Aetherboard.VR
             if (furyTurns != _lastFuryTurns)
             {
                 _lastFuryTurns = furyTurns;
-                PlayBossCue(furyTurns == 1 ? 880f : 520f, 0.1f, 0.22f);
+                var bossId = _director?.Engine.BossId ?? "earth";
+                var urgentFreq = bossId switch { "wind" => 880f, "ice" => 784f, _ => 880f };
+                var warnFreq = bossId switch { "wind" => 520f, "ice" => 494f, _ => 520f };
+                PlayBossCue(furyTurns == 1 ? urgentFreq : warnFreq, 0.1f, 0.22f);
             }
 
             _furyTickCooldown -= Time.deltaTime;
@@ -75,7 +78,10 @@ namespace Aetherboard.VR
 
             var interval = furyTurns == 1 ? 0.35f : 0.55f;
             _furyTickCooldown = interval;
-            PlayBossCue(furyTurns == 1 ? 660f : 440f, 0.04f, 0.14f);
+            var tickBossId = _director?.Engine.BossId ?? "earth";
+            var tickUrgent = tickBossId switch { "wind" => 660f, "ice" => 622f, _ => 660f };
+            var tickWarn = tickBossId switch { "wind" => 440f, "ice" => 415f, _ => 440f };
+            PlayBossCue(furyTurns == 1 ? tickUrgent : tickWarn, 0.04f, 0.14f);
         }
 
         private void OnPhaseChanged(BattlePhase phase)
@@ -108,10 +114,18 @@ namespace Aetherboard.VR
 
         private void OnBossChanged(string bossId)
         {
-            if (bossId == "wind")
-                PlayChord(new[] { 392f, 494f, 587f }, 0.2f, 0.22f);
-            else
-                PlayChord(new[] { 262f, 330f, 392f }, 0.2f, 0.22f);
+            switch (bossId)
+            {
+                case "wind":
+                    PlayChord(new[] { 392f, 494f, 587f }, 0.2f, 0.22f);
+                    break;
+                case "ice":
+                    PlayChord(new[] { 440f, 554f, 659f }, 0.2f, 0.22f);
+                    break;
+                default:
+                    PlayChord(new[] { 262f, 330f, 392f }, 0.2f, 0.22f);
+                    break;
+            }
         }
 
         private void OnNetRoleChanged(NetSessionRole role, string transport)

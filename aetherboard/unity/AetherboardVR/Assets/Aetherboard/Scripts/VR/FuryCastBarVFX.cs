@@ -122,6 +122,7 @@ namespace Aetherboard.VR
         private static Color PaletteForBoss(string bossId) => bossId switch
         {
             "wind" => new Color(0.45f, 0.75f, 1f),
+            "ice" => new Color(0.55f, 0.82f, 1f),
             _ => new Color(0.95f, 0.25f, 0.08f)
         };
 
@@ -134,9 +135,12 @@ namespace Aetherboard.VR
         private IEnumerator InterruptBurstRoutine()
         {
             var origin = _barRoot.position;
-            var color = _bossId == "wind"
-                ? new Color(0.5f, 0.9f, 1f)
-                : new Color(1f, 0.85f, 0.2f);
+            var color = _bossId switch
+            {
+                "wind" => new Color(0.5f, 0.9f, 1f),
+                "ice" => new Color(0.65f, 0.92f, 1f),
+                _ => new Color(1f, 0.85f, 0.2f)
+            };
 
             for (var i = 0; i < 3; i++)
             {

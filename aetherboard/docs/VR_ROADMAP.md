@@ -48,7 +48,7 @@
 | **Quest 侧载工具** | ✅ | ADB 检查 / 安装 + 实机诊断日志 |
 | **联机 HUD / VR 面板** | ✅ | Host IP 编辑 + PlayerPrefs 持久化 |
 | **Styled 美术 Prefab** | ✅ | 职业造型 + 材质 + 外部模型钩子 |
-| **Boss 全息 UI** | ✅ | 3D 铭牌 + 双 Boss 主题 + 轨道环 |
+| **Boss 全息 UI** | ✅ | 3D 铭牌 + 三 Boss 主题 + 轨道环 |
 | **战斗光照** | ✅ | 三色环境光 + Key/Fill/Rim + Quest 优化 |
 | **增强程序化音效** | ✅ | 读条滴答 + Boss 主题 + 联机/胜负音 |
 | **CI 测试** | ✅ | GitHub Actions Python + C# |
@@ -62,6 +62,7 @@
 | **VR Boss 选择面板** | ✅ | 世界空间 UI，Quest 无需键盘 |
 | **VR 操作提示** | ✅ | 首次启动可关闭的 cheat sheet |
 | **第三 Boss（冰灵女皇）** | ✅ | 冰枪/霜冻/冰环/暴雪 · Web/VR/C#/Python 对齐 |
+| **三 Boss 音频/VFX 抛光** | ✅ | 冰主题和弦 + 读条条配色 + Quest 验收项 #11 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
 | Quest 实机验证 | 🔲 | 人工 10 项（工具链已就绪，见 QUEST_VERIFICATION.md） |
 
@@ -102,7 +103,7 @@ cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 
 ## 首版 VR 范围
 
-- 单人 vs 土灵守护者 / 风灵领主
+- 单人 vs 土灵守护者 / 风灵领主 / 冰灵女皇
 - 1 张桌台场景
 - 抓取棋子 + 技能环 + 预警高亮
 - 坐姿 / 站姿桌台高度

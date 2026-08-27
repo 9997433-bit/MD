@@ -231,5 +231,15 @@ namespace Aetherboard.Core.Tests
             var parsed = BattleNetMessageCodec.Unframe(framed, framed.Length);
             Assert.Equal(json, parsed);
         }
+
+        [Fact]
+        public void BossRegistry_HasThreeBossesIncludingIce()
+        {
+            Assert.Equal(3, BossRegistry.AllBossIds.Count);
+            Assert.Contains("earth", BossRegistry.AllBossIds);
+            Assert.Contains("wind", BossRegistry.AllBossIds);
+            Assert.Contains("ice", BossRegistry.AllBossIds);
+            Assert.Equal("冰灵女皇", BossRegistry.Get("ice").Create().Name);
+        }
     }
 }
