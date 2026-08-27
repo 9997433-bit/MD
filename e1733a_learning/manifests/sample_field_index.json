@@ -1,0 +1,1360 @@
+{
+  "source_file": "/tmp/seed-repo/extracted/Sample.Lin",
+  "format": "Keysight E1733A Option Description File (ODF), Rev. 1.00a, app version 1.12",
+  "measurement_type": "Linear (.Lin)",
+  "total_identify_fields": 191,
+  "field_types": {
+    "counts": {
+      "Choosing": 75,
+      "TextUnit": 72,
+      "ItemText": 40,
+      "Comprise": 4
+    },
+    "descriptions": {
+      "Choosing": "枚举/单选索引值(整数,对应选项列表下标)",
+      "TextUnit": "带单位的数值或数值序列(如 mm, sec, um, ppm/C)",
+      "ItemText": "自由文本或文本列表",
+      "Comprise": "Y/N 标志串(多项包含状态)"
+    },
+    "expanded_n_fields": 25
+  },
+  "fields": [
+    {
+      "index": 1,
+      "line": 4,
+      "name": "MeaType",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 2,
+      "line": 5,
+      "name": "FileName",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 3,
+      "line": 6,
+      "name": "SynchOp",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 4,
+      "line": 7,
+      "name": "RotaryDev",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 5,
+      "line": 8,
+      "name": "UserEdited",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 6,
+      "line": 9,
+      "name": "AutoScale",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 7,
+      "line": 10,
+      "name": "StopOnErr",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 8,
+      "line": 11,
+      "name": "StopOnLost",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 9,
+      "line": 12,
+      "name": "Extended",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 10,
+      "line": 13,
+      "name": "TargetSign",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 11,
+      "line": 14,
+      "name": "FootSpace",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 12,
+      "line": 15,
+      "name": "DeadPath",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 13,
+      "line": 16,
+      "name": "Preset",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 14,
+      "line": 17,
+      "name": "Average",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 15,
+      "line": 18,
+      "name": "OCFactor",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 16,
+      "line": 19,
+      "name": "RangeType",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 17,
+      "line": 20,
+      "name": "SquareErr",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 18,
+      "line": 21,
+      "name": "RotAQBRes",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 19,
+      "line": 22,
+      "name": "ParaType",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 20,
+      "line": 23,
+      "name": "AllowKBPos",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 21,
+      "line": 24,
+      "name": "Axis",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 22,
+      "line": 25,
+      "name": "AutoTitle",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 23,
+      "line": 26,
+      "name": "Mode",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 24,
+      "line": 27,
+      "name": "Cycles",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 25,
+      "line": 28,
+      "name": "StartPos",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 26,
+      "line": 29,
+      "name": "Interval",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 27,
+      "line": 30,
+      "name": "EndPos",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 28,
+      "line": 31,
+      "name": "Points",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 29,
+      "line": 32,
+      "name": "UserDef",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 30,
+      "line": 33,
+      "name": "Positions",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 31,
+      "line": 34,
+      "name": "Axis2",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 32,
+      "line": 35,
+      "name": "Mode2",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 33,
+      "line": 36,
+      "name": "Cycles2",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 34,
+      "line": 37,
+      "name": "StartPos2",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 35,
+      "line": 38,
+      "name": "Interval2",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 36,
+      "line": 39,
+      "name": "EndPos2",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 37,
+      "line": 40,
+      "name": "Points2",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 38,
+      "line": 41,
+      "name": "UserDef2",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 39,
+      "line": 42,
+      "name": "Positions2",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 40,
+      "line": 43,
+      "name": "TrigType",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 41,
+      "line": 44,
+      "name": "TrigWnd",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 42,
+      "line": 45,
+      "name": "TrigDwell",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 43,
+      "line": 46,
+      "name": "AQBMode",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 44,
+      "line": 47,
+      "name": "AQBRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 45,
+      "line": 48,
+      "name": "EPTimeOut",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 46,
+      "line": 49,
+      "name": "AutoTimer",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 47,
+      "line": 50,
+      "name": "UnitSysSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 48,
+      "line": 51,
+      "name": "PosUnit",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 49,
+      "line": 52,
+      "name": "ErrUnit",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 50,
+      "line": 53,
+      "name": "ResultRes",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 51,
+      "line": 54,
+      "name": "ExpCoef",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 52,
+      "line": 55,
+      "name": "WayLength",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 53,
+      "line": 56,
+      "name": "WayDir",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 54,
+      "line": 57,
+      "name": "WayStaNum",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 55,
+      "line": 58,
+      "name": "FlaStaAC",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 56,
+      "line": 59,
+      "name": "FlaStaAG",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 57,
+      "line": 60,
+      "name": "FlaAxisDir",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 58,
+      "line": 61,
+      "name": "FlaLenAC",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 59,
+      "line": 62,
+      "name": "FlaLenAG",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 60,
+      "line": 63,
+      "name": "FlaLenAE",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 61,
+      "line": 64,
+      "name": "FlaAllSta",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 62,
+      "line": 65,
+      "name": "DiaScaleX",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 63,
+      "line": 66,
+      "name": "DiaScaleY",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 64,
+      "line": 67,
+      "name": "DiaScaleZ",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 65,
+      "line": 68,
+      "name": "AxisDirSel",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 66,
+      "line": 69,
+      "name": "AxisOrder",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 67,
+      "line": 70,
+      "name": "AxisDone",
+      "value_type": "Comprise",
+      "expanded_attr": true
+    },
+    {
+      "index": 68,
+      "line": 71,
+      "name": "MeaAxisSel",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 69,
+      "line": 72,
+      "name": "SameAs",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 70,
+      "line": 73,
+      "name": "TBDispSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 71,
+      "line": 74,
+      "name": "StartType",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 72,
+      "line": 75,
+      "name": "TBStartPos",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 73,
+      "line": 76,
+      "name": "StopType",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 74,
+      "line": 77,
+      "name": "TBStopPos",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 75,
+      "line": 78,
+      "name": "TBInterval",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 76,
+      "line": 79,
+      "name": "TotalTime",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 77,
+      "line": 80,
+      "name": "PointNum",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 78,
+      "line": 81,
+      "name": "ManualRH",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 79,
+      "line": 82,
+      "name": "EnvUnitSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 80,
+      "line": 83,
+      "name": "EnvUpdate",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 81,
+      "line": 84,
+      "name": "Standard",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 82,
+      "line": 85,
+      "name": "AnaMod",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 83,
+      "line": 86,
+      "name": "AnaGraph",
+      "value_type": "Comprise",
+      "expanded_attr": true
+    },
+    {
+      "index": 84,
+      "line": 87,
+      "name": "AnaSigma",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 85,
+      "line": 88,
+      "name": "AnaNum",
+      "value_type": "Comprise",
+      "expanded_attr": true
+    },
+    {
+      "index": 86,
+      "line": 89,
+      "name": "AnaSlope",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 87,
+      "line": 90,
+      "name": "PrnShowSel",
+      "value_type": "Comprise",
+      "expanded_attr": true
+    },
+    {
+      "index": 88,
+      "line": 91,
+      "name": "PrnEnvSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 89,
+      "line": 92,
+      "name": "PrnCopies",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 90,
+      "line": 93,
+      "name": "PrnOrient",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 91,
+      "line": 94,
+      "name": "PrnMargin",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 92,
+      "line": 95,
+      "name": "TBDataPnt",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 93,
+      "line": 96,
+      "name": "FlaMethod",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 94,
+      "line": 97,
+      "name": "CompZero",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 95,
+      "line": 98,
+      "name": "Location",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 96,
+      "line": 99,
+      "name": "AssetNo",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 97,
+      "line": 100,
+      "name": "Comments",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 98,
+      "line": 101,
+      "name": "StartTime",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 99,
+      "line": 102,
+      "name": "MachName",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 100,
+      "line": 103,
+      "name": "MachType",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 101,
+      "line": 104,
+      "name": "MachSN",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 102,
+      "line": 105,
+      "name": "MachModel",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 103,
+      "line": 106,
+      "name": "DateTest",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 104,
+      "line": 107,
+      "name": "Operator",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 105,
+      "line": 108,
+      "name": "MeaInst",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 106,
+      "line": 109,
+      "name": "TypeScale",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 107,
+      "line": 110,
+      "name": "NDECorr",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 108,
+      "line": 111,
+      "name": "FeedRate",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 109,
+      "line": 112,
+      "name": "DwellTime",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 110,
+      "line": 113,
+      "name": "CompUsed",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 111,
+      "line": 114,
+      "name": "CoefScale",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 112,
+      "line": 115,
+      "name": "PosAxes",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 113,
+      "line": 116,
+      "name": "ToolX",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 114,
+      "line": 117,
+      "name": "ToolY",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 115,
+      "line": 118,
+      "name": "ToolZ",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 116,
+      "line": 119,
+      "name": "PieceX",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 117,
+      "line": 120,
+      "name": "PieceY",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 118,
+      "line": 121,
+      "name": "PieceZ",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 119,
+      "line": 122,
+      "name": "MatSen1",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 120,
+      "line": 123,
+      "name": "MatSen2",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 121,
+      "line": 124,
+      "name": "MatSen3",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 122,
+      "line": 125,
+      "name": "ATSen",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 123,
+      "line": 126,
+      "name": "MeaLength",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 124,
+      "line": 127,
+      "name": "CalMeaDev",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 125,
+      "line": 128,
+      "name": "ErrorRange",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 126,
+      "line": 129,
+      "name": "AlignErr",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 127,
+      "line": 130,
+      "name": "Diff20CMax",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 128,
+      "line": 131,
+      "name": "MatTempDev",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 129,
+      "line": 132,
+      "name": "UncExpCoef",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 130,
+      "line": 133,
+      "name": "EnvVarErr",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 131,
+      "line": 134,
+      "name": "CompRout",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 132,
+      "line": 135,
+      "name": "CompCalc",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 133,
+      "line": 136,
+      "name": "CompDir",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 134,
+      "line": 137,
+      "name": "CompSign",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 135,
+      "line": 138,
+      "name": "CompAbs",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 136,
+      "line": 139,
+      "name": "CompTI",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 137,
+      "line": 140,
+      "name": "MachUnit",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 138,
+      "line": 141,
+      "name": "CompSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 139,
+      "line": 142,
+      "name": "CompStart",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 140,
+      "line": 143,
+      "name": "CompIntvl",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 141,
+      "line": 144,
+      "name": "CompEnd",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 142,
+      "line": 145,
+      "name": "UpperSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 143,
+      "line": 146,
+      "name": "LaserRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 144,
+      "line": 147,
+      "name": "LaserSen",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 145,
+      "line": 148,
+      "name": "ErrorRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 146,
+      "line": 149,
+      "name": "ComboRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 147,
+      "line": 150,
+      "name": "SpeedRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 148,
+      "line": 151,
+      "name": "LaserRes2",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 149,
+      "line": 152,
+      "name": "LaserSen2",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 150,
+      "line": 153,
+      "name": "LowerSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 151,
+      "line": 154,
+      "name": "TargetRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 152,
+      "line": 155,
+      "name": "EncoderRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 153,
+      "line": 156,
+      "name": "RotaryRes",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 154,
+      "line": 157,
+      "name": "RotarySen",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 155,
+      "line": 158,
+      "name": "MidDispSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 156,
+      "line": 159,
+      "name": "GraPanel",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 157,
+      "line": 160,
+      "name": "LimitSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 158,
+      "line": 161,
+      "name": "LimitLine",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 159,
+      "line": 162,
+      "name": "UserSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 160,
+      "line": 163,
+      "name": "UserScale",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 161,
+      "line": 164,
+      "name": "Legend",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 162,
+      "line": 165,
+      "name": "TarInRow",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 163,
+      "line": 166,
+      "name": "ResAxisSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 164,
+      "line": 167,
+      "name": "GridLines",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 165,
+      "line": 168,
+      "name": "Centered",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 166,
+      "line": 169,
+      "name": "FlaGraSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 167,
+      "line": 170,
+      "name": "ErrorSign",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 168,
+      "line": 171,
+      "name": "FirstRow",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    },
+    {
+      "index": 169,
+      "line": 172,
+      "name": "RefDisp",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 170,
+      "line": 173,
+      "name": "RotThita",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 171,
+      "line": 174,
+      "name": "RotPhy",
+      "value_type": "TextUnit",
+      "expanded_attr": false
+    },
+    {
+      "index": 172,
+      "line": 175,
+      "name": "FigRanges",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 173,
+      "line": 176,
+      "name": "EnvRanges",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 174,
+      "line": 177,
+      "name": "DataGrids",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 175,
+      "line": 178,
+      "name": "CompGrids",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 176,
+      "line": 179,
+      "name": "LinearErr",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 177,
+      "line": 180,
+      "name": "EnvDispSel",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 178,
+      "line": 181,
+      "name": "ATHistory",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 179,
+      "line": 182,
+      "name": "APHistory",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 180,
+      "line": 183,
+      "name": "RHHistory",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 181,
+      "line": 184,
+      "name": "MTHistory",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 182,
+      "line": 185,
+      "name": "ProgHist",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 183,
+      "line": 186,
+      "name": "TimeHist",
+      "value_type": "ItemText",
+      "expanded_attr": true
+    },
+    {
+      "index": 184,
+      "line": 187,
+      "name": "NormRange",
+      "value_type": "Choosing",
+      "expanded_attr": false
+    },
+    {
+      "index": 185,
+      "line": 188,
+      "name": "ATList",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 186,
+      "line": 189,
+      "name": "APList",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 187,
+      "line": 190,
+      "name": "RHList",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 188,
+      "line": 191,
+      "name": "MT1List",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 189,
+      "line": 192,
+      "name": "MT2List",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 190,
+      "line": 193,
+      "name": "MT3List",
+      "value_type": "TextUnit",
+      "expanded_attr": true
+    },
+    {
+      "index": 191,
+      "line": 194,
+      "name": "EnvCount",
+      "value_type": "ItemText",
+      "expanded_attr": false
+    }
+  ]
+}

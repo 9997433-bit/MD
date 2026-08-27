@@ -51,3 +51,15 @@ def unknown_entries() -> list[dict[str, Any]]:
 
 def forced_null_bridges() -> list[str]:
     return load_bridge_matrix()["forced_null_bridges"]
+
+
+def load_english_gaps() -> dict[str, Any]:
+    return json.loads((ROOT / "manifests" / "english_string_gaps.json").read_text(encoding="utf-8"))
+
+
+def gap_blocks() -> list[dict[str, Any]]:
+    return load_english_gaps().get("gap_blocks", [])
+
+
+def entries_by_block_and_status(block: Block, status: str) -> list[dict[str, Any]]:
+    return [e for e in entries_by_block(block) if e["status"] == status]

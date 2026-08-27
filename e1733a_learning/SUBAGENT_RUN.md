@@ -1,28 +1,29 @@
 # 10 子代理并行执行记录
 
-**时间**：2026-08-27  
+**时间**：2026-08-27（第二轮）  
 **模型**：claude-fable-5-thinking-high（Fable 5）
 
 | # | 类型 | 任务 | 产出 |
 |---|------|------|------|
-| 1 | 只读 | EvidenceLedger 字段审计 | 主代理确认 178 条必填完整 |
-| 2 | 只读 | 阶段 B 导出复核 | ProcessRawData/ReadEnvironment 保持 unknown |
-| 3 | 只读 | 13×Sample.* 对比 | 与 sample_manifest.json 一致 |
-| 4 | 只读 | English.csv 映射 | 已并入 Remote.h / ledger |
-| 5 | 只读 | 强制 null 桥检查 | bridge_matrix 合规 |
-| 6 | 写 | catalog_e1733a_acq.py | ACQ_ENTRY_IDS、get_entry、meatype_ids |
-| 7 | 写 | catalog_e1733a_ana.py | STANDARDS_MAP、ANALYSIS_CI_MAP |
-| 8 | 写 | static_catalog.py + formats | 统一 API |
-| 9 | 写 | test_catalog_completeness.py | +5 项测试 |
-| 10 | 写 | .static-analysis/ | README、schema、placeholders |
+| 1 | 只读 | Remote.h CC/CI 分类审计 | 报告：未登记 candidate 常量清单 |
+| 2 | 只读 | PE 导出复核（四 DLL） | 报告：ProcessRawData/ReadEnvironment 仍为 unknown |
+| 3 | 只读 | 13×Sample.* 对比 | 报告：与 sample_manifest 一致 |
+| 4 | 只读 | English.csv 映射 | 报告：缺口 Top 10 candidate 建议 |
+| 5 | 只读 | coverage + 7 条强制 null 桥 | 报告：停止条件 1–5 全部 pass |
+| 6 | 写 | catalog_e1733a_acq.py | TRIG-STR 文档、trig_ids/cmd_ids/entries_by_boundary |
+| 7 | 写 | catalog_e1733a_ana.py | ANA_ENTRY_IDS、verify_standards_map、get_entry |
+| 8 | 写 | catalog_formats.py | FMT_ENTRY_IDS、format_slots、verify_extension_coverage |
+| 9 | 写 | test_e1733a_analysis_catalog.py | +6 项 ANA 完整性测试 |
+| 10 | 写 | catalog_e1733a_cmp.py | CMP_ENTRY_IDS、window_audit 扩展、verify_no_unk_upgrades |
 
-**测试**：20 passed  
-**推送**：分支 `cursor/e1733a-static-analysis-a08f`
+**主代理汇总**：
+- 修复 `generate_ledger.py` TRIG-STR 插入顺序 → ACQ_ENTRY_IDS 对齐
+- 账本 **193** 条 identifier；**31** 项 pytest 全部通过
+- 推送分支 `cursor/e1733a-static-analysis-a08f`
 
-## 子代理后续修复（主代理）
+## 第一轮记录（同日早些时候）
 
-- [阶段B未知导出复核](bc-0998dff5-3577-53cd-befa-ca64c573d676)：`E1736A_ReadEnvironment` 导出项改为 `unknown`（与 ProcessRawData 一致）
-- 补登记 `E1736ACore.dll` 11 个功能导出 → `CMP-E1-CORE-*`
-- [Sample 解析](bc-0184b8ee-e763-5f7d-b096-a396ae9fccc7)：`parse_sample` 修复 mea_type/field_count/LinearErr；新增 `test_e1733a_sample_manifest.py`
-- [扩展分析 catalog](bc-545f109c-2545-598a-89ce-f566a43aa292)：`verify_analysis_ci_map()` 等已合并
-- [English.csv 映射](bc-4c25db37-acaf-536d-9672-5d7b03211580)：缺口清单 → `manifests/english_string_gaps.json`
+| # | 任务 | 产出 |
+|---|------|------|
+| 1–5 | 只读审计 | 178→193 条、null 桥合规 |
+| 6–10 | catalog/tests/static-analysis | 见 commit 97c15df–add80a1 |

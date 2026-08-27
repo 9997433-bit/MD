@@ -74,6 +74,30 @@ def analysis_entry_ids():
     return [e["identifier"] for e in analysis_entries()]
 
 
+# 顺序与 EvidenceLedger.json 中 analysis 段一致
+ANA_ENTRY_IDS = analysis_entry_ids()
+
+
+def get_entry(identifier: str):
+    for e in analysis_entries():
+        if e["identifier"] == identifier:
+            return e
+    return None
+
+
+def verify_standards_map():
+    """Cross-check STANDARDS_MAP indexes against ANA-E1-STD-* ledger rows."""
+    mismatches = []
+    for idx, name in STANDARDS_MAP.items():
+        ident = f"ANA-E1-STD-{idx}"
+        row = get_entry(ident)
+        if row is None:
+            mismatches.append(f"{ident}: missing from ledger")
+        elif f"ANASETUP_STANDARD_CHOOSING={idx}" not in (row.get("source_identifier") or ""):
+            mismatches.append(f"{ident}: source {row.get('source_identifier')!r}")
+    return mismatches
+
+
 def standard_entries():
     """Return the ANA-E1-STD-* ledger entries (analysis standard slots)."""
     return [
