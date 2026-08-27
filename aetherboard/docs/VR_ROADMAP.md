@@ -59,7 +59,7 @@
 | **FBX 导入向导** | ✅ | Editor 批量转换 + 资源清单校验 |
 | **Quest 验收工具链** | ✅ | 预检向导 + 报告导出 + CLI 烟测脚本 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
-| Quest 实机验证 | 🔲 | 按 QUEST_VERIFICATION.md 人工验收（含 logcat 自动 PASS/FAIL） |
+| Quest 实机验证 | 🔲 | 人工 10 项（工具链已就绪，见 QUEST_VERIFICATION.md） |
 
 ## 技术栈
 

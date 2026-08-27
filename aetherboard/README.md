@@ -1,56 +1,79 @@
 # Aetherboard — FF14 风格 VR 互动战棋
 
-从《最终幻想14：重生之境》战斗节奏提炼的 **GCD 战棋原型**：先以 Python 模拟 + 2D Web 验证玩法，再迁移到 Unity/OpenXR VR。
+从《最终幻想14：重生之境》战斗节奏提炼的 **GCD 战棋**：Python 模拟 → 2D Web 原型 → **Unity VR 可玩版本**（OpenXR / Meta Quest）。
+
+## 里程碑状态
+
+| 模块 | 状态 |
+|------|------|
+| Python 战斗核心 + 测试 | ✅ 19 tests |
+| 2D Web 可玩原型 | ✅ |
+| C# 战斗核心 + 测试 | ✅ 13 tests |
+| Unity VR 交互 / VFX / 音效 | ✅ |
+| 三路联机（TCP / WS / NGO） | ✅ |
+| Quest 打包 / 侧载 / 验收工具链 | ✅ |
+| Quest 实机 10 项人工验收 | 🔲 见 `docs/QUEST_VERIFICATION.md` |
+
+完整功能清单见 [`docs/VR_ROADMAP.md`](docs/VR_ROADMAP.md)。
 
 ## 快速开始
 
-### 1. 运行 Python 战斗模拟与测试
+### Python + Web（无需 Unity）
 
 ```bash
 cd aetherboard
 PYTHONPATH=. python3 -m unittest discover -s tests -q
 PYTHONPATH=. python3 scripts/run_sim_demo.py
+
+cd web && python3 -m http.server 8765
+# 打开 http://localhost:8765
+# 联机：先 python3 scripts/battle_host.py --coop，再 ?client=1
 ```
 
-### 2. 启动 2D 可玩原型（浏览器）
+### C# 核心测试（无需 Unity）
 
 ```bash
-cd aetherboard/web
-python3 -m http.server 8765
+cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 ```
 
-打开 http://localhost:8765
+### Unity VR
 
-**联机模式**：先启动 Host，再打开 http://localhost:8765/?client=1
+1. Unity Hub 打开 `unity/AetherboardVR`
+2. 菜单：`Aetherboard → Configure URP Pipeline`
+3. `Install Battle Table Prefabs` + `Install XR Origin Prefab`
+4. **Play**（自动创建 7×7 战棋桌）
+
+Quest 打包与实机验收见 [`docs/QUEST_BUILD.md`](docs/QUEST_BUILD.md) · [`docs/QUEST_VERIFICATION.md`](docs/QUEST_VERIFICATION.md)
+
+**Quest 一键烟测（需 adb + 已构建 APK）：**
+
+```bash
+cd aetherboard
+./scripts/quest_verify.sh
+```
 
 ## 项目结构
 
 | 路径 | 说明 |
 |------|------|
 | `sim/` | Python 确定性战斗状态机 |
-| `web/` | 2D 浏览器可玩原型 |
-| `unity/AetherboardVR/` | **Unity VR 项目**（OpenXR + XRI） |
-| `csharp/` | C# 核心单元测试（无需 Unity） |
+| `web/` | 2D 浏览器可玩原型 + 读条 UI |
+| `unity/AetherboardVR/` | Unity VR 项目（OpenXR + XRI + NGO） |
+| `csharp/` | C# 核心单元测试 |
 | `schema/` | 战斗状态 JSON Schema |
-| `tests/` | Python 单元测试 |
-| `docs/` | GDD、VR 路线、Unity 设置指南 |
+| `scripts/` | Host 服务、Quest 烟测脚本 |
+| `docs/` | GDD、VR 路线、联机、Quest、美术指南 |
 
-## Unity VR 快速开始
+## VR 功能概览
 
-**最快路径**：Unity Hub 打开 `unity/AetherboardVR` → 打开 `BattleTable` 场景或按 **Play**（自动创建战棋桌）
+- **7×7 桌台**：抓取棋子、格子吸附、技能环 VR 射线
+- **双 Boss**：土灵守护者 / 风灵领主，读条 VFX + 机制预警
+- **双人协作**：P1 铁卫/游弦，P2 白愈/黑炎
+- **联机**：Host 权威，TCP `8767` / WS `8769` / NGO `7777`
+- **美术**：Styled Prefab + FBX 导入向导 + URP 后处理
+- **Quest 工具**：APK 构建、ADB 侧载、验收报告导出
 
-桌面快捷键：`C` 双人模式 | `Tab` 切换 P1/P2 | `F5`/`F9` 存读档
-
-```bash
-# C# 核心测试（无需 Unity）
-cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
-```
-
-Quest 打包见 `docs/QUEST_BUILD.md` · 实机验收见 `docs/QUEST_VERIFICATION.md`
-
-在线同步见 `docs/NETWORK_SYNC.md` · Netcode 见 `docs/NETCODE.md` · 美术见 `docs/ART_ASSETS.md`
-
-### VR 桌面快捷键
+## 桌面 / VR 快捷键
 
 | 键 | 功能 |
 |----|------|
@@ -63,24 +86,29 @@ Quest 打包见 `docs/QUEST_BUILD.md` · 实机验收见 `docs/QUEST_VERIFICATIO
 
 Quest 端使用桌台右侧 **联机 VR 面板** 配置 Host IP。
 
-## 当前 MVP 内容
+## MVP 机制
 
-- **7×7 棋盘**，四职责小队：铁卫 / 白愈 / 黑炎 / 游弦
-- **回合阶段**：预警 → 移动 → GCD → oGCD → 结算
-- **两名 Boss**：
-  - **土灵守护者**：重击 / 地震 / 缩圈 + 土神之怒
-  - **风灵领主**：风刃 / 分散 / 集合 + 旋风
-- **战术 AI**：自动躲避机制、打断读条、治疗与分散/集合
-- **机制预警高亮**：Web 版棋盘显示危险区域预览
+| Boss | 阶段机制 |
+|------|----------|
+| 土灵守护者 | 重击 → 地震 → 缩圈 + 土神之怒（可打断读条） |
+| 风灵领主 | 风刃 → 分散 → 集合 + 旋风 |
 
-## 操作说明（Web）
+四职责小队：铁卫 / 白愈 / 黑炎 / 游弦。回合流：预警 → 移动 → GCD → oGCD → 结算。
 
-1. 点击左侧小队成员选中
-2. **移动阶段**：点击可达格子移动
-3. **GCD / oGCD 阶段**：点技能按钮，再点目标格（治疗点友方，攻击点 Boss 格）
-4. **结束当前阶段** 推进；未操作单位会自动使用默认技能
-5. **自动演示一步** 快速观看 AI 对战
+## 文档索引
 
-## 下一步（VR）
+| 文档 | 内容 |
+|------|------|
+| [VR_ROADMAP.md](docs/VR_ROADMAP.md) | 功能清单与架构 |
+| [NETCODE.md](docs/NETCODE.md) | NGO / 联机架构 |
+| [NETWORK_SYNC.md](docs/NETWORK_SYNC.md) | Host 权威同步 |
+| [QUEST_BUILD.md](docs/QUEST_BUILD.md) | Quest APK 打包 |
+| [QUEST_VERIFICATION.md](docs/QUEST_VERIFICATION.md) | 实机验收清单 |
+| [ART_ASSETS.md](docs/ART_ASSETS.md) | 美术替换与 FBX 导入 |
+| [URP_SETUP.md](docs/URP_SETUP.md) | URP 渲染管线 |
+| [PR_MERGE.md](docs/PR_MERGE.md) | PR 合并指南 |
+| [CHANGELOG.md](CHANGELOG.md) | 版本记录 |
 
-见 `docs/VR_ROADMAP.md`：Unity + OpenXR、桌面战棋桌、手柄抓取棋子与技能环。
+## CI
+
+GitHub Actions：`.github/workflows/aetherboard-tests.yml`（Python + C#）
