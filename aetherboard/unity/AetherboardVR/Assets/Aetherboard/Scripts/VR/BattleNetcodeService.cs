@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 using Aetherboard.Core;
+using Aetherboard.NetcodeIntegration;
 
 namespace Aetherboard.VR
 {
     /// <summary>
     /// NGO integration hook — registers battle sync handlers when Netcode is present.
-    /// Falls back to no-op; actual client IO remains IBattleNetTransport until NGO transport lands.
     /// </summary>
     public class BattleNetcodeService : MonoBehaviour
     {
@@ -32,6 +32,16 @@ namespace Aetherboard.VR
             TryRegisterNetcodeHandlers();
         }
 
+        private void OnEnable()
+        {
+            BattleNetcodeHostCoordinator.OnRemoteBattleMessage += ReceiveBattleMessage;
+        }
+
+        private void OnDisable()
+        {
+            BattleNetcodeHostCoordinator.OnRemoteBattleMessage -= ReceiveBattleMessage;
+        }
+
         private void OnDestroy()
         {
             if (_instance == this) _instance = null;
@@ -41,8 +51,6 @@ namespace Aetherboard.VR
         {
             if (string.IsNullOrEmpty(json)) return;
             OnBattleMessage?.Invoke(json);
-            if (!NetcodeReady) return;
-            // Future: CustomMessagingManager.SendNamedMessage(BattleMessageName, Frame(json), ...)
         }
 
         public void ReceiveBattleMessage(string json) => OnBattleMessage?.Invoke(json);
@@ -52,7 +60,7 @@ namespace Aetherboard.VR
             BattleNetcodeRuntime.LogStatus();
             NetcodeReady = BattleNetcodeRuntime.IsAvailable;
             if (!NetcodeReady) return;
-            Debug.Log("[Aetherboard] BattleNetcodeService ready — wire CustomMessagingManager when NGO host starts");
+            Debug.Log("[Aetherboard] BattleNetcodeService ready — NGO CustomMessaging via BattleNetcodeFacade");
         }
 
         public static byte[] FrameForNetcode(string json) => BattleNetMessageCodec.Frame(json);

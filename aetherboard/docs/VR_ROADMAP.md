@@ -41,7 +41,9 @@
 | **网络传输抽象** | ✅ | `IBattleNetTransport` TCP/WS 可插拔 |
 | **Netcode 适配原型** | ✅ | `BattleNetcodeService` + Relay 传输 |
 | **Web 读条 UI** | ✅ | 进度条 + 紧急脉冲 + 打断爆发 |
-| 在线多人传输层 | 🔲 | NGO CustomMessaging 实装 |
+| **NGO CustomMessaging** | ✅ | `BattleNetcodeFacade` + HostCoordinator |
+| **Quest APK 构建菜单** | ✅ | `QuestApkBuilder` Editor 菜单 |
+| 在线多人传输层 | 🔲 | NGO UnityTransport 替代 WS 中继 |
 
 ## 技术栈
 

@@ -43,10 +43,11 @@
 
 ## 构建 APK
 
-1. `File → Build Settings`
-2. 确认场景 `Assets/Aetherboard/Scenes/BattleTable.unity` 在列表中  
+1. `Aetherboard → Configure Quest (Android) Build Settings`（首次）
+2. `Aetherboard → Build Quest APK...`（一键构建，或手动 `File → Build Settings`）
+3. 确认场景 `Assets/Aetherboard/Scenes/BattleTable.unity` 在列表中  
    （或任意空场景 + Runtime 自动加载）
-3. `Build And Run`（Quest 通过 USB 连接并开启开发者模式）
+4. `Build And Run`（Quest 通过 USB 连接并开启开发者模式）
 
 ## 桌面快速验证（无需头显）
 

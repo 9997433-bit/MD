@@ -1,4 +1,5 @@
 using System;
+using Aetherboard.NetcodeIntegration;
 using System.Threading;
 using UnityEngine;
 using Aetherboard.Core;
@@ -149,6 +150,7 @@ namespace Aetherboard.VR
             var line = BattleSyncProtocol.EncodeState(director.ExportSnapshotJson());
             GetComponent<BattleTcpHostServer>()?.BroadcastState(line);
             GetComponent<BattleWebSocketHostServer>()?.BroadcastState(line);
+            BattleNetcodeHostCoordinator.BroadcastState(line);
         }
 
         private bool TryConnectTransport(BattleNetTransportKind kind, int port)

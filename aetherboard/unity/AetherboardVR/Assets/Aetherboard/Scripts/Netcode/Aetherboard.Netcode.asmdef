@@ -1,11 +1,9 @@
 {
-  "name": "Aetherboard.VR",
-  "rootNamespace": "Aetherboard.VR",
+  "name": "Aetherboard.Netcode",
+  "rootNamespace": "Aetherboard.NetcodeIntegration",
   "references": [
     "Aetherboard.Core",
-    "Aetherboard.Netcode",
-    "Unity.XR.Interaction.Toolkit",
-    "Unity.InputSystem"
+    "Unity.Netcode.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
@@ -14,6 +12,12 @@
   "precompiledReferences": [],
   "autoReferenced": true,
   "defineConstraints": [],
-  "versionDefines": [],
+  "versionDefines": [
+    {
+      "name": "com.unity.netcode.gameobjects",
+      "expression": "1.0.0",
+      "define": "AETHERBOARD_NGO_INSTALLED"
+    }
+  ],
   "noEngineReferences": false
 }
