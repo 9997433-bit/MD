@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "fpga_bitstream",
+  "description": "Metadata manifest for a Xilinx BIT configuration bitstream, extracted from the file header by scripts/parse_bit_header.py.",
+  "file": {
+    "name": "device.bit",
+    "relative_path": "firmware/device.bit",
+    "file_type": "Xilinx BIT",
+    "size_bytes": 131046,
+    "sha256": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5"
+  },
+  "header": {
+    "format": "Xilinx BIT",
+    "magic": "0ff00ff00ff00ff000",
+    "marker": 1,
+    "header_length_bytes": 94
+  },
+  "design": {
+    "source_design_name": "TopUsb4431.ncd;UserID=0xFFFFFFFF",
+    "build_date": "2011/06/10",
+    "build_time": "12:44:47",
+    "build_timestamp": "2011-06-10T12:44:47"
+  },
+  "target_device": {
+    "part_name": "3s200ft256",
+    "family": "Spartan-3",
+    "device": "XC3S200",
+    "package": "FT256",
+    "description": "Spartan-3 XC3S200, FT256 package"
+  },
+  "bitstream_payload": {
+    "section": "e",
+    "length_bytes": 130952,
+    "length_hex": "0x1ff88",
+    "data_offset": 94,
+    "matches_file_size": true
+  },
+  "header_sections": {
+    "a": {
+      "field": "source_design_name",
+      "declared_length": 33,
+      "value": "TopUsb4431.ncd;UserID=0xFFFFFFFF"
+    },
+    "b": {
+      "field": "part_name",
+      "declared_length": 11,
+      "value": "3s200ft256"
+    },
+    "c": {
+      "field": "build_date",
+      "declared_length": 11,
+      "value": "2011/06/10"
+    },
+    "d": {
+      "field": "build_time",
+      "declared_length": 9,
+      "value": "12:44:47"
+    },
+    "e": {
+      "field": "bitstream_data",
+      "declared_length": 130952,
+      "declared_length_hex": "0x1ff88",
+      "data_offset": 94,
+      "header_length": 94,
+      "matches_file_size": true
+    }
+  },
+  "provenance": {
+    "parser": "scripts/parse_bit_header.py",
+    "generated_by": "scripts/parse_bit_header.py header parse"
+  }
+}
