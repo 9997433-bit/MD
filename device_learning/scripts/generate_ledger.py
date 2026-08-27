@@ -14,16 +14,25 @@ sys.path.insert(0, str(ROOT))
 from catalogs.catalog_arch import ENTRIES as ARCH_ENTRIES
 from catalogs.catalog_bit import ENTRIES as BIT_ENTRIES
 from catalogs.catalog_hw import ENTRIES as HW_ENTRIES
+from catalogs.catalog_learn import ENTRIES as LEARN_ENTRIES
 from catalogs.catalog_ref import ENTRIES as REF_ENTRIES
 from catalogs.catalog_signal import ENTRIES as SIG_ENTRIES
 from catalogs.catalog_usb import ENTRIES as USB_ENTRIES
 
 MANIFESTS = ROOT / "manifests"
-
-
-def load_json(name: str):
-    p = MANIFESTS / name
-    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+FEEDERS = [
+    ["build_manifests.py"],
+    ["parse_bit_header.py", str(ROOT / "firmware" / "device.bit"), "-o", str(MANIFESTS / "bitstream_meta.json")],
+    ["parse_bitstream.py"],
+    ["scan_spartan3_frames.py"],
+    ["analyze_eeprom.py"],
+    ["scan_firmware_stub.py"],
+    ["build_system_map.py"],
+    ["build_photo_index.py"],
+    ["build_crossref.py"],
+    ["ingest_phase_b.py"],
+    ["redact_manifests.py"],
+]
 
 
 def normalize_usb(entry: dict) -> dict:
@@ -41,26 +50,44 @@ def normalize_usb(entry: dict) -> dict:
     }
 
 
-def build_coverage(entries: list[dict]) -> dict:
+def run_feeders() -> None:
+    MANIFESTS.mkdir(parents=True, exist_ok=True)
+    for argv in FEEDERS:
+        script = ROOT / "scripts" / argv[0]
+        if script.exists():
+            subprocess.run([sys.executable, str(script), *argv[1:]], check=False)
+
+
+def load_manifests() -> dict:
+    out = {}
+    for p in sorted(MANIFESTS.glob("*.json")):
+        try:
+            out[p.stem] = json.loads(p.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            out[p.stem] = {"error": "invalid_json"}
+    return out
+
+
+def build_coverage(entries: list[dict], catalogs: dict) -> dict:
     counts: dict[str, int] = {}
     for e in entries:
         counts[e["status"]] = counts.get(e["status"], 0) + 1
     bridges = json.loads((ROOT / "bridge_matrix.json").read_text(encoding="utf-8"))
     stop = {
         "1_no_empty_status": all(e.get("status") for e in entries),
-        "2_all_layers_present": all(
-            any(e["layer"] == layer for e in entries)
-            for layer in ("hw", "bit", "signal", "usb", "ref", "arch")
-        ),
+        "2_all_layers_present": all(len(catalogs.get(l, [])) > 0 for l in ("hw", "bit", "signal", "usb", "ref", "arch", "learn")),
         "3_missing_documented": (ROOT / "OMISSIONS_AND_REMAINING.md").exists(),
-        "4_null_bridges_intact": len(bridges["forced_null_bridges"]) >= 8
-        and all(x["status"] is None for x in bridges["entries"]),
+        "4_null_bridges_intact": len(bridges.get("forced_null_bridges", [])) >= 8
+        and all(x.get("status") is None for x in bridges.get("entries", [])),
         "5_no_false_confirmed_bridges": True,
         "6_phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
+        "7_learning_guide": (ROOT / "LEARNING_GUIDE.md").exists(),
+        "8_no_sensitive_tokens": "topusb" not in json.dumps(load_manifests()).lower(),
     }
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_identifiers": len(entries),
+        "by_layer": {k: len(v) for k, v in catalogs.items()},
         "status_counts": counts,
         "stop_conditions": stop,
         "all_pass": all(stop.values()),
@@ -70,51 +97,33 @@ def build_coverage(entries: list[dict]) -> dict:
 
 
 def main() -> None:
-    MANIFESTS.mkdir(parents=True, exist_ok=True)
-    subprocess.run([sys.executable, str(ROOT / "scripts" / "build_manifests.py")], check=True)
-    subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "parse_bit_header.py"),
-         str(ROOT / "firmware" / "device.bit"), "-o", str(MANIFESTS / "bitstream_meta.json")],
-        check=True,
-    )
-    for script in ("parse_bitstream.py", "scan_spartan3_frames.py", "analyze_eeprom.py", "build_system_map.py", "ingest_phase_b.py"):
-        subprocess.run([sys.executable, str(ROOT / "scripts" / script)], check=False)
-
+    run_feeders()
     usb_norm = [normalize_usb(e) for e in USB_ENTRIES]
-    all_entries = HW_ENTRIES + BIT_ENTRIES + SIG_ENTRIES + usb_norm + REF_ENTRIES + ARCH_ENTRIES
+    catalogs = {
+        "hw": HW_ENTRIES,
+        "bit": BIT_ENTRIES,
+        "signal": SIG_ENTRIES,
+        "usb": usb_norm,
+        "ref": REF_ENTRIES,
+        "arch": ARCH_ENTRIES,
+        "learn": LEARN_ENTRIES,
+    }
+    all_entries = [e for cat in catalogs.values() for e in cat]
     ledger = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
         "phase": "A_deep_B_scaffolded",
-        "catalogs": {
-            "hw": HW_ENTRIES,
-            "bit": BIT_ENTRIES,
-            "signal": SIG_ENTRIES,
-            "usb": usb_norm,
-            "ref": REF_ENTRIES,
-            "arch": ARCH_ENTRIES,
-        },
-        "manifests": {
-            "file_hashes": load_json("file_hashes.json"),
-            "bitstream_meta": load_json("bitstream_meta.json"),
-            "frame_summary": load_json("frame_summary.json"),
-            "frame_deep": load_json("frame_deep.json"),
-            "hardware_bom": load_json("hardware_bom.json"),
-            "pin_hypothesis": load_json("pin_hypothesis.json"),
-            "phase_b_status": load_json("phase_b_status.json"),
-            "eeprom_layout_ref": load_json("eeprom_layout_ref.json"),
-            "eeprom_meta": load_json("eeprom_meta.json"),
-            "system_map": load_json("system_map.json"),
-        },
+        "catalogs": catalogs,
+        "manifests": load_manifests(),
     }
     (ROOT / "EvidenceLedger.json").write_text(
         json.dumps(ledger, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    coverage = build_coverage(all_entries)
+    coverage = build_coverage(all_entries, catalogs)
     (ROOT / "coverage.json").write_text(
         json.dumps(coverage, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    print(f"Ledger: {len(all_entries)} identifiers")
+    print(f"Ledger: {coverage['total_identifiers']} identifiers")
     print(f"Coverage: {coverage['status_counts']}")
     print(f"Stop conditions pass: {coverage['all_pass']}")
 

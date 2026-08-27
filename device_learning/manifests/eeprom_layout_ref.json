@@ -16,8 +16,14 @@
       "offset": 0,
       "offset_hex": "0x00",
       "size_bytes": 1,
-      "applies_to": ["C0", "C2"],
-      "expected_values": ["0xC0", "0xC2"],
+      "applies_to": [
+        "C0",
+        "C2"
+      ],
+      "expected_values": [
+        "0xC0",
+        "0xC2"
+      ],
       "description": "Leading boot-configuration byte that selects the EEPROM boot format (0xC0 identifier-only, 0xC2 firmware load). Any other value means the controller ignores the EEPROM."
     },
     {
@@ -26,7 +32,10 @@
       "offset_hex": "0x01",
       "size_bytes": 2,
       "endianness": "little",
-      "applies_to": ["C0", "C2"],
+      "applies_to": [
+        "C0",
+        "C2"
+      ],
       "description": "USB Vendor ID override word (LSB at 0x01, MSB at 0x02)."
     },
     {
@@ -35,7 +44,10 @@
       "offset_hex": "0x03",
       "size_bytes": 2,
       "endianness": "little",
-      "applies_to": ["C0", "C2"],
+      "applies_to": [
+        "C0",
+        "C2"
+      ],
       "description": "USB Product ID override word (LSB at 0x03, MSB at 0x04)."
     },
     {
@@ -44,7 +56,10 @@
       "offset_hex": "0x05",
       "size_bytes": 2,
       "endianness": "little",
-      "applies_to": ["C0", "C2"],
+      "applies_to": [
+        "C0",
+        "C2"
+      ],
       "description": "USB Device release / Device ID override word (LSB at 0x05, MSB at 0x06)."
     },
     {
@@ -52,7 +67,10 @@
       "offset": 7,
       "offset_hex": "0x07",
       "size_bytes": 1,
-      "applies_to": ["C0", "C2"],
+      "applies_to": [
+        "C0",
+        "C2"
+      ],
       "description": "Configuration byte holding the I2C bus-speed select bit and the disconnect (DISCON) control bit as defined in the public datasheet."
     },
     {
@@ -61,7 +79,9 @@
       "offset_hex": "0x08",
       "size_bytes": 2,
       "endianness": "big",
-      "applies_to": ["C2"],
+      "applies_to": [
+        "C2"
+      ],
       "description": "First C2 firmware data-record length word (MSB first). The high bit of this word on the final record flags the end of the record list."
     },
     {
@@ -70,7 +90,9 @@
       "offset_hex": "0x0A",
       "size_bytes": 2,
       "endianness": "big",
-      "applies_to": ["C2"],
+      "applies_to": [
+        "C2"
+      ],
       "description": "First C2 firmware data-record load address word (MSB first): the internal-RAM destination for the following payload bytes."
     },
     {
@@ -78,13 +100,17 @@
       "offset": 12,
       "offset_hex": "0x0C",
       "size_bytes": "variable (data_record_length bytes)",
-      "applies_to": ["C2"],
+      "applies_to": [
+        "C2"
+      ],
       "description": "Payload bytes of the first C2 firmware data record. Records repeat (length, address, payload) until the final record is reached."
     },
     {
       "name": "final_record",
       "offset": "variable",
-      "applies_to": ["C2"],
+      "applies_to": [
+        "C2"
+      ],
       "final_record_length_word": "0x8001",
       "final_record_address": "0xE600",
       "size_bytes": 1,

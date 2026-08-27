@@ -13,7 +13,7 @@
       "a": {
         "field": "source_design_name",
         "declared_length": 33,
-        "value": "TopUsb4431.ncd;UserID=0xFFFFFFFF"
+        "value": "[redacted].ncd;UserID=0xFFFFFFFF"
       },
       "b": {
         "field": "part_name",
@@ -39,7 +39,7 @@
         "matches_file_size": true
       }
     },
-    "source_design_name": "TopUsb4431.ncd;UserID=0xFFFFFFFF",
+    "source_design_name": "[redacted].ncd;UserID=0xFFFFFFFF",
     "part_name": "3s200ft256",
     "part": {
       "raw": "3s200ft256",

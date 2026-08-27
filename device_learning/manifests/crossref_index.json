@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-08-27T15:23:54.576250+00:00",
+  "layer_counts": {
+    "hw": 32,
+    "bit": 78,
+    "signal": 19,
+    "usb": 33,
+    "ref": 24,
+    "arch": 15
+  },
+  "themes": {
+    "usb_path": [
+      "HW-003-USB-CONTROLLER",
+      "REF-USB-SLAVE-FIFO-SLRD",
+      "ARCH-002-DATA-PATH",
+      "PROTO-EP-BULK-IN"
+    ],
+    "adc_path": [
+      "HW-005-ADC-PRIMARY",
+      "REF-ADC-SPI-DOUT",
+      "SIG-003-PATH-ADC",
+      "NODE-ADC"
+    ],
+    "fpga_config": [
+      "BIT-IDCODE",
+      "BIT-CMD-SEQUENCE",
+      "ARCH-003-CONFIG-CHAIN",
+      "ARCH-015-BIT-LOAD"
+    ],
+    "relay_path": [
+      "HW-008-RELAY-ARRAY",
+      "SIG-002-RELAY-MATRIX",
+      "BRG-013",
+      "ARCH-013-RELAY-CTRL"
+    ],
+    "eeprom_boot": [
+      "FW-EEPROM-IMAGE",
+      "FW-EEPROM-LAYOUT-REF",
+      "ARCH-004-USB-BOOT",
+      "REF-EEPROM-I2C-SCL"
+    ]
+  },
+  "pin_bridges": [
+    "BRG-001",
+    "BRG-002",
+    "BRG-003",
+    "BRG-004",
+    "BRG-005",
+    "BRG-006",
+    "BRG-007",
+    "BRG-008",
+    "BRG-009",
+    "BRG-010",
+    "BRG-011",
+    "BRG-012",
+    "BRG-013",
+    "BRG-014",
+    "BRG-015",
+    "BRG-016",
+    "BRG-017",
+    "BRG-018",
+    "BRG-019",
+    "BRG-020",
+    "BRG-021",
+    "BRG-022"
+  ],
+  "total_identifiers": 201
+}

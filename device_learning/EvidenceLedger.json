@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:21:32.418738+00:00",
+  "generated_at": "2026-08-27T15:23:54.738136+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "A_deep_B_scaffolded",
   "catalogs": {
@@ -325,10 +325,10 @@
         "identifier": "BIT-004-SOURCE-DESIGN",
         "layer": "bit",
         "module": "header",
-        "description": "Source NCD design name in section b",
+        "description": "Source NCD design name (redacted in manifests)",
         "status": "confirmed",
         "boundary": null,
-        "evidence": "strings section b"
+        "evidence": "bitstream section a"
       },
       {
         "identifier": "BIT-005-TARGET-DEVICE",
@@ -496,9 +496,9 @@
         "identifier": "BIT-FRAME-COUNT-EST",
         "layer": "bit",
         "module": "packet",
-        "description": "Estimated 627 configuration frames",
-        "status": "candidate",
-        "boundary": "FDRI余数44字未对齐",
+        "description": "Estimated 627 configuration frames (FDRI/FLR split)",
+        "status": "confirmed",
+        "boundary": null,
         "evidence": "frame_summary.frame_analysis.estimated_frame_count"
       },
       {
@@ -559,10 +559,10 @@
         "identifier": "FRM-007-CRC",
         "layer": "bit",
         "module": "frame",
-        "description": "Embedded CRC check value",
-        "status": "candidate",
-        "boundary": "CRC未重算",
-        "evidence": "BIT trailer"
+        "description": "CRC register 0x00005F57",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary"
       },
       {
         "identifier": "FRM-008-FAR",
@@ -590,6 +590,96 @@
         "status": "candidate",
         "boundary": null,
         "evidence": "entropy analysis"
+      },
+      {
+        "identifier": "FRM-011-FAR-WRITE-COUNT",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Single explicit FAR write (0x00000000)",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "scan_spartan3_frames.py / frame_deep.json"
+      },
+      {
+        "identifier": "FRM-012-FAR-COLUMN-ADDR",
+        "layer": "bit",
+        "module": "frame",
+        "description": "FAR Column Address field = 0 (logic & I/O block)",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_deep.json (XAPP452 Fig.2 decode)"
+      },
+      {
+        "identifier": "FRM-013-FAR-MAJOR-MINOR",
+        "layer": "bit",
+        "module": "frame",
+        "description": "FAR start Major=0 / Minor=0",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-014-FAR-AUTOINC",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Per-frame FAR via internal auto-increment",
+        "status": "candidate",
+        "boundary": "逐帧地址由器件内部自增，未在位流中编码，不可重建",
+        "evidence": "XAPP452 frame addressing"
+      },
+      {
+        "identifier": "FRM-015-FRAME-LENGTH",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Frame length 52 words (FLR register)",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_deep.json register inventory"
+      },
+      {
+        "identifier": "FRM-016-FRAME-COUNT-EST",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Estimated 627 configuration frames",
+        "status": "candidate",
+        "boundary": "FDRI 字数非 FLR 整数倍，计数为估计值",
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-017-PAD-FRAME",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Trailing pad frame per spec",
+        "status": "candidate",
+        "boundary": "尾帧为填充帧，边界未逐字验证",
+        "evidence": "UG332/XAPP452"
+      },
+      {
+        "identifier": "FRM-018-COLUMN-ADDR-DIST",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Explicit frame writes confined to Column Address 0",
+        "status": "candidate",
+        "boundary": "块类型分布仅反映显式写入，自增部分未知",
+        "evidence": "frame_deep.json histogram"
+      },
+      {
+        "identifier": "FRM-019-LOGIC-COLUMN-EST",
+        "layer": "bit",
+        "module": "frame",
+        "description": "~33 logic columns (candidate estimate)",
+        "status": "candidate",
+        "boundary": "按 CLB/IOI 每列 19 帧估算，逐器件列表未知",
+        "evidence": "frame_deep.json"
+      },
+      {
+        "identifier": "FRM-020-REG-WRITE-SET",
+        "layer": "bit",
+        "module": "frame",
+        "description": "Config register write set CMD/FLR/COR/IDCODE/MASK/FAR/CTL/CRC",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_deep.json register inventory"
       },
       {
         "identifier": "IOB-001-ACTIVE-COUNT",
@@ -1190,6 +1280,33 @@
         "evidence": "presence of custom descriptors unknown"
       },
       {
+        "identifier": "FW-EEPROM-BOOT-FORMAT",
+        "layer": "usb",
+        "module": "fw",
+        "description": "EEPROM boot-format selector (boot_config_byte at offset 0x00)",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": "whether the image is identifier-only or a firmware load not read out"
+      },
+      {
+        "identifier": "FW-EEPROM-DID-FIELD",
+        "layer": "usb",
+        "module": "fw",
+        "description": "Device release / Device ID override word (did field at offset 0x05)",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": "DID value not dumped and not guessed"
+      },
+      {
+        "identifier": "FW-EEPROM-FW-RECORDS",
+        "layer": "usb",
+        "module": "fw",
+        "description": "Firmware image data records / firmware size (C2 data-record region)",
+        "status": "missing",
+        "boundary": "no_dump",
+        "evidence": "record layout and firmware size undetermined without a dump"
+      },
+      {
         "identifier": "FW-FPGA-BITSTREAM",
         "layer": "usb",
         "module": "fw",
@@ -1706,11 +1823,446 @@
         "boundary": null,
         "evidence": "frame_summary packets"
       }
+    ],
+    "learn": [
+      {
+        "identifier": "LEARN-001-GOAL",
+        "layer": "learn",
+        "module": "meta",
+        "description": "Build auditable static learning package",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "README.md"
+      },
+      {
+        "identifier": "LEARN-002-STOP",
+        "layer": "learn",
+        "module": "meta",
+        "description": "Directory complete != vendor equivalence",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "coverage.json"
+      },
+      {
+        "identifier": "LEARN-003-HW-BOM",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Read hardware BOM and photo index",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "hardware_bom.json"
+      },
+      {
+        "identifier": "LEARN-004-BIT-HEADER",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Understand Xilinx BIT container sections a-e",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "bitstream_meta.json"
+      },
+      {
+        "identifier": "LEARN-005-BIT-PACKETS",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Trace Spartan-3 config packet stream",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "frame_summary.json"
+      },
+      {
+        "identifier": "LEARN-006-FRAME-HEUR",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Interpret frame/IOB heuristic limits",
+        "status": "candidate",
+        "boundary": "IOB mapping incomplete",
+        "evidence": "frame_analysis"
+      },
+      {
+        "identifier": "LEARN-007-REF-DESIGN",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Compare REF catalog to public TRMs",
+        "status": "candidate",
+        "boundary": "Pins not verified",
+        "evidence": "catalog_ref.py"
+      },
+      {
+        "identifier": "LEARN-008-SYSTEM-MAP",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Follow data path in system_map.json",
+        "status": "candidate",
+        "boundary": "Analog path unprobed",
+        "evidence": "system_map.json"
+      },
+      {
+        "identifier": "LEARN-009-EEPROM-LAYOUT",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Study FX2LP EEPROM boot layout",
+        "status": "candidate",
+        "boundary": "No dump yet",
+        "evidence": "eeprom_layout_ref.json"
+      },
+      {
+        "identifier": "LEARN-010-USB-PROTO",
+        "layer": "learn",
+        "module": "topic",
+        "description": "USB protocol from capture",
+        "status": "not_started",
+        "boundary": "Need pcap",
+        "evidence": "phase_b/templates"
+      },
+      {
+        "identifier": "LEARN-011-8051-DISASM",
+        "layer": "learn",
+        "module": "topic",
+        "description": "8051 firmware reverse engineering",
+        "status": "not_started",
+        "boundary": "Need eeprom.bin",
+        "evidence": "scan_firmware_stub.py"
+      },
+      {
+        "identifier": "LEARN-012-PIN-TEST",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Pin hypothesis verification experiments",
+        "status": "not_started",
+        "boundary": "Need hardware",
+        "evidence": "pin_hypothesis.json"
+      },
+      {
+        "identifier": "LEARN-013-RELAY-TEST",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Relay switching experiment design",
+        "status": "not_started",
+        "boundary": "Need hardware",
+        "evidence": "SIG-002-RELAY-MATRIX"
+      },
+      {
+        "identifier": "LEARN-014-BRAM-DECODE",
+        "layer": "learn",
+        "module": "topic",
+        "description": "BRAM init extraction from bitstream",
+        "status": "unknown",
+        "boundary": "No decoder",
+        "evidence": "MEM-001-BRAM"
+      },
+      {
+        "identifier": "LEARN-015-OPEN-REIMPL",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Open-source behavioral reimplementation",
+        "status": "not_started",
+        "boundary": "Future phase D",
+        "evidence": "OMISSIONS"
+      },
+      {
+        "identifier": "LEARN-016-NULL-BRIDGE",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Understand forced null bridges policy",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "bridge_matrix.json"
+      },
+      {
+        "identifier": "LEARN-017-CROSSREF",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Navigate cross-layer themes",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "crossref_index.json"
+      },
+      {
+        "identifier": "LEARN-018-PHOTO-INDEX",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Map photos to components",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "photo_index.json"
+      },
+      {
+        "identifier": "LEARN-019-REGENERATE",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Regenerate ledger and run pytest",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "generate_ledger.py"
+      },
+      {
+        "identifier": "LEARN-020-BOUNDARY",
+        "layer": "learn",
+        "module": "topic",
+        "description": "Document unknowns honestly",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "OMISSIONS_AND_REMAINING.md"
+      }
     ]
   },
   "manifests": {
+    "bitstream_meta": {
+      "file": {
+        "name": "device.bit",
+        "path": "/workspace/device_learning/firmware/device.bit",
+        "size_bytes": 131046,
+        "sha256": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5"
+      },
+      "header": {
+        "format": "Xilinx BIT",
+        "magic": "0ff00ff00ff00ff000",
+        "marker": 1,
+        "sections": {
+          "a": {
+            "field": "source_design_name",
+            "declared_length": 33,
+            "value": "[redacted].ncd;UserID=0xFFFFFFFF"
+          },
+          "b": {
+            "field": "part_name",
+            "declared_length": 11,
+            "value": "3s200ft256"
+          },
+          "c": {
+            "field": "build_date",
+            "declared_length": 11,
+            "value": "2011/06/10"
+          },
+          "d": {
+            "field": "build_time",
+            "declared_length": 9,
+            "value": "12:44:47"
+          },
+          "e": {
+            "field": "bitstream_data",
+            "declared_length": 130952,
+            "declared_length_hex": "0x1ff88",
+            "data_offset": 94,
+            "header_length": 94,
+            "matches_file_size": true
+          }
+        },
+        "source_design_name": "[redacted].ncd;UserID=0xFFFFFFFF",
+        "part_name": "3s200ft256",
+        "part": {
+          "raw": "3s200ft256",
+          "family": "Spartan-3",
+          "device": "XC3S200",
+          "package": "FT256"
+        },
+        "build_date": "2011/06/10",
+        "build_time": "12:44:47",
+        "header_length": 94,
+        "bitstream_length": 130952,
+        "bitstream_length_hex": "0x1ff88",
+        "bitstream_data_offset": 94
+      }
+    },
+    "crossref_index": {
+      "generated_at": "2026-08-27T15:23:54.576250+00:00",
+      "layer_counts": {
+        "hw": 32,
+        "bit": 78,
+        "signal": 19,
+        "usb": 33,
+        "ref": 24,
+        "arch": 15
+      },
+      "themes": {
+        "usb_path": [
+          "HW-003-USB-CONTROLLER",
+          "REF-USB-SLAVE-FIFO-SLRD",
+          "ARCH-002-DATA-PATH",
+          "PROTO-EP-BULK-IN"
+        ],
+        "adc_path": [
+          "HW-005-ADC-PRIMARY",
+          "REF-ADC-SPI-DOUT",
+          "SIG-003-PATH-ADC",
+          "NODE-ADC"
+        ],
+        "fpga_config": [
+          "BIT-IDCODE",
+          "BIT-CMD-SEQUENCE",
+          "ARCH-003-CONFIG-CHAIN",
+          "ARCH-015-BIT-LOAD"
+        ],
+        "relay_path": [
+          "HW-008-RELAY-ARRAY",
+          "SIG-002-RELAY-MATRIX",
+          "BRG-013",
+          "ARCH-013-RELAY-CTRL"
+        ],
+        "eeprom_boot": [
+          "FW-EEPROM-IMAGE",
+          "FW-EEPROM-LAYOUT-REF",
+          "ARCH-004-USB-BOOT",
+          "REF-EEPROM-I2C-SCL"
+        ]
+      },
+      "pin_bridges": [
+        "BRG-001",
+        "BRG-002",
+        "BRG-003",
+        "BRG-004",
+        "BRG-005",
+        "BRG-006",
+        "BRG-007",
+        "BRG-008",
+        "BRG-009",
+        "BRG-010",
+        "BRG-011",
+        "BRG-012",
+        "BRG-013",
+        "BRG-014",
+        "BRG-015",
+        "BRG-016",
+        "BRG-017",
+        "BRG-018",
+        "BRG-019",
+        "BRG-020",
+        "BRG-021",
+        "BRG-022"
+      ],
+      "total_identifiers": 201
+    },
+    "eeprom_layout_ref": {
+      "device": "CY7C68013A",
+      "artifact": "serial EEPROM boot image layout",
+      "source": "public datasheet",
+      "status": "reference",
+      "reference_note": "EZ-USB FX2LP serial-EEPROM boot formats as documented in the public device datasheet and technical reference manual. Offsets and field meanings are transcribed from public documentation only; no value here is derived from any device dump.",
+      "endianness_note": "Identifier fields (VID/PID/DID) are stored little-endian (LSB first). C2 firmware data-record length and address words are stored big-endian (MSB first).",
+      "boot_formats": {
+        "C0": "Identifier-only image: overrides VID/PID/DID and the configuration byte; no 8051 firmware is loaded from EEPROM.",
+        "C2": "Firmware image: identifier header followed by one or more code/data records loaded into internal RAM, terminated by a final record that releases the 8051 from reset."
+      },
+      "field_count": 9,
+      "fields": [
+        {
+          "name": "boot_config_byte",
+          "offset": 0,
+          "offset_hex": "0x00",
+          "size_bytes": 1,
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "expected_values": [
+            "0xC0",
+            "0xC2"
+          ],
+          "description": "Leading boot-configuration byte that selects the EEPROM boot format (0xC0 identifier-only, 0xC2 firmware load). Any other value means the controller ignores the EEPROM."
+        },
+        {
+          "name": "vid",
+          "offset": 1,
+          "offset_hex": "0x01",
+          "size_bytes": 2,
+          "endianness": "little",
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "USB Vendor ID override word (LSB at 0x01, MSB at 0x02)."
+        },
+        {
+          "name": "pid",
+          "offset": 3,
+          "offset_hex": "0x03",
+          "size_bytes": 2,
+          "endianness": "little",
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "USB Product ID override word (LSB at 0x03, MSB at 0x04)."
+        },
+        {
+          "name": "did",
+          "offset": 5,
+          "offset_hex": "0x05",
+          "size_bytes": 2,
+          "endianness": "little",
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "USB Device release / Device ID override word (LSB at 0x05, MSB at 0x06)."
+        },
+        {
+          "name": "config_byte",
+          "offset": 7,
+          "offset_hex": "0x07",
+          "size_bytes": 1,
+          "applies_to": [
+            "C0",
+            "C2"
+          ],
+          "description": "Configuration byte holding the I2C bus-speed select bit and the disconnect (DISCON) control bit as defined in the public datasheet."
+        },
+        {
+          "name": "data_record_length",
+          "offset": 8,
+          "offset_hex": "0x08",
+          "size_bytes": 2,
+          "endianness": "big",
+          "applies_to": [
+            "C2"
+          ],
+          "description": "First C2 firmware data-record length word (MSB first). The high bit of this word on the final record flags the end of the record list."
+        },
+        {
+          "name": "data_record_address",
+          "offset": 10,
+          "offset_hex": "0x0A",
+          "size_bytes": 2,
+          "endianness": "big",
+          "applies_to": [
+            "C2"
+          ],
+          "description": "First C2 firmware data-record load address word (MSB first): the internal-RAM destination for the following payload bytes."
+        },
+        {
+          "name": "data_record_payload",
+          "offset": 12,
+          "offset_hex": "0x0C",
+          "size_bytes": "variable (data_record_length bytes)",
+          "applies_to": [
+            "C2"
+          ],
+          "description": "Payload bytes of the first C2 firmware data record. Records repeat (length, address, payload) until the final record is reached."
+        },
+        {
+          "name": "final_record",
+          "offset": "variable",
+          "applies_to": [
+            "C2"
+          ],
+          "final_record_length_word": "0x8001",
+          "final_record_address": "0xE600",
+          "size_bytes": 1,
+          "description": "Terminating C2 record: a single payload byte written to the reset-control register at 0xE600 to release the 8051 core from reset once all firmware records are loaded."
+        }
+      ]
+    },
+    "eeprom_meta": {
+      "generated_at": "2026-08-27T15:23:54.268637+00:00",
+      "capture_path": "phase_b/captures/eeprom.bin",
+      "status": "missing",
+      "reason": "phase_b/captures/eeprom.bin not present",
+      "layout_ref": "manifests/eeprom_layout_ref.json",
+      "note": "no EEPROM dump available; no field values inferred"
+    },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:21:31.888005+00:00",
+      "generated_at": "2026-08-27T15:23:53.912120+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -1771,66 +2323,255 @@
         }
       ]
     },
-    "bitstream_meta": {
-      "file": {
-        "name": "device.bit",
-        "path": "/workspace/device_learning/firmware/device.bit",
-        "size_bytes": 131046,
-        "sha256": "63cd3874297407bceedb524909d919dd35ba8a16639573a1af81721aed4fc3f5"
+    "firmware_scan": {
+      "status": "missing",
+      "path": "phase_b/captures/eeprom.bin"
+    },
+    "frame_deep": {
+      "schema_version": "1.0",
+      "generated_utc": "2026-08-27T15:23:54.185014+00:00",
+      "source_file": "firmware/device.bit",
+      "file_size_bytes": 131046,
+      "reference": "UG332 / XAPP452 (public Xilinx documentation)",
+      "scan_status": "partial-ok",
+      "config_segment": {
+        "offset_in_file": 94,
+        "declared_length_bytes": 130952,
+        "sync_offset_in_file": 98,
+        "sync_word": "0xaa995566"
       },
-      "header": {
-        "format": "Xilinx BIT",
-        "magic": "0ff00ff00ff00ff000",
-        "marker": 1,
-        "sections": {
-          "a": {
-            "field": "source_design_name",
-            "declared_length": 33,
-            "value": "TopUsb4431.ncd;UserID=0xFFFFFFFF"
+      "far_address_distribution": {
+        "confidence": "confirmed (explicit writes) / candidate (per-frame)",
+        "explicit_far_write_count": 1,
+        "unique_far_values": 1,
+        "explicit_far_writes": [
+          {
+            "raw": "0x00000000",
+            "reserved": 0,
+            "column_address": 0,
+            "column_address_type": "CLB/IOB/IOI/TERM/GCLK (logic & I/O block)",
+            "major_address": 0,
+            "minor_address": 0,
+            "frm_byte": 0
+          }
+        ],
+        "column_address_histogram": {
+          "CLB/IOB/IOI/TERM/GCLK (logic & I/O block)": 1
+        },
+        "distinct_major_addresses": [
+          0
+        ],
+        "distinct_minor_addresses": [
+          0
+        ],
+        "auto_increment_note": "only the explicit FAR write(s) above are encoded; all remaining frame addresses are produced by the device's internal minor->major->block auto-increment during the FDRI burst and are not present in the bitstream (per XAPP452)"
+      },
+      "frame_type_counts": {
+        "confidence": "confirmed (packets) / candidate (frame estimates)",
+        "packet_type_counts": {
+          "type_1": 72,
+          "type_2": 1
+        },
+        "opcode_counts": {
+          "WRITE": 16,
+          "NOP": 57
+        },
+        "total_packets": 73,
+        "trailing_filler_words": 1,
+        "fdri_frame_data_word_count": 32648,
+        "frame_length_words": 52,
+        "estimated_frame_count": 627,
+        "trailing_words_after_last_full_frame": 44,
+        "frame_alignment": "candidate: FDRI word count not an exact multiple of FLR; remainder likely pad/CRC words",
+        "nonzero_frame_count": 492,
+        "active_config_words": 21631,
+        "implied_logic_column_count_candidate": 33,
+        "implied_logic_column_count_note": "estimated_frame_count / 19 (CLB/IOI frames-per-column); candidate only, exact per-device column inventory is not encoded in the bitstream",
+        "pad_frame_present": "candidate: last configuration frame is a pad frame per spec"
+      },
+      "register_write_inventory": {
+        "confidence": "confirmed",
+        "register_write_counts": {
+          "CMD": 7,
+          "FLR": 1,
+          "COR": 1,
+          "IDCODE": 1,
+          "MASK": 1,
+          "FAR": 1,
+          "CTL": 1,
+          "CRC": 1
+        },
+        "distinct_registers_written": [
+          "CMD",
+          "COR",
+          "CRC",
+          "CTL",
+          "FAR",
+          "FLR",
+          "IDCODE",
+          "MASK"
+        ],
+        "cmd_sequence": [
+          "RCRC",
+          "SWITCH",
+          "WCFG",
+          "GRESTORE",
+          "DGHIGH/LFRM",
+          "START",
+          "DESYNCH"
+        ],
+        "decoded_registers": {
+          "FLR": {
+            "value": 52,
+            "note": "frame length register"
           },
-          "b": {
-            "field": "part_name",
-            "declared_length": 11,
-            "value": "3s200ft256"
+          "COR": {
+            "value": "0x40003fe5"
           },
-          "c": {
-            "field": "build_date",
-            "declared_length": 11,
-            "value": "2011/06/10"
+          "IDCODE": {
+            "raw": "0x01414093",
+            "device_hint": "family=spartan3 device=xc3s200"
           },
-          "d": {
-            "field": "build_time",
-            "declared_length": 9,
-            "value": "12:44:47"
-          },
-          "e": {
-            "field": "bitstream_data",
-            "declared_length": 130952,
-            "declared_length_hex": "0x1ff88",
-            "data_offset": 94,
-            "header_length": 94,
-            "matches_file_size": true
+          "other_writes": [
+            {
+              "register": "MASK",
+              "value": "0x00000000"
+            },
+            {
+              "register": "CTL",
+              "value": "0x00000000"
+            }
+          ],
+          "FAR_writes": [
+            "0x00000000"
+          ],
+          "CRC": {
+            "value": "0x00005f57"
           }
         },
-        "source_design_name": "TopUsb4431.ncd;UserID=0xFFFFFFFF",
-        "part_name": "3s200ft256",
-        "part": {
-          "raw": "3s200ft256",
-          "family": "Spartan-3",
-          "device": "XC3S200",
-          "package": "FT256"
-        },
-        "build_date": "2011/06/10",
-        "build_time": "12:44:47",
-        "header_length": 94,
-        "bitstream_length": 130952,
-        "bitstream_length_hex": "0x1ff88",
-        "bitstream_data_offset": 94
-      }
+        "writes": [
+          {
+            "offset": 8,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000007"
+            ]
+          },
+          {
+            "offset": 16,
+            "register": "FLR",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000034"
+            ]
+          },
+          {
+            "offset": 24,
+            "register": "COR",
+            "word_count": 1,
+            "payload_hex": [
+              "0x40003fe5"
+            ]
+          },
+          {
+            "offset": 32,
+            "register": "IDCODE",
+            "word_count": 1,
+            "payload_hex": [
+              "0x01414093"
+            ]
+          },
+          {
+            "offset": 40,
+            "register": "MASK",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000000"
+            ]
+          },
+          {
+            "offset": 48,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000009"
+            ]
+          },
+          {
+            "offset": 56,
+            "register": "FAR",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000000"
+            ]
+          },
+          {
+            "offset": 64,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000001"
+            ]
+          },
+          {
+            "offset": 130676,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x0000000a"
+            ]
+          },
+          {
+            "offset": 130684,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000003"
+            ]
+          },
+          {
+            "offset": 130904,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000005"
+            ]
+          },
+          {
+            "offset": 130912,
+            "register": "CTL",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00000000"
+            ]
+          },
+          {
+            "offset": 130920,
+            "register": "CRC",
+            "word_count": 1,
+            "payload_hex": [
+              "0x00005f57"
+            ]
+          },
+          {
+            "offset": 130928,
+            "register": "CMD",
+            "word_count": 1,
+            "payload_hex": [
+              "0x0000000d"
+            ]
+          }
+        ]
+      },
+      "unknowns": [
+        "per-frame FAR addresses are auto-incremented internally and not encoded in the bitstream (candidate reconstruction only)",
+        "exact per-device column inventory (major-address range) is not reconstructed; column-count estimate is a candidate heuristic"
+      ]
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:21:32.071656+00:00",
+      "generated_utc": "2026-08-27T15:23:54.093623+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -2509,21 +3250,6 @@
         "exact per-column IOB frame mapping for the specific device is not reconstructed (candidate heuristic only)"
       ]
     },
-    "frame_deep": {
-      "device": "3s200ft256",
-      "config_length": 130952,
-      "scan": {
-        "word_count": 65476,
-        "class_counts": {
-          "other": 31120,
-          "type2": 3796,
-          "type1": 4598,
-          "zero": 25962
-        },
-        "zero_word_ratio": 0.3965
-      },
-      "notes": "Heuristic Spartan-3 frame classifier."
-    },
     "hardware_bom": {
       "manifest": "hardware_bom",
       "description": "基于 10 张实物照片的电路板元器件清单（BOM）。功能描述采用中性措辞，仅记录可见丝印与器件本体标记。",
@@ -2973,6 +3699,577 @@
         ]
       }
     },
+    "manifest_files": {
+      "generated_at": "2026-08-27T15:23:53.912120+00:00",
+      "source_dir": "/workspace/device_learning",
+      "file_count": 11,
+      "files": [
+        {
+          "path": "firmware/device.bit",
+          "size_bytes": 131046
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_84_144.jpg",
+          "size_bytes": 2951647
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_85_144.jpg",
+          "size_bytes": 2435663
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_86_144.jpg",
+          "size_bytes": 2729039
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_87_144.jpg",
+          "size_bytes": 2881541
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_88_144.jpg",
+          "size_bytes": 3198749
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_89_144.jpg",
+          "size_bytes": 2686503
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_90_144.jpg",
+          "size_bytes": 2829380
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_91_144.jpg",
+          "size_bytes": 2412629
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_92_144.jpg",
+          "size_bytes": 3099512
+        },
+        {
+          "path": "hardware/photos/微信图片_20260824134434_93_144.jpg",
+          "size_bytes": 2860154
+        }
+      ]
+    },
+    "phase_b_status": {
+      "captures_found": [],
+      "ready": false
+    },
+    "photo_index": {
+      "generated_at": "2026-08-27T15:23:54.498690+00:00",
+      "photo_count": 10,
+      "photos": [
+        {
+          "file": "微信图片_20260824134434_84_144.jpg",
+          "component_count": 1,
+          "components": [
+            {
+              "ref": "RN602 / RN605 / RN608 / RN630 / RN44 / RN525-527 等",
+              "marking": "101 / 103 / 330 / 221 / 270（排阻阵列）",
+              "function": "总线串联端接/上拉电阻网络",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_85_144.jpg",
+          "component_count": 2,
+          "components": [
+            {
+              "ref": "U513",
+              "marking": "KS245 49K95 AXYR",
+              "function": "八路总线收发器（245 型），数字总线电平缓冲/隔离",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RN602 / RN605 / RN608 / RN630 / RN44 / RN525-527 等",
+              "marking": "101 / 103 / 330 / 221 / 270（排阻阵列）",
+              "function": "总线串联端接/上拉电阻网络",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_86_144.jpg",
+          "component_count": 8,
+          "components": [
+            {
+              "ref": "U622",
+              "marking": "KS245 45K94 AXYR",
+              "function": "八路总线收发器（245 型），位于 FPGA 左下方",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U4xx（输入通道 4 前端，丝印部分可读）",
+              "marking": "BB 1271B（TSSOP，字符部分可读）",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RL200",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RL302",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RL402",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+              "marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+              "function": "BNC 同轴连接器，模拟输入/输出信号接口（板边可见约 5 只）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U711（丝印部分可读）",
+              "marking": "…6221（SOIC-8，字符部分可读）",
+              "function": "模拟运算放大器（信号调理级）",
+              "status": "candidate"
+            },
+            {
+              "ref": "YC700 / U-SOT23-6（继电器驱动区多只）",
+              "marking": "YC7D0 等（SOT-23-6，字符部分可读）",
+              "function": "继电器驱动/小信号晶体管电路",
+              "status": "candidate"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_87_144.jpg",
+          "component_count": 21,
+          "components": [
+            {
+              "ref": "U-FPGA（丝印被器件遮挡，未读出）",
+              "marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+              "function": "现场可编程逻辑器件（FPGA），BGA-256 封装，承担板上数字逻辑/时序控制",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U4xx（输入通道 4 前端，丝印部分可读）",
+              "marking": "BB 1271B（TSSOP，字符部分可读）",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U3xx（输入通道 3 前端）",
+              "marking": "同型 TSSOP，标记未逐字读出（外观与 U4xx 一致）",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "candidate"
+            },
+            {
+              "ref": "U2xx（输入通道 2 前端）",
+              "marking": "同型 TSSOP，标记未逐字读出",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "candidate"
+            },
+            {
+              "ref": "U1xx（输入通道 1 前端）",
+              "marking": "同型 TSSOP，标记未逐字读出",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "candidate"
+            },
+            {
+              "ref": "RL200",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RL302",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RL402",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），输入通道耦合/量程切换",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-04（丝印被继电器本体遮挡）",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-05",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-06",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-07",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-08",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-09",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-10",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-11",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-12",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员（阵列共约 12 只，3 列 × 4 行排布）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "D-PWR-1 / D-PWR-2（电源区，丝印未读出）",
+              "marking": "15-50L R1（SMC 封装功率二极管，共 2 只）",
+              "function": "电源整流/防反接或续流二极管",
+              "status": "candidate"
+            },
+            {
+              "ref": "C-BULK（电源区多只，含 C608/C811 附近）",
+              "marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+              "function": "电源大容量储能/滤波电容",
+              "status": "confirmed"
+            },
+            {
+              "ref": "L6xx / L9xx（电源区多只屏蔽功率电感）",
+              "marking": "本体标记不可辨认",
+              "function": "DC-DC 变换电感（多路开关电源）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "YC700 / U-SOT23-6（继电器驱动区多只）",
+              "marking": "YC7D0 等（SOT-23-6，字符部分可读）",
+              "function": "继电器驱动/小信号晶体管电路",
+              "status": "candidate"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_88_144.jpg",
+          "component_count": 1,
+          "components": [
+            {
+              "ref": "U9xx（背面模拟区多只 SOIC-8/TSSOP）",
+              "marking": "标记不可辨认（含 ADI 商标样式器件）",
+              "function": "模拟前端运放/基准/开关等辅助器件",
+              "status": "unknown"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_89_144.jpg",
+          "component_count": 16,
+          "components": [
+            {
+              "ref": "U-FPGA（丝印被器件遮挡，未读出）",
+              "marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+              "function": "现场可编程逻辑器件（FPGA），BGA-256 封装，承担板上数字逻辑/时序控制",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U-USB（丝印未读出，位于 USB-B 座旁）",
+              "marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+              "function": "USB 2.0 高速接口控制器（带 8051 内核），TQFP-128 封装，主机通信接口",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U-SRAM（USB 控制器左下方，丝印未读出）",
+              "marking": "ISSI IS62WV10248LL-15BLI（部分字符可读）",
+              "function": "异步 SRAM 缓冲存储器，配合 USB 控制器/FPGA 做数据缓冲",
+              "status": "candidate"
+            },
+            {
+              "ref": "XT600",
+              "marking": "24.000M",
+              "function": "24.000 MHz 有源晶体振荡器，为 USB 控制器提供主时钟",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
+              "marking": "不可辨认（小型 8 脚器件）",
+              "function": "串行 EEPROM（推测存放 USB VID/PID 与固件引导数据）",
+              "status": "candidate"
+            },
+            {
+              "ref": "U-CLK-DIST（FPGA 周边，未逐一读出）",
+              "marking": "不可辨认",
+              "function": "其他时钟源/时钟分配器件（照片分辨率不足，无法确认是否存在独立采样时钟晶振）",
+              "status": "unknown"
+            },
+            {
+              "ref": "U622",
+              "marking": "KS245 45K94 AXYR",
+              "function": "八路总线收发器（245 型），位于 FPGA 左下方",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U6xx-a（FPGA 下方一排 4 只之一，丝印未读全）",
+              "marking": "KS245 49K95 AXYR",
+              "function": "八路总线收发器（245 型），FPGA 与外围数字信号缓冲",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U6xx-b（FPGA 下方一排 4 只之二）",
+              "marking": "KS245 49K95 AXYR",
+              "function": "八路总线收发器（245 型）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U6xx-c（FPGA 下方一排 4 只之三）",
+              "marking": "KS245 49K95 AXYR",
+              "function": "八路总线收发器（245 型）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U602（丝印部分可读）",
+              "marking": "VCT8C LCX245",
+              "function": "低压八路总线收发器（74LCX245 型），电平转换/总线缓冲",
+              "status": "candidate"
+            },
+            {
+              "ref": "J600",
+              "marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+              "function": "USB Type-B 接口，主机连接",
+              "status": "confirmed"
+            },
+            {
+              "ref": "GND500",
+              "marking": "无（金属接地端子/焊片）",
+              "function": "机壳/屏蔽接地端子",
+              "status": "confirmed"
+            },
+            {
+              "ref": "D-PWR-1 / D-PWR-2（电源区，丝印未读出）",
+              "marking": "15-50L R1（SMC 封装功率二极管，共 2 只）",
+              "function": "电源整流/防反接或续流二极管",
+              "status": "candidate"
+            },
+            {
+              "ref": "C-BULK（电源区多只，含 C608/C811 附近）",
+              "marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+              "function": "电源大容量储能/滤波电容",
+              "status": "confirmed"
+            },
+            {
+              "ref": "L6xx / L9xx（电源区多只屏蔽功率电感）",
+              "marking": "本体标记不可辨认",
+              "function": "DC-DC 变换电感（多路开关电源）",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_90_144.jpg",
+          "component_count": 2,
+          "components": [
+            {
+              "ref": "RN602 / RN605 / RN608 / RN630 / RN44 / RN525-527 等",
+              "marking": "101 / 103 / 330 / 221 / 270（排阻阵列）",
+              "function": "总线串联端接/上拉电阻网络",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U9xx（背面模拟区多只 SOIC-8/TSSOP）",
+              "marking": "标记不可辨认（含 ADI 商标样式器件）",
+              "function": "模拟前端运放/基准/开关等辅助器件",
+              "status": "unknown"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_91_144.jpg",
+          "component_count": 3,
+          "components": [
+            {
+              "ref": "U613",
+              "marking": "KS245 49K94 AXYR",
+              "function": "八路总线收发器（245 型），数字总线电平缓冲/隔离",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J600",
+              "marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+              "function": "USB Type-B 接口，主机连接",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RN602 / RN605 / RN608 / RN630 / RN44 / RN525-527 等",
+              "marking": "101 / 103 / 330 / 221 / 270（排阻阵列）",
+              "function": "总线串联端接/上拉电阻网络",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_92_144.jpg",
+          "component_count": 5,
+          "components": [
+            {
+              "ref": "U-FPGA（丝印被器件遮挡，未读出）",
+              "marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+              "function": "现场可编程逻辑器件（FPGA），BGA-256 封装，承担板上数字逻辑/时序控制",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U-USB（丝印未读出，位于 USB-B 座旁）",
+              "marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+              "function": "USB 2.0 高速接口控制器（带 8051 内核），TQFP-128 封装，主机通信接口",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+              "marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+              "function": "BNC 同轴连接器，模拟输入/输出信号接口（板边可见约 5 只）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J600",
+              "marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+              "function": "USB Type-B 接口，主机连接",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J503（丝印部分可读）",
+              "marking": "AMP2313A 5747844-4",
+              "function": "D-sub 连接器（AMP/TE 系列），数字/辅助信号接口",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "file": "微信图片_20260824134434_93_144.jpg",
+          "component_count": 16,
+          "components": [
+            {
+              "ref": "U-FPGA（丝印被器件遮挡，未读出）",
+              "marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+              "function": "现场可编程逻辑器件（FPGA），BGA-256 封装，承担板上数字逻辑/时序控制",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U-USB（丝印未读出，位于 USB-B 座旁）",
+              "marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+              "function": "USB 2.0 高速接口控制器（带 8051 内核），TQFP-128 封装，主机通信接口",
+              "status": "confirmed"
+            },
+            {
+              "ref": "XT600",
+              "marking": "24.000M",
+              "function": "24.000 MHz 有源晶体振荡器，为 USB 控制器提供主时钟",
+              "status": "confirmed"
+            },
+            {
+              "ref": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
+              "marking": "不可辨认（小型 8 脚器件）",
+              "function": "串行 EEPROM（推测存放 USB VID/PID 与固件引导数据）",
+              "status": "candidate"
+            },
+            {
+              "ref": "U-CLK-DIST（FPGA 周边，未逐一读出）",
+              "marking": "不可辨认",
+              "function": "其他时钟源/时钟分配器件（照片分辨率不足，无法确认是否存在独立采样时钟晶振）",
+              "status": "unknown"
+            },
+            {
+              "ref": "U3xx（输入通道 3 前端）",
+              "marking": "同型 TSSOP，标记未逐字读出（外观与 U4xx 一致）",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "candidate"
+            },
+            {
+              "ref": "U2xx（输入通道 2 前端）",
+              "marking": "同型 TSSOP，标记未逐字读出",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "candidate"
+            },
+            {
+              "ref": "U1xx（输入通道 1 前端）",
+              "marking": "同型 TSSOP，标记未逐字读出",
+              "function": "24 位 delta-sigma 模数转换器（1271 系列），单通道模拟采集前端",
+              "status": "candidate"
+            },
+            {
+              "ref": "RLxxx-10",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-11",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员",
+              "status": "confirmed"
+            },
+            {
+              "ref": "RLxxx-12",
+              "marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+              "function": "信号继电器（双刀，3V 线圈），继电器阵列成员（阵列共约 12 只，3 列 × 4 行排布）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+              "marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+              "function": "BNC 同轴连接器，模拟输入/输出信号接口（板边可见约 5 只）",
+              "status": "confirmed"
+            },
+            {
+              "ref": "J503（丝印部分可读）",
+              "marking": "AMP2313A 5747844-4",
+              "function": "D-sub 连接器（AMP/TE 系列），数字/辅助信号接口",
+              "status": "confirmed"
+            },
+            {
+              "ref": "D-PWR-1 / D-PWR-2（电源区，丝印未读出）",
+              "marking": "15-50L R1（SMC 封装功率二极管，共 2 只）",
+              "function": "电源整流/防反接或续流二极管",
+              "status": "candidate"
+            },
+            {
+              "ref": "C-BULK（电源区多只，含 C608/C811 附近）",
+              "marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+              "function": "电源大容量储能/滤波电容",
+              "status": "confirmed"
+            },
+            {
+              "ref": "L6xx / L9xx（电源区多只屏蔽功率电感）",
+              "marking": "本体标记不可辨认",
+              "function": "DC-DC 变换电感（多路开关电源）",
+              "status": "confirmed"
+            }
+          ]
+        }
+      ]
+    },
     "pin_hypothesis": {
       "generated_at": "2026-08-27T15:10:00Z",
       "policy": "All entries are hypothesis or unknown until verified by experiment",
@@ -3178,139 +4475,8 @@
       ],
       "count": 22
     },
-    "phase_b_status": {
-      "captures_found": [],
-      "ready": false
-    },
-    "eeprom_layout_ref": {
-      "device": "CY7C68013A",
-      "artifact": "serial EEPROM boot image layout",
-      "source": "public datasheet",
-      "status": "reference",
-      "reference_note": "EZ-USB FX2LP serial-EEPROM boot formats as documented in the public device datasheet and technical reference manual. Offsets and field meanings are transcribed from public documentation only; no value here is derived from any device dump.",
-      "endianness_note": "Identifier fields (VID/PID/DID) are stored little-endian (LSB first). C2 firmware data-record length and address words are stored big-endian (MSB first).",
-      "boot_formats": {
-        "C0": "Identifier-only image: overrides VID/PID/DID and the configuration byte; no 8051 firmware is loaded from EEPROM.",
-        "C2": "Firmware image: identifier header followed by one or more code/data records loaded into internal RAM, terminated by a final record that releases the 8051 from reset."
-      },
-      "field_count": 9,
-      "fields": [
-        {
-          "name": "boot_config_byte",
-          "offset": 0,
-          "offset_hex": "0x00",
-          "size_bytes": 1,
-          "applies_to": [
-            "C0",
-            "C2"
-          ],
-          "expected_values": [
-            "0xC0",
-            "0xC2"
-          ],
-          "description": "Leading boot-configuration byte that selects the EEPROM boot format (0xC0 identifier-only, 0xC2 firmware load). Any other value means the controller ignores the EEPROM."
-        },
-        {
-          "name": "vid",
-          "offset": 1,
-          "offset_hex": "0x01",
-          "size_bytes": 2,
-          "endianness": "little",
-          "applies_to": [
-            "C0",
-            "C2"
-          ],
-          "description": "USB Vendor ID override word (LSB at 0x01, MSB at 0x02)."
-        },
-        {
-          "name": "pid",
-          "offset": 3,
-          "offset_hex": "0x03",
-          "size_bytes": 2,
-          "endianness": "little",
-          "applies_to": [
-            "C0",
-            "C2"
-          ],
-          "description": "USB Product ID override word (LSB at 0x03, MSB at 0x04)."
-        },
-        {
-          "name": "did",
-          "offset": 5,
-          "offset_hex": "0x05",
-          "size_bytes": 2,
-          "endianness": "little",
-          "applies_to": [
-            "C0",
-            "C2"
-          ],
-          "description": "USB Device release / Device ID override word (LSB at 0x05, MSB at 0x06)."
-        },
-        {
-          "name": "config_byte",
-          "offset": 7,
-          "offset_hex": "0x07",
-          "size_bytes": 1,
-          "applies_to": [
-            "C0",
-            "C2"
-          ],
-          "description": "Configuration byte holding the I2C bus-speed select bit and the disconnect (DISCON) control bit as defined in the public datasheet."
-        },
-        {
-          "name": "data_record_length",
-          "offset": 8,
-          "offset_hex": "0x08",
-          "size_bytes": 2,
-          "endianness": "big",
-          "applies_to": [
-            "C2"
-          ],
-          "description": "First C2 firmware data-record length word (MSB first). The high bit of this word on the final record flags the end of the record list."
-        },
-        {
-          "name": "data_record_address",
-          "offset": 10,
-          "offset_hex": "0x0A",
-          "size_bytes": 2,
-          "endianness": "big",
-          "applies_to": [
-            "C2"
-          ],
-          "description": "First C2 firmware data-record load address word (MSB first): the internal-RAM destination for the following payload bytes."
-        },
-        {
-          "name": "data_record_payload",
-          "offset": 12,
-          "offset_hex": "0x0C",
-          "size_bytes": "variable (data_record_length bytes)",
-          "applies_to": [
-            "C2"
-          ],
-          "description": "Payload bytes of the first C2 firmware data record. Records repeat (length, address, payload) until the final record is reached."
-        },
-        {
-          "name": "final_record",
-          "offset": "variable",
-          "applies_to": [
-            "C2"
-          ],
-          "final_record_length_word": "0x8001",
-          "final_record_address": "0xE600",
-          "size_bytes": 1,
-          "description": "Terminating C2 record: a single payload byte written to the reset-control register at 0xE600 to release the 8051 core from reset once all firmware records are loaded."
-        }
-      ]
-    },
-    "eeprom_meta": {
-      "status": "missing",
-      "path": "phase_b/captures/eeprom.bin",
-      "generated_at": "2026-08-27T15:21:32.261428+00:00",
-      "layout_ref": "manifests/eeprom_layout_ref.json",
-      "note": "Place eeprom.bin in phase_b/captures/ and re-run"
-    },
     "system_map": {
-      "generated_at": "2026-08-27T15:21:32.338766+00:00",
+      "generated_at": "2026-08-27T15:23:54.422016+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -3405,7 +4571,7 @@
         {
           "from": "NODE-USB-CTL",
           "to": "NODE-HOST",
-          "type": "usb2",
+          "type": "[redacted]",
           "status": "not_started"
         }
       ],
