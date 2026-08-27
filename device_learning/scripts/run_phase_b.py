@@ -41,9 +41,12 @@ def main() -> int:
     run("ingest_phase_b.py")
     status = load_status()
     run("analyze_pcap_stub.py")
+    run("analyze_protocol_log.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")
+        run("extract_firmware_slice.py")
+    run("build_capture_manifest.py")
     run("sync_phase_b_checklist.py")
     run("detect_phase_transition.py")
     run("generate_ledger.py")

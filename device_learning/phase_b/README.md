@@ -8,21 +8,31 @@
 | # | 任务 | 产出 | 模板 |
 |---|------|------|------|
 | B1 | 读取板载 EEPROM | `phase_b/captures/eeprom.bin` | [eeprom_read.md](templates/eeprom_read.md) |
-| B2 | 8051 固件反汇编 | `phase_b/analysis/mcu_disasm.txt` | — |
-| B3 | USB 枚举抓包 | `phase_b/captures/usb_enum.pcapng` | [usb_capture.md](templates/usb_capture.md) |
-| B4 | 配置/采集命令抓包 | `phase_b/captures/usb_session.pcapng` | [usb_capture.md](templates/usb_capture.md) |
-| B5 | 命令记录 | `phase_b/captures/protocol_log.json` | [protocol_log_template.json](templates/protocol_log_template.json) |
-| B6 | 驱动解包 | `phase_b/driver/` | — |
+| B2 | USB 枚举抓包 | `phase_b/captures/usb_enum.pcapng` | [usb_capture.md](templates/usb_capture.md) |
+| B3 | 配置/采集命令抓包 | `phase_b/captures/usb_session.pcapng` | [usb_capture.md](templates/usb_capture.md) |
+| B4 | 命令记录（可选） | `phase_b/captures/protocol_log.json` | [protocol_log_template.json](templates/protocol_log_template.json) |
+| B5 | 账本刷新 | `make phase-b` | — |
+| B6 | 8051 反汇编 | `phase_b/analysis/mcu_disasm.txt` | [ghidra_8051.md](templates/ghidra_8051.md) |
+
+可选：[driver_unpack.md](templates/driver_unpack.md) — 合法授权下解包官方驱动，产出放 `phase_b/driver/`。
 
 ## 操作
 
-1. 按模板读取 EEPROM / 抓包
-2. 将文件放入 `phase_b/captures/`
-3. 运行 `python3 scripts/ingest_phase_b.py`
-4. 运行 `python3 scripts/analyze_pcap_stub.py`
-5. 运行 `python3 scripts/generate_ledger.py`
+```bash
+cd device_learning
+make check-captures    # 采集前预检
+make phase-b           # 采集后一键刷新
+```
+
+或分步：
+
+1. 按模板读取 EEPROM / 抓包，文件放入 `phase_b/captures/`
+2. `python3 scripts/extract_firmware_slice.py`（有 eeprom.bin 时）
+3. Ghidra 反汇编 → `phase_b/analysis/mcu_disasm.txt`
+4. `make phase-b`
 
 ## 诚实边界
 
 - 抓包观察 ≠ 协议完全理解
 - 反汇编入口 ≠ 掌握全部固件逻辑
+- 合成夹具（`phase_b/fixtures/`）仅用于流水线测试

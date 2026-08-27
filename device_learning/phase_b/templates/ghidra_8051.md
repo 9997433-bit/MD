@@ -7,7 +7,8 @@
 ```bash
 cd device_learning
 python3 scripts/analyze_eeprom.py
-# 查看 manifests/eeprom_meta.json 中的 firmware_offset / firmware_size_bytes
+python3 scripts/extract_firmware_slice.py
+# → phase_b/analysis/firmware.bin + manifests/firmware_extract.json
 ```
 
 C2 格式下固件位于数据记录 payload；C0 格式无板载固件镜像。

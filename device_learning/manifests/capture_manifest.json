@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-08-27T16:04:00.158238+00:00",
+  "artifacts": [
+    {
+      "path": "phase_b/captures/eeprom.bin",
+      "exists": false
+    },
+    {
+      "path": "phase_b/captures/usb_enum.pcapng",
+      "exists": false
+    },
+    {
+      "path": "phase_b/captures/usb_session.pcapng",
+      "exists": false
+    },
+    {
+      "path": "phase_b/captures/protocol_log.json",
+      "exists": false
+    },
+    {
+      "path": "phase_b/analysis/firmware.bin",
+      "exists": false
+    },
+    {
+      "path": "phase_b/analysis/mcu_disasm.txt",
+      "exists": false
+    }
+  ],
+  "present_count": 0,
+  "expected_count": 6,
+  "flags": {
+    "eeprom_present": false,
+    "usb_capture_present": false,
+    "protocol_log_present": false
+  },
+  "eeprom_status": "synthetic_pipeline_test",
+  "usb_capture_status": "missing",
+  "protocol_log_status": "missing",
+  "firmware_extract_status": "missing",
+  "ready_for_deep_analysis": false,
+  "boundary": "Inventory only; status upgrades require ledger refresh"
+}

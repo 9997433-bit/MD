@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:00:37.653395+00:00",
-  "artifact_count": 43,
-  "present_count": 43,
+  "generated_at": "2026-08-27T16:04:01.023316+00:00",
+  "artifact_count": 46,
+  "present_count": 46,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 221142
+      "size_bytes": 223321
     },
     {
       "path": "coverage.json",
@@ -61,7 +61,7 @@
       "path": "HARDWARE_HANDOFF.md",
       "description": "实机接入指南",
       "exists": true,
-      "size_bytes": 2171
+      "size_bytes": 2468
     },
     {
       "path": "phase_b/CHECKLIST.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 6435
+      "size_bytes": 6890
     },
     {
       "path": "manifests/bit_strings.json",
@@ -104,6 +104,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 7073
+    },
+    {
+      "path": "manifests/capture_manifest.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1009
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -158,6 +164,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 2271
+    },
+    {
+      "path": "manifests/firmware_extract.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 148
     },
     {
       "path": "manifests/firmware_scan.json",
@@ -236,6 +248,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 5128
+    },
+    {
+      "path": "manifests/protocol_log_meta.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 219
     },
     {
       "path": "manifests/sensitive_audit.json",

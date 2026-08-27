@@ -50,9 +50,11 @@ python3 -m pytest tests/ -q
 
 | 产物 | 工具 / 动作 |
 |------|-------------|
-| 8051 固件 | Ghidra（8051 处理器）→ `phase_b/analysis/mcu_disasm.txt` |
+| 8051 固件切片 | `python3 scripts/extract_firmware_slice.py` → `phase_b/analysis/firmware.bin` |
+| 8051 反汇编 | Ghidra（8051 处理器）→ `phase_b/analysis/mcu_disasm.txt` |
 | USB 协议 | Wireshark 解析 → 回填 PROTO-* / SIG-* |
-| 驱动解包 | 合法授权下解包 → `phase_b/driver/` |
+| 命令记录 | `phase_b/captures/protocol_log.json` → `analyze_protocol_log.py` |
+| 驱动解包 | 合法授权下解包 → `phase_b/driver/`（见 `templates/driver_unpack.md`） |
 
 ## 验收检查
 
