@@ -113,6 +113,17 @@ header h1 {
   color: var(--muted);
 }
 
+.net-status {
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(94, 177, 255, 0.08);
+  border-radius: 4px;
+}
+
+.hidden { display: none; }
+
 .boss-select select {
   display: block;
   width: 100%;

@@ -21,6 +21,8 @@ python3 -m http.server 8765
 
 打开 http://localhost:8765
 
+**联机模式**：先启动 Host，再打开 http://localhost:8765/?client=1
+
 ## 项目结构
 
 | 路径 | 说明 |

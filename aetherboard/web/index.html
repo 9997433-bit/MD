@@ -22,6 +22,7 @@
             <option value="wind">风灵领主</option>
           </select>
         </label>
+        <div id="net-status" class="net-status hidden">单机模式</div>
         <div id="turn-info">回合 1</div>
         <div id="phase-info">阶段：预警</div>
         <div id="telegraph-info">—</div>
@@ -58,7 +59,7 @@
     </main>
 
     <footer>
-      <p>操作：点击棋子选中 → 点击格子移动 / 施法 → 「结束当前阶段」推进。危险格为红色，Boss 在棋盘上方中央。</p>
+      <p>操作：点击棋子选中 → 点击格子移动 / 施法 → 「结束当前阶段」推进。危险格为红色，Boss 在棋盘上方中央。联机：<code>?client=1</code> 连接 Host（需先启动 <code>battle_host.py</code>）。</p>
     </footer>
   </div>
   <script type="module" src="js/main.js"></script>

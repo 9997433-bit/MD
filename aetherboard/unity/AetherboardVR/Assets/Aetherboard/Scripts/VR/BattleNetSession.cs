@@ -32,6 +32,7 @@ namespace Aetherboard.VR
         [SerializeField] private NetSessionRole role = NetSessionRole.Offline;
         [SerializeField] private string hostAddress = "127.0.0.1";
         [SerializeField] private int hostPort = 8767;
+        [SerializeField] private bool startTcpHostWhenHosting = true;
 
         private TcpClient _client;
         private Thread _readerThread;
@@ -61,6 +62,8 @@ namespace Aetherboard.VR
         {
             _running = false;
             try { _client?.Close(); } catch { /* ignore */ }
+            var tcp = GetComponent<BattleTcpHostServer>();
+            if (tcp != null) tcp.StopServer();
             _readerThread?.Join(200);
         }
 
@@ -77,7 +80,13 @@ namespace Aetherboard.VR
         private void StartHost()
         {
             if (director == null) return;
-            Debug.Log("[Aetherboard] Host mode — use battle_host.py for remote clients, or play locally.");
+            if (startTcpHostWhenHosting)
+            {
+                var tcp = GetComponent<BattleTcpHostServer>();
+                if (tcp == null) tcp = gameObject.AddComponent<BattleTcpHostServer>();
+                tcp.StartServer();
+            }
+            Debug.Log($"[Aetherboard] Host mode — TCP :{hostPort} | Python HTTP :8768 for Web");
         }
 
         private void ConnectClient()

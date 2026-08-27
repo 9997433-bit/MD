@@ -1,4 +1,5 @@
 import { BOSS_POS, JOB_SKILLS, Phase, SKILLS, TELEGRAPH_TEXT } from "./constants.js";
+import { importHostState } from "./hostState.js";
 
 const phaseLabel = {
   WARNING: "预警",
@@ -11,9 +12,11 @@ const phaseLabel = {
 };
 
 export class GameUI {
-  constructor(engine, onBossChange) {
+  constructor(engine, onBossChange, options = {}) {
     this.engine = engine;
     this.onBossChange = onBossChange;
+    this.remoteMode = options.remoteMode ?? false;
+    this.hostClient = null;
     this.selectedUnitId = null;
     this.pendingSkillId = null;
 
@@ -31,27 +34,62 @@ export class GameUI {
     this.skillButtons = document.getElementById("skill-buttons");
     this.battleLog = document.getElementById("battle-log");
     this.bossSelect = document.getElementById("boss-select");
+    this.netStatus = document.getElementById("net-status");
 
-    document.getElementById("btn-end-phase").addEventListener("click", () => {
-      this.engine.endPhase();
-      this.render();
-    });
-    document.getElementById("btn-auto").addEventListener("click", () => {
-      this.engine.stepAuto();
-      this.render();
-    });
-    document.getElementById("btn-reset").addEventListener("click", () => {
-      this.engine.reset(this.bossSelect.value);
-      this.selectedUnitId = null;
-      this.pendingSkillId = null;
-      this.render();
-    });
+    document.getElementById("btn-end-phase").addEventListener("click", () => this.handleEndPhase());
+    document.getElementById("btn-auto").addEventListener("click", () => this.handleAuto());
+    document.getElementById("btn-reset").addEventListener("click", () => this.handleReset());
     this.bossSelect.addEventListener("change", () => {
+      if (this.remoteMode) return;
       this.onBossChange(this.bossSelect.value);
       this.selectedUnitId = null;
       this.pendingSkillId = null;
       this.render();
     });
+  }
+
+  setHostClient(client) {
+    this.hostClient = client;
+    this.remoteMode = true;
+    this.bossSelect.disabled = true;
+    document.getElementById("btn-auto").disabled = true;
+    document.getElementById("btn-reset").disabled = true;
+    this.netStatus?.classList.remove("hidden");
+  }
+
+  setStatus(text) {
+    if (this.netStatus) this.netStatus.textContent = text;
+  }
+
+  async applyHostPayload(payload) {
+    importHostState(this.engine, payload);
+  }
+
+  async handleEndPhase() {
+    if (this.hostClient) {
+      try {
+        await this.applyHostPayload(await this.hostClient.endPhase());
+      } catch (err) {
+        this.setStatus(`命令失败: ${err.message}`);
+      }
+    } else {
+      this.engine.endPhase();
+    }
+    this.render();
+  }
+
+  async handleAuto() {
+    if (this.hostClient) return;
+    this.engine.stepAuto();
+    this.render();
+  }
+
+  async handleReset() {
+    if (this.hostClient) return;
+    this.engine.reset(this.bossSelect.value);
+    this.selectedUnitId = null;
+    this.pendingSkillId = null;
+    this.render();
   }
 
   render() {
@@ -172,6 +210,17 @@ export class GameUI {
     if (!unit || !unit.alive) return;
 
     if (this.pendingSkillId) {
+      if (this.hostClient) {
+        this.hostClient
+          .skill(unit.id, this.pendingSkillId, x, y)
+          .then((payload) => {
+            this.applyHostPayload(payload);
+            this.pendingSkillId = null;
+            this.render();
+          })
+          .catch((err) => this.setStatus(`技能失败: ${err.message}`));
+        return;
+      }
       const ok = this.engine.useSkill(unit.id, this.pendingSkillId, dest);
       if (ok) this.pendingSkillId = null;
       this.render();
@@ -179,6 +228,16 @@ export class GameUI {
     }
 
     if (this.engine.phase === Phase.MOVE) {
+      if (this.hostClient) {
+        this.hostClient
+          .move(unit.id, x, y)
+          .then((payload) => {
+            this.applyHostPayload(payload);
+            this.render();
+          })
+          .catch((err) => this.setStatus(`移动失败: ${err.message}`));
+        return;
+      }
       this.engine.moveUnit(unit.id, dest);
       this.render();
     }

@@ -24,7 +24,8 @@ def _cell_name(c: CellKind) -> str:
     return c.name
 
 
-def state_to_dict(state: BattleState, boss_id: str) -> dict[str, Any]:
+def state_to_dict(state: BattleState, boss_id: str, preview_cells: list | None = None) -> dict[str, Any]:
+    preview = preview_cells or []
     return {
         "turn": state.turn,
         "phase": _phase_name(state.phase),
@@ -60,7 +61,7 @@ def state_to_dict(state: BattleState, boss_id: str) -> dict[str, Any]:
         ],
         "cells": [[_cell_name(state.cells[y][x]) for x in range(state.board_size)] for y in range(state.board_size)],
         "pendingHazards": [{"x": p.x, "y": p.y} for p in state.pending_hazards],
-        "previewCells": [],
+        "previewCells": [{"x": p.x, "y": p.y} for p in preview],
         "log": list(state.log.entries),
     }
 

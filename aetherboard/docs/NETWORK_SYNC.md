@@ -19,8 +19,22 @@ Aetherboard 使用 **Host 权威** 模型：Host 运行战斗状态机，客户�
 
 ```bash
 cd aetherboard
-PYTHONPATH=. python3 scripts/battle_host.py --port 8767 --boss earth --seed 42
+PYTHONPATH=. python3 scripts/battle_host.py --port 8767 --http-port 8768 --boss earth --seed 42
 ```
+
+| 端口 | 客户端 |
+|------|--------|
+| **8767** TCP | Unity Client 模式 |
+| **8768** HTTP | Web 浏览器（CORS 已开启） |
+
+## Web 浏览器联机
+
+1. 启动 Host（见上）
+2. `cd web && python3 -m http.server 8765`
+3. 打开 http://localhost:8765/?client=1
+4. 操作通过 HTTP 发往 Host，棋盘由返回的 `state` 更新
+
+可选：`?client=1&host=http://192.168.1.10:8768`
 
 ## Unity 客户端
 
@@ -28,9 +42,14 @@ PYTHONPATH=. python3 scripts/battle_host.py --port 8767 --boss earth --seed 42
 2. HUD 点击 **Client**，或按 `N`（默认连接 `127.0.0.1:8767`）
 3. 操作会发送到 Host；棋盘由 Host 广播的 `state` 更新
 
-### 纯本地 Host（无 TCP）
+### 纯本地 Host（Unity 内置 TCP）
 
-- HUD 点 **Host** 或按 `H` — 使用 `BattleHostAuthority` 本地权威（不启动 Python 也可双人调试逻辑）
+- HUD 点 **Host** 或按 `H` — 自动启动 `BattleTcpHostServer`（端口 8767）
+- 另一台 Unity 实例选 **Client** 连接同一局域网 IP
+
+### Python Host（Web + Unity）
+
+- 运行 `battle_host.py` — TCP 8767 + HTTP 8768
 
 ## C# 核心 API
 
@@ -43,6 +62,6 @@ var replayed = BattleReplayer.Replay(commandLog);
 
 ## 后续
 
-- WebSocket 封装（Quest / 浏览器）
+- WebSocket 长连接（替代 HTTP 轮询）
 - Unity Netcode 传输层替换 TCP
 - 玩家身份与回合归属校验（Coop P1/P2）

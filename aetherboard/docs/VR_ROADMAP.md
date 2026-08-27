@@ -26,6 +26,8 @@
 | **Host 权威同步** | ✅ | `BattleHostAuthority` + `scripts/battle_host.py` |
 | **命令回放** | ✅ | `BattleReplayer` + `BattleCommandExecutor` |
 | **TCP 客户端** | ✅ | Unity Client 模式 → Python Host |
+| **Unity TCP Host** | ✅ | `BattleTcpHostServer` — 内置 8767 服务 |
+| **Web HTTP 客户端** | ✅ | `?client=1` + `hostClient.js` |
 | XR Origin 官方 Prefab | 🔲 | 可替换为 `GameObject → XR → XR Origin` |
 | 在线多人传输层 | 🔲 | WebSocket / Netcode 生产级封装 |
 
