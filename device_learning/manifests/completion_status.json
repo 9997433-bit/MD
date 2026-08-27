@@ -7,6 +7,7 @@
     "learning_guide": true,
     "static_report": true,
     "blocked_report": true,
+    "confirmed_report": true,
     "phase_b_scaffold": true,
     "phase_c_scaffold": true,
     "hardware_handoff": true,

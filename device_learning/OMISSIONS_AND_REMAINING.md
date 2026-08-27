@@ -62,6 +62,6 @@
 
 ### 回填闭环
 - [ ] 运行 `python3 scripts/ingest_phase_b.py` 登记采集物
-- [ ] 运行 `python3 scripts/generate_ledger.py` 刷新账本
-- [ ] 未采集项保持 unknown/missing 并在本文件登记
+- [ ] 运行 `make phase-b` 或 `python3 scripts/generate_ledger.py` 刷新账本
+- [ ] 未采集项保持 unknown/missing 并在本文件与 `BLOCKED_REPORT.md` 登记
 - [ ] 强制 null 桥未被破坏

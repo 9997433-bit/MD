@@ -18,6 +18,7 @@ def main() -> int:
         "learning_guide": (ROOT / "LEARNING_GUIDE.md").exists(),
         "static_report": (ROOT / "STATIC_REPORT.md").exists(),
         "blocked_report": (ROOT / "BLOCKED_REPORT.md").exists(),
+        "confirmed_report": (ROOT / "CONFIRMED_REPORT.md").exists(),
         "phase_b_scaffold": (ROOT / "phase_b" / "README.md").exists(),
         "phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
         "hardware_handoff": (ROOT / "HARDWARE_HANDOFF.md").exists(),

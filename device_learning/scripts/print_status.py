@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+"""Print one-line project status to stdout."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main() -> None:
+    cov = json.loads((ROOT / "coverage.json").read_text(encoding="utf-8"))
+    summary = json.loads((ROOT / "manifests" / "evidence_summary.json").read_text(encoding="utf-8"))
+    print(
+        f"phase={summary.get('phase')} "
+        f"ids={summary.get('identifiers')} "
+        f"confirmed={cov.get('status_counts', {}).get('confirmed', 0)} "
+        f"blocked={summary.get('blocked')} "
+        f"idcode={summary.get('bitstream', {}).get('idcode')} "
+        f"eeprom={summary.get('eeprom_status')} "
+        f"pass={summary.get('stop_conditions_pass')}"
+    )
+
+
+if __name__ == "__main__":
+    main()

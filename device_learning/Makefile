@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b clean
+.PHONY: ledger test verify phase-b clean status
 
 ledger:
 	python3 scripts/generate_ledger.py
@@ -13,6 +13,9 @@ verify: ledger
 
 phase-b:
 	python3 scripts/run_phase_b.py
+
+status:
+	python3 scripts/print_status.py
 
 clean:
 	rm -rf .pytest_cache

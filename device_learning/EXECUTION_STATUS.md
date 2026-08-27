@@ -1,7 +1,7 @@
 # 执行状态
 
 **阶段**：静态分析 **完成**（等待实机）  
-**规模**：**237 条 identifier**，**55 pytest**，停止条件 **10/10 pass**
+**规模**：**237 条 identifier**，**59 pytest**，停止条件 **10/10 pass**
 
 ## 八层目录
 
@@ -34,7 +34,7 @@ python3 scripts/verify_completion.py
 | `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
 | `manifests/evidence_summary.json` | 一页式证据摘要 |
 | `manifests/catalog_integrity.json` | 目录 schema 校验 |
-| `manifests/sensitive_audit.json` | 敏感词审计结果 |
+| `BLOCKED_REPORT.md` | 98 条阻塞项人类可读表 |
 | `manifests/pending_index.json` | 98 条阻塞项 |
 | `manifests/phase_roadmap.json` | 阶段 B/C 解锁路线 |
 | `HARDWARE_HANDOFF.md` | 实机接入步骤 |
