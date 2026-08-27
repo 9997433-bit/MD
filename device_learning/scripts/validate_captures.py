@@ -7,6 +7,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from eeprom_source import is_synthetic_dump  # noqa: E402
+
 CAPTURES = ROOT / "phase_b" / "captures"
 EXPECTED = {
     "eeprom.bin": {"size": 8192, "label": "24LC64 全片镜像"},
@@ -33,6 +36,13 @@ def check_file(name: str, spec: dict) -> dict:
         row["issue"] = "missing"
         return row
     row["size_bytes"] = path.stat().st_size
+    if name == "eeprom.bin":
+        data = path.read_bytes()
+        row["is_synthetic_fixture"] = is_synthetic_dump(data)
+        if row["is_synthetic_fixture"]:
+            row["ok"] = False
+            row["issue"] = "SHA-256 matches synthetic fixture — replace with real device dump"
+            return row
     if "size" in spec and row["size_bytes"] != spec["size"]:
         row["ok"] = False
         row["issue"] = f"expected {spec['size']} bytes, got {row['size_bytes']}"
@@ -54,7 +64,8 @@ def main() -> int:
     optional = CAPTURES / "protocol_log.json"
     if optional.is_file():
         try:
-            entries = len(json.loads(optional.read_text(encoding="utf-8")))
+            payload = json.loads(optional.read_text(encoding="utf-8"))
+            entries = len(payload.get("commands", payload))
         except json.JSONDecodeError:
             entries = None
         checks.append(
@@ -70,15 +81,20 @@ def main() -> int:
 
     ready = all(c["ok"] for c in checks if c["name"] != "protocol_log.json")
     partial = any(c["present"] for c in checks)
+    synthetic_only = any(c.get("is_synthetic_fixture") for c in checks)
 
     report = {
         "captures_dir": str(CAPTURES.relative_to(ROOT)),
         "checks": checks,
         "ready_for_phase_b": ready,
         "partial_captures": partial and not ready,
+        "synthetic_eeprom_detected": synthetic_only,
     }
     print(json.dumps(report, indent=2, ensure_ascii=False))
 
+    if synthetic_only:
+        print("\n警告: eeprom.bin 为合成夹具，不能作为实机证据。", file=sys.stderr)
+        return 3
     if not partial:
         print("\n提示: 尚无采集文件。见 HARDWARE_HANDOFF.md", file=sys.stderr)
         return 1

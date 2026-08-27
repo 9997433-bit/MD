@@ -46,8 +46,9 @@ def test_phase_b_pipeline_synthetic(synthetic_eeprom_capture):
     assert meta.get("boot_format") == "C2"
 
     transition = json.loads((ROOT / "manifests" / "phase_transition.json").read_text())
-    assert transition["recommended_phase"] == "phase_b_in_progress"
-    assert transition["capture_flags"]["eeprom"] is True
+    assert transition["recommended_phase"] == "static_complete_pending_hardware"
+    assert transition["capture_flags"]["eeprom_synthetic"] is True
+    assert transition["capture_flags"]["eeprom_observed"] is False
 
     checklist = json.loads((ROOT / "phase_b" / "CHECKLIST.json").read_text())
     b1 = next(t for t in checklist["tasks"] if t["id"] == "B1")

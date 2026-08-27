@@ -46,6 +46,9 @@ FEEDERS = [
     ["build_capture_manifest.py"],
     ["propose_phase_b_upgrades.py"],
     ["build_phase_b_readiness.py"],
+    ["validate_experiment_log.py"],
+    ["build_experiment_index.py"],
+    ["build_phase_c_readiness.py"],
     ["redact_manifests.py"],
     ["audit_sensitive_tokens.py"],
     ["validate_catalog_integrity.py"],
@@ -98,7 +101,15 @@ def load_manifests() -> dict:
     return out
 
 
-def build_coverage(entries: list[dict], catalogs: dict) -> dict:
+def resolve_phase() -> str:
+    path = MANIFESTS / "phase_transition.json"
+    if path.exists():
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data.get("recommended_phase", "static_complete_pending_hardware")
+    return "static_complete_pending_hardware"
+
+
+def build_coverage(entries: list[dict], catalogs: dict, phase: str) -> dict:
     counts: dict[str, int] = {}
     for e in entries:
         counts[e["status"]] = counts.get(e["status"], 0) + 1
@@ -125,7 +136,7 @@ def build_coverage(entries: list[dict], catalogs: dict) -> dict:
         "stop_conditions": stop,
         "all_pass": all(stop.values()),
         "declaration": DECLARATION,
-        "phase": "static_complete_pending_hardware",
+        "phase": phase,
     }
 
 
@@ -144,17 +155,18 @@ def main() -> None:
     }
     all_entries = [e for cat in catalogs.values() for e in cat]
     generated_at = datetime.now(timezone.utc).isoformat()
+    phase = resolve_phase()
     ledger = {
         "generated_at": generated_at,
         "declaration": DECLARATION,
-        "phase": "static_complete_pending_hardware",
+        "phase": phase,
         "catalogs": catalogs,
         "manifests": load_manifests(),
     }
     (ROOT / "EvidenceLedger.json").write_text(
         json.dumps(ledger, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    coverage = build_coverage(all_entries, catalogs)
+    coverage = build_coverage(all_entries, catalogs, phase)
     (ROOT / "coverage.json").write_text(
         json.dumps(coverage, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )

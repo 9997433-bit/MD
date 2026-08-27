@@ -1,7 +1,7 @@
 {
   "type": "synthetic_reference",
   "warning": "NOT a device dump — pipeline test fixture only",
-  "generated_at": "2026-08-27T16:06:45.461338+00:00",
+  "generated_at": "2026-08-27T16:08:58.310544+00:00",
   "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
   "size_bytes": 8192,
   "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",

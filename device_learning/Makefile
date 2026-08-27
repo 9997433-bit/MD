@@ -1,6 +1,6 @@
 # device_learning 常用命令
 
-.PHONY: ledger test verify phase-b clean status freeze ci health dryrun handoff check-captures readiness
+.PHONY: ledger test verify phase-b phase-c clean status freeze ci health dryrun handoff check-captures readiness
 
 ledger:
 	python3 scripts/generate_ledger.py
@@ -13,6 +13,9 @@ verify: ledger
 
 phase-b:
 	python3 scripts/run_phase_b.py
+
+phase-c:
+	python3 scripts/run_phase_c.py
 
 status:
 	python3 scripts/print_status.py

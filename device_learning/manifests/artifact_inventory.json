@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T16:06:47.728843+00:00",
-  "artifact_count": 48,
-  "present_count": 48,
+  "generated_at": "2026-08-27T16:09:00.823785+00:00",
+  "artifact_count": 51,
+  "present_count": 51,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 225304
+      "size_bytes": 226737
     },
     {
       "path": "coverage.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 7202
+      "size_bytes": 7661
     },
     {
       "path": "manifests/bit_strings.json",
@@ -160,6 +160,18 @@
       "size_bytes": 785
     },
     {
+      "path": "manifests/experiment_index.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 165
+    },
+    {
+      "path": "manifests/experiment_validation.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 182
+    },
+    {
       "path": "manifests/file_hashes.json",
       "description": "generated manifest",
       "exists": true,
@@ -232,6 +244,12 @@
       "size_bytes": 295
     },
     {
+      "path": "manifests/phase_c_readiness.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 272
+    },
+    {
       "path": "manifests/phase_roadmap.json",
       "description": "generated manifest",
       "exists": true,
@@ -241,7 +259,7 @@
       "path": "manifests/phase_transition.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 366
+      "size_bytes": 484
     },
     {
       "path": "manifests/photo_hw_map.json",

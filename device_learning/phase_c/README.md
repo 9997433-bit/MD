@@ -18,6 +18,8 @@
 
 ## 记录模板
 
+复制 `phase_c/templates/experiment_log_template.json` 到 `phase_c/logs/EXP-XXX-YYYYMMDD.json`。
+
 每次实验在 `phase_c/logs/` 创建：
 
 ```json
