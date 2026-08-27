@@ -44,10 +44,10 @@ def test_phase_roadmap_exists():
     assert len(data["phase_c"]) >= 15
 
 
-def test_diff_eeprom_identical_synthetic():
+def test_diff_eeprom_identical_synthetic(tmp_path):
     import subprocess
     synth = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
-    out = ROOT / "manifests" / "eeprom_diff_test.json"
+    out = tmp_path / "eeprom_diff_test.json"
     subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "diff_eeprom.py"), str(synth), str(synth), "-o", str(out)],
         check=True,
