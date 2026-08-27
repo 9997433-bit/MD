@@ -22,6 +22,9 @@
 # 一键本地测试（等同 CI）
 cd aetherboard && ./scripts/run_all_tests.sh
 
+# 合并前预检（测试 + 人工清单提示）
+cd aetherboard && ./scripts/release_preflight.sh
+
 # Python 19 tests
 cd aetherboard && PYTHONPATH=. python3 -m unittest discover -s tests -q
 

@@ -43,3 +43,5 @@ jobs:
         run: bash -n aetherboard/scripts/quest_verify.sh
       - name: Validate run_all_tests script syntax
         run: bash -n aetherboard/scripts/run_all_tests.sh
+      - name: Validate release_preflight script syntax
+        run: bash -n aetherboard/scripts/release_preflight.sh

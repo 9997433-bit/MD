@@ -33,8 +33,8 @@ cd web && python3 -m http.server 8765
 ### C# 核心测试（无需 Unity）
 
 ```bash
-cd aetherboard && ./scripts/run_all_tests.sh
-# 或仅 C#：cd csharp/Aetherboard.Core.Tests && dotnet test
+cd aetherboard && ./scripts/run_all_tests.sh       # 本地 CI
+cd aetherboard && ./scripts/release_preflight.sh   # 合并前预检
 ```
 
 ### Unity VR

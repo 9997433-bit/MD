@@ -42,5 +42,7 @@
 - Quest/PCVR 控制器触觉：抓取、落子、技能
 - 战斗结算世界空间面板（胜败统计、再战/换 Boss）
 
-### 文档
+### 文档与工具
 - `VR_ROADMAP.md` · `NETCODE.md` · `ART_ASSETS.md` · `URP_SETUP.md` · `QUEST_BUILD.md` · `QUEST_VERIFICATION.md`
+- 首次设置向导 · `run_all_tests.sh` · `release_preflight.sh` · `quest_verify.sh`
+- 版本标记：`VERSION`（`0.2.0-vr`）
