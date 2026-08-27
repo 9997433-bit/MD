@@ -22,7 +22,7 @@
 - `coverage.json` — 状态统计
 - `bridge_matrix.json` — 桥矩阵
 - `manifests/` — 文件哈希、PE 导出、Remote.h 常量、样本清单
-- `tests/` — 31 项 pytest 全部通过
+- `tests/` — 29 项 pytest 全部通过
 
 ## 仍为 unknown（预期）
 

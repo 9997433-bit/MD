@@ -1,4 +1,30 @@
 {
+  "derived_from_single_sample": "Sample.Lin",
+  "cross_sample_value_type_exceptions": [
+    {
+      "field": "Axis",
+      "index": 21,
+      "default_value_type": "Choosing",
+      "exceptions": [
+        {
+          "mea_type_name": "DIAGONAL",
+          "source_file": "Sample.Dia",
+          "value_type": "ItemText",
+          "example": "ItemText=XYZ"
+        }
+      ],
+      "note": "索引由 Sample.Lin 生成；DIAGONAL 类型为唯一 ItemText 变体"
+    }
+  ],
+  "unindexed_sections": [
+    {
+      "marker": "<Time Base Raw Data>",
+      "applies_to_mea_types": [9, 10, 11],
+      "applies_to_files": ["Sample.LTB", "Sample.ATB", "Sample.STB"],
+      "status": "candidate",
+      "note": "位于 <End of Option Description File> 之后，不在 191 个 Identify= 字段内；LTB≈10000 行，ATB/STB 各 104 行"
+    }
+  ],
   "source_file": "/tmp/seed-repo/extracted/Sample.Lin",
   "format": "Keysight E1733A Option Description File (ODF), Rev. 1.00a, app version 1.12",
   "measurement_type": "Linear (.Lin)",
