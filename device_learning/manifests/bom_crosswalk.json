@@ -1,0 +1,294 @@
+{
+  "generated_at": "2026-08-27T15:36:04.880923+00:00",
+  "component_count": 40,
+  "linked_count": 29,
+  "links": [
+    {
+      "ref_designator": "U-FPGA（丝印被器件遮挡，未读出）",
+      "part_marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U-USB（丝印未读出，位于 USB-B 座旁）",
+      "part_marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+      "hw_identifiers": [
+        "HW-003-USB-CONTROLLER",
+        "HW-004-USB-PACKAGE",
+        "HW-017-INTERFACE-USB"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U-SRAM（USB 控制器左下方，丝印未读出）",
+      "part_marking": "ISSI IS62WV10248LL-15BLI（部分字符可读）",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-003-USB-CONTROLLER",
+        "HW-004-USB-PACKAGE",
+        "HW-017-INTERFACE-USB",
+        "HW-023-MEMORY-SRAM"
+      ],
+      "bom_status": "candidate"
+    },
+    {
+      "ref_designator": "XT600",
+      "part_marking": "24.000M",
+      "hw_identifiers": [
+        "HW-003-USB-CONTROLLER",
+        "HW-004-USB-PACKAGE",
+        "HW-014-CRYSTAL-USB",
+        "HW-017-INTERFACE-USB"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
+      "part_marking": "不可辨认（小型 8 脚器件）",
+      "hw_identifiers": [
+        "HW-003-USB-CONTROLLER",
+        "HW-004-USB-PACKAGE",
+        "HW-012-EEPROM",
+        "HW-013-EEPROM-CAPACITY",
+        "HW-017-INTERFACE-USB"
+      ],
+      "bom_status": "candidate"
+    },
+    {
+      "ref_designator": "U-CLK-DIST（FPGA 周边，未逐一读出）",
+      "part_marking": "不可辨认",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE"
+      ],
+      "bom_status": "unknown"
+    },
+    {
+      "ref_designator": "U513",
+      "part_marking": "KS245 49K95 AXYR",
+      "hw_identifiers": [
+        "HW-011-BUS-TRANSCEIVER"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U613",
+      "part_marking": "KS245 49K94 AXYR",
+      "hw_identifiers": [
+        "HW-011-BUS-TRANSCEIVER"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U622",
+      "part_marking": "KS245 45K94 AXYR",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-011-BUS-TRANSCEIVER"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U6xx-a（FPGA 下方一排 4 只之一，丝印未读全）",
+      "part_marking": "KS245 49K95 AXYR",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-011-BUS-TRANSCEIVER"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U6xx-b（FPGA 下方一排 4 只之二）",
+      "part_marking": "KS245 49K95 AXYR",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-011-BUS-TRANSCEIVER"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "U6xx-c（FPGA 下方一排 4 只之三）",
+      "part_marking": "KS245 49K95 AXYR",
+      "hw_identifiers": [
+        "HW-001-FPGA-DEVICE",
+        "HW-002-FPGA-PACKAGE",
+        "HW-011-BUS-TRANSCEIVER"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RL200",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RL302",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RL402",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-04（丝印被继电器本体遮挡）",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-05",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-06",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-07",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-08",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-09",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-10",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-11",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "RLxxx-12",
+      "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+      "part_marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+      "hw_identifiers": [
+        "HW-016-INTERFACE-COAX"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "J600",
+      "part_marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+      "hw_identifiers": [
+        "HW-003-USB-CONTROLLER",
+        "HW-004-USB-PACKAGE",
+        "HW-017-INTERFACE-USB",
+        "HW-031-CONNECTOR-J600"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "J503（丝印部分可读）",
+      "part_marking": "AMP2313A 5747844-4",
+      "hw_identifiers": [
+        "HW-018-INTERFACE-DSUB"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "C-BULK（电源区多只，含 C608/C811 附近）",
+      "part_marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+      "hw_identifiers": [
+        "HW-022-POWER-TANTALUM"
+      ],
+      "bom_status": "confirmed"
+    },
+    {
+      "ref_designator": "YC700 / U-SOT23-6（继电器驱动区多只）",
+      "part_marking": "YC7D0 等（SOT-23-6，字符部分可读）",
+      "hw_identifiers": [
+        "HW-008-RELAY-ARRAY",
+        "HW-009-RELAY-COUNT",
+        "HW-010-RELAY-VOLTAGE",
+        "HW-014-CRYSTAL-USB"
+      ],
+      "bom_status": "candidate"
+    }
+  ],
+  "boundary": "Keyword heuristic only; not a netlist"
+}

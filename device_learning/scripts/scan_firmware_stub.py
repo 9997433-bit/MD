@@ -3,24 +3,45 @@
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from eeprom_parse import parse_eeprom  # noqa: E402
+
 REAL = ROOT / "phase_b" / "captures" / "eeprom.bin"
 SYNTH = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
-FW_OFFSET = 0x10
+
+# 8051 opcode names for frequency histogram (subset)
+OPCODES = {
+    0x00: "NOP",
+    0x02: "LJMP",
+    0x12: "LCALL",
+    0x22: "RET",
+    0x32: "RETI",
+    0x74: "MOV A,#",
+    0x75: "MOV direct,#",
+    0x90: "MOV DPTR,#",
+}
 
 
 def scan_firmware(fw: bytes, source: str) -> dict:
-    if len(fw) < 16:
+    if len(fw) < 4:
         return {"status": "too_short", "size": len(fw), "source": source}
+    hist: dict[str, int] = {}
+    for b in fw[:512]:
+        name = OPCODES.get(b, f"0x{b:02x}")
+        hist[name] = hist.get(name, 0) + 1
+    top = sorted(hist.items(), key=lambda x: -x[1])[:8]
     return {
         "status": "observed" if source == "device_capture" else "synthetic_pipeline_test",
         "source": source,
         "size_bytes": len(fw),
         "header_hex": fw[:32].hex(),
-        "boundary": "Not disassembled; use Ghidra 8051 when real dump available",
+        "opcode_histogram_top8": dict(top),
+        "boundary": "Histogram only; use Ghidra 8051 for real disassembly",
     }
 
 
@@ -36,11 +57,18 @@ def main() -> None:
         (ROOT / "manifests" / "firmware_scan.json").write_text(json.dumps(meta, indent=2) + "\n")
         print(json.dumps(meta, indent=2))
         return
-    fw = data[FW_OFFSET:] if len(data) > FW_OFFSET else b""
+
+    hdr = parse_eeprom(data)
+    if hdr.firmware_offset is None or hdr.firmware_size_bytes is None:
+        fw = b""
+    else:
+        fw = data[hdr.firmware_offset : hdr.firmware_offset + hdr.firmware_size_bytes]
+
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "eeprom_size": len(data),
-        "firmware_offset": FW_OFFSET,
+        "boot_format": hdr.boot_format,
+        "firmware_offset": hdr.firmware_offset,
         "firmware_scan": scan_firmware(fw, source),
     }
     if source == "synthetic_reference":

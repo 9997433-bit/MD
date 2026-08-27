@@ -25,6 +25,8 @@ cat STATIC_REPORT.md
 | `HARDWARE_HANDOFF.md` | 实机接入三步指南 |
 | `STATIC_REPORT.md` | 自动摘要 |
 | `manifests/pending_index.json` | 阻塞 identifier 索引 |
+| `IDENTIFIER_INDEX.md` | 237 条 identifier 全表 |
+| `manifests/bom_crosswalk.json` | BOM → HW 交叉对照 |
 | `phase_b/` | 实机采集（EEPROM/抓包） |
 | `phase_c/` | 实验验证 |
 | `phase_b/fixtures/` | 合成参考（非实机数据） |

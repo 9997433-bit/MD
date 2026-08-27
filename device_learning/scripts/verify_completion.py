@@ -21,6 +21,8 @@ def main() -> int:
         "phase_c_scaffold": (ROOT / "phase_c" / "README.md").exists(),
         "hardware_handoff": (ROOT / "HARDWARE_HANDOFF.md").exists(),
         "pending_index": (ROOT / "manifests" / "pending_index.json").exists(),
+        "identifier_index": (ROOT / "IDENTIFIER_INDEX.md").exists(),
+        "bom_crosswalk": (ROOT / "manifests" / "bom_crosswalk.json").exists(),
         "no_captures_yet": not (ROOT / "phase_b" / "captures" / "eeprom.bin").exists(),
     }
     result = {

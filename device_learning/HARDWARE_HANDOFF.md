@@ -30,6 +30,13 @@ device_learning/phase_b/captures/
 
 ```bash
 cd device_learning
+python3 scripts/run_phase_b.py
+```
+
+或分步执行：
+
+```bash
+cd device_learning
 python3 scripts/ingest_phase_b.py
 python3 scripts/analyze_pcap_stub.py
 python3 scripts/generate_ledger.py

@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-08-27T15:36:04.303084+00:00",
+  "source": "firmware/device.bit",
+  "config_segment_bytes": 130948,
+  "byte_entropy_bits": 4.3049,
+  "zero_byte_ratio": 0.5022,
+  "interpretation": "candidate",
+  "boundary": "High entropy expected in encrypted/compressed config; zero ratio relates to FRM-010 padding",
+  "supports_identifiers": [
+    "FRM-010-PADDING",
+    "FRM-023-ZERO-RATIO"
+  ]
+}

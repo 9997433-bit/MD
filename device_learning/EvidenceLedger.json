@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:33:42.071331+00:00",
+  "generated_at": "2026-08-27T15:36:05.521310+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_complete_pending_hardware",
   "catalogs": {
@@ -2155,7 +2155,7 @@
   },
   "manifests": {
     "bit_strings": {
-      "generated_at": "2026-08-27T15:33:41.055487+00:00",
+      "generated_at": "2026-08-27T15:36:04.214596+00:00",
       "source": "firmware/device.bit",
       "file_size_bytes": 131046,
       "min_string_length": 4,
@@ -2303,6 +2303,300 @@
         "bitstream_data_offset": 94
       }
     },
+    "bom_crosswalk": {
+      "generated_at": "2026-08-27T15:36:04.880923+00:00",
+      "component_count": 40,
+      "linked_count": 29,
+      "links": [
+        {
+          "ref_designator": "U-FPGA（丝印被器件遮挡，未读出）",
+          "part_marking": "XILINX SPARTAN XC3S200 FTG256EGQ2437 D4AWU… 4I TAIWAN",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U-USB（丝印未读出，位于 USB-B 座旁）",
+          "part_marking": "CY7C68013A-128AXI TWN 2249 B 04 633447",
+          "hw_identifiers": [
+            "HW-003-USB-CONTROLLER",
+            "HW-004-USB-PACKAGE",
+            "HW-017-INTERFACE-USB"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U-SRAM（USB 控制器左下方，丝印未读出）",
+          "part_marking": "ISSI IS62WV10248LL-15BLI（部分字符可读）",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE",
+            "HW-003-USB-CONTROLLER",
+            "HW-004-USB-PACKAGE",
+            "HW-017-INTERFACE-USB",
+            "HW-023-MEMORY-SRAM"
+          ],
+          "bom_status": "candidate"
+        },
+        {
+          "ref_designator": "XT600",
+          "part_marking": "24.000M",
+          "hw_identifiers": [
+            "HW-003-USB-CONTROLLER",
+            "HW-004-USB-PACKAGE",
+            "HW-014-CRYSTAL-USB",
+            "HW-017-INTERFACE-USB"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U-EEPROM（USB 控制器附近 SOIC-8，丝印未读出）",
+          "part_marking": "不可辨认（小型 8 脚器件）",
+          "hw_identifiers": [
+            "HW-003-USB-CONTROLLER",
+            "HW-004-USB-PACKAGE",
+            "HW-012-EEPROM",
+            "HW-013-EEPROM-CAPACITY",
+            "HW-017-INTERFACE-USB"
+          ],
+          "bom_status": "candidate"
+        },
+        {
+          "ref_designator": "U-CLK-DIST（FPGA 周边，未逐一读出）",
+          "part_marking": "不可辨认",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE"
+          ],
+          "bom_status": "unknown"
+        },
+        {
+          "ref_designator": "U513",
+          "part_marking": "KS245 49K95 AXYR",
+          "hw_identifiers": [
+            "HW-011-BUS-TRANSCEIVER"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U613",
+          "part_marking": "KS245 49K94 AXYR",
+          "hw_identifiers": [
+            "HW-011-BUS-TRANSCEIVER"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U622",
+          "part_marking": "KS245 45K94 AXYR",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE",
+            "HW-011-BUS-TRANSCEIVER"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U6xx-a（FPGA 下方一排 4 只之一，丝印未读全）",
+          "part_marking": "KS245 49K95 AXYR",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE",
+            "HW-011-BUS-TRANSCEIVER"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U6xx-b（FPGA 下方一排 4 只之二）",
+          "part_marking": "KS245 49K95 AXYR",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE",
+            "HW-011-BUS-TRANSCEIVER"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "U6xx-c（FPGA 下方一排 4 只之三）",
+          "part_marking": "KS245 49K95 AXYR",
+          "hw_identifiers": [
+            "HW-001-FPGA-DEVICE",
+            "HW-002-FPGA-PACKAGE",
+            "HW-011-BUS-TRANSCEIVER"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RL200",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RL302",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RL402",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-04（丝印被继电器本体遮挡）",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-05",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-06",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-07",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-08",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-09",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-10",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-11",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "RLxxx-12",
+          "part_marking": "OMRON G6JU-2FS-Y 3V DC 1715C1 CHINA",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "J-BNC-1..5（板上邻近丝印含 TV400/TV500 等区域标记）",
+          "part_marking": "无器件本体型号标记（黑色绝缘 BNC 同轴座，带灰色后部绝缘块）",
+          "hw_identifiers": [
+            "HW-016-INTERFACE-COAX"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "J600",
+          "part_marking": "无本体型号标记（金属屏蔽 USB-B 母座）",
+          "hw_identifiers": [
+            "HW-003-USB-CONTROLLER",
+            "HW-004-USB-PACKAGE",
+            "HW-017-INTERFACE-USB",
+            "HW-031-CONNECTOR-J600"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "J503（丝印部分可读）",
+          "part_marking": "AMP2313A 5747844-4",
+          "hw_identifiers": [
+            "HW-018-INTERFACE-DSUB"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "C-BULK（电源区多只，含 C608/C811 附近）",
+          "part_marking": "477A（钽电容，470 µF 级，黄色本体，多只）",
+          "hw_identifiers": [
+            "HW-022-POWER-TANTALUM"
+          ],
+          "bom_status": "confirmed"
+        },
+        {
+          "ref_designator": "YC700 / U-SOT23-6（继电器驱动区多只）",
+          "part_marking": "YC7D0 等（SOT-23-6，字符部分可读）",
+          "hw_identifiers": [
+            "HW-008-RELAY-ARRAY",
+            "HW-009-RELAY-COUNT",
+            "HW-010-RELAY-VOLTAGE",
+            "HW-014-CRYSTAL-USB"
+          ],
+          "bom_status": "candidate"
+        }
+      ],
+      "boundary": "Keyword heuristic only; not a netlist"
+    },
     "completion_status": {
       "static_phase_complete": true,
       "checks": {
@@ -2315,12 +2609,27 @@
         "phase_c_scaffold": true,
         "hardware_handoff": true,
         "pending_index": true,
+        "identifier_index": true,
+        "bom_crosswalk": true,
         "no_captures_yet": true
       },
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
+    "config_entropy": {
+      "generated_at": "2026-08-27T15:36:04.303084+00:00",
+      "source": "firmware/device.bit",
+      "config_segment_bytes": 130948,
+      "byte_entropy_bits": 4.3049,
+      "zero_byte_ratio": 0.5022,
+      "interpretation": "candidate",
+      "boundary": "High entropy expected in encrypted/compressed config; zero ratio relates to FRM-010 padding",
+      "supports_identifiers": [
+        "FRM-010-PADDING",
+        "FRM-023-ZERO-RATIO"
+      ]
+    },
     "crossref_index": {
-      "generated_at": "2026-08-27T15:33:41.563094+00:00",
+      "generated_at": "2026-08-27T15:36:04.959230+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -2477,34 +2786,40 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-27T15:33:41.225039+00:00",
+      "generated_at": "2026-08-27T15:36:04.516978+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
-      "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
-      "boot_config_byte": "0xc0",
+      "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
+      "boot_format": "C2",
+      "boot_config_byte": "0xc2",
       "vid_hex": "0x0000",
       "pid_hex": "0x0000",
-      "firmware_offset": 16,
-      "firmware_size_bytes": 8176,
-      "firmware_header_hex": "020010001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f",
+      "did_hex": "0x0000",
+      "config_byte": "0x00",
+      "firmware_offset": 12,
+      "firmware_size_bytes": 16,
+      "firmware_header_hex": "02001000000102030405060708090a0b",
+      "c2_record_count": 2,
+      "layout_ref": "manifests/eeprom_layout_ref.json",
       "boundary": "Values observed from file only; synthetic fixture is NOT device truth"
     },
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-27T15:33:41.144693+00:00",
+      "generated_at": "2026-08-27T15:36:04.385384+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
-      "sha256": "7972fb71fd7d8a6418592913f53d368e2d22e72ab7910e7129deb21ad84aa253",
-      "boot_config_byte": "0xc0",
+      "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
+      "boot_format": "C2",
+      "boot_config_byte": "0xc2",
       "vid_hex": "0x0000",
       "pid_hex": "0x0000",
-      "firmware_offset": 16
+      "layout_ref": "manifests/eeprom_layout_ref.json"
     },
     "file_hashes": {
-      "generated_at": "2026-08-27T15:33:40.617447+00:00",
+      "generated_at": "2026-08-27T15:36:03.838283+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -2566,21 +2881,32 @@
       ]
     },
     "firmware_scan": {
-      "generated_at": "2026-08-27T15:33:41.303174+00:00",
+      "generated_at": "2026-08-27T15:36:04.644224+00:00",
       "eeprom_size": 8192,
-      "firmware_offset": 16,
+      "boot_format": "C2",
+      "firmware_offset": 12,
       "firmware_scan": {
         "status": "synthetic_pipeline_test",
         "source": "synthetic_reference",
-        "size_bytes": 8176,
-        "header_hex": "020010001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f",
-        "boundary": "Not disassembled; use Ghidra 8051 when real dump available"
+        "size_bytes": 16,
+        "header_hex": "02001000000102030405060708090a0b",
+        "opcode_histogram_top8": {
+          "NOP": 3,
+          "LJMP": 2,
+          "0x10": 1,
+          "0x01": 1,
+          "0x03": 1,
+          "0x04": 1,
+          "0x05": 1,
+          "0x06": 1
+        },
+        "boundary": "Histogram only; use Ghidra 8051 for real disassembly"
       },
       "warning": "NOT device firmware"
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:33:40.924234+00:00",
+      "generated_utc": "2026-08-27T15:36:04.120857+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -2836,7 +3162,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-27T15:33:40.829682+00:00",
+      "generated_utc": "2026-08-27T15:36:04.020651+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -3965,7 +4291,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-27T15:33:40.617447+00:00",
+      "generated_at": "2026-08-27T15:36:03.838283+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -4016,7 +4342,7 @@
       ]
     },
     "pending_index": {
-      "generated_at": "2026-08-27T15:33:41.641594+00:00",
+      "generated_at": "2026-08-27T15:36:05.038864+00:00",
       "blocked_statuses": [
         "missing",
         "not_started",
@@ -4908,7 +5234,7 @@
       "note": "Blocked items must not be upgraded without new evidence"
     },
     "phase_b_status": {
-      "generated_at": "2026-08-27T15:33:41.732544+00:00",
+      "generated_at": "2026-08-27T15:36:05.119729+00:00",
       "captures_dir": "phase_b/captures",
       "capture_count": 0,
       "captures": [],
@@ -4923,7 +5249,7 @@
       ]
     },
     "photo_index": {
-      "generated_at": "2026-08-27T15:33:41.470026+00:00",
+      "generated_at": "2026-08-27T15:36:04.802113+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -5644,7 +5970,7 @@
       "count": 22
     },
     "system_map": {
-      "generated_at": "2026-08-27T15:33:41.392267+00:00",
+      "generated_at": "2026-08-27T15:36:04.723799+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -5780,7 +6106,7 @@
       "pin_bridge_count": 22
     },
     "usb_capture_meta": {
-      "generated_at": "2026-08-27T15:33:41.812364+00:00",
+      "generated_at": "2026-08-27T15:36:05.200533+00:00",
       "status": "missing",
       "path": "phase_b/captures",
       "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"
