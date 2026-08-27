@@ -153,7 +153,7 @@ def main() -> None:
     (ROOT / "coverage.json").write_text(
         json.dumps(coverage, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    for post in ("verify_completion.py", "build_static_freeze.py"):
+    for post in ("verify_completion.py", "build_static_freeze.py", "build_package_manifest.py"):
         script = ROOT / "scripts" / post
         if script.exists():
             subprocess.run([sys.executable, str(script)], check=False)

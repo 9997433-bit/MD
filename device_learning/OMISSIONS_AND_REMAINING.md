@@ -3,6 +3,12 @@
 **生成时间**：2026-08-27  
 **声明**：目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
+## 静态阶段已关闭
+
+静态分析于 `manifests/static_freeze.json` 冻结。**无实机数据时不再扩展 identifier 或升级 status。**
+
+下一步仅需实机证据，运行 `make handoff` 查看交接摘要。
+
 ## 预期保持 unknown / missing / not_started 的项
 
 ### 固件层（需实机）

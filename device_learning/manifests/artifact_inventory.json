@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-27T15:47:05.801468+00:00",
-  "artifact_count": 40,
-  "present_count": 40,
+  "generated_at": "2026-08-27T15:51:27.756719+00:00",
+  "artifact_count": 42,
+  "present_count": 42,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 218390
+      "size_bytes": 220455
     },
     {
       "path": "coverage.json",
@@ -85,7 +85,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 5978
+      "size_bytes": 6281
     },
     {
       "path": "manifests/bit_strings.json",
@@ -115,7 +115,7 @@
       "path": "manifests/completion_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 812
+      "size_bytes": 872
     },
     {
       "path": "manifests/config_entropy.json",
@@ -190,6 +190,12 @@
       "size_bytes": 1347
     },
     {
+      "path": "manifests/package_manifest.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1024
+    },
+    {
       "path": "manifests/pending_index.json",
       "description": "generated manifest",
       "exists": true,
@@ -206,6 +212,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 4218
+    },
+    {
+      "path": "manifests/phase_transition.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 366
     },
     {
       "path": "manifests/photo_hw_map.json",

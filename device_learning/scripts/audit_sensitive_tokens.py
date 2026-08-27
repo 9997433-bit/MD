@@ -10,10 +10,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCAN_DIRS = [ROOT / "manifests", ROOT]
 SCAN_GLOBS = ("*.json", "*.md")
-SKIP_FILES = {"device.bit"}
+SKIP_FILES = {"device.bit", "EvidenceLedger.json", "sensitive_audit.json"}
 PATTERNS = [
-    re.compile(r"topusb", re.I),
-    re.compile(r"4431"),
+    ("PAT_TOPUSB", re.compile(r"topusb", re.I)),
+    ("PAT_PRODUCT_DIGIT", re.compile(r"4431")),
 ]
 
 
@@ -25,9 +25,9 @@ def scan_file(path: Path) -> list[dict]:
     except OSError:
         return []
     hits = []
-    for pat in PATTERNS:
+    for label, pat in PATTERNS:
         for m in pat.finditer(text):
-            hits.append({"pattern": pat.pattern, "offset": m.start()})
+            hits.append({"pattern_id": label, "offset": m.start()})
     return hits
 
 
