@@ -34,8 +34,8 @@
 
 | 阶段 | 状态 |
 |------|------|
-| A 静态分析 | **完成** (`verify_completion.py` → `static_phase_complete: true`) |
-| B 实机采集 | 脚手架就绪，等待 `phase_b/captures/` |
+| A 静态分析 | **完成并已冻结** (`manifests/static_freeze.json`) |
+| B 实机采集 | 脚手架就绪；可用 `make dryrun` 验证合成流水线 |
 | C 实验验证 | 脚手架就绪，见 `phase_c/README.md` |
 | D 行为复现 | 未开始 |
 
@@ -44,7 +44,9 @@
 ```bash
 cd device_learning
 make verify              # 生成账本 + 验收（推荐）
-make test                # 55 项测试
+make test                # 全量 pytest（含合成流水线集成测试）
+make health              # 包健康检查
+make dryrun              # 合成 EEPROM 流水线演练（非实机数据）
 make phase-b             # 实机采集后一键刷新
 ```
 

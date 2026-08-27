@@ -22,6 +22,9 @@ freeze: verify
 
 ci: verify test
 
+dryrun:
+	python3 scripts/dryrun_phase_b.py
+
 health:
 	python3 scripts/health_check.py
 

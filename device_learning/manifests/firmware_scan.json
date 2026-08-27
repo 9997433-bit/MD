@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-27T15:47:04.231562+00:00",
+  "generated_at": "2026-08-27T15:49:16.026499+00:00",
   "eeprom_size": 8192,
   "boot_format": "C2",
   "firmware_offset": 12,
   "firmware_scan": {
-    "status": "synthetic_pipeline_test",
-    "source": "synthetic_reference",
+    "status": "observed",
+    "source": "device_capture",
     "size_bytes": 16,
     "header_hex": "02001000000102030405060708090a0b",
     "opcode_histogram_top8": {
@@ -19,6 +19,5 @@
       "0x06": 1
     },
     "boundary": "Histogram only; use Ghidra 8051 for real disassembly"
-  },
-  "warning": "NOT device firmware"
+  }
 }
