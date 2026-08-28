@@ -11,11 +11,26 @@ Xilinx 7-series 配置位流深度解析（L2 阶段）
 import sys
 import collections
 import math
+from pathlib import Path
 
-PATH = sys.argv[1] if len(sys.argv) > 1 else \
-    "/workspace/zero0000-research/assets/firmware/20230825_s2056.bin"
+HERE = Path(__file__).resolve().parent
+DEFAULT_BIN = HERE.parent / "assets" / "firmware" / "20230825_s2056.bin"
+DEFAULT_MCS = HERE.parent / "assets" / "firmware" / "20230825_s2056.mcs"
 
-data = open(PATH, "rb").read()
+PATH = sys.argv[1] if len(sys.argv) > 1 else str(DEFAULT_BIN)
+if not Path(PATH).is_file():
+    # regenerate from mcs when bin is gitignored / missing
+    from parse_mcs import parse_mcs
+    if DEFAULT_MCS.is_file():
+        print(f"# bin 缺失，从 MCS 重建: {DEFAULT_MCS}")
+        data = bytes(parse_mcs(DEFAULT_MCS))
+        DEFAULT_BIN.write_bytes(data)
+        PATH = str(DEFAULT_BIN)
+    else:
+        raise SystemExit(f"missing bin and mcs: {PATH}")
+else:
+    data = open(PATH, "rb").read()
+
 print(f"# 输入镜像: {PATH}")
 print(f"镜像长度: {len(data)} 字节 ({len(data)/1024/1024:.3f} MiB)")
 

@@ -50,10 +50,10 @@ def main() -> None:
     print(f"boot_bb11220044_offset: {boot}")
 
     idcodes = {
-        0x03631093: "XC7K160T",
-        0x0362C093: "XC7K325T",
-        0x03722093: "XC7K70T",
-        0x02824093: "XC3S200",
+        0x0364C093: "XC7K160T",
+        0x03651093: "XC7K325T",
+        0x03647093: "XC7K70T",
+        0x0362D093: "XC7A100T",
     }
     for code, name in idcodes.items():
         off = data.find(code.to_bytes(4, "big"))
