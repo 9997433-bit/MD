@@ -189,40 +189,62 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
 
 
 def crosscheck_clock_spi(clocks: list[dict], checklist: dict) -> dict:
-    """C2 样钟 vs ADS62P49 0x20 LOW SPEED（SLAS635）交叉核验。"""
+    """C2↔ADC 0x20 LOW SPEED；C3/C6↔DAC CONFIG1 插值（靶标表 X2）。"""
     notes: list[str] = []
-    bump = None  # optional P1.4 bump
+    bump = None
     consistent: bool | None = None
     by_id = {c["id"]: c.get("hz") for c in clocks if "id" in c and c.get("hz")}
     adc = by_id.get("C2") or by_id.get("ADC_CLK")
+    dac = by_id.get("C3") or by_id.get("DACCLK")
+    data = by_id.get("C6") or by_id.get("DATACLK")
     ls_on = bool(checklist.get("A_adc_0x20_low_speed_on"))
     ls_off = bool(checklist.get("A_adc_0x20_low_speed_off"))
-    if not adc or not (ls_on or ls_off):
-        return {"notes": notes, "P1.4_bump": bump, "consistent": None}
-    if adc <= 80e6 * 1.01:
-        if ls_on:
+
+    # --- LOW SPEED vs C2 ---
+    if adc and (ls_on or ls_off):
+        if adc <= 80e6 * 1.01:
+            if ls_on:
+                notes.append(
+                    f"交叉一致：C2={adc:.0f}≤80e6 且 ADC LOW SPEED=1 → 强化计划C/低率 P1.4"
+                )
+                bump = "强 🔶"
+                consistent = True if consistent is not False else False
+            elif ls_off:
+                notes.append(
+                    f"交叉冲突：C2={adc:.0f}≤80e6 但 LOW SPEED=0（核对探点或 SPI 译码）"
+                )
+                consistent = False
+        else:
+            if ls_off:
+                notes.append(
+                    f"交叉一致：C2={adc:.0f}>80e6 且 LOW SPEED=0 → 强化计划A/B P1.4"
+                )
+                bump = "强 🔶"
+                consistent = True if consistent is not False else False
+            elif ls_on:
+                notes.append(
+                    f"交叉冲突：C2={adc:.0f}>80e6 但 LOW SPEED=1（核对探点或 SPI）"
+                )
+                consistent = False
+
+    # --- CONFIG1 interp vs C3/C6 (X2) ---
+    interp_spi = checklist.get("dac_interp_x")
+    if dac and data and data > 0 and interp_spi is not None:
+        interp_clk = int(round(dac / data))
+        if abs(dac / data - interp_clk) <= 0.05 and interp_clk == int(interp_spi):
             notes.append(
-                f"交叉一致：C2={adc:.0f}≤80e6 且 ADC LOW SPEED=1 → 强化计划C/低率 P1.4"
+                f"交叉一致：DACCLK/DATACLK≈{dac/data:.3f}→{interp_clk}x "
+                f"且 CONFIG1 fir→{interp_spi}x（靶标 X2）"
             )
             bump = "强 🔶"
-            consistent = True
-        elif ls_off:
+            consistent = True if consistent is not False else False
+        else:
             notes.append(
-                f"交叉冲突：C2={adc:.0f}≤80e6 但 LOW SPEED=0（核对探点或 SPI 译码）"
+                f"交叉冲突：钟比≈{dac/data:.3f}（hint {int(round(dac/data))}x）"
+                f" vs CONFIG1→{interp_spi}x（核对 C3/C6 或 fir 位）"
             )
             consistent = False
-    else:
-        if ls_off:
-            notes.append(
-                f"交叉一致：C2={adc:.0f}>80e6 且 LOW SPEED=0 → 强化计划A/B P1.4"
-            )
-            bump = "强 🔶"
-            consistent = True
-        elif ls_on:
-            notes.append(
-                f"交叉冲突：C2={adc:.0f}>80e6 但 LOW SPEED=1（核对探点或 SPI）"
-            )
-            consistent = False
+
     return {"notes": notes, "P1.4_bump": bump, "consistent": consistent}
 
 
@@ -324,13 +346,34 @@ def self_test() -> int:
     if x_bad["consistent"] is not False or "交叉冲突" not in "".join(x_bad["notes"]):
         print("SELF-TEST FAILED A/B×LOW SPEED conflict", x_bad, file=sys.stderr)
         return 1
+    # X2: C3/C6 ratio vs CONFIG1 fir
+    x_interp = crosscheck_clock_spi(
+        [
+            {"id": "C3", "hz": 245.76e6},
+            {"id": "C6", "hz": 122.88e6},
+        ],
+        {"dac_interp_x": 2},
+    )
+    if not x_interp["consistent"] or "CONFIG1" not in "".join(x_interp["notes"]):
+        print("SELF-TEST FAILED X2 interp cross", x_interp, file=sys.stderr)
+        return 1
+    x_interp_bad = crosscheck_clock_spi(
+        [
+            {"id": "C3", "hz": 245.76e6},
+            {"id": "C6", "hz": 122.88e6},
+        ],
+        {"dac_interp_x": 4},
+    )
+    if x_interp_bad["consistent"] is not False:
+        print("SELF-TEST FAILED X2 interp conflict", x_interp_bad, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
     print(
         "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, "
         "RHINO 163.84/PlanC + SPI→C prior, R11e CONFIG31, LDV 40.96, "
-        "ADC 0x20×C2 crosscheck)"
+        "ADC 0x20×C2 + DAC X2 interp crosscheck)"
     )
     return 0
 

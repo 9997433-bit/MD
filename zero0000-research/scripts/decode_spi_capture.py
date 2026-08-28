@@ -104,7 +104,22 @@ CDCE_RHINO_61 = {
     0xB: 0x0000040,
     0xC: 0x0000180,
 }
-DAC_CONSERVISS_CFG1 = 0x21  # FIR0=2x + twos
+DAC_CONSERVISS_CFG1 = 0x21  # bit5 fir0=2x + bit0 twos (SLAS693)
+
+
+def _dac_interp_from_fir(fir0: int, fir1: int) -> int | None:
+    """Return 1/2/4, or None if fir1 without fir0 (illegal per datasheet)."""
+    if fir0 and fir1:
+        return 4
+    if fir0:
+        return 2
+    if fir1:
+        return None
+    return 1
+
+
+def _dac_interp_from_cfg1(d: int) -> int | None:
+    return _dac_interp_from_fir((d >> 5) & 1, (d >> 4) & 1)
 # Conserviss C_DAC_PRE_SYNC_CONFIG (addr → data); used for profile hit ratio only.
 DAC_CONSERVISS_PRE_SYNC: dict[int, int] = {
     0x00: 0x70,
@@ -359,8 +374,11 @@ def decode_dac(t: float, bits: list[int]) -> Frame:
     }
     if addr == 0x01 and data_bytes:
         d = data_bytes[0]
-        fir0, fir1 = (d >> 4) & 1, (d >> 5) & 1
-        fr.notes.append(f"fir0={fir0} fir1={fir1} → interp ~{1 + fir0 + fir1*2}x(?)")
+        # SLAS693 CONFIG1: bit5=fir0_ena (2x), bit4=fir1_ena (4x, requires fir0)
+        fir0, fir1 = (d >> 5) & 1, (d >> 4) & 1
+        interp = _dac_interp_from_fir(fir0, fir1)
+        interp_s = f"{interp}x" if interp else "invalid(fir1 without fir0)"
+        fr.notes.append(f"fir0={fir0} fir1={fir1} → interp {interp_s}")
         if d == DAC_CONSERVISS_CFG1:
             fr.notes.append("matches Conserviss FMC150-VC707 CONFIG1 (2x+twos)")
     if (not rw) and addr in DAC_CONSERVISS_PRE_SYNC and data_bytes:
@@ -466,6 +484,10 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
         if ai == 0x01 and dac_cfg1 is None:
             dac_cfg1 = di
 
+    dac_interp_x = None
+    if dac_cfg1 is not None:
+        dac_interp_x = _dac_interp_from_cfg1(dac_cfg1)
+
     dac_pre_hit = 0
     dac_pre_detail: list[str] = []
     for addr, expect in DAC_CONSERVISS_PRE_SYNC.items():
@@ -500,6 +522,7 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
             None,
         ),
         "D1_dac_cfg1_seen": any(f.decoded.get("addr") == "0x01" for f in dac),
+        "dac_interp_x": dac_interp_x,
         "D2_dac_version_read": any("VERSION read" in n for f in dac for n in f.notes),
         "C1_cdce_writes": any(
             f.decoded.get("addr", "").startswith("0x") and "READ" not in "".join(f.notes)
@@ -749,6 +772,7 @@ def self_test() -> int:
         or not flags3.get("conserviss_dac_cfg1")
         or not flags3.get("A_adc_0x50_twos")
         or not flags3.get("A_adc_0x20_low_speed_off")
+        or flags3.get("dac_interp_x") != 2
     ):
         print("SELF-TEST FAILED conserviss min", flags3, file=sys.stderr)
         return 1
