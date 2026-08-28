@@ -7,9 +7,14 @@
 ## 现有资料状态
 
 - G0 ✅（P1.1/P1.2 **强 🔶**；P1.3/P1.4 **❓**）/ G1 ✅（R10–R11e + R5b + Hamming≤2）  
-- G2 管线齐（ingest → `apply_g0_backfill.py --apply` 同步结论卡/进度；`--demo` **禁止**回填）  
+- G2 管线齐（ingest → `mk_g2_clocks.py --confirm-measured` → `apply_g0_backfill.py --apply`；`--demo` **禁止**回填）  
 - **Must-2 通过**；**Must-1/3 仅差实测钟/SPI**  
 - 一页结论：`当前结论卡_①②.md`（**≠ Must 完成**）
+
+## 云环境硬阻塞（2026-08-28 复核）
+
+本 Cloud Agent VM：**无** `lsusb` 设备、无 `/dev/ttyUSB*`、无 Vivado/OpenOCD/prjxray-xc7k160t。  
+→ **无法在云端自行测钟/SPI**；Must-1/3 只能由用户投放实测文件或提供带仪器的板卡工位。
 
 ## 仍可解锁的输入
 
