@@ -142,6 +142,16 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
         )
         if p14 == "❓":
             p14 = "🔶"
+    r_ratio = checklist.get("rhino_61m44_cdce_match_ratio") or 0
+    r_hits = checklist.get("rhino_61m44_cdce_reg_hits") or 0
+    if best == "rhino_61m44":
+        # best==rhino only when Reg2 is ÷8 (0x8304000); attach Plan C clock prior
+        notes.append(
+            f"CDCE≈RHINO计划C (ratio={r_ratio}, hits={r_hits}) → G2 钟先验："
+            "C2≈61.44e6 / C3≈245.76e6；见 decode_cdce_profile --profile rhino_61m44 / G1 §6.9"
+        )
+        if p14 == "❓":
+            p14 = "🔶"
     if checklist.get("conserviss_dac_cfg1") or dac_pre >= 0.3:
         notes.append(
             f"DAC Conserviss 足迹 (cfg1={checklist.get('dac_cfg1_value')}, "
@@ -224,6 +234,18 @@ def self_test() -> int:
     if c_c["P1.3_suggested"] != "✅" or "计划C" not in c_c["H8"]:
         print("SELF-TEST FAILED RHINO Plan C", c_c, file=sys.stderr)
         return 1
+    # SPI best==rhino_61m44 → Plan C clock prior note
+    s_r = infer_spi(
+        {
+            "C1_cdce_writes": True,
+            "best_cdce_profile": "rhino_61m44",
+            "rhino_61m44_cdce_match_ratio": 0.57,
+            "rhino_61m44_cdce_reg_hits": 4,
+        }
+    )
+    if "计划C" not in "".join(s_r["notes"]) or "61.44" not in "".join(s_r["notes"]):
+        print("SELF-TEST FAILED SPI→Plan C prior", s_r, file=sys.stderr)
+        return 1
     # R11e: CONFIG31/VERSION read alone → 强 🔶 (Must-1 grade)
     s_id = infer_spi({"D2_dac_version_read": True})
     if s_id["P1.4_suggested"] != "强 🔶" or "VERSION31" not in "".join(s_id["notes"]):
@@ -234,7 +256,7 @@ def self_test() -> int:
         return 1
     print(
         "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, "
-        "RHINO 163.84/PlanC, R11e CONFIG31)"
+        "RHINO 163.84/PlanC + SPI→C prior, R11e CONFIG31)"
     )
     return 0
 

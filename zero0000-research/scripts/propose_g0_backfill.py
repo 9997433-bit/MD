@@ -45,6 +45,7 @@ def main() -> int:
 
     profile = checklist.get("best_cdce_profile", "—")
     ratio = checklist.get("conserviss_cdce_match_ratio", "—")
+    r_ratio = checklist.get("rhino_61m44_cdce_match_ratio", "—")
     dac_cfg = checklist.get("dac_cfg1_value", "—")
     dac_pre = checklist.get("conserviss_dac_pre_sync_ratio", "—")
     cdce_prior = infer.get("cdce_profile_prior") or {}
@@ -64,7 +65,8 @@ def main() -> int:
         f"| P1.4 | {p14} | {'; '.join(spi.get('notes') or []) or '（无 SPI）'} |",
         f"| P1.5 | {p15} | 仅上电实验标记={args.power_on_only} |",
         f"| H8 | {clocks.get('H8', '—')} | interp_hint={clocks.get('interp_hint')} |",
-        f"| CDCE 剖面 | {profile} | Conserviss match_ratio={ratio}; DAC CONFIG1={dac_cfg}; pre_sync_ratio={dac_pre} |",
+        f"| CDCE 剖面 | {profile} | Conserviss ratio={ratio}; rhino_61m44 ratio={r_ratio}; "
+        f"DAC CONFIG1={dac_cfg}; pre_sync_ratio={dac_pre} |",
         "",
     ]
     if cdce_prior:
