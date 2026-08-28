@@ -20,6 +20,19 @@ namespace CosmicFront.Combat
             damage = dps / fireRate;
         }
 
+        /// <summary>
+        /// Multiplier on cooldown duration (0.95 = -5% cooldown / slightly higher fire rate).
+        /// </summary>
+        public void ApplyCooldownMultiplier(float cooldownMultiplier)
+        {
+            var mul = Mathf.Max(0.01f, cooldownMultiplier);
+            fireRate = Mathf.Max(0.01f, fireRate / mul);
+            if (_dps > 0f)
+            {
+                damage = _dps / fireRate;
+            }
+        }
+
         public void TryFire(Transform origin, Transform lockTarget, GameObject owner)
         {
             if (origin == null || _cooldown > 0f)

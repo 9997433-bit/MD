@@ -52,6 +52,16 @@ namespace CosmicFront.Mech
             BoostFuel = stats.BoostFuel;
         }
 
+        /// <summary>
+        /// Apply hangar passive tuning multipliers on top of current configured stats.
+        /// </summary>
+        public void ApplyTuning(float moveSpeedMultiplier, float boostFuelMultiplier = 1f)
+        {
+            maxSpeed *= Mathf.Max(0.01f, moveSpeedMultiplier);
+            maxBoostFuel *= Mathf.Max(0.01f, boostFuelMultiplier);
+            BoostFuel = maxBoostFuel;
+        }
+
         public void ApplyInput(MechInputState input, Transform yawPivot, Transform pitchPivot)
         {
             var speedLimit = maxSpeed * (input.Boost && BoostFuel > 0f ? boostMultiplier : 1f);

@@ -3,6 +3,7 @@ using CosmicFront.Core;
 using CosmicFront.Mech;
 using CosmicFront.Player;
 using CosmicFront.Ship;
+using CosmicFront.Tuning;
 using CosmicFront.UI;
 
 namespace CosmicFront.Core
@@ -82,6 +83,11 @@ namespace CosmicFront.Core
 
             playerMech.SetTeam(GameManager.Instance.SelectedTeam);
             playerMech.SetArchetype(GameManager.Instance.SelectedMech);
+
+            if (GameManager.Instance.PilotLoadout != null)
+            {
+                TuningApplier.Apply(playerMech, GameManager.Instance.PilotLoadout);
+            }
         }
 
         private void TryAutoBoardShip()

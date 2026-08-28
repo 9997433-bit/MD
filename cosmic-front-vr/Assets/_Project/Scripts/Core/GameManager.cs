@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using CosmicFront.Network;
+using CosmicFront.Tuning;
 
 namespace CosmicFront.Core
 {
@@ -36,6 +37,7 @@ namespace CosmicFront.Core
         public int PlayerKills { get; private set; }
         public int PlayerDeaths { get; private set; }
         public string ModeResultMessage { get; private set; } = string.Empty;
+        public PilotLoadout PilotLoadout { get; private set; } = new PilotLoadout();
 
         public event Action<GamePhase> PhaseChanged;
         public event Action MatchEnded;
@@ -56,6 +58,11 @@ namespace CosmicFront.Core
         {
             SelectedTeam = team;
             SelectedMech = mech;
+        }
+
+        public void SetPilotLoadout(PilotLoadout loadout)
+        {
+            PilotLoadout = loadout ?? new PilotLoadout();
         }
 
         public void SelectSpawnPreference(SpawnPreference spawn)

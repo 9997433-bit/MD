@@ -4,6 +4,7 @@ using CosmicFront.Combat;
 using CosmicFront.Core;
 using CosmicFront.Mech;
 using CosmicFront.Player;
+using CosmicFront.Tuning;
 using CosmicFront.UI;
 
 namespace CosmicFront.Network

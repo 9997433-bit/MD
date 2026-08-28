@@ -21,6 +21,15 @@ namespace CosmicFront.Combat
             _ammo = maxAmmo;
         }
 
+        /// <summary>
+        /// Multiplier on fire cooldown duration (0.95 = -5% cooldown).
+        /// </summary>
+        public void ApplyCooldownMultiplier(float cooldownMultiplier)
+        {
+            fireCooldown *= Mathf.Max(0.01f, cooldownMultiplier);
+            reloadTime *= Mathf.Max(0.01f, cooldownMultiplier);
+        }
+
         public void TryFire(Transform origin, Transform lockTarget, GameObject owner)
         {
             if (origin == null || _cooldown > 0f || _reloadTimer > 0f || _ammo <= 0)
