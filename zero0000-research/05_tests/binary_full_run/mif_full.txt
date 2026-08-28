@@ -1,0 +1,42 @@
+file=assets/firmware/20230825_s2056.bin size=6692588
+tables=KC705_DDS Vivado.runs *.mif (ads/dac/cdce int+ext)
+
+=== ADS62P49_MIF_LE16 ===
+full_table_bytes=36 full_hits=0 first=None
+longest_prefix_words=2/18 offset=5474
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== ADS62P49_MIF_BE16 ===
+full_table_bytes=36 full_hits=0 first=None
+longest_prefix_words=2/18 offset=3360
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== DAC3283_MIF_LE16 ===
+full_table_bytes=64 full_hits=0 first=None
+longest_prefix_words=0/32 offset=-1
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== DAC3283_MIF_BE16 ===
+full_table_bytes=64 full_hits=0 first=None
+longest_prefix_words=0/32 offset=-1
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== CDCE_INT_MIF_LE32 ===
+full_table_bytes=52 full_hits=0 first=None
+longest_prefix_words=0/13 offset=-1
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== CDCE_INT_MIF_BE32 ===
+full_table_bytes=52 full_hits=0 first=None
+longest_prefix_words=0/13 offset=-1
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== CDCE_EXT_MIF_LE32 ===
+full_table_bytes=52 full_hits=0 first=None
+longest_prefix_words=0/13 offset=-1
+  OK: no meaningful contiguous MIF-style ROM blob
+
+=== CDCE_EXT_MIF_BE32 ===
+full_table_bytes=52 full_hits=0 first=None
+longest_prefix_words=0/13 offset=-1
+  OK: no meaningful contiguous MIF-style ROM blob

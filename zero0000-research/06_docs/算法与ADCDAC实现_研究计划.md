@@ -215,6 +215,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G0/G1 收束：位流逆向阶梯文档（`02_firmware/位流逆向_能推出与不能.md`）— 明确二进制上限与 G2 门  
 - [x] **二进制基准计划+目标**（`06_docs/二进制基准_分析计划与目标.md`；B0–B4 ✅ / B5 等 G2；`audit_binary_baseline.py`）  
 - [x] G1 再加深：R5d RHINO_CALF DDC/DUC·NCO 先验 + 位流 NCO 字噪声阴性（§5e；Must-2 血统排除）  
+- [x] **位流全量分析**：结构+BRAM+SPI/MIF/网+关键字/频率/窗密度（`位流全量分析报告.md`；`binary_full_census.py`；`05_tests/binary_full_run/`）  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）

@@ -29,6 +29,7 @@ REQUIRED_DOCS = [
     ROOT / "02_firmware" / "KC705_DDS_SPI_MIF对照.md",
     ROOT / "02_firmware" / "prjxray_K160T帧图可得性.md",
     ROOT / "02_firmware" / "位流逆向_能推出与不能.md",
+    ROOT / "02_firmware" / "位流全量分析报告.md",
     PLAN,
 ]
 

@@ -38,6 +38,8 @@ jobs:
           python3 scripts/ocr_scope_hz.py --self-test >/dev/null
       - name: Plan C synthetic demo (never writes G0)
         run: python3 scripts/ingest_g2_inbox.py --demo-plan-c >/dev/null
+      - name: Binary full census self-test
+        run: python3 scripts/binary_full_census.py --self-test
       - name: Binary-baseline B-Must (offline bitstream track)
         run: python3 scripts/audit_binary_baseline.py
       - name: Must audit (expect fail without measured inbox)
