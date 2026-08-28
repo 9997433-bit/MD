@@ -20,6 +20,17 @@ namespace CosmicFront.Core
         {
             if (GameManager.Instance != null)
             {
+                if (GameManager.Instance.IsMultiplayer)
+                {
+                    if (playerMech != null)
+                    {
+                        playerMech.gameObject.SetActive(false);
+                    }
+
+                    GameManager.Instance.OnBattleSceneLoaded();
+                    return;
+                }
+
                 ApplyLoadoutFromGameManager();
                 GameManager.Instance.OnBattleSceneLoaded();
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using CosmicFront.Combat;
 using CosmicFront.Core;
-using CosmicFront.Mech;
+using CosmicFront.Network;
 
 namespace CosmicFront.Mech
 {
@@ -24,6 +24,7 @@ namespace CosmicFront.Mech
         private WeaponPrimary _primary;
         private WeaponSecondary _secondary;
         private IMechInputProvider _input;
+        private NetworkMechSync _network;
 
         public TeamId Team => team;
         public MechArchetype Archetype => archetype;
@@ -37,6 +38,7 @@ namespace CosmicFront.Mech
             _lockOn = GetComponent<LockOnSystem>();
             _primary = GetComponent<WeaponPrimary>();
             _secondary = GetComponent<WeaponSecondary>();
+            _network = GetComponent<NetworkMechSync>();
             _input = GetComponent<MechInputRouter>() ?? GetComponent<IMechInputProvider>();
 
             ApplyArchetype();
@@ -82,6 +84,11 @@ namespace CosmicFront.Mech
                 return;
             }
 
+            if (_network != null && !_network.IsLocalPlayer)
+            {
+                return;
+            }
+
             var input = _input.ReadInput();
             _movement.ApplyInput(input, yawPivot != null ? yawPivot : transform, pitchPivot);
 
@@ -101,12 +108,26 @@ namespace CosmicFront.Mech
 
             if (_primary != null && input.FirePrimary)
             {
-                _primary.TryFire(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null, gameObject);
+                if (_network != null)
+                {
+                    _network.RequestPrimaryFire(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null);
+                }
+                else
+                {
+                    _primary.TryFire(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null, gameObject);
+                }
             }
 
             if (_secondary != null && input.FireSecondary)
             {
-                _secondary.TryFire(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null, gameObject);
+                if (_network != null)
+                {
+                    _network.RequestSecondaryFire(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null);
+                }
+                else
+                {
+                    _secondary.TryFire(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null, gameObject);
+                }
             }
         }
 

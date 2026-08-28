@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using CosmicFront.Core;
 using CosmicFront.Mech;
+using CosmicFront.Network;
 
 namespace CosmicFront.UI
 {
@@ -10,6 +11,9 @@ namespace CosmicFront.UI
         [SerializeField] private Dropdown teamDropdown;
         [SerializeField] private Dropdown mechDropdown;
         [SerializeField] private Button startButton;
+        [SerializeField] private Button hostButton;
+        [SerializeField] private Button joinButton;
+        [SerializeField] private InputField addressInput;
         [SerializeField] private Text statusText;
         [SerializeField] private Text controlsHint;
 
@@ -20,7 +24,23 @@ namespace CosmicFront.UI
                 startButton.onClick.AddListener(OnStartClicked);
             }
 
+            if (hostButton != null)
+            {
+                hostButton.onClick.AddListener(OnHostClicked);
+            }
+
+            if (joinButton != null)
+            {
+                joinButton.onClick.AddListener(OnJoinClicked);
+            }
+
             PopulateDropdowns();
+            NetworkBootstrap.StatusChanged += OnNetworkStatus;
+        }
+
+        private void OnDestroy()
+        {
+            NetworkBootstrap.StatusChanged -= OnNetworkStatus;
         }
 
         private void Start()
@@ -31,7 +51,12 @@ namespace CosmicFront.UI
                 go.AddComponent<GameManager>();
             }
 
-            UpdateStatus("选择阵营与机甲，开始单机任务");
+            if (addressInput != null && string.IsNullOrWhiteSpace(addressInput.text))
+            {
+                addressInput.text = NetworkSessionConfig.DefaultAddress;
+            }
+
+            UpdateStatus("单机：开始任务 | 多人：Host 或 Join");
             UpdateControlsHint();
         }
 
@@ -68,9 +93,42 @@ namespace CosmicFront.UI
 
         private void OnStartClicked()
         {
-            if (GameManager.Instance == null)
+            if (!ApplyLoadout())
             {
                 return;
+            }
+
+            GameManager.Instance.StartSinglePlayerMission();
+        }
+
+        private void OnHostClicked()
+        {
+            if (!ApplyLoadout())
+            {
+                return;
+            }
+
+            UpdateStatus("正在启动 Host...");
+            GameManager.Instance.StartMultiplayerHost();
+        }
+
+        private void OnJoinClicked()
+        {
+            if (!ApplyLoadout())
+            {
+                return;
+            }
+
+            var address = addressInput != null ? addressInput.text : NetworkSessionConfig.DefaultAddress;
+            UpdateStatus($"正在加入 {address}...");
+            GameManager.Instance.StartMultiplayerClient(address);
+        }
+
+        private bool ApplyLoadout()
+        {
+            if (GameManager.Instance == null)
+            {
+                return false;
             }
 
             var team = TeamId.Terran;
@@ -87,7 +145,12 @@ namespace CosmicFront.UI
             }
 
             GameManager.Instance.SelectLoadout(team, mech);
-            GameManager.Instance.StartSinglePlayerMission();
+            return true;
+        }
+
+        private void OnNetworkStatus(string message)
+        {
+            UpdateStatus(message);
         }
 
         public void UpdateStatus(string message)
@@ -106,8 +169,8 @@ namespace CosmicFront.UI
             }
 
             controlsHint.text = VRMechInput.IsHeadsetPresent()
-                ? "VR: 左摇杆移动 | 右摇杆转向 | 右扳机射击 | 左扳机导弹 | 左Grip锁定 | Enter开始"
-                : "键鼠: WASD移动 | Tab锁定 | 鼠标射击 | Enter开始";
+                ? "VR: 左摇杆移动 | 右摇杆转向 | 右扳机射击 | 左扳机导弹 | 左Grip锁定"
+                : "键鼠: WASD移动 | Tab锁定 | 鼠标射击 | 多人默认端口 7770";
         }
     }
 }

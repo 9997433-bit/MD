@@ -81,8 +81,8 @@ cosmic-front-vr/
 | P0 文档 | ✅ | `docs/` |
 | P1 单机切片 | ✅ | 核心脚本 + Editor 场景向导 |
 | P1.5 VR 输入 | ✅ | VRMechInput、Snap Turn、机库场景、XR Rig |
-| P2 多人 | ⏳ | 见 `docs/NETWORK_PLAN.md` |
-| P3 Steam MVP | ⏳ | 匹配、2 图 2 机 |
+| P2 多人 LAN | ✅ | Fish-Net Host/Join、NetworkMechSync |
+| P3 Steam MVP | ⏳ | Dedicated Server、2 图、击杀榜同步 |
 | P4 战舰 | ⏳ | 见 GDD |
 
 ## VR 配置
@@ -97,12 +97,19 @@ cosmic-front-vr/
 
 导入 XR Interaction Toolkit Samples 后，用官方 XR Origin 替换场景中的 `XROrigin` 对象，保留 `PlayerMechBinder` 与 `VRSnapTurn` 组件。
 
+## 多人联机（P2）
+
+1. 运行 **Setup All Scenes** 生成 NetworkManager
+2. `Hangar.unity` → **Host 局域网** 或 **Join 局域网**
+3. 详见 [MULTIPLAYER_SETUP.md](docs/MULTIPLAYER_SETUP.md)
+
 ## 文档
 
 - [Project Brief](docs/PROJECT_BRIEF.md)
 - [GDD](docs/GDD.md)
 - [原创 IP 圣经](docs/IP_BIBLE.md)
 - [网络规划](docs/NETWORK_PLAN.md)
+- [多人联机指南](docs/MULTIPLAYER_SETUP.md)
 
 ## 许可
 

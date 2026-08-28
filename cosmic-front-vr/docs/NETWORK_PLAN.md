@@ -1,23 +1,34 @@
-# 多人网络规划（P2+）
+# 多人网络规划
 
-## 阶段
+## 当前阶段（P2 ✅）
+
+| 项目 | 方案 |
+|------|------|
+| 网络库 | **Fish-Net 4.5.8** |
+| 连接方式 | LAN Host / Join（Tugboat，端口 7770） |
+| 权威 | 服务器裁定射击伤害；Owner 驱动移动 |
+| 玩家生成 | `NetworkMatchManager` Server Spawn |
+
+详见 [MULTIPLAYER_SETUP.md](MULTIPLAYER_SETUP.md)
+
+## 后续阶段
 
 | 阶段 | 方案 | 说明 |
 |------|------|------|
-| P2 原型 | Photon Fusion Host | 最快验证 4–8 人 |
-| P3 测试 | Fusion Dedicated 或 Fish-Net | 降低 Host 优势 |
-| P4 正式 | Dedicated Server + Steamworks | 反作弊、统计 |
+| P3 测试 | Dedicated Server Build | 独立服务器，客户端仅连接 |
+| P4 正式 | Steamworks + FishySteamworks | 好友邀请、NAT |
+| P5 | Lag Compensation | 射击 rewind 碰撞体 |
 
 ## 同步原则
 
-1. **Server Authoritative**：位置、HP、命中均由服务器裁定
-2. **Client Prediction**：本地机甲移动预测，误差回滚
-3. **Lag Compensation**：射击时 rewind 目标碰撞体
-4. **不同步 VR 手指**：仅同步机体 Transform 与状态
+1. **Server Authoritative 伤害**：命中在 ServerRpc 中执行
+2. **Owner 驱动移动**：NetworkTransform 从 Owner 同步
+3. **不同步 VR 手指**：仅机体 Transform
+4. **Loadout**：Owner 通过 ServerRpc 提交阵营/机甲选择
 
-## 待实现脚本占位
+## 核心脚本
 
-- `Assets/_Project/Scripts/Network/NetworkBootstrap.cs`
-- `Assets/_Project/Scripts/Network/NetworkMech.cs`
-
-P1 完成后再接入 Fusion SDK。
+- `Network/NetworkBootstrap.cs` — 连接入口
+- `Network/NetworkMatchManager.cs` — 房间与生成
+- `Network/NetworkMechSync.cs` — 玩家机甲网络层
+- `Network/NetworkSessionConfig.cs` — 端口与人数常量

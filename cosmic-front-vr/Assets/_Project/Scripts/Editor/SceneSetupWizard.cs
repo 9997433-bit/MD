@@ -8,8 +8,14 @@ using CosmicFront.AI;
 using CosmicFront.Combat;
 using CosmicFront.Core;
 using CosmicFront.Mech;
+using CosmicFront.Network;
 using CosmicFront.Player;
 using CosmicFront.UI;
+using FishNet.Component.Transforming;
+using FishNet.Managing;
+using FishNet.Managing.Object;
+using FishNet.Object;
+using FishNet.Transporting.Tugboat;
 
 namespace CosmicFront.Editor
 {
@@ -79,6 +85,7 @@ namespace CosmicFront.Editor
 
             CreateHangarUi();
             CreateXRRig(new Vector3(0f, 0f, -6f), null);
+            CreateFishNetNetworkManager();
 
             DisableDefaultMainCamera();
 
@@ -128,7 +135,10 @@ namespace CosmicFront.Editor
             var spawner = spawnerGo.AddComponent<EnemySpawner>();
             var enemyPrefab = CreateMechPrefabAsset();
             SetPrivateField(spawner, "enemyPrefab", enemyPrefab);
-            SetPrivateField(spawner, "spawnPoints", CreateSpawnPoints());
+            var spawnPoints = CreateSpawnPoints();
+            SetPrivateField(spawner, "spawnPoints", spawnPoints);
+            var playerNetworkPrefab = CreateNetworkPlayerPrefabAsset();
+            CreateNetworkMatchManager(playerNetworkPrefab, spawnPoints, playerMech);
 
             DisableDefaultMainCamera();
 
@@ -162,31 +172,113 @@ namespace CosmicFront.Editor
             canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasGo.AddComponent<GraphicRaycaster>();
 
-            var panel = CreateUiPanel(canvasGo.transform, new Vector2(420f, 320f), new Vector2(0.5f, 0.5f));
+            var panel = CreateUiPanel(canvasGo.transform, new Vector2(460f, 420f), new Vector2(0.5f, 0.5f));
 
             var title = CreateText(panel.transform, "Title", "COSMIC FRONT VR", 22, TextAnchor.UpperCenter);
             title.rectTransform.anchoredPosition = new Vector2(0f, -10f);
-            title.rectTransform.sizeDelta = new Vector2(380f, 40f);
+            title.rectTransform.sizeDelta = new Vector2(420f, 40f);
 
-            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -70f));
-            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -130f));
+            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -60f));
+            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -110f));
 
-            var startBtn = CreateButton(panel.transform, "StartButton", "开始任务", new Vector2(0f, -200f));
-            var status = CreateText(panel.transform, "Status", "选择阵营与机甲", 14, TextAnchor.MiddleCenter);
-            status.rectTransform.anchoredPosition = new Vector2(0f, -250f);
-            status.rectTransform.sizeDelta = new Vector2(380f, 30f);
+            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -170f), new Vector2(180f, 36f));
+            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -170f), new Vector2(180f, 36f));
+            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join 局域网", new Vector2(0f, -220f), new Vector2(200f, 36f));
+
+            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -270f));
+
+            var status = CreateText(panel.transform, "Status", "单机或多人 LAN（端口 7770）", 14, TextAnchor.MiddleCenter);
+            status.rectTransform.anchoredPosition = new Vector2(0f, -320f);
+            status.rectTransform.sizeDelta = new Vector2(420f, 30f);
 
             var hint = CreateText(panel.transform, "ControlsHint", "", 11, TextAnchor.LowerCenter);
-            hint.rectTransform.anchoredPosition = new Vector2(0f, -290f);
-            hint.rectTransform.sizeDelta = new Vector2(400f, 40f);
+            hint.rectTransform.anchoredPosition = new Vector2(0f, -370f);
+            hint.rectTransform.sizeDelta = new Vector2(440f, 40f);
             hint.color = new Color(0.75f, 0.85f, 1f);
 
             var menu = canvasGo.AddComponent<HangarMenu>();
             SetPrivateField(menu, "teamDropdown", teamDropdown);
             SetPrivateField(menu, "mechDropdown", mechDropdown);
             SetPrivateField(menu, "startButton", startBtn);
+            SetPrivateField(menu, "hostButton", hostBtn);
+            SetPrivateField(menu, "joinButton", joinBtn);
+            SetPrivateField(menu, "addressInput", addressInput);
             SetPrivateField(menu, "statusText", status);
             SetPrivateField(menu, "controlsHint", hint);
+        }
+
+        private static void CreateFishNetNetworkManager()
+        {
+            if (Object.FindObjectOfType<NetworkManager>() != null)
+            {
+                return;
+            }
+
+            var go = new GameObject("NetworkManager");
+            var nm = go.AddComponent<NetworkManager>();
+            var transport = go.AddComponent<Tugboat>();
+            transport.SetPort(NetworkSessionConfig.Port);
+
+            var dpo = EnsureDefaultPrefabObjects();
+            SetPrivateField(nm, "_defaultPrefabObjects", dpo);
+            Object.DontDestroyOnLoad(go);
+        }
+
+        private static DefaultPrefabObjects EnsureDefaultPrefabObjects()
+        {
+            const string path = "Assets/_Project/Settings/DefaultPrefabObjects.asset";
+            EnsureFolder("Assets/_Project/Settings");
+            var existing = AssetDatabase.LoadAssetAtPath<DefaultPrefabObjects>(path);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            var dpo = ScriptableObject.CreateInstance<DefaultPrefabObjects>();
+            AssetDatabase.CreateAsset(dpo, path);
+            return dpo;
+        }
+
+        private static GameObject CreateNetworkPlayerPrefabAsset()
+        {
+            EnsureFolder("Assets/_Project/Prefabs");
+            var temp = CreateMech("NetworkPlayerMech", TeamId.Terran, true);
+            temp.tag = "Player";
+            temp.AddComponent<NetworkObject>();
+            temp.AddComponent<NetworkTransform>();
+            temp.AddComponent<NetworkMechSync>();
+
+            var path = "Assets/_Project/Prefabs/NetworkPlayerMech.prefab";
+            var prefab = PrefabUtility.SaveAsPrefabAsset(temp, path);
+            Object.DestroyImmediate(temp);
+
+            RegisterNetworkPrefab(prefab);
+            return prefab;
+        }
+
+        private static void RegisterNetworkPrefab(GameObject prefab)
+        {
+            var nob = prefab.GetComponent<NetworkObject>();
+            if (nob == null)
+            {
+                return;
+            }
+
+            var dpo = EnsureDefaultPrefabObjects();
+            dpo.AddObject(nob, checkDuplicates: true, spawnable: true);
+            EditorUtility.SetDirty(dpo);
+        }
+
+        private static void CreateNetworkMatchManager(GameObject playerPrefab, Transform[] spawnPoints, GameObject singlePlayerMech)
+        {
+            var go = new GameObject("NetworkMatchManager");
+            go.AddComponent<NetworkObject>();
+            var match = go.AddComponent<NetworkMatchManager>();
+
+            var nob = playerPrefab.GetComponent<NetworkObject>();
+            SetPrivateField(match, "playerPrefab", nob);
+            SetPrivateField(match, "spawnPoints", spawnPoints);
+            SetPrivateField(match, "singlePlayerMechToDisable", singlePlayerMech);
         }
 
         private static void CreateBattleHud(Transform parent, MechController mech)
@@ -420,7 +512,7 @@ namespace CosmicFront.Editor
             return text;
         }
 
-        private static Button CreateButton(Transform parent, string name, string label, Vector2 pos)
+        private static Button CreateButton(Transform parent, string name, string label, Vector2 pos, Vector2? size = null)
         {
             var go = new GameObject(name);
             go.transform.SetParent(parent, false);
@@ -428,7 +520,7 @@ namespace CosmicFront.Editor
             image.color = new Color(0.2f, 0.45f, 0.85f);
             var btn = go.AddComponent<Button>();
             var rect = go.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(200f, 40f);
+            rect.sizeDelta = size ?? new Vector2(200f, 40f);
             rect.anchoredPosition = pos;
 
             var textGo = new GameObject("Text");
@@ -445,6 +537,50 @@ namespace CosmicFront.Editor
             textRect.offsetMax = Vector2.zero;
 
             return btn;
+        }
+
+        private static InputField CreateInputField(Transform parent, string name, string defaultValue, Vector2 pos)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var image = go.AddComponent<Image>();
+            image.color = new Color(0.12f, 0.14f, 0.2f);
+            var input = go.AddComponent<InputField>();
+            var rect = go.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(280f, 32f);
+            rect.anchoredPosition = pos;
+
+            var textGo = new GameObject("Text");
+            textGo.transform.SetParent(go.transform, false);
+            var text = textGo.AddComponent<Text>();
+            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            text.color = Color.white;
+            text.supportRichText = false;
+            text.alignment = TextAnchor.MiddleLeft;
+            var textRect = text.rectTransform;
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = new Vector2(10f, 0f);
+            textRect.offsetMax = new Vector2(-10f, 0f);
+
+            var placeholderGo = new GameObject("Placeholder");
+            placeholderGo.transform.SetParent(go.transform, false);
+            var placeholder = placeholderGo.AddComponent<Text>();
+            placeholder.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            placeholder.text = "Host IP";
+            placeholder.color = new Color(1f, 1f, 1f, 0.35f);
+            placeholder.alignment = TextAnchor.MiddleLeft;
+            var phRect = placeholder.rectTransform;
+            phRect.anchorMin = Vector2.zero;
+            phRect.anchorMax = Vector2.one;
+            phRect.offsetMin = new Vector2(10f, 0f);
+            phRect.offsetMax = new Vector2(-10f, 0f);
+
+            input.textComponent = text;
+            input.placeholder = placeholder;
+            input.text = defaultValue;
+
+            return input;
         }
 
         private static Dropdown CreateDropdown(Transform parent, string name, Vector2 pos)
