@@ -1,0 +1,37 @@
+loading assets/firmware/20230825_s2056.bin …
+image size: 6692588 bytes (0x661EEC)
+
+=== CDCE full32 (internal) hits ===
+  reg2 0x83800002 LE32 ×1 @ ['0x2E355D']
+  reg8 0x68000018 LE32 ×1 @ ['0x33E3DE']
+  regC 0x0000180C BE32 ×3 @ ['0x334A34', '0x3B94C8', '0x48779A']
+  regC 0x0000180C LE32 ×1 @ ['0x3773CA']
+
+=== CDCE full32 (external) hits ===
+  reg2 0x83800002 LE32 ×1 @ ['0x2E355D']
+  reg8 0x68000018 LE32 ×1 @ ['0x33E3DE']
+  regB 0x00001C8B BE32 ×1 @ ['0x1DCCDC']
+  regC 0x0000180C BE32 ×3 @ ['0x334A34', '0x3B94C8', '0x48779A']
+  regC 0x0000180C LE32 ×1 @ ['0x3773CA']
+
+=== CDCE SCAA090 REG0 ===
+[{'word': '0x002C0040', 'endian': 'BE32', 'count': 2, 'offsets': ['0x1C604', '0x374126']}, {'word': '0x002C0040', 'endian': 'LE32', 'count': 1, 'offsets': ['0x1EF773']}]
+
+=== CDCE data28-only (weaker) ===
+  rows: 35 (see JSON for detail)
+
+=== ADC 16-bit frames (noisy; focus 0x4180) ===
+  soft_reset_0x00 BE16 ×64 sample=['0x56', '0xBE', '0xF2', '0x611', '0x621', '0x63B']
+  soft_reset_0x00 LE16 ×64 sample=['0x3B', '0x43', '0x4F', '0x57', '0x5F', '0x6B']
+  ddr_lvds_0x41_80 BE16 ×64 sample=['0x7E1C', '0xC85C', '0xCBEC', '0xD322', '0xE492', '0xF098']
+  ddr_lvds_0x41_80 LE16 ×64 sample=['0x7EC5', '0x8B81', '0xA353', '0x10121', '0x12BC6', '0x133B9']
+  test_ramp_0x62 BE16 ×14 sample=['0x13846', '0x129281', '0x1EE3E7', '0x257D3C', '0x274C77', '0x2EF23A']
+  test_ramp_0x62 LE16 ×22 sample=['0x113E7', '0x1D3D7', '0x29EFE', '0x246734', '0x267177', '0x27AE25']
+
+=== Summary ===
+  cdce_internal_full32_regs_hit: 4
+  cdce_external_full32_regs_hit: 5
+  cdce_scaa090_hit: True
+  cdce_data28_only_rows: 35
+  adc_0x4180_hit_count_sum: 128
+  interpretation_zh: 若 CDCE full32 / SCAA090 / ADC 0x4180 均无可信成簇命中，则位流内不以明文 FMC150 写表形式存放初始化 ROM；这与『配置经状态机即时拼帧 / 表经压缩 / 或依赖 CDCE EEPROM 自举』相容，但不能排除 SPI 主控存在——G2 嗅探仍是唯一裁决。

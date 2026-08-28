@@ -1,0 +1,69 @@
+name: zero0000-research self-tests
+
+on:
+  push:
+    paths:
+      - 'zero0000-research/scripts/**'
+      - 'zero0000-research/05_tests/g2_inbox/**'
+      - 'zero0000-research/06_docs/二进制基准_分析计划与目标.md'
+      - 'zero0000-research/assets/firmware/**'
+      - '.github/workflows/zero0000-research.yml'
+  pull_request:
+    paths:
+      - 'zero0000-research/scripts/**'
+      - 'zero0000-research/05_tests/g2_inbox/**'
+      - 'zero0000-research/06_docs/二进制基准_分析计划与目标.md'
+      - 'zero0000-research/assets/firmware/**'
+      - '.github/workflows/zero0000-research.yml'
+
+jobs:
+  g2-pipeline:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: zero0000-research
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: CDCE / mode infer / SPI decode / G3 / apply / OCR self-tests
+        run: |
+          set -e
+          python3 scripts/decode_cdce_profile.py --self-test >/dev/null
+          python3 scripts/g2_mode_infer.py --self-test >/dev/null
+          python3 scripts/decode_spi_capture.py --self-test >/dev/null
+          python3 scripts/g3_tone_analyze.py --self-test >/dev/null
+          python3 scripts/apply_g0_backfill.py --self-test >/dev/null
+          python3 scripts/ocr_scope_hz.py --self-test >/dev/null
+          python3 scripts/search_spi_constants.py --self-test >/dev/null
+      - name: Plan C synthetic demo (never writes G0)
+        run: python3 scripts/ingest_g2_inbox.py --demo-plan-c >/dev/null
+      - name: Binary full census self-test
+        run: python3 scripts/binary_full_census.py --self-test
+      - name: Binary-baseline B-Must (offline bitstream track)
+        run: python3 scripts/audit_binary_baseline.py
+      - name: Must audit (expect fail without measured inbox)
+        run: |
+          set +e
+          python3 scripts/audit_must.py
+          code=$?
+          set -e
+          # Exit 1 = Must incomplete (expected without g2_clocks/spi deposit)
+          if [ "$code" -eq 1 ]; then
+            echo "Must incomplete as expected without measured deposits"
+            exit 0
+          fi
+          if [ "$code" -eq 0 ]; then
+            echo "Must fully satisfied"
+            exit 0
+          fi
+          echo "audit_must unexpected exit $code"
+          exit "$code"
+      - name: If measured inbox present, ingest must succeed
+        run: |
+          if [ -f 05_tests/g2_inbox/g2_clocks.json ] || ls 05_tests/g2_inbox/spi_capture*.csv >/dev/null 2>&1; then
+            python3 scripts/ingest_g2_inbox.py
+          else
+            echo "no measured root deposit; skip live ingest"
+          fi

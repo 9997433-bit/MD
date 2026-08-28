@@ -1,0 +1,12 @@
+file: assets/firmware/20230825_s2056.mcs
+span_bytes: 6692588
+non_ff_bytes: 6673113
+sync_aa995566_offset: 48
+boot_bb11220044_offset: 32
+idcode_XC7K160T: 148
+idcode_XC7K325T: NOT_FOUND
+idcode_XC7K70T: NOT_FOUND
+idcode_XC7A100T: NOT_FOUND
+ascii_clues: []
+bb11220044_count: 1
+aa995566_count: 1

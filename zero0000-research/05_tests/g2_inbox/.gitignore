@@ -1,0 +1,10 @@
+# Keep derived/scratch out of git; ALLOW measured deposits for Must unlock.
+_derived/
+NOTES.md
+*_TEST.*
+!examples/
+!examples/**
+# Measured unlock artifacts — intentionally tracked when present:
+#   g2_clocks.json
+#   spi_capture.csv
+#   scope_*.jpg / scope_*.png

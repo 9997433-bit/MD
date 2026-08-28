@@ -1,0 +1,8 @@
+[
+  {"id": "C1", "hz": null, "note": "X1 VCXO — fill measured Hz or leave null"},
+  {"id": "C2", "hz": null, "note": "ADC CLKP — REQUIRED for P1.3"},
+  {"id": "C3", "hz": null, "note": "DAC DACCLK — REQUIRED for P1.3"},
+  {"id": "C6", "hz": null, "note": "DAC DATACLK — optional interp hint"},
+  {"id": "C7a", "hz": null, "note": "X2 100M"},
+  {"id": "C7b", "hz": null, "note": "X3 200M"}
+]

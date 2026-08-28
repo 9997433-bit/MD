@@ -1,0 +1,111 @@
+{
+  "nframes": 16560,
+  "fdri_bits": 53521920,
+  "ug470_k160t_bits": 53540576,
+  "ug470_minus_fdri_bits": 18656,
+  "nonzero_frames": 8830,
+  "nonzero_frame_rate": 0.5332125603864735,
+  "segments10": [
+    {
+      "seg": 0,
+      "lo": 0,
+      "hi": 1656,
+      "nz": 1348,
+      "span": 1656,
+      "rate": 0.8140096618357487
+    },
+    {
+      "seg": 1,
+      "lo": 1656,
+      "hi": 3312,
+      "nz": 1233,
+      "span": 1656,
+      "rate": 0.7445652173913043
+    },
+    {
+      "seg": 2,
+      "lo": 3312,
+      "hi": 4968,
+      "nz": 311,
+      "span": 1656,
+      "rate": 0.18780193236714976
+    },
+    {
+      "seg": 3,
+      "lo": 4968,
+      "hi": 6624,
+      "nz": 1354,
+      "span": 1656,
+      "rate": 0.8176328502415459
+    },
+    {
+      "seg": 4,
+      "lo": 6624,
+      "hi": 8280,
+      "nz": 1215,
+      "span": 1656,
+      "rate": 0.7336956521739131
+    },
+    {
+      "seg": 5,
+      "lo": 8280,
+      "hi": 9936,
+      "nz": 1415,
+      "span": 1656,
+      "rate": 0.8544685990338164
+    },
+    {
+      "seg": 6,
+      "lo": 9936,
+      "hi": 11592,
+      "nz": 1204,
+      "span": 1656,
+      "rate": 0.7270531400966184
+    },
+    {
+      "seg": 7,
+      "lo": 11592,
+      "hi": 13248,
+      "nz": 714,
+      "span": 1656,
+      "rate": 0.4311594202898551
+    },
+    {
+      "seg": 8,
+      "lo": 13248,
+      "hi": 14904,
+      "nz": 0,
+      "span": 1656,
+      "rate": 0.0
+    },
+    {
+      "seg": 9,
+      "lo": 14904,
+      "hi": 16560,
+      "nz": 36,
+      "span": 1656,
+      "rate": 0.021739130434782608
+    }
+  ],
+  "trailing_zero_frames": 1112,
+  "bram_start_candidate": 12134,
+  "method": "UG470 write order blk0→blk1; boundary by density cliff (tail<5% & prev200>40%); not a Vivado frame map",
+  "bram_zone": {
+    "lo": 12134,
+    "hi": 16560,
+    "frames": 4426,
+    "nonzero_frames": 221,
+    "nonzero_frame_rate": 0.04993221870763669,
+    "nonzero_bytes": 5548,
+    "last_nonzero_frame": 15447
+  },
+  "tail20_pct": {
+    "lo": 13248,
+    "nonzero_frames": 36,
+    "frames": 3312,
+    "rate": 0.010869565217391304
+  }
+}
+
+# summary: BRAM-candidate frames[12134,16560) nz_frames=221/4426 (4.99%), nonzero_bytes=5548
+# interpretation: initialized BRAM ROM content is scarce → weakens PicoBlaze / BRAM-resident MicroBlaze; does not rule out SPI/DDR-boot tiny cores (P2.5 stays 🔶 until JTAG/ILA).
