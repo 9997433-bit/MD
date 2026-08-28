@@ -29,11 +29,13 @@ namespace CosmicFront.Core
         public TeamId SelectedTeam { get; private set; } = TeamId.Terran;
         public MechArchetype SelectedMech { get; private set; } = MechArchetype.Light;
         public SpawnPreference SelectedSpawn { get; private set; } = SpawnPreference.Mech;
+        public GameModeType SelectedGameMode { get; private set; } = GameModeType.TeamDeathmatch;
         public string SelectedBattleScene { get; private set; }
         public string MultiplayerAddress { get; private set; } = NetworkSessionConfig.DefaultAddress;
         public float MatchTimeRemaining { get; private set; }
         public int PlayerKills { get; private set; }
         public int PlayerDeaths { get; private set; }
+        public string ModeResultMessage { get; private set; } = string.Empty;
 
         public event Action<GamePhase> PhaseChanged;
         public event Action MatchEnded;
@@ -59,6 +61,16 @@ namespace CosmicFront.Core
         public void SelectSpawnPreference(SpawnPreference spawn)
         {
             SelectedSpawn = spawn;
+        }
+
+        public void SelectGameMode(GameModeType mode)
+        {
+            SelectedGameMode = mode;
+        }
+
+        public void SetModeResult(string message)
+        {
+            ModeResultMessage = message ?? string.Empty;
         }
 
         public void SelectBattleScene(string sceneName)
@@ -106,6 +118,7 @@ namespace CosmicFront.Core
             MatchTimeRemaining = matchDurationSeconds;
             PlayerKills = 0;
             PlayerDeaths = 0;
+            ModeResultMessage = string.Empty;
             SetPhase(GamePhase.Loading);
 
             if (IsMultiplayer)

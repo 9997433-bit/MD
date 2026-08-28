@@ -22,6 +22,13 @@ namespace CosmicFront.Core
         ShipCaptain
     }
 
+    public enum GameModeType
+    {
+        TeamDeathmatch = 0,
+        EscortFlagship = 1,
+        CapturePoints = 2
+    }
+
     public enum GamePhase
     {
         Boot,

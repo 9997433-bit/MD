@@ -11,6 +11,8 @@ using CosmicFront.Mech;
 using CosmicFront.Network;
 using CosmicFront.Player;
 using CosmicFront.Ship;
+using CosmicFront.Steam;
+using CosmicFront.Modes;
 using CosmicFront.UI;
 using FishNet.Component.Transforming;
 using FishNet.Managing;
@@ -98,6 +100,10 @@ namespace CosmicFront.Editor
             CreateHangarUi();
             CreateXRRig(new Vector3(0f, 0f, -6f), null);
             CreateFishNetNetworkManager();
+            if (Object.FindObjectOfType<SteamManager>() == null)
+            {
+                new GameObject("SteamManager").AddComponent<SteamManager>();
+            }
 
             DisableDefaultMainCamera();
 
@@ -161,6 +167,8 @@ namespace CosmicFront.Editor
             CreateNetworkMatchManager(playerNetworkPrefab, spawnPoints, playerMech);
             CreateShipSpawnerInScene(playerStart);
             CreateShipHudUi();
+            CreateEscortAndCaptureModes(playerStart);
+            CreateModeStatusUi();
 
             DisableDefaultMainCamera();
         }
@@ -229,30 +237,36 @@ namespace CosmicFront.Editor
             canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasGo.AddComponent<GraphicRaycaster>();
 
-            var panel = CreateUiPanel(canvasGo.transform, new Vector2(460f, 510f), new Vector2(0.5f, 0.5f));
+            var panel = CreateUiPanel(canvasGo.transform, new Vector2(480f, 560f), new Vector2(0.5f, 0.5f));
 
             var title = CreateText(panel.transform, "Title", "COSMIC FRONT VR", 22, TextAnchor.UpperCenter);
-            title.rectTransform.anchoredPosition = new Vector2(0f, -10f);
-            title.rectTransform.sizeDelta = new Vector2(420f, 40f);
+            title.rectTransform.anchoredPosition = new Vector2(0f, -8f);
+            title.rectTransform.sizeDelta = new Vector2(440f, 36f);
 
-            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -55f));
-            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -100f));
-            var mapDropdown = CreateDropdown(panel.transform, "MapDropdown", new Vector2(0f, -145f));
-            var spawnDropdown = CreateDropdown(panel.transform, "SpawnDropdown", new Vector2(0f, -190f));
+            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -50f));
+            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -90f));
+            var mapDropdown = CreateDropdown(panel.transform, "MapDropdown", new Vector2(0f, -130f));
+            var spawnDropdown = CreateDropdown(panel.transform, "SpawnDropdown", new Vector2(0f, -170f));
+            var modeDropdown = CreateDropdown(panel.transform, "ModeDropdown", new Vector2(0f, -210f));
 
-            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -245f), new Vector2(180f, 36f));
-            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -245f), new Vector2(180f, 36f));
-            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join / Dedicated", new Vector2(0f, -295f), new Vector2(220f, 36f));
+            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -265f), new Vector2(180f, 36f));
+            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -265f), new Vector2(180f, 36f));
+            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join / Dedicated", new Vector2(0f, -315f), new Vector2(220f, 36f));
 
-            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -345f));
+            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -365f));
 
-            var status = CreateText(panel.transform, "Status", "机甲出击 或 登舰职位", 14, TextAnchor.MiddleCenter);
-            status.rectTransform.anchoredPosition = new Vector2(0f, -395f);
-            status.rectTransform.sizeDelta = new Vector2(420f, 30f);
+            var status = CreateText(panel.transform, "Status", "选择模式后开始", 14, TextAnchor.MiddleCenter);
+            status.rectTransform.anchoredPosition = new Vector2(0f, -415f);
+            status.rectTransform.sizeDelta = new Vector2(440f, 28f);
+
+            var steam = CreateText(panel.transform, "SteamStatus", "Steam: ...", 12, TextAnchor.MiddleCenter);
+            steam.rectTransform.anchoredPosition = new Vector2(0f, -445f);
+            steam.rectTransform.sizeDelta = new Vector2(440f, 24f);
+            steam.color = new Color(0.7f, 0.85f, 1f);
 
             var hint = CreateText(panel.transform, "ControlsHint", "", 11, TextAnchor.LowerCenter);
-            hint.rectTransform.anchoredPosition = new Vector2(0f, -455f);
-            hint.rectTransform.sizeDelta = new Vector2(440f, 40f);
+            hint.rectTransform.anchoredPosition = new Vector2(0f, -500f);
+            hint.rectTransform.sizeDelta = new Vector2(450f, 40f);
             hint.color = new Color(0.75f, 0.85f, 1f);
 
             var menu = canvasGo.AddComponent<HangarMenu>();
@@ -260,12 +274,14 @@ namespace CosmicFront.Editor
             SetPrivateField(menu, "mechDropdown", mechDropdown);
             SetPrivateField(menu, "mapDropdown", mapDropdown);
             SetPrivateField(menu, "spawnDropdown", spawnDropdown);
+            SetPrivateField(menu, "modeDropdown", modeDropdown);
             SetPrivateField(menu, "startButton", startBtn);
             SetPrivateField(menu, "hostButton", hostBtn);
             SetPrivateField(menu, "joinButton", joinBtn);
             SetPrivateField(menu, "addressInput", addressInput);
             SetPrivateField(menu, "statusText", status);
             SetPrivateField(menu, "controlsHint", hint);
+            SetPrivateField(menu, "steamStatusText", steam);
         }
 
         private static void CreateFishNetNetworkManager()
@@ -675,6 +691,85 @@ namespace CosmicFront.Editor
             SetPrivateField(hud, "shipHealthBar", hp);
             SetPrivateField(hud, "shipShieldBar", sh);
             SetPrivateField(hud, "abilityBar", ab);
+        }
+
+        private static void CreateEscortAndCaptureModes(Vector3 playerStart)
+        {
+            // Escort waypoints along the map spine.
+            var escortRoot = new GameObject("EscortFlagshipMode");
+            var escort = escortRoot.AddComponent<EscortFlagshipMode>();
+            escortRoot.AddComponent<NetworkObject>();
+
+            var wpParent = new GameObject("EscortWaypoints").transform;
+            var wps = new Transform[4];
+            var offsets = new[]
+            {
+                playerStart + new Vector3(0f, 3f, -10f),
+                playerStart + new Vector3(0f, 3f, 10f),
+                playerStart + new Vector3(0f, 3f, 30f),
+                playerStart + new Vector3(0f, 3f, 50f)
+            };
+            for (var i = 0; i < offsets.Length; i++)
+            {
+                var t = new GameObject($"WP_{i}").transform;
+                t.SetParent(wpParent, false);
+                t.position = offsets[i];
+                wps[i] = t;
+            }
+
+            var flagship = CreateWarshipPrefabAsset();
+            SetPrivateField(escort, "flagshipPrefab", flagship);
+            SetPrivateField(escort, "waypoints", wps);
+
+            // Capture points A/B/C
+            var captureRoot = new GameObject("CapturePointsMode");
+            var capture = captureRoot.AddComponent<CapturePointsMode>();
+            captureRoot.AddComponent<NetworkObject>();
+
+            var pointDefs = new[]
+            {
+                ("Alpha", playerStart + new Vector3(-10f, 1f, 5f)),
+                ("Bravo", playerStart + new Vector3(0f, 1f, 20f)),
+                ("Charlie", playerStart + new Vector3(10f, 1f, 35f))
+            };
+            var points = new CapturePoint[pointDefs.Length];
+            for (var i = 0; i < pointDefs.Length; i++)
+            {
+                var go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                go.name = $"Capture_{pointDefs[i].Item1}";
+                go.transform.position = pointDefs[i].Item2;
+                go.transform.localScale = new Vector3(8f, 0.2f, 8f);
+                Object.DestroyImmediate(go.GetComponent<Collider>());
+                var trigger = go.AddComponent<SphereCollider>();
+                trigger.isTrigger = true;
+                trigger.radius = 1.2f;
+                var cp = go.AddComponent<CapturePoint>();
+                go.AddComponent<NetworkObject>();
+                SetPrivateField(cp, "pointName", pointDefs[i].Item1);
+                SetPrivateField(cp, "radius", 12f);
+                points[i] = cp;
+            }
+
+            SetPrivateField(capture, "points", points);
+        }
+
+        private static void CreateModeStatusUi()
+        {
+            var canvasGo = new GameObject("ModeStatusCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+            var text = CreateText(canvasGo.transform, "ModeStatus", "", 13, TextAnchor.UpperRight);
+            text.rectTransform.anchorMin = new Vector2(1f, 1f);
+            text.rectTransform.anchorMax = new Vector2(1f, 1f);
+            text.rectTransform.pivot = new Vector2(1f, 1f);
+            text.rectTransform.anchoredPosition = new Vector2(-12f, -12f);
+            text.rectTransform.sizeDelta = new Vector2(320f, 140f);
+            text.alignment = TextAnchor.UpperRight;
+
+            var ui = canvasGo.AddComponent<ModeStatusUI>();
+            SetPrivateField(ui, "modeStatusText", text);
         }
 
         private static GameObject CreateMechPrefabAsset()

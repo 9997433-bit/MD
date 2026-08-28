@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using CosmicFront.Core;
 using CosmicFront.Mech;
 using CosmicFront.Network;
+using CosmicFront.Steam;
 
 namespace CosmicFront.UI
 {
@@ -12,12 +13,14 @@ namespace CosmicFront.UI
         [SerializeField] private Dropdown mechDropdown;
         [SerializeField] private Dropdown mapDropdown;
         [SerializeField] private Dropdown spawnDropdown;
+        [SerializeField] private Dropdown modeDropdown;
         [SerializeField] private Button startButton;
         [SerializeField] private Button hostButton;
         [SerializeField] private Button joinButton;
         [SerializeField] private InputField addressInput;
         [SerializeField] private Text statusText;
         [SerializeField] private Text controlsHint;
+        [SerializeField] private Text steamStatusText;
 
         private void Awake()
         {
@@ -53,13 +56,20 @@ namespace CosmicFront.UI
                 go.AddComponent<GameManager>();
             }
 
+            if (SteamManager.Instance == null)
+            {
+                var steamGo = new GameObject("SteamManager");
+                steamGo.AddComponent<SteamManager>();
+            }
+
             if (addressInput != null && string.IsNullOrWhiteSpace(addressInput.text))
             {
                 addressInput.text = NetworkSessionConfig.DefaultAddress;
             }
 
-            UpdateStatus("单机 / Host / Join Dedicated 或局域网");
+            UpdateStatus("选择模式 / 地图 / 生成方式后开始");
             UpdateControlsHint();
+            UpdateSteamStatus();
         }
 
         private void Update()
@@ -111,6 +121,17 @@ namespace CosmicFront.UI
                     "战舰 — 舵手",
                     "战舰 — 炮手",
                     "战舰 — 舰长"
+                });
+            }
+
+            if (modeDropdown != null)
+            {
+                modeDropdown.ClearOptions();
+                modeDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "团队死斗 TDM",
+                    "护送旗舰 Escort",
+                    "据点争夺 Domination"
                 });
             }
         }
@@ -179,6 +200,15 @@ namespace CosmicFront.UI
                 GameManager.Instance.SelectSpawnPreference(SpawnPreference.Mech);
             }
 
+            if (modeDropdown != null)
+            {
+                GameManager.Instance.SelectGameMode((GameModeType)modeDropdown.value);
+            }
+            else
+            {
+                GameManager.Instance.SelectGameMode(GameModeType.TeamDeathmatch);
+            }
+
             if (mapDropdown != null && mapDropdown.value == 1)
             {
                 GameManager.Instance.SelectBattleScene(GameManager.Instance.GetAsteroidSceneName());
@@ -212,8 +242,20 @@ namespace CosmicFront.UI
             }
 
             controlsHint.text = VRMechInput.IsHeadsetPresent()
-                ? "VR: 机甲驾驶 / 登舰后按席位操作 | B登舰 X离舰"
-                : "键鼠: WASD | B登舰 | X离舰 | L弹射 | V舰长技能";
+                ? "VR: 机甲/战舰 | Escort 护旗 | Domination 占点"
+                : "键鼠: WASD | B登舰 | 模式: TDM / Escort / Domination";
+        }
+
+        private void UpdateSteamStatus()
+        {
+            if (steamStatusText == null || SteamManager.Instance == null)
+            {
+                return;
+            }
+
+            steamStatusText.text = SteamManager.Instance.IsOfflineFallback
+                ? $"Steam: 离线 ({SteamManager.Instance.PersonaName})"
+                : $"Steam: {SteamManager.Instance.PersonaName}";
         }
     }
 }

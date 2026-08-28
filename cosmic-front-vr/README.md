@@ -84,7 +84,8 @@ cosmic-front-vr/
 | P2 多人 LAN | ✅ | Fish-Net Host/Join、NetworkMechSync |
 | P3 Dedicated + 记分 | ✅ | 无头 Server、击杀榜同步、小行星地图 |
 | P4 可玩战舰 | ✅ | Aegis 护卫舰四席位 + 弹射 |
-| P5 Steam / 护送模式 | ⏳ | Steamworks、旗舰护送 |
+| P5 模式 + Steam | ✅ | Escort / Domination + Steam 骨架 |
+| P6 打磨上架 | ⏳ | 美术、平衡、Steam 正式 API |
 
 ## VR 配置
 
@@ -97,6 +98,10 @@ cosmic-front-vr/
 ### 可选：替换为 XRI Starter Assets
 
 导入 XR Interaction Toolkit Samples 后，用官方 XR Origin 替换场景中的 `XROrigin` 对象，保留 `PlayerMechBinder` 与 `VRSnapTurn` 组件。
+
+## 游戏模式（P5）
+
+机库可选：**团队死斗 / 护送旗舰 / 据点争夺**。Steam 默认离线骨架，详见 [GAME_MODES.md](docs/GAME_MODES.md)。
 
 ## 战舰（P4）
 
@@ -127,6 +132,7 @@ CosmicFrontServer.exe -batchmode -nographics -cosmicServer
 - [多人联机指南](docs/MULTIPLAYER_SETUP.md)
 - [Dedicated Server](docs/DEDICATED_SERVER.md)
 - [战舰系统](docs/SHIP_SYSTEM.md)
+- [游戏模式与 Steam](docs/GAME_MODES.md)
 
 ## 许可
 

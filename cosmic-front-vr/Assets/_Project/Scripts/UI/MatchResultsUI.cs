@@ -77,6 +77,11 @@ namespace CosmicFront.UI
                     $"阵营分 — 地球联合: {NetworkScoreManager.Instance.TerranScore}  |  " +
                     $"轨道联盟: {NetworkScoreManager.Instance.OrbitalScore}";
             }
+
+            if (!string.IsNullOrEmpty(GameManager.Instance.ModeResultMessage) && teamScoreText != null)
+            {
+                teamScoreText.text = GameManager.Instance.ModeResultMessage + "\n" + (teamScoreText.text ?? string.Empty);
+            }
         }
 
         private void OnReturn()
