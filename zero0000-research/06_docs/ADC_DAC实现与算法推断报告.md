@@ -46,6 +46,7 @@
 - 判据：ADC 0x41 D7、DAC fir0/fir1、CDCE Reg0–C / LOCK  
 - 工具：`decode_spi_capture.py` + `G2_当日执行包.md`  
 - 配置归属（P1.5）：EEPROM / FPGA RTL / 主机 — 仅上电嗅探可裁决  
+- 静态否定：FMC150 E2E 明文簇无；**KC705_DDS 上游整表 MIF 连续 blob 无**（`KC705_DDS_SPI_MIF对照.md` ✅）→ 非「照抄该公开工程 BRAM 表」 
 
 ### 2.5 固件侧配置骨架 —— ✅（仅 FPGA 自举）
 
@@ -79,7 +80,7 @@
 ### 3.3 明确不能写的话
 
 - 「本板用了 FFT/DDC」——无 G3/G4 实验前禁止  
-- 「SPI 一定按 FMC150 表初始化」——位流阴性扫描已削弱明文 ROM 假说，但仍可能运行时拼帧  
+- 「SPI 一定按 FMC150 / KC705_DDS 表初始化」——散点+整表 MIF 阴性已削弱明文 ROM 假说，但仍可能运行时拼帧或 EEPROM 
 
 ---
 

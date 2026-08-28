@@ -56,5 +56,6 @@ zero0000-research/
 **算法/ADC·DAC 实现目标**（进行中）：见 `06_docs/算法与ADCDAC实现_研究计划.md` · `算法目标进度.md`。  
 - **固件工作流程（证据分级）**：`02_firmware/板卡固件工作流程.md`  
 - **G0/G1 已通过**；**G2 起需板**（`05_tests/G2_当日执行包.md`）。  
-- 工具：`analyze_bram_frames.py` · `decode_spi_capture.py` · `g2_mode_infer.py` · `g3_tone_analyze.py`。  
+- 工具：`analyze_bram_frames.py` · `search_fmc150_mif_rom.py` · `decode_spi_capture.py` · `g2_mode_infer.py` · `g3_tone_analyze.py`。  
+- MIF 否定：`02_firmware/KC705_DDS_SPI_MIF对照.md`。  
 - 报告骨架：`ADC_DAC实现与算法推断报告.md`。

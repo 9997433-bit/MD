@@ -81,7 +81,17 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 ---
 
-## 5. 与 G1 出口的关系
+## 5. 加深：KC705_DDS 整表 MIF 连续blob（2026-08-28）
+
+单字扫描之外，对 [samprager/KC705_DDS](https://github.com/samprager/KC705_DDS) 上游 `.mif` **整表**做连续字节搜索（LE/BE）：
+
+- 文档：`02_firmware/KC705_DDS_SPI_MIF对照.md`
+- 脚本：`scripts/search_fmc150_mif_rom.py`
+- 结果：ADS/DAC/CDCE(int+ext) **full_hits=0**，最长前缀 ≤2 → **✅ 否定**「照抄该工程 BRAM INIT 写表」
+
+这比 §3 的「散点/成簇」否定更强：连参考设计自己的连续 ROM 形态也不在镜像里。
+
+## 6. 与 G1 出口的关系
 
 - 本轮满足研究计划 G1「至少多 1 份非照片证据」的**加分项**（可复现阴性扫描），不推翻既有 G1 ✅ 有增量结论。  
 - 仍缺：本板专属上位机、原理图、第二版 mcs。  
