@@ -34,6 +34,10 @@ make status         # 一行状态摘要
 | `EvidenceLedger.json` | 主账本 |
 | `PHASE_B_READINESS.md` / `PHASE_C_READINESS.md` | 阶段就绪报告 |
 | `HARDWARE_HANDOFF.md` | 实机接入指南 |
+| `ACQUISITION_ROADMAP.md` | 实机采集里程碑 M0–M6 |
+| `DSA_REFERENCE_FUNCTION_PLAN.md` | NI USB DSA 公开规格 ↔ 本机功能映射与专题规划（脱敏） |
+| `BINARY_RE_PLAN.md` | FX2 RAM 自底向上静态逆向 |
+| `HOST_ACQ_API_SKETCH.md` | 主机采集 API 草案 |
 | `phase_b/captures/` | 采集物放置目录 |
 
 ## 八层 catalog
