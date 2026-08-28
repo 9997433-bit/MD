@@ -57,6 +57,7 @@ def main() -> int:
         run("analyze_fx2_datapath.py")
         run("analyze_fx2_ram_disasm.py")
         run("analyze_fx2_ivt_and_1435.py")
+        run("analyze_fx2_stream_path.py")
         run("analyze_fx2_address_map.py")
         run("analyze_fx2_oracle_crosscheck.py")
     if (CAPTURES / "eeprom.bin").exists():

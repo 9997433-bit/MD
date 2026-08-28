@@ -65,8 +65,11 @@ def main() -> None:
         {"name": "reset_vector", "start": 0x0000, "length": 0x40},
         {"name": "main_init_0x075b", "start": 0x075B, "length": 0xA0},
         {"name": "hot_0x0393", "start": 0x0393, "length": 0x40},
-        {"name": "cmd_0x01_owner_0x0473", "start": 0x0473, "length": 0xA0},
-        {"name": "cmd_0x08_datapath_0x1435", "start": 0x1435, "length": 0x200},
+        {"name": "cmd_0x01_owner_0x0473", "start": 0x0473, "length": 0xC0},
+        {"name": "cmd_0x01_owner_0x054c", "start": 0x054C, "length": 0xC0},
+        {"name": "cmd_0x08_datapath_0x1435", "start": 0x1435, "length": 0x280},
+        {"name": "cmd_0x09_owner_0x1c5b", "start": 0x1C5B, "length": 0x100},
+        {"name": "cmd_0x0a_owner_0x0b13", "start": 0x0B13, "length": 0xA0},
         {"name": "cpucs_cluster_0x16ab", "start": 0x16AB, "length": 0x80},
     ]
     # append datapath followups
@@ -77,6 +80,18 @@ def main() -> None:
             name = f"datapath_{entry}"
             if not any(r["start"] == addr for r in regions):
                 regions.append({"name": name, "start": addr, "length": 0x80})
+    # Expand from cmd dispatch owners for focus opcodes when present
+    if DISPATCH.exists():
+        disp = json.loads(DISPATCH.read_text(encoding="utf-8"))
+        focus = {"0x01", "0x08", "0x09", "0x0a"}
+        for cand in disp.get("dispatch_candidates") or []:
+            if cand.get("opcode") not in focus:
+                continue
+            for owner in (cand.get("dominant_owner_routines") or [])[:2]:
+                addr = int(owner["entry"], 16)
+                name = f"opcode_{cand['opcode']}_owner_{owner['entry']}"
+                if not any(r["start"] == addr for r in regions):
+                    regions.append({"name": name, "start": addr, "length": 0xA0})
 
     blocks = []
     lines = [
