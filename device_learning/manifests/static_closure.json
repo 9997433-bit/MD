@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-28T07:11:25.795675+00:00",
+  "generated_at": "2026-08-28T07:27:54.999650+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "static_phase_closed": true,
   "frozen": true,
   "identifiers": 237,
   "status_counts": {
-    "confirmed": 68,
-    "candidate": 65,
-    "unknown": 56,
+    "confirmed": 76,
+    "candidate": 72,
+    "unknown": 50,
     "hypothesis": 6,
-    "not_started": 30,
+    "not_started": 21,
     "missing": 12
   },
-  "pytest_count": 104,
-  "manifest_json_count": 43,
+  "pytest_count": 105,
+  "manifest_json_count": 47,
   "phase_b_blockers_remaining": 1,
   "upgrade_proposals_pending": 0,
   "resume_commands": [

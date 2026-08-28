@@ -11,7 +11,7 @@ def test_pending_index_exists():
     path = ROOT / "manifests" / "pending_index.json"
     assert path.exists()
     data = json.loads(path.read_text())
-    assert data["total_blocked"] >= 90
+    assert data["total_blocked"] >= 70
     assert "by_layer" in data
     assert "missing" in data["by_status"]
 

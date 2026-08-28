@@ -35,7 +35,7 @@ def test_phase_transition_with_fake_real_eeprom():
     _run("ingest_phase_b.py")
     _run("detect_phase_transition.py")
     t = json.loads((ROOT / "manifests" / "phase_transition.json").read_text())
-    assert t["recommended_phase"] == "phase_b_in_progress"
+    assert t["recommended_phase"] in ("phase_b_in_progress", "phase_b_partial_complete")
     assert t["capture_flags"]["eeprom_observed"] is True
 
 

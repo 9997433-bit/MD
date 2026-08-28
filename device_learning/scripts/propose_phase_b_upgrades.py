@@ -30,6 +30,14 @@ def current_status(identifier: str) -> str | None:
     for e in USB_ENTRIES:
         if e["identifier"] == identifier:
             return e["status"]
+    try:
+        from catalogs.catalog_learn import ENTRIES as LEARN_ENTRIES
+
+        for e in LEARN_ENTRIES:
+            if e["identifier"] == identifier:
+                return e["status"]
+    except Exception:
+        pass
     return None
 
 
@@ -99,18 +107,78 @@ def build_proposals() -> dict:
     elif eeprom.get("status") == "synthetic_pipeline_test":
         notes.append("Only synthetic EEPROM available — no upgrade proposals.")
 
-    if usb.get("status") == "observed":
+    decode = load_json("manifests/usb_protocol_decode.json")
+    has_usb_files = (ROOT / "phase_b" / "captures" / "usb_enum.pcapng").exists() or (
+        ROOT / "phase_b" / "captures" / "usb_session.pcapng"
+    ).exists()
+
+    # Only propose from decode when real pcap files are on disk (pytest empties captures/).
+    if decode.get("status") == "decoded" and has_usb_files:
         applicable = True
-        notes.append("USB capture files present.")
+        notes.append("usb_protocol_decode.json available — descriptor/endpoint map decoded.")
+        evid = "manifests/usb_protocol_decode.json"
+        for ident, reason in (
+            ("PROTO-DESC-DEVICE", "Device descriptor decoded (VID/PID/bcdDevice)"),
+            ("PROTO-DESC-CONFIG", "Configuration descriptor decoded (1 interface)"),
+            ("PROTO-DESC-INTERFACE", "Interface descriptor decoded (vendor-specific 0xff, 4 EPs)"),
+        ):
+            if p := propose(ident, "confirmed", reason, evid):
+                proposals.append(p)
+        if p := propose(
+            "PROTO-DESC-STRING",
+            "candidate",
+            "String descriptors partial (serial candidate present; manufacturer/product sparse)",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose("PROTO-EP-MAP", "confirmed", "Four bulk endpoints mapped (0x01/0x81/0x06/0x84)", evid):
+            proposals.append(p)
+        if p := propose("PROTO-EP-BULK-IN", "confirmed", "Bulk IN 0x81 and 0x84, wMaxPacketSize=512", evid):
+            proposals.append(p)
+        if p := propose("PROTO-EP-BULK-OUT", "confirmed", "Bulk OUT 0x01 and 0x06, wMaxPacketSize=512", evid):
+            proposals.append(p)
+        if p := propose(
+            "PROTO-EP-INTERRUPT",
+            "candidate",
+            "No interrupt endpoint in interface descriptor (4 bulk only)",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose(
+            "PROTO-EP-ALT-SETTINGS",
+            "candidate",
+            "Only bAlternateSetting=0 observed",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose("PROTO-XFER-MODE", "confirmed", "Session traffic is bulk-dominant; no isochronous", evid):
+            proposals.append(p)
+        if p := propose(
+            "PROTO-CTRL-VENDOR-REQ",
+            "unknown",
+            "Control transfers present; bRequest semantics not yet tabulated",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose(
+            "LEARN-010-USB-PROTO",
+            "candidate",
+            "Real pcap decoded; command table still open",
+            evid,
+        ):
+            proposals.append(p)
+    elif usb.get("status") == "observed" and has_usb_files:
+        applicable = True
+        notes.append("USB capture files present; decode pending.")
         for ident in (
             "PROTO-DESC-DEVICE",
             "PROTO-DESC-CONFIG",
             "PROTO-DESC-INTERFACE",
             "PROTO-DESC-STRING",
         ):
-            if p := propose(ident, "not_started", "pcap present; descriptor parse pending", "manifests/usb_capture_meta.json"):
+            if p := propose(ident, "candidate", "pcap present; run analyze_usb_pcap_decode.py", "manifests/usb_capture_meta.json"):
                 proposals.append(p)
-        if p := propose("PROTO-EP-MAP", "unknown", "pcap present; endpoint map not decoded", "manifests/usb_capture_meta.json"):
+        if p := propose("PROTO-EP-MAP", "candidate", "pcap present; endpoint map pending decode", "manifests/usb_capture_meta.json"):
             proposals.append(p)
 
     if proto_log.get("status") == "observed":

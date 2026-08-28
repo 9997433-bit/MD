@@ -20,10 +20,13 @@ def has_captures() -> bool:
     return bool(names & {"eeprom.bin"} or any(n.endswith((".pcap", ".pcapng")) for n in names))
 
 
-def run(script: str, *args: str) -> None:
+def run(script: str, *args: str, check: bool = True) -> int:
     cmd = [sys.executable, str(SCRIPTS / script), *args]
     print(f"\n>>> {' '.join(cmd)}")
-    subprocess.run(cmd, check=True)
+    completed = subprocess.run(cmd, check=False)
+    if check and completed.returncode != 0:
+        raise subprocess.CalledProcessError(completed.returncode, cmd)
+    return completed.returncode
 
 
 def load_status() -> dict:
@@ -41,11 +44,13 @@ def main() -> int:
     run("ingest_phase_b.py")
     status = load_status()
     run("analyze_pcap_stub.py")
+    run("analyze_usb_pcap_decode.py")
     run("analyze_protocol_log.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")
-        run("extract_firmware_slice.py")
+        # Synthetic fixture returns 2; missing slice returns 3 — do not abort pipeline.
+        run("extract_firmware_slice.py", check=False)
     run("build_capture_manifest.py")
     run("propose_phase_b_upgrades.py")
     run("build_phase_b_readiness.py")

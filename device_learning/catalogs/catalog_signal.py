@@ -66,9 +66,9 @@ ENTRIES = [
         "SIG-PROTOCOL-FRAMING",
         "usb",
         "Application-level framing carried over the USB link",
-        "unknown",
-        "no_capture",
-        "no bus trace; framing not observed",
+        "candidate",
+        "bulk endpoints known; command/frame layout not reverse-engineered",
+        "usb_protocol_decode.json + usb_session.pcapng bulk traffic",
     ),
     _e(
         "SIG-INPUT-CONNECTOR",

@@ -1,0 +1,202 @@
+{
+  "generated_at": "2026-08-28T07:20:43.354122+00:00",
+  "source": "phase_b/captures/usb_enum.pcapng",
+  "tool": "tshark",
+  "bus_id": 2,
+  "devices": [
+    {
+      "bus_id": 2,
+      "device_address": 1,
+      "idVendor": "0x05e3",
+      "idProduct": "0x0610",
+      "bcdDevice": "0x0655"
+    },
+    {
+      "bus_id": 2,
+      "device_address": 2,
+      "idVendor": "0x046d",
+      "idProduct": "0xc542",
+      "bcdDevice": "0x0308"
+    },
+    {
+      "bus_id": 2,
+      "device_address": 3,
+      "idVendor": "0x0c45",
+      "idProduct": "0x671b",
+      "bcdDevice": "0x8172"
+    },
+    {
+      "bus_id": 2,
+      "device_address": 4,
+      "idVendor": "0x8087",
+      "idProduct": "0x0025",
+      "bcdDevice": "0x0002"
+    },
+    {
+      "bus_id": 2,
+      "device_address": 5,
+      "idVendor": "0x046d",
+      "idProduct": "0xc52b",
+      "bcdDevice": "0x2411"
+    },
+    {
+      "bus_id": 2,
+      "device_address": 8,
+      "idVendor": "0x3923",
+      "idProduct": "0x7317",
+      "bcdDevice": "0x744f"
+    },
+    {
+      "bus_id": 2,
+      "device_address": 9,
+      "idVendor": "0x3923",
+      "idProduct": "0x744f",
+      "bcdDevice": "0x0001"
+    }
+  ],
+  "primary": {
+    "idVendor": "0x3923",
+    "idProduct": "0x744f",
+    "bcdDevice": "0x0001",
+    "device_address": 9,
+    "first_seen_s": 8.059856,
+    "bDeviceClass": "0x00",
+    "bNumConfigurations": 1,
+    "get_descriptor_sequence": [
+      {
+        "frame": 297,
+        "t_s": 8.060015,
+        "bRequest": 6,
+        "bDescriptorType": "DEVICE",
+        "bDescriptorType_code": "0x01",
+        "descriptor_index": "0x00",
+        "wLength": 18,
+        "response_frame": 298
+      },
+      {
+        "frame": 299,
+        "t_s": 8.060074,
+        "bRequest": 6,
+        "bDescriptorType": "CONFIGURATION",
+        "bDescriptorType_code": "0x02",
+        "descriptor_index": "0x00",
+        "wLength": 9,
+        "response_frame": 300,
+        "note": "header probe; wTotalLength=46"
+      },
+      {
+        "frame": 301,
+        "t_s": 8.060194,
+        "bRequest": 6,
+        "bDescriptorType": "CONFIGURATION",
+        "bDescriptorType_code": "0x02",
+        "descriptor_index": "0x00",
+        "wLength": 55,
+        "response_frame": 302,
+        "response_bytes": 46,
+        "interfaces": 1,
+        "endpoints": [
+          "0x81",
+          "0x01",
+          "0x84",
+          "0x06"
+        ],
+        "endpoint_type": "bulk",
+        "wMaxPacketSize": 512,
+        "bInterfaceClass": "0xff"
+      },
+      {
+        "frame": 305,
+        "t_s": 8.060452,
+        "bRequest": 9,
+        "name": "SET_CONFIGURATION",
+        "wValue_configuration": 1,
+        "response_frame": 306
+      },
+      {
+        "frame": 307,
+        "t_s": 8.061788,
+        "bRequest": 6,
+        "bDescriptorType": "STRING",
+        "bDescriptorType_code": "0x03",
+        "descriptor_index": "0x03",
+        "langid": "0x0409",
+        "wLength": 4,
+        "response_frame": 308
+      },
+      {
+        "frame": 309,
+        "t_s": 8.062413,
+        "bRequest": 6,
+        "bDescriptorType": "STRING",
+        "bDescriptorType_code": "0x03",
+        "descriptor_index": "0x03",
+        "langid": "0x0409",
+        "wLength": 18,
+        "response_frame": 310,
+        "string_value": "01B771DA",
+        "note": "iSerialNumber only; iManufacturer/iProduct not requested in this capture"
+      }
+    ],
+    "post_enum": {
+      "bulk_traffic_starts_frame": 311,
+      "endpoints_active": [
+        "0x01",
+        "0x81"
+      ]
+    }
+  },
+  "companion": {
+    "idVendor": "0x3923",
+    "idProduct": "0x7317",
+    "bcdDevice": "0x744f",
+    "device_address": 8,
+    "first_seen_s": 5.600594,
+    "last_seen_s": 6.334632,
+    "bDeviceClass": "0xff",
+    "bNumConfigurations": 1,
+    "relationship_to_primary": {
+      "kind": "pre_renumeration_loader",
+      "evidence": [
+        "bcdDevice of 0x7317 equals primary idProduct 0x744f",
+        "0x7317 enumerated first (addr 8); after vendor control load, addr 8 silent",
+        "0x744f appears ~1.73s later on new addr 9; no concurrent traffic",
+        "vendor bRequest 0xA0 (160) dominant — EZ-USB-style firmware download pattern"
+      ],
+      "gap_s": 1.725224
+    },
+    "get_descriptor_sequence": [
+      {
+        "frame": 37,
+        "bDescriptorType": "DEVICE",
+        "wLength": 18
+      },
+      {
+        "frame": 39,
+        "bDescriptorType": "CONFIGURATION",
+        "wLength": 9
+      },
+      {
+        "frame": 41,
+        "bDescriptorType": "CONFIGURATION",
+        "wLength": 180,
+        "response_wTotalLength": 171
+      },
+      {
+        "frame": 45,
+        "bRequest": 9,
+        "name": "SET_CONFIGURATION"
+      }
+    ],
+    "vendor_control_after_config": {
+      "bRequest_histogram": {
+        "0xA0": 74,
+        "0xA4": 30,
+        "0xA5": 16,
+        "0xB0": 1
+      },
+      "note": "Control-only path; alt settings present in descriptor but bulk not used before renumeration"
+    }
+  },
+  "boundary": "Enum-only decode from usb_enum.pcapng via tshark; VID/PID identifiers only (no product marketing names); companion→primary link is chronological + bcdDevice cross-ref, not a claim of silicon identity; vendor bRequest semantics beyond 0xA0 download pattern not reverse-engineered"
+}

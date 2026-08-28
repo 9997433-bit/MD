@@ -18,7 +18,7 @@ ENTRIES = [
     _e("LEARN-007-REF-DESIGN", "topic", "Compare REF catalog to public TRMs", "candidate", "Pins not verified", "catalog_ref.py"),
     _e("LEARN-008-SYSTEM-MAP", "topic", "Follow data path in system_map.json", "candidate", "Analog path unprobed", "system_map.json"),
     _e("LEARN-009-EEPROM-LAYOUT", "topic", "Study FX2LP EEPROM boot layout", "candidate", "No dump yet", "eeprom_layout_ref.json"),
-    _e("LEARN-010-USB-PROTO", "topic", "USB protocol from capture", "not_started", "Need pcap", "phase_b/templates"),
+    _e("LEARN-010-USB-PROTO", "topic", "USB protocol from capture", "candidate", "Command byte table still open", "usb_protocol_decode.json"),
     _e("LEARN-011-8051-DISASM", "topic", "8051 firmware reverse engineering", "not_started", "Need eeprom.bin", "scan_firmware_stub.py"),
     _e("LEARN-012-PIN-TEST", "topic", "Pin hypothesis verification experiments", "not_started", "Need hardware", "pin_hypothesis.json"),
     _e("LEARN-013-RELAY-TEST", "topic", "Relay switching experiment design", "not_started", "Need hardware", "SIG-002-RELAY-MATRIX"),

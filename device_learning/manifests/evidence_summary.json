@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-28T07:11:26.784154+00:00",
+  "generated_at": "2026-08-28T07:27:55.967542+00:00",
   "phase": "static_complete_pending_hardware",
   "identifiers": 237,
   "status_counts": {
-    "confirmed": 68,
-    "candidate": 65,
-    "unknown": 56,
+    "confirmed": 76,
+    "candidate": 72,
+    "unknown": 50,
     "hypothesis": 6,
-    "not_started": 30,
+    "not_started": 21,
     "missing": 12
   },
-  "blocked": 98,
+  "blocked": 83,
   "hardware_ready": {
     "eeprom_present": false,
     "eeprom_observed": false,

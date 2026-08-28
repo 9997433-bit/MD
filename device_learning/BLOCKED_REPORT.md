@@ -1,8 +1,8 @@
 # 阻塞项报告（自动生成）
 
-**生成时间**：2026-08-28 07:11 UTC
+**生成时间**：2026-08-28 07:27 UTC
 
-**阻塞总数**：98 条
+**阻塞总数**：83 条
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -23,28 +23,20 @@
 | `FW-EEPROM-DID-FIELD` | usb | no_dump |
 | `FW-EEPROM-FW-RECORDS` | usb | no_dump |
 
-## not_started (30)
+## not_started (21)
 
 | Identifier | Layer | Boundary |
 |------------|-------|----------|
 | `SIG-ADC-TO-INTERFACE` | signal | cross_layer |
-| `PROTO-DESC-DEVICE` | usb | no_capture |
-| `PROTO-DESC-CONFIG` | usb | no_capture |
-| `PROTO-DESC-INTERFACE` | usb | no_capture |
-| `PROTO-DESC-STRING` | usb | no_capture |
-| `PROTO-CTRL-VENDOR-REQ` | usb | no_capture |
 | `DRV-HOST-MODULE` | usb | no_binary |
 | `DRV-INF-BINDING` | usb | no_binary |
 | `DRV-IOCTL-SURFACE` | usb | no_binary |
 | `DRV-FIRMWARE-LOADER` | usb | no_binary |
-| `LEARN-010-USB-PROTO` | learn | Need pcap |
 | `LEARN-011-8051-DISASM` | learn | Need eeprom.bin |
 | `LEARN-012-PIN-TEST` | learn | Need hardware |
 | `LEARN-013-RELAY-TEST` | learn | Need hardware |
 | `LEARN-015-OPEN-REIMPL` | learn | Future phase D |
 | `EXP-001-EEPROM-DUMP` | exp | Need programmer |
-| `EXP-002-USB-ENUM` | exp | Need device+host |
-| `EXP-003-USB-SESSION` | exp | Need official driver |
 | `EXP-004-PIN-FIFO` | exp | Need scope |
 | `EXP-005-PIN-ADC` | exp | Need scope |
 | `EXP-006-RELAY-TOGGLE` | exp | Need signal source |
@@ -54,11 +46,10 @@
 | `EXP-010-8051-DISASM` | exp | Depends EXP-001 |
 | `EXP-011-PROTO-TABLE` | exp | Depends EXP-003 |
 | `EXP-012-VIDPID` | exp | Depends EXP-001/002 |
-| `EXP-013-ENDPOINT-MAP` | exp | Depends EXP-002 |
 | `EXP-014-DATA-FRAME` | exp | Depends EXP-008 |
 | `EXP-015-BRG-UPGRADE` | exp | Needs EXP-004..008 |
 
-## unknown (56)
+## unknown (50)
 
 | Identifier | Layer | Boundary |
 |------------|-------|----------|
@@ -95,7 +86,6 @@
 | `MEM-005-ROM` | bit | — |
 | `SIG-ACQ-CHANNEL` | signal | no_capture |
 | `SIG-POWER-RAILS` | signal | no_measurement |
-| `SIG-PROTOCOL-FRAMING` | signal | no_capture |
 | `SIG-INPUT-PROTECTION` | signal | no_measurement |
 | `SIG-COUPLING-MODE` | signal | no_measurement |
 | `SIG-COUPLING-RELAY` | signal | no_measurement |
@@ -108,12 +98,7 @@
 | `SIG-ADC-SAMPLE-RATE` | signal | no_datasheet |
 | `SIG-ADC-REFERENCE` | signal | no_measurement |
 | `FW-FPGA-CONFIG-IFACE` | usb | no_dump |
-| `PROTO-EP-MAP` | usb | no_capture |
-| `PROTO-EP-BULK-IN` | usb | no_capture |
-| `PROTO-EP-BULK-OUT` | usb | no_capture |
-| `PROTO-EP-INTERRUPT` | usb | no_capture |
-| `PROTO-EP-ALT-SETTINGS` | usb | no_capture |
-| `PROTO-XFER-MODE` | usb | no_capture |
+| `PROTO-CTRL-VENDOR-REQ` | usb | bRequest semantics not tabulated |
 | `DRV-PIPE-EP-BIND` | usb | cross_layer |
 | `ARCH-007-CLOCK-FPGA` | arch | — |
 | `ARCH-008-RESET-USB` | arch | — |

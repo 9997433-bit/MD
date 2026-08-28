@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:11:25.899726+00:00",
+  "generated_at": "2026-08-28T07:27:55.102294+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,21 +10,21 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-28T07:11:25.795675+00:00",
+      "generated_at": "2026-08-28T07:27:54.999650+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
       "identifiers": 237,
       "status_counts": {
-        "confirmed": 68,
-        "candidate": 65,
-        "unknown": 56,
+        "confirmed": 76,
+        "candidate": 72,
+        "unknown": 50,
         "hypothesis": 6,
-        "not_started": 30,
+        "not_started": 21,
         "missing": 12
       },
-      "pytest_count": 104,
-      "manifest_json_count": 43,
+      "pytest_count": 105,
+      "manifest_json_count": 47,
       "phase_b_blockers_remaining": 1,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-28T07:11:25.002052+00:00",
+      "generated_at": "2026-08-28T07:27:54.225935+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -108,7 +108,7 @@
       "next_command": "make phase-b"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-28T07:11:25.235716+00:00",
+      "generated_at": "2026-08-28T07:27:54.457106+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": true,
       "checklist": "0/6",
@@ -116,7 +116,7 @@
       "recommended_action": "make phase-c"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-28T07:11:22.700344+00:00",
+      "generated_at": "2026-08-28T07:27:51.971430+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "phase_b_in_progress",
       "transition_ready": true,
@@ -134,7 +134,7 @@
       "action": "make phase-b"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-28T07:11:24.844593+00:00",
+      "generated_at": "2026-08-28T07:27:54.068925+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -180,18 +180,18 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-28T07:11:24.923136+00:00",
+      "generated_at": "2026-08-28T07:27:54.147180+00:00",
       "applicable": true,
       "proposal_count": 0,
       "proposals": [],
       "notes": [
         "Only synthetic EEPROM available — no upgrade proposals.",
-        "USB capture files present."
+        "usb_protocol_decode.json available — descriptor/endpoint map decoded."
       ],
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-28T07:11:24.191216+00:00",
+      "generated_at": "2026-08-28T07:27:53.424905+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -221,11 +221,7 @@
           "action": "usb_enum_capture",
           "artifact": "phase_b/captures/usb_enum.pcapng",
           "unblocks": [
-            "PROTO-DESC-DEVICE",
-            "PROTO-DESC-CONFIG",
-            "PROTO-DESC-INTERFACE",
-            "PROTO-DESC-STRING",
-            "PROTO-EP-MAP"
+            "PROTO-CTRL-VENDOR-REQ"
           ],
           "feeds": [
             "analyze_pcap_stub.py",
@@ -256,14 +252,14 @@
         {
           "experiment": "EXP-002-USB-ENUM",
           "description": "Capture USB enumeration traffic",
-          "status": "not_started",
-          "depends": "Need device+host"
+          "status": "candidate",
+          "depends": "pcap present; deeper vendor-req table open"
         },
         {
           "experiment": "EXP-003-USB-SESSION",
           "description": "Capture config+acquire session",
-          "status": "not_started",
-          "depends": "Need official driver"
+          "status": "candidate",
+          "depends": "pcap present; command semantics open"
         },
         {
           "experiment": "EXP-004-PIN-FIFO",
@@ -322,8 +318,8 @@
         {
           "experiment": "EXP-013-ENDPOINT-MAP",
           "description": "Map bulk IN/OUT endpoint numbers",
-          "status": "not_started",
-          "depends": "Depends EXP-002"
+          "status": "confirmed",
+          "depends": null
         },
         {
           "experiment": "EXP-014-DATA-FRAME",
@@ -341,18 +337,18 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-28T00:51:07.009780+00:00",
+      "generated_at": "2026-08-28T07:27:43.865435+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
-        "confirmed": 68,
-        "candidate": 65,
-        "unknown": 56,
+        "confirmed": 76,
+        "candidate": 72,
+        "unknown": 50,
         "hypothesis": 6,
-        "not_started": 30,
+        "not_started": 21,
         "missing": 12
       },
-      "blocked": 98,
+      "blocked": 83,
       "hardware_ready": {
         "eeprom_present": false,
         "eeprom_observed": false,
@@ -432,7 +428,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T07:11:22.611704+00:00",
+      "updated_at": "2026-08-28T07:27:51.885104+00:00",
       "done_count": 3,
       "total_count": 6
     },
@@ -489,7 +485,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T00:51:11.807441+00:00",
+      "updated_at": "2026-08-28T07:27:49.001120+00:00",
       "done_count": 0,
       "total_count": 6
     }

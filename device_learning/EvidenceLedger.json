@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:11:27.737883+00:00",
+  "generated_at": "2026-08-28T07:27:56.916751+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "phase_b_in_progress",
   "catalogs": {
@@ -1048,9 +1048,9 @@
         "layer": "signal",
         "module": "usb",
         "description": "Application-level framing carried over the USB link",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "no bus trace; framing not observed"
+        "status": "candidate",
+        "boundary": "bulk endpoints known; command/frame layout not reverse-engineered",
+        "evidence": "usb_protocol_decode.json + usb_session.pcapng bulk traffic"
       },
       {
         "identifier": "SIG-INPUT-CONNECTOR",
@@ -1337,100 +1337,100 @@
         "identifier": "PROTO-DESC-DEVICE",
         "layer": "usb",
         "module": "proto",
-        "description": "USB device descriptor",
-        "status": "not_started",
-        "boundary": "no_capture",
-        "evidence": "enumeration not captured; fields unparsed"
+        "description": "USB device descriptor VID=0x3923 PID=0x744f bcdDevice=0x0001",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json / usb_session.pcapng device descriptor"
       },
       {
         "identifier": "PROTO-DESC-CONFIG",
         "layer": "usb",
         "module": "proto",
-        "description": "USB configuration descriptor",
-        "status": "not_started",
-        "boundary": "no_capture",
-        "evidence": "power/interface counts unparsed"
+        "description": "USB configuration descriptor: 1 interface, bmAttributes=0x80",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json configuration descriptor"
       },
       {
         "identifier": "PROTO-DESC-INTERFACE",
         "layer": "usb",
         "module": "proto",
-        "description": "USB interface descriptor",
-        "status": "not_started",
-        "boundary": "no_capture",
-        "evidence": "class/subclass/protocol fields unparsed"
+        "description": "Interface 0 vendor-specific (0xff), 4 endpoints, alt=0",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json interface descriptor"
       },
       {
         "identifier": "PROTO-DESC-STRING",
         "layer": "usb",
         "module": "proto",
-        "description": "USB string descriptors",
-        "status": "not_started",
-        "boundary": "no_capture",
-        "evidence": "vendor/product strings not read"
+        "description": "USB string descriptors (partial; serial candidate present)",
+        "status": "candidate",
+        "boundary": "manufacturer/product strings sparse in capture",
+        "evidence": "usb_protocol_decode.json string_descriptors"
       },
       {
         "identifier": "PROTO-EP-MAP",
         "layer": "usb",
         "module": "proto",
-        "description": "Overall endpoint map",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "endpoint count/direction/type have no evidence"
+        "description": "Endpoints: bulk 0x01 OUT, 0x81 IN, 0x06 OUT, 0x84 IN (512 B)",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json endpoints"
       },
       {
         "identifier": "PROTO-EP-BULK-IN",
         "layer": "usb",
         "module": "proto",
-        "description": "Bulk IN endpoint (data upstream to host)",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "endpoint number and max packet size unknown"
+        "description": "Bulk IN endpoints 0x81 and 0x84, wMaxPacketSize=512",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json + session URB counts"
       },
       {
         "identifier": "PROTO-EP-BULK-OUT",
         "layer": "usb",
         "module": "proto",
-        "description": "Bulk OUT endpoint (commands downstream)",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "endpoint number and purpose not confirmed"
+        "description": "Bulk OUT endpoints 0x01 and 0x06, wMaxPacketSize=512",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json + session URB counts"
       },
       {
         "identifier": "PROTO-EP-INTERRUPT",
         "layer": "usb",
         "module": "proto",
-        "description": "Interrupt endpoint (status / events)",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "existence of an interrupt endpoint unknown"
+        "description": "No interrupt endpoint in observed interface descriptor",
+        "status": "candidate",
+        "boundary": "only 4 bulk endpoints listed",
+        "evidence": "usb_protocol_decode.json"
       },
       {
         "identifier": "PROTO-EP-ALT-SETTINGS",
         "layer": "usb",
         "module": "proto",
-        "description": "Interface alternate settings",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "bandwidth/endpoint changes per alt-setting unknown"
+        "description": "Only bAlternateSetting=0 observed",
+        "status": "candidate",
+        "boundary": "other alt-settings not seen in capture",
+        "evidence": "usb_protocol_decode.json"
       },
       {
         "identifier": "PROTO-XFER-MODE",
         "layer": "usb",
         "module": "proto",
-        "description": "Data transfer mode for the acquisition stream (bulk vs isochronous)",
-        "status": "unknown",
-        "boundary": "no_capture",
-        "evidence": "whether the stream uses bulk or isochronous not confirmed"
+        "description": "Acquisition stream uses bulk transfers (not isochronous)",
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json transfer_mode + session traffic"
       },
       {
         "identifier": "PROTO-CTRL-VENDOR-REQ",
         "layer": "usb",
         "module": "proto",
         "description": "Vendor-specific control-request surface",
-        "status": "not_started",
-        "boundary": "no_capture",
-        "evidence": "bRequest/wValue semantics unparsed"
+        "status": "unknown",
+        "boundary": "bRequest semantics not tabulated",
+        "evidence": "usb_session.pcapng control URBs present; decode pending"
       },
       {
         "identifier": "DRV-HOST-MODULE",
@@ -1920,9 +1920,9 @@
         "layer": "learn",
         "module": "topic",
         "description": "USB protocol from capture",
-        "status": "not_started",
-        "boundary": "Need pcap",
-        "evidence": "phase_b/templates"
+        "status": "candidate",
+        "boundary": "Command byte table still open",
+        "evidence": "usb_protocol_decode.json"
       },
       {
         "identifier": "LEARN-011-8051-DISASM",
@@ -2030,18 +2030,18 @@
         "layer": "exp",
         "module": "capture",
         "description": "Capture USB enumeration traffic",
-        "status": "not_started",
-        "boundary": "Need device+host",
-        "evidence": "phase_b/templates/usb_capture.md"
+        "status": "candidate",
+        "boundary": "pcap present; deeper vendor-req table open",
+        "evidence": "phase_b/captures/usb_enum.pcapng"
       },
       {
         "identifier": "EXP-003-USB-SESSION",
         "layer": "exp",
         "module": "capture",
         "description": "Capture config+acquire session",
-        "status": "not_started",
-        "boundary": "Need official driver",
-        "evidence": "phase_b/templates/usb_capture.md"
+        "status": "candidate",
+        "boundary": "pcap present; command semantics open",
+        "evidence": "phase_b/captures/usb_session.pcapng"
       },
       {
         "identifier": "EXP-004-PIN-FIFO",
@@ -2129,9 +2129,9 @@
         "layer": "exp",
         "module": "analysis",
         "description": "Map bulk IN/OUT endpoint numbers",
-        "status": "not_started",
-        "boundary": "Depends EXP-002",
-        "evidence": "PROTO-EP-MAP"
+        "status": "confirmed",
+        "boundary": null,
+        "evidence": "usb_protocol_decode.json"
       },
       {
         "identifier": "EXP-014-DATA-FRAME",
@@ -2155,15 +2155,15 @@
   },
   "manifests": {
     "artifact_inventory": {
-      "generated_at": "2026-08-28T07:11:27.331079+00:00",
-      "artifact_count": 58,
-      "present_count": 58,
+      "generated_at": "2026-08-28T07:27:56.512581+00:00",
+      "artifact_count": 62,
+      "present_count": 62,
       "artifacts": [
         {
           "path": "EvidenceLedger.json",
           "description": "主账本",
           "exists": true,
-          "size_bytes": 247428
+          "size_bytes": 260094
         },
         {
           "path": "coverage.json",
@@ -2193,13 +2193,13 @@
           "path": "CONFIRMED_REPORT.md",
           "description": "confirmed 项报告",
           "exists": true,
-          "size_bytes": 3771
+          "size_bytes": 4476
         },
         {
           "path": "BLOCKED_REPORT.md",
           "description": "阻塞项报告",
           "exists": true,
-          "size_bytes": 4746
+          "size_bytes": 4089
         },
         {
           "path": "BRIDGE_REPORT.md",
@@ -2217,7 +2217,7 @@
           "path": "IDENTIFIER_INDEX.md",
           "description": "identifier 全表",
           "exists": true,
-          "size_bytes": 18696
+          "size_bytes": 18903
         },
         {
           "path": "HARDWARE_HANDOFF.md",
@@ -2265,7 +2265,7 @@
           "path": "manifests/handoff_bundle.json",
           "description": "一站式交接 JSON",
           "exists": true,
-          "size_bytes": 15381
+          "size_bytes": 15323
         },
         {
           "path": "manifests/output_hashes.json",
@@ -2277,7 +2277,7 @@
           "path": "manifests/artifact_inventory.json",
           "description": "generated manifest",
           "exists": true,
-          "size_bytes": 8710
+          "size_bytes": 9330
         },
         {
           "path": "manifests/bit_strings.json",
@@ -2421,7 +2421,7 @@
           "path": "manifests/pending_index.json",
           "description": "generated manifest",
           "exists": true,
-          "size_bytes": 23445
+          "size_bytes": 19867
         },
         {
           "path": "manifests/phase_b_readiness.json",
@@ -2439,7 +2439,7 @@
           "path": "manifests/phase_b_upgrade_proposals.json",
           "description": "generated manifest",
           "exists": true,
-          "size_bytes": 328
+          "size_bytes": 373
         },
         {
           "path": "manifests/phase_c_readiness.json",
@@ -2451,7 +2451,7 @@
           "path": "manifests/phase_roadmap.json",
           "description": "generated manifest",
           "exists": true,
-          "size_bytes": 4218
+          "size_bytes": 4131
         },
         {
           "path": "manifests/phase_transition.json",
@@ -2506,11 +2506,35 @@
           "description": "generated manifest",
           "exists": true,
           "size_bytes": 578
+        },
+        {
+          "path": "manifests/usb_companion_7317.json",
+          "description": "generated manifest",
+          "exists": true,
+          "size_bytes": 7041
+        },
+        {
+          "path": "manifests/usb_enum_decode_notes.json",
+          "description": "generated manifest",
+          "exists": true,
+          "size_bytes": 5244
+        },
+        {
+          "path": "manifests/usb_protocol_decode.json",
+          "description": "generated manifest",
+          "exists": true,
+          "size_bytes": 3465
+        },
+        {
+          "path": "manifests/usb_session_traffic.json",
+          "description": "generated manifest",
+          "exists": true,
+          "size_bytes": 1250
         }
       ]
     },
     "bit_strings": {
-      "generated_at": "2026-08-28T07:11:23.295307+00:00",
+      "generated_at": "2026-08-28T07:27:52.538198+00:00",
       "source": "firmware/device.bit",
       "file_size_bytes": 131046,
       "min_string_length": 4,
@@ -2659,7 +2683,7 @@
       }
     },
     "bom_crosswalk": {
-      "generated_at": "2026-08-28T07:11:24.112980+00:00",
+      "generated_at": "2026-08-28T07:27:53.347471+00:00",
       "component_count": 40,
       "linked_count": 27,
       "links": [
@@ -2912,7 +2936,7 @@
       "boundary": "Keyword heuristic on ref/marking only; not a netlist"
     },
     "capture_manifest": {
-      "generated_at": "2026-08-28T07:11:24.844593+00:00",
+      "generated_at": "2026-08-28T07:27:54.068925+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -2958,7 +2982,7 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "catalog_integrity": {
-      "generated_at": "2026-08-28T07:11:26.706773+00:00",
+      "generated_at": "2026-08-28T07:27:55.890306+00:00",
       "entry_count": 237,
       "unique_identifiers": 237,
       "duplicate_count": 0,
@@ -3000,7 +3024,7 @@
       "note": "static_phase_complete means L0-A deep done; phase B/C require hardware"
     },
     "config_entropy": {
-      "generated_at": "2026-08-28T07:11:23.376388+00:00",
+      "generated_at": "2026-08-28T07:27:52.619341+00:00",
       "source": "firmware/device.bit",
       "config_segment_bytes": 130948,
       "byte_entropy_bits": 4.3049,
@@ -3013,7 +3037,7 @@
       ]
     },
     "crossref_index": {
-      "generated_at": "2026-08-28T07:11:24.269312+00:00",
+      "generated_at": "2026-08-28T07:27:53.502876+00:00",
       "layer_counts": {
         "hw": 32,
         "bit": 78,
@@ -3170,7 +3194,7 @@
     },
     "eeprom_meta": {
       "status": "synthetic_pipeline_test",
-      "generated_at": "2026-08-28T07:11:23.666288+00:00",
+      "generated_at": "2026-08-28T07:27:52.905920+00:00",
       "warning": "Using synthetic fixture — NOT device data",
       "source": "synthetic_reference",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
@@ -3192,7 +3216,7 @@
     "eeprom_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device dump — pipeline test fixture only",
-      "generated_at": "2026-08-28T07:11:23.458426+00:00",
+      "generated_at": "2026-08-28T07:27:52.698588+00:00",
       "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
       "size_bytes": 8192,
       "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
@@ -3203,18 +3227,18 @@
       "layout_ref": "manifests/eeprom_layout_ref.json"
     },
     "evidence_summary": {
-      "generated_at": "2026-08-28T07:11:26.784154+00:00",
+      "generated_at": "2026-08-28T07:27:55.967542+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
-        "confirmed": 68,
-        "candidate": 65,
-        "unknown": 56,
+        "confirmed": 76,
+        "candidate": 72,
+        "unknown": 50,
         "hypothesis": 6,
-        "not_started": 30,
+        "not_started": 21,
         "missing": 12
       },
-      "blocked": 98,
+      "blocked": 83,
       "hardware_ready": {
         "eeprom_present": false,
         "eeprom_observed": false,
@@ -3235,20 +3259,20 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "experiment_index": {
-      "generated_at": "2026-08-28T07:11:25.157709+00:00",
+      "generated_at": "2026-08-28T07:27:54.380433+00:00",
       "entry_count": 0,
       "experiments": [],
       "boundary": "Index only; catalog upgrades require human review"
     },
     "experiment_validation": {
-      "generated_at": "2026-08-28T07:11:25.080105+00:00",
+      "generated_at": "2026-08-28T07:27:54.303237+00:00",
       "log_count": 0,
       "valid_count": 0,
       "files": [],
       "boundary": "Validation only; does not auto-upgrade catalog entries"
     },
     "file_hashes": {
-      "generated_at": "2026-08-28T07:11:22.922123+00:00",
+      "generated_at": "2026-08-28T07:27:52.177639+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -3312,10 +3336,10 @@
     "firmware_extract": {
       "status": "missing",
       "path": "/workspace/device_learning/phase_b/captures/eeprom.bin",
-      "generated_at": "2026-08-28T07:11:24.764701+00:00"
+      "generated_at": "2026-08-28T07:27:53.989609+00:00"
     },
     "firmware_scan": {
-      "generated_at": "2026-08-28T07:11:23.796963+00:00",
+      "generated_at": "2026-08-28T07:27:53.033408+00:00",
       "eeprom_size": 8192,
       "boot_format": "C2",
       "firmware_offset": 12,
@@ -3340,7 +3364,7 @@
     },
     "frame_deep": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-28T07:11:23.203735+00:00",
+      "generated_utc": "2026-08-28T07:27:52.448047+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "reference": "UG332 / XAPP452 (public Xilinx documentation)",
@@ -3596,7 +3620,7 @@
     },
     "frame_summary": {
       "schema_version": "1.0",
-      "generated_utc": "2026-08-28T07:11:23.103630+00:00",
+      "generated_utc": "2026-08-28T07:27:52.356639+00:00",
       "source_file": "firmware/device.bit",
       "file_size_bytes": 131046,
       "parse_status": "partial-ok",
@@ -4276,7 +4300,7 @@
       ]
     },
     "handoff_bundle": {
-      "generated_at": "2026-08-28T07:11:25.899726+00:00",
+      "generated_at": "2026-08-28T07:27:55.102294+00:00",
       "package": "device_learning",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "resume_commands": [
@@ -4287,21 +4311,21 @@
       ],
       "sections": {
         "manifests_static_closure": {
-          "generated_at": "2026-08-28T07:11:25.795675+00:00",
+          "generated_at": "2026-08-28T07:27:54.999650+00:00",
           "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
           "static_phase_closed": true,
           "frozen": true,
           "identifiers": 237,
           "status_counts": {
-            "confirmed": 68,
-            "candidate": 65,
-            "unknown": 56,
+            "confirmed": 76,
+            "candidate": 72,
+            "unknown": 50,
             "hypothesis": 6,
-            "not_started": 30,
+            "not_started": 21,
             "missing": 12
           },
-          "pytest_count": 104,
-          "manifest_json_count": 43,
+          "pytest_count": 105,
+          "manifest_json_count": 47,
           "phase_b_blockers_remaining": 1,
           "upgrade_proposals_pending": 0,
           "resume_commands": [
@@ -4349,7 +4373,7 @@
           "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
         },
         "manifests_phase_b_readiness": {
-          "generated_at": "2026-08-28T07:11:25.002052+00:00",
+          "generated_at": "2026-08-28T07:27:54.225935+00:00",
           "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
           "blockers": [
             {
@@ -4385,7 +4409,7 @@
           "next_command": "make phase-b"
         },
         "manifests_phase_c_readiness": {
-          "generated_at": "2026-08-28T07:11:25.235716+00:00",
+          "generated_at": "2026-08-28T07:27:54.457106+00:00",
           "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
           "phase_b_prerequisite_met": true,
           "checklist": "0/6",
@@ -4393,7 +4417,7 @@
           "recommended_action": "make phase-c"
         },
         "manifests_phase_transition": {
-          "generated_at": "2026-08-28T07:11:22.700344+00:00",
+          "generated_at": "2026-08-28T07:27:51.971430+00:00",
           "current_phase": "static_complete_pending_hardware",
           "recommended_phase": "phase_b_in_progress",
           "transition_ready": true,
@@ -4411,7 +4435,7 @@
           "action": "make phase-b"
         },
         "manifests_capture_manifest": {
-          "generated_at": "2026-08-28T07:11:24.844593+00:00",
+          "generated_at": "2026-08-28T07:27:54.068925+00:00",
           "artifacts": [
             {
               "path": "phase_b/captures/eeprom.bin",
@@ -4457,18 +4481,18 @@
           "boundary": "Inventory only; status upgrades require ledger refresh"
         },
         "manifests_phase_b_upgrade_proposals": {
-          "generated_at": "2026-08-28T07:11:24.923136+00:00",
+          "generated_at": "2026-08-28T07:27:54.147180+00:00",
           "applicable": true,
           "proposal_count": 0,
           "proposals": [],
           "notes": [
             "Only synthetic EEPROM available — no upgrade proposals.",
-            "USB capture files present."
+            "usb_protocol_decode.json available — descriptor/endpoint map decoded."
           ],
           "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
         },
         "manifests_phase_roadmap": {
-          "generated_at": "2026-08-28T07:11:24.191216+00:00",
+          "generated_at": "2026-08-28T07:27:53.424905+00:00",
           "phase_b": [
             {
               "action": "eeprom_dump",
@@ -4498,11 +4522,7 @@
               "action": "usb_enum_capture",
               "artifact": "phase_b/captures/usb_enum.pcapng",
               "unblocks": [
-                "PROTO-DESC-DEVICE",
-                "PROTO-DESC-CONFIG",
-                "PROTO-DESC-INTERFACE",
-                "PROTO-DESC-STRING",
-                "PROTO-EP-MAP"
+                "PROTO-CTRL-VENDOR-REQ"
               ],
               "feeds": [
                 "analyze_pcap_stub.py",
@@ -4533,14 +4553,14 @@
             {
               "experiment": "EXP-002-USB-ENUM",
               "description": "Capture USB enumeration traffic",
-              "status": "not_started",
-              "depends": "Need device+host"
+              "status": "candidate",
+              "depends": "pcap present; deeper vendor-req table open"
             },
             {
               "experiment": "EXP-003-USB-SESSION",
               "description": "Capture config+acquire session",
-              "status": "not_started",
-              "depends": "Need official driver"
+              "status": "candidate",
+              "depends": "pcap present; command semantics open"
             },
             {
               "experiment": "EXP-004-PIN-FIFO",
@@ -4599,8 +4619,8 @@
             {
               "experiment": "EXP-013-ENDPOINT-MAP",
               "description": "Map bulk IN/OUT endpoint numbers",
-              "status": "not_started",
-              "depends": "Depends EXP-002"
+              "status": "confirmed",
+              "depends": null
             },
             {
               "experiment": "EXP-014-DATA-FRAME",
@@ -4618,18 +4638,18 @@
           "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
         },
         "manifests_evidence_summary": {
-          "generated_at": "2026-08-28T00:51:07.009780+00:00",
+          "generated_at": "2026-08-28T07:27:43.865435+00:00",
           "phase": "static_complete_pending_hardware",
           "identifiers": 237,
           "status_counts": {
-            "confirmed": 68,
-            "candidate": 65,
-            "unknown": 56,
+            "confirmed": 76,
+            "candidate": 72,
+            "unknown": 50,
             "hypothesis": 6,
-            "not_started": 30,
+            "not_started": 21,
             "missing": 12
           },
-          "blocked": 98,
+          "blocked": 83,
           "hardware_ready": {
             "eeprom_present": false,
             "eeprom_observed": false,
@@ -4709,7 +4729,7 @@
               "done": false
             }
           ],
-          "updated_at": "2026-08-28T07:11:22.611704+00:00",
+          "updated_at": "2026-08-28T07:27:51.885104+00:00",
           "done_count": 3,
           "total_count": 6
         },
@@ -4766,7 +4786,7 @@
               "done": false
             }
           ],
-          "updated_at": "2026-08-28T00:51:11.807441+00:00",
+          "updated_at": "2026-08-28T07:27:49.001120+00:00",
           "done_count": 0,
           "total_count": 6
         }
@@ -5223,7 +5243,7 @@
       }
     },
     "manifest_files": {
-      "generated_at": "2026-08-28T07:11:22.922123+00:00",
+      "generated_at": "2026-08-28T07:27:52.177639+00:00",
       "source_dir": "/workspace/device_learning",
       "file_count": 11,
       "files": [
@@ -5274,19 +5294,19 @@
       ]
     },
     "output_hashes": {
-      "generated_at": "2026-08-28T07:11:27.412130+00:00",
+      "generated_at": "2026-08-28T07:27:56.593267+00:00",
       "output_count": 15,
-      "combined_sha256": "07c01513c69f87317b6f83612fd74ef00c78978146f996b9c7995832de80e894",
+      "combined_sha256": "065ada2672275abf80f99c1fb2b15a71a3bebb9a7420a5a3e81651db8a02cfb9",
       "outputs": [
         {
           "path": "EvidenceLedger.json",
-          "size_bytes": 247428,
-          "sha256": "72ccfa991b55385ce3780ad6f5c389f7fcc02626c219a45fd6d0edea571b2c93"
+          "size_bytes": 260094,
+          "sha256": "0217b50a3ec8f7d10f1403e8d48c05b2e87fe77a695e76d8416b56db03a9b3b3"
         },
         {
           "path": "coverage.json",
           "size_bytes": 881,
-          "sha256": "dd71051236cf1b903a7c750121551bae55ef24de4dedda8e233edede1ee0d316"
+          "sha256": "292383329f42a27e8ee86feef1f163a83019cd30e387f5be4b046b0e2cff72cd"
         },
         {
           "path": "bridge_matrix.json",
@@ -5296,37 +5316,37 @@
         {
           "path": "STATIC_REPORT.md",
           "size_bytes": 1637,
-          "sha256": "bd05e718912447ed0e3645be6d1d84a60a230cb8e4454bdfd3c1e4ad6886317b"
+          "sha256": "efdcfa0c2c5e4750b26f3470a3297a7605a3e6a4edd3c844a79acacd4684baeb"
         },
         {
           "path": "CONFIRMED_REPORT.md",
-          "size_bytes": 3771,
-          "sha256": "1b27e11f5becc32c8d0722435e19f498750ad63be7ca100a09aead5383506bb8"
+          "size_bytes": 4476,
+          "sha256": "813fa590c83432d9f6e564cf9d41906a7479a1816bd6af3adf1a095f37e52240"
         },
         {
           "path": "BLOCKED_REPORT.md",
-          "size_bytes": 4746,
-          "sha256": "5598eefe06495cb88475fe47c99cf04f82249b176e1ea407f27340184c51e191"
+          "size_bytes": 4089,
+          "sha256": "008eb35d6b2677bfd1abc270995211f94eb39fb51c1d47fcf6477064098f5e6e"
         },
         {
           "path": "BRIDGE_REPORT.md",
           "size_bytes": 969,
-          "sha256": "b000bf80a2b9247271d844a030af96cb5d9c92d8fcb274fb7ba7c7ba07229948"
+          "sha256": "8415cf972d89b08a50e4551581c50f7de57da420d215ce621ac544ba1931d7be"
         },
         {
           "path": "ARCHITECTURE.md",
           "size_bytes": 731,
-          "sha256": "bd7b280b189f5aebcc7d9ffbf01562a85989b1963bcc73e227e1be3abbacb622"
+          "sha256": "af35375132b63efa693dc5c15b95231e5b247b7e7218ed894ba9b45f7ab55b11"
         },
         {
           "path": "IDENTIFIER_INDEX.md",
-          "size_bytes": 18696,
-          "sha256": "3ba8c93597afb3692cc1e15ae7fd474cdf8ff7873c9ce593971f5ddec6095060"
+          "size_bytes": 18903,
+          "sha256": "6bf474d1333c655594818d0deddcd78cba34a2ccb1b9a3203680fdc1fcac0ece"
         },
         {
           "path": "manifests/evidence_summary.json",
           "size_bytes": 818,
-          "sha256": "7ed5a92db56ebfb238a5a7b039374b2f72beeb43f72d24c94a33f03b3d70722c"
+          "sha256": "3b7eb863754b99f1e66338c961d8aec92ce1eee12a96e554e9335a05e06cf547"
         },
         {
           "path": "manifests/completion_status.json",
@@ -5336,42 +5356,42 @@
         {
           "path": "manifests/catalog_integrity.json",
           "size_bytes": 182,
-          "sha256": "e836df46212528a596526f478d13e2227b199bc4e6e220d6ece26cdd0feb85ad"
+          "sha256": "c9befc6622022784ec0546982e946d508257de877fb6d9d3d51175b743ba9a55"
         },
         {
           "path": "manifests/sensitive_audit.json",
           "size_bytes": 162,
-          "sha256": "448ccfb73b1502201f508fa6aede841ca747dd383d5234b332f5f4f6b64425ff"
+          "sha256": "b6bede95949ccd33586bc4ce489a06784e0a017199a46ee6dbc9240b4fa5f5af"
         },
         {
           "path": "manifests/frame_summary.json",
           "size_bytes": 14548,
-          "sha256": "45be14c81aff6a65cdbc93a8dbfe5a14c7e7cdf0c0e78642c6190c342a233959"
+          "sha256": "b78dbb515afe548440e59523a3d88a57d0a393fce2b41a79bc932fea627ddb1d"
         },
         {
           "path": "manifests/pending_index.json",
-          "size_bytes": 23445,
-          "sha256": "8443b7cffb92909a0f59ee42a99a0973b3058cc1adbf00b56842f9337d8bb152"
+          "size_bytes": 19867,
+          "sha256": "7e1c5ca2da6c069a98733474c454bdad798fa4eea0d05acdfb275fc5e8a86831"
         }
       ],
       "boundary": "Hashes of generated artifacts; inputs see file_hashes.json"
     },
     "package_manifest": {
-      "generated_at": "2026-08-28T00:51:08.234369+00:00",
+      "generated_at": "2026-08-28T07:27:45.090988+00:00",
       "package": "device_learning",
       "version": "static-1.0",
       "phase": "static_complete_pending_hardware",
       "static_phase_complete": true,
-      "frozen_at": "2026-08-28T00:51:08.130972+00:00",
+      "frozen_at": "2026-08-28T07:27:44.986890+00:00",
       "metrics": {
         "identifiers": 237,
-        "confirmed": 68,
-        "blocked": 98,
-        "pytest_count": 104,
-        "manifest_json_count": 43
+        "confirmed": 76,
+        "blocked": 83,
+        "pytest_count": 105,
+        "manifest_json_count": 47
       },
       "input_hashes": {
-        "combined_output_sha256": "ca9307ae4e85b821e0e39edbd66d7e1cb03ed576db74227674a659c9ef53f1a4"
+        "combined_output_sha256": "65d5cce88c391cf94c7c34f88ae9924db4a80fa0eb4173bc63806ed3e703710d"
       },
       "checklists": {
         "phase_b": "0/6",
@@ -5390,20 +5410,20 @@
     "pcap_synthetic_meta": {
       "type": "synthetic_reference",
       "warning": "NOT a device USB capture — pipeline test fixture only",
-      "generated_at": "2026-08-28T07:11:23.538391+00:00",
+      "generated_at": "2026-08-28T07:27:52.779109+00:00",
       "path": "phase_b/fixtures/usb_enum_synthetic_reference.pcapng",
       "size_bytes": 28,
       "sha256": "3d269a1e29b7c5760e85f16bf148e93bbe4bb4401ca0e2ff1399f11fb634d679",
       "magic": "pcapng"
     },
     "pending_index": {
-      "generated_at": "2026-08-28T07:11:24.348823+00:00",
+      "generated_at": "2026-08-28T07:27:53.581089+00:00",
       "blocked_statuses": [
         "missing",
         "not_started",
         "unknown"
       ],
-      "total_blocked": 98,
+      "total_blocked": 83,
       "by_status": {
         "missing": {
           "count": 12,
@@ -5495,7 +5515,7 @@
           ]
         },
         "not_started": {
-          "count": 30,
+          "count": 21,
           "items": [
             {
               "identifier": "SIG-ADC-TO-INTERFACE",
@@ -5503,41 +5523,6 @@
               "status": "not_started",
               "boundary": "cross_layer",
               "module": "path"
-            },
-            {
-              "identifier": "PROTO-DESC-DEVICE",
-              "layer": "usb",
-              "status": "not_started",
-              "boundary": "no_capture",
-              "module": "descriptor"
-            },
-            {
-              "identifier": "PROTO-DESC-CONFIG",
-              "layer": "usb",
-              "status": "not_started",
-              "boundary": "no_capture",
-              "module": "descriptor"
-            },
-            {
-              "identifier": "PROTO-DESC-INTERFACE",
-              "layer": "usb",
-              "status": "not_started",
-              "boundary": "no_capture",
-              "module": "descriptor"
-            },
-            {
-              "identifier": "PROTO-DESC-STRING",
-              "layer": "usb",
-              "status": "not_started",
-              "boundary": "no_capture",
-              "module": "descriptor"
-            },
-            {
-              "identifier": "PROTO-CTRL-VENDOR-REQ",
-              "layer": "usb",
-              "status": "not_started",
-              "boundary": "no_capture",
-              "module": "control"
             },
             {
               "identifier": "DRV-HOST-MODULE",
@@ -5566,13 +5551,6 @@
               "status": "not_started",
               "boundary": "no_binary",
               "module": "driver"
-            },
-            {
-              "identifier": "LEARN-010-USB-PROTO",
-              "layer": "learn",
-              "status": "not_started",
-              "boundary": "Need pcap",
-              "module": "topic"
             },
             {
               "identifier": "LEARN-011-8051-DISASM",
@@ -5607,20 +5585,6 @@
               "layer": "exp",
               "status": "not_started",
               "boundary": "Need programmer",
-              "module": "capture"
-            },
-            {
-              "identifier": "EXP-002-USB-ENUM",
-              "layer": "exp",
-              "status": "not_started",
-              "boundary": "Need device+host",
-              "module": "capture"
-            },
-            {
-              "identifier": "EXP-003-USB-SESSION",
-              "layer": "exp",
-              "status": "not_started",
-              "boundary": "Need official driver",
               "module": "capture"
             },
             {
@@ -5687,13 +5651,6 @@
               "module": "analysis"
             },
             {
-              "identifier": "EXP-013-ENDPOINT-MAP",
-              "layer": "exp",
-              "status": "not_started",
-              "boundary": "Depends EXP-002",
-              "module": "analysis"
-            },
-            {
               "identifier": "EXP-014-DATA-FRAME",
               "layer": "exp",
               "status": "not_started",
@@ -5710,7 +5667,7 @@
           ]
         },
         "unknown": {
-          "count": 56,
+          "count": 50,
           "items": [
             {
               "identifier": "HW-013-EEPROM-CAPACITY",
@@ -5944,13 +5901,6 @@
               "module": "power"
             },
             {
-              "identifier": "SIG-PROTOCOL-FRAMING",
-              "layer": "signal",
-              "status": "unknown",
-              "boundary": "no_capture",
-              "module": "usb"
-            },
-            {
               "identifier": "SIG-INPUT-PROTECTION",
               "layer": "signal",
               "status": "unknown",
@@ -6035,46 +5985,11 @@
               "module": "fpga"
             },
             {
-              "identifier": "PROTO-EP-MAP",
+              "identifier": "PROTO-CTRL-VENDOR-REQ",
               "layer": "usb",
               "status": "unknown",
-              "boundary": "no_capture",
-              "module": "endpoint"
-            },
-            {
-              "identifier": "PROTO-EP-BULK-IN",
-              "layer": "usb",
-              "status": "unknown",
-              "boundary": "no_capture",
-              "module": "endpoint"
-            },
-            {
-              "identifier": "PROTO-EP-BULK-OUT",
-              "layer": "usb",
-              "status": "unknown",
-              "boundary": "no_capture",
-              "module": "endpoint"
-            },
-            {
-              "identifier": "PROTO-EP-INTERRUPT",
-              "layer": "usb",
-              "status": "unknown",
-              "boundary": "no_capture",
-              "module": "endpoint"
-            },
-            {
-              "identifier": "PROTO-EP-ALT-SETTINGS",
-              "layer": "usb",
-              "status": "unknown",
-              "boundary": "no_capture",
-              "module": "endpoint"
-            },
-            {
-              "identifier": "PROTO-XFER-MODE",
-              "layer": "usb",
-              "status": "unknown",
-              "boundary": "no_capture",
-              "module": "transfer"
+              "boundary": "bRequest semantics not tabulated",
+              "module": "control"
             },
             {
               "identifier": "DRV-PIPE-EP-BIND",
@@ -6150,11 +6065,9 @@
           ]
         },
         "exp": {
-          "count": 15,
+          "count": 12,
           "identifiers": [
             "EXP-001-EEPROM-DUMP",
-            "EXP-002-USB-ENUM",
-            "EXP-003-USB-SESSION",
             "EXP-004-PIN-FIFO",
             "EXP-005-PIN-ADC",
             "EXP-006-RELAY-TOGGLE",
@@ -6164,7 +6077,6 @@
             "EXP-010-8051-DISASM",
             "EXP-011-PROTO-TABLE",
             "EXP-012-VIDPID",
-            "EXP-013-ENDPOINT-MAP",
             "EXP-014-DATA-FRAME",
             "EXP-015-BRG-UPGRADE"
           ]
@@ -6177,9 +6089,8 @@
           ]
         },
         "learn": {
-          "count": 6,
+          "count": 5,
           "identifiers": [
-            "LEARN-010-USB-PROTO",
             "LEARN-011-8051-DISASM",
             "LEARN-012-PIN-TEST",
             "LEARN-013-RELAY-TEST",
@@ -6188,11 +6099,10 @@
           ]
         },
         "signal": {
-          "count": 15,
+          "count": 14,
           "identifiers": [
             "SIG-ACQ-CHANNEL",
             "SIG-POWER-RAILS",
-            "SIG-PROTOCOL-FRAMING",
             "SIG-INPUT-PROTECTION",
             "SIG-COUPLING-MODE",
             "SIG-COUPLING-RELAY",
@@ -6208,7 +6118,7 @@
           ]
         },
         "usb": {
-          "count": 29,
+          "count": 19,
           "identifiers": [
             "FW-MCU-CORE-IMAGE",
             "FW-MCU-RESET-VECTOR",
@@ -6223,16 +6133,6 @@
             "FW-EEPROM-DID-FIELD",
             "FW-EEPROM-FW-RECORDS",
             "FW-FPGA-CONFIG-IFACE",
-            "PROTO-DESC-DEVICE",
-            "PROTO-DESC-CONFIG",
-            "PROTO-DESC-INTERFACE",
-            "PROTO-DESC-STRING",
-            "PROTO-EP-MAP",
-            "PROTO-EP-BULK-IN",
-            "PROTO-EP-BULK-OUT",
-            "PROTO-EP-INTERRUPT",
-            "PROTO-EP-ALT-SETTINGS",
-            "PROTO-XFER-MODE",
             "PROTO-CTRL-VENDOR-REQ",
             "DRV-HOST-MODULE",
             "DRV-INF-BINDING",
@@ -6256,23 +6156,15 @@
         "FW-EEPROM-DID-FIELD",
         "FW-EEPROM-FW-RECORDS",
         "SIG-ADC-TO-INTERFACE",
-        "PROTO-DESC-DEVICE",
-        "PROTO-DESC-CONFIG",
-        "PROTO-DESC-INTERFACE",
-        "PROTO-DESC-STRING",
-        "PROTO-CTRL-VENDOR-REQ",
         "DRV-HOST-MODULE",
         "DRV-INF-BINDING",
         "DRV-IOCTL-SURFACE",
         "DRV-FIRMWARE-LOADER",
-        "LEARN-010-USB-PROTO",
         "LEARN-011-8051-DISASM",
         "LEARN-012-PIN-TEST",
         "LEARN-013-RELAY-TEST",
         "LEARN-015-OPEN-REIMPL",
         "EXP-001-EEPROM-DUMP",
-        "EXP-002-USB-ENUM",
-        "EXP-003-USB-SESSION",
         "EXP-004-PIN-FIFO",
         "EXP-005-PIN-ADC",
         "EXP-006-RELAY-TOGGLE",
@@ -6282,14 +6174,13 @@
         "EXP-010-8051-DISASM",
         "EXP-011-PROTO-TABLE",
         "EXP-012-VIDPID",
-        "EXP-013-ENDPOINT-MAP",
         "EXP-014-DATA-FRAME",
         "EXP-015-BRG-UPGRADE"
       ],
       "note": "Blocked items must not be upgraded without new evidence"
     },
     "phase_b_readiness": {
-      "generated_at": "2026-08-28T07:11:25.002052+00:00",
+      "generated_at": "2026-08-28T07:27:54.225935+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -6325,7 +6216,7 @@
       "next_command": "make phase-b"
     },
     "phase_b_status": {
-      "generated_at": "2026-08-28T07:11:24.442602+00:00",
+      "generated_at": "2026-08-28T07:27:53.671433+00:00",
       "captures_dir": "phase_b/captures",
       "capture_count": 2,
       "captures": [
@@ -6357,18 +6248,18 @@
       ]
     },
     "phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-28T07:11:24.923136+00:00",
+      "generated_at": "2026-08-28T07:27:54.147180+00:00",
       "applicable": true,
       "proposal_count": 0,
       "proposals": [],
       "notes": [
         "Only synthetic EEPROM available — no upgrade proposals.",
-        "USB capture files present."
+        "usb_protocol_decode.json available — descriptor/endpoint map decoded."
       ],
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "phase_c_readiness": {
-      "generated_at": "2026-08-28T07:11:25.235716+00:00",
+      "generated_at": "2026-08-28T07:27:54.457106+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": true,
       "checklist": "0/6",
@@ -6376,7 +6267,7 @@
       "recommended_action": "make phase-c"
     },
     "phase_roadmap": {
-      "generated_at": "2026-08-28T07:11:24.191216+00:00",
+      "generated_at": "2026-08-28T07:27:53.424905+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -6406,11 +6297,7 @@
           "action": "usb_enum_capture",
           "artifact": "phase_b/captures/usb_enum.pcapng",
           "unblocks": [
-            "PROTO-DESC-DEVICE",
-            "PROTO-DESC-CONFIG",
-            "PROTO-DESC-INTERFACE",
-            "PROTO-DESC-STRING",
-            "PROTO-EP-MAP"
+            "PROTO-CTRL-VENDOR-REQ"
           ],
           "feeds": [
             "analyze_pcap_stub.py",
@@ -6441,14 +6328,14 @@
         {
           "experiment": "EXP-002-USB-ENUM",
           "description": "Capture USB enumeration traffic",
-          "status": "not_started",
-          "depends": "Need device+host"
+          "status": "candidate",
+          "depends": "pcap present; deeper vendor-req table open"
         },
         {
           "experiment": "EXP-003-USB-SESSION",
           "description": "Capture config+acquire session",
-          "status": "not_started",
-          "depends": "Need official driver"
+          "status": "candidate",
+          "depends": "pcap present; command semantics open"
         },
         {
           "experiment": "EXP-004-PIN-FIFO",
@@ -6507,8 +6394,8 @@
         {
           "experiment": "EXP-013-ENDPOINT-MAP",
           "description": "Map bulk IN/OUT endpoint numbers",
-          "status": "not_started",
-          "depends": "Depends EXP-002"
+          "status": "confirmed",
+          "depends": null
         },
         {
           "experiment": "EXP-014-DATA-FRAME",
@@ -6526,7 +6413,7 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "phase_transition": {
-      "generated_at": "2026-08-28T07:11:27.656271+00:00",
+      "generated_at": "2026-08-28T07:27:56.835449+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "phase_b_in_progress",
       "transition_ready": true,
@@ -6544,7 +6431,7 @@
       "action": "make phase-b"
     },
     "photo_hw_map": {
-      "generated_at": "2026-08-28T07:11:24.034397+00:00",
+      "generated_at": "2026-08-28T07:27:53.269257+00:00",
       "photo_count": 10,
       "photos_with_hw_links": 7,
       "photos": [
@@ -6649,7 +6536,7 @@
       "boundary": "Keyword match on photo_index components only"
     },
     "photo_index": {
-      "generated_at": "2026-08-28T07:11:23.954738+00:00",
+      "generated_at": "2026-08-28T07:27:53.190396+00:00",
       "photo_count": 10,
       "photos": [
         {
@@ -7370,13 +7257,13 @@
       "count": 22
     },
     "protocol_log_meta": {
-      "generated_at": "2026-08-28T07:11:24.610799+00:00",
+      "generated_at": "2026-08-28T07:27:53.836956+00:00",
       "status": "missing",
       "path": "phase_b/captures/protocol_log.json",
       "boundary": "Optional; copy phase_b/templates/protocol_log_template.json after capture"
     },
     "sensitive_audit": {
-      "generated_at": "2026-08-28T07:11:26.627512+00:00",
+      "generated_at": "2026-08-28T07:27:55.811927+00:00",
       "scanned_roots": [
         "manifests",
         "."
@@ -7386,21 +7273,21 @@
       "ok": true
     },
     "static_closure": {
-      "generated_at": "2026-08-28T07:11:25.795675+00:00",
+      "generated_at": "2026-08-28T07:27:54.999650+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
       "identifiers": 237,
       "status_counts": {
-        "confirmed": 68,
-        "candidate": 65,
-        "unknown": 56,
+        "confirmed": 76,
+        "candidate": 72,
+        "unknown": 50,
         "hypothesis": 6,
-        "not_started": 30,
+        "not_started": 21,
         "missing": 12
       },
-      "pytest_count": 104,
-      "manifest_json_count": 43,
+      "pytest_count": 105,
+      "manifest_json_count": 47,
       "phase_b_blockers_remaining": 1,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
@@ -7420,15 +7307,15 @@
       "boundary": "No further catalog status upgrades without hardware evidence"
     },
     "static_freeze": {
-      "frozen_at": "2026-08-28T00:51:08.130972+00:00",
+      "frozen_at": "2026-08-28T07:27:44.986890+00:00",
       "phase": "static_complete_pending_hardware",
       "static_phase_complete": true,
       "identifiers": 237,
-      "confirmed": 68,
-      "blocked": 98,
-      "git_commit": "e0971446dc8b90a343ffb9a2a089428a9031ffee",
+      "confirmed": 76,
+      "blocked": 83,
+      "git_commit": "e7c6986ccd91f8ada09b96302790facfedb5c584",
       "input_file_count": 11,
-      "output_combined_sha256": "ca9307ae4e85b821e0e39edbd66d7e1cb03ed576db74227674a659c9ef53f1a4",
+      "output_combined_sha256": "65d5cce88c391cf94c7c34f88ae9924db4a80fa0eb4173bc63806ed3e703710d",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "next_phase": "phase_b_hardware_capture",
       "stop_conditions_pass": true
@@ -7462,7 +7349,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "system_map": {
-      "generated_at": "2026-08-28T07:11:23.877114+00:00",
+      "generated_at": "2026-08-28T07:27:53.113157+00:00",
       "node_count": 6,
       "edge_count": 5,
       "nodes": [
@@ -7598,7 +7485,7 @@
       "pin_bridge_count": 22
     },
     "usb_capture_meta": {
-      "generated_at": "2026-08-28T07:11:24.530498+00:00",
+      "generated_at": "2026-08-28T07:27:53.757382+00:00",
       "status": "observed",
       "capture_count": 2,
       "files": [
@@ -7616,6 +7503,651 @@
         }
       ],
       "boundary": "File metadata only; endpoint/protocol decode requires Wireshark + device"
+    },
+    "usb_companion_7317": {
+      "generated_at": "2026-08-28T07:20:22.624370+00:00",
+      "status": "observed",
+      "tool": "tshark",
+      "role": "companion",
+      "confidence": "candidate",
+      "sources": {
+        "usb_enum.pcapng": true,
+        "usb_session.pcapng": true
+      },
+      "identity": {
+        "idVendor": "0x3923",
+        "idVendor_name": "National Instruments Corp. (USB-IF)",
+        "idProduct": "0x7317",
+        "bcdDevice": "0x744f",
+        "bcdUSB": "0x0200",
+        "bDeviceClass": "0xff",
+        "bDeviceSubClass": "0xff",
+        "bDeviceProtocol": "0xff",
+        "bMaxPacketSize0": 64,
+        "bNumConfigurations": 1,
+        "iManufacturer": 0,
+        "iProduct": 0,
+        "iSerialNumber": 0,
+        "confidence": "confirmed",
+        "evidence": "device descriptor in usb_enum.pcapng frame 38 and usb_session.pcapng frame 88"
+      },
+      "device_addresses": {
+        "usb_enum.pcapng": 8,
+        "usb_session.pcapng": 23
+      },
+      "relationship": {
+        "primary_idProduct": "0x744f",
+        "note": "Secondary device on same bus as primary 0x3923:0x744f; companion bcdDevice 0x744f observed historically and confirmed in both captures (equals primary idProduct value).",
+        "same_bus": true,
+        "bus_id": 2,
+        "confidence": "candidate"
+      },
+      "configuration": {
+        "bConfigurationValue": 1,
+        "bNumInterfaces": 1,
+        "wTotalLength": 171,
+        "bmAttributes": "0x80",
+        "self_powered": false,
+        "remote_wakeup": false,
+        "bMaxPower_mA": 100,
+        "confidence": "confirmed",
+        "evidence": "usb_enum.pcapng / usb_session.pcapng configuration descriptor"
+      },
+      "interfaces": [
+        {
+          "bInterfaceNumber": 0,
+          "bAlternateSetting": 0,
+          "bNumEndpoints": 0,
+          "bInterfaceClass": "0xff",
+          "bInterfaceSubClass": "0xff",
+          "bInterfaceProtocol": "0xff",
+          "note": "Default after SET_CONFIGURATION; no non-control endpoints"
+        },
+        {
+          "bInterfaceNumber": 0,
+          "bAlternateSetting": 1,
+          "bNumEndpoints": 6,
+          "bInterfaceClass": "0xff",
+          "bInterfaceSubClass": "0xff",
+          "bInterfaceProtocol": "0xff",
+          "endpoints": [
+            {
+              "bEndpointAddress": "0x01",
+              "direction": "OUT",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x81",
+              "direction": "IN",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x02",
+              "direction": "OUT",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x04",
+              "direction": "OUT",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x86",
+              "direction": "IN",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x88",
+              "direction": "IN",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            }
+          ]
+        },
+        {
+          "bInterfaceNumber": 0,
+          "bAlternateSetting": 2,
+          "bNumEndpoints": 6,
+          "bInterfaceClass": "0xff",
+          "bInterfaceSubClass": "0xff",
+          "bInterfaceProtocol": "0xff",
+          "endpoints": [
+            {
+              "bEndpointAddress": "0x01",
+              "direction": "OUT",
+              "type": "interrupt",
+              "wMaxPacketSize": 64
+            },
+            {
+              "bEndpointAddress": "0x81",
+              "direction": "IN",
+              "type": "interrupt",
+              "wMaxPacketSize": 64
+            },
+            {
+              "bEndpointAddress": "0x02",
+              "direction": "OUT",
+              "type": "interrupt",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x04",
+              "direction": "OUT",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x86",
+              "direction": "IN",
+              "type": "interrupt",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x88",
+              "direction": "IN",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            }
+          ]
+        },
+        {
+          "bInterfaceNumber": 0,
+          "bAlternateSetting": 3,
+          "bNumEndpoints": 6,
+          "bInterfaceClass": "0xff",
+          "bInterfaceSubClass": "0xff",
+          "bInterfaceProtocol": "0xff",
+          "endpoints": [
+            {
+              "bEndpointAddress": "0x01",
+              "direction": "OUT",
+              "type": "interrupt",
+              "wMaxPacketSize": 64
+            },
+            {
+              "bEndpointAddress": "0x81",
+              "direction": "IN",
+              "type": "interrupt",
+              "wMaxPacketSize": 64
+            },
+            {
+              "bEndpointAddress": "0x02",
+              "direction": "OUT",
+              "type": "isochronous",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x04",
+              "direction": "OUT",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x86",
+              "direction": "IN",
+              "type": "isochronous",
+              "wMaxPacketSize": 512
+            },
+            {
+              "bEndpointAddress": "0x88",
+              "direction": "IN",
+              "type": "bulk",
+              "wMaxPacketSize": 512
+            }
+          ]
+        }
+      ],
+      "alt_settings_used": {
+        "observed_set_configuration": 1,
+        "observed_set_interface": false,
+        "active_alternate_in_captures": 0,
+        "confidence": "candidate",
+        "boundary": "Alt 1–3 present in descriptors but never selected in either capture"
+      },
+      "session_traffic_volume": {
+        "usb_enum.pcapng": {
+          "device_address": 8,
+          "frames": 254,
+          "sum_frame_len": 65414,
+          "sum_data_len": 58304,
+          "endpoint_traffic_counts": {
+            "xfer=0x02 ep=0x80": 126,
+            "xfer=0x02 ep=0x00": 126,
+            "xfer=0xff ep=0x00": 2
+          },
+          "bulk_frames": 0,
+          "non_ep0_frames": 0
+        },
+        "usb_session.pcapng": {
+          "device_address": 23,
+          "frames": 254,
+          "sum_frame_len": 65414,
+          "sum_data_len": 58304,
+          "frame_range": [
+            85,
+            338
+          ],
+          "endpoint_traffic_counts": {
+            "xfer=0x02 ep=0x80": 126,
+            "xfer=0x02 ep=0x00": 126,
+            "xfer=0xff ep=0x00": 2
+          },
+          "bulk_frames": 0,
+          "non_ep0_frames": 0,
+          "relative_to_primary": {
+            "primary_device_address": 24,
+            "primary_frames": 15877,
+            "companion_fraction_of_addressed": 0.0157
+          }
+        },
+        "note": "Companion traffic is EP0 control only (descriptor + vendor control); no data-plane bulk/interrupt/iso observed. Volume matches enum capture (~254 frames)."
+      },
+      "vendor_control": {
+        "status": "observed_not_decoded",
+        "bRequest_codes_seen": [
+          160,
+          164,
+          165,
+          176
+        ],
+        "bmRequestType_seen": [
+          "0x40",
+          "0xc0"
+        ],
+        "boundary": "Vendor bRequest semantics not reverse-engineered; large wValue-indexed control reads/writes on EP0 only"
+      },
+      "boundary": "May be programmer/aux interface; present on bus beside primary 0x744f but not used for session data path in these captures",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+    },
+    "usb_enum_decode_notes": {
+      "generated_at": "2026-08-28T07:20:43.354122+00:00",
+      "source": "phase_b/captures/usb_enum.pcapng",
+      "tool": "tshark",
+      "bus_id": 2,
+      "devices": [
+        {
+          "bus_id": 2,
+          "device_address": 1,
+          "idVendor": "0x05e3",
+          "idProduct": "0x0610",
+          "bcdDevice": "0x0655"
+        },
+        {
+          "bus_id": 2,
+          "device_address": 2,
+          "idVendor": "0x046d",
+          "idProduct": "0xc542",
+          "bcdDevice": "0x0308"
+        },
+        {
+          "bus_id": 2,
+          "device_address": 3,
+          "idVendor": "0x0c45",
+          "idProduct": "0x671b",
+          "bcdDevice": "0x8172"
+        },
+        {
+          "bus_id": 2,
+          "device_address": 4,
+          "idVendor": "0x8087",
+          "idProduct": "0x0025",
+          "bcdDevice": "0x0002"
+        },
+        {
+          "bus_id": 2,
+          "device_address": 5,
+          "idVendor": "0x046d",
+          "idProduct": "0xc52b",
+          "bcdDevice": "0x2411"
+        },
+        {
+          "bus_id": 2,
+          "device_address": 8,
+          "idVendor": "0x3923",
+          "idProduct": "0x7317",
+          "bcdDevice": "0x744f"
+        },
+        {
+          "bus_id": 2,
+          "device_address": 9,
+          "idVendor": "0x3923",
+          "idProduct": "0x744f",
+          "bcdDevice": "0x0001"
+        }
+      ],
+      "primary": {
+        "idVendor": "0x3923",
+        "idProduct": "0x744f",
+        "bcdDevice": "0x0001",
+        "device_address": 9,
+        "first_seen_s": 8.059856,
+        "bDeviceClass": "0x00",
+        "bNumConfigurations": 1,
+        "get_descriptor_sequence": [
+          {
+            "frame": 297,
+            "t_s": 8.060015,
+            "bRequest": 6,
+            "bDescriptorType": "DEVICE",
+            "bDescriptorType_code": "0x01",
+            "descriptor_index": "0x00",
+            "wLength": 18,
+            "response_frame": 298
+          },
+          {
+            "frame": 299,
+            "t_s": 8.060074,
+            "bRequest": 6,
+            "bDescriptorType": "CONFIGURATION",
+            "bDescriptorType_code": "0x02",
+            "descriptor_index": "0x00",
+            "wLength": 9,
+            "response_frame": 300,
+            "note": "header probe; wTotalLength=46"
+          },
+          {
+            "frame": 301,
+            "t_s": 8.060194,
+            "bRequest": 6,
+            "bDescriptorType": "CONFIGURATION",
+            "bDescriptorType_code": "0x02",
+            "descriptor_index": "0x00",
+            "wLength": 55,
+            "response_frame": 302,
+            "response_bytes": 46,
+            "interfaces": 1,
+            "endpoints": [
+              "0x81",
+              "0x01",
+              "0x84",
+              "0x06"
+            ],
+            "endpoint_type": "bulk",
+            "wMaxPacketSize": 512,
+            "bInterfaceClass": "0xff"
+          },
+          {
+            "frame": 305,
+            "t_s": 8.060452,
+            "bRequest": 9,
+            "name": "SET_CONFIGURATION",
+            "wValue_configuration": 1,
+            "response_frame": 306
+          },
+          {
+            "frame": 307,
+            "t_s": 8.061788,
+            "bRequest": 6,
+            "bDescriptorType": "STRING",
+            "bDescriptorType_code": "0x03",
+            "descriptor_index": "0x03",
+            "langid": "0x0409",
+            "wLength": 4,
+            "response_frame": 308
+          },
+          {
+            "frame": 309,
+            "t_s": 8.062413,
+            "bRequest": 6,
+            "bDescriptorType": "STRING",
+            "bDescriptorType_code": "0x03",
+            "descriptor_index": "0x03",
+            "langid": "0x0409",
+            "wLength": 18,
+            "response_frame": 310,
+            "string_value": "01B771DA",
+            "note": "iSerialNumber only; iManufacturer/iProduct not requested in this capture"
+          }
+        ],
+        "post_enum": {
+          "bulk_traffic_starts_frame": 311,
+          "endpoints_active": [
+            "0x01",
+            "0x81"
+          ]
+        }
+      },
+      "companion": {
+        "idVendor": "0x3923",
+        "idProduct": "0x7317",
+        "bcdDevice": "0x744f",
+        "device_address": 8,
+        "first_seen_s": 5.600594,
+        "last_seen_s": 6.334632,
+        "bDeviceClass": "0xff",
+        "bNumConfigurations": 1,
+        "relationship_to_primary": {
+          "kind": "pre_renumeration_loader",
+          "evidence": [
+            "bcdDevice of 0x7317 equals primary idProduct 0x744f",
+            "0x7317 enumerated first (addr 8); after vendor control load, addr 8 silent",
+            "0x744f appears ~1.73s later on new addr 9; no concurrent traffic",
+            "vendor bRequest 0xA0 (160) dominant — EZ-USB-style firmware download pattern"
+          ],
+          "gap_s": 1.725224
+        },
+        "get_descriptor_sequence": [
+          {
+            "frame": 37,
+            "bDescriptorType": "DEVICE",
+            "wLength": 18
+          },
+          {
+            "frame": 39,
+            "bDescriptorType": "CONFIGURATION",
+            "wLength": 9
+          },
+          {
+            "frame": 41,
+            "bDescriptorType": "CONFIGURATION",
+            "wLength": 180,
+            "response_wTotalLength": 171
+          },
+          {
+            "frame": 45,
+            "bRequest": 9,
+            "name": "SET_CONFIGURATION"
+          }
+        ],
+        "vendor_control_after_config": {
+          "bRequest_histogram": {
+            "0xA0": 74,
+            "0xA4": 30,
+            "0xA5": 16,
+            "0xB0": 1
+          },
+          "note": "Control-only path; alt settings present in descriptor but bulk not used before renumeration"
+        }
+      },
+      "boundary": "Enum-only decode from usb_enum.pcapng via tshark; VID/PID identifiers only (no product marketing names); companion→primary link is chronological + bcdDevice cross-ref, not a claim of silicon identity; vendor bRequest semantics beyond 0xA0 download pattern not reverse-engineered"
+    },
+    "usb_protocol_decode": {
+      "generated_at": "2026-08-28T07:27:51.647678+00:00",
+      "status": "decoded",
+      "tool": "tshark",
+      "sources": {
+        "usb_enum.pcapng": true,
+        "usb_session.pcapng": true
+      },
+      "primary_device": {
+        "idVendor": "0x3923",
+        "idVendor_name": "National Instruments Corp. (USB-IF)",
+        "idProduct": "0x744f",
+        "bcdDevice": "0x0001",
+        "bDeviceClass": "0x00",
+        "bNumConfigurations": 1,
+        "confidence": "confirmed",
+        "evidence": "usb_enum.pcapng + usb_session.pcapng device descriptor"
+      },
+      "configuration": {
+        "bConfigurationValue": 1,
+        "bNumInterfaces": 1,
+        "bmAttributes": "0x80",
+        "self_powered": false,
+        "remote_wakeup": false,
+        "confidence": "confirmed",
+        "evidence": "usb_session.pcapng configuration descriptor"
+      },
+      "interface": {
+        "bInterfaceNumber": 0,
+        "bAlternateSetting": 0,
+        "bNumEndpoints": 4,
+        "bInterfaceClass": "0xff",
+        "bInterfaceClass_name": "Vendor Specific",
+        "bInterfaceSubClass": "0x00",
+        "bInterfaceProtocol": "0x00",
+        "confidence": "confirmed",
+        "evidence": "usb_session.pcapng interface descriptor"
+      },
+      "endpoints": [
+        {
+          "bEndpointAddress": "0x81",
+          "direction": "IN",
+          "number": 1,
+          "bmAttributes": "0x02",
+          "type": "bulk",
+          "wMaxPacketSize": 512,
+          "confidence": "confirmed"
+        },
+        {
+          "bEndpointAddress": "0x01",
+          "direction": "OUT",
+          "number": 1,
+          "bmAttributes": "0x02",
+          "type": "bulk",
+          "wMaxPacketSize": 512,
+          "confidence": "confirmed"
+        },
+        {
+          "bEndpointAddress": "0x84",
+          "direction": "IN",
+          "number": 4,
+          "bmAttributes": "0x02",
+          "type": "bulk",
+          "wMaxPacketSize": 512,
+          "confidence": "confirmed"
+        },
+        {
+          "bEndpointAddress": "0x06",
+          "direction": "OUT",
+          "number": 6,
+          "bmAttributes": "0x02",
+          "type": "bulk",
+          "wMaxPacketSize": 512,
+          "confidence": "confirmed"
+        }
+      ],
+      "transfer_mode": {
+        "mode": "bulk",
+        "isochronous_observed": false,
+        "interrupt_observed": false,
+        "confidence": "confirmed",
+        "evidence": "session URB transfer_type bulk dominant on EP 0x01/0x81/0x06/0x84"
+      },
+      "alt_settings": {
+        "observed": [
+          0
+        ],
+        "confidence": "candidate",
+        "boundary": "Only alt-setting 0 observed in descriptors"
+      },
+      "string_descriptors": {
+        "status": "partial",
+        "serial_candidate": "01B771DA",
+        "confidence": "candidate",
+        "boundary": "Sparse strings; manufacturer/product not fully populated in capture"
+      },
+      "companion_device": {
+        "idVendor": "0x3923",
+        "idProduct": "0x7317",
+        "note": "Secondary device on same bus; bcdDevice observed as 0x744f in enum",
+        "session_device_address": 23,
+        "confidence": "candidate"
+      },
+      "session_device_address": 24,
+      "session_endpoint_traffic_counts": {
+        "xfer=0xff ep=0x00": 2,
+        "xfer=0x02 ep=0x80": 12,
+        "xfer=0x02 ep=0x00": 2,
+        "xfer=0x03 ep=0x81": 6869,
+        "xfer=0x03 ep=0x01": 7448,
+        "xfer=0x03 ep=0x06": 834,
+        "xfer=0x03 ep=0x84": 680,
+        "xfer=0xfe ep=0x84": 24,
+        "xfer=0xfe ep=0x06": 6
+      },
+      "vendor_control": {
+        "status": "not_decoded",
+        "boundary": "Control URB semantics (bRequest table) not yet reverse-engineered"
+      },
+      "boundary": "Descriptor/endpoint map from observed captures only; command byte semantics and sample framing remain unknown without protocol_log / EEPROM",
+      "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+    },
+    "usb_session_traffic": {
+      "generated_at": "2026-08-28T07:20:57.664972+00:00",
+      "status": "observed",
+      "tool": "tshark",
+      "source": "phase_b/captures/usb_session.pcapng",
+      "device": {
+        "idVendor": "0x3923",
+        "idProduct": "0x744f",
+        "usb_device_address": 24
+      },
+      "frame_count": 15877,
+      "duration_secs": 93.148239,
+      "interrupt_exists": false,
+      "isochronous_exists": false,
+      "endpoint_urb_counts_by_transfer_type": {
+        "0x00": {
+          "control": 2,
+          "usbpcap_0xff": 2
+        },
+        "0x01": {
+          "bulk": 7448
+        },
+        "0x06": {
+          "bulk": 834,
+          "usbpcap_0xfe": 6
+        },
+        "0x80": {
+          "control": 12
+        },
+        "0x81": {
+          "bulk": 6869
+        },
+        "0x84": {
+          "bulk": 680,
+          "usbpcap_0xfe": 24
+        }
+      },
+      "transfer_type_totals": {
+        "bulk": 15831,
+        "control": 14,
+        "usbpcap_0xfe": 30,
+        "usbpcap_0xff": 2
+      },
+      "bulk_out_ep01_first_byte_histogram": {
+        "endpoint": "0x01",
+        "direction": "OUT",
+        "transfer_type": "bulk",
+        "sample": "first_2000_bulk_OUT",
+        "sample_size": 2000,
+        "payload_present": 1000,
+        "payload_missing": 1000,
+        "top": [
+          {
+            "first_byte": "0x00",
+            "count": 1000
+          }
+        ],
+        "unique_first_bytes": 1
+      },
+      "boundary": "payload semantics unknown"
     }
   }
 }

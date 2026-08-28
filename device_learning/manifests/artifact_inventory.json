@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28T07:11:27.331079+00:00",
-  "artifact_count": 58,
-  "present_count": 58,
+  "generated_at": "2026-08-28T07:27:56.512581+00:00",
+  "artifact_count": 62,
+  "present_count": 62,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 247428
+      "size_bytes": 260094
     },
     {
       "path": "coverage.json",
@@ -37,13 +37,13 @@
       "path": "CONFIRMED_REPORT.md",
       "description": "confirmed 项报告",
       "exists": true,
-      "size_bytes": 3771
+      "size_bytes": 4476
     },
     {
       "path": "BLOCKED_REPORT.md",
       "description": "阻塞项报告",
       "exists": true,
-      "size_bytes": 4746
+      "size_bytes": 4089
     },
     {
       "path": "BRIDGE_REPORT.md",
@@ -61,7 +61,7 @@
       "path": "IDENTIFIER_INDEX.md",
       "description": "identifier 全表",
       "exists": true,
-      "size_bytes": 18696
+      "size_bytes": 18903
     },
     {
       "path": "HARDWARE_HANDOFF.md",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15381
+      "size_bytes": 15323
     },
     {
       "path": "manifests/output_hashes.json",
@@ -121,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 8710
+      "size_bytes": 9330
     },
     {
       "path": "manifests/bit_strings.json",
@@ -265,7 +265,7 @@
       "path": "manifests/pending_index.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 23445
+      "size_bytes": 19867
     },
     {
       "path": "manifests/phase_b_readiness.json",
@@ -283,7 +283,7 @@
       "path": "manifests/phase_b_upgrade_proposals.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 328
+      "size_bytes": 373
     },
     {
       "path": "manifests/phase_c_readiness.json",
@@ -295,7 +295,7 @@
       "path": "manifests/phase_roadmap.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 4218
+      "size_bytes": 4131
     },
     {
       "path": "manifests/phase_transition.json",
@@ -350,6 +350,30 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 578
+    },
+    {
+      "path": "manifests/usb_companion_7317.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 7041
+    },
+    {
+      "path": "manifests/usb_enum_decode_notes.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 5244
+    },
+    {
+      "path": "manifests/usb_protocol_decode.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 3465
+    },
+    {
+      "path": "manifests/usb_session_traffic.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1250
     }
   ]
 }

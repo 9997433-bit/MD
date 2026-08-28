@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-28T07:11:28.029601+00:00",
+  "generated_at": "2026-08-28T07:27:57.207363+00:00",
   "package": "device_learning",
   "version": "static-1.0",
   "phase": "static_complete_pending_hardware",
   "static_phase_complete": true,
-  "frozen_at": "2026-08-28T07:11:27.923868+00:00",
+  "frozen_at": "2026-08-28T07:27:57.102264+00:00",
   "metrics": {
     "identifiers": 237,
-    "confirmed": 68,
-    "blocked": 98,
-    "pytest_count": 104,
-    "manifest_json_count": 43
+    "confirmed": 76,
+    "blocked": 83,
+    "pytest_count": 105,
+    "manifest_json_count": 47
   },
   "input_hashes": {
-    "combined_output_sha256": "07c01513c69f87317b6f83612fd74ef00c78978146f996b9c7995832de80e894"
+    "combined_output_sha256": "065ada2672275abf80f99c1fb2b15a71a3bebb9a7420a5a3e81651db8a02cfb9"
   },
   "checklists": {
     "phase_b": "3/6",

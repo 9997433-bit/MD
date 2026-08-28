@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-28T07:11:24.923136+00:00",
+  "generated_at": "2026-08-28T07:27:54.147180+00:00",
   "applicable": true,
   "proposal_count": 0,
   "proposals": [],
   "notes": [
     "Only synthetic EEPROM available — no upgrade proposals.",
-    "USB capture files present."
+    "usb_protocol_decode.json available — descriptor/endpoint map decoded."
   ],
   "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
 }

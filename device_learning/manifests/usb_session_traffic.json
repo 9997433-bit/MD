@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-08-28T07:20:57.664972+00:00",
+  "status": "observed",
+  "tool": "tshark",
+  "source": "phase_b/captures/usb_session.pcapng",
+  "device": {
+    "idVendor": "0x3923",
+    "idProduct": "0x744f",
+    "usb_device_address": 24
+  },
+  "frame_count": 15877,
+  "duration_secs": 93.148239,
+  "interrupt_exists": false,
+  "isochronous_exists": false,
+  "endpoint_urb_counts_by_transfer_type": {
+    "0x00": {
+      "control": 2,
+      "usbpcap_0xff": 2
+    },
+    "0x01": {
+      "bulk": 7448
+    },
+    "0x06": {
+      "bulk": 834,
+      "usbpcap_0xfe": 6
+    },
+    "0x80": {
+      "control": 12
+    },
+    "0x81": {
+      "bulk": 6869
+    },
+    "0x84": {
+      "bulk": 680,
+      "usbpcap_0xfe": 24
+    }
+  },
+  "transfer_type_totals": {
+    "bulk": 15831,
+    "control": 14,
+    "usbpcap_0xfe": 30,
+    "usbpcap_0xff": 2
+  },
+  "bulk_out_ep01_first_byte_histogram": {
+    "endpoint": "0x01",
+    "direction": "OUT",
+    "transfer_type": "bulk",
+    "sample": "first_2000_bulk_OUT",
+    "sample_size": 2000,
+    "payload_present": 1000,
+    "payload_missing": 1000,
+    "top": [
+      {
+        "first_byte": "0x00",
+        "count": 1000
+      }
+    ],
+    "unique_first_bytes": 1
+  },
+  "boundary": "payload semantics unknown"
+}

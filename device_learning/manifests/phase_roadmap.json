@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:11:24.191216+00:00",
+  "generated_at": "2026-08-28T07:27:53.424905+00:00",
   "phase_b": [
     {
       "action": "eeprom_dump",
@@ -29,11 +29,7 @@
       "action": "usb_enum_capture",
       "artifact": "phase_b/captures/usb_enum.pcapng",
       "unblocks": [
-        "PROTO-DESC-DEVICE",
-        "PROTO-DESC-CONFIG",
-        "PROTO-DESC-INTERFACE",
-        "PROTO-DESC-STRING",
-        "PROTO-EP-MAP"
+        "PROTO-CTRL-VENDOR-REQ"
       ],
       "feeds": [
         "analyze_pcap_stub.py",
@@ -64,14 +60,14 @@
     {
       "experiment": "EXP-002-USB-ENUM",
       "description": "Capture USB enumeration traffic",
-      "status": "not_started",
-      "depends": "Need device+host"
+      "status": "candidate",
+      "depends": "pcap present; deeper vendor-req table open"
     },
     {
       "experiment": "EXP-003-USB-SESSION",
       "description": "Capture config+acquire session",
-      "status": "not_started",
-      "depends": "Need official driver"
+      "status": "candidate",
+      "depends": "pcap present; command semantics open"
     },
     {
       "experiment": "EXP-004-PIN-FIFO",
@@ -130,8 +126,8 @@
     {
       "experiment": "EXP-013-ENDPOINT-MAP",
       "description": "Map bulk IN/OUT endpoint numbers",
-      "status": "not_started",
-      "depends": "Depends EXP-002"
+      "status": "confirmed",
+      "depends": null
     },
     {
       "experiment": "EXP-014-DATA-FRAME",
