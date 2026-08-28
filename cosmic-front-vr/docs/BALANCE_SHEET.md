@@ -17,13 +17,15 @@
 兼容旧名：`MechStatsPresets.Light/Heavy` 仍映射到 Kestrel/Bastion。
 
 ### 1.1b 旧预设别名 — `MechStatsPresets`
-|------|------------------------|------------------------|--------------|
+
+| 参数 | Light→Kestrel | Heavy→Bastion | 建议区间 |
+|------|---------------|---------------|----------|
 | MaxHealth | 100 | 200 | Light 80–120 / Heavy 160–240 |
 | MaxShield | 50 | 80 | Light 40–70 / Heavy 60–120 |
 | MaxSpeed (m/s) | 18 | 12 | Light 15–22 / Heavy 9–14 |
 | BoostFuel | 100 | 70 | Light 80–120 / Heavy 50–90 |
 
-主武器 DPS 由 `MechController.ApplyArchetype` 注入：Light **30**、Heavy **45**（建议 24–36 / 36–55）。
+主武器 DPS 由 `MechController.ApplyModel` 注入（见上表）。
 
 ### 1.2 移动细节 — `MechMovement` 默认字段
 
