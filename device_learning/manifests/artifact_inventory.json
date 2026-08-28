@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-28T07:27:56.512581+00:00",
-  "artifact_count": 62,
-  "present_count": 62,
+  "generated_at": "2026-08-28T07:29:56.984259+00:00",
+  "artifact_count": 63,
+  "present_count": 63,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 260094
+      "size_bytes": 264984
     },
     {
       "path": "coverage.json",
       "description": "完成度统计",
       "exists": true,
-      "size_bytes": 881
+      "size_bytes": 868
     },
     {
       "path": "bridge_matrix.json",
@@ -25,7 +25,7 @@
       "path": "STATIC_REPORT.md",
       "description": "静态摘要",
       "exists": true,
-      "size_bytes": 1637
+      "size_bytes": 1624
     },
     {
       "path": "STATIC_CLOSURE.md",
@@ -85,7 +85,7 @@
       "path": "phase_b/CHECKLIST.json",
       "description": "阶段 B 机器可读检查清单",
       "exists": true,
-      "size_bytes": 1615
+      "size_bytes": 1614
     },
     {
       "path": "phase_c/CHECKLIST.json",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15323
+      "size_bytes": 15350
     },
     {
       "path": "manifests/output_hashes.json",
@@ -121,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 9330
+      "size_bytes": 9331
     },
     {
       "path": "manifests/bit_strings.json",
@@ -145,7 +145,7 @@
       "path": "manifests/capture_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1128
+      "size_bytes": 1154
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -193,7 +193,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 818
+      "size_bytes": 804
     },
     {
       "path": "manifests/experiment_index.json",
@@ -253,7 +253,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1024
+      "size_bytes": 1011
     },
     {
       "path": "manifests/pcap_synthetic_meta.json",
@@ -277,7 +277,7 @@
       "path": "manifests/phase_b_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 879
+      "size_bytes": 1095
     },
     {
       "path": "manifests/phase_b_upgrade_proposals.json",
@@ -325,7 +325,7 @@
       "path": "manifests/protocol_log_meta.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 219
+      "size_bytes": 504
     },
     {
       "path": "manifests/sensitive_audit.json",
@@ -344,6 +344,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 3424
+    },
+    {
+      "path": "manifests/usb_bulk_framing_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 2085
     },
     {
       "path": "manifests/usb_capture_meta.json",

@@ -1,8 +1,15 @@
 {
-  "generated_at": "2026-08-28T07:27:53.671433+00:00",
+  "generated_at": "2026-08-28T07:29:54.123965+00:00",
   "captures_dir": "phase_b/captures",
-  "capture_count": 2,
+  "capture_count": 3,
   "captures": [
+    {
+      "name": "protocol_log.json",
+      "size_bytes": 19403,
+      "sha256": "b5d39ed5465c72bb4b8b11e0267577e16b639fad00aa5d142f7493dc41ed3017",
+      "type": "protocol_log",
+      "protocol_entries": 3
+    },
     {
       "name": "usb_enum.pcapng",
       "size_bytes": 562768,
@@ -23,7 +30,7 @@
     "eeprom_observed": false,
     "usb_capture_present": true,
     "usb_capture_observed": true,
-    "protocol_log_present": false
+    "protocol_log_present": true
   },
   "ready_for_ledger_refresh": true,
   "next_steps": [

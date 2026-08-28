@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:27:54.068925+00:00",
+  "generated_at": "2026-08-28T07:29:54.522859+00:00",
   "artifacts": [
     {
       "path": "phase_b/captures/eeprom.bin",
@@ -17,7 +17,8 @@
     },
     {
       "path": "phase_b/captures/protocol_log.json",
-      "exists": false
+      "exists": true,
+      "size_bytes": 19403
     },
     {
       "path": "phase_b/analysis/firmware.bin",
@@ -28,18 +29,18 @@
       "exists": false
     }
   ],
-  "present_count": 2,
+  "present_count": 3,
   "expected_count": 6,
   "flags": {
     "eeprom_present": false,
     "eeprom_observed": false,
     "usb_capture_present": true,
     "usb_capture_observed": true,
-    "protocol_log_present": false
+    "protocol_log_present": true
   },
   "eeprom_status": "synthetic_pipeline_test",
   "usb_capture_status": "observed",
-  "protocol_log_status": "missing",
+  "protocol_log_status": "observed",
   "firmware_extract_status": "missing",
   "ready_for_deep_analysis": false,
   "boundary": "Inventory only; status upgrades require ledger refresh"

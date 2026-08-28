@@ -39,7 +39,7 @@
       "artifact": "phase_b/captures/protocol_log.json",
       "template": "phase_b/templates/protocol_log_template.json",
       "optional": true,
-      "done": false
+      "done": true
     },
     {
       "id": "B5",
@@ -58,7 +58,7 @@
       "done": false
     }
   ],
-  "updated_at": "2026-08-28T07:27:56.671164+00:00",
-  "done_count": 3,
+  "updated_at": "2026-08-28T07:29:57.142762+00:00",
+  "done_count": 4,
   "total_count": 6
 }
