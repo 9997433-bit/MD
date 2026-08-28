@@ -190,6 +190,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G2 预备加深：SPI CSV `--auto-map` + `g2_inbox/examples` 合成演练（ingest 忽略 example）  
 - [x] G1/P2.5：确认公开 prjxray **无** xc7k160t（`prjxray_K160T帧图可得性.md`）  
 - [x] G2 摩擦降低：`G2_投放三步.md`  
+- [x] Must-2 归因陷阱排除：`G3G4` §4.1b（DAC 片内 FIR/混频 ≠ FPGA 算法）  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量  
 
 ### 有板后（最短路径到「实现级」）
