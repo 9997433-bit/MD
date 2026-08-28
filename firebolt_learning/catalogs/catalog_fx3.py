@@ -95,6 +95,34 @@ FX3_ENTRIES: list[tuple[str, str, str, str, str]] = [
         "arch_synthesis",
         "Synthesized from strings + SPEC sync layer",
     ),
+    (
+        "FX3-USB-IF-VENDOR",
+        "Single interface class 255 (vendor-specific)",
+        "confirmed",
+        "firmware_config_descriptor",
+        "fx3_static_re.json; aligns with Fusion control plane",
+    ),
+    (
+        "FX3-USB-EP-TOPOLOGY",
+        "16 endpoints: 15 bulk + 1 interrupt IN (0x82)",
+        "confirmed",
+        "firmware_config_descriptor",
+        "Many bulk EPs consistent with multi-stream DMA / Signal Stream hypothesis",
+    ),
+    (
+        "FX3-USB-DESC-USB2-VIEW",
+        "Embedded descriptors are USB2-coded (bcdUSB 0x0210, maxpkt 64)",
+        "confirmed",
+        "firmware_config_descriptor",
+        "Do not deny product USB-C/SS; only asserts what this .cfg embeds",
+    ),
+    (
+        "FX3-LOAD-BASE-SYSMEM",
+        "String VA addend 0x3FFD6000 maps into FX3 SYSMEM",
+        "candidate",
+        "pointer_heuristic",
+        "tFPGARegisterAccess.c file 0x4624C -> VA 0x4001C24C; aids future Ghidra load",
+    ),
 ]
 
 

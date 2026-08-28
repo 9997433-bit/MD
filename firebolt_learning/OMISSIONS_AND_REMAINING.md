@@ -11,7 +11,9 @@
 | FX3-REGMAP | `tFPGARegisterAccess` 寄存器偏移表 | Ghidra 深挖 + 抓包 |
 | FX3-FUSION-REQ | Fusion vendor bRequest/payload | **USB 抓包**（刻意延后） |
 | USB-FRAME-LAYOUT | Signal Stream 帧内通道打包格式 | 抓流 / 驱动静态 |
+| USB-SS-RUNTIME | 运行时是否另有 SS 描述符/1024B 包长 | 实机枚举 / 抓包 |
 | HOST-DAQMX | 主机 API→Fusion 映射 | 驱动/NI-DAQmx 静态（范围外） |
+| FX3-GHIDRA-LOAD | 用 addend `0x3FFD6000` 正确加载映像做深反汇编 | Ghidra（静态可继续） |
 
 ## 硬件识别
 

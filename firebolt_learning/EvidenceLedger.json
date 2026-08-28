@@ -1,6 +1,6 @@
 {
   "schema": "firebolt_learning.EvidenceLedger.v1",
-  "generated_at": "2026-08-28T13:46:33.530234+00:00",
+  "generated_at": "2026-08-28T14:32:10.900699+00:00",
   "product": {
     "name": "NI USB-6453",
     "codename": "Firebolt",
@@ -355,6 +355,38 @@
         "status": "confirmed",
         "boundary": "arch_synthesis",
         "note": "Synthesized from strings + SPEC sync layer"
+      },
+      {
+        "identifier": "FX3-USB-IF-VENDOR",
+        "module": "fx3",
+        "source_identifier": "Single interface class 255 (vendor-specific)",
+        "status": "confirmed",
+        "boundary": "firmware_config_descriptor",
+        "note": "fx3_static_re.json; aligns with Fusion control plane"
+      },
+      {
+        "identifier": "FX3-USB-EP-TOPOLOGY",
+        "module": "fx3",
+        "source_identifier": "16 endpoints: 15 bulk + 1 interrupt IN (0x82)",
+        "status": "confirmed",
+        "boundary": "firmware_config_descriptor",
+        "note": "Many bulk EPs consistent with multi-stream DMA / Signal Stream hypothesis"
+      },
+      {
+        "identifier": "FX3-USB-DESC-USB2-VIEW",
+        "module": "fx3",
+        "source_identifier": "Embedded descriptors are USB2-coded (bcdUSB 0x0210, maxpkt 64)",
+        "status": "confirmed",
+        "boundary": "firmware_config_descriptor",
+        "note": "Do not deny product USB-C/SS; only asserts what this .cfg embeds"
+      },
+      {
+        "identifier": "FX3-LOAD-BASE-SYSMEM",
+        "module": "fx3",
+        "source_identifier": "String VA addend 0x3FFD6000 maps into FX3 SYSMEM",
+        "status": "candidate",
+        "boundary": "pointer_heuristic",
+        "note": "tFPGARegisterAccess.c file 0x4624C -> VA 0x4001C24C; aids future Ghidra load"
       }
     ],
     "bitstream": [
@@ -483,17 +515,17 @@
     ]
   },
   "stats": {
-    "identifier_count": 57,
+    "identifier_count": 61,
     "by_status": {
-      "confirmed": 45,
-      "candidate": 5,
+      "confirmed": 48,
+      "candidate": 6,
       "unknown": 6,
       "hypothesis": 1
     },
     "by_block": {
       "spec": 19,
       "hardware": 10,
-      "fx3": 13,
+      "fx3": 17,
       "bitstream": 7,
       "learn": 8
     }

@@ -1,6 +1,6 @@
 # Firebolt Identifier Index
 > **停止条件**：目录完整 ≠ 厂商等价 ≠ 掌握运行行为。本索引对应静态骨架账本；USB 抓包未做。
-生成自 EvidenceLedger（57 条）。
+生成自 EvidenceLedger（61 条）。
 
 ## spec
 | identifier | status | boundary | 一句话 |
@@ -55,6 +55,10 @@
 | `FX3-REGMAP` | unknown | needs_ghidra_or_capture | OMISSIONS |
 | `FX3-FUSION-REQ` | unknown | needs_usb_capture | Explicitly deferred this phase |
 | `FX3-ROLE-SUMMARY` | confirmed | arch_synthesis | Synthesized from strings + SPEC sync layer |
+| `FX3-USB-IF-VENDOR` | confirmed | firmware_config_descriptor | fx3_static_re.json; aligns with Fusion control plane |
+| `FX3-USB-EP-TOPOLOGY` | confirmed | firmware_config_descriptor | Many bulk EPs consistent with multi-stream DMA / Signal Stream hypothesis |
+| `FX3-USB-DESC-USB2-VIEW` | confirmed | firmware_config_descriptor | Do not deny product USB-C/SS; only asserts what this .cfg embeds |
+| `FX3-LOAD-BASE-SYSMEM` | candidate | pointer_heuristic | tFPGARegisterAccess.c file 0x4624C -> VA 0x4001C24C; aids future Ghidra load |
 
 ## bitstream
 | identifier | status | boundary | 一句话 |
@@ -83,7 +87,7 @@
 
 | status | count |
 |---|---|
-| candidate | 5 |
-| confirmed | 45 |
+| candidate | 6 |
+| confirmed | 48 |
 | hypothesis | 1 |
 | unknown | 6 |
