@@ -1,0 +1,7 @@
+# Keep large teardown JPEGs out of git by default (see manifests/photo_index.json).
+hardware/photos/*.jpg
+hardware/photos/*.jpeg
+hardware/photos/*.png
+__pycache__/
+*.pyc
+.pytest_cache/

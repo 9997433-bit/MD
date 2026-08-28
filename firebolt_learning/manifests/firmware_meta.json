@@ -1,0 +1,37 @@
+{
+  "path": "firmware/niusbFirebolt.cfg",
+  "size": 361054,
+  "sha256": "6d0aa09e84498d0da7d81233bb4b9b0f9ffaa4ce959e0de68516483e5be48567",
+  "magic": "43591cb0",
+  "cy_header": true,
+  "image_ctrl_bytes": [
+    28,
+    176
+  ],
+  "device_descriptor_offset": 283432,
+  "bcdUSB": 528,
+  "idVendor": 14627,
+  "idProduct": 31556,
+  "anchor_strings": [
+    "./source/nimarengoCore/fusion2/tFusionVendorDeviceRequest.h",
+    "01_DMA_THREAD",
+    "21:Main Thread",
+    "42:Secondary IRQ handler",
+    "43:State Machine handler",
+    "45:Counter Data Monitor handler",
+    "@System Timer Thread",
+    "@source/nimarengoSrc/main.c",
+    "Copyright (c) 1996-2008 Express Logic Inc. * ThreadX ARM9/RVDS Version G5.1.5.1 SN: 2923-115-1301 *",
+    "Fusion",
+    "source/nimarengoCore/fusion2/tFusionManager.c",
+    "source/nimarengoCore/fx3/tSerialFlash.c",
+    "source/nimarengoCore/fx3/tUart.c",
+    "source/nimarengoCore/tDMAManager.c",
+    "source/nimarengoCore/tDescriptor.c",
+    "source/nimarengoCore/tScheduler.c",
+    "source/nimarengoCore/tTimer.c",
+    "source/nimarengoSrc/startup/tFPGA.c",
+    "source/nimarengoSrc/tFPGARegisterAccess.c"
+  ],
+  "entropy": 5.814
+}

@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-08-28T13:32:49.705098+00:00",
+  "identifier_count": 52,
+  "by_status": {
+    "confirmed": 40,
+    "candidate": 5,
+    "unknown": 6,
+    "hypothesis": 1
+  },
+  "by_block": {
+    "spec": 14,
+    "hardware": 10,
+    "fx3": 13,
+    "bitstream": 7,
+    "learn": 8
+  },
+  "forced_null_bridge_count": 8,
+  "stop_condition": {
+    "catalog_complete": true,
+    "vendor_equivalent": false,
+    "runtime_behavior_mastered": false,
+    "usb_capture_done": false
+  },
+  "next_upgrades": [
+    "USB capture for Fusion requests",
+    "Ghidra on FX3 register access",
+    "FPGA netlist / lab for sync clock tree"
+  ]
+}

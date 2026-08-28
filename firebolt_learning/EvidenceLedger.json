@@ -1,0 +1,461 @@
+{
+  "schema": "firebolt_learning.EvidenceLedger.v1",
+  "generated_at": "2026-08-28T13:32:49.705098+00:00",
+  "product": {
+    "name": "NI USB-6453",
+    "codename": "Firebolt",
+    "source_repo": "https://github.com/Montyzhang/sixfour",
+    "usb": {
+      "idVendor": 14627,
+      "idProduct": 31556
+    },
+    "fpga_idcode": "0x0362C093",
+    "fpga_device": "XC7A100T"
+  },
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "phase": "static_skeleton_no_capture",
+  "catalogs": {
+    "spec": [
+      {
+        "identifier": "SPEC-PRODUCT-USB-6453",
+        "module": "spec_sync",
+        "source_identifier": "Product is NI USB-6453 mioDAQ (Firebolt)",
+        "status": "confirmed",
+        "boundary": "spec_and_usb_pid",
+        "note": "32 SE / 16 DIFF AI, 4 AO, 16 DIO; community maps PID 0x7B44 to Firebolt"
+      },
+      {
+        "identifier": "SPEC-ADC-16",
+        "module": "spec_sync",
+        "source_identifier": "Sixteen physical ADCs",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Number of ADC = 16"
+      },
+      {
+        "identifier": "SPEC-SIM-MAX-16CH",
+        "module": "spec_sync",
+        "source_identifier": "Up to 16 channels truly simultaneous",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Simultaneous sampling channels: up to 16"
+      },
+      {
+        "identifier": "SPEC-SIM-1MS",
+        "module": "spec_sync",
+        "source_identifier": "1 MS/s/ch for full simultaneous cases",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "All 16 DIFF or up to 16 SE at 1 MS/s/ch"
+      },
+      {
+        "identifier": "SPEC-SE-PAIR",
+        "module": "spec_sync",
+        "source_identifier": "SE pairs share one ADC (AIn with AIn+8)",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "e.g. AI0&AI8, AI1&AI9 on the same converter"
+      },
+      {
+        "identifier": "SPEC-BANK",
+        "module": "spec_sync",
+        "source_identifier": "Same-ADC dual-SE uses banked scan at 500 kS/s/ch",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "AI0:7 then AI8:15; gap via AIConv.Rate"
+      },
+      {
+        "identifier": "SPEC-AICONV-RATE",
+        "module": "spec_sync",
+        "source_identifier": "AIConv.Rate property controls inter-bank delay",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Software property name only; device register unknown"
+      },
+      {
+        "identifier": "SPEC-TIMING-RES",
+        "module": "spec_sync",
+        "source_identifier": "Timing resolution 10 ns, accuracy 50 ppm",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Sample clock timebase quality"
+      },
+      {
+        "identifier": "SPEC-FIFO-AI",
+        "module": "spec_sync",
+        "source_identifier": "Input FIFO 8191 samples shared among used channels",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Shared depth, not per-channel dedicated"
+      },
+      {
+        "identifier": "SPEC-XFER-STREAM",
+        "module": "spec_sync",
+        "source_identifier": "AI data path uses USB Signal Stream",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Also lists programmed I/O; stream is primary high-rate path"
+      },
+      {
+        "identifier": "SPEC-PFI-TRIG",
+        "module": "spec_sync",
+        "source_identifier": "PFI lines can source/sink AI timing and triggers",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "PFI0:15 multifunctional with DIO"
+      },
+      {
+        "identifier": "SPEC-SYNC-LAYER",
+        "module": "spec_sync",
+        "source_identifier": "Multi-channel sync is hardware convert-on-shared-clock",
+        "status": "confirmed",
+        "boundary": "spec_derived",
+        "note": "Not host-side software alignment; follows from 16-ADC simultaneous model"
+      },
+      {
+        "identifier": "SPEC-AO-4CH",
+        "module": "spec_sync",
+        "source_identifier": "Four AO channels (out of sync-AI focus)",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Registered for system_map completeness; low priority for sync learning"
+      },
+      {
+        "identifier": "SPEC-DIO-16",
+        "module": "spec_sync",
+        "source_identifier": "Sixteen DIO/PFI lines",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Port0/line0:15"
+      }
+    ],
+    "hardware": [
+      {
+        "identifier": "HW-BRAND-NI",
+        "module": "hardware",
+        "source_identifier": "PCB branded National Instruments",
+        "status": "confirmed",
+        "boundary": "photo_silkscreen",
+        "note": "NI logo / ni.com/patents / © 2024 on teardown photos"
+      },
+      {
+        "identifier": "HW-USB-C",
+        "module": "hardware",
+        "source_identifier": "USB Type-C host connector",
+        "status": "confirmed",
+        "boundary": "photo",
+        "note": "Visible on board edge"
+      },
+      {
+        "identifier": "HW-FX3-CYUSB3014",
+        "module": "hardware",
+        "source_identifier": "Cypress EZ-USB FX3 CYUSB3014",
+        "status": "confirmed",
+        "boundary": "photo_marking",
+        "note": "Matches firmware ThreadX ARM9 / FX3 strings"
+      },
+      {
+        "identifier": "HW-FPGA-ARTIX7",
+        "module": "hardware",
+        "source_identifier": "Xilinx Artix-7 FPGA present",
+        "status": "confirmed",
+        "boundary": "photo_and_bitstream",
+        "note": "Photo marking + IDCODE XC7A100T"
+      },
+      {
+        "identifier": "HW-FPGA-XC7A100T",
+        "module": "hardware",
+        "source_identifier": "FPGA device XC7A100T",
+        "status": "confirmed",
+        "boundary": "bitstream_idcode",
+        "note": "IDCODE 0x0362C093; some photo OCR may say 50T — binary wins"
+      },
+      {
+        "identifier": "HW-ASSY-114365F",
+        "module": "hardware",
+        "source_identifier": "Assembly label 114365F-01L/03L family",
+        "status": "candidate",
+        "boundary": "photo_label",
+        "note": "Multiple sticker variants across photos"
+      },
+      {
+        "identifier": "HW-OEM-S2C",
+        "module": "hardware",
+        "source_identifier": "Board-level S2C-SMT high-density connectors",
+        "status": "candidate",
+        "boundary": "photo",
+        "note": "Consistent with USB-6453 OEM 50-pin style interconnect"
+      },
+      {
+        "identifier": "HW-ADC-ARRAY",
+        "module": "hardware",
+        "source_identifier": "Repetitive multi-channel analog front-end array",
+        "status": "candidate",
+        "boundary": "photo_layout",
+        "note": "Supports 16-ADC architecture; MPN not confirmed"
+      },
+      {
+        "identifier": "HW-ADC-MPN",
+        "module": "hardware",
+        "source_identifier": "Exact ADC manufacturer part numbers",
+        "status": "unknown",
+        "boundary": "needs_photo_or_bom",
+        "note": "See OMISSIONS"
+      },
+      {
+        "identifier": "HW-SYNC-LOCUS",
+        "module": "hardware",
+        "source_identifier": "Sync locus is ADC array + FPGA, not FX3 ARM",
+        "status": "confirmed",
+        "boundary": "spec_plus_arch",
+        "note": "FX3 lacks sample/sync strings; SPEC requires shared convert clock"
+      }
+    ],
+    "fx3": [
+      {
+        "identifier": "FX3-IMG-CY-MAGIC",
+        "module": "fx3",
+        "source_identifier": "Image starts with Cypress CY header + 0xB0 exec marker",
+        "status": "confirmed",
+        "boundary": "firmware_bytes",
+        "note": "niusbFirebolt.cfg offset 0: 43 59 1c b0"
+      },
+      {
+        "identifier": "FX3-USB-VIDPID",
+        "module": "fx3",
+        "source_identifier": "USB VID 0x3923 PID 0x7B44",
+        "status": "confirmed",
+        "boundary": "firmware_device_descriptor",
+        "note": "Matches Firebolt / USB-6453 community reports"
+      },
+      {
+        "identifier": "FX3-RTOS-THREADX",
+        "module": "fx3",
+        "source_identifier": "ThreadX ARM9 G5.1.5.1",
+        "status": "confirmed",
+        "boundary": "firmware_string",
+        "note": "Express Logic copyright string"
+      },
+      {
+        "identifier": "FX3-SRC-NIMARENGO",
+        "module": "fx3",
+        "source_identifier": "Internal tree nimarengoCore / nimarengoSrc",
+        "status": "confirmed",
+        "boundary": "firmware_string",
+        "note": "Marengo platform naming"
+      },
+      {
+        "identifier": "FX3-FPGA-LOAD",
+        "module": "fx3",
+        "source_identifier": "startup/tFPGA.c loads/configures FPGA",
+        "status": "confirmed",
+        "boundary": "firmware_string",
+        "note": "Role: configuration agent"
+      },
+      {
+        "identifier": "FX3-FPGA-REGACC",
+        "module": "fx3",
+        "source_identifier": "tFPGARegisterAccess.c pokes FPGA registers",
+        "status": "confirmed",
+        "boundary": "firmware_string",
+        "note": "Register map body unknown without RE/capture"
+      },
+      {
+        "identifier": "FX3-FUSION",
+        "module": "fx3",
+        "source_identifier": "Fusion vendor device request path present",
+        "status": "confirmed",
+        "boundary": "firmware_string",
+        "note": "tFusionManager / tFusionVendorDeviceRequest.h"
+      },
+      {
+        "identifier": "FX3-DMA",
+        "module": "fx3",
+        "source_identifier": "DMA manager + DMA/PIB threads",
+        "status": "confirmed",
+        "boundary": "firmware_string",
+        "note": "01_DMA_THREAD / 03_PIB_THREAD / tDMAManager.c"
+      },
+      {
+        "identifier": "FX3-STATE-MACHINE",
+        "module": "fx3",
+        "source_identifier": "State Machine handler thread name",
+        "status": "hypothesis",
+        "boundary": "firmware_string",
+        "note": "May be device/USB state, not AI sample FSM"
+      },
+      {
+        "identifier": "FX3-COUNTER-MON",
+        "module": "fx3",
+        "source_identifier": "Counter Data Monitor handler",
+        "status": "candidate",
+        "boundary": "firmware_string",
+        "note": "Likely ties to 4 counters; not proven as AI clock"
+      },
+      {
+        "identifier": "FX3-REGMAP",
+        "module": "fx3",
+        "source_identifier": "Concrete FPGA register offsets",
+        "status": "unknown",
+        "boundary": "needs_ghidra_or_capture",
+        "note": "OMISSIONS"
+      },
+      {
+        "identifier": "FX3-FUSION-REQ",
+        "module": "fx3",
+        "source_identifier": "Fusion bRequest / payload dictionary",
+        "status": "unknown",
+        "boundary": "needs_usb_capture",
+        "note": "Explicitly deferred this phase"
+      },
+      {
+        "identifier": "FX3-ROLE-SUMMARY",
+        "module": "fx3",
+        "source_identifier": "FX3 = config proxy + DMA bridge; not sync timebase",
+        "status": "confirmed",
+        "boundary": "arch_synthesis",
+        "note": "Synthesized from strings + SPEC sync layer"
+      }
+    ],
+    "bitstream": [
+      {
+        "identifier": "BIT-FMT-BIN",
+        "module": "bitstream",
+        "source_identifier": "Raw .bin style (FF pad + bus width detect + sync)",
+        "status": "confirmed",
+        "boundary": "firmware_bytes",
+        "note": "No Xilinx .bit ASCII header"
+      },
+      {
+        "identifier": "BIT-SYNC-WORD",
+        "module": "bitstream",
+        "source_identifier": "Sync word AA995566 present",
+        "status": "confirmed",
+        "boundary": "firmware_bytes",
+        "note": "7-series bitstream"
+      },
+      {
+        "identifier": "BIT-IDCODE",
+        "module": "bitstream",
+        "source_identifier": "IDCODE 0x0362C093 = XC7A100T",
+        "status": "confirmed",
+        "boundary": "bitstream_packet",
+        "note": "Type1 write IDCODE"
+      },
+      {
+        "identifier": "BIT-COMPRESSED",
+        "module": "bitstream",
+        "source_identifier": "Compressed FDRI segments (~1.60 MiB)",
+        "status": "candidate",
+        "boundary": "size_heuristic",
+        "note": "Uncompressed 7A100T ~3.8 MiB typical"
+      },
+      {
+        "identifier": "BIT-SYNC-CLOCK-TREE",
+        "module": "bitstream",
+        "source_identifier": "Sample-clock / multi-ADC convert tree in fabric",
+        "status": "unknown",
+        "boundary": "needs_netlist",
+        "note": "OMISSIONS — sync logic locus asserted by SPEC+arch only"
+      },
+      {
+        "identifier": "BIT-BANK-AICONV",
+        "module": "bitstream",
+        "source_identifier": "Bank switch and AIConv timer implementation",
+        "status": "unknown",
+        "boundary": "needs_netlist_or_lab",
+        "note": "OMISSIONS"
+      },
+      {
+        "identifier": "BIT-FIFO-LOGIC",
+        "module": "bitstream",
+        "source_identifier": "AI FIFO sizing / packing in fabric",
+        "status": "unknown",
+        "boundary": "needs_netlist",
+        "note": "SPEC gives 8191 samples; HDL unknown"
+      }
+    ],
+    "learn": [
+      {
+        "identifier": "LEARN-Q1-SYNC-LAYER",
+        "module": "learn",
+        "source_identifier": "Can explain sync layer (ADC shared convert vs software align)",
+        "status": "confirmed",
+        "boundary": "checklist",
+        "note": "Answer keyed to SPEC-SYNC-LAYER + HW-SYNC-LOCUS"
+      },
+      {
+        "identifier": "LEARN-Q2-16-VS-32",
+        "module": "learn",
+        "source_identifier": "Can explain 16-ch simultaneous vs 32-SE bank",
+        "status": "confirmed",
+        "boundary": "checklist",
+        "note": "SPEC-SIM-* / SPEC-SE-PAIR / SPEC-BANK"
+      },
+      {
+        "identifier": "LEARN-Q3-CLOCK-TRIG-AICONV",
+        "module": "learn",
+        "source_identifier": "Can separate sample clock, start trigger, AIConv roles",
+        "status": "confirmed",
+        "boundary": "checklist",
+        "note": "SPEC timing + PFI + AIConv"
+      },
+      {
+        "identifier": "LEARN-Q4-FX3-VS-FPGA",
+        "module": "learn",
+        "source_identifier": "Can state FX3 vs FPGA responsibilities",
+        "status": "confirmed",
+        "boundary": "checklist",
+        "note": "FX3-ROLE-SUMMARY vs BIT unknowns"
+      },
+      {
+        "identifier": "LEARN-Q5-FRAME-PACK",
+        "module": "learn",
+        "source_identifier": "Can state FIFO->USB packing only as unknown/hypothesis",
+        "status": "confirmed",
+        "boundary": "checklist",
+        "note": "Must not over-claim; see forced null bridges"
+      },
+      {
+        "identifier": "LEARN-Q6-UPGRADE-PATH",
+        "module": "learn",
+        "source_identifier": "Can list capture/netlist/lab upgrades for unknowns",
+        "status": "confirmed",
+        "boundary": "checklist",
+        "note": "OMISSIONS_AND_REMAINING.md"
+      },
+      {
+        "identifier": "LEARN-NO-VENDOR-EQ",
+        "module": "learn",
+        "source_identifier": "Accept stop condition: complete catalog != vendor equivalence",
+        "status": "confirmed",
+        "boundary": "policy",
+        "note": "README declaration"
+      },
+      {
+        "identifier": "LEARN-NO-CAPTURE-YET",
+        "module": "learn",
+        "source_identifier": "Acknowledge USB capture deferred this phase",
+        "status": "confirmed",
+        "boundary": "policy",
+        "note": "PHASE_PLAN deferred list"
+      }
+    ]
+  },
+  "stats": {
+    "identifier_count": 52,
+    "by_status": {
+      "confirmed": 40,
+      "candidate": 5,
+      "unknown": 6,
+      "hypothesis": 1
+    },
+    "by_block": {
+      "spec": 14,
+      "hardware": 10,
+      "fx3": 13,
+      "bitstream": 7,
+      "learn": 8
+    }
+  }
+}
