@@ -148,6 +148,15 @@ LDV_FIN_MHZ = [
     (5.0, "patent mid-low channel"),
 ]
 
+# R14/R14b：已解调后可能出现的振动基带峰（非 IF Fin；非样钟）
+LDV_VIB_HZ = [
+    (200.0, "R14 Vibrometer UI self-test spectrum peak (half of 400 Hz FM)"),
+    (400.0, "R14 signal-gen carrier-related tone in loopback demo"),
+    (500.0, "R14b IEEE IoT 2025 vibration band low end"),
+    (1000.0, "R14b mid vibration example"),
+    (1.0e6, "R14b vibration band high end (1 MHz)"),
+]
+
 
 def nearest_clock_family(fs: float) -> str:
     family = CLOCK_FAMILY_HZ
@@ -164,6 +173,20 @@ def list_ldv_fins() -> None:
     for i, (mhz, note) in enumerate(LDV_FIN_MHZ, 1):
         print(f"  {i:2d}     {mhz:5.1f}   {note}")
     print("Source: 应用域_激光测振仪.md §3b / G3G4 §2c — do not upgrade Must.")
+
+
+def list_ldv_vib() -> None:
+    print("R14/R14b post-demod vibration baseband candidates (NOT IF Fin / NOT clocks):")
+    print("  order  Hz           note")
+    for i, (hz, note) in enumerate(LDV_VIB_HZ, 1):
+        if hz >= 1e6:
+            label = f"{hz/1e6:.0f}e6"
+        elif hz >= 1000:
+            label = f"{hz:.0f}"
+        else:
+            label = f"{hz:.0f}"
+        print(f"  {i:2d}     {label:>8}   {note}")
+    print("Source: 应用域 §3d/§3e / G3G4 §2e — H-条纹计数 / H-板内FFT; do not upgrade Must.")
 
 
 def analyze(x: list[float], fin: float | None, fs_guess: float) -> dict:
@@ -188,7 +211,7 @@ def analyze(x: list[float], fin: float | None, fs_guess: float) -> dict:
             "若 fs_estimated 落入 40.96/61.44/81.92/122.88/163.84/245.76 族且 "
             "fin_error_at_guess≪1%，支持「时域上传 + 该样率」(H2/H8；含计划 C / LDV 旁支)；"
             "若峰钉死与 Fin 无关，疑 DDC/板内谱/已解调(H-DDC/H-FFT)；"
-            "Fin 优先序见 --list-ldv-fins。"
+            "Fin 优先序见 --list-ldv-fins；若峰在百 Hz–kHz 振动带见 --list-ldv-vib（R14）。"
         )
     return out
 
@@ -197,6 +220,8 @@ def self_test() -> int:
     import csv
     import tempfile
 
+    assert LDV_FIN_MHZ[0][0] == 10.0
+    assert any(abs(h - 200.0) < 1e-6 for h, _ in LDV_VIB_HZ)
     fs = 245.76e6
     fin = 10e6
     n = 4096
@@ -266,14 +291,22 @@ def main() -> int:
         action="store_true",
         help="print R13b LDV Fin/DAC-watch MHz list (CN117109719B priors)",
     )
+    ap.add_argument(
+        "--list-ldv-vib",
+        action="store_true",
+        help="print R14/R14b post-demod vibration Hz candidates (not IF Fin)",
+    )
     args = ap.parse_args()
     if args.list_ldv_fins:
         list_ldv_fins()
         return 0
+    if args.list_ldv_vib:
+        list_ldv_vib()
+        return 0
     if args.self_test:
         return self_test()
     if not args.file:
-        ap.error("file required (or --self-test / --list-ldv-fins)")
+        ap.error("file required (or --self-test / --list-ldv-fins / --list-ldv-vib)")
     if not args.file.is_file():
         print(f"missing {args.file}", file=sys.stderr)
         return 2
