@@ -1,7 +1,7 @@
 # Must 完成审计（当前 · 未达成）
 
 > 对照 `算法与ADCDAC实现_研究计划.md` §5 **最低合格（Must）**。
-> 由 `scripts/audit_must.py` 生成：2026-08-28T11:25:25.453541+00:00
+> 由 `scripts/audit_must.py` 生成：2026-08-28T11:44:05.385267+00:00
 > 结论：**Must 未达成 → 总目标未完成。禁止标 complete。**
 
 ---
@@ -39,4 +39,4 @@ Must-1=False Must-2=True Must-3=False
 
 ## 解锁
 
-`G2_投放三步.md` → 根目录实测 → `ingest_g2_inbox.py` → 人工回填 G0 → 再跑本脚本。
+`G2_投放三步.md` → 根目录实测 → `ingest_g2_inbox.py` → `apply_g0_backfill.py --apply` → 再跑本脚本（`--write-md`）。

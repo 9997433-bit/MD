@@ -170,7 +170,8 @@ def write_md(result: dict) -> None:
         "",
         "## 解锁",
         "",
-        "`G2_投放三步.md` → 根目录实测 → `ingest_g2_inbox.py` → 人工回填 G0 → 再跑本脚本。",
+        "`G2_投放三步.md` → 根目录实测 → `ingest_g2_inbox.py` → "
+        "`apply_g0_backfill.py --apply` → 再跑本脚本（`--write-md`）。",
         "",
     ]
     MUST_MD.write_text("\n".join(lines), encoding="utf-8")
