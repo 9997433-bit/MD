@@ -207,6 +207,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1 再加深：R11e Conserviss 验收双判据（DACCLK±1% + CONFIG31=0x12）+ apply 同步结论卡  
 - [x] G2 摩擦降低：`mk_g2_clocks.py`（读数→inbox）+ G3 Conserviss CSV 解析  
 - [x] G2 现场单：`G2_当日执行包.md` §0 十分钟填空（云端无仪器）  
+- [x] G1 再加深：位流 ASCII/UTF-16 SPI hex 与频率字面量阴性（`位流SPI常量搜索.md` §5c）  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）
