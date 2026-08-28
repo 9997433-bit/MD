@@ -48,11 +48,18 @@ def main() -> int:
         action="store_true",
         help="run Conserviss synthetic demo into _derived/demo_* (NOT for G0 backfill)",
     )
+    ap.add_argument(
+        "--demo-plan-c",
+        action="store_true",
+        help="run RHINO Plan-C synthetic demo into _derived/demo_plan_c_* (NOT for G0)",
+    )
     args = ap.parse_args()
     inbox: Path = args.inbox.resolve()
 
     if args.demo:
         return run_demo(inbox)
+    if args.demo_plan_c:
+        return run_demo_plan_c(inbox)
 
     return run_ingest(inbox, args)
 
@@ -97,6 +104,67 @@ def run_demo(inbox: Path) -> int:
     code = run_ingest(demo_dir, Args(), demo_banner=True)
     print(
         "DEMO DONE — outputs under g2_inbox/_derived/demo_inbox/ ; "
+        "DO NOT paste into G0 (synthetic).",
+        file=sys.stderr,
+    )
+    return code
+
+
+def run_demo_plan_c(inbox: Path) -> int:
+    """End-to-end with synthetic RHINO Plan-C clocks + SPI. Never touches G0."""
+    demo_dir = inbox / "_derived" / "demo_plan_c"
+    if demo_dir.exists():
+        for p in demo_dir.iterdir():
+            if p.is_file():
+                p.unlink()
+    demo_dir.mkdir(parents=True, exist_ok=True)
+    clocks = demo_dir / "g2_clocks.json"
+    clocks.write_text(
+        json.dumps(
+            [
+                {"id": "C2", "hz": 61440000, "note": "DEMO RHINO plan C ADC"},
+                {"id": "C3", "hz": 245760000, "note": "DEMO RHINO plan C DACCLK"},
+            ],
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    csv_path = demo_dir / "spi_capture.rhino_min.example.csv"
+    r = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPTS / "decode_spi_capture.py"),
+            "--write-rhino-example",
+            str(csv_path),
+        ],
+        cwd=ROOT,
+    )
+    if r.returncode != 0:
+        return r.returncode
+
+    class Args:
+        sclk = mosi = cs_adc = cs_dac = cs_cdce = None
+
+    code = run_ingest(demo_dir, Args(), demo_banner=True)
+    # Verify Plan C wiring without reading G0
+    infer_path = demo_dir / "_derived" / "g2_mode_infer.json"
+    if infer_path.is_file():
+        blob = json.loads(infer_path.read_text(encoding="utf-8"))
+        h8 = (blob.get("clocks") or {}).get("H8", "")
+        notes = " ".join((blob.get("spi") or {}).get("notes") or [])
+        prior = blob.get("cdce_profile_prior") or {}
+        if "计划C" not in h8:
+            print(f"DEMO Plan-C FAILED H8={h8}", file=sys.stderr)
+            return 1
+        if "计划C" not in notes and "61.44" not in notes:
+            print(f"DEMO Plan-C FAILED SPI notes={notes}", file=sys.stderr)
+            return 1
+        if prior.get("profile") != "rhino_61m44":
+            print(f"DEMO Plan-C FAILED cdce prior={prior}", file=sys.stderr)
+            return 1
+    print(
+        "DEMO Plan-C DONE — outputs under g2_inbox/_derived/demo_plan_c/ ; "
         "DO NOT paste into G0 (synthetic).",
         file=sys.stderr,
     )

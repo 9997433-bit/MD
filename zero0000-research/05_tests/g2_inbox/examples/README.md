@@ -5,6 +5,7 @@
 | `spi_capture.example.csv` | E2E-min：ADC `0x41=0x80`、DAC CONFIG1=`0x11`、CDCE Reg0 internal |
 | `spi_capture.saleae_aliases.example.csv` | 同上，Saleae/PulseView 列名别名 |
 | `spi_capture.conserviss_min.example.csv` | Conserviss-min：ADC `4180/5004`、DAC CFG1=`0x21`、CDCE Reg0/2/A |
+| `spi_capture.rhino_min.example.csv` | RHINO 计划 C：CDCE Reg2=÷8（`8304000`）+ Reg7=÷2 |
 | `g2_clocks.planA.example.json` | 计划 A 钟格式样例（245.76 / 491.52） |
 | `g2_clocks.planB.example.json` | 计划 B 钟格式样例（双路 245.76） |
 | `g2_clocks.planC.example.json` | 计划 C 钟格式样例（ADC 61.44 / DACCLK 245.76） |

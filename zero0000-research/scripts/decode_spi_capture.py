@@ -575,6 +575,11 @@ def synthesize_conserviss_min_csv(path: Path) -> None:
     _write_spi_csv(path, _synth_frames_conserviss_min())
 
 
+def synthesize_rhino_min_csv(path: Path) -> None:
+    """RHINO 计划 C 最小足迹：CDCE Reg2=÷8 + Reg7=÷2。"""
+    _write_spi_csv(path, _synth_frames_rhino_min())
+
+
 def _write_spi_csv(path: Path, frame_specs: list[tuple[list[int], int, bool]]) -> None:
     rows: list[list[str]] = [["time", "SCLK", "MOSI", "SEN", "SDENB", "SPI_LE"]]
 
@@ -636,6 +641,22 @@ def _synth_frames_conserviss_min() -> list[tuple[list[int], int, bool]]:
     ]
     # Reg0, Reg2 (ADC clk ÷2), RegA — enough for conserviss best_cdce_profile
     for addr, data28 in ((0, 0x683C035), (2, 0x8380000), (0xA, 0x05FC270)):
+        frames.append((_cdce_lsb_bits(data28, addr), 5, False))
+    return frames
+
+
+def _synth_frames_rhino_min() -> list[tuple[list[int], int, bool]]:
+    frames: list[tuple[list[int], int, bool]] = [
+        (_msb_bits(0x4180, 16), 3, True),
+        (_msb_bits(0x5004, 16), 3, True),
+        (_msb_bits(0x01, 8) + _msb_bits(0x21, 8), 4, False),
+    ]
+    for addr, data28 in (
+        (0, 0x683C035),
+        (2, 0x8304000),
+        (7, 0x8380001),
+        (0xA, 0x05FC270),
+    ):
         frames.append((_cdce_lsb_bits(data28, addr), 5, False))
     return frames
 
@@ -704,7 +725,25 @@ def self_test() -> int:
     ):
         print("SELF-TEST FAILED conserviss min", flags3, file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. --auto-map aliases + conserviss min)")
+    tmp4 = Path("/tmp/spi_rhino_min.csv")
+    synthesize_rhino_min_csv(tmp4)
+    flags4 = checklist_from_frames(
+        run_decode(
+            load_csv(
+                tmp4,
+                None,
+                "SCLK",
+                "MOSI",
+                {"adc": "SEN", "dac": "SDENB", "cdce": "SPI_LE"},
+                auto_map=False,
+            )[0],
+            True,
+        )
+    )
+    if flags4.get("best_cdce_profile") != "rhino_61m44":
+        print("SELF-TEST FAILED rhino min", flags4, file=sys.stderr)
+        return 1
+    print("SELF-TEST OK (incl. --auto-map aliases + conserviss/rhino min)")
     return 0
 
 
@@ -727,6 +766,11 @@ def main() -> int:
         type=Path,
         help="write synthetic Conserviss-min example CSV and exit",
     )
+    ap.add_argument(
+        "--write-rhino-example",
+        type=Path,
+        help="write synthetic RHINO Plan-C min example CSV and exit",
+    )
     args = ap.parse_args()
 
     if args.write_example:
@@ -736,6 +780,10 @@ def main() -> int:
     if args.write_conserviss_example:
         synthesize_conserviss_min_csv(args.write_conserviss_example)
         print(f"wrote conserviss example {args.write_conserviss_example}")
+        return 0
+    if args.write_rhino_example:
+        synthesize_rhino_min_csv(args.write_rhino_example)
+        print(f"wrote rhino example {args.write_rhino_example}")
         return 0
     if args.self_test:
         return self_test()
