@@ -321,7 +321,7 @@ def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
         "",
         "1. 复核 `G2_G0回填提案.md` → 写入 `G2_时钟与SPI记录.md` 与 `G0_命题基线证据表.md`",
         "2. 改等级时附上本报告中的 sha256",
-        "3. 未达标勿开 G3 算法定性",
+        "3. `python3 scripts/audit_must.py --write-md` 核验 Must；未达标勿开 G3 算法定性",
         "",
     ]
     out_report.write_text("\n".join(lines) + "\n", encoding="utf-8")

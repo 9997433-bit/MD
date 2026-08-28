@@ -1,7 +1,7 @@
 # Must 完成审计（当前 · 未达成）
 
-> 对照 `算法与ADCDAC实现_研究计划.md` §5 **最低合格（Must）**。  
-> 审计时刻：2026-08-28（P1.1/P1.2→强🔶 + ingest --demo 后）；`ingest_g2_inbox.py` exit **2**。  
+> 对照 `算法与ADCDAC实现_研究计划.md` §5 **最低合格（Must）**。
+> 由 `scripts/audit_must.py` 生成：2026-08-28T11:10:38.481596+00:00
 > 结论：**Must 未达成 → 总目标未完成。禁止标 complete。**
 
 ---
@@ -9,53 +9,34 @@
 ## 机器核验快照
 
 ```text
-g2_inbox 根: 无 g2_clocks.json；无非 example 的 *.csv
-G0 等级: P1.1强🔶 P1.2强🔶 P1.3❓ P1.4❓ | P2.1🔶 P2.2❓ P2.3❓ P2.4❓
-G3G4 §4.2: 仍含「（空）」
-USB/板: 无
-Montyzhang/zero0000: c9fbd9f（仍仅 mcs+照片）
-ingest --demo: OK（合成；禁止回填 G0）
+g2_inbox usable: False; clocks_filled=[]; spi=[]
+G0: P1.1=强 🔶 P1.2=强 🔶 P1.3=❓ P1.4=❓
+§4.2 empty: True
+Must-1=False Must-2=False Must-3=False
 ```
 
----
+## Must-1
 
-## Must-1：P1.1–P1.4 均 ✅ 或强 🔶
+| 命题 | 等级 | 达子条 |
+|------|------|--------|
+| P1.1 | 强 🔶 | 是 |
+| P1.2 | 强 🔶 | 是 |
+| P1.3 | ❓ | **否** |
+| P1.4 | ❓ | **否** |
 
-| 命题 | 当前 | 权威证据 | 判定 |
-|------|------|----------|------|
-| P1.1 | **强 🔶** | G0 + `SMA通道几何映射.md` | **达 Must 子条**；未 ✅（缺蜂鸣） |
-| P1.2 | **强 🔶** | G0；datasheet 排除法 + LVDS 串阻簇 | **达 Must 子条**；未 ✅（缺边沿） |
-| P1.3 | ❓ | 无测频 JSON | **缺口** |
-| P1.4 | ❓ | 无 SPI CSV | **缺口** |
+**Must-1：失败。**
 
-**Must-1：失败**（P1.3、P1.4 仍 ❓）。
+## Must-2
 
----
+§4.2 算法模块排除表空：True
+**Must-2：失败/部分。**
 
-## Must-2：P2 排除表
+## Must-3
 
-| 项 | 状态 |
-|----|------|
-| §4.1 + §4.1b 细假说/归因/带宽形态排除 | ✅ |
-| §4.2 算法模块排除 | ❌ 空 |
-
-**Must-2：部分**（模块行空 → 未完全满足）。
-
----
-
-## Must-3：可复现实测
-
-| 项 | 状态 |
-|----|------|
-| 步骤与脚本 | ✅（含 `--demo`） |
-| 原始数据+哈希 | ❌ |
-
+实测 inbox：{'clocks_file': False, 'clocks_filled': [], 'spi_csvs': [], 'usable': False}
+含 sha256 的 G2 文档：（无）
 **Must-3：失败。**
-
----
 
 ## 解锁
 
-`G2_投放三步.md` → 根目录实测 → `python3 scripts/ingest_g2_inbox.py`（勿 `--demo`）。
-
-在此之前：**goal active；不做空静态扫描。**
+`G2_投放三步.md` → 根目录实测 → `ingest_g2_inbox.py` → 人工回填 G0 → 再跑本脚本。
