@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T09:43:48.095892+00:00",
+  "generated_at": "2026-08-28T12:53:10.946290+00:00",
   "total_identifiers": 237,
   "by_layer": {
     "hw": 32,
@@ -13,11 +13,11 @@
   },
   "status_counts": {
     "confirmed": 76,
-    "candidate": 76,
+    "candidate": 80,
     "unknown": 48,
     "hypothesis": 6,
-    "not_started": 20,
-    "missing": 11
+    "not_started": 19,
+    "missing": 8
   },
   "stop_conditions": {
     "1_no_empty_status": true,

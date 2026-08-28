@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-08-28T12:52:08.378730+00:00",
+  "status": "scanned",
+  "confidence": "candidate",
+  "path": "phase_b/analysis/fx2_ram_from_enum.bin",
+  "size_bytes": 16384,
+  "sha256": "ac3461195e2dd3fe6a436cdcae0f6cc481054923d2cd4cb1fba9d1c2299a3241",
+  "source_note": "Volatile FX2-style RAM load from usb_enum.pcapng — NOT eeprom.bin",
+  "reset_vector_hint": {
+    "byte0": "0x02",
+    "interpretation": "LJMP abs",
+    "target": "0x075b",
+    "confidence": "candidate"
+  },
+  "opcode_histogram_first_2kib": {
+    "0xf0": 87,
+    "0x82": 58,
+    "LJMP": 55,
+    "RET": 54,
+    "0xe4": 50,
+    "0x83": 47,
+    "SJMP": 47,
+    "0xe0": 42,
+    "0x08": 41,
+    "0xa3": 41,
+    "0x93": 37,
+    "MOV_DPTR_imm": 36
+  },
+  "zero_ratio": 0.0481,
+  "unique_bytes": 255,
+  "strings_ascii_top": [
+    {
+      "offset": "0x05e8",
+      "text": "pOu%"
+    },
+    {
+      "offset": "0x0633",
+      "text": "u#?u$"
+    },
+    {
+      "offset": "0x070d",
+      "text": "4/PB"
+    },
+    {
+      "offset": "0x088c",
+      "text": "z+yq}"
+    },
+    {
+      "offset": "0x08bd",
+      "text": "MNO`\\"
+    },
+    {
+      "offset": "0x0947",
+      "text": "MNOp"
+    },
+    {
+      "offset": "0x0b38",
+      "text": "saGaOaYaxa"
+    },
+    {
+      "offset": "0x0e01",
+      "text": "MNO\""
+    },
+    {
+      "offset": "0x105f",
+      "text": "25@b"
+    },
+    {
+      "offset": "0x108a",
+      "text": "5d p6"
+    },
+    {
+      "offset": "0x10a1",
+      "text": "25@ {"
+    },
+    {
+      "offset": "0x17dc",
+      "text": "MNOp"
+    },
+    {
+      "offset": "0x19cb",
+      "text": "Tpo`"
+    },
+    {
+      "offset": "0x1c71",
+      "text": "u]xuZ"
+    },
+    {
+      "offset": "0x1ce1",
+      "text": "+-P$"
+    },
+    {
+      "offset": "0x24aa",
+      "text": "D E@"
+    },
+    {
+      "offset": "0x27f1",
+      "text": "u1;u0"
+    },
+    {
+      "offset": "0x2f2c",
+      "text": "0123456789ABCDEF"
+    },
+    {
+      "offset": "0x2fde",
+      "text": "333T"
+    },
+    {
+      "offset": "0x3432",
+      "text": "\"22222222222222222222222222222222"
+    }
+  ],
+  "strings_interesting": [],
+  "boundary": "Histogram/strings only; full 8051 disasm still needs Ghidra + preferably persistent EEPROM",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

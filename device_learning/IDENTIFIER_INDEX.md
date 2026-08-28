@@ -1,6 +1,6 @@
 # Identifier 索引（自动生成）
 
-**生成时间**：2026-08-28 09:43 UTC
+**生成时间**：2026-08-28 12:53 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -156,10 +156,10 @@
 | `FW-EEPROM-LAYOUT-REF` | candidate | Public FX2LP EEPROM field layout reference |
 | `FW-EEPROM-BOOT-BYTE-RULE` | candidate | Boot config byte semantics (0xC0/0xC2) |
 | `FW-EEPROM-FW-OFFSET` | candidate | Typical 8051 firmware start offset 0x10 in EEPROM |
-| `FW-MCU-CORE-IMAGE` | missing | 8051-compatible microcontroller firmware image |
-| `FW-MCU-RESET-VECTOR` | missing | Reset vector / boot entry of the MCU firmware |
+| `FW-MCU-CORE-IMAGE` | candidate | 8051-compatible microcontroller firmware image |
+| `FW-MCU-RESET-VECTOR` | candidate | Reset vector / boot entry of the MCU firmware |
 | `FW-MCU-CODE-XRAM-MAP` | missing | Code / external-RAM address map of the MCU |
-| `FW-MCU-I2C-BOOT-PATH` | missing | MCU boot path loading from the serial EEPROM over I2C |
+| `FW-MCU-I2C-BOOT-PATH` | candidate | MCU boot path loading from the serial EEPROM over I2C |
 | `FW-MCU-RENUMERATION` | candidate | USB re-numeration after FX2 RAM load: 0x7317 → 0x744f |
 | `FW-EEPROM-IMAGE` | missing | Serial EEPROM contents image |
 | `FW-EEPROM-CONFIG-BYTE` | missing | EEPROM leading boot-configuration byte |
@@ -250,7 +250,7 @@
 | `LEARN-008-SYSTEM-MAP` | candidate | Follow data path in system_map.json |
 | `LEARN-009-EEPROM-LAYOUT` | candidate | Study FX2LP EEPROM boot layout |
 | `LEARN-010-USB-PROTO` | candidate | USB command and acquisition planes from captures |
-| `LEARN-011-8051-DISASM` | not_started | 8051 firmware reverse engineering |
+| `LEARN-011-8051-DISASM` | candidate | 8051 firmware reverse engineering |
 | `LEARN-012-PIN-TEST` | not_started | Pin hypothesis verification experiments |
 | `LEARN-013-RELAY-TEST` | not_started | Relay switching experiment design |
 | `LEARN-014-BRAM-DECODE` | unknown | BRAM init extraction from bitstream |

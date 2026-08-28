@@ -46,14 +46,14 @@ ENTRIES = [
     make_entry(
         "FW-MCU-CORE-IMAGE", "FW", "mcu",
         "8051-compatible microcontroller firmware image",
-        "missing", "no_dump",
-        "no firmware binary dumped; nothing to disassemble",
+        "candidate", "volatile RAM extract from enum 0xA0; persistent EEPROM still missing",
+        "phase_b/analysis/fx2_ram_from_enum.bin + manifests/usb_fx2_ram_extract.json",
     ),
     make_entry(
         "FW-MCU-RESET-VECTOR", "FW", "mcu",
         "Reset vector / boot entry of the MCU firmware",
-        "missing", "no_dump",
-        "no image available; entry address undetermined",
+        "candidate", "hint from RAM image byte0; needs Ghidra confirmation",
+        "manifests/fx2_ram_scan.json",
     ),
     make_entry(
         "FW-MCU-CODE-XRAM-MAP", "FW", "mcu",
@@ -64,8 +64,8 @@ ENTRIES = [
     make_entry(
         "FW-MCU-I2C-BOOT-PATH", "FW", "mcu",
         "MCU boot path loading from the serial EEPROM over I2C",
-        "missing", "no_dump",
-        "boot decision and load flow have no evidence",
+        "candidate", "host also does FX2 0xA0 RAM load; EEPROM role still unknown without dump",
+        "usb_renumeration_timeline.json + usb_vendor_ctrl_7317.json",
     ),
     make_entry(
         "FW-MCU-RENUMERATION", "FW", "mcu",

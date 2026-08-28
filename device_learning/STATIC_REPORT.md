@@ -1,6 +1,6 @@
 # 静态分析报告（自动生成）
 
-**生成时间**：2026-08-28 09:43 UTC
+**生成时间**：2026-08-28 12:53 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -14,11 +14,11 @@
 
 | Status | 数量 |
 |--------|------|
-| candidate | 76 |
+| candidate | 80 |
 | confirmed | 76 |
 | hypothesis | 6 |
-| missing | 11 |
-| not_started | 20 |
+| missing | 8 |
+| not_started | 19 |
 | unknown | 48 |
 
 ## 硬件
@@ -43,7 +43,7 @@
 
 ## 待解项
 
-- 阻塞 identifier：**79** 条（见 `manifests/pending_index.json`）
+- 阻塞 identifier：**75** 条（见 `manifests/pending_index.json`）
 
 ## 数据路径
 

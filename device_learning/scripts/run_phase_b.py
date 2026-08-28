@@ -46,7 +46,11 @@ def main() -> int:
     run("analyze_pcap_stub.py")
     run("analyze_usb_pcap_decode.py")
     run("analyze_usb_command_taxonomy.py")
+    run("analyze_cmd_data_correlation.py")
     run("analyze_protocol_log.py")
+    if (ROOT / "phase_b" / "analysis" / "fx2_ram_from_enum.bin").exists():
+        run("analyze_fx2_ram_image.py")
+        run("analyze_fx2_ram_xrefs.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")

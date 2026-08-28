@@ -1,14 +1,11 @@
 {
-  "generated_at": "2026-08-28T09:43:44.541134+00:00",
+  "generated_at": "2026-08-28T12:53:07.359574+00:00",
   "phase_b": [
     {
       "action": "eeprom_dump",
       "artifact": "phase_b/captures/eeprom.bin",
       "unblocks": [
-        "FW-MCU-CORE-IMAGE",
-        "FW-MCU-RESET-VECTOR",
         "FW-MCU-CODE-XRAM-MAP",
-        "FW-MCU-I2C-BOOT-PATH",
         "FW-EEPROM-IMAGE",
         "FW-EEPROM-CONFIG-BYTE",
         "FW-EEPROM-VIDPID",

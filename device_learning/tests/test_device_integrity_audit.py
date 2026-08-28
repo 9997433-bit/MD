@@ -33,4 +33,5 @@ def test_blocked_report_exists():
     assert path.exists()
     text = path.read_text()
     assert "missing" in text
-    assert "FW-MCU-CORE-IMAGE" in text
+    # Persistent EEPROM dump remains the hard blocker; MCU RAM extract may already be candidate.
+    assert "FW-EEPROM-IMAGE" in text

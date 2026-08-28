@@ -19,7 +19,7 @@ ENTRIES = [
     _e("LEARN-008-SYSTEM-MAP", "topic", "Follow data path in system_map.json", "candidate", "Analog path unprobed", "system_map.json"),
     _e("LEARN-009-EEPROM-LAYOUT", "topic", "Study FX2LP EEPROM boot layout", "candidate", "No dump yet", "eeprom_layout_ref.json"),
     _e("LEARN-010-USB-PROTO", "topic", "USB command and acquisition planes from captures", "candidate", "Framing and endpoint roles observed; all 14 opcode meanings and sample packing remain unknown", "usb_command_taxonomy.json + usb_data_plane_hypothesis.json"),
-    _e("LEARN-011-8051-DISASM", "topic", "8051 firmware reverse engineering", "not_started", "Need eeprom.bin", "scan_firmware_stub.py"),
+    _e("LEARN-011-8051-DISASM", "topic", "8051 firmware reverse engineering", "candidate", "Have volatile RAM image from USB 0xA0; still need eeprom.bin + Ghidra", "fx2_ram_from_enum.bin + fx2_ram_scan.json"),
     _e("LEARN-012-PIN-TEST", "topic", "Pin hypothesis verification experiments", "not_started", "Need hardware", "pin_hypothesis.json"),
     _e("LEARN-013-RELAY-TEST", "topic", "Relay switching experiment design", "not_started", "Need hardware", "SIG-002-RELAY-MATRIX"),
     _e("LEARN-014-BRAM-DECODE", "topic", "BRAM init extraction from bitstream", "unknown", "No decoder", "MEM-001-BRAM"),
