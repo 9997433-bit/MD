@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T09:32:47Z",
+  "generated_at": "2026-08-28T09:34:01Z",
   "scope": "USB acquisition evidence and catalog-alignment parallel workstreams",
   "baseline": {
     "branch": "cursor/ingest-usb-captures-7fdd",
@@ -59,8 +59,10 @@
     {
       "name": "renumeration_timeline",
       "branch": "cursor/usb-renumeration-timeline-eba5",
-      "status": "in_progress",
-      "boundary": "The 0x7317 to 0x744f relationship is a candidate based on chronology and loader traffic."
+      "status": "complete",
+      "result": "A timed USB renumeration evidence timeline was committed separately.",
+      "commit": "0b74930",
+      "boundary": "The 0x7317 to 0x744f relationship remains a candidate based on chronology and loader traffic."
     }
   ],
   "eeprom": {
