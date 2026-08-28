@@ -126,6 +126,9 @@ def counter_public(c: collections.Counter) -> dict[str, int]:
 def write_primary_ctrl(addr: int | None) -> dict:
     now = datetime.now(timezone.utc).isoformat()
     if not SESSION.exists() or not shutil.which("tshark") or addr is None:
+        kept = _preserve_if_good(OUT_CTRL)
+        if kept is not None:
+            return kept
         report = {
             "generated_at": now,
             "status": "missing",
@@ -177,9 +180,26 @@ def write_primary_ctrl(addr: int | None) -> dict:
     return report
 
 
+def _preserve_if_good(path: Path) -> dict | None:
+    """Avoid clobbering a prior decoded report when pytest empties captures/."""
+    if not path.exists():
+        return None
+    try:
+        prev = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if prev.get("status") in ("hypothesis", "decoded", "decoded_partial"):
+        return prev
+    return None
+
+
 def main() -> None:
     now = datetime.now(timezone.utc).isoformat()
     if not SESSION.exists() or not shutil.which("tshark"):
+        kept = _preserve_if_good(OUT_TAXONOMY)
+        if kept is not None:
+            print(json.dumps({"status": kept.get("status"), "preserved": True}, indent=2))
+            return
         report = {
             "generated_at": now,
             "status": "missing",

@@ -71,6 +71,14 @@ def main() -> None:
     has_tshark = shutil.which("tshark") is not None
 
     if not enum_path.exists() and not session_path.exists():
+        if OUT.exists():
+            try:
+                prev = json.loads(OUT.read_text(encoding="utf-8"))
+                if prev.get("status") == "decoded":
+                    print(json.dumps({"status": "decoded", "preserved": True}, indent=2))
+                    return
+            except Exception:
+                pass
         report = {
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "status": "missing",

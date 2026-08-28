@@ -1,5 +1,122 @@
 {
-  "generated_at": "2026-08-28T08:51:16.623374+00:00",
-  "status": "missing",
-  "boundary": "No pcapng in phase_b/captures/"
+  "generated_at": "2026-08-28T08:53:20.654936+00:00",
+  "status": "decoded",
+  "tool": "tshark",
+  "sources": {
+    "usb_enum.pcapng": true,
+    "usb_session.pcapng": true
+  },
+  "primary_device": {
+    "idVendor": "0x3923",
+    "idVendor_name": "National Instruments Corp. (USB-IF)",
+    "idProduct": "0x744f",
+    "bcdDevice": "0x0001",
+    "bDeviceClass": "0x00",
+    "bNumConfigurations": 1,
+    "confidence": "confirmed",
+    "evidence": "usb_enum.pcapng + usb_session.pcapng device descriptor"
+  },
+  "configuration": {
+    "bConfigurationValue": 1,
+    "bNumInterfaces": 1,
+    "bmAttributes": "0x80",
+    "self_powered": false,
+    "remote_wakeup": false,
+    "confidence": "confirmed",
+    "evidence": "usb_session.pcapng configuration descriptor"
+  },
+  "interface": {
+    "bInterfaceNumber": 0,
+    "bAlternateSetting": 0,
+    "bNumEndpoints": 4,
+    "bInterfaceClass": "0xff",
+    "bInterfaceClass_name": "Vendor Specific",
+    "bInterfaceSubClass": "0x00",
+    "bInterfaceProtocol": "0x00",
+    "confidence": "confirmed",
+    "evidence": "usb_session.pcapng interface descriptor"
+  },
+  "endpoints": [
+    {
+      "bEndpointAddress": "0x81",
+      "direction": "IN",
+      "number": 1,
+      "bmAttributes": "0x02",
+      "type": "bulk",
+      "wMaxPacketSize": 512,
+      "confidence": "confirmed"
+    },
+    {
+      "bEndpointAddress": "0x01",
+      "direction": "OUT",
+      "number": 1,
+      "bmAttributes": "0x02",
+      "type": "bulk",
+      "wMaxPacketSize": 512,
+      "confidence": "confirmed"
+    },
+    {
+      "bEndpointAddress": "0x84",
+      "direction": "IN",
+      "number": 4,
+      "bmAttributes": "0x02",
+      "type": "bulk",
+      "wMaxPacketSize": 512,
+      "confidence": "confirmed"
+    },
+    {
+      "bEndpointAddress": "0x06",
+      "direction": "OUT",
+      "number": 6,
+      "bmAttributes": "0x02",
+      "type": "bulk",
+      "wMaxPacketSize": 512,
+      "confidence": "confirmed"
+    }
+  ],
+  "transfer_mode": {
+    "mode": "bulk",
+    "isochronous_observed": false,
+    "interrupt_observed": false,
+    "confidence": "confirmed",
+    "evidence": "session URB transfer_type bulk dominant on EP 0x01/0x81/0x06/0x84"
+  },
+  "alt_settings": {
+    "observed": [
+      0
+    ],
+    "confidence": "candidate",
+    "boundary": "Only alt-setting 0 observed in descriptors"
+  },
+  "string_descriptors": {
+    "status": "partial",
+    "serial_candidate": "01B771DA",
+    "confidence": "candidate",
+    "boundary": "Sparse strings; manufacturer/product not fully populated in capture"
+  },
+  "companion_device": {
+    "idVendor": "0x3923",
+    "idProduct": "0x7317",
+    "note": "Secondary device on same bus; bcdDevice observed as 0x744f in enum",
+    "session_device_address": 23,
+    "confidence": "candidate"
+  },
+  "session_device_address": 24,
+  "session_endpoint_traffic_counts": {
+    "xfer=0xff ep=0x00": 2,
+    "xfer=0x02 ep=0x80": 12,
+    "xfer=0x02 ep=0x00": 2,
+    "xfer=0x03 ep=0x81": 6869,
+    "xfer=0x03 ep=0x01": 7448,
+    "xfer=0x03 ep=0x06": 834,
+    "xfer=0x03 ep=0x84": 680,
+    "xfer=0xfe ep=0x84": 24,
+    "xfer=0xfe ep=0x06": 6
+  },
+  "vendor_control": {
+    "status": "not_decoded",
+    "boundary": "Control URB semantics (bRequest table) not yet reverse-engineered"
+  },
+  "boundary": "Descriptor/endpoint map from observed captures only; command byte semantics and sample framing remain unknown without protocol_log / EEPROM",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
 }

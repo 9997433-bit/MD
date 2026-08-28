@@ -1,5 +1,284 @@
 {
-  "generated_at": "2026-08-28T08:51:16.737109+00:00",
-  "status": "missing",
-  "boundary": "usb_session.pcapng or tshark unavailable"
+  "generated_at": "2026-08-28T08:53:18.564751+00:00",
+  "device": "0x3923:0x744f",
+  "usb_addr": 24,
+  "status": "hypothesis",
+  "confidence": "candidate",
+  "framing_hypothesis": {
+    "layout": [
+      "BE u16 tag/stream_id (0x0000 and 0x0001 observed)",
+      "BE u16 frame_length (= entire bulk payload length)",
+      "BE u16 body_length (= frame_length - 4)",
+      "u8 type/flags (0x00 or 0x01)",
+      "u8 opcode (OUT) / status (IN; 0x00 = success-like)",
+      "payload (frame_length - 8 bytes)"
+    ],
+    "supersedes": "Earlier BE-u32-total-length hypothesis was the special case tag==0",
+    "ep01_out": {
+      "n": 3724,
+      "frame_len_ok": 3724,
+      "body_len_ok": 3724,
+      "both": 3724,
+      "frame_len_ok_ratio": 1.0,
+      "body_len_ok_ratio": 1.0,
+      "both_ratio": 1.0
+    },
+    "ep81_in": {
+      "n": 3434,
+      "frame_len_ok": 3434,
+      "body_len_ok": 3434,
+      "both": 3434,
+      "frame_len_ok_ratio": 1.0,
+      "body_len_ok_ratio": 1.0,
+      "both_ratio": 1.0
+    },
+    "out_tag_hist": {
+      "0x0000": 2891,
+      "0x0001": 833
+    },
+    "in_tag_hist": {
+      "0x0000": 2601,
+      "0x0001": 833
+    }
+  },
+  "command_plane": {
+    "out_ep": "0x01",
+    "in_ep": "0x81"
+  },
+  "out_opcodes": [
+    {
+      "opcode": "0x01",
+      "count": 1814,
+      "tags_hex": [
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 1814
+      },
+      "example_hex": "0000000c0008010100000000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x09",
+      "count": 1155,
+      "tags_hex": [
+        "0x0000",
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x00",
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 777,
+        "12": 326,
+        "8": 52
+      },
+      "example_hex": "0000000c000801090c200000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x08",
+      "count": 522,
+      "tags_hex": [
+        "0x0001",
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x00",
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "12": 431,
+        "8": 64,
+        "16": 15,
+        "4": 12
+      },
+      "example_hex": "00010014001001080c0f00000000002c00000020",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0a",
+      "count": 80,
+      "tags_hex": [
+        "0x0001",
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "8": 55,
+        "4": 25
+      },
+      "example_hex": "0000000c0008010a0c200000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0b",
+      "count": 76,
+      "tags_hex": [
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "8": 48,
+        "4": 16,
+        "16": 12
+      },
+      "example_hex": "00010010000c010b0c03000000000000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x04",
+      "count": 15,
+      "tags_hex": [
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "8": 15
+      },
+      "example_hex": "00000010000c01040c01000000040001",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x05",
+      "count": 15,
+      "tags_hex": [
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "8": 15
+      },
+      "example_hex": "00000010000c01050c01000000040001",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0f",
+      "count": 13,
+      "tags_hex": [
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 13
+      },
+      "example_hex": "0001000c0008010f0c030000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x10",
+      "count": 13,
+      "tags_hex": [
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 13
+      },
+      "example_hex": "0001000c000801100c030000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0c",
+      "count": 9,
+      "tags_hex": [
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "8": 4,
+        "12": 4,
+        "4": 1
+      },
+      "example_hex": "00010010000c010c0c03000000000000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0d",
+      "count": 7,
+      "tags_hex": [
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "12": 4,
+        "4": 3
+      },
+      "example_hex": "000100140010010d0c10000000000000fffe5fd6",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x00",
+      "count": 2,
+      "tags_hex": [
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 2
+      },
+      "example_hex": "0000000c0008010000000000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x11",
+      "count": 2,
+      "tags_hex": [
+        "0x0001"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 2
+      },
+      "example_hex": "0001000c000801110c030000",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x02",
+      "count": 1,
+      "tags_hex": [
+        "0x0000"
+      ],
+      "types_hex": [
+        "0x01"
+      ],
+      "arg_len_hist": {
+        "4": 1
+      },
+      "example_hex": "0000000c0008010200000000",
+      "semantics": "unknown"
+    }
+  ],
+  "in_status_bytes_top": [
+    {
+      "value": "0x00",
+      "count": 3434
+    }
+  ],
+  "boundary": "Opcode meanings unknown without host software or firmware dump.",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
 }
