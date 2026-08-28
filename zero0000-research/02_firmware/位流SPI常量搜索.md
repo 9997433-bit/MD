@@ -134,6 +134,17 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 **结论**：单次 LE 命中视为**噪声级**（与 §3 散点纪律一致），**不**支持「明文 RHINO Plan C ROM」；**不**升 P1.3/P1.4。
 
+## 5e. RHINO_CALF NCO 相位字（2026-08-28 · R5d 一次）
+
+> 靶标：开源 `fmc150_if.vhd` 的 `FREQ_DEFAULT`（Fs=61.44 MHz 下 ±12 MHz → `0x03200000` / `0x0CE00000`）。镜像同 §5c。
+
+| 靶标 | BE | LE | 判读 |
+|------|----|----|------|
+| `0x03200000`（+12 MHz） | 35 | 19 | **低辨识度**（多零字节），不可作肯定证据 |
+| `0x0CE00000`（−12 MHz） | **0** | **0** | 弱阴性；不排除运行时写 NCO |
+
+**结论**：不支持「位流明文拷贝 RHINO_CALF NCO 常数」；**不**升 P2.3。RHINO 有 DDC/DUC 仅作 G3 假说优先级，见 `G1_FMC150_VC707对照.md` §6.10。
+
 ## 6. 与 G1 出口的关系
 
 - 本轮满足研究计划 G1「至少多 1 份非照片证据」的**加分项**（可复现阴性扫描），不推翻既有 G1 ✅ 有增量结论。  
@@ -142,4 +153,4 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 ---
 
-*复现：§2 二进制；§5b Hamming；§5c/§5d 对 bin 做 `data.count(token)`。不必入库大 JSON。*
+*复现：§2 二进制；§5b Hamming；§5c/§5d/§5e 对 bin 做 `data.count(token)`。不必入库大 JSON。*
