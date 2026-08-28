@@ -1,0 +1,299 @@
+{
+  "generated_at": "2026-08-28T09:34:11Z",
+  "status": "capture-derived estimate",
+  "source": {
+    "path": "phase_b/captures/usb_session.pcapng",
+    "sha256": "fedb99ad954abe461fd987f6f592c6f95fba3ffac37f8665196edd5f57363b1b",
+    "display_filter": "usb.device_address == 24 && usb.endpoint_address == 0x84",
+    "payload_accounting": "usb.data_len on successful device-to-host bulk completions"
+  },
+  "device": {
+    "idVendor": "0x3923",
+    "idProduct": "0x744f",
+    "usb_device_address": 24
+  },
+  "endpoint": {
+    "address": "0x84",
+    "direction": "IN",
+    "transfer_type": "bulk"
+  },
+  "methodology": {
+    "units": "decimal MB/s (1 MB = 1000000 bytes)",
+    "active_burst_rule": "At least two payload completions in a segment; split segments wherever consecutive payload completions are more than 1.0 s apart.",
+    "active_duration_rule": "Elapsed time from the first through the last payload completion in each active burst.",
+    "sustained_rate_rule": "Active-burst payload bytes divided by the sum of active-burst completion spans.",
+    "peak_rate_rule": "Maximum payload bytes completed in any forward rolling window, divided by the full nominal window width.",
+    "quantile_rule": "Nearest-rank quantiles."
+  },
+  "observed_totals": {
+    "successful_payload_completions": 294,
+    "total_payload_bytes": 3383796,
+    "total_payload_MB": 3.383796,
+    "first_payload_completion_s": 19.24451,
+    "last_payload_completion_s": 78.230016,
+    "first_to_last_completion_span_s": 58.985506,
+    "capture_span_rate_MB_per_s": 0.057366,
+    "payload_length_bytes": {
+      "min": 3532,
+      "median": 7032,
+      "max": 32768
+    },
+    "transfer_status": {
+      "successful_payload_completions": 294,
+      "successful_zero_length_completions": 0,
+      "canceled_zero_length_completions": 46,
+      "canceled_status": "USBD_STATUS_CANCELED (0xc0010000)",
+      "note": "Canceled zero-length completions occur when queued reads are canceled after segment termination and are excluded from byte/rate calculations."
+    }
+  },
+  "active_bursts": {
+    "burst_count": 10,
+    "payload_completions": 292,
+    "payload_bytes": 3367796,
+    "payload_MB": 3.367796,
+    "aggregate_active_duration_s": 15.566574,
+    "aggregate_sustained_bytes_per_s": 216347.926,
+    "aggregate_sustained_MB_per_s": 0.216348,
+    "per_burst": [
+      {
+        "burst": 1,
+        "first_frame": 10650,
+        "last_frame": 11098,
+        "start_s": 34.092482,
+        "end_s": 36.284906,
+        "duration_s": 2.192424,
+        "payload_completions": 41,
+        "payload_bytes": 466276,
+        "sustained_MB_per_s": 0.212676
+      },
+      {
+        "burst": 2,
+        "first_frame": 11916,
+        "last_frame": 12370,
+        "start_s": 38.99799,
+        "end_s": 41.316542,
+        "duration_s": 2.318552,
+        "payload_completions": 43,
+        "payload_bytes": 492084,
+        "sustained_MB_per_s": 0.212238
+      },
+      {
+        "burst": 3,
+        "first_frame": 13170,
+        "last_frame": 13516,
+        "start_s": 44.034047,
+        "end_s": 45.68746,
+        "duration_s": 1.653413,
+        "payload_completions": 31,
+        "payload_bytes": 356052,
+        "sustained_MB_per_s": 0.215344
+      },
+      {
+        "burst": 4,
+        "first_frame": 14274,
+        "last_frame": 14612,
+        "start_s": 48.034944,
+        "end_s": 49.378471,
+        "duration_s": 1.343527,
+        "payload_completions": 25,
+        "payload_bytes": 292616,
+        "sustained_MB_per_s": 0.217797
+      },
+      {
+        "burst": 5,
+        "first_frame": 16410,
+        "last_frame": 16842,
+        "start_s": 56.100804,
+        "end_s": 58.26943,
+        "duration_s": 2.168626,
+        "payload_completions": 41,
+        "payload_bytes": 461420,
+        "sustained_MB_per_s": 0.212771
+      },
+      {
+        "burst": 6,
+        "first_frame": 17940,
+        "last_frame": 18234,
+        "start_s": 62.075416,
+        "end_s": 63.20083,
+        "duration_s": 1.125414,
+        "payload_completions": 23,
+        "payload_bytes": 248360,
+        "sustained_MB_per_s": 0.220683
+      },
+      {
+        "burst": 7,
+        "first_frame": 19180,
+        "last_frame": 19414,
+        "start_s": 66.362886,
+        "end_s": 67.282084,
+        "duration_s": 0.919198,
+        "payload_completions": 18,
+        "payload_bytes": 205428,
+        "sustained_MB_per_s": 0.223486
+      },
+      {
+        "burst": 8,
+        "first_frame": 20068,
+        "last_frame": 20352,
+        "start_s": 69.537527,
+        "end_s": 70.652466,
+        "duration_s": 1.114939,
+        "payload_completions": 19,
+        "payload_bytes": 247564,
+        "sustained_MB_per_s": 0.222043
+      },
+      {
+        "burst": 9,
+        "first_frame": 21174,
+        "last_frame": 21454,
+        "start_s": 73.2977,
+        "end_s": 74.654876,
+        "duration_s": 1.357176,
+        "payload_completions": 24,
+        "payload_bytes": 298912,
+        "sustained_MB_per_s": 0.220246
+      },
+      {
+        "burst": 10,
+        "first_frame": 22162,
+        "last_frame": 22480,
+        "start_s": 76.856711,
+        "end_s": 78.230016,
+        "duration_s": 1.373305,
+        "payload_completions": 27,
+        "payload_bytes": 299084,
+        "sustained_MB_per_s": 0.217784
+      }
+    ],
+    "isolated_payload_completions": [
+      {
+        "frame": 7434,
+        "time_s": 19.24451,
+        "payload_bytes": 8000
+      },
+      {
+        "frame": 9146,
+        "time_s": 27.325992,
+        "payload_bytes": 8000
+      }
+    ]
+  },
+  "completion_density_peaks": [
+    {
+      "window_ms": 50,
+      "payload_bytes": 40156,
+      "peak_MB_per_s": 0.80312
+    },
+    {
+      "window_ms": 100,
+      "payload_bytes": 50272,
+      "peak_MB_per_s": 0.50272
+    },
+    {
+      "window_ms": 250,
+      "payload_bytes": 82696,
+      "peak_MB_per_s": 0.330784
+    },
+    {
+      "window_ms": 500,
+      "payload_bytes": 132768,
+      "peak_MB_per_s": 0.265536
+    },
+    {
+      "window_ms": 1000,
+      "payload_bytes": 227288,
+      "peak_MB_per_s": 0.227288
+    }
+  ],
+  "timing": {
+    "request_to_completion_s": {
+      "min": 0.041664,
+      "p50": 0.204529,
+      "p90": 0.279539,
+      "p95": 0.296493,
+      "p99": 0.360412,
+      "max": 0.426446
+    }
+  },
+  "gap_analysis": {
+    "segment_boundary_gap_threshold_s": 1.0,
+    "segment_boundary_gaps_s_chronological": [
+      8.081482,
+      6.76649,
+      2.713084,
+      2.717505,
+      2.347484,
+      6.722333,
+      3.805986,
+      3.162056,
+      2.255443,
+      2.645234,
+      2.201835
+    ],
+    "within_active_bursts": {
+      "gap_count": 282,
+      "min_s": 0.017339,
+      "p50_s": 0.031493,
+      "p90_s": 0.085644,
+      "p95_s": 0.112681,
+      "p99_s": 0.159973,
+      "max_s": 0.16001,
+      "gaps_at_least_100ms": 21,
+      "gaps_at_least_125ms": 12,
+      "gaps_at_least_150ms": 8
+    },
+    "possible_fifo_underrun_indicators": {
+      "long_internal_gap_rule": "Within an active burst, inter-payload gap >= 100 ms.",
+      "long_internal_gap_count": 21,
+      "following_payload_length_range_bytes": [
+        20824,
+        32768
+      ],
+      "successful_zero_length_completions": 0,
+      "payload_completion_usb_errors": 0,
+      "assessment": "No direct USB-level FIFO-underrun indicator is present. Every >=100 ms internal gap is followed by a large successful completion, which is compatible with host scheduling, queued-read batching, or FIFO accumulation; capture timing alone cannot distinguish those causes from a data-generation pause."
+    }
+  },
+  "sample_rate_envelopes": {
+    "assumption": "Ideal upper envelope: each simultaneous N-channel scan consumes exactly N * 3 payload bytes, with no framing, metadata, padding, loss, or host/device overhead.",
+    "formula": "per_channel_samples_per_s = observed_payload_bytes_per_s / (3 * channel_count)",
+    "throughput_references": {
+      "active_sustained_bytes_per_s": 216347.926,
+      "peak_1s_bytes_per_s": 227288,
+      "peak_100ms_bytes_per_s": 502720
+    },
+    "per_channel_samples_per_s": [
+      {
+        "channels": 1,
+        "active_sustained": 72115.975,
+        "peak_1s": 75762.667,
+        "peak_100ms": 167573.333
+      },
+      {
+        "channels": 2,
+        "active_sustained": 36057.988,
+        "peak_1s": 37881.333,
+        "peak_100ms": 83786.667
+      },
+      {
+        "channels": 4,
+        "active_sustained": 18028.994,
+        "peak_1s": 18940.667,
+        "peak_100ms": 41893.333
+      },
+      {
+        "channels": 8,
+        "active_sustained": 9014.497,
+        "peak_1s": 9470.333,
+        "peak_100ms": 20946.667
+      }
+    ]
+  },
+  "confidence": {
+    "byte_counts_and_completion_timestamps": "observed",
+    "burst_partition_and_rate_envelopes": "estimate"
+  },
+  "boundary": "Estimate only from this capture; no device-rated throughput or sample-rate specifications were used or inferred. USBPcap completion density is not a guaranteed bus-rate or device-limit measurement.",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}
