@@ -16,7 +16,7 @@
 | IS43TR16128D(2 Gb DDR3,128M×16) | ISSI | 43-46TR16128D | <https://www.issi.com/WW/pdf/43-46TR16128D-82560DL.pdf> | `is43tr16128d.pdf` |
 | RTL8211FI(千兆以太网 PHY) | Realtek | JATR-8275-15 | 无官方公开直链,见下方说明 | `rtl8211fi.pdf` |
 | TPS74401（U10/U11 净轨 LDO，✅） | TI | SBVS066 | <https://www.ti.com/lit/ds/symlink/tps74401.pdf> | `tps74401.pdf` |
-| TPS53515（U7/U8 同步 buck，✅） | TI | SLUSBP9 | <https://www.ti.com/lit/ds/symlink/tps53515.pdf> | `tps53515.pdf` |
+| TRS3221（U33 RS-232，✅） | TI | SLLS366 | <https://www.ti.com/lit/ds/symlink/trs3221.pdf> | `trs3221.pdf` |
 | TPS54620（U4 候选，🔶） | TI | SLUS949 | <https://www.ti.com/lit/ds/symlink/tps54620.pdf> | `tps54620.pdf` |
 | （已排除）TPS54425 | — | — | 封装与图25 不符，勿再下载作本板证据 | — |
 
