@@ -44,7 +44,7 @@
 ### 2.4 SPI 工作模式 —— ❓
 
 - 判据：ADC 0x41 D7、DAC fir0/fir1、CDCE Reg0–C / LOCK  
-- 工具：`decode_spi_capture.py` + `G2_当日执行包.md`  
+- 工具：`decode_spi_capture.py --auto-map` + `ingest_g2_inbox.py` + `G2_当日执行包.md`  
 - 飞线：`G2_照片探针地图.md` — 先蜂鸣 **R83/R88/R89/R105/R106**  
 - 配置归属（P1.5）：EEPROM / FPGA RTL / 主机 — 仅上电嗅探可裁决  
 - 静态否定：FMC150 E2E 明文簇无；**KC705_DDS 上游整表 MIF 连续 blob 无**（`KC705_DDS_SPI_MIF对照.md` ✅） 
@@ -119,9 +119,10 @@
 | 位流以 KC705_DDS 上游 ADS/DAC/CDCE(int\|ext) **整表 MIF** 作 BRAM INIT | ✅ 排除 | `KC705_DDS_SPI_MIF对照.md` |
 | 大规模 BRAM 驻留软核/大程序镜像 | 🔶 强烈倾向排除 | `位流BRAM帧分析.md`（候选区非零 ~5.5 KB） |
 | 带硬编码 IP/MAC/端口的网络栈固件镜像 | ✅ 排除（该形态） | `位流网络常量搜索.md` |
-| 从 MCS 字符串点名 FFT/DDC/NCO | ✅ 方法不可用 | 位流无此类明文；禁止当结论 |
+| 位流内嵌明文 FFT/FIR/DDS/CIC/`NCO` 等 ASCII 标签 | ✅ 排除（仅明文标签假说） | `位流特征与软核线索.md` §4.1 |
+| 从 MCS 字符串点名 FFT/DDC/NCO **算法存在** | ✅ 方法不可用 | 禁止当算法排除/肯定 |
 
-**未排除**（须 G2–G4）：运行时拼帧 SPI、EEPROM 自举、主机下发配置；形态 A/B/C；H1–H9 本体。
+**未排除**（须 G2–G4）：运行时拼帧 SPI、EEPROM 自举、主机下发配置；形态 A/B/C；H1–H9 本体；板内 FFT/DDC/FIR 模块本身。
 
 ### 6.3 P2
 

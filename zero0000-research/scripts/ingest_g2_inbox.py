@@ -38,11 +38,11 @@ def rel(p: Path) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--inbox", type=Path, default=DEFAULT_INBOX)
-    ap.add_argument("--sclk", default="SCLK")
-    ap.add_argument("--mosi", default="MOSI")
-    ap.add_argument("--cs-adc", default="SEN")
-    ap.add_argument("--cs-dac", default="SDENB")
-    ap.add_argument("--cs-cdce", default="SPI_LE")
+    ap.add_argument("--sclk", default=None)
+    ap.add_argument("--mosi", default=None)
+    ap.add_argument("--cs-adc", default=None)
+    ap.add_argument("--cs-dac", default=None)
+    ap.add_argument("--cs-cdce", default=None)
     args = ap.parse_args()
     inbox: Path = args.inbox.resolve()
     inbox.mkdir(parents=True, exist_ok=True)
@@ -58,21 +58,37 @@ def main() -> int:
     if not clocks.is_file():
         clocks = inbox / "clocks.json"
     csv_candidates = sorted(inbox.glob("*.csv")) + sorted(inbox.glob("spi*.csv"))
-    # de-dup
+    # de-dup; never treat tracked examples/ as real G2 captures
     seen = set()
     csvs = []
     for c in csv_candidates:
         if c.resolve() in seen:
             continue
+        if c.parent.name == "examples" or "example" in c.name.lower():
+            continue
         seen.add(c.resolve())
         csvs.append(c)
 
-    if not clocks.is_file() and not csvs:
+    clocks_usable = False
+    clocks_filled: list[str] = []
+    if clocks.is_file():
+        data = json.loads(clocks.read_text(encoding="utf-8"))
+        clocks_filled = [c["id"] for c in data if c.get("hz") is not None]
+        clocks_usable = bool(clocks_filled)
+
+    if not clocks_usable and not csvs:
         print(
-            f"EMPTY inbox: place g2_clocks.json and/or spi_capture.csv in {inbox}",
+            f"EMPTY inbox: place g2_clocks.json (with measured hz) "
+            f"and/or spi_capture.csv in {inbox}",
             file=sys.stderr,
         )
+        if clocks.is_file() and not clocks_usable:
+            print(
+                "NOTE: g2_clocks.json present but all hz are null — not usable for P1.3",
+                file=sys.stderr,
+            )
         print(f"See template: {inbox / 'g2_clocks.template.json'}", file=sys.stderr)
+        print(f"Synthetic column demos: {inbox / 'examples'}/ (not auto-ingested)", file=sys.stderr)
         return 2
 
     lines = [
@@ -89,14 +105,11 @@ def main() -> int:
 
     if clocks.is_file():
         lines.append(f"- `{clocks.name}` sha256=`{sha256(clocks)}`")
-        # reject all-null clocks
-        data = json.loads(clocks.read_text())
-        filled = [c for c in data if c.get("hz") is not None]
-        if not filled:
+        if not clocks_usable:
             lines.append("  - **WARN**: all hz are null — not usable for P1.3")
         else:
             infer_cmd += ["--clocks", str(clocks)]
-            lines.append(f"  - filled points: {', '.join(c['id'] for c in filled)}")
+            lines.append(f"  - filled points: {', '.join(clocks_filled)}")
 
     if csvs:
         csv_path = csvs[0]
@@ -108,19 +121,20 @@ def main() -> int:
             sys.executable,
             str(SCRIPTS / "decode_spi_capture.py"),
             str(csv_path),
-            "--sclk",
-            args.sclk,
-            "--mosi",
-            args.mosi,
-            "--cs-adc",
-            args.cs_adc,
-            "--cs-dac",
-            args.cs_dac,
-            "--cs-cdce",
-            args.cs_cdce,
+            "--auto-map",
             "--json",
             str(spi_json),
         ]
+        if args.sclk:
+            cmd += ["--sclk", args.sclk]
+        if args.mosi:
+            cmd += ["--mosi", args.mosi]
+        if args.cs_adc:
+            cmd += ["--cs-adc", args.cs_adc]
+        if args.cs_dac:
+            cmd += ["--cs-dac", args.cs_dac]
+        if args.cs_cdce:
+            cmd += ["--cs-cdce", args.cs_cdce]
         print("RUN", " ".join(cmd))
         r = subprocess.run(cmd, cwd=ROOT)
         if r.returncode != 0:

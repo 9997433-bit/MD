@@ -90,37 +90,96 @@ def _as_bool(v: str) -> int:
         raise ValueError(f"cannot parse logic level: {v!r}") from e
 
 
+# Common LA export aliases (case-insensitive substring / exact).
+_COL_ALIASES: dict[str, tuple[str, ...]] = {
+    "time": ("time", "timestamp", "t", "time [s]", "time(s)"),
+    "sclk": ("sclk", "spi_clk", "spi clk", "clock", "clk", "sck"),
+    "mosi": ("mosi", "sdata", "spi_mosi", "sdio", "data", "sdi"),
+    "cs_adc": ("sen", "ads_n_en", "adc_n_en", "adc_cs", "cs_adc", "ads62"),
+    "cs_dac": ("sdenb", "dac_n_en", "dac_cs", "cs_dac", "dac328"),
+    "cs_cdce": ("spi_le", "cdce_n_en", "cdce_cs", "cs_cdce", "le", "cdce720"),
+}
+
+
+def resolve_column(fields: list[str], role: str, explicit: str | None) -> str:
+    """Pick CSV column for role; explicit wins if present in header."""
+    if explicit and explicit in fields:
+        return explicit
+    if explicit and explicit not in fields:
+        # allow case-insensitive exact match of user flag
+        for f in fields:
+            if f.lower() == explicit.lower():
+                return f
+    aliases = _COL_ALIASES.get(role, ())
+    lowered = {f.lower().strip(): f for f in fields}
+    for a in aliases:
+        if a in lowered:
+            return lowered[a]
+    for a in aliases:
+        for fl, orig in lowered.items():
+            if a in fl:
+                return orig
+    raise ValueError(f"cannot resolve column for {role}; headers={fields}")
+
+
 def load_csv(
     path: Path,
     time_col: str | None,
-    sclk: str,
-    mosi: str,
-    cs_map: dict[str, str],
-) -> list[dict]:
+    sclk: str | None,
+    mosi: str | None,
+    cs_map: dict[str, str | None],
+    *,
+    auto_map: bool = False,
+) -> tuple[list[dict], dict[str, str]]:
     with path.open(newline="", encoding="utf-8", errors="ignore") as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames:
             raise ValueError("empty CSV")
         fields = list(reader.fieldnames)
-        tname = time_col
-        if not tname:
-            for cand in fields:
-                if "time" in cand.lower() or cand.lower() in ("t", "timestamp"):
-                    tname = cand
-                    break
+        if auto_map:
+            tname = resolve_column(fields, "time", time_col)
+            sclk_c = resolve_column(fields, "sclk", sclk)
+            mosi_c = resolve_column(fields, "mosi", mosi)
+            resolved_cs = {
+                "adc": resolve_column(fields, "cs_adc", cs_map.get("adc")),
+                "dac": resolve_column(fields, "cs_dac", cs_map.get("dac")),
+                "cdce": resolve_column(fields, "cs_cdce", cs_map.get("cdce")),
+            }
+        else:
+            tname = time_col
             if not tname:
-                tname = fields[0]
-        need = {sclk, mosi, *cs_map.values()}
-        missing = need - set(fields)
-        if missing:
-            raise ValueError(f"CSV missing columns: {sorted(missing)}; have {fields}")
+                for cand in fields:
+                    if "time" in cand.lower() or cand.lower() in ("t", "timestamp"):
+                        tname = cand
+                        break
+                if not tname:
+                    tname = fields[0]
+            sclk_c = sclk or "SCLK"
+            mosi_c = mosi or "MOSI"
+            resolved_cs = {
+                "adc": cs_map.get("adc") or "SEN",
+                "dac": cs_map.get("dac") or "SDENB",
+                "cdce": cs_map.get("cdce") or "SPI_LE",
+            }
+            need = {sclk_c, mosi_c, *resolved_cs.values()}
+            missing = need - set(fields)
+            if missing:
+                raise ValueError(
+                    f"CSV missing columns: {sorted(missing)}; have {fields}. "
+                    f"Try --auto-map"
+                )
+        mapping = {"time": tname, "sclk": sclk_c, "mosi": mosi_c, **{f"cs_{k}": v for k, v in resolved_cs.items()}}
         rows = []
         for row in reader:
-            item = {"t": float(row[tname]), "sclk": _as_bool(row[sclk]), "mosi": _as_bool(row[mosi])}
-            for dev, col in cs_map.items():
+            item = {
+                "t": float(row[tname]),
+                "sclk": _as_bool(row[sclk_c]),
+                "mosi": _as_bool(row[mosi_c]),
+            }
+            for dev, col in resolved_cs.items():
                 item[dev] = _as_bool(row[col])
             rows.append(item)
-        return rows
+        return rows, mapping
 
 
 def extract_bits_on_edge(
@@ -347,28 +406,45 @@ def synthesize_self_test_csv(path: Path) -> None:
 def self_test() -> int:
     tmp = Path("/tmp/spi_self_test.csv")
     synthesize_self_test_csv(tmp)
-    rows = load_csv(
+    rows, mapping = load_csv(
         tmp,
         None,
         "SCLK",
         "MOSI",
         {"adc": "SEN", "dac": "SDENB", "cdce": "SPI_LE"},
+        auto_map=False,
     )
+    print(f"self-test column map: {mapping}")
     frames = run_decode(rows, cs_active_low=True)
     print(f"self-test frames: {len(frames)}")
     for fr in frames:
         print(f"  {fr.device} {fr.raw_hex} {fr.decoded} {fr.notes}")
     flags = checklist_from_frames(frames)
     print("checklist:", json.dumps(flags, ensure_ascii=False, indent=2))
+    # auto-map path on renamed headers
+    tmp2 = Path("/tmp/spi_self_test_aliases.csv")
+    text = tmp.read_text(encoding="utf-8")
+    text = (
+        text.replace("time", "Time [s]", 1)
+        .replace("SCLK", "SPI_CLK", 1)
+        .replace("MOSI", "SDATA", 1)
+        .replace("SEN", "ADC_CS", 1)
+        .replace("SDENB", "DAC_CS", 1)
+        .replace("SPI_LE", "CDCE_CS", 1)
+    )
+    tmp2.write_text(text, encoding="utf-8")
+    rows2, map2 = load_csv(tmp2, None, None, None, {"adc": None, "dac": None, "cdce": None}, auto_map=True)
+    flags2 = checklist_from_frames(run_decode(rows2, True))
     ok = (
         flags.get("A2_adc_0x41_lvds")
         and flags.get("D1_dac_cfg1_seen")
         and any("matches FMC150 internal" in n for fr in frames for n in fr.notes)
+        and flags2.get("A2_adc_0x41_lvds")
     )
     if not ok:
-        print("SELF-TEST FAILED", file=sys.stderr)
+        print("SELF-TEST FAILED", map2, flags2, file=sys.stderr)
         return 1
-    print("SELF-TEST OK")
+    print("SELF-TEST OK (incl. --auto-map aliases)")
     return 0
 
 
@@ -376,28 +452,44 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Decode G2 SPI LA CSV for FMC150-class front-end")
     ap.add_argument("csv", nargs="?", help="logic analyzer CSV export")
     ap.add_argument("--self-test", action="store_true")
-    ap.add_argument("--sclk", default="SCLK")
-    ap.add_argument("--mosi", default="MOSI")
-    ap.add_argument("--cs-adc", default="SEN")
-    ap.add_argument("--cs-dac", default="SDENB")
-    ap.add_argument("--cs-cdce", default="SPI_LE")
+    ap.add_argument("--sclk", default=None, help="default SCLK; with --auto-map optional")
+    ap.add_argument("--mosi", default=None)
+    ap.add_argument("--cs-adc", default=None)
+    ap.add_argument("--cs-dac", default=None)
+    ap.add_argument("--cs-cdce", default=None)
     ap.add_argument("--time", dest="time_col", default=None)
     ap.add_argument("--cs-active", choices=("low", "high"), default="low")
+    ap.add_argument("--auto-map", action="store_true", help="resolve Saleae/PulseView-style column aliases")
     ap.add_argument("--json", dest="json_out")
+    ap.add_argument("--write-example", type=Path, help="write synthetic example CSV and exit")
     args = ap.parse_args()
 
+    if args.write_example:
+        synthesize_self_test_csv(args.write_example)
+        print(f"wrote example {args.write_example}")
+        return 0
     if args.self_test:
         return self_test()
     if not args.csv:
         ap.error("csv path required (or --self-test)")
 
-    rows = load_csv(
+    auto = args.auto_map or not all([args.sclk, args.mosi, args.cs_adc, args.cs_dac, args.cs_cdce])
+    # backward compatible defaults when not auto
+    sclk = args.sclk or ("SCLK" if not auto else None)
+    mosi = args.mosi or ("MOSI" if not auto else None)
+    cs_adc = args.cs_adc or ("SEN" if not auto else None)
+    cs_dac = args.cs_dac or ("SDENB" if not auto else None)
+    cs_cdce = args.cs_cdce or ("SPI_LE" if not auto else None)
+
+    rows, mapping = load_csv(
         Path(args.csv),
         args.time_col,
-        args.sclk,
-        args.mosi,
-        {"adc": args.cs_adc, "dac": args.cs_dac, "cdce": args.cs_cdce},
+        sclk,
+        mosi,
+        {"adc": cs_adc, "dac": cs_dac, "cdce": cs_cdce},
+        auto_map=auto,
     )
+    print(f"column map: {mapping}")
     frames = run_decode(rows, cs_active_low=(args.cs_active == "low"))
     flags = checklist_from_frames(frames)
 
@@ -408,7 +500,7 @@ def main() -> int:
     print(json.dumps(flags, ensure_ascii=False, indent=2))
 
     if args.json_out:
-        payload = {"frames": [asdict(f) for f in frames], "checklist": flags}
+        payload = {"frames": [asdict(f) for f in frames], "checklist": flags, "column_map": mapping}
         Path(args.json_out).write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
         print(f"wrote {args.json_out}")
     return 0

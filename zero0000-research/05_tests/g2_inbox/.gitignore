@@ -4,3 +4,6 @@ g2_clocks.json
 NOTES.md
 !g2_clocks.template.json
 !README.md
+!examples/
+!examples/*.csv
+!examples/*.md
