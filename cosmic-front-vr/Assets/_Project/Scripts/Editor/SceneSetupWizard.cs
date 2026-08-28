@@ -23,6 +23,7 @@ namespace CosmicFront.Editor
     {
         private const string HangarScenePath = "Assets/_Project/Scenes/Hangar.unity";
         private const string BattleScenePath = "Assets/_Project/Scenes/Map_ColonyRim.unity";
+        private const string AsteroidScenePath = "Assets/_Project/Scenes/Map_AsteroidField.unity";
 
         [MenuItem("Cosmic Front/Setup All Scenes (Hangar + Battle)")]
         public static void SetupAllScenes()
@@ -32,10 +33,20 @@ namespace CosmicFront.Editor
 
             SetupHangarSceneInternal();
             SetupPrototypeSceneInternal();
+            SetupAsteroidSceneInternal();
             ConfigureBuildSettings();
 
             AssetDatabase.SaveAssets();
-            Debug.Log("Cosmic Front: Hangar + Map_ColonyRim scenes ready. Build Settings updated.");
+            Debug.Log("Cosmic Front: Hangar + ColonyRim + AsteroidField ready. Build Settings updated.");
+        }
+
+        [MenuItem("Cosmic Front/Setup Asteroid Map Scene")]
+        public static void SetupAsteroidScene()
+        {
+            SetupAsteroidSceneInternal();
+            ConfigureBuildSettings();
+            AssetDatabase.SaveAssets();
+            Debug.Log("Cosmic Front: Map_AsteroidField scene created.");
         }
 
         [MenuItem("Cosmic Front/Setup P1 Prototype Scene")]
@@ -95,26 +106,33 @@ namespace CosmicFront.Editor
         private static void SetupPrototypeSceneInternal()
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+            CreateColonyRimGeometry();
+            SetupBattleSceneContent(new Vector3(0f, 2f, -30f), CreateSpawnPointsColony());
+            EditorSceneManager.SaveScene(scene, BattleScenePath);
+        }
 
-            var ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            ground.name = "Platform";
-            ground.transform.localScale = new Vector3(40f, 1f, 80f);
-            ground.transform.position = new Vector3(0f, -0.5f, 0f);
+        private static void SetupAsteroidSceneInternal()
+        {
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+            CreateAsteroidFieldGeometry();
+            SetupBattleSceneContent(new Vector3(0f, 2f, -20f), CreateSpawnPointsAsteroid());
+            EditorSceneManager.SaveScene(scene, AsteroidScenePath);
+        }
 
-            CreateRimWalls();
-
-            if (GameObject.Find("GameManager") == null)
+        private static void SetupBattleSceneContent(Vector3 playerStart, Transform[] spawnPoints)
+        {
+            if (Object.FindObjectOfType<GameManager>() == null)
             {
                 var managerGo = new GameObject("GameManager");
                 managerGo.AddComponent<GameManager>();
             }
 
             var playerMech = CreateMech("PlayerMech", TeamId.Terran, true);
-            playerMech.transform.position = new Vector3(0f, 2f, -30f);
+            playerMech.transform.position = playerStart;
             playerMech.tag = "Player";
 
             var cockpit = playerMech.transform.Find("YawPivot/PitchPivot/CockpitAnchor");
-            var xrRig = CreateXRRig(new Vector3(0f, 2f, -30f), cockpit);
+            var xrRig = CreateXRRig(playerStart, cockpit);
             var binder = xrRig.GetComponent<PlayerMechBinder>();
             SetPrivateField(binder, "mech", playerMech.GetComponent<MechController>());
             SetPrivateField(binder, "cockpitAnchor", cockpit);
@@ -129,20 +147,56 @@ namespace CosmicFront.Editor
             SetPrivateField(boot, "fallbackCamera", xrSetup != null ? xrSetup.VrCamera : null);
 
             CreateBattleHud(xrRig.transform, playerMech.GetComponent<MechController>());
+            CreateMatchScoreboardUi();
             CreateMatchResultsUi();
 
             var spawnerGo = new GameObject("EnemySpawner");
             var spawner = spawnerGo.AddComponent<EnemySpawner>();
             var enemyPrefab = CreateMechPrefabAsset();
             SetPrivateField(spawner, "enemyPrefab", enemyPrefab);
-            var spawnPoints = CreateSpawnPoints();
             SetPrivateField(spawner, "spawnPoints", spawnPoints);
+
             var playerNetworkPrefab = CreateNetworkPlayerPrefabAsset();
             CreateNetworkMatchManager(playerNetworkPrefab, spawnPoints, playerMech);
 
             DisableDefaultMainCamera();
+        }
 
-            EditorSceneManager.SaveScene(scene, BattleScenePath);
+        private static void CreateColonyRimGeometry()
+        {
+            var ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            ground.name = "Platform";
+            ground.transform.localScale = new Vector3(40f, 1f, 80f);
+            ground.transform.position = new Vector3(0f, -0.5f, 0f);
+            CreateRimWalls();
+        }
+
+        private static void CreateAsteroidFieldGeometry()
+        {
+            var floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            floor.name = "Floor";
+            floor.transform.localScale = new Vector3(60f, 1f, 60f);
+            floor.transform.position = new Vector3(0f, -0.5f, 0f);
+
+            var rockPositions = new[]
+            {
+                new Vector3(-15f, 4f, 5f),
+                new Vector3(12f, 5f, 8f),
+                new Vector3(-8f, 3f, 18f),
+                new Vector3(18f, 6f, -10f),
+                new Vector3(0f, 4f, 0f),
+                new Vector3(-20f, 5f, -12f),
+                new Vector3(10f, 3f, -18f),
+                new Vector3(22f, 4f, 14f)
+            };
+
+            for (var i = 0; i < rockPositions.Length; i++)
+            {
+                var rock = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                rock.name = $"Asteroid_{i}";
+                rock.transform.position = rockPositions[i];
+                rock.transform.localScale = Vector3.one * Random.Range(4f, 9f);
+            }
         }
 
         private static GameObject CreateXRRig(Vector3 position, Transform cockpitAnchor)
@@ -172,33 +226,35 @@ namespace CosmicFront.Editor
             canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasGo.AddComponent<GraphicRaycaster>();
 
-            var panel = CreateUiPanel(canvasGo.transform, new Vector2(460f, 420f), new Vector2(0.5f, 0.5f));
+            var panel = CreateUiPanel(canvasGo.transform, new Vector2(460f, 460f), new Vector2(0.5f, 0.5f));
 
             var title = CreateText(panel.transform, "Title", "COSMIC FRONT VR", 22, TextAnchor.UpperCenter);
             title.rectTransform.anchoredPosition = new Vector2(0f, -10f);
             title.rectTransform.sizeDelta = new Vector2(420f, 40f);
 
-            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -60f));
-            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -110f));
+            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -55f));
+            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -100f));
+            var mapDropdown = CreateDropdown(panel.transform, "MapDropdown", new Vector2(0f, -145f));
 
-            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -170f), new Vector2(180f, 36f));
-            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -170f), new Vector2(180f, 36f));
-            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join 局域网", new Vector2(0f, -220f), new Vector2(200f, 36f));
+            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -200f), new Vector2(180f, 36f));
+            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -200f), new Vector2(180f, 36f));
+            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join / Dedicated", new Vector2(0f, -250f), new Vector2(220f, 36f));
 
-            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -270f));
+            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -300f));
 
             var status = CreateText(panel.transform, "Status", "单机或多人 LAN（端口 7770）", 14, TextAnchor.MiddleCenter);
-            status.rectTransform.anchoredPosition = new Vector2(0f, -320f);
+            status.rectTransform.anchoredPosition = new Vector2(0f, -350f);
             status.rectTransform.sizeDelta = new Vector2(420f, 30f);
 
             var hint = CreateText(panel.transform, "ControlsHint", "", 11, TextAnchor.LowerCenter);
-            hint.rectTransform.anchoredPosition = new Vector2(0f, -370f);
+            hint.rectTransform.anchoredPosition = new Vector2(0f, -410f);
             hint.rectTransform.sizeDelta = new Vector2(440f, 40f);
             hint.color = new Color(0.75f, 0.85f, 1f);
 
             var menu = canvasGo.AddComponent<HangarMenu>();
             SetPrivateField(menu, "teamDropdown", teamDropdown);
             SetPrivateField(menu, "mechDropdown", mechDropdown);
+            SetPrivateField(menu, "mapDropdown", mapDropdown);
             SetPrivateField(menu, "startButton", startBtn);
             SetPrivateField(menu, "hostButton", hostBtn);
             SetPrivateField(menu, "joinButton", joinBtn);
@@ -218,6 +274,7 @@ namespace CosmicFront.Editor
             var nm = go.AddComponent<NetworkManager>();
             var transport = go.AddComponent<Tugboat>();
             transport.SetPort(NetworkSessionConfig.Port);
+            go.AddComponent<DedicatedServerBootstrap>();
 
             var dpo = EnsureDefaultPrefabObjects();
             SetPrivateField(nm, "_defaultPrefabObjects", dpo);
@@ -247,6 +304,7 @@ namespace CosmicFront.Editor
             temp.AddComponent<NetworkObject>();
             temp.AddComponent<NetworkTransform>();
             temp.AddComponent<NetworkMechSync>();
+            temp.AddComponent<NetworkHealthSync>();
 
             var path = "Assets/_Project/Prefabs/NetworkPlayerMech.prefab";
             var prefab = PrefabUtility.SaveAsPrefabAsset(temp, path);
@@ -274,6 +332,7 @@ namespace CosmicFront.Editor
             var go = new GameObject("NetworkMatchManager");
             go.AddComponent<NetworkObject>();
             var match = go.AddComponent<NetworkMatchManager>();
+            go.AddComponent<NetworkScoreManager>();
 
             var nob = playerPrefab.GetComponent<NetworkObject>();
             SetPrivateField(match, "playerPrefab", nob);
@@ -325,13 +384,37 @@ namespace CosmicFront.Editor
             kills.rectTransform.anchoredPosition = new Vector2(0f, -40f);
             var deaths = CreateText(panel.transform, "Deaths", "被击坠: 0", 16, TextAnchor.UpperCenter);
             deaths.rectTransform.anchoredPosition = new Vector2(0f, -80f);
-            var returnBtn = CreateButton(panel.transform, "ReturnButton", "返回机库", new Vector2(0f, -140f));
+            var teamScore = CreateText(panel.transform, "TeamScore", "", 14, TextAnchor.UpperCenter);
+            teamScore.rectTransform.anchoredPosition = new Vector2(0f, -115f);
+            teamScore.rectTransform.sizeDelta = new Vector2(340f, 40f);
+            var returnBtn = CreateButton(panel.transform, "ReturnButton", "返回机库", new Vector2(0f, -160f));
 
             var results = canvasGo.AddComponent<MatchResultsUI>();
             SetPrivateField(results, "panel", panel);
             SetPrivateField(results, "killsText", kills);
             SetPrivateField(results, "deathsText", deaths);
+            SetPrivateField(results, "teamScoreText", teamScore);
             SetPrivateField(results, "returnButton", returnBtn);
+        }
+
+        private static void CreateMatchScoreboardUi()
+        {
+            var canvasGo = new GameObject("ScoreboardCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+            var text = CreateText(canvasGo.transform, "Scoreboard", "Scoreboard", 13, TextAnchor.UpperLeft);
+            text.rectTransform.anchorMin = new Vector2(0f, 1f);
+            text.rectTransform.anchorMax = new Vector2(0f, 1f);
+            text.rectTransform.pivot = new Vector2(0f, 1f);
+            text.rectTransform.anchoredPosition = new Vector2(12f, -12f);
+            text.rectTransform.sizeDelta = new Vector2(280f, 160f);
+            text.alignment = TextAnchor.UpperLeft;
+            text.fontStyle = FontStyle.Bold;
+
+            var ui = canvasGo.AddComponent<MatchScoreboardUI>();
+            SetPrivateField(ui, "scoreboardText", text);
         }
 
         private static void CreateBoostVignette(VRComfortSettings comfort, Transform parent)
@@ -435,7 +518,7 @@ namespace CosmicFront.Editor
             return prefab;
         }
 
-        private static Transform[] CreateSpawnPoints()
+        private static Transform[] CreateSpawnPointsColony()
         {
             var parent = new GameObject("SpawnPoints").transform;
             var points = new Transform[4];
@@ -445,6 +528,29 @@ namespace CosmicFront.Editor
                 new Vector3(8f, 2f, 25f),
                 new Vector3(-8f, 2f, 35f),
                 new Vector3(8f, 2f, 35f)
+            };
+
+            for (var i = 0; i < offsets.Length; i++)
+            {
+                var p = new GameObject($"Spawn_{i}").transform;
+                p.SetParent(parent, false);
+                p.position = offsets[i];
+                points[i] = p;
+            }
+
+            return points;
+        }
+
+        private static Transform[] CreateSpawnPointsAsteroid()
+        {
+            var parent = new GameObject("SpawnPoints").transform;
+            var points = new Transform[4];
+            var offsets = new[]
+            {
+                new Vector3(-12f, 2f, 10f),
+                new Vector3(12f, 2f, 10f),
+                new Vector3(-12f, 2f, -8f),
+                new Vector3(12f, 2f, -8f)
             };
 
             for (var i = 0; i < offsets.Length; i++)
@@ -469,6 +575,11 @@ namespace CosmicFront.Editor
             if (System.IO.File.Exists(BattleScenePath))
             {
                 scenes.Add(new EditorBuildSettingsScene(BattleScenePath, true));
+            }
+
+            if (System.IO.File.Exists(AsteroidScenePath))
+            {
+                scenes.Add(new EditorBuildSettingsScene(AsteroidScenePath, true));
             }
 
             EditorBuildSettings.scenes = scenes.ToArray();

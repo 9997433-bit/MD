@@ -46,6 +46,26 @@ namespace CosmicFront.Core
                 return;
             }
 
+            ApplyDamageInternal(amount, source, invokeDeathEvent: true);
+        }
+
+        /// <summary>
+        /// Mirror HP from network authority without re-triggering death callbacks.
+        /// </summary>
+        public void SetFromNetwork(float health, float shield)
+        {
+            CurrentHealth = health;
+            CurrentShield = shield;
+            NotifyChanged();
+        }
+
+        internal void ApplyDamageInternal(float amount, GameObject source, bool invokeDeathEvent)
+        {
+            if (!IsAlive || amount <= 0f)
+            {
+                return;
+            }
+
             _shieldRegenTimer = shieldRegenDelay;
             var remaining = amount;
 
@@ -63,7 +83,7 @@ namespace CosmicFront.Core
 
             NotifyChanged();
 
-            if (!IsAlive)
+            if (invokeDeathEvent && !IsAlive)
             {
                 Died?.Invoke(this, source);
             }

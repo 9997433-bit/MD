@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using CosmicFront.Core;
+using CosmicFront.Network;
 
 namespace CosmicFront.UI
 {
@@ -9,6 +10,7 @@ namespace CosmicFront.UI
         [SerializeField] private GameObject panel;
         [SerializeField] private Text killsText;
         [SerializeField] private Text deathsText;
+        [SerializeField] private Text teamScoreText;
         [SerializeField] private Button returnButton;
 
         private void Awake()
@@ -23,6 +25,11 @@ namespace CosmicFront.UI
                 GameManager.Instance.MatchEnded += ShowResults;
                 GameManager.Instance.PhaseChanged += OnPhaseChanged;
             }
+
+            if (NetworkScoreManager.Instance != null)
+            {
+                NetworkScoreManager.Instance.MatchEnded += ShowResults;
+            }
         }
 
         private void OnDestroy()
@@ -31,6 +38,11 @@ namespace CosmicFront.UI
             {
                 GameManager.Instance.MatchEnded -= ShowResults;
                 GameManager.Instance.PhaseChanged -= OnPhaseChanged;
+            }
+
+            if (NetworkScoreManager.Instance != null)
+            {
+                NetworkScoreManager.Instance.MatchEnded -= ShowResults;
             }
         }
 
@@ -57,6 +69,13 @@ namespace CosmicFront.UI
             if (deathsText != null)
             {
                 deathsText.text = $"被击坠: {GameManager.Instance.PlayerDeaths}";
+            }
+
+            if (teamScoreText != null && NetworkScoreManager.Instance != null)
+            {
+                teamScoreText.text =
+                    $"阵营分 — 地球联合: {NetworkScoreManager.Instance.TerranScore}  |  " +
+                    $"轨道联盟: {NetworkScoreManager.Instance.OrbitalScore}";
             }
         }
 

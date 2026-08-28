@@ -1,6 +1,8 @@
 using UnityEngine;
 using CosmicFront.Core;
 using CosmicFront.Mech;
+using CosmicFront.Network;
+using FishNet;
 
 namespace CosmicFront.AI
 {
@@ -16,10 +18,22 @@ namespace CosmicFront.AI
 
         private void Start()
         {
+            if (ShouldDisableOnClient())
+            {
+                enabled = false;
+                return;
+            }
+
             for (var i = 0; i < initialCount; i++)
             {
                 SpawnOne();
             }
+        }
+
+        private static bool ShouldDisableOnClient()
+        {
+            var nm = InstanceFinder.NetworkManager;
+            return nm != null && nm.IsClientStarted && !nm.IsServerStarted;
         }
 
         private void SpawnOne()
@@ -51,9 +65,17 @@ namespace CosmicFront.AI
             health.Died -= OnEnemyDied;
             _living--;
 
-            if (killer != null && killer.CompareTag("Player") && GameManager.Instance != null)
+            if (killer != null && killer.CompareTag("Player"))
             {
-                GameManager.Instance.RegisterKill();
+                if (GameManager.Instance != null && GameManager.Instance.IsMultiplayer &&
+                    NetworkBootstrap.IsServer && NetworkScoreManager.Instance != null)
+                {
+                    NetworkScoreManager.Instance.RegisterFrag(killer, health.gameObject);
+                }
+                else if (GameManager.Instance != null && !GameManager.Instance.IsMultiplayer)
+                {
+                    GameManager.Instance.RegisterKill();
+                }
             }
 
             Destroy(health.gameObject, 2f);

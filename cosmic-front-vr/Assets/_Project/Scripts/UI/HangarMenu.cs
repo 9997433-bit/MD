@@ -10,6 +10,7 @@ namespace CosmicFront.UI
     {
         [SerializeField] private Dropdown teamDropdown;
         [SerializeField] private Dropdown mechDropdown;
+        [SerializeField] private Dropdown mapDropdown;
         [SerializeField] private Button startButton;
         [SerializeField] private Button hostButton;
         [SerializeField] private Button joinButton;
@@ -56,7 +57,7 @@ namespace CosmicFront.UI
                 addressInput.text = NetworkSessionConfig.DefaultAddress;
             }
 
-            UpdateStatus("单机：开始任务 | 多人：Host 或 Join");
+            UpdateStatus("单机 / Host / Join Dedicated 或局域网");
             UpdateControlsHint();
         }
 
@@ -87,6 +88,16 @@ namespace CosmicFront.UI
                 {
                     "轻型 — 迅影 Kestrel",
                     "重型 — 重盾 Bastion"
+                });
+            }
+
+            if (mapDropdown != null)
+            {
+                mapDropdown.ClearOptions();
+                mapDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "环带外壁 — Station Rim",
+                    "碎屑航道 — Debris Lane"
                 });
             }
         }
@@ -145,6 +156,16 @@ namespace CosmicFront.UI
             }
 
             GameManager.Instance.SelectLoadout(team, mech);
+
+            if (mapDropdown != null && mapDropdown.value == 1)
+            {
+                GameManager.Instance.SelectBattleScene(GameManager.Instance.GetAsteroidSceneName());
+            }
+            else
+            {
+                GameManager.Instance.SelectBattleScene(null);
+            }
+
             return true;
         }
 
@@ -169,8 +190,8 @@ namespace CosmicFront.UI
             }
 
             controlsHint.text = VRMechInput.IsHeadsetPresent()
-                ? "VR: 左摇杆移动 | 右摇杆转向 | 右扳机射击 | 左扳机导弹 | 左Grip锁定"
-                : "键鼠: WASD移动 | Tab锁定 | 鼠标射击 | 多人默认端口 7770";
+                ? "VR: 左摇杆移动 | 右扳机射击 | Dedicated: Join + 服务器IP"
+                : "键鼠: WASD | Tab锁定 | 端口7770 | Dedicated: -cosmicServer";
         }
     }
 }

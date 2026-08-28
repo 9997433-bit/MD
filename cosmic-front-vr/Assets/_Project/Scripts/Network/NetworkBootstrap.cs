@@ -4,7 +4,6 @@ using FishNet.Managing;
 using FishNet.Managing.Scened;
 using FishNet.Transporting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CosmicFront.Network
 {
@@ -60,6 +59,35 @@ namespace CosmicFront.Network
             if (!nm.ClientManager.StartConnection(address, NetworkSessionConfig.Port))
             {
                 RaiseStatus("Client 连接失败");
+            }
+        }
+
+        public static void StartDedicatedServer(string battleScene, Action onServerReady)
+        {
+            var nm = RequireNetworkManager();
+            if (nm == null)
+            {
+                return;
+            }
+
+            void Handler(ServerConnectionStateArgs args)
+            {
+                if (args.ConnectionState != LocalConnectionState.Started)
+                {
+                    return;
+                }
+
+                nm.ServerManager.OnServerConnectionState -= Handler;
+                RaiseStatus("Dedicated Server 已启动");
+                onServerReady?.Invoke();
+            }
+
+            nm.ServerManager.OnServerConnectionState += Handler;
+            RaiseStatus("正在启动 Dedicated Server...");
+
+            if (!nm.ServerManager.StartConnection())
+            {
+                RaiseStatus("Dedicated Server 启动失败");
             }
         }
 

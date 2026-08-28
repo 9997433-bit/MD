@@ -20,6 +20,7 @@ namespace CosmicFront.Core
 
         [SerializeField] private string hangarScene = "Hangar";
         [SerializeField] private string battleScene = "Map_ColonyRim";
+        [SerializeField] private string asteroidScene = "Map_AsteroidField";
         [SerializeField] private float matchDurationSeconds = 600f;
 
         public GamePhase Phase { get; private set; } = GamePhase.Boot;
@@ -27,6 +28,7 @@ namespace CosmicFront.Core
         public bool IsMultiplayer => CurrentMatchMode != MatchMode.SinglePlayer;
         public TeamId SelectedTeam { get; private set; } = TeamId.Terran;
         public MechArchetype SelectedMech { get; private set; } = MechArchetype.Light;
+        public string SelectedBattleScene { get; private set; }
         public string MultiplayerAddress { get; private set; } = NetworkSessionConfig.DefaultAddress;
         public float MatchTimeRemaining { get; private set; }
         public int PlayerKills { get; private set; }
@@ -52,6 +54,18 @@ namespace CosmicFront.Core
             SelectedTeam = team;
             SelectedMech = mech;
         }
+
+        public void SelectBattleScene(string sceneName)
+        {
+            SelectedBattleScene = string.IsNullOrWhiteSpace(sceneName) ? battleScene : sceneName;
+        }
+
+        public string GetActiveBattleScene()
+        {
+            return string.IsNullOrWhiteSpace(SelectedBattleScene) ? battleScene : SelectedBattleScene;
+        }
+
+        public string GetAsteroidSceneName() => asteroidScene;
 
         public void StartSinglePlayerMission()
         {
@@ -92,13 +106,13 @@ namespace CosmicFront.Core
             {
                 if (NetworkBootstrap.IsServer)
                 {
-                    NetworkBootstrap.LoadBattleScene(battleScene);
+                    NetworkBootstrap.LoadBattleScene(GetActiveBattleScene());
                 }
 
                 return;
             }
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(battleScene);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(GetActiveBattleScene());
         }
 
         private void ApplySelectedLoadoutFromUiDefaults()
@@ -126,6 +140,22 @@ namespace CosmicFront.Core
             PlayerDeaths++;
         }
 
+        public void SetPersonalStats(int kills, int deaths)
+        {
+            PlayerKills = kills;
+            PlayerDeaths = deaths;
+        }
+
+        public void SetNetworkMatchTime(float seconds)
+        {
+            MatchTimeRemaining = seconds;
+        }
+
+        public void EndMatchFromNetwork()
+        {
+            EndMatch();
+        }
+
         public void EndMatch()
         {
             SetPhase(GamePhase.Results);
@@ -148,6 +178,12 @@ namespace CosmicFront.Core
         {
             if (Phase != GamePhase.Battle)
             {
+                return;
+            }
+
+            if (IsMultiplayer && NetworkScoreManager.Instance != null)
+            {
+                MatchTimeRemaining = NetworkScoreManager.Instance.TimeRemaining;
                 return;
             }
 

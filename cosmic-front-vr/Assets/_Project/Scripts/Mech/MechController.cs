@@ -133,6 +133,11 @@ namespace CosmicFront.Mech
 
         private void OnDied(HealthSystem _, GameObject killer)
         {
+            if (GetComponent<NetworkHealthSync>() != null)
+            {
+                return;
+            }
+
             if (CompareTag("Player"))
             {
                 if (GameManager.Instance != null)

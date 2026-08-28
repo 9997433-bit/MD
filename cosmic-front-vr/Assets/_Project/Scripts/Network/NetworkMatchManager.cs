@@ -73,6 +73,12 @@ namespace CosmicFront.Network
             }
 
             NetworkManager.ServerManager.Spawn(instance, conn);
+
+            var healthSync = instance.GetComponent<NetworkHealthSync>();
+            if (healthSync != null)
+            {
+                healthSync.SetSpawnPoint(spawn.position, spawn.rotation);
+            }
         }
 
         private TeamId AssignTeam()
