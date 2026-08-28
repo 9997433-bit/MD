@@ -134,21 +134,27 @@ def write_clocks(c2: int | None, c3: int | None, out: Path, note: str) -> None:
 
 
 def self_test() -> int:
-    from PIL import Image, ImageDraw, ImageFont
-
-    img = Image.new("RGB", (640, 200), "black")
-    draw = ImageDraw.Draw(img)
-    draw.text((40, 70), "Freq  245.76 MHz", fill="white")
-    path = Path(tempfile.mkstemp(suffix="_scope.png")[1])
-    img.save(path)
-    text = ocr_image(path)
-    cands = parse_hz_candidates(text + "\n245.76 MHz")  # guarantee parse unit test
-    path.unlink(missing_ok=True)
-    # unit parse always
+    # Parse unit test never needs PIL/tesseract
     c2 = parse_hz_candidates("Freq=245.76 MHz\nDACCLK 491.52 MHz")
     assert any(abs(c["hz"] - 245760000) < 1000 for c in c2), c2
     assert any(abs(c["hz"] - 491520000) < 1000 for c in c2), c2
-    print("SELF-TEST OK ocr_scope_hz parse; ocr_text_len=", len(text))
+    c_plan_c = parse_hz_candidates("ADC 61.44 MHz")
+    assert any(abs(c["hz"] - 61440000) < 1000 for c in c_plan_c), c_plan_c
+    text_len = 0
+    try:
+        from PIL import Image, ImageDraw
+
+        img = Image.new("RGB", (640, 200), "black")
+        draw = ImageDraw.Draw(img)
+        draw.text((40, 70), "Freq  245.76 MHz", fill="white")
+        path = Path(tempfile.mkstemp(suffix="_scope.png")[1])
+        img.save(path)
+        text = ocr_image(path)
+        text_len = len(text)
+        path.unlink(missing_ok=True)
+    except Exception as exc:  # noqa: BLE001 — optional OCR stack in CI/dev
+        print(f"OCR image path skipped ({exc})")
+    print("SELF-TEST OK ocr_scope_hz parse; ocr_text_len=", text_len)
     return 0
 
 
