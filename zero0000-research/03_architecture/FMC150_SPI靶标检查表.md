@@ -103,7 +103,7 @@ FMC150 类固件的 ADC 初始化足迹(一例公开配置见 TI E2E,地址集�
 | 地址 | 名称(默认值) | 关键位 | 抓包时的意义 |
 |------|----------------|--------|--------------|
 | 0x00 | CONFIG0(0x70) | fifo_ena(b6)、fifo_reset_ena(b5)、multi_sync_ena(b4)、alarm 极性、**mixer_func(1:0)** | FIFO 模式与粗混频选择;SDR 类应用可能启用 fs/2、±fs/4 混频 |
-| 0x01 | CONFIG1(0x11) | qmc_offset_ena、qmc_correct_ena、**fir0_ena/fir1_ena(插值 2x/4x)**、**iotest_ena**、twos | 插值倍数 = 判定 DAC 时钟计划(491.52 MHz @2x → 数据率 245.76 MSPS)的关键 |
+| 0x01 | CONFIG1(reset 0x11) | qmc_offset_ena、qmc_correct_ena、**fir0_ena(bit5→2x)**、**fir1_ena(bit4→4x,须 fir0)**、iotest_ena、twos | Conserviss=`0x21`=fir0+twos→**2x**；与 C3/C6 比 = 靶标 **X2** |
 | 0x02 | CONFIG2(0x00) | sif_sync、output_delay | 同步方式 |
 | 0x03 | CONFIG3(0x10) | fifo_offset(2:0)、64cnt_ena、alarm 屏蔽 | FIFO 读指针偏移 |
 | 0x04 | CONFIG4(0xFF) | coarse_daca(3:0)/coarse_dacb(3:0) | 输出满量程粗增益 |
