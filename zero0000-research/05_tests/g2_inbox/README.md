@@ -49,4 +49,6 @@ SPI CSV 列名：默认 `SCLK,MOSI,SEN,SDENB,SPI_LE`；也可用 Saleae 风格�
 
 **禁止**把未测的猜测 Hz 填进 JSON，或把 `examples/*.csv` 冒充实测。
 
+> 实测 `g2_clocks.json` / `spi_capture.csv` / `scope_*.jpg` **可以** `git add` 进本目录并推送 PR（已不再 gitignore），以便云端 Agent 拾取。
+
 合成列名演练见 `examples/README.md`。流程总览：`05_tests/G2_投放三步.md`。
