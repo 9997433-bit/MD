@@ -324,18 +324,15 @@ def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
                         spi_blob = json.loads(spi_json.read_text(encoding="utf-8"))
                         if "checklist" in spi_blob:
                             infer_blob["checklist"] = spi_blob["checklist"]
-                            # Attach CDCE Table-8 prior when Conserviss (or named) profile wins
+                            # Attach CDCE Table-8 prior when a named profile wins
                             best = spi_blob["checklist"].get("best_cdce_profile")
-                            if best in ("conserviss", "e2e_internal", "e2e_external"):
-                                profile_arg = (
-                                    "conserviss"
-                                    if best == "conserviss"
-                                    else (
-                                        "e2e_internal"
-                                        if best == "e2e_internal"
-                                        else "e2e_external"
-                                    )
-                                )
+                            if best in (
+                                "conserviss",
+                                "e2e_internal",
+                                "e2e_external",
+                                "rhino_61m44",
+                            ):
+                                profile_arg = best
                                 cp = subprocess.run(
                                     [
                                         sys.executable,

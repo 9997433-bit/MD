@@ -7,6 +7,7 @@
 | `spi_capture.conserviss_min.example.csv` | Conserviss-min：ADC `4180/5004`、DAC CFG1=`0x21`、CDCE Reg0/2/A |
 | `g2_clocks.planA.example.json` | 计划 A 钟格式样例（245.76 / 491.52） |
 | `g2_clocks.planB.example.json` | 计划 B 钟格式样例（双路 245.76） |
+| `g2_clocks.planC.example.json` | 计划 C 钟格式样例（ADC 61.44 / DACCLK 245.76） |
 
 **禁止**把本目录文件复制成 `../spi_capture.csv` / `../g2_clocks.json` 冒充实测。`ingest_g2_inbox.py` 会忽略 `examples/` 与文件名含 `example` 的 CSV；`mk_g2_clocks.py` 写入 inbox 根须 `--confirm-measured`。
 

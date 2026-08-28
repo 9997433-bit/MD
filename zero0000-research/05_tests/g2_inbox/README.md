@@ -9,7 +9,7 @@ python3 scripts/apply_g0_backfill.py          # dry-run
 python3 scripts/apply_g0_backfill.py --apply  # 写 G0 + 结论卡；SPI 仅上电加 --power-on-only
 ```
 
-脚本会：校验文件 →（若有 CSV）**自动列名映射**译码 → `g2_mode_infer` →（Conserviss 命中则挂 `decode_cdce_profile` 先验）→ 写出 `05_tests/G2_inbox_infer_report.md`、`G2_G0回填提案.md` 与哈希。
+脚本会：校验文件 →（若有 CSV）**自动列名映射**译码 → `g2_mode_infer` →（Conserviss / E2E / **rhino_61m44** 命中则挂 `decode_cdce_profile` 先验）→ 写出 `05_tests/G2_inbox_infer_report.md`、`G2_G0回填提案.md` 与哈希。
 
 端到端合成演练（**禁止**当实测）：
 
@@ -30,11 +30,13 @@ python3 scripts/ingest_g2_inbox.py --demo
 ```bash
 # 计划 B 例：ADC 与 DACCLK 均为 245.76 MHz（须是你测到的数）
 python3 scripts/mk_g2_clocks.py --c2 245.76e6 --c3 245.76e6 --confirm-measured
+# 计划 C 例：ADC 61.44 / DACCLK 245.76（RHINO；须是你测到的数）
+python3 scripts/mk_g2_clocks.py --c2 61.44e6 --c3 245.76e6 --confirm-measured
 # 或 CSV：两列 id,hz
 python3 scripts/mk_g2_clocks.py --from-csv readings.csv --confirm-measured
 ```
 
-无 `--confirm-measured` **不会**写入 inbox 根（防把先验当实测）。格式样例见 `examples/g2_clocks.planA.example.json` / `planB`（ingest **忽略** examples/）。
+无 `--confirm-measured` **不会**写入 inbox 根（防把先验当实测）。格式样例见 `examples/g2_clocks.planA.example.json` / `planB` / `planC`（ingest **忽略** examples/）。
 
 ### 示波器截图 OCR（可选）
 

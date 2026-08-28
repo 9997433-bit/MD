@@ -159,6 +159,8 @@ FMC150 板上经 TI E2E 验证过的两套 28-bit 数据值(不含地址半字�
 
 **另**：Conserviss/FMC150-VC707 给出**硬件回读**的第三套完整 CDCE 13 字 + DAC CONFIG1=`0x21`（2x），Reg0 data=`683C035`（≠下表 internal 的 `683C034`）。抓包须同时对照：`03_architecture/G1_FMC150_VC707对照.md`；`decode_spi_capture.py` 会标注 `conserviss`。
 
+**再另（R5c · 计划 C）**：RHINO 论文示例 ADC=**61.44**（Out2 ÷8）/ DACCLK=**245.76**（Out7 ÷2）；Reg0/A 与 Conserviss 同族，Reg2 靶标合成字 data28=`8304000`（全字 `83040002`）。`decode_spi_capture` 的 `best_cdce_profile=rhino_61m44` **仅当** Reg2 命中该 ÷8 字；`decode_cdce_profile --profile rhino_61m44` 给出 C2/C3 先验。**勿**把 OCR 表字 `83080002` 当硬靶标。
+
 | 寄存器 | 内部时钟(板载 VCXO 自锁) | 外部 10 MHz 参考 |
 |--------|-----------------------------|-------------------|
 | Reg0 | 0x683C034 | 0x683C038(Auto 模式则 0x683C03C) |
