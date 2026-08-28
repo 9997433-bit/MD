@@ -1,0 +1,704 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-28T09:34:09Z",
+  "status": "hypothesis_only",
+  "device": "0x3923:0x744f",
+  "source": {
+    "path": "phase_b/captures/usb_session.pcapng",
+    "sha256": "fedb99ad954abe461fd987f6f592c6f95fba3ffac37f8665196edd5f57363b1b",
+    "usb_device_address": 24,
+    "tool": "TShark 4.2.2",
+    "display_filter_basis": "usb.device_address == 24 && usb.transfer_type == 0x03 && usb.capdata",
+    "packet_definition": "payload-bearing USBPcap records only; submit/completion records without usb.capdata are excluded"
+  },
+  "measurement_method": {
+    "inter_arrival": "delta between capture timestamps of consecutive payload-bearing records on the same endpoint",
+    "quantiles": "linear interpolation over sorted observations",
+    "active_gap_cutoff_s": 1.0,
+    "entropy": "Shannon entropy in bits per byte; it describes captured byte distributions, not ADC effective number of bits",
+    "word_probe": "non-semantic structural probe using four-byte words; both endian interpretations were tested"
+  },
+  "ep06_out": {
+    "endpoint": "0x06",
+    "direction": "OUT",
+    "payload_record_count": 417,
+    "payload_bytes": 453050,
+    "length_bytes": {
+      "distinct_count": 3,
+      "min": 490,
+      "p10": 512.0,
+      "p25": 512.0,
+      "p50": 512.0,
+      "p75": 2000.0,
+      "p90": 2000.0,
+      "p95": 2000.0,
+      "p99": 2000.0,
+      "max": 2000,
+      "mean": 1086.450839,
+      "exact_histogram_count_to_lengths": {
+        "255": [
+          512
+        ],
+        "161": [
+          2000
+        ],
+        "1": [
+          490
+        ]
+      },
+      "histogram_encoding": "Each key is an occurrence count and its array contains every payload length having that count.",
+      "divisibility": {
+        "multiple_of_4": 416,
+        "not_multiple_of_4": 1,
+        "multiple_of_8": 416,
+        "not_multiple_of_8": 1,
+        "length_490_is_the_only_exception": true
+      }
+    },
+    "inter_arrival_s": {
+      "gap_count": 416,
+      "all_gaps": {
+        "min": 0.000013113,
+        "p50": 0.001732111,
+        "p90": 0.009803057,
+        "p95": 0.00993377,
+        "p99": 0.010261667,
+        "mean": 0.209345082,
+        "max": 75.676490068
+      },
+      "gaps_le_1s": {
+        "count": 413,
+        "min": 0.000013113,
+        "p50": 0.001729965,
+        "p90": 0.009799767,
+        "p95": 0.009894371,
+        "p99": 0.010115376,
+        "mean": 0.004462343,
+        "max": 0.010295153
+      },
+      "gaps_gt_1s_count": 3,
+      "interpretation": "The large all-gap mean is idle-session dominated. Active bursts have an approximately 1.73 ms median with an approximately 10 ms upper cadence."
+    },
+    "boundary_observation": "The 512/2000-byte modes look like host transfer segmentation, but this capture alone does not establish whether EP06 carries samples, setup tables, FPGA data, or another vendor-defined payload."
+  },
+  "ep84_in": {
+    "endpoint": "0x84",
+    "direction": "IN",
+    "payload_record_count": 294,
+    "payload_bytes": 3383796,
+    "length_bytes": {
+      "distinct_count": 245,
+      "min": 3532,
+      "p10": 5598.4,
+      "p25": 5780.0,
+      "p50": 7032.0,
+      "p75": 15314.0,
+      "p90": 18301.6,
+      "p95": 22634.2,
+      "p99": 32768.0,
+      "max": 32768,
+      "mean": 11509.510204,
+      "bucket_histogram": {
+        "0_to_8192": 150,
+        "8193_to_16384": 99,
+        "16385_to_24576": 32,
+        "24577_to_32768": 13
+      },
+      "exact_histogram_count_to_lengths": {
+        "5": [
+          5640
+        ],
+        "4": [
+          5508,
+          15168,
+          32768
+        ],
+        "3": [
+          5592,
+          5700,
+          5732,
+          5788,
+          5804
+        ],
+        "2": [
+          5540,
+          5584,
+          5648,
+          5676,
+          5688,
+          5692,
+          5716,
+          5780,
+          5792,
+          5800,
+          5824,
+          5856,
+          5872,
+          5896,
+          5900,
+          5904,
+          5908,
+          5992,
+          6284,
+          8000,
+          14988,
+          15004,
+          15092,
+          15132,
+          15308,
+          16304
+        ],
+        "1": [
+          3532,
+          4820,
+          5408,
+          5424,
+          5440,
+          5460,
+          5464,
+          5468,
+          5520,
+          5524,
+          5528,
+          5548,
+          5556,
+          5560,
+          5564,
+          5572,
+          5576,
+          5580,
+          5596,
+          5604,
+          5616,
+          5628,
+          5632,
+          5636,
+          5656,
+          5664,
+          5672,
+          5680,
+          5684,
+          5696,
+          5708,
+          5724,
+          5736,
+          5744,
+          5748,
+          5752,
+          5756,
+          5760,
+          5768,
+          5772,
+          5776,
+          5784,
+          5808,
+          5820,
+          5828,
+          5832,
+          5840,
+          5848,
+          5868,
+          5912,
+          5920,
+          5924,
+          5928,
+          5932,
+          5940,
+          5956,
+          5960,
+          5968,
+          5988,
+          6000,
+          6072,
+          6128,
+          6160,
+          6176,
+          6180,
+          6204,
+          6224,
+          6244,
+          6268,
+          6288,
+          6296,
+          6328,
+          6332,
+          6348,
+          6352,
+          6364,
+          6380,
+          6392,
+          6448,
+          6460,
+          6512,
+          6592,
+          6608,
+          6628,
+          6676,
+          7388,
+          11648,
+          11784,
+          12264,
+          12432,
+          14412,
+          14512,
+          14568,
+          14608,
+          14636,
+          14648,
+          14656,
+          14664,
+          14692,
+          14696,
+          14708,
+          14720,
+          14732,
+          14744,
+          14752,
+          14760,
+          14768,
+          14776,
+          14780,
+          14784,
+          14832,
+          14836,
+          14880,
+          14892,
+          14896,
+          14912,
+          14920,
+          14932,
+          14948,
+          14976,
+          14980,
+          14984,
+          15000,
+          15012,
+          15020,
+          15028,
+          15032,
+          15044,
+          15060,
+          15064,
+          15068,
+          15072,
+          15084,
+          15116,
+          15180,
+          15184,
+          15192,
+          15220,
+          15248,
+          15292,
+          15296,
+          15304,
+          15316,
+          15320,
+          15328,
+          15332,
+          15352,
+          15356,
+          15364,
+          15444,
+          15448,
+          15460,
+          15512,
+          15528,
+          15604,
+          15616,
+          15660,
+          15688,
+          15712,
+          15856,
+          15960,
+          16008,
+          16048,
+          16080,
+          16104,
+          16124,
+          16192,
+          16316,
+          16380,
+          16456,
+          16708,
+          16864,
+          17168,
+          17224,
+          17244,
+          17260,
+          17272,
+          17368,
+          17432,
+          17456,
+          17504,
+          17544,
+          17824,
+          17876,
+          18484,
+          18508,
+          18516,
+          19224,
+          19964,
+          20188,
+          20392,
+          20460,
+          20824,
+          20940,
+          20952,
+          21292,
+          21808,
+          21968,
+          22392,
+          23084,
+          23732,
+          25148,
+          29132,
+          30092,
+          30408,
+          30448,
+          30876,
+          31080,
+          31688,
+          31800
+        ]
+      },
+      "histogram_encoding": "Each key is an occurrence count and its array contains every payload length having that count.",
+      "divisibility": {
+        "multiple_of_4": 294,
+        "multiple_of_8": 161,
+        "remainder_4_mod_8": 133,
+        "modulo_3_histogram": {
+          "0": 98,
+          "1": 98,
+          "2": 98
+        }
+      }
+    },
+    "inter_arrival_s": {
+      "gap_count": 293,
+      "all_gaps": {
+        "min": 0.017338991,
+        "p50": 0.032600164,
+        "p90": 0.103643656,
+        "p95": 0.157125282,
+        "p99": 4.03929369,
+        "mean": 0.20131572,
+        "max": 8.081481934
+      },
+      "gaps_le_1s": {
+        "count": 282,
+        "min": 0.017338991,
+        "p50": 0.031508923,
+        "p90": 0.085626316,
+        "p95": 0.112512589,
+        "p99": 0.159971361,
+        "mean": 0.055200618,
+        "max": 0.160009861
+      },
+      "gaps_gt_1s_count": 11,
+      "interpretation": "Active arrivals are variable rather than a single fixed packet period; long gaps represent separate idle or acquisition intervals."
+    },
+    "first_window_entropy_and_repetition": {
+      "packet_count": 294,
+      "window_16_bytes": {
+        "aggregate_shannon_bits_per_byte": 5.525708,
+        "mean_within_packet_shannon_bits_per_byte": 2.56994,
+        "unique_exact_windows": 245,
+        "top_exact_patterns": [
+          {
+            "pattern": "beffee00 repeated 4 times",
+            "count": 27
+          },
+          {
+            "pattern": "bf018f00 repeated 4 times",
+            "count": 24
+          }
+        ]
+      },
+      "window_32_bytes": {
+        "aggregate_shannon_bits_per_byte": 5.541192,
+        "mean_within_packet_shannon_bits_per_byte": 2.809204,
+        "unique_exact_windows": 245,
+        "top_exact_patterns": [
+          {
+            "pattern": "beffee00 repeated 8 times",
+            "count": 27
+          },
+          {
+            "pattern": "bf018f00 repeated 8 times",
+            "count": 24
+          }
+        ]
+      },
+      "window_64_bytes": {
+        "aggregate_shannon_bits_per_byte": 5.553117,
+        "mean_within_packet_shannon_bits_per_byte": 3.028483,
+        "unique_exact_windows": 245,
+        "top_exact_patterns": [
+          {
+            "pattern": "beffee00 repeated 16 times",
+            "count": 27
+          },
+          {
+            "pattern": "bf018f00 repeated 16 times",
+            "count": 24
+          }
+        ]
+      },
+      "whole_payload_byte_entropy_bits_per_byte": 5.555496,
+      "fully_constant_payloads": {
+        "count": 51,
+        "fraction": 0.173469,
+        "bytes": 597996,
+        "values": {
+          "beffee00": 27,
+          "bf018f00": 24
+        }
+      },
+      "interpretation": "The only repeated 16/32/64-byte starts are 51 payloads that remain one repeated four-byte value for the entire payload. Those values also occur tens of thousands of times away from payload starts, so they are more consistent with flat data runs than unique packet magic."
+    },
+    "four_byte_periodicity": {
+      "word_count": 845949,
+      "unique_word_count": 178922,
+      "word_symbol_entropy_bits": 12.504439,
+      "byte_lane_statistics": [
+        {
+          "offset_mod_4": 0,
+          "unique_values": 16,
+          "entropy_bits_per_byte": 2.767261
+        },
+        {
+          "offset_mod_4": 1,
+          "unique_values": 256,
+          "entropy_bits_per_byte": 5.404984
+        },
+        {
+          "offset_mod_4": 2,
+          "unique_values": 256,
+          "entropy_bits_per_byte": 7.371319
+        },
+        {
+          "offset_mod_4": 3,
+          "unique_values": 2,
+          "entropy_bits_per_byte": 0.977459,
+          "value_histogram": {
+            "00": 497549,
+            "80": 348400
+          }
+        }
+      ],
+      "all_big_endian_words_low_7_bits_zero": true,
+      "big_endian_signed_word_shift_right_7_adjacent_abs_delta": {
+        "median": 34.0,
+        "p90": 105.0
+      },
+      "little_endian_raw_adjacent_abs_delta_median": 3801088.0,
+      "little_endian_low_7_bits_zero_fraction": 0.11264,
+      "interpretation": "A four-byte, big-endian-aligned numeric representation is strongly visible. This is a packing observation, not confirmation that each word is an ADC sample."
+    },
+    "channel_stride_probe": {
+      "method": "Within each payload, decode structural big-endian words shifted right by seven and compare absolute differences at word lags 1 through 16.",
+      "lag_median_abs_delta": {
+        "1": 34.0,
+        "2": 36.0,
+        "3": 37.0,
+        "4": 39.0,
+        "5": 39.0,
+        "6": 40.0,
+        "7": 41.0,
+        "8": 42.0,
+        "9": 42.0,
+        "10": 43.0,
+        "11": 43.0,
+        "12": 44.0,
+        "13": 44.0,
+        "14": 45.0,
+        "15": 45.0,
+        "16": 45.0
+      },
+      "lag_p90_abs_delta": {
+        "1": 105.0,
+        "2": 117.0,
+        "3": 129.0,
+        "4": 141.0,
+        "5": 152.0,
+        "6": 165.0,
+        "7": 178.0,
+        "8": 194.0,
+        "9": 210.0,
+        "10": 229.0,
+        "11": 249.0,
+        "12": 269.0,
+        "13": 291.0,
+        "14": 312.0,
+        "15": 333.0,
+        "16": 354.0
+      },
+      "result": "No periodic local minimum identifies a round-robin channel count from 2 through 16. Lag 1 is smoothest.",
+      "limitation": "Channels carrying correlated or identical signals could hide interleaving; a known per-channel stimulus is required."
+    },
+    "urb_boundary_continuity": {
+      "active_boundary_count": 282,
+      "definition": "consecutive EP84 payloads separated by at most one second",
+      "boundary_abs_delta_median": 34.5,
+      "boundary_abs_delta_p90": 99.9,
+      "boundary_abs_delta_max": 196.0,
+      "boundary_delta_le_within_payload_p90_fraction": 0.91844,
+      "exact_boundary_equal_count": 51,
+      "within_payload_abs_delta_median": 34.0,
+      "within_payload_abs_delta_p90": 105.0,
+      "u32_payload_length_matches": {
+        "big_endian": 0,
+        "little_endian": 0
+      },
+      "interpretation": "Active payload boundaries are as smooth as interior word boundaries, and no first-word length field is visible. USB payloads therefore look like transport fragments of a continuous word stream rather than self-contained blocks with an obvious four-byte header."
+    }
+  },
+  "hypotheses": [
+    {
+      "id": "H1_EP84_BE_WORD_STREAM",
+      "statement": "EP84 is a continuous stream of four-byte, big-endian-aligned numeric words; USB payload boundaries normally do not reset the represented sequence.",
+      "confidence": "candidate",
+      "support": [
+        "294 of 294 payload lengths are multiples of four.",
+        "The fourth byte is always 0x00 or 0x80, so every big-endian word has seven zero low bits.",
+        "Big-endian shifted values are smooth both inside payloads and across active payload boundaries.",
+        "Little-endian interpretation lacks the fixed low-bit structure and has much larger adjacent differences."
+      ],
+      "would_falsify": [
+        "A known stimulus decodes coherently only with a different byte phase or endian order.",
+        "New captures show insertion/deletion at four-byte boundaries or non-0x00/0x80 fourth bytes during normal acquisition.",
+        "Firmware or protocol evidence identifies these bytes as non-numeric records."
+      ]
+    },
+    {
+      "id": "H2_EP84_24BIT_PLUS_AUX_BIT",
+      "statement": "Each four-byte slot may contain a big-endian 24-bit value in bytes 0..2 plus one auxiliary bit at byte 3 bit 7; that bit could instead be the least-significant bit of a 25-bit fixed-point value.",
+      "confidence": "hypothesis",
+      "support": [
+        "Bytes 0..2 vary while byte 3 is restricted to 0x00/0x80 over all 845949 words.",
+        "The layout is compatible with three value bytes plus a one-bit tag, flag, or extra precision bit."
+      ],
+      "counterevidence": [
+        "A conventional 24-bit value left-justified in 32 bits would normally have byte 3 equal to 0x00, but 348400 words (41.19 percent) have 0x80.",
+        "Treating bit 7 as numeric produces a smooth 25-bit structural sequence, so the capture does not separate a flag from numeric precision."
+      ],
+      "would_falsify": [
+        "If bit 7 changes as required by numeric least-significant-bit continuity under a calibrated ramp, the separate auxiliary-bit interpretation is falsified.",
+        "If bit 7 follows an independent channel/status condition while bytes 0..2 track a known stimulus, the 25-bit numeric interpretation is falsified.",
+        "A calibrated transfer function with more or fewer than 24 value bits would falsify the 24-bit-value interpretation."
+      ]
+    },
+    {
+      "id": "H3_EP84_TIGHT_3BYTE_PACKING",
+      "statement": "EP84 may be a boundary-agnostic stream of tightly packed three-byte samples spanning USB payloads.",
+      "confidence": "hypothesis",
+      "assessment": "disfavored by this capture",
+      "support": [
+        "USB payload boundaries need not coincide with sample boundaries, so individual lengths need not be divisible by three.",
+        "The complete EP84 byte count, 3383796, is divisible by three."
+      ],
+      "counterevidence": [
+        "All 294 payload lengths are divisible by four.",
+        "Length residues modulo three are exactly 98 each for residues 0, 1, and 2.",
+        "A stable low-entropy byte lane repeats every four bytes from the first byte of every payload."
+      ],
+      "would_falsify": [
+        "A known ramp or tone that decodes continuously in four-byte words but not as a concatenated three-byte stream.",
+        "Independent captures that preserve the four-byte phase while total byte count is not divisible by three."
+      ]
+    },
+    {
+      "id": "H4_EP84_CHANNEL_STRIDE_1",
+      "statement": "The observed EP84 sequence behaves like one scalar word stream (channel stride one word/four bytes), with no detectable 2..16-channel round-robin stride.",
+      "confidence": "candidate",
+      "support": [
+        "Lag 1 has the smallest median and p90 adjacent difference.",
+        "Lag differences rise without periodic minima through lag 16."
+      ],
+      "would_falsify": [
+        "Driving exactly one physical channel produces a response only in every Nth word for N greater than one.",
+        "A repeated lane-specific channel identifier or a robust lag-N minimum appears across independent stimuli."
+      ]
+    },
+    {
+      "id": "H5_EP84_ROUND_ROBIN_INTERLEAVING",
+      "statement": "Two or more channels may still be interleaved at a fixed word stride, but correlated inputs in this session conceal the stride.",
+      "confidence": "hypothesis",
+      "support": [
+        "The capture has no documented per-channel stimulus, so correlated channel values cannot be excluded."
+      ],
+      "counterevidence": [
+        "No lag from 2 through 16 is smoother than lag 1.",
+        "No channel marker has been identified in the four-byte slots."
+      ],
+      "would_falsify": [
+        "Independent single-channel stimulation changes consecutive words uniformly rather than one residue class modulo N.",
+        "A device configuration proving one active channel while preserving the same stream structure."
+      ]
+    },
+    {
+      "id": "H6_EP84_HEADERLESS_URB_FRAGMENTS",
+      "statement": "EP84 payloads are mostly headerless USB transport fragments aligned to four-byte values, not protocol blocks with a per-payload header.",
+      "confidence": "candidate",
+      "support": [
+        "Across active payload boundaries, median/p90 deltas match interior deltas.",
+        "Neither endian interpretation of the first u32 equals payload length in any payload.",
+        "The two repeated first words occur 74744 and 74704 times away from payload starts and fill 51 entire payloads, so they are not unique start magic.",
+        "Per-position entropy in the first 64 bytes repeats by byte lane every four bytes rather than showing a distinct leading field."
+      ],
+      "would_falsify": [
+        "A stable magic, counter, timestamp, flags, checksum, or length field is found at every logical block start and validated across captures.",
+        "Removing a fixed leading field produces better cross-payload numeric continuity than decoding from byte zero.",
+        "Logical block starts are shown to differ from USB payload boundaries and carry a validated in-band header."
+      ]
+    },
+    {
+      "id": "H7_EP84_BLOCK_HEADER",
+      "statement": "An unrecognized variable or in-band block header may exist even though no fixed per-USB-payload header is visible.",
+      "confidence": "hypothesis",
+      "support": [
+        "A single passive capture cannot exclude headers that occur only at logical blocks inside the stream."
+      ],
+      "counterevidence": [
+        "Observed USB boundaries preserve numeric continuity.",
+        "No fixed magic or first-u32 length relation is present."
+      ],
+      "would_falsify": [
+        "A complete known-stimulus decode accounts for every four-byte word as continuous values across all acquisition intervals without skipped fields.",
+        "Multiple captures show no invariant/counter/checksum structure at independently identified acquisition starts."
+      ]
+    },
+    {
+      "id": "H8_EP06_HOST_SEGMENTED_DATA_PLANE",
+      "statement": "EP06 is a host-to-device bulk data-plane transport whose 512/2000-byte modes are transfer segmentation rather than an identified semantic frame format.",
+      "confidence": "hypothesis",
+      "support": [
+        "416 of 417 payloads are divisible by eight and use only 512 or 2000 bytes.",
+        "The active cadence differs from EP84 and includes tightly spaced records."
+      ],
+      "would_falsify": [
+        "A stable command opcode/length/checksum grammar explains EP06 payloads and predicts device responses.",
+        "Known experiments identify the payload as firmware/configuration upload rather than acquisition data."
+      ]
+    }
+  ],
+  "confidence": {
+    "structural_packing": "candidate",
+    "sample_semantics": "hypothesis",
+    "channel_mapping": "hypothesis",
+    "block_header_semantics": "hypothesis",
+    "meaning": {
+      "candidate": "supported by repeated capture-level structure but not semantically validated",
+      "hypothesis": "plausible interpretation requiring controlled experiments or firmware/protocol corroboration"
+    }
+  },
+  "required_next_experiments": [
+    "Capture zero, positive/negative DC, and ramp stimuli while recording engineering values and active channel count.",
+    "Toggle one channel at a time to test residue classes at candidate word strides.",
+    "Repeat captures at multiple requested sample counts to distinguish logical blocks from USB transfer segmentation.",
+    "Correlate byte 3 bit 7 with numeric transitions and known status/channel changes.",
+    "Validate signedness, scale, offset, and any checksum/counter against independent device behavior before declaring samples decoded."
+  ],
+  "boundary": "No channel identity, signedness, scale, units, sample rate, 24-bit interpretation, auxiliary-bit meaning, or block-header semantics are confirmed by this passive capture.",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}
