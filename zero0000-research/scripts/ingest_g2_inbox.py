@@ -103,6 +103,76 @@ def run_demo(inbox: Path) -> int:
     return code
 
 
+def run_ocr_hint(inbox: Path, images: list[Path], out_dir: Path) -> int:
+    """OCR scope photos → candidate Hz; do NOT write g2_clocks without confirm."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        sys.executable,
+        str(SCRIPTS / "ocr_scope_hz.py"),
+        *[str(p) for p in images],
+        "--json",
+    ]
+    print("RUN", " ".join(cmd))
+    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    report_path = out_dir / "ocr_scope_candidates.json"
+    md_path = (
+        ROOT / "05_tests" / "G2_OCR候选.md"
+        if inbox == DEFAULT_INBOX.resolve()
+        else inbox / "G2_OCR候选.md"
+    )
+    blob: dict = {}
+    if r.returncode == 0 and r.stdout:
+        try:
+            blob = json.loads(r.stdout)
+        except json.JSONDecodeError:
+            blob = {"raw": r.stdout, "stderr": r.stderr}
+    else:
+        blob = {"error": r.stderr or r.stdout or f"exit {r.returncode}"}
+    report_path.write_text(json.dumps(blob, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    cands = blob.get("candidates") or []
+    lines = [
+        "# G2 OCR 候选频率（须人眼核对）",
+        "",
+        f"> generated: {datetime.now(timezone.utc).isoformat()}",
+        f"> images: {', '.join(p.name for p in images)}",
+        "",
+        "## 候选",
+        "",
+    ]
+    if not cands:
+        lines.append("（无候选 — 请裁剪到频率读数区、提高对比度后重试）")
+    else:
+        lines.append("| # | Hz | raw | file |")
+        lines.append("|---|-----|-----|------|")
+        for i, c in enumerate(cands):
+            lines.append(
+                f"| {i} | {c.get('hz')} | `{c.get('raw')}` | {c.get('file', '')} |"
+            )
+    lines += [
+        "",
+        "## 确认后写入 inbox",
+        "",
+        "```bash",
+        f"python3 scripts/ocr_scope_hz.py {' '.join(str(p) for p in images)} "
+        "--as-c2 0 --as-c3-same --write-clocks --confirm-measured",
+        "python3 scripts/ingest_g2_inbox.py",
+        "python3 scripts/apply_g0_backfill.py --apply",
+        "```",
+        "",
+        f"JSON: `{rel(report_path)}`",
+        "",
+    ]
+    md_path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"WROTE {md_path}")
+    print(f"WROTE {report_path}")
+    print(
+        "OCR-ONLY inbox: review candidates, then --write-clocks --confirm-measured "
+        "(not yet usable for Must)",
+        file=sys.stderr,
+    )
+    return 3
+
+
 def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
     inbox.mkdir(parents=True, exist_ok=True)
     out_dir = inbox / "_derived"
@@ -136,7 +206,19 @@ def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
         clocks_filled = [c["id"] for c in data if c.get("hz") is not None]
         clocks_usable = bool(clocks_filled)
 
+    scope_imgs = []
+    if not demo_banner:
+        for pat in ("*.jpg", "*.jpeg", "*.png", "*.webp", "scope*"):
+            for p in sorted(inbox.glob(pat)):
+                if p.parent.name == "examples" or "example" in p.name.lower():
+                    continue
+                if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}:
+                    if p.resolve() not in {x.resolve() for x in scope_imgs}:
+                        scope_imgs.append(p)
+
     if not clocks_usable and not csvs:
+        if scope_imgs:
+            return run_ocr_hint(inbox, scope_imgs, out_dir)
         print(
             f"EMPTY inbox: place g2_clocks.json (with measured hz) "
             f"and/or spi_capture.csv in {inbox}",
@@ -148,6 +230,10 @@ def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
                 file=sys.stderr,
             )
         print(f"See template: {DEFAULT_INBOX / 'g2_clocks.template.json'}", file=sys.stderr)
+        print(
+            "Or drop a scope screenshot (*.jpg) and re-run — OCR will list Hz candidates.",
+            file=sys.stderr,
+        )
         print(f"Synthetic demos: python3 scripts/ingest_g2_inbox.py --demo", file=sys.stderr)
         return 2
 
