@@ -1,19 +1,91 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 using CosmicFront.AI;
 using CosmicFront.Combat;
 using CosmicFront.Core;
 using CosmicFront.Mech;
 using CosmicFront.Player;
+using CosmicFront.UI;
 
 namespace CosmicFront.Editor
 {
     public static class SceneSetupWizard
     {
+        private const string HangarScenePath = "Assets/_Project/Scenes/Hangar.unity";
+        private const string BattleScenePath = "Assets/_Project/Scenes/Map_ColonyRim.unity";
+
+        [MenuItem("Cosmic Front/Setup All Scenes (Hangar + Battle)")]
+        public static void SetupAllScenes()
+        {
+            EnsureFolder("Assets/_Project/Scenes");
+            EnsureFolder("Assets/_Project/Prefabs");
+
+            SetupHangarSceneInternal();
+            SetupPrototypeSceneInternal();
+            ConfigureBuildSettings();
+
+            AssetDatabase.SaveAssets();
+            Debug.Log("Cosmic Front: Hangar + Map_ColonyRim scenes ready. Build Settings updated.");
+        }
+
         [MenuItem("Cosmic Front/Setup P1 Prototype Scene")]
         public static void SetupPrototypeScene()
+        {
+            SetupPrototypeSceneInternal();
+            ConfigureBuildSettings();
+            AssetDatabase.SaveAssets();
+            Debug.Log("Cosmic Front: Map_ColonyRim prototype scene created.");
+        }
+
+        [MenuItem("Cosmic Front/Setup Hangar Scene")]
+        public static void SetupHangarScene()
+        {
+            SetupHangarSceneInternal();
+            ConfigureBuildSettings();
+            AssetDatabase.SaveAssets();
+            Debug.Log("Cosmic Front: Hangar scene created.");
+        }
+
+        [MenuItem("Cosmic Front/Configure Build Settings")]
+        public static void ConfigureBuildSettingsMenu()
+        {
+            ConfigureBuildSettings();
+            Debug.Log("Cosmic Front: Build settings scenes registered.");
+        }
+
+        private static void SetupHangarSceneInternal()
+        {
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+
+            var floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            floor.name = "HangarFloor";
+            floor.transform.localScale = new Vector3(30f, 0.2f, 20f);
+            floor.transform.position = new Vector3(0f, -0.1f, 0f);
+
+            var managerGo = new GameObject("GameManager");
+            managerGo.AddComponent<GameManager>();
+
+            var bootstrap = new GameObject("HangarBootstrap");
+            bootstrap.AddComponent<HangarSceneBootstrap>();
+
+            var previewMech = CreateMech("PreviewMech", TeamId.Terran, false);
+            previewMech.transform.position = new Vector3(-6f, 0f, 2f);
+            Object.DestroyImmediate(previewMech.GetComponent<Rigidbody>());
+            Object.DestroyImmediate(previewMech.GetComponent<SimpleEnemyAI>());
+
+            CreateHangarUi();
+            CreateXRRig(new Vector3(0f, 0f, -6f), null);
+
+            DisableDefaultMainCamera();
+
+            EditorSceneManager.SaveScene(scene, HangarScenePath);
+        }
+
+        private static void SetupPrototypeSceneInternal()
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
 
@@ -22,22 +94,35 @@ namespace CosmicFront.Editor
             ground.transform.localScale = new Vector3(40f, 1f, 80f);
             ground.transform.position = new Vector3(0f, -0.5f, 0f);
 
-            var managerGo = new GameObject("GameManager");
-            managerGo.AddComponent<GameManager>();
+            CreateRimWalls();
+
+            if (GameObject.Find("GameManager") == null)
+            {
+                var managerGo = new GameObject("GameManager");
+                managerGo.AddComponent<GameManager>();
+            }
 
             var playerMech = CreateMech("PlayerMech", TeamId.Terran, true);
             playerMech.transform.position = new Vector3(0f, 2f, -30f);
             playerMech.tag = "Player";
 
-            var bootstrap = new GameObject("BattleBootstrap");
-            var boot = bootstrap.AddComponent<BattleSceneBootstrap>();
-            SetPrivateField(boot, "playerMech", playerMech.GetComponent<MechController>());
+            var cockpit = playerMech.transform.Find("YawPivot/PitchPivot/CockpitAnchor");
+            var xrRig = CreateXRRig(new Vector3(0f, 2f, -30f), cockpit);
+            var binder = xrRig.GetComponent<PlayerMechBinder>();
+            SetPrivateField(binder, "mech", playerMech.GetComponent<MechController>());
+            SetPrivateField(binder, "cockpitAnchor", cockpit);
 
-            var cam = Camera.main;
-            if (cam != null)
-            {
-                SetPrivateField(boot, "fallbackCamera", cam);
-            }
+            var comfort = xrRig.GetComponent<VRComfortSettings>();
+            CreateBoostVignette(comfort, xrRig.transform);
+
+            var bootstrapGo = new GameObject("BattleBootstrap");
+            var boot = bootstrapGo.AddComponent<BattleSceneBootstrap>();
+            SetPrivateField(boot, "playerMech", playerMech.GetComponent<MechController>());
+            var xrSetup = xrRig.GetComponent<XROriginSetup>();
+            SetPrivateField(boot, "fallbackCamera", xrSetup != null ? xrSetup.VrCamera : null);
+
+            CreateBattleHud(xrRig.transform, playerMech.GetComponent<MechController>());
+            CreateMatchResultsUi();
 
             var spawnerGo = new GameObject("EnemySpawner");
             var spawner = spawnerGo.AddComponent<EnemySpawner>();
@@ -45,9 +130,154 @@ namespace CosmicFront.Editor
             SetPrivateField(spawner, "enemyPrefab", enemyPrefab);
             SetPrivateField(spawner, "spawnPoints", CreateSpawnPoints());
 
-            EditorSceneManager.SaveScene(scene, "Assets/_Project/Scenes/Map_ColonyRim.unity");
-            AssetDatabase.SaveAssets();
-            Debug.Log("Cosmic Front: Map_ColonyRim prototype scene created.");
+            DisableDefaultMainCamera();
+
+            EditorSceneManager.SaveScene(scene, BattleScenePath);
+        }
+
+        private static GameObject CreateXRRig(Vector3 position, Transform cockpitAnchor)
+        {
+            var rig = new GameObject("XROrigin");
+            rig.transform.position = position;
+
+            rig.AddComponent<XROriginSetup>();
+            rig.AddComponent<VRComfortSettings>();
+            rig.AddComponent<VRSnapTurn>();
+            var binder = rig.AddComponent<PlayerMechBinder>();
+            if (cockpitAnchor != null)
+            {
+                SetPrivateField(binder, "cockpitAnchor", cockpitAnchor);
+            }
+
+            var setup = rig.GetComponent<XROriginSetup>();
+            setup.EnsureHierarchy();
+            return rig;
+        }
+
+        private static void CreateHangarUi()
+        {
+            var canvasGo = new GameObject("HangarCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvasGo.AddComponent<GraphicRaycaster>();
+
+            var panel = CreateUiPanel(canvasGo.transform, new Vector2(420f, 320f), new Vector2(0.5f, 0.5f));
+
+            var title = CreateText(panel.transform, "Title", "COSMIC FRONT VR", 22, TextAnchor.UpperCenter);
+            title.rectTransform.anchoredPosition = new Vector2(0f, -10f);
+            title.rectTransform.sizeDelta = new Vector2(380f, 40f);
+
+            var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -70f));
+            var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -130f));
+
+            var startBtn = CreateButton(panel.transform, "StartButton", "开始任务", new Vector2(0f, -200f));
+            var status = CreateText(panel.transform, "Status", "选择阵营与机甲", 14, TextAnchor.MiddleCenter);
+            status.rectTransform.anchoredPosition = new Vector2(0f, -250f);
+            status.rectTransform.sizeDelta = new Vector2(380f, 30f);
+
+            var hint = CreateText(panel.transform, "ControlsHint", "", 11, TextAnchor.LowerCenter);
+            hint.rectTransform.anchoredPosition = new Vector2(0f, -290f);
+            hint.rectTransform.sizeDelta = new Vector2(400f, 40f);
+            hint.color = new Color(0.75f, 0.85f, 1f);
+
+            var menu = canvasGo.AddComponent<HangarMenu>();
+            SetPrivateField(menu, "teamDropdown", teamDropdown);
+            SetPrivateField(menu, "mechDropdown", mechDropdown);
+            SetPrivateField(menu, "startButton", startBtn);
+            SetPrivateField(menu, "statusText", status);
+            SetPrivateField(menu, "controlsHint", hint);
+        }
+
+        private static void CreateBattleHud(Transform parent, MechController mech)
+        {
+            var canvasGo = new GameObject("CockpitHUD");
+            canvasGo.transform.SetParent(parent, false);
+            canvasGo.transform.localPosition = new Vector3(0f, 0f, 0.4f);
+            canvasGo.transform.localScale = Vector3.one * 0.001f;
+
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+            var rect = canvasGo.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(800f, 400f);
+
+            var healthBar = CreateSlider(canvasGo.transform, "HealthBar", new Vector2(-200f, 150f), Color.red);
+            var shieldBar = CreateSlider(canvasGo.transform, "ShieldBar", new Vector2(-200f, 120f), Color.cyan);
+            var boostBar = CreateSlider(canvasGo.transform, "BoostBar", new Vector2(-200f, 90f), Color.yellow);
+            var lockText = CreateText(canvasGo.transform, "Lock", "---", 18, TextAnchor.MiddleCenter);
+            lockText.rectTransform.anchoredPosition = new Vector2(200f, 150f);
+            var speedText = CreateText(canvasGo.transform, "Speed", "0 m/s", 16, TextAnchor.MiddleCenter);
+            speedText.rectTransform.anchoredPosition = new Vector2(200f, 120f);
+
+            var hud = canvasGo.AddComponent<CockpitHUD>();
+            SetPrivateField(hud, "healthBar", healthBar);
+            SetPrivateField(hud, "shieldBar", shieldBar);
+            SetPrivateField(hud, "boostBar", boostBar);
+            SetPrivateField(hud, "lockIndicator", lockText);
+            SetPrivateField(hud, "speedLabel", speedText);
+            SetPrivateField(hud, "mech", mech);
+        }
+
+        private static void CreateMatchResultsUi()
+        {
+            var canvasGo = new GameObject("ResultsCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvasGo.AddComponent<GraphicRaycaster>();
+
+            var panel = CreateUiPanel(canvasGo.transform, new Vector2(360f, 220f), new Vector2(0.5f, 0.5f));
+            panel.SetActive(false);
+
+            var kills = CreateText(panel.transform, "Kills", "击坠: 0", 16, TextAnchor.UpperCenter);
+            kills.rectTransform.anchoredPosition = new Vector2(0f, -40f);
+            var deaths = CreateText(panel.transform, "Deaths", "被击坠: 0", 16, TextAnchor.UpperCenter);
+            deaths.rectTransform.anchoredPosition = new Vector2(0f, -80f);
+            var returnBtn = CreateButton(panel.transform, "ReturnButton", "返回机库", new Vector2(0f, -140f));
+
+            var results = canvasGo.AddComponent<MatchResultsUI>();
+            SetPrivateField(results, "panel", panel);
+            SetPrivateField(results, "killsText", kills);
+            SetPrivateField(results, "deathsText", deaths);
+            SetPrivateField(results, "returnButton", returnBtn);
+        }
+
+        private static void CreateBoostVignette(VRComfortSettings comfort, Transform parent)
+        {
+            var canvasGo = new GameObject("BoostVignette");
+            canvasGo.transform.SetParent(parent, false);
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 100;
+
+            var image = new GameObject("Vignette").AddComponent<Image>();
+            image.transform.SetParent(canvasGo.transform, false);
+            image.color = new Color(0f, 0f, 0f, 0f);
+            var rect = image.GetComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+
+            var group = canvasGo.AddComponent<CanvasGroup>();
+            group.alpha = 0f;
+            group.blocksRaycasts = false;
+
+            SetPrivateField(comfort, "boostVignette", group);
+        }
+
+        private static void CreateRimWalls()
+        {
+            CreateWall("WallLeft", new Vector3(-21f, 5f, 0f), new Vector3(1f, 10f, 82f));
+            CreateWall("WallRight", new Vector3(21f, 5f, 0f), new Vector3(1f, 10f, 82f));
+        }
+
+        private static void CreateWall(string name, Vector3 pos, Vector3 scale)
+        {
+            var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            wall.name = name;
+            wall.transform.position = pos;
+            wall.transform.localScale = scale;
         }
 
         private static GameObject CreateMech(string name, TeamId team, bool isPlayer)
@@ -91,6 +321,9 @@ namespace CosmicFront.Editor
             if (isPlayer)
             {
                 root.AddComponent<FallbackMechInput>();
+                root.AddComponent<VRMechInput>();
+                root.AddComponent<MechInputRouter>();
+                root.AddComponent<MechBoostFeedback>();
             }
             else
             {
@@ -131,6 +364,155 @@ namespace CosmicFront.Editor
             }
 
             return points;
+        }
+
+        private static void ConfigureBuildSettings()
+        {
+            var scenes = new List<EditorBuildSettingsScene>();
+            if (System.IO.File.Exists(HangarScenePath))
+            {
+                scenes.Add(new EditorBuildSettingsScene(HangarScenePath, true));
+            }
+
+            if (System.IO.File.Exists(BattleScenePath))
+            {
+                scenes.Add(new EditorBuildSettingsScene(BattleScenePath, true));
+            }
+
+            EditorBuildSettings.scenes = scenes.ToArray();
+        }
+
+        private static void DisableDefaultMainCamera()
+        {
+            var main = Camera.main;
+            if (main != null && main.transform.root.name != "XROrigin")
+            {
+                main.gameObject.SetActive(false);
+            }
+        }
+
+        private static GameObject CreateUiPanel(Transform parent, Vector2 size, Vector2 anchor)
+        {
+            var panel = new GameObject("Panel");
+            panel.transform.SetParent(parent, false);
+            var image = panel.AddComponent<Image>();
+            image.color = new Color(0.08f, 0.1f, 0.16f, 0.92f);
+            var rect = panel.GetComponent<RectTransform>();
+            rect.sizeDelta = size;
+            rect.anchorMin = anchor;
+            rect.anchorMax = anchor;
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            return panel;
+        }
+
+        private static Text CreateText(Transform parent, string name, string content, int fontSize, TextAnchor anchor)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var text = go.AddComponent<Text>();
+            text.text = content;
+            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            text.fontSize = fontSize;
+            text.alignment = anchor;
+            text.color = Color.white;
+            var rect = text.rectTransform;
+            rect.sizeDelta = new Vector2(360f, 30f);
+            return text;
+        }
+
+        private static Button CreateButton(Transform parent, string name, string label, Vector2 pos)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var image = go.AddComponent<Image>();
+            image.color = new Color(0.2f, 0.45f, 0.85f);
+            var btn = go.AddComponent<Button>();
+            var rect = go.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(200f, 40f);
+            rect.anchoredPosition = pos;
+
+            var textGo = new GameObject("Text");
+            textGo.transform.SetParent(go.transform, false);
+            var text = textGo.AddComponent<Text>();
+            text.text = label;
+            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            text.alignment = TextAnchor.MiddleCenter;
+            text.color = Color.white;
+            var textRect = text.rectTransform;
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = Vector2.zero;
+            textRect.offsetMax = Vector2.zero;
+
+            return btn;
+        }
+
+        private static Dropdown CreateDropdown(Transform parent, string name, Vector2 pos)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var image = go.AddComponent<Image>();
+            image.color = new Color(0.15f, 0.18f, 0.25f);
+            var dropdown = go.AddComponent<Dropdown>();
+            var rect = go.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(320f, 36f);
+            rect.anchoredPosition = pos;
+
+            var labelGo = new GameObject("Label");
+            labelGo.transform.SetParent(go.transform, false);
+            var label = labelGo.AddComponent<Text>();
+            label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            label.color = Color.white;
+            dropdown.captionText = label;
+            var labelRect = label.rectTransform;
+            labelRect.anchorMin = Vector2.zero;
+            labelRect.anchorMax = Vector2.one;
+            labelRect.offsetMin = new Vector2(10f, 0f);
+            labelRect.offsetMax = new Vector2(-30f, 0f);
+
+            var template = new GameObject("Template");
+            template.transform.SetParent(go.transform, false);
+            template.SetActive(false);
+            var templateRect = template.AddComponent<RectTransform>();
+            templateRect.sizeDelta = new Vector2(320f, 120f);
+
+            dropdown.template = templateRect;
+            return dropdown;
+        }
+
+        private static Slider CreateSlider(Transform parent, string name, Vector2 pos, Color fillColor)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var slider = go.AddComponent<Slider>();
+            var rect = go.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(200f, 16f);
+            rect.anchoredPosition = pos;
+
+            var bg = new GameObject("Background").AddComponent<Image>();
+            bg.transform.SetParent(go.transform, false);
+            bg.color = new Color(0.2f, 0.2f, 0.2f);
+            var bgRect = bg.rectTransform;
+            bgRect.anchorMin = Vector2.zero;
+            bgRect.anchorMax = Vector2.one;
+            bgRect.offsetMin = Vector2.zero;
+            bgRect.offsetMax = Vector2.zero;
+
+            var fillArea = new GameObject("Fill Area").AddComponent<RectTransform>();
+            fillArea.transform.SetParent(go.transform, false);
+            fillArea.anchorMin = Vector2.zero;
+            fillArea.anchorMax = Vector2.one;
+
+            var fill = new GameObject("Fill").AddComponent<Image>();
+            fill.transform.SetParent(fillArea.transform, false);
+            fill.color = fillColor;
+
+            slider.fillRect = fill.rectTransform;
+            slider.targetGraphic = bg;
+            slider.maxValue = 1f;
+            slider.value = 1f;
+
+            return slider;
         }
 
         private static void EnsureFolder(string path)

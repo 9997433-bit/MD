@@ -20,32 +20,23 @@ Unity Hub → Open → 选择 `cosmic-front-vr` 文件夹。
 
 弹出对话框时选择 **Input System Package (New)** → Restart。
 
-## 第四步：生成试玩场景
+## 第四步：生成场景
 
-Unity 菜单：**Cosmic Front → Setup P1 Prototype Scene**
+Unity 菜单：**Cosmic Front → Setup All Scenes (Hangar + Battle)**
 
-打开 `Assets/_Project/Scenes/Map_ColonyRim.unity`，点击 **Play**。
+打开 `Hangar.unity`，点击 **Play**，从机库开始完整流程。
 
-## 第五步：键鼠试玩
+## 第五步：键鼠 / VR 试玩
 
 见根目录 `README.md` 键位表。目标：移动、锁定（Tab）、击毁敌机。
 
-## 第六步：接入 VR（可选）
+## 第六步：接入 VR
 
-1. **Edit → Project Settings → XR Plug-in Management**
-   - PC 平台勾选 **OpenXR**
-   - 按头显安装对应 Runtime（SteamVR / Meta Link 等）
+1. **Edit → Project Settings → XR Plug-in Management** → PC 勾选 **OpenXR**
+2. 场景已含 `XROrigin`（由 Setup All Scenes 生成）
+3. 连接头显 → Play → 自动使用 VR 手柄输入
 
-2. **Window → Package Manager** 确认已安装 XR Interaction Toolkit
-
-3. 从 Samples 导入 **Starter Assets → XR Origin**
-
-4. 场景中：
-   - 删除或禁用 Main Camera
-   - 放入 XR Origin
-   - 添加 `PlayerMechBinder`，绑定 PlayerMech 与 CockpitAnchor
-
-5. Play with VR headset connected
+操作映射见 [VR_CONTROLS.md](VR_CONTROLS.md)。
 
 ## 第七步：Build Settings
 

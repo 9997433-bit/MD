@@ -22,18 +22,26 @@
 
 首次打开时若提示 *Active Input Handling*，选择 **Input System Package (New)** 并重启 Editor。
 
-### 3. 一键生成 P1 试玩场景
+### 3. 一键生成全部场景（推荐）
 
-菜单栏：**Cosmic Front → Setup P1 Prototype Scene**
+菜单栏：**Cosmic Front → Setup All Scenes (Hangar + Battle)**
 
-会在 `Assets/_Project/Scenes/Map_ColonyRim.unity` 生成：
-- 玩家占位机甲（带驾驶舱锚点）
-- 敌机 Prefab + 刷新器
-- 平台地图
+会创建：
+- `Hangar.unity` — 机库选阵营/机甲
+- `Map_ColonyRim.unity` — 战斗地图（含 XR Rig、HUD、敌机刷新）
+- 自动写入 **Build Settings**
 
-按 **Play** 即可用键鼠试玩。
+也可单独生成：
+- **Cosmic Front → Setup Hangar Scene**
+- **Cosmic Front → Setup P1 Prototype Scene**
 
-### 4. 编辑器测试键位
+### 4. 运行流程
+
+1. 打开 `Hangar.unity` → Play → 选阵营/机甲 → **开始任务**
+2. 进入战斗地图，击坠敌机
+3. 时间结束或按结算界面 **返回机库**
+
+### 5. 编辑器测试键位
 
 | 操作 | 按键 |
 |------|------|
@@ -71,17 +79,23 @@ cosmic-front-vr/
 | 阶段 | 状态 | 内容 |
 |------|------|------|
 | P0 文档 | ✅ | `docs/` |
-| P1 单机切片 | 🔄 | 核心脚本 + Editor 场景向导 |
+| P1 单机切片 | ✅ | 核心脚本 + Editor 场景向导 |
+| P1.5 VR 输入 | ✅ | VRMechInput、Snap Turn、机库场景、XR Rig |
 | P2 多人 | ⏳ | 见 `docs/NETWORK_PLAN.md` |
 | P3 Steam MVP | ⏳ | 匹配、2 图 2 机 |
 | P4 战舰 | ⏳ | 见 GDD |
 
-## VR 配置（下一步）
+## VR 配置
 
 1. **Edit → Project Settings → XR Plug-in Management** → 启用 OpenXR
-2. 场景中添加 **XR Origin (Action-based)**（来自 XR Interaction Toolkit 样例）
-3. 将 `PlayerMechBinder` 挂到 XR Origin，绑定玩家机甲 CockpitAnchor
-4. 在 `FallbackMechInput` 同级添加基于 Input System 的 VR 输入（P1.5）
+2. 运行 **Setup All Scenes** 会自动创建 `XROrigin`（含 Camera、PlayerMechBinder、Snap Turn）
+3. 戴上头显 Play — 自动切换 VR 输入
+
+详见 [VR 操作说明](docs/VR_CONTROLS.md)
+
+### 可选：替换为 XRI Starter Assets
+
+导入 XR Interaction Toolkit Samples 后，用官方 XR Origin 替换场景中的 `XROrigin` 对象，保留 `PlayerMechBinder` 与 `VRSnapTurn` 组件。
 
 ## 文档
 

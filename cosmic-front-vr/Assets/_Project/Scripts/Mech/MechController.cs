@@ -37,7 +37,7 @@ namespace CosmicFront.Mech
             _lockOn = GetComponent<LockOnSystem>();
             _primary = GetComponent<WeaponPrimary>();
             _secondary = GetComponent<WeaponSecondary>();
-            _input = GetComponent<IMechInputProvider>();
+            _input = GetComponent<MechInputRouter>() ?? GetComponent<IMechInputProvider>();
 
             ApplyArchetype();
             _health.Died += OnDied;

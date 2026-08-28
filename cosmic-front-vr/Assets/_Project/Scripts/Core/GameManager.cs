@@ -57,6 +57,11 @@ namespace CosmicFront.Core
             SetPhase(GamePhase.Battle);
         }
 
+        public void OnHangarSceneLoaded()
+        {
+            SetPhase(GamePhase.Hangar);
+        }
+
         public void RegisterKill()
         {
             PlayerKills++;
