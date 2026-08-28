@@ -112,6 +112,26 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
         notes.append("ADC 测试图样写入 → H5 支持")
     if checklist.get("EEPROM_lock_seen"):
         notes.append("!! EEPROM lock 0x3F 出现")
+    # Conserviss / E2E profile scoring (from decode_spi_capture checklist)
+    best = checklist.get("best_cdce_profile")
+    c_ratio = checklist.get("conserviss_cdce_match_ratio") or 0
+    dac_pre = checklist.get("conserviss_dac_pre_sync_ratio") or 0
+    if best == "conserviss" and c_ratio >= 0.5:
+        notes.append(
+            f"CDCE≈Conserviss (ratio={c_ratio}) → G2 钟先验计划B：C2≈C3≈245.76e6；"
+            "见 decode_cdce_profile.py / G1 §6"
+        )
+        if p14 == "❓":
+            p14 = "🔶"
+    if checklist.get("conserviss_dac_cfg1") or dac_pre >= 0.3:
+        notes.append(
+            f"DAC Conserviss 足迹 (cfg1={checklist.get('dac_cfg1_value')}, "
+            f"pre_sync_ratio={dac_pre}) → 插值先验 2x"
+        )
+        if p14 == "❓":
+            p14 = "🔶"
+        elif p14 == "🔶" and checklist.get("A2_adc_0x41_lvds"):
+            p14 = "✅"
     return {"P1.4_suggested": p14, "P1.5_suggested": p15, "notes": notes}
 
 
@@ -138,10 +158,26 @@ def self_test() -> int:
     if c_b["P1.3_suggested"] != "✅" or "计划B" not in c_b["H8"]:
         print("SELF-TEST FAILED plan B", c_b, file=sys.stderr)
         return 1
+    # Conserviss SPI profile → clock prior note
+    s_c = infer_spi(
+        {
+            "A2_adc_0x41_lvds": True,
+            "D1_dac_cfg1_seen": True,
+            "C1_cdce_writes": True,
+            "best_cdce_profile": "conserviss",
+            "conserviss_cdce_match_ratio": 0.9,
+            "conserviss_dac_cfg1": True,
+            "dac_cfg1_value": "0x21",
+            "conserviss_dac_pre_sync_ratio": 0.5,
+        }
+    )
+    if "计划B" not in "".join(s_c["notes"]) or s_c["P1.4_suggested"] != "✅":
+        print("SELF-TEST FAILED conserviss spi prior", s_c, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. single-sided → 🔶, Conserviss plan B)")
+    print("SELF-TEST OK (incl. single-sided → 🔶, Conserviss plan B, SPI→B prior)")
     return 0
 
 
