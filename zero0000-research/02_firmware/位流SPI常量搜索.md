@@ -123,6 +123,17 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 **结论**：不支持「位流内嵌可读 SPI/频率调试表」；与 §3/§5b 二进制阴性一致。**仍不升 P1.3/P1.4**（无字符串 ≠ 无该频率/无 SPI）。
 
+## 5d. RHINO 计划 C Reg2 靶标（2026-08-28 · R5c 一次）
+
+> 靶标：Table-8 合成字 `83040002`（÷8→61.44）及论文 OCR `83080002`；镜像同 §5c bin。
+
+| 靶标 | BE count | LE count | 共窗 Conserviss Reg0/A/Reg7 |
+|------|----------|----------|------------------------------|
+| `83040002` | **0** | **1**（offset `0x65324`） | Reg0/A/Reg7 全字 **0**；命中处 ±256 B **无**同剖面簇 |
+| `83080002`（OCR） | **0** | **0** | — |
+
+**结论**：单次 LE 命中视为**噪声级**（与 §3 散点纪律一致），**不**支持「明文 RHINO Plan C ROM」；**不**升 P1.3/P1.4。
+
 ## 6. 与 G1 出口的关系
 
 - 本轮满足研究计划 G1「至少多 1 份非照片证据」的**加分项**（可复现阴性扫描），不推翻既有 G1 ✅ 有增量结论。  
@@ -131,4 +142,4 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 ---
 
-*复现：§2 二进制；§5b Hamming；§5c 对 bin 做 `data.count(token)` / UTF-16LE。不必入库大 JSON。*
+*复现：§2 二进制；§5b Hamming；§5c/§5d 对 bin 做 `data.count(token)`。不必入库大 JSON。*

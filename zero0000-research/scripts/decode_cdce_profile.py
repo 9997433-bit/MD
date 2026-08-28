@@ -67,6 +67,20 @@ PROFILES: dict[str, dict[int, int]] = {
         0xB: 0x00001C8,
         0xC: 0x0000180,
     },
+    # UCT RHINO thesis §5.1.1 Plan C: ADC Fout2=61.44 (÷8), FPGA Fout4=245.76 (÷2),
+    # DAC Fout7=245.76 (÷2). Reg0/A/C share Conserviss/coe lineage (683C035 / 05FC270).
+    # Reg2 data28 is Table-8 ÷8 synthesised (0b0000010→0x8304000). Thesis Table 5.2 OCR
+    # prints "83080002" which does NOT decode to ÷8 — treat OCR as suspect; match SPI on
+    # math-correct word and/or Reg0+Reg7+RegA cluster.
+    "rhino_61m44": {
+        0x0: 0x683C035,
+        0x2: 0x8304000,
+        0x4: 0xE980000,
+        0x7: 0x8380001,
+        0xA: 0x05FC270,
+        0xB: 0x0000040,
+        0xC: 0x0000180,
+    },
 }
 
 # Minimal Table-8 map used by FMC150-class profiles (7-bit codes as int).
@@ -114,21 +128,39 @@ def decode_profile(name: str, vcxo_hz: float) -> dict:
             }
         )
     divs = {o["divide"] for o in outs if o["divide"]}
+    by_reg = {o["reg"]: o for o in outs}
     plan = None
+    c2 = None
+    c3 = None
     if divs == {2}:
         plan = "B_all_div2_→ADC_and_DACCLK_245.76"
+        c2 = c3 = vcxo_hz / 2
+    elif 8 in divs and 2 in divs:
+        plan = "C_RHINO_ADC_div8_61.44_DAC_div2_245.76"
+        # Prefer explicit Out2 / Out7 when present
+        r2 = by_reg.get(2)
+        r7 = by_reg.get(7)
+        if r2 and r2.get("divide") == 8:
+            c2 = vcxo_hz / 8
+        if r7 and r7.get("divide") == 2:
+            c3 = vcxo_hz / 2
+        if c2 is None:
+            c2 = vcxo_hz / 8
+        if c3 is None:
+            c3 = vcxo_hz / 2
     elif 1 in divs and 2 in divs:
         plan = "mixed_div1_and_div2_→可能计划A类"
+        c2 = vcxo_hz / 2
+    elif 2 in divs:
+        c2 = vcxo_hz / 2
     return {
         "profile": name,
         "vcxo_hz": vcxo_hz,
         "outputs_reg1_to_8": outs,
         "plan_hint": plan,
         "g2_prior": {
-            "C2_ADC_CLK_hz": 245.76e6 if 2 in divs else None,
-            "C3_DACCLK_hz_if_same_as_enabled": (
-                245.76e6 if plan and plan.startswith("B_") else None
-            ),
+            "C2_ADC_CLK_hz": None if c2 is None else round(c2),
+            "C3_DACCLK_hz_if_same_as_enabled": None if c3 is None else round(c3),
             "disclaimer": "本板 Yx→ADC/DAC 布线未蜂鸣；先验仅当 SPI 剖面匹配且布线同构",
         },
     }
@@ -147,8 +179,23 @@ def self_test() -> int:
         if not all(o["divide"] == 2 for o in known):
             print("FAIL plan", c["plan_hint"], known, file=sys.stderr)
             return 1
+    r = decode_profile("rhino_61m44", 491.52e6)
+    rr2 = next(o for o in r["outputs_reg1_to_8"] if o["reg"] == 2)
+    rr7 = next(o for o in r["outputs_reg1_to_8"] if o["reg"] == 7)
+    if rr2["divide"] != 8 or rr2["hz_if_vcxo"] != 61440000:
+        print("FAIL rhino reg2", rr2, file=sys.stderr)
+        return 1
+    if rr7["divide"] != 2 or rr7["hz_if_vcxo"] != 245760000:
+        print("FAIL rhino reg7", rr7, file=sys.stderr)
+        return 1
+    if not (r["plan_hint"] or "").startswith("C_"):
+        print("FAIL rhino plan", r["plan_hint"], file=sys.stderr)
+        return 1
+    if r["g2_prior"]["C2_ADC_CLK_hz"] != 61440000:
+        print("FAIL rhino C2 prior", r["g2_prior"], file=sys.stderr)
+        return 1
     print("SELF-TEST OK")
-    print(json.dumps(c, ensure_ascii=False, indent=2))
+    print(json.dumps({"conserviss": c, "rhino_61m44": r}, ensure_ascii=False, indent=2))
     return 0
 
 

@@ -93,6 +93,17 @@ CDCE_CONSERVISS = {
     0xB: 0x0000040,
     0xC: 0x0000180,
 }
+# RHINO thesis Plan C (ADC 61.44): Reg2 Table-8 ÷8 synthesised; Reg0/A/C Conserviss lineage.
+# See decode_cdce_profile.py profile "rhino_61m44".
+CDCE_RHINO_61 = {
+    0x0: 0x683C035,
+    0x2: 0x8304000,
+    0x4: 0xE980000,
+    0x7: 0x8380001,
+    0xA: 0x05FC270,
+    0xB: 0x0000040,
+    0xC: 0x0000180,
+}
 DAC_CONSERVISS_CFG1 = 0x21  # FIR0=2x + twos
 # Conserviss C_DAC_PRE_SYNC_CONFIG (addr → data); used for profile hit ratio only.
 DAC_CONSERVISS_PRE_SYNC: dict[int, int] = {
@@ -384,6 +395,7 @@ def decode_cdce(t: float, bits: list[int]) -> Frame:
         ("internal", CDCE_INTERNAL),
         ("external", CDCE_EXTERNAL),
         ("conserviss", CDCE_CONSERVISS),
+        ("rhino_61m44", CDCE_RHINO_61),
     ):
         if addr in table and table[addr] == data28:
             fr.notes.append(f"matches FMC150 {label} Reg{addr:X}")
@@ -429,6 +441,7 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
     c_hit, c_n, c_detail = profile_hits(CDCE_CONSERVISS)
     i_hit, i_n, _ = profile_hits(CDCE_INTERNAL)
     e_hit, e_n, _ = profile_hits(CDCE_EXTERNAL)
+    r_hit, r_n, r_detail = profile_hits(CDCE_RHINO_61)
 
     dac_cfg1 = None
     dac_writes: dict[int, int] = {}
@@ -478,6 +491,10 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
         "conserviss_cdce_reg_total": c_n,
         "conserviss_cdce_match_ratio": round(c_hit / c_n, 3) if c_n else 0.0,
         "conserviss_cdce_detail": c_detail,
+        "rhino_61m44_cdce_reg_hits": r_hit,
+        "rhino_61m44_cdce_reg_total": r_n,
+        "rhino_61m44_cdce_match_ratio": round(r_hit / r_n, 3) if r_n else 0.0,
+        "rhino_61m44_cdce_detail": r_detail,
         "e2e_internal_cdce_hits": i_hit,
         "e2e_internal_cdce_total": i_n,
         "e2e_external_cdce_hits": e_hit,
@@ -488,17 +505,49 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
         "conserviss_dac_pre_sync_total": len(DAC_CONSERVISS_PRE_SYNC),
         "conserviss_dac_pre_sync_ratio": round(dac_pre_hit / len(DAC_CONSERVISS_PRE_SYNC), 3),
         "conserviss_dac_pre_sync_mismatches": dac_pre_detail[:12],
-        "best_cdce_profile": (
-            "conserviss"
-            if c_hit >= i_hit and c_hit >= e_hit and c_hit > 0
-            else "e2e_internal"
-            if i_hit >= e_hit and i_hit > 0
-            else "e2e_external"
-            if e_hit > 0
-            else "none"
+        "best_cdce_profile": _best_cdce_profile(
+            c_hit, c_n, r_hit, r_n, i_hit, e_hit, cdce_by_addr
         ),
     }
     return flags
+
+
+def _best_cdce_profile(
+    c_hit: int,
+    c_n: int,
+    r_hit: int,
+    r_n: int,
+    i_hit: int,
+    e_hit: int,
+    cdce_by_addr: dict[int, int],
+) -> str:
+    """Pick best CDCE init profile.
+
+    RHINO Plan C is only eligible when Reg2 is the ÷8 word (0x8304000).
+    Shared Reg0/A with Conserviss must not let a partial rhino ratio win.
+    """
+    reg2 = cdce_by_addr.get(0x2)
+    if reg2 == 0x8304000 and r_hit > 0:
+        return "rhino_61m44"
+    # If Reg2 is Conserviss/E2E ÷2 style, do not score rhino at all.
+    r_score_hits = r_hit if reg2 == 0x8304000 else 0
+    scores = [
+        ("conserviss", (c_hit / c_n if c_n else 0.0, c_hit)),
+        (
+            "rhino_61m44",
+            (r_score_hits / r_n if r_n and r_score_hits else 0.0, r_score_hits),
+        ),
+        (
+            "e2e_internal",
+            (i_hit / len(CDCE_INTERNAL), i_hit) if CDCE_INTERNAL else (0.0, 0),
+        ),
+        (
+            "e2e_external",
+            (e_hit / len(CDCE_EXTERNAL), e_hit) if CDCE_EXTERNAL else (0.0, 0),
+        ),
+    ]
+    name, (_ratio, hits) = max(scores, key=lambda x: (x[1][0], x[1][1]))
+    return name if hits > 0 else "none"
 
 
 def run_decode(rows: list[dict], cs_active_low: bool) -> list[Frame]:

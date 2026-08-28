@@ -86,6 +86,8 @@ def infer_clocks(clocks: list[dict]) -> dict:
         h8 = "支持·计划A(ADC245.76/DACCLK491.52)"
     elif adc_f == "245.76e6" and dac_f == "245.76e6":
         h8 = "支持·计划B(Conserviss:双路245.76+2x)"
+    elif adc_f == "61.44e6" and dac_f == "245.76e6":
+        h8 = "弱支持·计划C(RHINO:ADC61.44/DACCLK245.76)"
     elif adc_f == "122.88e6" or dac_f == "122.88e6":
         h8 = "弱支持（见122.88；核对探点/插值）"
     elif adc_f == "163.84e6" or dac_f == "163.84e6":
@@ -215,6 +217,13 @@ def self_test() -> int:
     if c_r["P1.3_suggested"] != "强 🔶" or "163.84" not in c_r["H8"]:
         print("SELF-TEST FAILED RHINO 163.84 family", c_r, file=sys.stderr)
         return 1
+    # R5c Plan C: ADC 61.44 + DACCLK 245.76
+    c_c = infer_clocks(
+        [{"id": "C2", "hz": 61.44e6}, {"id": "C3", "hz": 245.76e6}]
+    )
+    if c_c["P1.3_suggested"] != "✅" or "计划C" not in c_c["H8"]:
+        print("SELF-TEST FAILED RHINO Plan C", c_c, file=sys.stderr)
+        return 1
     # R11e: CONFIG31/VERSION read alone → 强 🔶 (Must-1 grade)
     s_id = infer_spi({"D2_dac_version_read": True})
     if s_id["P1.4_suggested"] != "强 🔶" or "VERSION31" not in "".join(s_id["notes"]):
@@ -225,7 +234,7 @@ def self_test() -> int:
         return 1
     print(
         "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, "
-        "RHINO 163.84, R11e CONFIG31)"
+        "RHINO 163.84/PlanC, R11e CONFIG31)"
     )
     return 0
 
