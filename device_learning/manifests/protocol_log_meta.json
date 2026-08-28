@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:38:49.884059+00:00",
+  "generated_at": "2026-08-28T00:51:04.893709+00:00",
   "status": "missing",
   "path": "phase_b/captures/protocol_log.json",
   "boundary": "Optional; copy phase_b/templates/protocol_log_template.json after capture"

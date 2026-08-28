@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:38:57.795951+00:00",
+  "generated_at": "2026-08-28T00:51:12.727909+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,7 +10,7 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-27T16:38:57.691189+00:00",
+      "generated_at": "2026-08-28T00:51:12.623952+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-27T16:38:50.275777+00:00",
+      "generated_at": "2026-08-28T00:51:05.277803+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -108,7 +108,7 @@
       "next_command": "make check-captures"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-27T16:38:50.507361+00:00",
+      "generated_at": "2026-08-28T00:51:05.507277+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": false,
       "checklist": "0/6",
@@ -116,7 +116,7 @@
       "recommended_action": "complete phase B captures first"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-27T16:38:57.104956+00:00",
+      "generated_at": "2026-08-28T00:51:12.042303+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "static_complete_pending_hardware",
       "transition_ready": false,
@@ -134,7 +134,7 @@
       "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-27T16:38:50.118562+00:00",
+      "generated_at": "2026-08-28T00:51:05.123779+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -178,7 +178,7 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-27T16:38:55.215722+00:00",
+      "generated_at": "2026-08-28T00:51:10.178439+00:00",
       "applicable": false,
       "proposal_count": 0,
       "proposals": [],
@@ -188,7 +188,7 @@
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-27T16:38:49.490373+00:00",
+      "generated_at": "2026-08-28T00:51:04.502114+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -338,7 +338,7 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-27T16:38:52.032205+00:00",
+      "generated_at": "2026-08-28T00:51:07.009780+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
@@ -429,7 +429,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-27T16:38:57.024918+00:00",
+      "updated_at": "2026-08-28T00:51:11.963340+00:00",
       "done_count": 0,
       "total_count": 6
     },
@@ -486,7 +486,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-27T16:38:56.867424+00:00",
+      "updated_at": "2026-08-28T00:51:11.807441+00:00",
       "done_count": 0,
       "total_count": 6
     }
