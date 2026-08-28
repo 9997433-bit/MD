@@ -223,6 +223,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G2 管线：ADC **0x20 LOW SPEED** ↔ C2（≤80 MSPS）交叉核验写入 `g2_mode_infer` / 现场表单  
 - [x] G2 管线：DAC **CONFIG1 插值** ↔ C3/C6（靶标 X2）交叉核验  
 - [x] G1 再加深：R14 Apollo3zehn/Vibrometer 开源 HDL 形态（条纹计数/板内 FFT/多流）+ R14b 带通采样 atan（不升 Must）  
+- [x] G1 再加深：位流 **非对齐 SPI 位串** Conserviss/E2E CDCE 高辨识度字阴性（`位流SPI常量搜索.md` §5f；不升 Must）  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）

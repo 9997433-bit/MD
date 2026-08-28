@@ -36,6 +36,7 @@ jobs:
           python3 scripts/g3_tone_analyze.py --self-test >/dev/null
           python3 scripts/apply_g0_backfill.py --self-test >/dev/null
           python3 scripts/ocr_scope_hz.py --self-test >/dev/null
+          python3 scripts/search_spi_constants.py --self-test >/dev/null
       - name: Plan C synthetic demo (never writes G0)
         run: python3 scripts/ingest_g2_inbox.py --demo-plan-c >/dev/null
       - name: Binary full census self-test

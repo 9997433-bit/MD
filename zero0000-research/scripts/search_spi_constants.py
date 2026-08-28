@@ -298,6 +298,108 @@ def search_dac(data: bytes) -> list[dict]:
     return out
 
 
+def _bits_of(val: int, nbits: int, msb_first: bool) -> bytes:
+    out = bytearray(nbits)
+    for i in range(nbits):
+        shift = (nbits - 1 - i) if msb_first else i
+        out[i] = (val >> shift) & 1
+    return bytes(out)
+
+
+def _file_to_msb_bits(data: bytes | bytearray) -> bytes:
+    """Each file byte → 8 bits, MSB first (common SPI shift order)."""
+    bits = bytearray(len(data) * 8)
+    j = 0
+    for b in data:
+        for i in range(7, -1, -1):
+            bits[j] = (b >> i) & 1
+            j += 1
+    return bytes(bits)
+
+
+def count_unaligned_bit_hits(
+    file_bits: bytes, val: int, nbits: int, *, cap: int = 32
+) -> dict[str, int]:
+    """Count unaligned bit-string occurrences (MSB-first and LSB-first patterns)."""
+    out: dict[str, int] = {}
+    for name, msb in (("msb", True), ("lsb", False)):
+        pat = _bits_of(val, nbits, msb)
+        c = 0
+        start = 0
+        while c < cap:
+            i = file_bits.find(pat, start)
+            if i < 0:
+                break
+            c += 1
+            start = i + 1
+        out[name] = c
+    return out
+
+
+# High-ID Conserviss / E2E CDCE words for bit-serial ROM probe (G1 §5f).
+BIT_SERIAL_TARGETS: list[tuple[str, int, int]] = [
+    ("cdce_reg0_cons_683C0350", 0x683C0350, 32),
+    ("cdce_rega_cons_05FC270A", 0x05FC270A, 32),
+    ("cdce_reg0_int_683C0340", 0x683C0340, 32),
+    ("cdce_data28_cons_683C035", 0x683C035, 28),
+    ("cdce_data28_int_683C034", 0x683C034, 28),
+]
+
+
+def search_bit_serial(data: bytes | bytearray) -> dict:
+    file_bits = _file_to_msb_bits(data)
+    rows = []
+    for name, val, nbits in BIT_SERIAL_TARGETS:
+        hits = count_unaligned_bit_hits(file_bits, val, nbits)
+        rows.append(
+            {
+                "name": name,
+                "value": f"0x{val:X}",
+                "nbits": nbits,
+                "msb_hits": hits["msb"],
+                "lsb_hits": hits["lsb"],
+            }
+        )
+    high_id_zero = all(
+        r["msb_hits"] == 0 and r["lsb_hits"] == 0
+        for r in rows
+        if r["nbits"] >= 28
+    )
+    return {
+        "file_bits": len(file_bits),
+        "targets": rows,
+        "high_id_all_zero": high_id_zero,
+        "interpretation_zh": (
+            "高辨识度 CDCE 字在非字节对齐位串中亦全 0 → "
+            "进一步否定『SPI 移位串明文铺在 BRAM』细假说；"
+            "仍不升 P1.4（运行时拼帧可能）。"
+        ),
+    }
+
+
+def bit_serial_self_test() -> None:
+    """Synthetic: plant Conserviss Reg0 bits unaligned; expect msb hit ≥1."""
+    # 3 zero bits pad, then 0x683C0350 MSB-first, then pad
+    plant = _bits_of(0x683C0350, 32, True)
+    prefix = b"\x00" * 3
+    # pack bits back to bytes (MSB first)
+    all_bits = prefix + plant + b"\x00" * 5
+    raw = bytearray()
+    for i in range(0, len(all_bits) - (len(all_bits) % 8), 8):
+        byte = 0
+        for b in all_bits[i : i + 8]:
+            byte = (byte << 1) | b
+        raw.append(byte)
+    fb = _file_to_msb_bits(raw)
+    hits = count_unaligned_bit_hits(fb, 0x683C0350, 32)
+    assert hits["msb"] >= 1, hits
+    # real image high-ID should be zero (if present)
+    path = autolocate()
+    if path and path.suffix.lower() == ".bin" and path.exists():
+        rep = search_bit_serial(path.read_bytes())
+        assert rep["high_id_all_zero"], rep["targets"]
+
+
 def score_summary(cdce: dict, adc: list, dac: list) -> dict:
     """给出可写入文档的一句话结论材料。"""
     int_hits = len(cdce["internal_full32"])
@@ -328,7 +430,18 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Search MCS/BIN for FMC150 SPI constants")
     ap.add_argument("image", nargs="?", help="path to .mcs or .bin")
     ap.add_argument("--json", dest="json_out", help="write full JSON report")
+    ap.add_argument(
+        "--bit-serial",
+        action="store_true",
+        help="also search high-ID CDCE words as unaligned bit strings (G1 §5f)",
+    )
+    ap.add_argument("--self-test", action="store_true", help="bit-serial unit check; exit")
     args = ap.parse_args()
+
+    if args.self_test:
+        bit_serial_self_test()
+        print("search_spi_constants --self-test OK")
+        return 0
 
     path = Path(args.image) if args.image else autolocate()
     if not path or not path.exists():
@@ -343,6 +456,7 @@ def main() -> int:
     adc = search_adc(data)
     dac = search_dac(data)
     summary = score_summary(cdce, adc, dac)
+    bit_serial = search_bit_serial(data) if args.bit_serial else None
 
     report = {
         "image": str(path),
@@ -351,6 +465,7 @@ def main() -> int:
         "adc_frames": adc,
         "dac_frames": dac,
         "summary": summary,
+        "bit_serial": bit_serial,
     }
 
     print("\n=== CDCE full32 (internal) hits ===")
@@ -379,6 +494,15 @@ def main() -> int:
     print("\n=== Summary ===")
     for k, v in summary.items():
         print(f"  {k}: {v}")
+
+    if bit_serial is not None:
+        print("\n=== Bit-serial (unaligned) high-ID CDCE ===")
+        for row in bit_serial["targets"]:
+            print(
+                f"  {row['name']} msb×{row['msb_hits']} lsb×{row['lsb_hits']}"
+            )
+        print(f"  high_id_all_zero: {bit_serial['high_id_all_zero']}")
+        print(f"  note: {bit_serial['interpretation_zh']}")
 
     if args.json_out:
         outp = Path(args.json_out)

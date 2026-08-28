@@ -145,6 +145,22 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 **结论**：不支持「位流明文拷贝 RHINO_CALF NCO 常数」；**不**升 P2.3。RHINO 有 DDC/DUC 仅作 G3 假说优先级，见 `G1_FMC150_VC707对照.md` §6.10。
 
+## 5f. 非字节对齐位串（SPI 移位 ROM 假说）（2026-08-28 · 新模态）
+
+> 动机：§3/§5b 只扫 **字节对齐** BE/LE 字；若工程把 CDCE 字以 **SPI MOSI 位序**（MSB-first 移位串）铺进 BRAM，则可能不对齐到字节边界。  
+> 方法：`scripts/search_spi_constants.py --bit-serial`（`--self-test` 先验植入）。镜像同 §5c；文件字节→MSB-first 位流后 `find` 32/28-bit 模式（MSB/LSB 两种模式串）。
+
+| 靶标 | nbits | msb 命中 | lsb 命中 | 判读 |
+|------|-------|----------|----------|------|
+| Conserviss Reg0 `683C0350` | 32 | **0** | **0** | 高辨识度；位串亦无 |
+| Conserviss RegA `05FC270A` | 32 | **0** | **0** | 同上 |
+| E2E 内部 Reg0 `683C0340` | 32 | **0** | **0** | 同上 |
+| data28 `683C035` / `683C034` | 28 | **0** / **0** | **0** / **0** | 去地址半字节后仍无 |
+
+（对照：低熵 `0x4180`/`0x21` 位串命中封顶噪声级，**不作**肯定/否定依据。）
+
+**结论**：在「非对齐 SPI 移位串 ROM」假说下仍阴性 → 与 §3/§5b 一并削弱明文写表；**仍不升 P1.4**（运行时拼帧 / EEPROM 自举仍可能）。
+
 ## 6. 与 G1 出口的关系
 
 - 本轮满足研究计划 G1「至少多 1 份非照片证据」的**加分项**（可复现阴性扫描），不推翻既有 G1 ✅ 有增量结论。  
@@ -153,4 +169,4 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 
 ---
 
-*复现：§2 二进制；§5b Hamming；§5c/§5d/§5e 对 bin 做 `data.count(token)`。不必入库大 JSON。*
+*复现：§2 二进制；§5b Hamming；§5c/§5d/§5e `data.count`；§5f `search_spi_constants.py --bit-serial`。不必入库大 JSON。*
