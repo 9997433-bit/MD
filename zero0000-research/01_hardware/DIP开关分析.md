@@ -39,6 +39,7 @@
 | H2 | FPGA 配置模式位(M[1:0],JTAG ↔ Master SPI 切换,M2 硬线) | Kintex-7 板常规做法;但 SW5 距 FPGA 模式脚一侧与 Flash(U21,右区)较远,布线上偏弱 | 中 | 拨动后上电观察 DONE / JTAG 是否仍可配置;断电量至 FPGA M 脚 |
 | H3 | 用户功能位(FPGA 普通 IO 读取:测试模式、环回、增益档) | 兜底假设,任何位置都成立 | 中 | JTAG 边界扫描定位(实验 E3) |
 | H4 | 以太网 PHY strap / USB 通道选择 | 初稿曾列;但 SW5 距 U37(RTL8211F)与 U2(FT600Q)均远(对角),布局上不利 | 低 | 拨动后观察网口 link / USB 枚举变化 |
+| H8-alg | **数据通路/DSP 旁路**(类 Avnet:直通 vs DDC/DUC)或环回 | Avnet FMC150 参考用 DIP 旁路 DUC/DDC;见算法假说 **H9**(`算法线索_资料对照.md`) | 中 | G3-DIP:改一位冷启动+同 Fin 收数对比谱/样率 |
 
 ### SW42(8 位,J12 扩展座旁)
 
