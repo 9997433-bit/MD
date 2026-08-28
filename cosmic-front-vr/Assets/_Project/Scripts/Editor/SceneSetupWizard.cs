@@ -10,6 +10,7 @@ using CosmicFront.Core;
 using CosmicFront.Mech;
 using CosmicFront.Network;
 using CosmicFront.Player;
+using CosmicFront.Ship;
 using CosmicFront.UI;
 using FishNet.Component.Transforming;
 using FishNet.Managing;
@@ -158,6 +159,8 @@ namespace CosmicFront.Editor
 
             var playerNetworkPrefab = CreateNetworkPlayerPrefabAsset();
             CreateNetworkMatchManager(playerNetworkPrefab, spawnPoints, playerMech);
+            CreateShipSpawnerInScene(playerStart);
+            CreateShipHudUi();
 
             DisableDefaultMainCamera();
         }
@@ -226,7 +229,7 @@ namespace CosmicFront.Editor
             canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasGo.AddComponent<GraphicRaycaster>();
 
-            var panel = CreateUiPanel(canvasGo.transform, new Vector2(460f, 460f), new Vector2(0.5f, 0.5f));
+            var panel = CreateUiPanel(canvasGo.transform, new Vector2(460f, 510f), new Vector2(0.5f, 0.5f));
 
             var title = CreateText(panel.transform, "Title", "COSMIC FRONT VR", 22, TextAnchor.UpperCenter);
             title.rectTransform.anchoredPosition = new Vector2(0f, -10f);
@@ -235,19 +238,20 @@ namespace CosmicFront.Editor
             var teamDropdown = CreateDropdown(panel.transform, "TeamDropdown", new Vector2(0f, -55f));
             var mechDropdown = CreateDropdown(panel.transform, "MechDropdown", new Vector2(0f, -100f));
             var mapDropdown = CreateDropdown(panel.transform, "MapDropdown", new Vector2(0f, -145f));
+            var spawnDropdown = CreateDropdown(panel.transform, "SpawnDropdown", new Vector2(0f, -190f));
 
-            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -200f), new Vector2(180f, 36f));
-            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -200f), new Vector2(180f, 36f));
-            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join / Dedicated", new Vector2(0f, -250f), new Vector2(220f, 36f));
+            var startBtn = CreateButton(panel.transform, "StartButton", "单机开始", new Vector2(-110f, -245f), new Vector2(180f, 36f));
+            var hostBtn = CreateButton(panel.transform, "HostButton", "Host 局域网", new Vector2(110f, -245f), new Vector2(180f, 36f));
+            var joinBtn = CreateButton(panel.transform, "JoinButton", "Join / Dedicated", new Vector2(0f, -295f), new Vector2(220f, 36f));
 
-            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -300f));
+            var addressInput = CreateInputField(panel.transform, "AddressInput", "127.0.0.1", new Vector2(0f, -345f));
 
-            var status = CreateText(panel.transform, "Status", "单机或多人 LAN（端口 7770）", 14, TextAnchor.MiddleCenter);
-            status.rectTransform.anchoredPosition = new Vector2(0f, -350f);
+            var status = CreateText(panel.transform, "Status", "机甲出击 或 登舰职位", 14, TextAnchor.MiddleCenter);
+            status.rectTransform.anchoredPosition = new Vector2(0f, -395f);
             status.rectTransform.sizeDelta = new Vector2(420f, 30f);
 
             var hint = CreateText(panel.transform, "ControlsHint", "", 11, TextAnchor.LowerCenter);
-            hint.rectTransform.anchoredPosition = new Vector2(0f, -410f);
+            hint.rectTransform.anchoredPosition = new Vector2(0f, -455f);
             hint.rectTransform.sizeDelta = new Vector2(440f, 40f);
             hint.color = new Color(0.75f, 0.85f, 1f);
 
@@ -255,6 +259,7 @@ namespace CosmicFront.Editor
             SetPrivateField(menu, "teamDropdown", teamDropdown);
             SetPrivateField(menu, "mechDropdown", mechDropdown);
             SetPrivateField(menu, "mapDropdown", mapDropdown);
+            SetPrivateField(menu, "spawnDropdown", spawnDropdown);
             SetPrivateField(menu, "startButton", startBtn);
             SetPrivateField(menu, "hostButton", hostBtn);
             SetPrivateField(menu, "joinButton", joinBtn);
@@ -499,6 +504,8 @@ namespace CosmicFront.Editor
                 root.AddComponent<VRMechInput>();
                 root.AddComponent<MechInputRouter>();
                 root.AddComponent<MechBoostFeedback>();
+                root.AddComponent<ShipCrewMember>();
+                root.AddComponent<ShipSeatInputBridge>();
             }
             else
             {
@@ -506,6 +513,168 @@ namespace CosmicFront.Editor
             }
 
             return root;
+        }
+
+        private static GameObject CreateWarship(string name, TeamId team)
+        {
+            var root = new GameObject(name);
+            var rb = root.AddComponent<Rigidbody>();
+            rb.mass = 5000f;
+            rb.useGravity = false;
+            rb.drag = 1.5f;
+            rb.angularDrag = 3f;
+
+            var hull = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            hull.name = "Hull";
+            hull.transform.SetParent(root.transform, false);
+            hull.transform.localScale = new Vector3(8f, 3f, 20f);
+            Object.DestroyImmediate(hull.GetComponent<Collider>());
+
+            var col = root.AddComponent<BoxCollider>();
+            col.size = new Vector3(8f, 3f, 20f);
+            col.center = Vector3.zero;
+
+            var bridge = new GameObject("BridgeAnchor").transform;
+            bridge.SetParent(root.transform, false);
+            bridge.localPosition = new Vector3(0f, 2.2f, 6f);
+
+            var pilotSeat = CreateSeat(root.transform, "Seat_Pilot", ShipSeatRole.Pilot, new Vector3(0f, 1.2f, 5f));
+            var gunnerSeat = CreateSeat(root.transform, "Seat_Gunner", ShipSeatRole.Gunner, new Vector3(2.5f, 1.5f, 2f));
+            var captainSeat = CreateSeat(root.transform, "Seat_Captain", ShipSeatRole.Captain, new Vector3(0f, 1.5f, 7f));
+            var launchSeat = CreateSeat(root.transform, "Seat_Launch", ShipSeatRole.LaunchBay, new Vector3(0f, 0.5f, -8f));
+
+            var yaw = new GameObject("TurretYaw").transform;
+            yaw.SetParent(root.transform, false);
+            yaw.localPosition = new Vector3(2.5f, 2f, 2f);
+            var pitch = new GameObject("TurretPitch").transform;
+            pitch.SetParent(yaw, false);
+            var fire = new GameObject("TurretFire").transform;
+            fire.SetParent(pitch, false);
+            fire.localPosition = new Vector3(0f, 0f, 1.5f);
+
+            var turret = root.AddComponent<ShipGunnerTurret>();
+            SetPrivateField(turret, "yawPivot", yaw);
+            SetPrivateField(turret, "pitchPivot", pitch);
+            SetPrivateField(turret, "fireOrigin", fire);
+
+            var launchPoint = new GameObject("LaunchPoint").transform;
+            launchPoint.SetParent(root.transform, false);
+            launchPoint.localPosition = new Vector3(0f, 1f, -12f);
+            launchPoint.localRotation = Quaternion.Euler(0f, 180f, 0f);
+
+            var bay = root.AddComponent<ShipLaunchBay>();
+            SetPrivateField(bay, "launchPoint", launchPoint);
+            SetPrivateField(bay, "mechPrefab", CreateLaunchMechPrefabAsset());
+
+            root.AddComponent<ShipMovement>();
+            var health = root.AddComponent<HealthSystem>();
+            health.Configure(team, 500f, 200f);
+            root.AddComponent<ShipCaptainConsole>();
+            var ship = root.AddComponent<ShipController>();
+            SetPrivateField(ship, "bridgeCameraAnchor", bridge);
+            SetPrivateField(ship, "team", team);
+            SetPrivateField(ship, "shipDisplayName", "护卫舰 Aegis");
+
+            return root;
+        }
+
+        private static ShipSeat CreateSeat(Transform parent, string name, ShipSeatRole role, Vector3 localPos)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            go.transform.localPosition = localPos;
+            var seat = go.AddComponent<ShipSeat>();
+            SetPrivateField(seat, "role", role);
+            SetPrivateField(seat, "seatAnchor", go.transform);
+            SetPrivateField(seat, "displayName", name);
+            return seat;
+        }
+
+        private static GameObject CreateLaunchMechPrefabAsset()
+        {
+            EnsureFolder("Assets/_Project/Prefabs");
+            var temp = CreateMech("LaunchMech", TeamId.Terran, true);
+            temp.tag = "Player";
+            var path = "Assets/_Project/Prefabs/LaunchMech.prefab";
+            var prefab = PrefabUtility.SaveAsPrefabAsset(temp, path);
+            Object.DestroyImmediate(temp);
+            return prefab;
+        }
+
+        private static GameObject CreateWarshipPrefabAsset()
+        {
+            EnsureFolder("Assets/_Project/Prefabs");
+            var temp = CreateWarship("Warship_Aegis", TeamId.Terran);
+            temp.AddComponent<NetworkObject>();
+            temp.AddComponent<NetworkTransform>();
+            temp.AddComponent<NetworkShipSync>();
+            temp.AddComponent<NetworkHealthSync>();
+
+            var path = "Assets/_Project/Prefabs/Warship_Aegis.prefab";
+            var prefab = PrefabUtility.SaveAsPrefabAsset(temp, path);
+            Object.DestroyImmediate(temp);
+            RegisterNetworkPrefab(prefab);
+            return prefab;
+        }
+
+        private static void CreateShipSpawnerInScene(Vector3 playerStart)
+        {
+            var shipPrefab = CreateWarshipPrefabAsset();
+            var go = new GameObject("ShipSpawner");
+            var spawner = go.AddComponent<NetworkShipSpawner>();
+
+            var terran = new GameObject("ShipSpawn_Terran").transform;
+            terran.position = playerStart + new Vector3(-15f, 3f, 10f);
+            var orbital = new GameObject("ShipSpawn_Orbital").transform;
+            orbital.position = playerStart + new Vector3(15f, 3f, 40f);
+
+            SetPrivateField(spawner, "shipPrefab", shipPrefab);
+            SetPrivateField(spawner, "terranSpawn", terran);
+            SetPrivateField(spawner, "orbitalSpawn", orbital);
+        }
+
+        private static void CreateShipHudUi()
+        {
+            var canvasGo = new GameObject("ShipHudCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+            var role = CreateText(canvasGo.transform, "Role", "", 14, TextAnchor.LowerLeft);
+            role.rectTransform.anchorMin = new Vector2(0f, 0f);
+            role.rectTransform.anchorMax = new Vector2(0f, 0f);
+            role.rectTransform.pivot = new Vector2(0f, 0f);
+            role.rectTransform.anchoredPosition = new Vector2(12f, 70f);
+            role.rectTransform.sizeDelta = new Vector2(360f, 28f);
+
+            var status = CreateText(canvasGo.transform, "ShipStatus", "", 12, TextAnchor.LowerLeft);
+            status.rectTransform.anchorMin = new Vector2(0f, 0f);
+            status.rectTransform.anchorMax = new Vector2(0f, 0f);
+            status.rectTransform.pivot = new Vector2(0f, 0f);
+            status.rectTransform.anchoredPosition = new Vector2(12f, 42f);
+            status.rectTransform.sizeDelta = new Vector2(420f, 28f);
+
+            var hp = CreateSlider(canvasGo.transform, "ShipHP", new Vector2(120f, 24f), Color.red);
+            hp.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 0f);
+            hp.GetComponent<RectTransform>().anchorMax = new Vector2(0f, 0f);
+            hp.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f, 18f);
+
+            var sh = CreateSlider(canvasGo.transform, "ShipShield", new Vector2(120f, 8f), Color.cyan);
+            sh.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 0f);
+            sh.GetComponent<RectTransform>().anchorMax = new Vector2(0f, 0f);
+            sh.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f, 4f);
+
+            var ab = CreateSlider(canvasGo.transform, "Ability", new Vector2(320f, 8f), Color.yellow);
+            ab.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 0f);
+            ab.GetComponent<RectTransform>().anchorMax = new Vector2(0f, 0f);
+            ab.GetComponent<RectTransform>().anchoredPosition = new Vector2(320f, 4f);
+
+            var hud = canvasGo.AddComponent<ShipHud>();
+            SetPrivateField(hud, "roleText", role);
+            SetPrivateField(hud, "shipStatusText", status);
+            SetPrivateField(hud, "shipHealthBar", hp);
+            SetPrivateField(hud, "shipShieldBar", sh);
+            SetPrivateField(hud, "abilityBar", ab);
         }
 
         private static GameObject CreateMechPrefabAsset()

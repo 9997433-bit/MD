@@ -28,6 +28,7 @@ namespace CosmicFront.Core
         public bool IsMultiplayer => CurrentMatchMode != MatchMode.SinglePlayer;
         public TeamId SelectedTeam { get; private set; } = TeamId.Terran;
         public MechArchetype SelectedMech { get; private set; } = MechArchetype.Light;
+        public SpawnPreference SelectedSpawn { get; private set; } = SpawnPreference.Mech;
         public string SelectedBattleScene { get; private set; }
         public string MultiplayerAddress { get; private set; } = NetworkSessionConfig.DefaultAddress;
         public float MatchTimeRemaining { get; private set; }
@@ -53,6 +54,11 @@ namespace CosmicFront.Core
         {
             SelectedTeam = team;
             SelectedMech = mech;
+        }
+
+        public void SelectSpawnPreference(SpawnPreference spawn)
+        {
+            SelectedSpawn = spawn;
         }
 
         public void SelectBattleScene(string sceneName)

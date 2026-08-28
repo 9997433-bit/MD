@@ -14,6 +14,14 @@ namespace CosmicFront.Core
         Heavy
     }
 
+    public enum SpawnPreference
+    {
+        Mech,
+        ShipPilot,
+        ShipGunner,
+        ShipCaptain
+    }
+
     public enum GamePhase
     {
         Boot,

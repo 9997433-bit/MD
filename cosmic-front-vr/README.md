@@ -82,8 +82,9 @@ cosmic-front-vr/
 | P1 单机切片 | ✅ | 核心脚本 + Editor 场景向导 |
 | P1.5 VR 输入 | ✅ | VRMechInput、Snap Turn、机库场景、XR Rig |
 | P2 多人 LAN | ✅ | Fish-Net Host/Join、NetworkMechSync |
-| P3 Steam MVP | ⏳ | Dedicated Server、2 图、击杀榜同步 |
-| P4 战舰 | ⏳ | 见 GDD |
+| P3 Dedicated + 记分 | ✅ | 无头 Server、击杀榜同步、小行星地图 |
+| P4 可玩战舰 | ✅ | Aegis 护卫舰四席位 + 弹射 |
+| P5 Steam / 护送模式 | ⏳ | Steamworks、旗舰护送 |
 
 ## VR 配置
 
@@ -96,6 +97,20 @@ cosmic-front-vr/
 ### 可选：替换为 XRI Starter Assets
 
 导入 XR Interaction Toolkit Samples 后，用官方 XR Origin 替换场景中的 `XROrigin` 对象，保留 `PlayerMechBinder` 与 `VRSnapTurn` 组件。
+
+## 战舰（P4）
+
+机库「生成方式」可选舵手/炮手/舰长；战斗中按 **B** 登舰、**X** 离舰、**L** 弹射。详见 [SHIP_SYSTEM.md](docs/SHIP_SYSTEM.md)。
+
+## Dedicated Server（P3）
+
+菜单 **Cosmic Front → Build → Dedicated Server**，运行：
+
+```bash
+CosmicFrontServer.exe -batchmode -nographics -cosmicServer
+```
+
+客户端 Join 填服务器 IP。详见 [DEDICATED_SERVER.md](docs/DEDICATED_SERVER.md)。
 
 ## 多人联机（P2）
 
@@ -110,6 +125,8 @@ cosmic-front-vr/
 - [原创 IP 圣经](docs/IP_BIBLE.md)
 - [网络规划](docs/NETWORK_PLAN.md)
 - [多人联机指南](docs/MULTIPLAYER_SETUP.md)
+- [Dedicated Server](docs/DEDICATED_SERVER.md)
+- [战舰系统](docs/SHIP_SYSTEM.md)
 
 ## 许可
 

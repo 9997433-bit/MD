@@ -11,6 +11,7 @@ namespace CosmicFront.UI
         [SerializeField] private Dropdown teamDropdown;
         [SerializeField] private Dropdown mechDropdown;
         [SerializeField] private Dropdown mapDropdown;
+        [SerializeField] private Dropdown spawnDropdown;
         [SerializeField] private Button startButton;
         [SerializeField] private Button hostButton;
         [SerializeField] private Button joinButton;
@@ -100,6 +101,18 @@ namespace CosmicFront.UI
                     "碎屑航道 — Debris Lane"
                 });
             }
+
+            if (spawnDropdown != null)
+            {
+                spawnDropdown.ClearOptions();
+                spawnDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "机甲出击",
+                    "战舰 — 舵手",
+                    "战舰 — 炮手",
+                    "战舰 — 舰长"
+                });
+            }
         }
 
         private void OnStartClicked()
@@ -157,6 +170,15 @@ namespace CosmicFront.UI
 
             GameManager.Instance.SelectLoadout(team, mech);
 
+            if (spawnDropdown != null)
+            {
+                GameManager.Instance.SelectSpawnPreference((SpawnPreference)spawnDropdown.value);
+            }
+            else
+            {
+                GameManager.Instance.SelectSpawnPreference(SpawnPreference.Mech);
+            }
+
             if (mapDropdown != null && mapDropdown.value == 1)
             {
                 GameManager.Instance.SelectBattleScene(GameManager.Instance.GetAsteroidSceneName());
@@ -190,8 +212,8 @@ namespace CosmicFront.UI
             }
 
             controlsHint.text = VRMechInput.IsHeadsetPresent()
-                ? "VR: 左摇杆移动 | 右扳机射击 | Dedicated: Join + 服务器IP"
-                : "键鼠: WASD | Tab锁定 | 端口7770 | Dedicated: -cosmicServer";
+                ? "VR: 机甲驾驶 / 登舰后按席位操作 | B登舰 X离舰"
+                : "键鼠: WASD | B登舰 | X离舰 | L弹射 | V舰长技能";
         }
     }
 }

@@ -1,11 +1,10 @@
 using UnityEngine;
-using CosmicFront.Core;
 using CosmicFront.Mech;
 
 namespace CosmicFront.Player
 {
     /// <summary>
-    /// Attach to XR Origin. Camera lives inside cockpit; mech moves independently.
+    /// Attach to XR Origin. Camera lives inside cockpit / ship seat; parent moves independently.
     /// </summary>
     public class PlayerMechBinder : MonoBehaviour
     {
@@ -28,12 +27,17 @@ namespace CosmicFront.Player
             mech = targetMech;
             cockpitAnchor = cockpit;
 
+            if (mech == null)
+            {
+                return;
+            }
+
             if (fallbackInput == null)
             {
                 fallbackInput = mech.gameObject.GetComponent<FallbackMechInput>();
             }
 
-            if (fallbackInput == null && mech != null)
+            if (fallbackInput == null)
             {
                 fallbackInput = mech.gameObject.AddComponent<FallbackMechInput>();
             }
