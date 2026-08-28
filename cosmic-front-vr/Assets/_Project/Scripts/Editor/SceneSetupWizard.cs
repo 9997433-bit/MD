@@ -218,6 +218,7 @@ namespace CosmicFront.Editor
             rig.AddComponent<XROriginSetup>();
             rig.AddComponent<VRComfortSettings>();
             rig.AddComponent<VRSnapTurn>();
+            rig.AddComponent<VRComfortMenu>();
             var binder = rig.AddComponent<PlayerMechBinder>();
             if (cockpitAnchor != null)
             {
@@ -744,6 +745,8 @@ namespace CosmicFront.Editor
                 trigger.isTrigger = true;
                 trigger.radius = 1.2f;
                 var cp = go.AddComponent<CapturePoint>();
+                // CapturePointVisual also ensures CapturePointWorldLabel on Awake.
+                go.AddComponent<CapturePointVisual>();
                 go.AddComponent<NetworkObject>();
                 SetPrivateField(cp, "pointName", pointDefs[i].Item1);
                 SetPrivateField(cp, "radius", 12f);
