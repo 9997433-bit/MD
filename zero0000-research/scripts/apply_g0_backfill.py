@@ -25,10 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 G0 = ROOT / "06_docs" / "G0_命题基线证据表.md"
 G2_REC = ROOT / "05_tests" / "G2_时钟与SPI记录.md"
-INBOX = ROOT / "05_tests" / "g2_inbox"
-DERIVED = INBOX / "_derived"
-INFER = DERIVED / "g2_mode_infer.json"
-HASHES = DERIVED / "input_hashes.json"
+DEFAULT_INBOX = ROOT / "05_tests" / "g2_inbox"
 MUST_ACCEPT = {"✅", "强🔶", "强 🔶"}
 
 
@@ -46,21 +43,21 @@ def must_ok(g: str) -> bool:
     return norm_grade(g).replace(" ", "") in {a.replace(" ", "") for a in MUST_ACCEPT} or g == "✅"
 
 
-def load_infer() -> tuple[dict, dict[str, str]]:
-    if not INFER.is_file():
-        raise SystemExit(f"missing {INFER} — run ingest_g2_inbox.py first")
-    if "demo" in str(INFER).lower():
-        raise SystemExit("refusing demo_inbox path")
-    blob = json.loads(INFER.read_text(encoding="utf-8"))
-    if blob.get("DEMO") or "DEMO" in json.dumps(blob):
-        # soft check; demo infer usually lacks this key but path check above is primary
-        pass
+def load_infer(inbox: Path) -> tuple[dict, dict[str, str]]:
+    derived = inbox / "_derived"
+    infer_path = derived / "g2_mode_infer.json"
+    hash_path = derived / "input_hashes.json"
+    if not infer_path.is_file():
+        raise SystemExit(f"missing {infer_path} — run ingest_g2_inbox.py --inbox {inbox}")
+    path_l = str(infer_path).lower()
+    if "demo" in path_l or "example" in path_l:
+        raise SystemExit("refusing demo/example path")
+    blob = json.loads(infer_path.read_text(encoding="utf-8"))
     hashes: dict[str, str] = {}
-    if HASHES.is_file():
-        hashes = json.loads(HASHES.read_text(encoding="utf-8"))
+    if hash_path.is_file():
+        hashes = json.loads(hash_path.read_text(encoding="utf-8"))
     if not hashes:
-        raise SystemExit(f"missing/empty {HASHES} — need measured input sha256")
-    # refuse if any hash key looks like demo/example
+        raise SystemExit(f"missing/empty {hash_path} — need measured input sha256")
     for k in hashes:
         lk = k.lower()
         if "demo" in lk or "example" in lk:
@@ -136,23 +133,95 @@ def write_g2_record(infer: dict, hashes: dict[str, str], power_on_only: bool) ->
     return "\n".join(lines)
 
 
+def e2e_self_test() -> int:
+    """Scratch inbox: plan-B clocks + Conserviss SPI → Must-acceptable grades; never touch G0."""
+    import shutil
+    import subprocess
+    import tempfile
+
+    tmp = Path(tempfile.mkdtemp(prefix="g2_e2e_must_"))
+    try:
+        clocks = tmp / "g2_clocks.json"
+        clocks.write_text(
+            json.dumps(
+                [
+                    {"id": "C2", "hz": 245760000, "note": "E2E scratch"},
+                    {"id": "C3", "hz": 245760000, "note": "E2E scratch"},
+                    {"id": "C6", "hz": 122880000, "note": "E2E scratch"},
+                ],
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        csv_path = tmp / "spi_capture.csv"
+        r = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "decode_spi_capture.py"),
+                "--write-conserviss-example",
+                str(csv_path),
+            ],
+            cwd=ROOT,
+        )
+        if r.returncode != 0:
+            print("SELF-TEST FAILED write example", file=sys.stderr)
+            return 1
+        # rename away from *example* so ingest accepts it
+        real_csv = tmp / "spi_capture.csv"
+        if "example" in csv_path.name.lower():
+            # write-conserviss-example may keep name; force clean name
+            pass
+        # decode_spi writes the path we gave; ensure name has no 'example'
+        if "example" in real_csv.name.lower():
+            print("SELF-TEST FAILED csv name contains example", file=sys.stderr)
+            return 1
+        r = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "ingest_g2_inbox.py"),
+                "--inbox",
+                str(tmp),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if r.returncode != 0:
+            print("SELF-TEST FAILED ingest", r.stdout, r.stderr, file=sys.stderr)
+            return 1
+        infer, hashes = load_infer(tmp)
+        p13 = norm_grade(str((infer.get("clocks") or {}).get("P1.3_suggested", "❓")))
+        p14 = norm_grade(str((infer.get("spi") or {}).get("P1.4_suggested", "❓")))
+        if not (must_ok(p13) and must_ok(p14)):
+            print(
+                f"SELF-TEST FAILED grades P1.3={p13} P1.4={p14} hashes={list(hashes)}",
+                file=sys.stderr,
+            )
+            return 1
+        # dry-run apply on scratch must not require writing; ensure --apply on non-default refused
+        print(
+            f"SELF-TEST OK e2e scratch Must-grades P1.3={p13} P1.4={p14} "
+            f"hashes={len(hashes)} (G0 untouched)"
+        )
+        return 0
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--inbox", type=Path, default=DEFAULT_INBOX)
     ap.add_argument("--apply", action="store_true", help="write G0 + G2 record")
     ap.add_argument("--power-on-only", action="store_true")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
 
     if args.self_test:
-        # Refuse demo path logic
-        demo = INBOX / "_derived" / "demo_inbox" / "g2_mode_infer.json"
-        if "demo" in str(demo).lower():
-            print("SELF-TEST OK (demo path would be refused by load_infer guards)")
-            return 0
-        print("SELF-TEST unexpected", file=sys.stderr)
-        return 1
+        return e2e_self_test()
 
-    infer, hashes = load_infer()
+    inbox = args.inbox.resolve()
+    infer, hashes = load_infer(inbox)
     clocks = infer.get("clocks") or {}
     spi = infer.get("spi") or {}
     p13 = norm_grade(str(clocks.get("P1.3_suggested", "❓")))
@@ -180,6 +249,14 @@ def main() -> int:
     if not args.apply:
         print("DRY-RUN — pass --apply to write G0 / G2_时钟与SPI记录.md")
         return 0
+
+    if inbox != DEFAULT_INBOX.resolve():
+        print(
+            f"refusing --apply on non-default inbox {inbox} "
+            f"(use default g2_inbox for real backfill)",
+            file=sys.stderr,
+        )
+        return 2
 
     g0 = G0.read_text(encoding="utf-8")
     if plan["P1.3"]:
@@ -209,7 +286,6 @@ def main() -> int:
     )
     print(f"WROTE {G0}")
     print(f"WROTE {G2_REC}")
-    # refresh Must audit
     import subprocess
 
     subprocess.run(
