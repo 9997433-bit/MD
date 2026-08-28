@@ -37,15 +37,36 @@ def infer_clocks(clocks: list[dict]) -> dict:
     adc = by_id.get("C2") or by_id.get("ADC_CLK")
     dac = by_id.get("C3") or by_id.get("DACCLK")
     data = by_id.get("C6") or by_id.get("DATACLK")
-    if adc and near_family(adc):
-        notes.append(f"ADC clk ≈ {near_family(adc)}")
-    if dac and near_family(dac):
-        notes.append(f"DACCLK ≈ {near_family(dac)}")
+    adc_f = near_family(adc) if adc else None
+    dac_f = near_family(dac) if dac else None
+    if adc and adc_f:
+        notes.append(f"ADC clk ≈ {adc_f}")
+    elif adc:
+        notes.append(f"ADC clk={adc} Hz 不在 122.88/245.76/491.52 族（tol 1%）")
+    if dac and dac_f:
+        notes.append(f"DACCLK ≈ {dac_f}")
+    elif dac:
+        notes.append(f"DACCLK={dac} Hz 不在族内")
+    # 命题要求测得 ADC 与 DAC；单侧落入族 → 强 🔶；双侧 → ✅
     if adc and dac:
-        p13 = "✅" if near_family(adc) and near_family(dac) else "🔶"
+        if adc_f and dac_f:
+            p13 = "✅"
+        elif adc_f or dac_f:
+            p13 = "🔶"
+            notes.append("仅一侧落入族或另一侧偏离 → 强 🔶，未满 ✅")
+        else:
+            p13 = "🔶"
+            notes.append("双侧测得但均偏离先验族 → 🔶（需复核探点）")
         ratio = dac / adc if adc else None
         if ratio:
             notes.append(f"DACCLK/ADC ≈ {ratio:.3f}")
+    elif adc or dac:
+        if adc_f or dac_f:
+            p13 = "🔶"
+            notes.append("仅测得一侧且落入族 → 强 🔶；补另一侧可冲 ✅")
+        else:
+            p13 = "🔶"
+            notes.append("仅测得一侧且偏离族 → 🔶")
     interp = None
     if dac and data and data > 0:
         interp = round(dac / data)
@@ -58,9 +79,9 @@ def infer_clocks(clocks: list[dict]) -> dict:
             "支持"
             if adc
             and dac
-            and near_family(adc) in ("122.88e6", "245.76e6")
-            and near_family(dac) == "491.52e6"
-            else "未触及/弱"
+            and adc_f in ("122.88e6", "245.76e6")
+            and dac_f == "491.52e6"
+            else ("弱支持（单侧）" if (adc_f or dac_f) and not (adc and dac) else "未触及/弱")
         ),
     }
 
@@ -101,10 +122,15 @@ def self_test() -> int:
     s = infer_spi(checklist)
     print(json.dumps({"clocks": c, "spi": s}, ensure_ascii=False, indent=2))
     ok = c["P1.3_suggested"] == "✅" and s["P1.4_suggested"] == "✅" and c["interp_hint"] == 2
+    # single-sided clock → 强 🔶
+    c1 = infer_clocks([{"id": "C2", "hz": 245.76e6}])
+    if c1["P1.3_suggested"] != "🔶":
+        print("SELF-TEST FAILED single-sided", c1, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
-    print("SELF-TEST OK")
+    print("SELF-TEST OK (incl. single-sided → 🔶)")
     return 0
 
 

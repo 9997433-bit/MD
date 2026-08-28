@@ -144,23 +144,73 @@ def main() -> int:
         lines.append(f"- derived `{rel(spi_json)}` sha256=`{sha256(spi_json)}`")
         infer_cmd += ["--spi", str(spi_json)]
 
-    lines += ["", "## g2_mode_infer", "", "```"]
+    lines += ["", "## g2_mode_infer", "", "```json"]
+    infer_json_path = out_dir / "g2_mode_infer.json"
+    hashes: dict[str, str] = {}
+    if clocks.is_file() and clocks_usable:
+        hashes[clocks.name] = sha256(clocks)
+    if spi_json and spi_json.is_file():
+        hashes[rel(spi_json)] = sha256(spi_json)
+
+    out = ""
+    infer_blob: dict = {}
     if len(infer_cmd) == 2:
-        lines.append("(skipped — no usable clocks or spi)")
-        out = ""
+        lines.append('{"skipped": true}')
     else:
         print("RUN", " ".join(infer_cmd))
         r = subprocess.run(infer_cmd, cwd=ROOT, capture_output=True, text=True)
         out = (r.stdout or "") + (r.stderr or "")
-        lines.append(out.rstrip() or "(no output)")
         if r.returncode != 0:
+            lines.append(out.rstrip() or "(no output)")
             lines.append(f"exit={r.returncode}")
+        else:
+            lines.append((r.stdout or "").rstrip() or "(no output)")
+            try:
+                infer_blob = json.loads(r.stdout or "{}")
+            except json.JSONDecodeError:
+                infer_blob = {}
+            if infer_blob:
+                infer_json_path.write_text(
+                    json.dumps(infer_blob, indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8",
+                )
+                hashes[rel(infer_json_path)] = sha256(infer_json_path)
+
+    lines.append("```")
+
+    proposal = (
+        ROOT / "05_tests" / "G2_G0回填提案.md"
+        if inbox == DEFAULT_INBOX.resolve()
+        else inbox / "G2_G0回填提案.md"
+    )
+    if infer_blob:
+        hash_path = out_dir / "input_hashes.json"
+        hash_path.write_text(json.dumps(hashes, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        prop_cmd = [
+            sys.executable,
+            str(SCRIPTS / "propose_g0_backfill.py"),
+            "--infer",
+            str(infer_json_path),
+            "--hashes",
+            str(hash_path),
+            "--out",
+            str(proposal),
+        ]
+        print("RUN", " ".join(prop_cmd))
+        subprocess.run(prop_cmd, cwd=ROOT, check=False)
+        lines += [
+            "",
+            "## G0 backfill proposal",
+            "",
+            f"- `{rel(proposal)}`（须人工复核后才改 G0）",
+            f"- `{rel(infer_json_path)}` sha256=`{hashes.get(rel(infer_json_path), '')}`",
+        ]
+
     lines += [
-        "```",
         "",
         "## Next (human)",
         "",
-        "1. 人工复核建议等级后，写入 `G2_时钟与SPI记录.md` 与 `G0_命题基线证据表.md`",
+        "1. 复核 `G2_G0回填提案.md` → 写入 `G2_时钟与SPI记录.md` 与 `G0_命题基线证据表.md`",
         "2. 改等级时附上本报告中的 sha256",
         "3. 未达标勿开 G3 算法定性",
         "",

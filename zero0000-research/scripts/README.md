@@ -14,7 +14,8 @@ python3 scripts/search_fmc150_mif_rom.py assets/firmware/20230825_s2056.bin  # K
 python3 scripts/decode_spi_capture.py --self-test            # G2 SPI CSV 译码自检（含 --auto-map）
 python3 scripts/decode_spi_capture.py capture.csv --auto-map --json out.json
 python3 scripts/g2_mode_infer.py --self-test                 # 钟+SPI → P1 等级建议
-python3 scripts/ingest_g2_inbox.py                           # 空/全null钟 → exit 2；有实测则出报告
+python3 scripts/ingest_g2_inbox.py                           # 空/全null钟 → exit 2；有实测则出报告+G0回填提案
+python3 scripts/propose_g0_backfill.py --help                # 亦可单独从 infer JSON 出提案
 python3 scripts/g3_tone_analyze.py --self-test               # G3 单音落盘分析
 python3 scripts/l5_fft_check.py --help
 python3 scripts/ft600_scaffold.py --help
