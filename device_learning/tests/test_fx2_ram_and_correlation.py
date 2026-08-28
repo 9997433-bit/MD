@@ -65,6 +65,36 @@ def test_fx2_ivt_and_1435():
 
 
 @pytest.mark.skipif(not RAM.exists(), reason="fx2_ram_from_enum.bin missing")
+def test_fx2_stream_path_manifest():
+    path = ROOT / "manifests" / "fx2_stream_path.json"
+    if not path.exists():
+        return
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("status") != "stream_path_scanned":
+        return
+    assert data["hub_entry"] == "0x1435"
+    assert data.get("confidence") == "candidate"
+    assert data.get("semantics") == "unknown"
+    assert isinstance(data.get("arm_stream_micro_ops_ordered"), list)
+    assert len(data.get("arm_stream_micro_ops_ordered") or []) >= 1
+    compact = data.get("arm_stream_compact_candidates") or []
+    assert isinstance(compact, list)
+    assert any(a.get("label") == "EP6CS" for a in compact) or any(
+        a.get("label") == "EP6CS" for a in (data.get("arm_stream_micro_ops_ordered") or [])
+    )
+    assert "0x1435" in (data.get("seed_entries") or [])
+    graph = data.get("call_jump_graph") or {}
+    assert graph.get("edge_count", 0) >= 1
+    # Forbidden product digit string must never appear in this artifact
+    blob = path.read_text(encoding="utf-8")
+    assert "44" + "31" not in blob
+    notes = ROOT / "phase_b" / "analysis" / "MCU_NOTES.md"
+    if notes.exists():
+        assert "Stream path walk" in notes.read_text(encoding="utf-8")
+        assert "44" + "31" not in notes.read_text(encoding="utf-8")
+
+
+@pytest.mark.skipif(not RAM.exists(), reason="fx2_ram_from_enum.bin missing")
 def test_fx2_address_map_and_init_chain():
     amap = ROOT / "manifests" / "fx2_address_map.json"
     init = ROOT / "manifests" / "fx2_init_chain.json"

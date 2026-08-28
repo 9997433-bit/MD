@@ -26,6 +26,7 @@
 - L0–L2：✅ `analyze_fx2_ram_image.py` / `analyze_fx2_ram_xrefs.py`
 - G0–G1：✅ `analyze_fx2_address_map.py` → `fx2_address_map.json` + `fx2_init_chain.json`
 - L3–L5：✅ routines / cmd_dispatch / datapath（假设级；`0x1435` 为 L4∩L5 热点）
+- L5-stream：✅ `analyze_fx2_stream_path.py` → `fx2_stream_path.json`（arm-stream micro-op 候选；confidence ≤ candidate）
 - L6：✅ `fx2_oracle_crosscheck.json`（`0x08`→candidate 关联，语义 unknown）
 - G4 lite：✅ `phase_b/analysis/mcu_disasm.txt`（关键区域；非完整 Ghidra CFG）
 - L7：❌ 缺 `eeprom.bin`
