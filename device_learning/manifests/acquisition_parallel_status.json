@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T09:34:01Z",
+  "generated_at": "2026-08-28T09:34:18Z",
   "scope": "USB acquisition evidence and catalog-alignment parallel workstreams",
   "baseline": {
     "branch": "cursor/ingest-usb-captures-7fdd",
@@ -47,7 +47,9 @@
     {
       "name": "command_plane_replay",
       "branch": "cursor/replay-usb-command-plane-56fb",
-      "status": "in_progress",
+      "status": "complete",
+      "result": "A replay script, generated replay manifest, and focused tests were committed separately.",
+      "commit": "bf2789b",
       "boundary": "Replay scaffolding cannot confirm opcode meanings without controlled device responses."
     },
     {
