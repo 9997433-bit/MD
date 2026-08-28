@@ -27,6 +27,47 @@ def load_i16(path: Path, pack: str, max_n: int) -> list[float]:
     return [float(x) for x in samples[:max_n]]
 
 
+def load_conserviss_csv(path: Path, max_n: int, channel: str = "A") -> list[float]:
+    """
+    Conserviss host CSV: columns include raw_code (14-bit natural) and/or signed_code.
+    Matches host/analyze_adc_capture.py / write_waveform_csv conventions.
+    """
+    import csv
+
+    ADC_BITS = 14
+    ADC_MODULUS = 1 << ADC_BITS
+    ADC_SIGN_BIT = 1 << (ADC_BITS - 1)
+    out: list[float] = []
+    with path.open(newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        fields = {f.lower(): f for f in (reader.fieldnames or [])}
+        signed_key = fields.get("signed_code")
+        raw_key = fields.get("raw_code")
+        # interleaved A/B dumps may use channel_a / channel_b
+        ch = channel.lower()
+        ch_key = fields.get(f"channel_{ch}") or fields.get(f"adc_{ch}") or fields.get(ch)
+        for row in reader:
+            if signed_key and row.get(signed_key) not in (None, ""):
+                out.append(float(int(row[signed_key])))
+            elif ch_key and row.get(ch_key) not in (None, ""):
+                raw = int(row[ch_key])
+                out.append(float(raw - ADC_MODULUS if raw >= ADC_SIGN_BIT else raw))
+            elif raw_key and row.get(raw_key) not in (None, ""):
+                raw = int(row[raw_key])
+                out.append(float(raw - ADC_MODULUS if raw >= ADC_SIGN_BIT else raw))
+            else:
+                continue
+            if len(out) >= max_n:
+                break
+    return out
+
+
+def load_capture(path: Path, pack: str, max_n: int) -> list[float]:
+    if pack == "conserviss-csv" or path.suffix.lower() == ".csv":
+        return load_conserviss_csv(path, max_n)
+    return load_i16(path, pack if pack in ("mono", "ab") else "mono", max_n)
+
+
 def dft_peak(x: list[float], fs: float) -> tuple[int, float, float]:
     mean = sum(x) / len(x)
     x = [v - mean for v in x]
@@ -126,6 +167,7 @@ def analyze(x: list[float], fin: float | None, fs_guess: float) -> dict:
 
 
 def self_test() -> int:
+    import csv
     import tempfile
 
     fs = 245.76e6
@@ -138,7 +180,7 @@ def self_test() -> int:
         raw += struct.pack("<h", v)
     path = Path(tempfile.mkstemp(suffix=".bin")[1])
     path.write_bytes(raw)
-    x = load_i16(path, "mono", n)
+    x = load_capture(path, "mono", n)
     r = analyze(x, fin, fs)
     print("self-test", r)
     ok = (
@@ -154,13 +196,27 @@ def self_test() -> int:
         raw_ab += struct.pack("<hh", a, 0)
     path_ab = Path(tempfile.mkstemp(suffix="_ab.bin")[1])
     path_ab.write_bytes(raw_ab)
-    r_ab = analyze(load_i16(path_ab, "ab", n), fin, fs)
+    r_ab = analyze(load_capture(path_ab, "ab", n), fin, fs)
+    # Conserviss host CSV (14-bit raw_code)
+    path_csv = Path(tempfile.mkstemp(suffix="_cons.csv")[1])
+    with path_csv.open("w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(("index", "raw_code", "signed_code"))
+        for i in range(n):
+            signed = int(10000 * math.sin(2 * math.pi * fin * i / fs))
+            raw_code = signed & 0x3FFF
+            w.writerow((i, raw_code, signed))
+    r_csv = analyze(load_capture(path_csv, "conserviss-csv", n), fin, fs)
     path.unlink(missing_ok=True)
     path_ab.unlink(missing_ok=True)
+    path_csv.unlink(missing_ok=True)
     if not ok or r_ab["fin_error_at_guess"] is None or r_ab["fin_error_at_guess"] >= 0.02:
         print("SELF-TEST FAILED", r_ab, file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. --pack ab)")
+    if r_csv["fin_error_at_guess"] is None or r_csv["fin_error_at_guess"] >= 0.02:
+        print("SELF-TEST FAILED conserviss-csv", r_csv, file=sys.stderr)
+        return 1
+    print("SELF-TEST OK (incl. --pack ab + conserviss-csv)")
     return 0
 
 
@@ -171,9 +227,9 @@ def main() -> int:
     ap.add_argument("--fs-guess", type=float, default=245.76e6)
     ap.add_argument(
         "--pack",
-        choices=("mono", "ab"),
+        choices=("mono", "ab", "conserviss-csv"),
         default="mono",
-        help="mono int16, or Conserviss-style interleaved A/B (use A)",
+        help="mono int16, Conserviss A/B int16, or Conserviss host CSV (raw_code)",
     )
     ap.add_argument("--interleaved", action="store_true", help="alias for --pack ab")
     ap.add_argument("--n", type=int, default=4096)
@@ -187,7 +243,9 @@ def main() -> int:
         print(f"missing {args.file}", file=sys.stderr)
         return 2
     pack = "ab" if args.interleaved else args.pack
-    x = load_i16(args.file, pack, args.n)
+    if args.file.suffix.lower() == ".csv" and pack == "mono":
+        pack = "conserviss-csv"
+    x = load_capture(args.file, pack, args.n)
     if len(x) < args.n:
         print(f"need >= {args.n} samples, got {len(x)}", file=sys.stderr)
         return 1

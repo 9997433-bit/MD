@@ -1,0 +1,8 @@
+[
+  {"id": "C1", "hz": null, "note": "X1 VCXO — example leaves null"},
+  {"id": "C2", "hz": 245760000, "note": "EXAMPLE plan B ADC CLKP — NOT measured; ingest ignores examples/"},
+  {"id": "C3", "hz": 245760000, "note": "EXAMPLE plan B DACCLK — NOT measured"},
+  {"id": "C6", "hz": 122880000, "note": "EXAMPLE DATACLK with 2x"},
+  {"id": "C7a", "hz": null, "note": "X2 100M"},
+  {"id": "C7b", "hz": null, "note": "X3 200M"}
+]
