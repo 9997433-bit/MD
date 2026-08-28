@@ -1,14 +1,15 @@
 {
-  "generated_at": "2026-08-28T14:37:00.234504+00:00",
+  "generated_at": "2026-08-28T14:40:30.950273+00:00",
   "status": "partial_restore",
-  "overall_restore_fraction_estimate": 0.375,
+  "overall_restore_fraction_estimate": 0.422,
   "fraction_note": "Heuristic coverage of reverse-engineering facets; NOT product equivalence",
   "facets": {
-    "usb_transport_and_framing": 0.85,
-    "stream_arm_sequence_structure": 0.55,
+    "usb_transport_and_framing": 0.9,
+    "stream_arm_sequence_structure": 0.6,
+    "command_body_tlv_structure": 0.55,
     "sample_word_structure": 0.6,
     "sample_physical_units": 0.05,
-    "channel_map_and_sync": 0.1,
+    "channel_map_and_sync": 0.25,
     "fx2_datapath_anchors": 0.5,
     "fpga_analog_behavior": 0.15,
     "host_end_to_end_restore": 0.2
@@ -16,10 +17,10 @@
   "layers": [
     {
       "layer": "USB_command_plane",
-      "restored": "framing + opcode inventory + arm-window consensus sequence",
-      "artifact": "ep01_stream_arm_sequence.json / usb_command_taxonomy.json",
+      "restored": "framing + opcode inventory + arm-window consensus + 0x0c TLV/body pairing",
+      "artifact": "ep01_stream_arm_sequence.json / ep01_body_semantics.json / usb_command_taxonomy.json",
       "confidence": "candidate",
-      "missing": "opcode semantics, minimal recipe proof via replay"
+      "missing": "opcode semantics proof via replay; stimulus-linked field meanings"
     },
     {
       "layer": "USB_data_plane_bytes",
@@ -73,6 +74,20 @@
     "0x10",
     "0x04"
   ],
+  "body_hypotheses": [
+    "H_STATUS_OK_2",
+    "H_KEEPALIVE_01",
+    "H_BODY_0C_TLV",
+    "H_SUB_03_CHANNEL",
+    "H_SUB_0F_READBACK",
+    "H_SUB_20_QUERY"
+  ],
+  "channel_index_candidate_hist": {
+    "0": 52,
+    "1": 52,
+    "2": 52,
+    "3": 52
+  },
   "oracle_headline": {
     "opcode": "0x08",
     "binary_owner_routine": "0x1435",
@@ -94,11 +109,13 @@
     "eeprom.bin still missing (L7)",
     "Cannot auto-upgrade to confirmed under catalog policy"
   ],
+  "blocker_experiments_doc": "phase_c/templates/FULL_RESTORE_BLOCKERS.md",
+  "passive_evidence_exhausted": true,
   "next_actions": [
-    "Lab: known sine/DC on AI0 alone → validate packing + scale",
-    "Lab: 4ch common-source → channel interleave",
-    "Replay white-list arm recipe from ep01_stream_arm_sequence.json",
-    "Physical eeprom.bin dump for L7 firmware truth"
+    "Lab B1: known sine/DC on AI0 alone → validate packing + scale",
+    "Lab B2: 4ch common-source / single-hot → channel map vs 0c03 index",
+    "Lab B3: Replay white-list arm recipe from ep01_stream_arm_sequence.json",
+    "Lab B5: Physical eeprom.bin dump for L7 firmware truth"
   ],
   "confidence_ceiling": "candidate",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"

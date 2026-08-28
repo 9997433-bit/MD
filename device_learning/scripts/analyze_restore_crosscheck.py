@@ -29,14 +29,15 @@ def main() -> None:
     stream = load("fx2_stream_path.json")
     oracle = load("fx2_oracle_crosscheck.json")
     preview = load("ep84_unpack_preview.json")
+    bodies = load("ep01_body_semantics.json")
 
     layers = [
         {
             "layer": "USB_command_plane",
-            "restored": "framing + opcode inventory + arm-window consensus sequence",
-            "artifact": "ep01_stream_arm_sequence.json / usb_command_taxonomy.json",
+            "restored": "framing + opcode inventory + arm-window consensus + 0x0c TLV/body pairing",
+            "artifact": "ep01_stream_arm_sequence.json / ep01_body_semantics.json / usb_command_taxonomy.json",
             "confidence": "candidate",
-            "missing": "opcode semantics, minimal recipe proof via replay",
+            "missing": "opcode semantics proof via replay; stimulus-linked field meanings",
         },
         {
             "layer": "USB_data_plane_bytes",
@@ -83,11 +84,12 @@ def main() -> None:
     ]))
 
     pct_parts = {
-        "usb_transport_and_framing": 0.85,
-        "stream_arm_sequence_structure": 0.55,
+        "usb_transport_and_framing": 0.90,
+        "stream_arm_sequence_structure": 0.60,
+        "command_body_tlv_structure": 0.55,
         "sample_word_structure": 0.60,
         "sample_physical_units": 0.05,
-        "channel_map_and_sync": 0.10,
+        "channel_map_and_sync": 0.25,
         "fx2_datapath_anchors": 0.50,
         "fpga_analog_behavior": 0.15,
         "host_end_to_end_restore": 0.20,
@@ -103,14 +105,18 @@ def main() -> None:
         "layers": layers,
         "top_packing": pack.get("top_hypothesis"),
         "arm_first_occurrence_chain": arm.get("longest_common_first_occurrence_chain"),
+        "body_hypotheses": [h.get("id") for h in (bodies.get("hypotheses") or [])],
+        "channel_index_candidate_hist": bodies.get("channel_index_candidate_hist"),
         "oracle_headline": oracle.get("headline"),
         "unpack_preview_status": preview.get("status"),
         "blockers_to_full_restore": blockers,
+        "blocker_experiments_doc": "phase_c/templates/FULL_RESTORE_BLOCKERS.md",
+        "passive_evidence_exhausted": True,
         "next_actions": [
-            "Lab: known sine/DC on AI0 alone → validate packing + scale",
-            "Lab: 4ch common-source → channel interleave",
-            "Replay white-list arm recipe from ep01_stream_arm_sequence.json",
-            "Physical eeprom.bin dump for L7 firmware truth",
+            "Lab B1: known sine/DC on AI0 alone → validate packing + scale",
+            "Lab B2: 4ch common-source / single-hot → channel map vs 0c03 index",
+            "Lab B3: Replay white-list arm recipe from ep01_stream_arm_sequence.json",
+            "Lab B5: Physical eeprom.bin dump for L7 firmware truth",
         ],
         "confidence_ceiling": "candidate",
         "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
@@ -139,8 +145,13 @@ def main() -> None:
         f"- 打包：`{(pack.get('top_hypothesis') or {}).get('id')}` — {(pack.get('top_hypothesis') or {}).get('statement')}",
         f"- 启动链（首现）：`{' → '.join(arm.get('longest_common_first_occurrence_chain') or [])}`",
         f"- 固件枢纽：`0x1435`（FIFO/EP micro-ops + oracle 与 `0x08` 关联）",
+        f"- 命令体：`0x0c` TLV；`0c03` 索引 0..3 为通道候选；EP81 状态前缀多为 `u32be==2`",
         "",
         "## 完全还原阻塞",
+        "",
+        "可复现实验清单：[`phase_c/templates/FULL_RESTORE_BLOCKERS.md`](phase_c/templates/FULL_RESTORE_BLOCKERS.md)",
+        "",
+        "**被动证据已穷尽**（无新激励 pcap / EEPROM 前勿重复空扫同一 session）。",
         "",
     ]
     for b in blockers:
@@ -159,6 +170,7 @@ def main() -> None:
         "- `manifests/restore_crosscheck.json`",
         "- `manifests/ep84_packing_deep.json`",
         "- `manifests/ep01_stream_arm_sequence.json`",
+        "- `manifests/ep01_body_semantics.json`",
         "- `manifests/fx2_stream_path.json`",
         "- `manifests/ep84_unpack_preview.json`",
         "",
