@@ -1,0 +1,195 @@
+{
+  "generated_at": "2026-08-28T09:32:50+00:00",
+  "status": "observed_with_inference",
+  "confidence": "candidate",
+  "source": {
+    "path": "phase_b/captures/usb_enum.pcapng",
+    "sha256": "df096a1fb7bcdc5f4c0ab85db95954af119271cb24a0e10d1a9f727507e31f53",
+    "capture_start_utc": "2026-08-28T06:46:39.331582Z",
+    "time_basis": "frame.time_relative seconds from capture start",
+    "tool": "tshark 4.2.2"
+  },
+  "bus_id": 2,
+  "candidate_transition": {
+    "from": {
+      "idVendor": "0x3923",
+      "idProduct": "0x7317",
+      "device_address": 8,
+      "bcdDevice": "0x744f"
+    },
+    "to": {
+      "idVendor": "0x3923",
+      "idProduct": "0x744f",
+      "device_address": 9,
+      "bcdDevice": "0x0001"
+    },
+    "relationship": "volatile firmware load followed by USB renumeration",
+    "confidence": "candidate"
+  },
+  "timeline": [
+    {
+      "event": "loader_0x7317_appears",
+      "frame": 35,
+      "t_rel_s": 5.600594,
+      "identity_confirmed": {
+        "frame": 38,
+        "t_rel_s": 5.600789,
+        "idVendor": "0x3923",
+        "idProduct": "0x7317",
+        "bcdDevice": "0x744f"
+      },
+      "evidence": "First traffic for USB address 8, followed by its DEVICE descriptor."
+    },
+    {
+      "event": "cpucs_hold",
+      "stage": 1,
+      "frame": 47,
+      "completion_frame": 48,
+      "t_rel_s": 5.756657,
+      "completion_t_rel_s": 5.75671,
+      "request": "0xA0",
+      "address": "0xE600",
+      "value": "0x01",
+      "interpretation": "CPUCS reset asserted before load",
+      "confidence": "candidate"
+    },
+    {
+      "event": "a0_load_burst",
+      "stage": 1,
+      "frame_range": [
+        49,
+        60
+      ],
+      "setup_frame_range": [
+        49,
+        59
+      ],
+      "start_t_rel_s": 5.75673,
+      "end_t_rel_s": 5.757456,
+      "address_range": [
+        "0x0000",
+        "0x0503"
+      ],
+      "host_to_device_transfers": 3,
+      "host_to_device_bytes": 1284,
+      "device_to_host_readbacks": 3,
+      "device_to_host_bytes": 1284
+    },
+    {
+      "event": "cpucs_release",
+      "stage": 1,
+      "frame": 61,
+      "completion_frame": 62,
+      "t_rel_s": 5.757475,
+      "completion_t_rel_s": 5.757531,
+      "request": "0xA0",
+      "address": "0xE600",
+      "value": "0x00",
+      "interpretation": "CPUCS reset released after first load",
+      "confidence": "candidate"
+    },
+    {
+      "event": "intervening_vendor_transfers",
+      "frame_range": [
+        63,
+        156
+      ],
+      "start_t_rel_s": 5.757583,
+      "end_t_rel_s": 6.32688,
+      "requests": [
+        "0xB0",
+        "0xA4",
+        "0xA5"
+      ],
+      "note": "Included to make the gap between the two 0xA0 load stages explicit; request semantics are not asserted here."
+    },
+    {
+      "event": "cpucs_hold",
+      "stage": 2,
+      "frame": 157,
+      "completion_frame": 158,
+      "t_rel_s": 6.326918,
+      "completion_t_rel_s": 6.326995,
+      "request": "0xA0",
+      "address": "0xE600",
+      "value": "0x01",
+      "interpretation": "CPUCS reset asserted before load",
+      "confidence": "candidate"
+    },
+    {
+      "event": "a0_load_burst",
+      "stage": 2,
+      "frame_range": [
+        159,
+        286
+      ],
+      "setup_frame_range": [
+        159,
+        285
+      ],
+      "start_t_rel_s": 6.327006,
+      "end_t_rel_s": 6.334583,
+      "address_range": [
+        "0x0000",
+        "0x3fff"
+      ],
+      "host_to_device_transfers": 32,
+      "host_to_device_bytes": 16384,
+      "device_to_host_readbacks": 32,
+      "device_to_host_bytes": 16384
+    },
+    {
+      "event": "cpucs_release",
+      "stage": 2,
+      "frame": 287,
+      "completion_frame": 288,
+      "t_rel_s": 6.334603,
+      "completion_t_rel_s": 6.334632,
+      "request": "0xA0",
+      "address": "0xE600",
+      "value": "0x00",
+      "interpretation": "Final CPUCS reset release",
+      "confidence": "candidate"
+    },
+    {
+      "event": "loader_disconnect_inferred",
+      "last_loader_frame": 288,
+      "last_loader_t_rel_s": 6.334632,
+      "hub_change_frame": 289,
+      "hub_change_t_rel_s": 6.340264,
+      "hub_interrupt_bitmap": "0x10",
+      "evidence": "USB address 8 is silent after the final CPUCS completion; the next frame is a same-bus hub status-change interrupt.",
+      "confidence": "candidate",
+      "boundary": "USBPcap contains no explicit device-disconnect record, so the disconnect is inferred rather than directly observed."
+    },
+    {
+      "event": "primary_0x744f_appears",
+      "frame": 295,
+      "t_rel_s": 8.059856,
+      "identity_confirmed": {
+        "frame": 298,
+        "t_rel_s": 8.060063,
+        "idVendor": "0x3923",
+        "idProduct": "0x744f",
+        "bcdDevice": "0x0001"
+      },
+      "evidence": "First traffic for new USB address 9, followed by its DEVICE descriptor."
+    }
+  ],
+  "timing_summary": {
+    "loader_first_seen_to_final_cpucs_release_s": 0.734009,
+    "final_loader_frame_to_hub_change_s": 0.005632,
+    "hub_change_to_primary_first_seen_s": 1.719592,
+    "loader_last_seen_to_primary_first_seen_s": 1.725224
+  },
+  "a0_summary": {
+    "non_cpucs_host_to_device_transfers": 35,
+    "non_cpucs_host_to_device_bytes": 17668,
+    "non_cpucs_device_to_host_readbacks": 35,
+    "non_cpucs_device_to_host_bytes": 17668,
+    "cpucs_writes": 4
+  },
+  "interpretation": "The observed 0x3923:0x7317 loader at address 8 receives two 0xA0 memory-load/readback bursts bracketed by CPUCS writes, then goes silent after the final CPUCS release. A hub change follows and 0x3923:0x744f appears at address 9. This supports, but does not independently prove, a loader-to-runtime renumeration.",
+  "boundary": "VID/PID descriptors, requests, payload bytes, frame numbers, and times are observed. CPUCS meaning follows the public Cypress FX2 0xE600 convention; the disconnect and identity continuity across addresses are candidate inferences.",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}
