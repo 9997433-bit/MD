@@ -23,6 +23,7 @@ export function updateFuryBar(elements, boss, profile, lastFury = 0) {
   elements.container.classList.toggle("earth", bossKind === "earth");
   elements.container.classList.toggle("wind", bossKind === "wind");
   elements.container.classList.toggle("ice", bossKind === "ice");
+  elements.container.classList.toggle("fire", bossKind === "fire");
   elements.container.classList.toggle("urgent", casting && fury === 1);
   elements.container.classList.toggle("casting", casting);
 

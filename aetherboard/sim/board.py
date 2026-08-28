@@ -94,3 +94,14 @@ def positions_2x2(top_left: Pos, size: int) -> list[Pos]:
             if candidate.in_bounds(size):
                 positions.append(candidate)
     return positions
+
+
+def positions_diagonals(center: Pos, size: int) -> list[Pos]:
+    """X-shaped diagonals through center (cells where |dx| == |dy|)."""
+    positions: list[Pos] = []
+    for x in range(size):
+        for y in range(size):
+            candidate = Pos(x, y)
+            if abs(candidate.x - center.x) == abs(candidate.y - center.y):
+                positions.append(candidate)
+    return positions

@@ -61,13 +61,22 @@ namespace Aetherboard.Core
                 case TelegraphKind.IceRing:
                     score += pos.Distance(center) == 2 ? 40 : -30;
                     break;
+                case TelegraphKind.FlameBreath:
+                    if (Math.Abs(pos.X - center.X) == Math.Abs(pos.Y - center.Y)) score -= 60;
+                    break;
+                case TelegraphKind.Meteor:
+                    if (state.PendingHazards.Any(p => p.Equals(pos))) score -= 80;
+                    break;
+                case TelegraphKind.HeatLink:
+                    score -= MinDist(unit, pos, party) * 5;
+                    break;
                 default:
                     score += MinDist(unit, pos, party);
                     break;
             }
 
             if (unit.Job == JobType.BlackMage && !pos.Equals(unit.Pos)) score -= 2;
-            if (unit.Job == JobType.Knight && telegraph != TelegraphKind.Spread)
+            if (unit.Job == JobType.Knight && telegraph is not (TelegraphKind.Spread or TelegraphKind.HeatLink))
                 score -= pos.Distance(boss) * 2;
             if (BoardMath.IsDeadly(state.Cells, pos)) score -= 1000;
             return score;

@@ -233,13 +233,32 @@ namespace Aetherboard.Core.Tests
         }
 
         [Fact]
-        public void BossRegistry_HasThreeBossesIncludingIce()
+        public void Fire_AutoPlay_CanWin()
         {
-            Assert.Equal(3, BossRegistry.AllBossIds.Count);
+            var wins = 0;
+            for (var seed = 0; seed < 20; seed++)
+            {
+                var engine = new BattleEngine("fire", seed);
+                engine.BeginWarning();
+                for (var i = 0; i < 100; i++)
+                {
+                    if (engine.State.Phase is BattlePhase.Victory or BattlePhase.Defeat) break;
+                    engine.StepAuto();
+                }
+                if (engine.State.Phase == BattlePhase.Victory) wins++;
+            }
+            Assert.True(wins > 0);
+        }
+
+        [Fact]
+        public void BossRegistry_HasFourBossesIncludingFire()
+        {
+            Assert.Equal(4, BossRegistry.AllBossIds.Count);
             Assert.Contains("earth", BossRegistry.AllBossIds);
             Assert.Contains("wind", BossRegistry.AllBossIds);
             Assert.Contains("ice", BossRegistry.AllBossIds);
-            Assert.Equal("冰灵女皇", BossRegistry.Get("ice").Create().Name);
+            Assert.Contains("fire", BossRegistry.AllBossIds);
+            Assert.Equal("火灵君主", BossRegistry.Get("fire").Create().Name);
         }
     }
 }

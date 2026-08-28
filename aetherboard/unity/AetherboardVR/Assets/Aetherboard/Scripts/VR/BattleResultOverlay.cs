@@ -132,6 +132,7 @@ namespace Aetherboard.VR
             CreateButton(row, "土灵", () => SwitchBoss("earth"));
             CreateButton(row, "风灵", () => SwitchBoss("wind"));
             CreateButton(row, "冰灵", () => SwitchBoss("ice"));
+            CreateButton(row, "火灵", () => SwitchBoss("fire"));
             CreateButton(row, "关闭", Hide);
 
             gameObject.SetActive(true);

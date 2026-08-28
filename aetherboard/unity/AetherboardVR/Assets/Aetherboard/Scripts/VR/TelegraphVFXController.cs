@@ -65,6 +65,7 @@ namespace Aetherboard.VR
                 case TelegraphKind.EarthenFury:
                 case TelegraphKind.Cyclone:
                 case TelegraphKind.Blizzard:
+                case TelegraphKind.Eruption:
                     _pulseRoutine = StartCoroutine(FuryPulse());
                     break;
                 case TelegraphKind.IceLance:
@@ -78,6 +79,17 @@ namespace Aetherboard.VR
                 case TelegraphKind.IceRing:
                     SpawnIceRing(cells);
                     _pulseRoutine = StartCoroutine(PulseActive(2f, 0.1f));
+                    break;
+                case TelegraphKind.FlameBreath:
+                    SpawnFlameX(cells);
+                    _pulseRoutine = StartCoroutine(PulseActive(2.3f, 0.09f));
+                    break;
+                case TelegraphKind.Meteor:
+                    SpawnMeteorMarkers(cells);
+                    _pulseRoutine = StartCoroutine(PulseActive(2.6f, 0.1f));
+                    break;
+                case TelegraphKind.HeatLink:
+                    _pulseRoutine = StartCoroutine(PulseActive(2f, 0.12f));
                     break;
             }
         }
@@ -96,6 +108,10 @@ namespace Aetherboard.VR
             TelegraphKind.FrozenGround => new Color(0.35f, 0.65f, 1f, 0.88f),
             TelegraphKind.IceRing => new Color(0.65f, 0.92f, 1f, 0.9f),
             TelegraphKind.Blizzard => new Color(0.75f, 0.9f, 1f, 0.95f),
+            TelegraphKind.FlameBreath => new Color(1f, 0.35f, 0.08f, 0.92f),
+            TelegraphKind.Meteor => new Color(1f, 0.45f, 0.12f, 0.9f),
+            TelegraphKind.HeatLink => new Color(1f, 0.55f, 0.2f, 0.9f),
+            TelegraphKind.Eruption => new Color(1f, 0.2f, 0.05f, 0.95f),
             _ => new Color(1f, 0.65f, 0.1f, 0.85f)
         };
 
@@ -248,6 +264,44 @@ namespace Aetherboard.VR
             ring.GetComponent<Renderer>().material = ProceduralAssets.CreateUnlitMaterial(ringColor);
             Destroy(ring.GetComponent<Collider>());
             _active.Add(ring);
+        }
+
+        private void SpawnFlameX(List<GridPos> cells)
+        {
+            var fireColor = new Color(1f, 0.4f, 0.1f, 0.95f);
+            var center = _table.GridToWorld(3, 3) + Vector3.up * 0.04f;
+            foreach (var (dx, dy) in new[] { (1, 1), (1, -1) })
+            {
+                var line = new GameObject("FlameDiag");
+                line.transform.SetParent(vfxRoot, false);
+                var lr = line.AddComponent<LineRenderer>();
+                lr.positionCount = 2;
+                lr.startWidth = 0.012f;
+                lr.endWidth = 0.005f;
+                lr.material = ProceduralAssets.CreateUnlitMaterial(fireColor);
+                lr.startColor = lr.endColor = fireColor;
+                lr.useWorldSpace = true;
+                lr.SetPosition(0, _table.GridToWorld(3 - 3 * dx, 3 - 3 * dy) + Vector3.up * 0.04f);
+                lr.SetPosition(1, _table.GridToWorld(3 + 3 * dx, 3 + 3 * dy) + Vector3.up * 0.04f);
+                _active.Add(line);
+            }
+            _ = center;
+        }
+
+        private void SpawnMeteorMarkers(List<GridPos> cells)
+        {
+            var meteorColor = new Color(1f, 0.35f, 0.08f, 0.9f);
+            foreach (var pos in cells)
+            {
+                var marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                marker.name = "MeteorMarker";
+                marker.transform.SetParent(vfxRoot, false);
+                marker.transform.position = _table.GridToWorld(pos.X, pos.Y) + Vector3.up * 0.06f;
+                marker.transform.localScale = Vector3.one * (_table.CellSize * 0.28f);
+                marker.GetComponent<Renderer>().material = ProceduralAssets.CreateUnlitMaterial(meteorColor);
+                Destroy(marker.GetComponent<Collider>());
+                _active.Add(marker);
+            }
         }
 
         private static GameObject CreateCrackLine(Vector3 center, float halfLen, Color color, float yawDeg)

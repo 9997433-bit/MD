@@ -27,6 +27,10 @@ export const Telegraph = {
   FROZEN_GROUND: "FROZEN_GROUND",
   ICE_RING: "ICE_RING",
   BLIZZARD: "BLIZZARD",
+  FLAME_BREATH: "FLAME_BREATH",
+  METEOR: "METEOR",
+  HEAT_LINK: "HEAT_LINK",
+  ERUPTION: "ERUPTION",
 };
 
 export const SKILLS = {
@@ -67,4 +71,8 @@ export const TELEGRAPH_TEXT = {
   FROZEN_GROUND: "霜冻：2×2 危险区",
   ICE_RING: "冰环：站在距中心 2 格",
   BLIZZARD: "暴雪：2 回合内打断",
+  FLAME_BREATH: "火息：对角线 X 路径",
+  METEOR: "陨石：随机落点危险",
+  HEAT_LINK: "灼热连结：必须与友军相邻",
+  ERUPTION: "喷发：2 回合内打断",
 };

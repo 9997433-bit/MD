@@ -14,7 +14,7 @@ namespace Aetherboard.VR
         private static readonly string[] ExpectedModels =
         {
             "Piece_Knight", "Piece_WhiteMage", "Piece_BlackMage", "Piece_Bard",
-            "Table_Base", "Grid_Cell", "Boss_earth", "Boss_wind", "Boss_ice"
+            "Table_Base", "Grid_Cell", "Boss_earth", "Boss_wind", "Boss_ice", "Boss_fire"
         };
 
         public static GameObject LoadPieceModel(JobType job)

@@ -211,4 +211,73 @@ export const BOSS_PROFILES = {
       return boss.phase === 1 ? 110 : boss.phase === 2 ? 140 : 170;
     },
   },
+  fire: {
+    id: "fire",
+    name: "火灵君主",
+    maxHp: 5200,
+    victory: "胜利！火灵君主被击败。",
+    furyName: "喷发",
+    pickTelegraph(boss) {
+      if (boss.phase === 1) return Telegraph.FLAME_BREATH;
+      if (boss.phase === 2) return Telegraph.METEOR;
+      if (boss.fury > 0) return Telegraph.ERUPTION;
+      if (boss.shrink < 1) return Telegraph.HEAT_LINK;
+      return Telegraph.ERUPTION;
+    },
+    preview(telegraph, boss, pending) {
+      const text = {
+        [Telegraph.FLAME_BREATH]: "火息：对角线 X 路径",
+        [Telegraph.METEOR]: "陨石：随机落点危险",
+        [Telegraph.HEAT_LINK]: "灼热连结：必须与友军相邻",
+        [Telegraph.ERUPTION]: "喷发：2 回合内打断",
+      }[telegraph] || "";
+      let danger = pending?.length ? pending : [];
+      if (telegraph === Telegraph.FLAME_BREATH) {
+        danger = [];
+        for (let x = 0; x < BOARD_SIZE; x++)
+          for (let y = 0; y < BOARD_SIZE; y++) {
+            if (Math.abs(x - center.x) === Math.abs(y - center.y)) danger.push({ x, y });
+          }
+      }
+      return { text, danger };
+    },
+    resolve(telegraph, boss, pending) {
+      const logs = [];
+      let hazards = [];
+      if (telegraph === Telegraph.FLAME_BREATH) {
+        for (let x = 0; x < BOARD_SIZE; x++)
+          for (let y = 0; y < BOARD_SIZE; y++) {
+            if (Math.abs(x - center.x) === Math.abs(y - center.y)) hazards.push({ x, y });
+          }
+        logs.push("火息沿对角线扫过！");
+      } else if (telegraph === Telegraph.METEOR) {
+        hazards = pending || [];
+        logs.push("陨石砸落！");
+      } else if (telegraph === Telegraph.HEAT_LINK) {
+        boss.shrink += 1;
+        logs.push("灼热连结判定！");
+      } else if (telegraph === Telegraph.ERUPTION && boss.fury > 0) {
+        boss.fury -= 1;
+        if (boss.fury === 0) logs.push("喷发发动！");
+      }
+      const dmg = {
+        [Telegraph.FLAME_BREATH]: 155,
+        [Telegraph.METEOR]: 150,
+        [Telegraph.HEAT_LINK]: 200,
+        [Telegraph.ERUPTION]: 9999,
+      }[telegraph] || 0;
+      return {
+        hazards,
+        logs,
+        dmg,
+        spread: false,
+        stack: false,
+        iceRing: false,
+        heatLink: telegraph === Telegraph.HEAT_LINK,
+      };
+    },
+    basicDamage(boss) {
+      return boss.phase === 1 ? 115 : boss.phase === 2 ? 145 : 175;
+    },
+  },
 };

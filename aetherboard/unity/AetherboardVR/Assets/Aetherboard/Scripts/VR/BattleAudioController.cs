@@ -68,8 +68,8 @@ namespace Aetherboard.VR
             {
                 _lastFuryTurns = furyTurns;
                 var bossId = _director?.Engine.BossId ?? "earth";
-                var urgentFreq = bossId switch { "wind" => 880f, "ice" => 784f, _ => 880f };
-                var warnFreq = bossId switch { "wind" => 520f, "ice" => 494f, _ => 520f };
+                var urgentFreq = bossId switch { "wind" => 880f, "ice" => 784f, "fire" => 932f, _ => 880f };
+                var warnFreq = bossId switch { "wind" => 520f, "ice" => 494f, "fire" => 554f, _ => 520f };
                 PlayBossCue(furyTurns == 1 ? urgentFreq : warnFreq, 0.1f, 0.22f);
             }
 
@@ -79,8 +79,8 @@ namespace Aetherboard.VR
             var interval = furyTurns == 1 ? 0.35f : 0.55f;
             _furyTickCooldown = interval;
             var tickBossId = _director?.Engine.BossId ?? "earth";
-            var tickUrgent = tickBossId switch { "wind" => 660f, "ice" => 622f, _ => 660f };
-            var tickWarn = tickBossId switch { "wind" => 440f, "ice" => 415f, _ => 440f };
+            var tickUrgent = tickBossId switch { "wind" => 660f, "ice" => 622f, "fire" => 698f, _ => 660f };
+            var tickWarn = tickBossId switch { "wind" => 440f, "ice" => 415f, "fire" => 466f, _ => 440f };
             PlayBossCue(furyTurns == 1 ? tickUrgent : tickWarn, 0.04f, 0.14f);
         }
 
@@ -121,6 +121,9 @@ namespace Aetherboard.VR
                     break;
                 case "ice":
                     PlayChord(new[] { 440f, 554f, 659f }, 0.2f, 0.22f);
+                    break;
+                case "fire":
+                    PlayChord(new[] { 311f, 392f, 466f }, 0.2f, 0.24f);
                     break;
                 default:
                     PlayChord(new[] { 262f, 330f, 392f }, 0.2f, 0.22f);

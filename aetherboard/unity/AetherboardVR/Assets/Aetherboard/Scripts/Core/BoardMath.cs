@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Aetherboard.Core
@@ -50,6 +51,19 @@ namespace Aetherboard.Core
             {
                 var p = new GridPos(topLeft.X + dx, topLeft.Y + dy);
                 if (p.InBounds(size)) list.Add(p);
+            }
+            return list;
+        }
+
+        public static List<GridPos> PositionsDiagonals(GridPos center, int size)
+        {
+            var list = new List<GridPos>();
+            for (var x = 0; x < size; x++)
+            for (var y = 0; y < size; y++)
+            {
+                var p = new GridPos(x, y);
+                if (Math.Abs(p.X - center.X) == Math.Abs(p.Y - center.Y))
+                    list.Add(p);
             }
             return list;
         }
