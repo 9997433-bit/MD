@@ -20,7 +20,7 @@
 ### 各链接说明
 
 - **AMD/Xilinx(DS182/DS180)**:`docs.amd.com/v/u/en-US/...` 是官方 PDF 入口,浏览器打开会直接触发 PDF 下载;脚本抓取会先收到 HTML 跳转页,建议用浏览器下载。
-- **FTDI**:官网直链有效,但站点启用了 Cloudflare 防爬(curl/wget 会返回 403),请用浏览器下载。入口页:<https://ftdichip.com/products/ft600q-b/>。
+- **FTDI**:上表为官网当前版直链(2024-11 上传,v1.06,文档号 FT_001118);站点启用了 Cloudflare 防爬(curl/wget 会返回 403),请用浏览器下载。入口页:<https://ftdichip.com/products/ft600q-b/>。
 - **TI 三款(ADS62P49/DAC3283/CDCE72010)**:`ti.com/lit/ds/symlink/<型号>.pdf` 是 TI 官方"永久链接",始终重定向到最新版 PDF,可直接 curl/wget。
 - **Infineon(S25FL128S)**:上表为官方直链(与 S25FL256S 合刊,文档 001-98283);站点偶有防爬验证,如脚本下载失败请用浏览器。产品页:<https://www.infineon.com/cms/en/product/memories/nor-flash/standard-spi-nor-flash/quad-spi-flash/s25fl128sagnfi001/>。
 - **ISSI(IS43TR16128D)**:合刊文档(覆盖 IS43/46TR16128D(L) 与 IS43/46TR82560D(L));issi.com 启用了 Incapsula 防爬,脚本请求会被拦截,请用浏览器下载,或从 <https://www.issi.com> 产品页(DRAM → DDR3)进入。
