@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T08:54:19.342379+00:00",
+  "generated_at": "2026-08-28T09:43:46.202250+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,7 +10,7 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-28T08:54:19.238943+00:00",
+      "generated_at": "2026-08-28T09:43:46.099636+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
@@ -23,8 +23,8 @@
         "not_started": 20,
         "missing": 11
       },
-      "pytest_count": 106,
-      "manifest_json_count": 53,
+      "pytest_count": 110,
+      "manifest_json_count": 61,
       "phase_b_blockers_remaining": 3,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-28T08:54:18.456605+00:00",
+      "generated_at": "2026-08-28T09:43:45.323458+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -108,7 +108,7 @@
       "next_command": "make check-captures"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-28T08:54:18.689760+00:00",
+      "generated_at": "2026-08-28T09:43:45.554579+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": false,
       "checklist": "0/6",
@@ -116,7 +116,7 @@
       "recommended_action": "complete phase B captures first"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-28T08:54:16.213349+00:00",
+      "generated_at": "2026-08-28T09:43:43.090519+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "static_complete_pending_hardware",
       "transition_ready": false,
@@ -134,7 +134,7 @@
       "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-28T08:54:18.300110+00:00",
+      "generated_at": "2026-08-28T09:43:45.168489+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -178,7 +178,7 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-28T08:54:18.378944+00:00",
+      "generated_at": "2026-08-28T09:43:45.246424+00:00",
       "applicable": false,
       "proposal_count": 0,
       "proposals": [],
@@ -188,7 +188,7 @@
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-28T08:54:17.668591+00:00",
+      "generated_at": "2026-08-28T09:43:44.541134+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -331,8 +331,8 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-28T08:51:21.225664+00:00",
-      "phase": "phase_b_in_progress",
+      "generated_at": "2026-08-28T09:42:56.005456+00:00",
+      "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
         "confirmed": 76,
@@ -422,7 +422,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T08:54:16.132771+00:00",
+      "updated_at": "2026-08-28T09:43:43.011113+00:00",
       "done_count": 0,
       "total_count": 6
     },
@@ -479,7 +479,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T08:54:15.018003+00:00",
+      "updated_at": "2026-08-28T09:43:41.901811+00:00",
       "done_count": 0,
       "total_count": 6
     }

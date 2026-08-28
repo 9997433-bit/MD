@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-28T09:34:18Z",
-  "scope": "USB acquisition evidence and catalog-alignment parallel workstreams",
+  "generated_at": "2026-08-28T09:43:00Z",
+  "scope": "USB acquisition parallel workstreams merged into cursor/ingest-usb-captures-7fdd",
   "baseline": {
     "branch": "cursor/ingest-usb-captures-7fdd",
     "status": "complete",
@@ -13,66 +13,73 @@
   },
   "workstreams": [
     {
-      "name": "catalog_evidence_review",
-      "branch": "cursor/review-usb-catalogs-ae64",
+      "name": "opcode_sequence",
       "status": "complete",
-      "result": "Descriptor and endpoint facts align with catalogs; EXP-011 is eligible only for candidate status because opcode meanings remain unknown.",
-      "evidence": [
-        "catalogs/catalog_usb.py",
-        "catalogs/catalog_learn.py",
-        "catalogs/catalog_exp.py",
-        "manifests/usb_protocol_decode.json",
-        "manifests/usb_command_taxonomy.json"
-      ]
-    },
-    {
-      "name": "acquisition_roadmap",
-      "branch": "cursor/acquisition-roadmap-b9ac",
-      "status": "complete",
-      "result": "Roadmap committed separately; integration remains a parent-workstream decision.",
-      "commit": "211e336"
-    },
-    {
-      "name": "throughput_hypothesis",
-      "branch": "cursor/usb-throughput-hypothesis-d433",
-      "status": "in_progress",
-      "boundary": "Transfer timing and byte counts do not establish ADC sample rate or sample format."
+      "artifact": "manifests/usb_opcode_sequence_hypothesis.json"
     },
     {
       "name": "sample_packing",
-      "branch": "cursor/usb-sample-packing-a4e7",
-      "status": "in_progress",
-      "boundary": "EP06/84 are candidate data-plane endpoints; sample packing remains unknown without a known stimulus."
-    },
-    {
-      "name": "command_plane_replay",
-      "branch": "cursor/replay-usb-command-plane-56fb",
       "status": "complete",
-      "result": "A replay script, generated replay manifest, and focused tests were committed separately.",
-      "commit": "bf2789b",
-      "boundary": "Replay scaffolding cannot confirm opcode meanings without controlled device responses."
+      "artifact": "manifests/usb_sample_packing_hypothesis.json"
     },
     {
       "name": "fx2_ram_extraction",
-      "branch": "cursor/extract-fx2-ram-26be",
-      "status": "in_progress",
-      "boundary": "USB 0xA0 transfers describe a volatile RAM-load path, not a persistent EEPROM dump."
+      "status": "complete",
+      "artifact": "phase_b/analysis/fx2_ram_from_enum.bin",
+      "boundary": "RAM load ≠ eeprom.bin"
+    },
+    {
+      "name": "throughput_hypothesis",
+      "status": "complete",
+      "artifact": "manifests/usb_throughput_hypothesis.json"
+    },
+    {
+      "name": "acquisition_roadmap",
+      "status": "complete",
+      "artifact": "ACQUISITION_ROADMAP.md"
+    },
+    {
+      "name": "command_plane_replay",
+      "status": "complete",
+      "artifact": "manifests/usb_command_replay_script.json"
+    },
+    {
+      "name": "stream_tag",
+      "status": "complete",
+      "artifact": "manifests/usb_stream_tag_hypothesis.json"
+    },
+    {
+      "name": "phase_c_sync_templates",
+      "status": "complete",
+      "artifact": "phase_c/templates/sync_multichannel.md"
     },
     {
       "name": "renumeration_timeline",
-      "branch": "cursor/usb-renumeration-timeline-eba5",
       "status": "complete",
-      "result": "A timed USB renumeration evidence timeline was committed separately.",
-      "commit": "0b74930",
-      "boundary": "The 0x7317 to 0x744f relationship remains a candidate based on chronology and loader traffic."
+      "artifact": "manifests/usb_renumeration_timeline.json"
+    },
+    {
+      "name": "catalog_evidence_review",
+      "status": "complete",
+      "artifact": "manifests/acquisition_parallel_status.json"
+    },
+    {
+      "name": "protocol_log_curation",
+      "status": "complete",
+      "artifact": "phase_b/captures/protocol_log.json"
+    },
+    {
+      "name": "host_api_sketch",
+      "status": "complete",
+      "artifact": "HOST_ACQ_API_SKETCH.md"
     }
   ],
   "eeprom": {
     "eeprom_bin_present": false,
-    "catalog_action": "No FW-EEPROM-* upgrade proposals are permitted.",
-    "boundary": "Synthetic EEPROM metadata and volatile USB RAM transfers are not substitutes for phase_b/captures/eeprom.bin."
+    "catalog_action": "No FW-EEPROM-* upgrades.",
+    "boundary": "Volatile USB RAM extract is not a substitute for phase_b/captures/eeprom.bin."
   },
-  "overall_status": "parallel_analysis_in_progress",
-  "boundary": "Observed USB descriptors and transfer framing do not establish command semantics, sample packing, ADC rate, or vendor-equivalent behavior.",
+  "overall_status": "parallel_analysis_merged",
+  "next_hard_blocker": "phase_b/captures/eeprom.bin",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
 }

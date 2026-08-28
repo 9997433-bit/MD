@@ -1,6 +1,6 @@
 # Identifier 索引（自动生成）
 
-**生成时间**：2026-08-28 08:54 UTC
+**生成时间**：2026-08-28 09:43 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -249,7 +249,7 @@
 | `LEARN-007-REF-DESIGN` | candidate | Compare REF catalog to public TRMs |
 | `LEARN-008-SYSTEM-MAP` | candidate | Follow data path in system_map.json |
 | `LEARN-009-EEPROM-LAYOUT` | candidate | Study FX2LP EEPROM boot layout |
-| `LEARN-010-USB-PROTO` | candidate | USB protocol from capture |
+| `LEARN-010-USB-PROTO` | candidate | USB command and acquisition planes from captures |
 | `LEARN-011-8051-DISASM` | not_started | 8051 firmware reverse engineering |
 | `LEARN-012-PIN-TEST` | not_started | Pin hypothesis verification experiments |
 | `LEARN-013-RELAY-TEST` | not_started | Relay switching experiment design |

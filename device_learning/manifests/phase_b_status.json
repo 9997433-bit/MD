@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-28T08:54:26.047079+00:00",
+  "generated_at": "2026-08-28T09:43:52.955411+00:00",
   "captures_dir": "phase_b/captures",
   "capture_count": 3,
   "captures": [
     {
       "name": "protocol_log.json",
-      "size_bytes": 16928,
-      "sha256": "10f5f38dd265591dd6010eab0ee9e90f24260b26a5d8a5ab09e86a489b722db3",
+      "size_bytes": 22135,
+      "sha256": "40d88e870b15ce0f43dfcc616f16a1bd96d1c256f7a78a15f48aa3a31a71cd02",
       "type": "protocol_log",
       "protocol_entries": 3
     },

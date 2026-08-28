@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28T08:54:20.760143+00:00",
-  "artifact_count": 68,
-  "present_count": 68,
+  "generated_at": "2026-08-28T09:43:47.652680+00:00",
+  "artifact_count": 76,
+  "present_count": 76,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 275672
+      "size_bytes": 1601851
     },
     {
       "path": "coverage.json",
@@ -61,7 +61,7 @@
       "path": "IDENTIFIER_INDEX.md",
       "description": "identifier 全表",
       "exists": true,
-      "size_bytes": 18915
+      "size_bytes": 18938
     },
     {
       "path": "HARDWARE_HANDOFF.md",
@@ -97,7 +97,7 @@
       "path": "manifests/static_freeze.json",
       "description": "静态阶段冻结记录",
       "exists": true,
-      "size_bytes": 510
+      "size_bytes": 523
     },
     {
       "path": "manifests/static_phase_closed.json",
@@ -109,19 +109,25 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15183
+      "size_bytes": 15196
     },
     {
       "path": "manifests/output_hashes.json",
       "description": "产物哈希",
       "exists": true,
-      "size_bytes": 2694
+      "size_bytes": 2695
+    },
+    {
+      "path": "manifests/acquisition_parallel_status.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 2500
     },
     {
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 10282
+      "size_bytes": 11583
     },
     {
       "path": "manifests/bit_strings.json",
@@ -253,7 +259,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1011
+      "size_bytes": 1024
     },
     {
       "path": "manifests/pcap_synthetic_meta.json",
@@ -364,6 +370,12 @@
       "size_bytes": 183
     },
     {
+      "path": "manifests/usb_command_replay_script.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1093303
+    },
+    {
       "path": "manifests/usb_command_taxonomy.json",
       "description": "generated manifest",
       "exists": true,
@@ -388,6 +400,18 @@
       "size_bytes": 5244
     },
     {
+      "path": "manifests/usb_fx2_ram_extract.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 5269
+    },
+    {
+      "path": "manifests/usb_opcode_sequence_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 15202
+    },
+    {
       "path": "manifests/usb_primary_ctrl_744f.json",
       "description": "generated manifest",
       "exists": true,
@@ -400,10 +424,34 @@
       "size_bytes": 3465
     },
     {
+      "path": "manifests/usb_renumeration_timeline.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 5941
+    },
+    {
+      "path": "manifests/usb_sample_packing_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 22915
+    },
+    {
       "path": "manifests/usb_session_traffic.json",
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 1250
+    },
+    {
+      "path": "manifests/usb_stream_tag_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 6587
+    },
+    {
+      "path": "manifests/usb_throughput_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 9022
     },
     {
       "path": "manifests/usb_vendor_ctrl_7317.json",

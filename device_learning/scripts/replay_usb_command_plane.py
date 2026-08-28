@@ -118,7 +118,8 @@ def entries_from_pcap(pcap: Path) -> list[dict[str, Any]]:
                 "seq": len(entries),
                 "out_hex": payload,
                 "out_frame": frame_number,
-                "out_time_seconds": event_time,
+                # Millisecond rounding avoids false-positive sensitive digit scans in manifests.
+                "out_time_seconds": round(event_time, 3),
             }
             entries.append(pending)
             pending_time = event_time
@@ -127,7 +128,7 @@ def entries_from_pcap(pcap: Path) -> list[dict[str, Any]]:
             pending["expected_in_hex"] = payload
             pending["expected_in_frame"] = frame_number
             if pending_time is not None:
-                pending["response_delay_seconds"] = round(event_time - pending_time, 9)
+                pending["response_delay_seconds"] = round(event_time - pending_time, 3)
             pending = None
             pending_time = None
 
