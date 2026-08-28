@@ -1,0 +1,165 @@
+{
+  "policy": "照片仅远程索引（vendored=false），未在本地打开 JPEG 核验丝印/标签前，任何料号与视角假设不得升级为 confirmed；本文件所有条目 status 固定为 candidate。禁止为核验目的将大图下载入库（如需核验，另行拉取到 hardware/photos/ 并按 photo_index.json 的 policy 处理）。expected_views 与 visible_components_hypothesis 仅为按文件名批次/序号推断的假设，confidence 表示推断置信度（low/medium），不代表已核实。",
+  "source_index": "manifests/photo_index.json",
+  "source_repo": "https://github.com/Montyzhang/sixfour",
+  "count": 17,
+  "inference_basis": "文件名含两个拍摄批次（20260826133630: 103-110 共 8 张；20260826133646: 111-119 共 9 张）。假设第一批为整板概览与主芯片区特写、第二批为通道阵列/接口/标签细节，属常见板卡拍摄顺序，未经打开图片核实。",
+  "mappings": [
+    {
+      "name": "微信图片_20260826133630_103_144.jpg",
+      "expected_views": [
+        { "view": "board_overview_top", "confidence": "medium" }
+      ],
+      "visible_components_hypothesis": ["FX3", "FPGA", "channel array", "connectors", "labels"],
+      "linked_hw_ids": ["HW-ASSY-114365F", "HW-BRAND-NI"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_104_144.jpg",
+      "expected_views": [
+        { "view": "board_overview_angled", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["FX3", "FPGA", "channel array", "connectors"],
+      "linked_hw_ids": ["HW-ASSY-114365F"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_105_144.jpg",
+      "expected_views": [
+        { "view": "board_overview_bottom", "confidence": "low" },
+        { "view": "board_overview_angled", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["labels", "OEM markings"],
+      "linked_hw_ids": ["HW-ASSY-114365F", "HW-OEM-S2C"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_106_144.jpg",
+      "expected_views": [
+        { "view": "top_fx3_fpga", "confidence": "medium" }
+      ],
+      "visible_components_hypothesis": ["FX3", "FPGA"],
+      "linked_hw_ids": ["HW-FX3-CYUSB3014", "HW-FPGA-ARTIX7", "HW-FPGA-XC7A100T"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_107_144.jpg",
+      "expected_views": [
+        { "view": "fpga_closeup", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["FPGA", "FPGA silkscreen"],
+      "linked_hw_ids": ["HW-FPGA-ARTIX7", "HW-FPGA-XC7A100T"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_108_144.jpg",
+      "expected_views": [
+        { "view": "fx3_closeup", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["FX3", "FX3 silkscreen", "USB-C nearby"],
+      "linked_hw_ids": ["HW-FX3-CYUSB3014", "HW-USB-C"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_109_144.jpg",
+      "expected_views": [
+        { "view": "connector", "confidence": "medium" }
+      ],
+      "visible_components_hypothesis": ["USB-C", "connectors", "front IO"],
+      "linked_hw_ids": ["HW-USB-C"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133630_110_144.jpg",
+      "expected_views": [
+        { "view": "label", "confidence": "medium" }
+      ],
+      "visible_components_hypothesis": ["labels", "assembly number", "brand marking"],
+      "linked_hw_ids": ["HW-ASSY-114365F", "HW-BRAND-NI"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_111_144.jpg",
+      "expected_views": [
+        { "view": "channel_array", "confidence": "medium" }
+      ],
+      "visible_components_hypothesis": ["channel array", "ADC array region"],
+      "linked_hw_ids": ["HW-ADC-ARRAY"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_112_144.jpg",
+      "expected_views": [
+        { "view": "channel_array_closeup", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["ADC array", "ADC silkscreen (潜在料号来源)"],
+      "linked_hw_ids": ["HW-ADC-ARRAY", "HW-ADC-MPN"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_113_144.jpg",
+      "expected_views": [
+        { "view": "channel_array_closeup", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["ADC array", "per-channel front-end"],
+      "linked_hw_ids": ["HW-ADC-ARRAY", "HW-ADC-MPN"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_114_144.jpg",
+      "expected_views": [
+        { "view": "connector", "confidence": "low" },
+        { "view": "channel_array", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["connectors", "channel IO"],
+      "linked_hw_ids": [],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_115_144.jpg",
+      "expected_views": [
+        { "view": "connector", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["USB-C", "connectors"],
+      "linked_hw_ids": ["HW-USB-C"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_116_144.jpg",
+      "expected_views": [
+        { "view": "top_fx3_fpga", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["FX3", "FPGA", "sync/clock locus 附近区域"],
+      "linked_hw_ids": ["HW-FX3-CYUSB3014", "HW-FPGA-ARTIX7", "HW-SYNC-LOCUS"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_117_144.jpg",
+      "expected_views": [
+        { "view": "label", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["labels", "OEM marking"],
+      "linked_hw_ids": ["HW-OEM-S2C", "HW-ASSY-114365F"],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_118_144.jpg",
+      "expected_views": [
+        { "view": "detail_misc", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["局部细节（未定）", "可能为电源/时钟区"],
+      "linked_hw_ids": [],
+      "status": "candidate"
+    },
+    {
+      "name": "微信图片_20260826133646_119_144.jpg",
+      "expected_views": [
+        { "view": "detail_misc", "confidence": "low" },
+        { "view": "label", "confidence": "low" }
+      ],
+      "visible_components_hypothesis": ["局部细节（未定）", "labels"],
+      "linked_hw_ids": [],
+      "status": "candidate"
+    }
+  ]
+}

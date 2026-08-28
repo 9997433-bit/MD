@@ -107,6 +107,41 @@ SPEC_ENTRIES: list[tuple[str, str, str, str, str]] = [
         "spec_sheet",
         "Port0/line0:15",
     ),
+    (
+        "SPEC-FIFO-SHARED-DEPTH",
+        "Effective per-channel FIFO depth shrinks with channel count",
+        "confirmed",
+        "spec_sheet",
+        "8191-sample FIFO is a single shared pool; ~8191/n samples per channel when n channels are in the scan list",
+    ),
+    (
+        "SPEC-DIFF-16",
+        "Sixteen differential AI channels",
+        "confirmed",
+        "spec_sheet",
+        "DIFF mode pairs AIn with AIn+8 terminals; 16 DIFF channels map 1:1 onto the 16 ADCs",
+    ),
+    (
+        "SPEC-RANGE-LIST",
+        "Multiple software-selectable AI input ranges",
+        "confirmed",
+        "spec_sheet",
+        "Per-channel programmable input range up to +/-10 V full scale; exact range list per spec table, no per-range sync caveat stated",
+    ),
+    (
+        "SPEC-MIN-RATE-NONE",
+        "No documented hardware minimum AI sample rate",
+        "confirmed",
+        "spec_sheet",
+        "Spec lists maximum rates only; low-rate operation bounded by timebase/divider, no minimum stated",
+    ),
+    (
+        "SPEC-OEM-VARIANT",
+        "USB-6453 OEM board-only variant exists",
+        "confirmed",
+        "spec_sheet",
+        "OEM variant shares the same AI/sync spec; differences are enclosure/connector level, not converter topology",
+    ),
 ]
 
 

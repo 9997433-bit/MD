@@ -1,6 +1,6 @@
 {
   "schema": "firebolt_learning.EvidenceLedger.v1",
-  "generated_at": "2026-08-28T13:32:49.705098+00:00",
+  "generated_at": "2026-08-28T13:46:33.530234+00:00",
   "product": {
     "name": "NI USB-6453",
     "codename": "Firebolt",
@@ -127,6 +127,46 @@
         "status": "confirmed",
         "boundary": "spec_sheet",
         "note": "Port0/line0:15"
+      },
+      {
+        "identifier": "SPEC-FIFO-SHARED-DEPTH",
+        "module": "spec_sync",
+        "source_identifier": "Effective per-channel FIFO depth shrinks with channel count",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "8191-sample FIFO is a single shared pool; ~8191/n samples per channel when n channels are in the scan list"
+      },
+      {
+        "identifier": "SPEC-DIFF-16",
+        "module": "spec_sync",
+        "source_identifier": "Sixteen differential AI channels",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "DIFF mode pairs AIn with AIn+8 terminals; 16 DIFF channels map 1:1 onto the 16 ADCs"
+      },
+      {
+        "identifier": "SPEC-RANGE-LIST",
+        "module": "spec_sync",
+        "source_identifier": "Multiple software-selectable AI input ranges",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Per-channel programmable input range up to +/-10 V full scale; exact range list per spec table, no per-range sync caveat stated"
+      },
+      {
+        "identifier": "SPEC-MIN-RATE-NONE",
+        "module": "spec_sync",
+        "source_identifier": "No documented hardware minimum AI sample rate",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "Spec lists maximum rates only; low-rate operation bounded by timebase/divider, no minimum stated"
+      },
+      {
+        "identifier": "SPEC-OEM-VARIANT",
+        "module": "spec_sync",
+        "source_identifier": "USB-6453 OEM board-only variant exists",
+        "status": "confirmed",
+        "boundary": "spec_sheet",
+        "note": "OEM variant shares the same AI/sync spec; differences are enclosure/connector level, not converter topology"
       }
     ],
     "hardware": [
@@ -443,15 +483,15 @@
     ]
   },
   "stats": {
-    "identifier_count": 52,
+    "identifier_count": 57,
     "by_status": {
-      "confirmed": 40,
+      "confirmed": 45,
       "candidate": 5,
       "unknown": 6,
       "hypothesis": 1
     },
     "by_block": {
-      "spec": 14,
+      "spec": 19,
       "hardware": 10,
       "fx3": 13,
       "bitstream": 7,

@@ -1,0 +1,73 @@
+{
+  "product": "NI USB-6453 / Firebolt",
+  "assembly": {
+    "id": "BOM-ASSY-114365F",
+    "name": "Assembly label 114365F-01L/03L family",
+    "status": "candidate",
+    "evidence": ["HW-ASSY-114365F"],
+    "notes": "Multiple sticker variants across teardown photos; treated as assembly family, not a single confirmed revision."
+  },
+  "sync_locus": {
+    "description": "Multi-channel synchronization is implemented at the ADC array + Artix-7 FPGA layer (shared convert clock into the fabric), not in the FX3 ARM firmware.",
+    "components": ["BOM-ADC-ARRAY", "BOM-FPGA-XC7A100T"],
+    "evidence": ["HW-SYNC-LOCUS", "SPEC-SYNC-LAYER", "SPEC-ADC-16"],
+    "notes": "FX3 firmware strings show no sample/sync handling; SPEC requires a shared convert clock across 16 ADCs, placing the sync locus in ADC+FPGA."
+  },
+  "items": [
+    {
+      "id": "BOM-FX3-CYUSB3014",
+      "name": "Cypress (Infineon) EZ-USB FX3 CYUSB3014 USB 3.0 controller",
+      "status": "confirmed",
+      "evidence": ["HW-FX3-CYUSB3014", "FX3-IMG-CY-MAGIC", "FX3-USB-VIDPID"],
+      "notes": "Photo marking matches firmware evidence (ThreadX ARM9 / FX3 strings)."
+    },
+    {
+      "id": "BOM-FPGA-XC7A100T",
+      "name": "Xilinx (AMD) Artix-7 XC7A100T FPGA",
+      "status": "confirmed",
+      "evidence": ["HW-FPGA-XC7A100T", "BIT-IDCODE"],
+      "notes": "Bitstream IDCODE 0x0362C093 confirms XC7A100T; binary evidence overrides ambiguous photo OCR (some reads suggested 50T)."
+    },
+    {
+      "id": "BOM-USB-C",
+      "name": "USB Type-C host connector",
+      "status": "confirmed",
+      "evidence": ["HW-USB-C"],
+      "notes": "Clearly visible on board edge in teardown photos."
+    },
+    {
+      "id": "BOM-BRAND-NI",
+      "name": "National Instruments branded PCB",
+      "status": "confirmed",
+      "evidence": ["HW-BRAND-NI"],
+      "notes": "NI logo, ni.com/patents and © 2024 silkscreen visible on teardown photos."
+    },
+    {
+      "id": "BOM-CONN-S2C",
+      "name": "S2C-SMT high-density board-level connectors",
+      "status": "candidate",
+      "evidence": ["HW-OEM-S2C"],
+      "notes": "Consistent with USB-6453 OEM 50-pin style interconnect; connector family not confirmed from markings."
+    },
+    {
+      "id": "BOM-ADC-ARRAY",
+      "name": "Repetitive multi-channel analog front-end array",
+      "status": "candidate",
+      "evidence": ["HW-ADC-ARRAY", "SPEC-ADC-16"],
+      "notes": "Board layout supports 16-ADC shared-convert-clock architecture; individual device MPNs not confirmed."
+    },
+    {
+      "id": "BOM-ADC-MPN",
+      "name": "Exact manufacturer part numbers for the 16 ADCs",
+      "status": "unknown",
+      "evidence": ["HW-ADC-MPN"],
+      "notes": "Silkscreen/markings unreadable in available photos; needs better photos or an official BOM. Do not guess MPNs."
+    }
+  ],
+  "counts": {
+    "total": 8,
+    "confirmed": 4,
+    "candidate": 3,
+    "unknown": 1
+  }
+}
