@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T13:04:00.774095+00:00",
+  "generated_at": "2026-08-28T13:14:58.472358+00:00",
   "status": "hypothesis",
   "layer": "L4",
   "plan_ref": "BINARY_RE_PLAN.md",
@@ -7,31 +7,313 @@
   "dispatch_candidates": [
     {
       "opcode": "0x01",
-      "imm_site_count": 22,
-      "oracle_ep84_burst_precede_hits": null,
+      "imm_site_count": 40,
+      "oracle_ep84_burst_precede_hits": 118,
       "dominant_owner_routines": [
         {
-          "entry": "0x0473",
-          "site_hits": 4
-        },
-        {
           "entry": "0x054c",
+          "site_hits": 6
+        },
+        {
+          "entry": "0x0473",
+          "site_hits": 5
+        },
+        {
+          "entry": "0x03b3",
           "site_hits": 2
         },
         {
-          "entry": "0x07ea",
-          "site_hits": 2
-        },
-        {
-          "entry": "0x0522",
+          "entry": "0x014c",
           "site_hits": 1
         },
         {
-          "entry": "0x053c",
+          "entry": "0x0165",
           "site_hits": 1
         }
       ],
       "sites": [
+        {
+          "imm_site": "0x014c",
+          "owner_routine": {
+            "entry": "0x014c",
+            "end_exclusive": "0x0165",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": []
+        },
+        {
+          "imm_site": "0x0165",
+          "owner_routine": {
+            "entry": "0x0165",
+            "end_exclusive": "0x0192",
+            "inbound_abs_refs": 7
+          },
+          "nearby_abs_branches": []
+        },
+        {
+          "imm_site": "0x0193",
+          "owner_routine": {
+            "entry": "0x0192",
+            "end_exclusive": "0x0202",
+            "inbound_abs_refs": 5
+          },
+          "nearby_abs_branches": []
+        },
+        {
+          "imm_site": "0x0393",
+          "owner_routine": {
+            "entry": "0x0393",
+            "end_exclusive": "0x03b3",
+            "inbound_abs_refs": 40
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x039a",
+              "op": "LJMP",
+              "dest": "0x04c6"
+            },
+            {
+              "at": "0x03a1",
+              "op": "LJMP",
+              "dest": "0x03f1"
+            },
+            {
+              "at": "0x03a9",
+              "op": "LJMP",
+              "dest": "0x04d2"
+            },
+            {
+              "at": "0x03b0",
+              "op": "LJMP",
+              "dest": "0x04de"
+            },
+            {
+              "at": "0x03ba",
+              "op": "LJMP",
+              "dest": "0x0436"
+            },
+            {
+              "at": "0x03c1",
+              "op": "LJMP",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x03c9",
+              "op": "LJMP",
+              "dest": "0x0517"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x03b3",
+          "owner_routine": {
+            "entry": "0x03b3",
+            "end_exclusive": "0x03f1",
+            "inbound_abs_refs": 18
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x039a",
+              "op": "LJMP",
+              "dest": "0x04c6"
+            },
+            {
+              "at": "0x03a1",
+              "op": "LJMP",
+              "dest": "0x03f1"
+            },
+            {
+              "at": "0x03a9",
+              "op": "LJMP",
+              "dest": "0x04d2"
+            },
+            {
+              "at": "0x03b0",
+              "op": "LJMP",
+              "dest": "0x04de"
+            },
+            {
+              "at": "0x03ba",
+              "op": "LJMP",
+              "dest": "0x0436"
+            },
+            {
+              "at": "0x03c1",
+              "op": "LJMP",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x03c9",
+              "op": "LJMP",
+              "dest": "0x0517"
+            },
+            {
+              "at": "0x03da",
+              "op": "LJMP",
+              "dest": "0x0436"
+            },
+            {
+              "at": "0x03e3",
+              "op": "LJMP",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x03ed",
+              "op": "LJMP",
+              "dest": "0x0517"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x03cd",
+          "owner_routine": {
+            "entry": "0x03b3",
+            "end_exclusive": "0x03f1",
+            "inbound_abs_refs": 18
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x039a",
+              "op": "LJMP",
+              "dest": "0x04c6"
+            },
+            {
+              "at": "0x03a1",
+              "op": "LJMP",
+              "dest": "0x03f1"
+            },
+            {
+              "at": "0x03a9",
+              "op": "LJMP",
+              "dest": "0x04d2"
+            },
+            {
+              "at": "0x03b0",
+              "op": "LJMP",
+              "dest": "0x04de"
+            },
+            {
+              "at": "0x03ba",
+              "op": "LJMP",
+              "dest": "0x0436"
+            },
+            {
+              "at": "0x03c1",
+              "op": "LJMP",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x03c9",
+              "op": "LJMP",
+              "dest": "0x0517"
+            },
+            {
+              "at": "0x03da",
+              "op": "LJMP",
+              "dest": "0x0436"
+            },
+            {
+              "at": "0x03e3",
+              "op": "LJMP",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x03ed",
+              "op": "LJMP",
+              "dest": "0x0517"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x040a",
+          "owner_routine": {
+            "entry": "0x03f1",
+            "end_exclusive": "0x042a",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x03da",
+              "op": "LJMP",
+              "dest": "0x0436"
+            },
+            {
+              "at": "0x03e3",
+              "op": "LJMP",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x03ed",
+              "op": "LJMP",
+              "dest": "0x0517"
+            },
+            {
+              "at": "0x0411",
+              "op": "LJMP",
+              "dest": "0x04ee"
+            },
+            {
+              "at": "0x0418",
+              "op": "LJMP",
+              "dest": "0x03fd"
+            },
+            {
+              "at": "0x0420",
+              "op": "LJMP",
+              "dest": "0x04fa"
+            },
+            {
+              "at": "0x0427",
+              "op": "LJMP",
+              "dest": "0x0507"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0473",
+          "owner_routine": {
+            "entry": "0x0473",
+            "end_exclusive": "0x0517",
+            "inbound_abs_refs": 18
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x044b",
+              "op": "LCALL",
+              "dest": "0x0459"
+            },
+            {
+              "at": "0x044e",
+              "op": "LCALL",
+              "dest": "0x0459"
+            },
+            {
+              "at": "0x0451",
+              "op": "LCALL",
+              "dest": "0x0459"
+            },
+            {
+              "at": "0x0454",
+              "op": "LCALL",
+              "dest": "0x0459"
+            },
+            {
+              "at": "0x047a",
+              "op": "LJMP",
+              "dest": "0x0442"
+            },
+            {
+              "at": "0x0481",
+              "op": "LJMP",
+              "dest": "0x0523"
+            },
+            {
+              "at": "0x0489",
+              "op": "LJMP",
+              "dest": "0x053c"
+            }
+          ]
+        },
         {
           "imm_site": "0x04a2",
           "owner_routine": {
@@ -81,183 +363,6 @@
               "dest": "0x053c"
             }
           ]
-        },
-        {
-          "imm_site": "0x04e1",
-          "owner_routine": {
-            "entry": "0x0473",
-            "end_exclusive": "0x0517",
-            "inbound_abs_refs": 18
-          },
-          "nearby_abs_branches": []
-        },
-        {
-          "imm_site": "0x050a",
-          "owner_routine": {
-            "entry": "0x0473",
-            "end_exclusive": "0x0517",
-            "inbound_abs_refs": 18
-          },
-          "nearby_abs_branches": []
-        },
-        {
-          "imm_site": "0x052b",
-          "owner_routine": {
-            "entry": "0x0522",
-            "end_exclusive": "0x053c",
-            "inbound_abs_refs": 2
-          },
-          "nearby_abs_branches": []
-        },
-        {
-          "imm_site": "0x0544",
-          "owner_routine": {
-            "entry": "0x053c",
-            "end_exclusive": "0x054c",
-            "inbound_abs_refs": 2
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x057e",
-              "op": "LCALL",
-              "dest": "0x0051"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x06cf",
-          "owner_routine": {
-            "entry": "0x054c",
-            "end_exclusive": "0x075b",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x0690",
-              "op": "LCALL",
-              "dest": "0x2a57"
-            },
-            {
-              "at": "0x069b",
-              "op": "LCALL",
-              "dest": "0x2a36"
-            },
-            {
-              "at": "0x06b6",
-              "op": "LCALL",
-              "dest": "0x342d"
-            },
-            {
-              "at": "0x06de",
-              "op": "LCALL",
-              "dest": "0x2a57"
-            },
-            {
-              "at": "0x06e9",
-              "op": "LCALL",
-              "dest": "0x2a36"
-            },
-            {
-              "at": "0x070c",
-              "op": "LCALL",
-              "dest": "0x342f"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x0721",
-          "owner_routine": {
-            "entry": "0x054c",
-            "end_exclusive": "0x075b",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x06e9",
-              "op": "LCALL",
-              "dest": "0x2a36"
-            },
-            {
-              "at": "0x070c",
-              "op": "LCALL",
-              "dest": "0x342f"
-            },
-            {
-              "at": "0x0732",
-              "op": "LCALL",
-              "dest": "0x2a57"
-            },
-            {
-              "at": "0x073d",
-              "op": "LCALL",
-              "dest": "0x2a36"
-            },
-            {
-              "at": "0x0747",
-              "op": "LCALL",
-              "dest": "0x3431"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x0a50",
-          "owner_routine": {
-            "entry": "0x07ea",
-            "end_exclusive": "0x0af9",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x0a2c",
-              "op": "LCALL",
-              "dest": "0x2bb3"
-            },
-            {
-              "at": "0x0a77",
-              "op": "LCALL",
-              "dest": "0x2bb3"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x0a6c",
-          "owner_routine": {
-            "entry": "0x07ea",
-            "end_exclusive": "0x0af9",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x0a2c",
-              "op": "LCALL",
-              "dest": "0x2bb3"
-            },
-            {
-              "at": "0x0a77",
-              "op": "LCALL",
-              "dest": "0x2bb3"
-            },
-            {
-              "at": "0x0a93",
-              "op": "LCALL",
-              "dest": "0x2bb3"
-            },
-            {
-              "at": "0x0a98",
-              "op": "LCALL",
-              "dest": "0x27ee"
-            },
-            {
-              "at": "0x0a9d",
-              "op": "LCALL",
-              "dest": "0x27f8"
-            },
-            {
-              "at": "0x0aa8",
-              "op": "LCALL",
-              "dest": "0x2dd3"
-            }
-          ]
         }
       ],
       "semantics": "unknown",
@@ -265,27 +370,27 @@
     },
     {
       "opcode": "0x08",
-      "imm_site_count": 11,
-      "oracle_ep84_burst_precede_hits": null,
+      "imm_site_count": 25,
+      "oracle_ep84_burst_precede_hits": 176,
       "dominant_owner_routines": [
         {
           "entry": "0x1435",
-          "site_hits": 3
+          "site_hits": 4
         },
         {
           "entry": "0x0007",
+          "site_hits": 2
+        },
+        {
+          "entry": "0x07ea",
+          "site_hits": 2
+        },
+        {
+          "entry": "0x054c",
           "site_hits": 1
         },
         {
-          "entry": "0x111c",
-          "site_hits": 1
-        },
-        {
-          "entry": "0x1327",
-          "site_hits": 1
-        },
-        {
-          "entry": "0x1db8",
+          "entry": "0x0f23",
           "site_hits": 1
         }
       ],
@@ -356,6 +461,301 @@
           ]
         },
         {
+          "imm_site": "0x003a",
+          "owner_routine": {
+            "entry": "0x0007",
+            "end_exclusive": "0x0126",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0000",
+              "op": "LJMP",
+              "dest": "0x075b"
+            },
+            {
+              "at": "0x0003",
+              "op": "LJMP",
+              "dest": "0x0f2a"
+            },
+            {
+              "at": "0x000b",
+              "op": "LJMP",
+              "dest": "0x1f64"
+            },
+            {
+              "at": "0x001b",
+              "op": "LJMP",
+              "dest": "0x30b3"
+            },
+            {
+              "at": "0x0026",
+              "op": "LCALL",
+              "dest": "0x299e"
+            },
+            {
+              "at": "0x0033",
+              "op": "LJMP",
+              "dest": "0x33d9"
+            },
+            {
+              "at": "0x0043",
+              "op": "LJMP",
+              "dest": "0x1b00"
+            },
+            {
+              "at": "0x004b",
+              "op": "LJMP",
+              "dest": "0x123d"
+            },
+            {
+              "at": "0x004c",
+              "op": "LCALL",
+              "dest": "0x3d02"
+            },
+            {
+              "at": "0x004e",
+              "op": "LJMP",
+              "dest": "0x270a"
+            },
+            {
+              "at": "0x0053",
+              "op": "LJMP",
+              "dest": "0x1b00"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x05f3",
+          "owner_routine": {
+            "entry": "0x054c",
+            "end_exclusive": "0x075b",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x05ca",
+              "op": "LCALL",
+              "dest": "0x2f72"
+            },
+            {
+              "at": "0x05f6",
+              "op": "LCALL",
+              "dest": "0x2d07"
+            },
+            {
+              "at": "0x0607",
+              "op": "LCALL",
+              "dest": "0x2a72"
+            },
+            {
+              "at": "0x0614",
+              "op": "LCALL",
+              "dest": "0x2a7c"
+            },
+            {
+              "at": "0x0618",
+              "op": "LCALL",
+              "dest": "0x2a67"
+            },
+            {
+              "at": "0x061f",
+              "op": "LCALL",
+              "dest": "0x2a7c"
+            },
+            {
+              "at": "0x0622",
+              "op": "LCALL",
+              "dest": "0x2a67"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0987",
+          "owner_routine": {
+            "entry": "0x07ea",
+            "end_exclusive": "0x0af9",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0958",
+              "op": "LCALL",
+              "dest": "0x2bb3"
+            },
+            {
+              "at": "0x0965",
+              "op": "LCALL",
+              "dest": "0x27f8"
+            },
+            {
+              "at": "0x0982",
+              "op": "LCALL",
+              "dest": "0x2078"
+            },
+            {
+              "at": "0x0993",
+              "op": "LCALL",
+              "dest": "0x1000"
+            },
+            {
+              "at": "0x099a",
+              "op": "LCALL",
+              "dest": "0x27d9"
+            },
+            {
+              "at": "0x099d",
+              "op": "LCALL",
+              "dest": "0x1d62"
+            },
+            {
+              "at": "0x09a2",
+              "op": "LCALL",
+              "dest": "0x27d9"
+            },
+            {
+              "at": "0x09a5",
+              "op": "LCALL",
+              "dest": "0x1d67"
+            },
+            {
+              "at": "0x09aa",
+              "op": "LCALL",
+              "dest": "0x27d9"
+            },
+            {
+              "at": "0x09ad",
+              "op": "LCALL",
+              "dest": "0x1d6c"
+            },
+            {
+              "at": "0x09b2",
+              "op": "LCALL",
+              "dest": "0x27d9"
+            },
+            {
+              "at": "0x09b5",
+              "op": "LCALL",
+              "dest": "0x1d71"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0aaf",
+          "owner_routine": {
+            "entry": "0x07ea",
+            "end_exclusive": "0x0af9",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0a77",
+              "op": "LCALL",
+              "dest": "0x2bb3"
+            },
+            {
+              "at": "0x0a93",
+              "op": "LCALL",
+              "dest": "0x2bb3"
+            },
+            {
+              "at": "0x0a98",
+              "op": "LCALL",
+              "dest": "0x27ee"
+            },
+            {
+              "at": "0x0a9d",
+              "op": "LCALL",
+              "dest": "0x27f8"
+            },
+            {
+              "at": "0x0aa8",
+              "op": "LCALL",
+              "dest": "0x2dd3"
+            },
+            {
+              "at": "0x0ab9",
+              "op": "LJMP",
+              "dest": "0x1216"
+            },
+            {
+              "at": "0x0aba",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0ad3",
+              "op": "LCALL",
+              "dest": "0x27ee"
+            },
+            {
+              "at": "0x0ad8",
+              "op": "LCALL",
+              "dest": "0x27ee"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x1006",
+          "owner_routine": {
+            "entry": "0x0f23",
+            "end_exclusive": "0x10c6",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0fc9",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0fcc",
+              "op": "LCALL",
+              "dest": "0x17c0"
+            },
+            {
+              "at": "0x1011",
+              "op": "LJMP",
+              "dest": "0x1233"
+            },
+            {
+              "at": "0x1012",
+              "op": "LCALL",
+              "dest": "0x33d0"
+            },
+            {
+              "at": "0x1033",
+              "op": "LCALL",
+              "dest": "0x1102"
+            },
+            {
+              "at": "0x1035",
+              "op": "LJMP",
+              "dest": "0x1232"
+            },
+            {
+              "at": "0x1036",
+              "op": "LCALL",
+              "dest": "0x3235"
+            },
+            {
+              "at": "0x103a",
+              "op": "LJMP",
+              "dest": "0x01c5"
+            },
+            {
+              "at": "0x103d",
+              "op": "LCALL",
+              "dest": "0x111c"
+            },
+            {
+              "at": "0x1043",
+              "op": "LCALL",
+              "dest": "0x3243"
+            }
+          ]
+        },
+        {
           "imm_site": "0x1152",
           "owner_routine": {
             "entry": "0x111c",
@@ -397,6 +797,51 @@
               "at": "0x118b",
               "op": "LCALL",
               "dest": "0x306f"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x1294",
+          "owner_routine": {
+            "entry": "0x1233",
+            "end_exclusive": "0x1327",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x1267",
+              "op": "LJMP",
+              "dest": "0x1327"
+            },
+            {
+              "at": "0x127a",
+              "op": "LJMP",
+              "dest": "0x1327"
+            },
+            {
+              "at": "0x128a",
+              "op": "LJMP",
+              "dest": "0x1318"
+            },
+            {
+              "at": "0x1291",
+              "op": "LJMP",
+              "dest": "0x1324"
+            },
+            {
+              "at": "0x1298",
+              "op": "LJMP",
+              "dest": "0x1327"
+            },
+            {
+              "at": "0x12aa",
+              "op": "LCALL",
+              "dest": "0x0165"
+            },
+            {
+              "at": "0x12cd",
+              "op": "LCALL",
+              "dest": "0x0192"
             }
           ]
         },
@@ -459,254 +904,167 @@
               "dest": "0x1db8"
             }
           ]
+        }
+      ],
+      "semantics": "unknown",
+      "confidence": "hypothesis"
+    },
+    {
+      "opcode": "0x09",
+      "imm_site_count": 3,
+      "oracle_ep84_burst_precede_hits": 118,
+      "dominant_owner_routines": [
+        {
+          "entry": "0x1c5b",
+          "site_hits": 1
         },
         {
-          "imm_site": "0x1588",
-          "owner_routine": {
-            "entry": "0x1435",
-            "end_exclusive": "0x16b7",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x154c",
-              "op": "LCALL",
-              "dest": "0x2c82"
-            },
-            {
-              "at": "0x1550",
-              "op": "LCALL",
-              "dest": "0x1db8"
-            },
-            {
-              "at": "0x1574",
-              "op": "LCALL",
-              "dest": "0x07ea"
-            },
-            {
-              "at": "0x158b",
-              "op": "LCALL",
-              "dest": "0x2c82"
-            },
-            {
-              "at": "0x158f",
-              "op": "LCALL",
-              "dest": "0x1db8"
-            },
-            {
-              "at": "0x15b7",
-              "op": "LCALL",
-              "dest": "0x0800"
-            }
-          ]
+          "entry": "0x2d07",
+          "site_hits": 1
         },
         {
-          "imm_site": "0x1689",
-          "owner_routine": {
-            "entry": "0x1435",
-            "end_exclusive": "0x16b7",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x1655",
-              "op": "LCALL",
-              "dest": "0x2f13"
-            },
-            {
-              "at": "0x16b4",
-              "op": "LJMP",
-              "dest": "0x31d4"
-            }
-          ]
-        },
+          "entry": "0x30d3",
+          "site_hits": 1
+        }
+      ],
+      "sites": [
         {
-          "imm_site": "0x1e7c",
+          "imm_site": "0x1cac",
           "owner_routine": {
-            "entry": "0x1db8",
-            "end_exclusive": "0x1fff",
-            "inbound_abs_refs": 4
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x1e6d",
-              "op": "LCALL",
-              "dest": "0x3297"
-            },
-            {
-              "at": "0x1e76",
-              "op": "LCALL",
-              "dest": "0x2000"
-            },
-            {
-              "at": "0x1e83",
-              "op": "LCALL",
-              "dest": "0x16b7"
-            },
-            {
-              "at": "0x1ea5",
-              "op": "LCALL",
-              "dest": "0x16b7"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x2275",
-          "owner_routine": {
-            "entry": "0x2252",
-            "end_exclusive": "0x2337",
+            "entry": "0x1c5b",
+            "end_exclusive": "0x1da8",
             "inbound_abs_refs": 2
           },
           "nearby_abs_branches": [
             {
-              "at": "0x2239",
-              "op": "LJMP",
-              "dest": "0x054c"
-            },
-            {
-              "at": "0x223f",
+              "at": "0x1c84",
               "op": "LCALL",
-              "dest": "0x0eef"
+              "dest": "0x2d07"
             },
             {
-              "at": "0x225b",
+              "at": "0x1cba",
               "op": "LCALL",
-              "dest": "0x0e9b"
+              "dest": "0x2e90"
             },
             {
-              "at": "0x225f",
-              "op": "LCALL",
-              "dest": "0x0e88"
-            },
-            {
-              "at": "0x2268",
-              "op": "LCALL",
-              "dest": "0x0e9b"
-            },
-            {
-              "at": "0x226b",
-              "op": "LCALL",
-              "dest": "0x0e88"
-            },
-            {
-              "at": "0x227d",
-              "op": "LCALL",
-              "dest": "0x33e1"
-            },
-            {
-              "at": "0x2285",
-              "op": "LCALL",
-              "dest": "0x33e1"
-            },
-            {
-              "at": "0x2290",
+              "at": "0x1cca",
               "op": "LCALL",
               "dest": "0x16b7"
             },
             {
-              "at": "0x229d",
+              "at": "0x1ccd",
               "op": "LCALL",
-              "dest": "0x16b7"
+              "dest": "0x16fd"
             },
             {
-              "at": "0x22ab",
+              "at": "0x1cd2",
               "op": "LCALL",
-              "dest": "0x0393"
+              "dest": "0x3261"
             },
             {
-              "at": "0x22b4",
+              "at": "0x1cd8",
               "op": "LCALL",
-              "dest": "0x0dfd"
+              "dest": "0x0555"
+            },
+            {
+              "at": "0x1ce0",
+              "op": "LCALL",
+              "dest": "0x2b2d"
+            },
+            {
+              "at": "0x1ce7",
+              "op": "LCALL",
+              "dest": "0x3026"
             }
           ]
         },
         {
-          "imm_site": "0x26bf",
+          "imm_site": "0x2d8c",
           "owner_routine": {
-            "entry": "0x2561",
-            "end_exclusive": "0x270a",
-            "inbound_abs_refs": 3
+            "entry": "0x2d07",
+            "end_exclusive": "0x2dd3",
+            "inbound_abs_refs": 2
           },
           "nearby_abs_branches": [
             {
-              "at": "0x2689",
+              "at": "0x2d87",
               "op": "LCALL",
-              "dest": "0x0393"
+              "dest": "0x16b7"
             },
             {
-              "at": "0x2690",
+              "at": "0x2d97",
               "op": "LCALL",
-              "dest": "0x0393"
-            },
+              "dest": "0x2252"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x30fb",
+          "owner_routine": {
+            "entry": "0x30d3",
+            "end_exclusive": "0x314b",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
             {
-              "at": "0x2693",
-              "op": "LJMP",
-              "dest": "0x03b3"
-            },
-            {
-              "at": "0x2696",
-              "op": "LCALL",
-              "dest": "0x0dfd"
-            },
-            {
-              "at": "0x2699",
+              "at": "0x30d9",
               "op": "LCALL",
               "dest": "0x0473"
             },
             {
-              "at": "0x26b3",
+              "at": "0x30e0",
               "op": "LCALL",
-              "dest": "0x0e5e"
+              "dest": "0x0e16"
             },
             {
-              "at": "0x26b9",
+              "at": "0x30e3",
               "op": "LCALL",
-              "dest": "0x0436"
+              "dest": "0x25cd"
             },
             {
-              "at": "0x26cc",
+              "at": "0x30e6",
               "op": "LCALL",
-              "dest": "0x0e1d"
+              "dest": "0x0e05"
             },
             {
-              "at": "0x26d3",
+              "at": "0x30e9",
               "op": "LCALL",
-              "dest": "0x0436"
+              "dest": "0x24f5"
             },
             {
-              "at": "0x26e5",
+              "at": "0x30ec",
               "op": "LCALL",
-              "dest": "0x0e5e"
+              "dest": "0x0e05"
             },
             {
-              "at": "0x26eb",
-              "op": "LCALL",
-              "dest": "0x0436"
-            },
-            {
-              "at": "0x26f1",
-              "op": "LCALL",
-              "dest": "0x0e1d"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x328d",
-          "owner_routine": {
-            "entry": "0x3287",
-            "end_exclusive": "0x3297",
-            "inbound_abs_refs": 2
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x327a",
-              "op": "LCALL",
-              "dest": "0x299e"
-            },
-            {
-              "at": "0x32c3",
+              "at": "0x30ef",
               "op": "LJMP",
-              "dest": "0x2253"
+              "dest": "0x21de"
+            },
+            {
+              "at": "0x3100",
+              "op": "LCALL",
+              "dest": "0x2252"
+            },
+            {
+              "at": "0x3111",
+              "op": "LCALL",
+              "dest": "0x15f3"
+            },
+            {
+              "at": "0x3114",
+              "op": "LCALL",
+              "dest": "0x33f1"
+            },
+            {
+              "at": "0x3123",
+              "op": "LCALL",
+              "dest": "0x0442"
+            },
+            {
+              "at": "0x312d",
+              "op": "LJMP",
+              "dest": "0x22c0"
             }
           ]
         }
@@ -715,27 +1073,340 @@
       "confidence": "hypothesis"
     },
     {
-      "opcode": "0x09",
-      "imm_site_count": 0,
-      "oracle_ep84_burst_precede_hits": null,
-      "dominant_owner_routines": [],
-      "sites": [],
-      "semantics": "unknown",
-      "confidence": "hypothesis"
-    },
-    {
       "opcode": "0x0a",
-      "imm_site_count": 0,
-      "oracle_ep84_burst_precede_hits": null,
-      "dominant_owner_routines": [],
-      "sites": [],
+      "imm_site_count": 7,
+      "oracle_ep84_burst_precede_hits": 60,
+      "dominant_owner_routines": [
+        {
+          "entry": "0x0b13",
+          "site_hits": 1
+        },
+        {
+          "entry": "0x0c90",
+          "site_hits": 1
+        },
+        {
+          "entry": "0x1c5b",
+          "site_hits": 1
+        },
+        {
+          "entry": "0x2d07",
+          "site_hits": 1
+        },
+        {
+          "entry": "0x2e00",
+          "site_hits": 1
+        }
+      ],
+      "sites": [
+        {
+          "imm_site": "0x0c74",
+          "owner_routine": {
+            "entry": "0x0b13",
+            "end_exclusive": "0x0c90",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0c38",
+              "op": "LCALL",
+              "dest": "0x321c"
+            },
+            {
+              "at": "0x0c4d",
+              "op": "LCALL",
+              "dest": "0x330d"
+            },
+            {
+              "at": "0x0c5b",
+              "op": "LCALL",
+              "dest": "0x3367"
+            },
+            {
+              "at": "0x0c63",
+              "op": "LJMP",
+              "dest": "0x0522"
+            },
+            {
+              "at": "0x0c71",
+              "op": "LCALL",
+              "dest": "0x330d"
+            },
+            {
+              "at": "0x0c78",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0c7b",
+              "op": "LCALL",
+              "dest": "0x32ff"
+            },
+            {
+              "at": "0x0c85",
+              "op": "LCALL",
+              "dest": "0x112a"
+            },
+            {
+              "at": "0x0c88",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x0c94",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0c9f",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0ca5",
+              "op": "LCALL",
+              "dest": "0x0f02"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0c90",
+          "owner_routine": {
+            "entry": "0x0c90",
+            "end_exclusive": "0x0c98",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0c5b",
+              "op": "LCALL",
+              "dest": "0x3367"
+            },
+            {
+              "at": "0x0c63",
+              "op": "LJMP",
+              "dest": "0x0522"
+            },
+            {
+              "at": "0x0c71",
+              "op": "LCALL",
+              "dest": "0x330d"
+            },
+            {
+              "at": "0x0c78",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0c7b",
+              "op": "LCALL",
+              "dest": "0x32ff"
+            },
+            {
+              "at": "0x0c85",
+              "op": "LCALL",
+              "dest": "0x112a"
+            },
+            {
+              "at": "0x0c88",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x0c94",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0c9f",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0ca5",
+              "op": "LCALL",
+              "dest": "0x0f02"
+            },
+            {
+              "at": "0x0cb4",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x1c93",
+          "owner_routine": {
+            "entry": "0x1c5b",
+            "end_exclusive": "0x1da8",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x1c5c",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x1c5f",
+              "op": "LCALL",
+              "dest": "0x33e1"
+            },
+            {
+              "at": "0x1c6b",
+              "op": "LCALL",
+              "dest": "0x3111"
+            },
+            {
+              "at": "0x1c84",
+              "op": "LCALL",
+              "dest": "0x2d07"
+            },
+            {
+              "at": "0x1cba",
+              "op": "LCALL",
+              "dest": "0x2e90"
+            },
+            {
+              "at": "0x1cca",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x1ccd",
+              "op": "LCALL",
+              "dest": "0x16fd"
+            },
+            {
+              "at": "0x1cd2",
+              "op": "LCALL",
+              "dest": "0x3261"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x2d83",
+          "owner_routine": {
+            "entry": "0x2d07",
+            "end_exclusive": "0x2dd3",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x2d87",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x2d97",
+              "op": "LCALL",
+              "dest": "0x2252"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x2e97",
+          "owner_routine": {
+            "entry": "0x2e00",
+            "end_exclusive": "0x2ebf",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x2e5e",
+              "op": "LJMP",
+              "dest": "0x20f0"
+            },
+            {
+              "at": "0x2e70",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x2e73",
+              "op": "LCALL",
+              "dest": "0x000e"
+            },
+            {
+              "at": "0x2e7e",
+              "op": "LCALL",
+              "dest": "0x341b"
+            },
+            {
+              "at": "0x2e83",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x2e86",
+              "op": "LCALL",
+              "dest": "0x0ff2"
+            },
+            {
+              "at": "0x2e89",
+              "op": "LCALL",
+              "dest": "0x3415"
+            },
+            {
+              "at": "0x2e8c",
+              "op": "LCALL",
+              "dest": "0x3401"
+            },
+            {
+              "at": "0x2ea7",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x3261",
+          "owner_routine": {
+            "entry": "0x3243",
+            "end_exclusive": "0x3287",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x327a",
+              "op": "LCALL",
+              "dest": "0x299e"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x3323",
+          "owner_routine": {
+            "entry": "0x330d",
+            "end_exclusive": "0x3329",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x3317",
+              "op": "LCALL",
+              "dest": "0x0f15"
+            },
+            {
+              "at": "0x3326",
+              "op": "LJMP",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x335b",
+              "op": "LCALL",
+              "dest": "0x0393"
+            }
+          ]
+        }
+      ],
       "semantics": "unknown",
       "confidence": "hypothesis"
     },
     {
       "opcode": "0x0b",
       "imm_site_count": 0,
-      "oracle_ep84_burst_precede_hits": null,
+      "oracle_ep84_burst_precede_hits": 60,
       "dominant_owner_routines": [],
       "sites": [],
       "semantics": "unknown",
@@ -743,11 +1414,15 @@
     },
     {
       "opcode": "0x04",
-      "imm_site_count": 23,
-      "oracle_ep84_burst_precede_hits": null,
+      "imm_site_count": 36,
+      "oracle_ep84_burst_precede_hits": 12,
       "dominant_owner_routines": [
         {
-          "entry": "0x18af",
+          "entry": "0x07ea",
+          "site_hits": 6
+        },
+        {
+          "entry": "0x054c",
           "site_hits": 3
         },
         {
@@ -755,16 +1430,12 @@
           "site_hits": 2
         },
         {
-          "entry": "0x054c",
-          "site_hits": 2
-        },
-        {
-          "entry": "0x07ea",
-          "site_hits": 2
-        },
-        {
           "entry": "0x111c",
           "site_hits": 2
+        },
+        {
+          "entry": "0x0522",
+          "site_hits": 1
         }
       ],
       "sites": [
@@ -807,6 +1478,51 @@
               "at": "0x057e",
               "op": "LCALL",
               "dest": "0x0051"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x05f1",
+          "owner_routine": {
+            "entry": "0x054c",
+            "end_exclusive": "0x075b",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x05ca",
+              "op": "LCALL",
+              "dest": "0x2f72"
+            },
+            {
+              "at": "0x05f6",
+              "op": "LCALL",
+              "dest": "0x2d07"
+            },
+            {
+              "at": "0x0607",
+              "op": "LCALL",
+              "dest": "0x2a72"
+            },
+            {
+              "at": "0x0614",
+              "op": "LCALL",
+              "dest": "0x2a7c"
+            },
+            {
+              "at": "0x0618",
+              "op": "LCALL",
+              "dest": "0x2a67"
+            },
+            {
+              "at": "0x061f",
+              "op": "LCALL",
+              "dest": "0x2a7c"
+            },
+            {
+              "at": "0x0622",
+              "op": "LCALL",
+              "dest": "0x2a67"
             }
           ]
         },
@@ -891,6 +1607,76 @@
           ]
         },
         {
+          "imm_site": "0x0813",
+          "owner_routine": {
+            "entry": "0x07ea",
+            "end_exclusive": "0x0af9",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x081c",
+              "op": "LCALL",
+              "dest": "0x0499"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0961",
+          "owner_routine": {
+            "entry": "0x07ea",
+            "end_exclusive": "0x0af9",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0930",
+              "op": "LCALL",
+              "dest": "0x0442"
+            },
+            {
+              "at": "0x093d",
+              "op": "LCALL",
+              "dest": "0x30d3"
+            },
+            {
+              "at": "0x0943",
+              "op": "LCALL",
+              "dest": "0x27e2"
+            },
+            {
+              "at": "0x0958",
+              "op": "LCALL",
+              "dest": "0x2bb3"
+            },
+            {
+              "at": "0x0965",
+              "op": "LCALL",
+              "dest": "0x27f8"
+            },
+            {
+              "at": "0x0982",
+              "op": "LCALL",
+              "dest": "0x2078"
+            },
+            {
+              "at": "0x0993",
+              "op": "LCALL",
+              "dest": "0x1000"
+            },
+            {
+              "at": "0x099a",
+              "op": "LCALL",
+              "dest": "0x27d9"
+            },
+            {
+              "at": "0x099d",
+              "op": "LCALL",
+              "dest": "0x1d62"
+            }
+          ]
+        },
+        {
           "imm_site": "0x0a3c",
           "owner_routine": {
             "entry": "0x07ea",
@@ -929,116 +1715,6 @@
               "dest": "0x2bb3"
             }
           ]
-        },
-        {
-          "imm_site": "0x0e59",
-          "owner_routine": {
-            "entry": "0x0e51",
-            "end_exclusive": "0x0e5e",
-            "inbound_abs_refs": 3
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x0e34",
-              "op": "LJMP",
-              "dest": "0x035c"
-            },
-            {
-              "at": "0x0e3d",
-              "op": "LCALL",
-              "dest": "0x0393"
-            },
-            {
-              "at": "0x0e5e",
-              "op": "LCALL",
-              "dest": "0x0393"
-            },
-            {
-              "at": "0x0e72",
-              "op": "LCALL",
-              "dest": "0x0393"
-            },
-            {
-              "at": "0x0e77",
-              "op": "LCALL",
-              "dest": "0x0380"
-            },
-            {
-              "at": "0x0e7a",
-              "op": "LJMP",
-              "dest": "0x03b3"
-            },
-            {
-              "at": "0x0e85",
-              "op": "LJMP",
-              "dest": "0x014c"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x1146",
-          "owner_routine": {
-            "entry": "0x111c",
-            "end_exclusive": "0x120e",
-            "inbound_abs_refs": 2
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x1118",
-              "op": "LCALL",
-              "dest": "0x2bb3"
-            },
-            {
-              "at": "0x1126",
-              "op": "LCALL",
-              "dest": "0x33d0"
-            },
-            {
-              "at": "0x1134",
-              "op": "LCALL",
-              "dest": "0x3076"
-            },
-            {
-              "at": "0x113a",
-              "op": "LCALL",
-              "dest": "0x306f"
-            },
-            {
-              "at": "0x116b",
-              "op": "LCALL",
-              "dest": "0x308b"
-            },
-            {
-              "at": "0x1171",
-              "op": "LCALL",
-              "dest": "0x306f"
-            }
-          ]
-        },
-        {
-          "imm_site": "0x1191",
-          "owner_routine": {
-            "entry": "0x111c",
-            "end_exclusive": "0x120e",
-            "inbound_abs_refs": 2
-          },
-          "nearby_abs_branches": [
-            {
-              "at": "0x116b",
-              "op": "LCALL",
-              "dest": "0x308b"
-            },
-            {
-              "at": "0x1171",
-              "op": "LCALL",
-              "dest": "0x306f"
-            },
-            {
-              "at": "0x118b",
-              "op": "LCALL",
-              "dest": "0x306f"
-            }
-          ]
         }
       ],
       "semantics": "unknown",
@@ -1046,10 +1722,472 @@
     },
     {
       "opcode": "0x05",
-      "imm_site_count": 0,
+      "imm_site_count": 8,
       "oracle_ep84_burst_precede_hits": null,
-      "dominant_owner_routines": [],
-      "sites": [],
+      "dominant_owner_routines": [
+        {
+          "entry": "0x0f23",
+          "site_hits": 2
+        },
+        {
+          "entry": "0x1c5b",
+          "site_hits": 2
+        },
+        {
+          "entry": "0x0c98",
+          "site_hits": 1
+        },
+        {
+          "entry": "0x2e00",
+          "site_hits": 1
+        },
+        {
+          "entry": "0x2f13",
+          "site_hits": 1
+        }
+      ],
+      "sites": [
+        {
+          "imm_site": "0x0c9b",
+          "owner_routine": {
+            "entry": "0x0c98",
+            "end_exclusive": "0x0def",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0c5b",
+              "op": "LCALL",
+              "dest": "0x3367"
+            },
+            {
+              "at": "0x0c63",
+              "op": "LJMP",
+              "dest": "0x0522"
+            },
+            {
+              "at": "0x0c71",
+              "op": "LCALL",
+              "dest": "0x330d"
+            },
+            {
+              "at": "0x0c78",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0c7b",
+              "op": "LCALL",
+              "dest": "0x32ff"
+            },
+            {
+              "at": "0x0c85",
+              "op": "LCALL",
+              "dest": "0x112a"
+            },
+            {
+              "at": "0x0c88",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x0c94",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0c9f",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x0ca5",
+              "op": "LCALL",
+              "dest": "0x0f02"
+            },
+            {
+              "at": "0x0cb4",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0f7b",
+          "owner_routine": {
+            "entry": "0x0f23",
+            "end_exclusive": "0x10c6",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0f59",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            },
+            {
+              "at": "0x0f60",
+              "op": "LCALL",
+              "dest": "0x2c9d"
+            },
+            {
+              "at": "0x0f66",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0f76",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            },
+            {
+              "at": "0x0f7d",
+              "op": "LCALL",
+              "dest": "0x2c9d"
+            },
+            {
+              "at": "0x0f84",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0f94",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            },
+            {
+              "at": "0x0f9b",
+              "op": "LCALL",
+              "dest": "0x2c9d"
+            },
+            {
+              "at": "0x0fa2",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0fa5",
+              "op": "LCALL",
+              "dest": "0x32e3"
+            },
+            {
+              "at": "0x0fbb",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x0f80",
+          "owner_routine": {
+            "entry": "0x0f23",
+            "end_exclusive": "0x10c6",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x0f59",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            },
+            {
+              "at": "0x0f60",
+              "op": "LCALL",
+              "dest": "0x2c9d"
+            },
+            {
+              "at": "0x0f66",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0f76",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            },
+            {
+              "at": "0x0f7d",
+              "op": "LCALL",
+              "dest": "0x2c9d"
+            },
+            {
+              "at": "0x0f84",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0f94",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            },
+            {
+              "at": "0x0f9b",
+              "op": "LCALL",
+              "dest": "0x2c9d"
+            },
+            {
+              "at": "0x0fa2",
+              "op": "LCALL",
+              "dest": "0x31ee"
+            },
+            {
+              "at": "0x0fa5",
+              "op": "LCALL",
+              "dest": "0x32e3"
+            },
+            {
+              "at": "0x0fbb",
+              "op": "LCALL",
+              "dest": "0x1da8"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x1c80",
+          "owner_routine": {
+            "entry": "0x1c5b",
+            "end_exclusive": "0x1da8",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x1c40",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x1c43",
+              "op": "LCALL",
+              "dest": "0x33e1"
+            },
+            {
+              "at": "0x1c4f",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x1c52",
+              "op": "LCALL",
+              "dest": "0x33e1"
+            },
+            {
+              "at": "0x1c5c",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x1c5f",
+              "op": "LCALL",
+              "dest": "0x33e1"
+            },
+            {
+              "at": "0x1c6b",
+              "op": "LCALL",
+              "dest": "0x3111"
+            },
+            {
+              "at": "0x1c84",
+              "op": "LCALL",
+              "dest": "0x2d07"
+            },
+            {
+              "at": "0x1cba",
+              "op": "LCALL",
+              "dest": "0x2e90"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x1cc6",
+          "owner_routine": {
+            "entry": "0x1c5b",
+            "end_exclusive": "0x1da8",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x1cba",
+              "op": "LCALL",
+              "dest": "0x2e90"
+            },
+            {
+              "at": "0x1cca",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            },
+            {
+              "at": "0x1ccd",
+              "op": "LCALL",
+              "dest": "0x16fd"
+            },
+            {
+              "at": "0x1cd2",
+              "op": "LCALL",
+              "dest": "0x3261"
+            },
+            {
+              "at": "0x1cd8",
+              "op": "LCALL",
+              "dest": "0x0555"
+            },
+            {
+              "at": "0x1ce0",
+              "op": "LCALL",
+              "dest": "0x2b2d"
+            },
+            {
+              "at": "0x1ce7",
+              "op": "LCALL",
+              "dest": "0x3026"
+            },
+            {
+              "at": "0x1d03",
+              "op": "LCALL",
+              "dest": "0x2f46"
+            },
+            {
+              "at": "0x1d06",
+              "op": "LCALL",
+              "dest": "0x319f"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x2ea5",
+          "owner_routine": {
+            "entry": "0x2e00",
+            "end_exclusive": "0x2ebf",
+            "inbound_abs_refs": 2
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x2e70",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x2e73",
+              "op": "LCALL",
+              "dest": "0x000e"
+            },
+            {
+              "at": "0x2e7e",
+              "op": "LCALL",
+              "dest": "0x341b"
+            },
+            {
+              "at": "0x2e83",
+              "op": "LCALL",
+              "dest": "0x340f"
+            },
+            {
+              "at": "0x2e86",
+              "op": "LCALL",
+              "dest": "0x0ff2"
+            },
+            {
+              "at": "0x2e89",
+              "op": "LCALL",
+              "dest": "0x3415"
+            },
+            {
+              "at": "0x2e8c",
+              "op": "LCALL",
+              "dest": "0x3401"
+            },
+            {
+              "at": "0x2ea7",
+              "op": "LCALL",
+              "dest": "0x16b7"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x3041",
+          "owner_routine": {
+            "entry": "0x2f13",
+            "end_exclusive": "0x304b",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x3004",
+              "op": "LCALL",
+              "dest": "0x0006"
+            },
+            {
+              "at": "0x3023",
+              "op": "LJMP",
+              "dest": "0x33a1"
+            },
+            {
+              "at": "0x3053",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x3056",
+              "op": "LCALL",
+              "dest": "0x33e1"
+            },
+            {
+              "at": "0x3059",
+              "op": "LCALL",
+              "dest": "0x3329"
+            },
+            {
+              "at": "0x305c",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            }
+          ]
+        },
+        {
+          "imm_site": "0x3051",
+          "owner_routine": {
+            "entry": "0x304b",
+            "end_exclusive": "0x306f",
+            "inbound_abs_refs": 3
+          },
+          "nearby_abs_branches": [
+            {
+              "at": "0x3023",
+              "op": "LJMP",
+              "dest": "0x33a1"
+            },
+            {
+              "at": "0x3053",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x3056",
+              "op": "LCALL",
+              "dest": "0x33e1"
+            },
+            {
+              "at": "0x3059",
+              "op": "LCALL",
+              "dest": "0x3329"
+            },
+            {
+              "at": "0x305c",
+              "op": "LCALL",
+              "dest": "0x2ebf"
+            },
+            {
+              "at": "0x3083",
+              "op": "LCALL",
+              "dest": "0x042a"
+            },
+            {
+              "at": "0x3088",
+              "op": "LJMP",
+              "dest": "0x03f1"
+            }
+          ]
+        }
+      ],
       "semantics": "unknown",
       "confidence": "hypothesis"
     }

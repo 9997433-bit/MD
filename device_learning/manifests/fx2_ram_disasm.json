@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T13:04:01.024492+00:00",
+  "generated_at": "2026-08-28T13:14:58.724504+00:00",
   "status": "partial_disasm",
   "layer": "G4-lite",
   "plan_ref": "BINARY_RE_PLAN.md",
@@ -53,14 +53,14 @@
       "insn_count": 78
     },
     {
-      "name": "datapath_0x314b",
-      "start": "0x314b",
-      "insn_count": 83
+      "name": "datapath_0x054c",
+      "start": "0x054c",
+      "insn_count": 67
     },
     {
-      "name": "datapath_0x306f",
-      "start": "0x306f",
-      "insn_count": 67
+      "name": "datapath_0x18af",
+      "start": "0x18af",
+      "insn_count": 88
     }
   ],
   "confidence": "hypothesis",

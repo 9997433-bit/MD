@@ -1,16 +1,15 @@
 # 阻塞项报告（自动生成）
 
-**生成时间**：2026-08-28 13:04 UTC
+**生成时间**：2026-08-28 13:15 UTC
 
-**阻塞总数**：75 条
+**阻塞总数**：74 条
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
-## missing (8)
+## missing (7)
 
 | Identifier | Layer | Boundary |
 |------------|-------|----------|
-| `FW-MCU-CODE-XRAM-MAP` | usb | no_dump |
 | `FW-EEPROM-IMAGE` | usb | no_dump |
 | `FW-EEPROM-CONFIG-BYTE` | usb | no_dump |
 | `FW-EEPROM-VIDPID` | usb | no_dump |

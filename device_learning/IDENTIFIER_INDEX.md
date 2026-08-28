@@ -1,6 +1,6 @@
 # Identifier 索引（自动生成）
 
-**生成时间**：2026-08-28 13:04 UTC
+**生成时间**：2026-08-28 13:15 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -158,7 +158,7 @@
 | `FW-EEPROM-FW-OFFSET` | candidate | Typical 8051 firmware start offset 0x10 in EEPROM |
 | `FW-MCU-CORE-IMAGE` | candidate | 8051-compatible microcontroller firmware image |
 | `FW-MCU-RESET-VECTOR` | candidate | Reset vector / boot entry of the MCU firmware |
-| `FW-MCU-CODE-XRAM-MAP` | missing | Code / external-RAM address map of the MCU |
+| `FW-MCU-CODE-XRAM-MAP` | candidate | Code / external-RAM address map of the MCU |
 | `FW-MCU-I2C-BOOT-PATH` | candidate | MCU boot path loading from the serial EEPROM over I2C |
 | `FW-MCU-RENUMERATION` | candidate | USB re-numeration after FX2 RAM load: 0x7317 → 0x744f |
 | `FW-EEPROM-IMAGE` | missing | Serial EEPROM contents image |

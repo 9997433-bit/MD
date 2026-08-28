@@ -50,19 +50,35 @@ def test_cmd_data_correlation_manifest():
 
 
 @pytest.mark.skipif(not RAM.exists(), reason="fx2_ram_from_enum.bin missing")
-def test_fx2_disasm_and_oracle():
-    disasm = ROOT / "phase_b" / "analysis" / "mcu_disasm.txt"
-    meta = ROOT / "manifests" / "fx2_ram_disasm.json"
-    oracle = ROOT / "manifests" / "fx2_oracle_crosscheck.json"
-    if disasm.exists():
-        text = disasm.read_text(encoding="utf-8")
-        assert "0x075b" in text.lower() or "0x075B" in text or "075b" in text.lower()
-        assert "0x1435" in text or "1435" in text
-    if meta.exists():
-        data = json.loads(meta.read_text(encoding="utf-8"))
-        if data.get("status") == "partial_disasm":
-            assert data["region_count"] >= 4
-    if oracle.exists():
-        data = json.loads(oracle.read_text(encoding="utf-8"))
-        if data.get("status") == "crosschecked":
-            assert data.get("headline", {}).get("opcode") == "0x08"
+def test_fx2_ivt_and_1435():
+    ivt = ROOT / "manifests" / "fx2_ivt_map.json"
+    ann = ROOT / "manifests" / "fx2_routine_1435_annotation.json"
+    if ivt.exists():
+        data = json.loads(ivt.read_text(encoding="utf-8"))
+        if data.get("status") == "scanned":
+            assert data["vectors"][0]["ljmp_dest"] == "0x075b"
+    if ann.exists():
+        data = json.loads(ann.read_text(encoding="utf-8"))
+        if data.get("status") == "annotated":
+            assert data["routine_entry"] == "0x1435"
+            assert any(s["label"] == "EP6CS" for s in data.get("sfr_access_sequence") or [])
+
+
+@pytest.mark.skipif(not RAM.exists(), reason="fx2_ram_from_enum.bin missing")
+def test_fx2_address_map_and_init_chain():
+    amap = ROOT / "manifests" / "fx2_address_map.json"
+    init = ROOT / "manifests" / "fx2_init_chain.json"
+    if amap.exists():
+        data = json.loads(amap.read_text(encoding="utf-8"))
+        if data.get("status") == "mapped":
+            assert data["size_bytes"] == 16384
+            reset = data.get("reset") or {}
+            assert reset.get("target") == "0x075b"
+            assert any(a.get("start") == "0x1435" for a in data.get("anchors") or [])
+    if init.exists():
+        data = json.loads(init.read_text(encoding="utf-8"))
+        if data.get("status") == "scanned":
+            assert data["reset_target"] == "0x075b"
+            assert isinstance(data.get("movx_write_label_first_seen_order"), list)
+            assert len(data.get("movx_write_label_first_seen_order") or []) >= 1
+            assert any(c.get("dest") == "0x1435" for c in data.get("highlight_calls_to_0x1435") or [])

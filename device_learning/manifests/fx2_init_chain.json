@@ -1,0 +1,3063 @@
+{
+  "generated_at": "2026-08-28T13:14:58.886970+00:00",
+  "status": "scanned",
+  "layer": "G1",
+  "plan_ref": "BINARY_RE_PLAN.md",
+  "source_note": "Reset→CRT→early LCALL SFR walk on fx2_ram_from_enum.bin — NOT eeprom.bin; not a full CFG",
+  "reset_vector": "0x0000",
+  "reset_target": "0x075b",
+  "crt_prologue_preview": [
+    "MOV R0,#0x7f",
+    "CLR A",
+    "MOV @R0,A",
+    "DJNZ R0,0x075e",
+    "MOV 0x5e,#0x00",
+    "MOV 0x81,#0x5e",
+    "LJMP 0x07a5",
+    "LJMP 0x1c63",
+    "CLR A",
+    "MOVC A,@A+DPTR",
+    "INC DPTR",
+    "MOV R0,A"
+  ],
+  "crt_note": "0x075B clears IRAM then LJMP 0x07A5 (Keil-style runtime); SFR config is in callees",
+  "post_crt_entry": "0x07a5",
+  "early_abs_calls": [
+    {
+      "at": "0x081c",
+      "op": "LCALL",
+      "dest": "0x0499"
+    },
+    {
+      "at": "0x085c",
+      "op": "LJMP",
+      "dest": "0x0c11"
+    },
+    {
+      "at": "0x086b",
+      "op": "LCALL",
+      "dest": "0x27f8"
+    },
+    {
+      "at": "0x0887",
+      "op": "LCALL",
+      "dest": "0x292f"
+    },
+    {
+      "at": "0x0894",
+      "op": "LCALL",
+      "dest": "0x1435"
+    },
+    {
+      "at": "0x08a6",
+      "op": "LJMP",
+      "dest": "0x1435"
+    },
+    {
+      "at": "0x08b9",
+      "op": "LCALL",
+      "dest": "0x27e2"
+    },
+    {
+      "at": "0x08d8",
+      "op": "LCALL",
+      "dest": "0x0046"
+    },
+    {
+      "at": "0x08e3",
+      "op": "LCALL",
+      "dest": "0x0af9"
+    },
+    {
+      "at": "0x08ea",
+      "op": "LCALL",
+      "dest": "0x27e7"
+    },
+    {
+      "at": "0x08f0",
+      "op": "LCALL",
+      "dest": "0x0b13"
+    },
+    {
+      "at": "0x08f9",
+      "op": "LCALL",
+      "dest": "0x27e7"
+    },
+    {
+      "at": "0x0907",
+      "op": "LCALL",
+      "dest": "0x0af9"
+    },
+    {
+      "at": "0x0916",
+      "op": "LCALL",
+      "dest": "0x0b13"
+    },
+    {
+      "at": "0x0919",
+      "op": "LCALL",
+      "dest": "0x1d5d"
+    },
+    {
+      "at": "0x091e",
+      "op": "LCALL",
+      "dest": "0x334f"
+    },
+    {
+      "at": "0x0930",
+      "op": "LCALL",
+      "dest": "0x0442"
+    },
+    {
+      "at": "0x093d",
+      "op": "LCALL",
+      "dest": "0x30d3"
+    },
+    {
+      "at": "0x0943",
+      "op": "LCALL",
+      "dest": "0x27e2"
+    },
+    {
+      "at": "0x0958",
+      "op": "LCALL",
+      "dest": "0x2bb3"
+    },
+    {
+      "at": "0x0965",
+      "op": "LCALL",
+      "dest": "0x27f8"
+    },
+    {
+      "at": "0x0982",
+      "op": "LCALL",
+      "dest": "0x2078"
+    },
+    {
+      "at": "0x0993",
+      "op": "LCALL",
+      "dest": "0x1000"
+    },
+    {
+      "at": "0x099a",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x099d",
+      "op": "LCALL",
+      "dest": "0x1d62"
+    },
+    {
+      "at": "0x09a2",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09a5",
+      "op": "LCALL",
+      "dest": "0x1d67"
+    },
+    {
+      "at": "0x09aa",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09ad",
+      "op": "LCALL",
+      "dest": "0x1d6c"
+    },
+    {
+      "at": "0x09b2",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09b5",
+      "op": "LCALL",
+      "dest": "0x1d71"
+    },
+    {
+      "at": "0x09ba",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09bd",
+      "op": "LCALL",
+      "dest": "0x1d76"
+    },
+    {
+      "at": "0x09c2",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09c5",
+      "op": "LCALL",
+      "dest": "0x1d7b"
+    },
+    {
+      "at": "0x09ca",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09cd",
+      "op": "LCALL",
+      "dest": "0x1d80"
+    },
+    {
+      "at": "0x09d2",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    },
+    {
+      "at": "0x09d5",
+      "op": "LCALL",
+      "dest": "0x1d85"
+    },
+    {
+      "at": "0x09da",
+      "op": "LCALL",
+      "dest": "0x27d9"
+    }
+  ],
+  "early_callees_with_sfr": [
+    {
+      "call_at": "0x081c",
+      "entry": "0x0499",
+      "sfr_touch_count": 14,
+      "sfr_touches": [
+        {
+          "at": "0x0555",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b9",
+          "label": "E6xx_e6b9"
+        },
+        {
+          "at": "0x0558",
+          "op": "MOVX_READ",
+          "imm": "0xe6b9",
+          "label": "E6xx_e6b9"
+        },
+        {
+          "at": "0x0585",
+          "op": "MOV_DPTR",
+          "imm": "0xe6bb",
+          "label": "E6xx_e6bb"
+        },
+        {
+          "at": "0x0588",
+          "op": "MOVX_READ",
+          "imm": "0xe6bb",
+          "label": "E6xx_e6bb"
+        },
+        {
+          "at": "0x059f",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05a2",
+          "op": "MOVX_WRITE",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05a9",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05ac",
+          "op": "MOVX_WRITE",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05b3",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05b6",
+          "op": "MOVX_WRITE",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05bd",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05c0",
+          "op": "MOVX_WRITE",
+          "imm": "0xe6b3",
+          "label": "SUDPTRH"
+        },
+        {
+          "at": "0x05c5",
+          "op": "MOV_DPTR",
+          "imm": "0xe6ba",
+          "label": "E6xx_e6ba"
+        },
+        {
+          "at": "0x05c8",
+          "op": "MOVX_READ",
+          "imm": "0xe6ba",
+          "label": "E6xx_e6ba"
+        }
+      ],
+      "write_labels": [
+        "SUDPTRH",
+        "SUDPTRH",
+        "SUDPTRH",
+        "SUDPTRH"
+      ]
+    },
+    {
+      "call_at": "0x086b",
+      "entry": "0x27f8",
+      "sfr_touch_count": 10,
+      "sfr_touches": [
+        {
+          "at": "0x28d5",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28d8",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e4",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e7",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x2908",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x290b",
+          "op": "MOVX_READ",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x2913",
+          "op": "MOV_DPTR",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x2916",
+          "op": "MOVX_WRITE",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x291a",
+          "op": "MOV_DPTR",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        },
+        {
+          "at": "0x291d",
+          "op": "MOVX_WRITE",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        }
+      ],
+      "write_labels": [
+        "E6xx_e694",
+        "E6xx_e695"
+      ]
+    },
+    {
+      "call_at": "0x0887",
+      "entry": "0x292f",
+      "sfr_touch_count": 8,
+      "sfr_touches": [
+        {
+          "at": "0x29a1",
+          "op": "MOV_DPTR",
+          "imm": "0xe65d",
+          "label": "OUTPKTEND"
+        },
+        {
+          "at": "0x29d6",
+          "op": "MOV_DPTR",
+          "imm": "0xe68a",
+          "label": "EP4BCH"
+        },
+        {
+          "at": "0x29d9",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68a",
+          "label": "EP4BCH"
+        },
+        {
+          "at": "0x29da",
+          "op": "MOV_DPTR",
+          "imm": "0xe68b",
+          "label": "EP4BCL"
+        },
+        {
+          "at": "0x29de",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68b",
+          "label": "EP4BCL"
+        },
+        {
+          "at": "0x2a57",
+          "op": "MOV_DPTR",
+          "imm": "0xe6bc",
+          "label": "E6xx_e6bc"
+        },
+        {
+          "at": "0x2a5a",
+          "op": "MOVX_READ",
+          "imm": "0xe6bc",
+          "label": "E6xx_e6bc"
+        },
+        {
+          "at": "0x2a60",
+          "op": "MOVX_READ",
+          "imm": "0xe6bc",
+          "label": "E6xx_e6bc"
+        }
+      ],
+      "write_labels": [
+        "EP4BCH",
+        "EP4BCL"
+      ]
+    },
+    {
+      "call_at": "0x0894",
+      "entry": "0x1435",
+      "sfr_touch_count": 21,
+      "sfr_touches": [
+        {
+          "at": "0x1488",
+          "op": "MOV_DPTR",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x148d",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x148e",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x1491",
+          "op": "MOVX_READ",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x14f6",
+          "op": "MOV_DPTR",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x14f9",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x14fa",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x14fd",
+          "op": "MOVX_READ",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x1507",
+          "op": "MOV_DPTR",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x150a",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x150b",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x150e",
+          "op": "MOVX_READ",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x151c",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x151f",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1525",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1528",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x152f",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1531",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x1534",
+          "op": "MOVX_READ",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x153a",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x153d",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        }
+      ],
+      "write_labels": [
+        "EP8BCL",
+        "EP8BCL",
+        "EP8BCL",
+        "EP6BCL"
+      ]
+    },
+    {
+      "call_at": "0x08b9",
+      "entry": "0x27e2",
+      "sfr_touch_count": 10,
+      "sfr_touches": [
+        {
+          "at": "0x28d5",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28d8",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e4",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e7",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x2908",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x290b",
+          "op": "MOVX_READ",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x2913",
+          "op": "MOV_DPTR",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x2916",
+          "op": "MOVX_WRITE",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x291a",
+          "op": "MOV_DPTR",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        },
+        {
+          "at": "0x291d",
+          "op": "MOVX_WRITE",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        }
+      ],
+      "write_labels": [
+        "E6xx_e694",
+        "E6xx_e695"
+      ]
+    },
+    {
+      "call_at": "0x08d8",
+      "entry": "0x0046",
+      "sfr_touch_count": 0,
+      "sfr_touches": [],
+      "write_labels": []
+    },
+    {
+      "call_at": "0x08e3",
+      "entry": "0x0af9",
+      "sfr_touch_count": 7,
+      "sfr_touches": [
+        {
+          "at": "0x0bdf",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a5",
+          "label": "E6xx_e6a5"
+        },
+        {
+          "at": "0x0be2",
+          "op": "MOVX_READ",
+          "imm": "0xe6a5",
+          "label": "E6xx_e6a5"
+        },
+        {
+          "at": "0x0be8",
+          "op": "MOV_DPTR",
+          "imm": "0xe698",
+          "label": "E6xx_e698"
+        },
+        {
+          "at": "0x0beb",
+          "op": "MOVX_READ",
+          "imm": "0xe698",
+          "label": "E6xx_e698"
+        },
+        {
+          "at": "0x0bed",
+          "op": "MOV_DPTR",
+          "imm": "0xe699",
+          "label": "E6xx_e699"
+        },
+        {
+          "at": "0x0bf0",
+          "op": "MOVX_READ",
+          "imm": "0xe699",
+          "label": "E6xx_e699"
+        },
+        {
+          "at": "0x0c22",
+          "op": "MOVX_READ",
+          "imm": "0xe699",
+          "label": "E6xx_e699"
+        }
+      ],
+      "write_labels": []
+    },
+    {
+      "call_at": "0x08ea",
+      "entry": "0x27e7",
+      "sfr_touch_count": 10,
+      "sfr_touches": [
+        {
+          "at": "0x28d5",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28d8",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e4",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e7",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x2908",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x290b",
+          "op": "MOVX_READ",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x2913",
+          "op": "MOV_DPTR",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x2916",
+          "op": "MOVX_WRITE",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x291a",
+          "op": "MOV_DPTR",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        },
+        {
+          "at": "0x291d",
+          "op": "MOVX_WRITE",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        }
+      ],
+      "write_labels": [
+        "E6xx_e694",
+        "E6xx_e695"
+      ]
+    },
+    {
+      "call_at": "0x08f0",
+      "entry": "0x0b13",
+      "sfr_touch_count": 7,
+      "sfr_touches": [
+        {
+          "at": "0x0bdf",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a5",
+          "label": "E6xx_e6a5"
+        },
+        {
+          "at": "0x0be2",
+          "op": "MOVX_READ",
+          "imm": "0xe6a5",
+          "label": "E6xx_e6a5"
+        },
+        {
+          "at": "0x0be8",
+          "op": "MOV_DPTR",
+          "imm": "0xe698",
+          "label": "E6xx_e698"
+        },
+        {
+          "at": "0x0beb",
+          "op": "MOVX_READ",
+          "imm": "0xe698",
+          "label": "E6xx_e698"
+        },
+        {
+          "at": "0x0bed",
+          "op": "MOV_DPTR",
+          "imm": "0xe699",
+          "label": "E6xx_e699"
+        },
+        {
+          "at": "0x0bf0",
+          "op": "MOVX_READ",
+          "imm": "0xe699",
+          "label": "E6xx_e699"
+        },
+        {
+          "at": "0x0c22",
+          "op": "MOVX_READ",
+          "imm": "0xe699",
+          "label": "E6xx_e699"
+        }
+      ],
+      "write_labels": []
+    },
+    {
+      "call_at": "0x0919",
+      "entry": "0x1d5d",
+      "sfr_touch_count": 8,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL"
+      ]
+    },
+    {
+      "call_at": "0x091e",
+      "entry": "0x334f",
+      "sfr_touch_count": 4,
+      "sfr_touches": [
+        {
+          "at": "0x3396",
+          "op": "MOV_DPTR",
+          "imm": "0xe6ba",
+          "label": "E6xx_e6ba"
+        },
+        {
+          "at": "0x3399",
+          "op": "MOVX_READ",
+          "imm": "0xe6ba",
+          "label": "E6xx_e6ba"
+        },
+        {
+          "at": "0x33e9",
+          "op": "MOV_DPTR",
+          "imm": "0xe6ba",
+          "label": "E6xx_e6ba"
+        },
+        {
+          "at": "0x33ec",
+          "op": "MOVX_READ",
+          "imm": "0xe6ba",
+          "label": "E6xx_e6ba"
+        }
+      ],
+      "write_labels": []
+    },
+    {
+      "call_at": "0x0930",
+      "entry": "0x0442",
+      "sfr_touch_count": 2,
+      "sfr_touches": [
+        {
+          "at": "0x0555",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b9",
+          "label": "E6xx_e6b9"
+        },
+        {
+          "at": "0x0558",
+          "op": "MOVX_READ",
+          "imm": "0xe6b9",
+          "label": "E6xx_e6b9"
+        }
+      ],
+      "write_labels": []
+    },
+    {
+      "call_at": "0x093d",
+      "entry": "0x30d3",
+      "sfr_touch_count": 8,
+      "sfr_touches": [
+        {
+          "at": "0x3135",
+          "op": "MOV_DPTR",
+          "imm": "0xe6b5",
+          "label": "SUDPTRCTL"
+        },
+        {
+          "at": "0x3138",
+          "op": "MOVX_READ",
+          "imm": "0xe6b5",
+          "label": "SUDPTRCTL"
+        },
+        {
+          "at": "0x313b",
+          "op": "MOVX_WRITE",
+          "imm": "0xe6b5",
+          "label": "SUDPTRCTL"
+        },
+        {
+          "at": "0x3143",
+          "op": "MOVX_WRITE",
+          "imm": "0xe6b5",
+          "label": "SUDPTRCTL"
+        },
+        {
+          "at": "0x315a",
+          "op": "MOV_DPTR",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x315e",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68f",
+          "label": "EP8BCL"
+        },
+        {
+          "at": "0x315f",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        },
+        {
+          "at": "0x3162",
+          "op": "MOVX_READ",
+          "imm": "0xe6a2",
+          "label": "EP6CS"
+        }
+      ],
+      "write_labels": [
+        "SUDPTRCTL",
+        "SUDPTRCTL",
+        "EP8BCL"
+      ]
+    },
+    {
+      "call_at": "0x0958",
+      "entry": "0x2bb3",
+      "sfr_touch_count": 16,
+      "sfr_touches": [
+        {
+          "at": "0x2c30",
+          "op": "MOV_DPTR",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c33",
+          "op": "MOVX_READ",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c39",
+          "op": "MOV_DPTR",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c3c",
+          "op": "MOVX_READ",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c3f",
+          "op": "MOVX_WRITE",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c43",
+          "op": "MOV_DPTR",
+          "imm": "0xe679",
+          "label": "I2DAT"
+        },
+        {
+          "at": "0x2c46",
+          "op": "MOVX_WRITE",
+          "imm": "0xe679",
+          "label": "I2DAT"
+        },
+        {
+          "at": "0x2c47",
+          "op": "MOV_DPTR",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c4a",
+          "op": "MOVX_READ",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c4e",
+          "op": "MOV_DPTR",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c51",
+          "op": "MOVX_READ",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c54",
+          "op": "MOVX_WRITE",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c55",
+          "op": "MOV_DPTR",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c58",
+          "op": "MOVX_READ",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c5c",
+          "op": "MOV_DPTR",
+          "imm": "0xe678",
+          "label": "I2CS"
+        },
+        {
+          "at": "0x2c5f",
+          "op": "MOVX_READ",
+          "imm": "0xe678",
+          "label": "I2CS"
+        }
+      ],
+      "write_labels": [
+        "I2CS",
+        "I2DAT",
+        "I2CS"
+      ]
+    },
+    {
+      "call_at": "0x0982",
+      "entry": "0x2078",
+      "sfr_touch_count": 0,
+      "sfr_touches": [],
+      "write_labels": []
+    },
+    {
+      "call_at": "0x0993",
+      "entry": "0x1000",
+      "sfr_touch_count": 12,
+      "sfr_touches": [
+        {
+          "at": "0x112a",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x112d",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1130",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1142",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1148",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x114e",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1154",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1159",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x115d",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1160",
+          "op": "MOVX_WRITE",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1164",
+          "op": "MOV_DPTR",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        },
+        {
+          "at": "0x1167",
+          "op": "MOVX_WRITE",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        }
+      ],
+      "write_labels": [
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "PINFLAGSAB",
+        "PINFLAGSCD"
+      ]
+    },
+    {
+      "call_at": "0x099a",
+      "entry": "0x27d9",
+      "sfr_touch_count": 10,
+      "sfr_touches": [
+        {
+          "at": "0x28d5",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28d8",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e4",
+          "op": "MOV_DPTR",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x28e7",
+          "op": "MOVX_READ",
+          "imm": "0xe680",
+          "label": "USBCS"
+        },
+        {
+          "at": "0x2908",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x290b",
+          "op": "MOVX_READ",
+          "imm": "0xe6a4",
+          "label": "E6xx_e6a4"
+        },
+        {
+          "at": "0x2913",
+          "op": "MOV_DPTR",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x2916",
+          "op": "MOVX_WRITE",
+          "imm": "0xe694",
+          "label": "E6xx_e694"
+        },
+        {
+          "at": "0x291a",
+          "op": "MOV_DPTR",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        },
+        {
+          "at": "0x291d",
+          "op": "MOVX_WRITE",
+          "imm": "0xe695",
+          "label": "E6xx_e695"
+        }
+      ],
+      "write_labels": [
+        "E6xx_e694",
+        "E6xx_e695"
+      ]
+    },
+    {
+      "call_at": "0x099d",
+      "entry": "0x1d62",
+      "sfr_touch_count": 8,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL"
+      ]
+    },
+    {
+      "call_at": "0x09a5",
+      "entry": "0x1d67",
+      "sfr_touch_count": 9,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL"
+      ]
+    },
+    {
+      "call_at": "0x09ad",
+      "entry": "0x1d6c",
+      "sfr_touch_count": 11,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09b5",
+      "entry": "0x1d71",
+      "sfr_touch_count": 11,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09bd",
+      "entry": "0x1d76",
+      "sfr_touch_count": 11,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09c5",
+      "entry": "0x1d7b",
+      "sfr_touch_count": 11,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09cd",
+      "entry": "0x1d80",
+      "sfr_touch_count": 12,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09d5",
+      "entry": "0x1d85",
+      "sfr_touch_count": 13,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09dd",
+      "entry": "0x1d8a",
+      "sfr_touch_count": 14,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f05",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG"
+      ]
+    },
+    {
+      "call_at": "0x09e5",
+      "entry": "0x1d8f",
+      "sfr_touch_count": 15,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f05",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f08",
+          "op": "MOVX_WRITE",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "PINFLAGSAB"
+      ]
+    },
+    {
+      "call_at": "0x09ed",
+      "entry": "0x1d94",
+      "sfr_touch_count": 15,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f05",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f08",
+          "op": "MOVX_WRITE",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "PINFLAGSAB"
+      ]
+    },
+    {
+      "call_at": "0x09f5",
+      "entry": "0x1d99",
+      "sfr_touch_count": 17,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f05",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f08",
+          "op": "MOVX_WRITE",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f0c",
+          "op": "MOV_DPTR",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        },
+        {
+          "at": "0x1f0f",
+          "op": "MOVX_WRITE",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "PINFLAGSAB",
+        "PINFLAGSCD"
+      ]
+    },
+    {
+      "call_at": "0x09fd",
+      "entry": "0x1d9e",
+      "sfr_touch_count": 17,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f05",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f08",
+          "op": "MOVX_WRITE",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f0c",
+          "op": "MOV_DPTR",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        },
+        {
+          "at": "0x1f0f",
+          "op": "MOVX_WRITE",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "PINFLAGSAB",
+        "PINFLAGSCD"
+      ]
+    },
+    {
+      "call_at": "0x0a05",
+      "entry": "0x1da3",
+      "sfr_touch_count": 17,
+      "sfr_touches": [
+        {
+          "at": "0x1de7",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1dea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1deb",
+          "op": "MOV_DPTR",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1dee",
+          "op": "MOVX_READ",
+          "imm": "0xe6a1",
+          "label": "EP4CS"
+        },
+        {
+          "at": "0x1df2",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1df5",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e15",
+          "op": "MOV_DPTR",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1e18",
+          "op": "MOVX_READ",
+          "imm": "0xe68d",
+          "label": "EP6BCL"
+        },
+        {
+          "at": "0x1ee4",
+          "op": "MOV_DPTR",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1ee7",
+          "op": "MOVX_READ",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1eea",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1efc",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f01",
+          "op": "MOVX_WRITE",
+          "imm": "0xe61a",
+          "label": "EP6FIFOCFG"
+        },
+        {
+          "at": "0x1f05",
+          "op": "MOV_DPTR",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f08",
+          "op": "MOVX_WRITE",
+          "imm": "0xe602",
+          "label": "PINFLAGSAB"
+        },
+        {
+          "at": "0x1f0c",
+          "op": "MOV_DPTR",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        },
+        {
+          "at": "0x1f0f",
+          "op": "MOVX_WRITE",
+          "imm": "0xe603",
+          "label": "PINFLAGSCD"
+        }
+      ],
+      "write_labels": [
+        "EP6BCL",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "EP6FIFOCFG",
+        "PINFLAGSAB",
+        "PINFLAGSCD"
+      ]
+    }
+  ],
+  "movx_write_label_first_seen_order": [
+    "SUDPTRH",
+    "E6xx_e694",
+    "E6xx_e695",
+    "EP4BCH",
+    "EP4BCL",
+    "EP8BCL",
+    "EP6BCL",
+    "SUDPTRCTL",
+    "I2CS",
+    "I2DAT",
+    "EP6FIFOCFG",
+    "PINFLAGSAB",
+    "PINFLAGSCD"
+  ],
+  "movx_writes_flat": [
+    {
+      "at": "0x05a2",
+      "op": "MOVX_WRITE",
+      "imm": "0xe6b3",
+      "label": "SUDPTRH",
+      "via_callee": "0x0499",
+      "call_at": "0x081c"
+    },
+    {
+      "at": "0x05ac",
+      "op": "MOVX_WRITE",
+      "imm": "0xe6b3",
+      "label": "SUDPTRH",
+      "via_callee": "0x0499",
+      "call_at": "0x081c"
+    },
+    {
+      "at": "0x05b6",
+      "op": "MOVX_WRITE",
+      "imm": "0xe6b3",
+      "label": "SUDPTRH",
+      "via_callee": "0x0499",
+      "call_at": "0x081c"
+    },
+    {
+      "at": "0x05c0",
+      "op": "MOVX_WRITE",
+      "imm": "0xe6b3",
+      "label": "SUDPTRH",
+      "via_callee": "0x0499",
+      "call_at": "0x081c"
+    },
+    {
+      "at": "0x2916",
+      "op": "MOVX_WRITE",
+      "imm": "0xe694",
+      "label": "E6xx_e694",
+      "via_callee": "0x27f8",
+      "call_at": "0x086b"
+    },
+    {
+      "at": "0x291d",
+      "op": "MOVX_WRITE",
+      "imm": "0xe695",
+      "label": "E6xx_e695",
+      "via_callee": "0x27f8",
+      "call_at": "0x086b"
+    },
+    {
+      "at": "0x29d9",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68a",
+      "label": "EP4BCH",
+      "via_callee": "0x292f",
+      "call_at": "0x0887"
+    },
+    {
+      "at": "0x29de",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68b",
+      "label": "EP4BCL",
+      "via_callee": "0x292f",
+      "call_at": "0x0887"
+    },
+    {
+      "at": "0x148d",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68f",
+      "label": "EP8BCL",
+      "via_callee": "0x1435",
+      "call_at": "0x0894"
+    },
+    {
+      "at": "0x14f9",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68f",
+      "label": "EP8BCL",
+      "via_callee": "0x1435",
+      "call_at": "0x0894"
+    },
+    {
+      "at": "0x150a",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68f",
+      "label": "EP8BCL",
+      "via_callee": "0x1435",
+      "call_at": "0x0894"
+    },
+    {
+      "at": "0x152f",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1435",
+      "call_at": "0x0894"
+    },
+    {
+      "at": "0x2916",
+      "op": "MOVX_WRITE",
+      "imm": "0xe694",
+      "label": "E6xx_e694",
+      "via_callee": "0x27e2",
+      "call_at": "0x08b9"
+    },
+    {
+      "at": "0x291d",
+      "op": "MOVX_WRITE",
+      "imm": "0xe695",
+      "label": "E6xx_e695",
+      "via_callee": "0x27e2",
+      "call_at": "0x08b9"
+    },
+    {
+      "at": "0x2916",
+      "op": "MOVX_WRITE",
+      "imm": "0xe694",
+      "label": "E6xx_e694",
+      "via_callee": "0x27e7",
+      "call_at": "0x08ea"
+    },
+    {
+      "at": "0x291d",
+      "op": "MOVX_WRITE",
+      "imm": "0xe695",
+      "label": "E6xx_e695",
+      "via_callee": "0x27e7",
+      "call_at": "0x08ea"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d5d",
+      "call_at": "0x0919"
+    },
+    {
+      "at": "0x313b",
+      "op": "MOVX_WRITE",
+      "imm": "0xe6b5",
+      "label": "SUDPTRCTL",
+      "via_callee": "0x30d3",
+      "call_at": "0x093d"
+    },
+    {
+      "at": "0x3143",
+      "op": "MOVX_WRITE",
+      "imm": "0xe6b5",
+      "label": "SUDPTRCTL",
+      "via_callee": "0x30d3",
+      "call_at": "0x093d"
+    },
+    {
+      "at": "0x315e",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68f",
+      "label": "EP8BCL",
+      "via_callee": "0x30d3",
+      "call_at": "0x093d"
+    },
+    {
+      "at": "0x2c3f",
+      "op": "MOVX_WRITE",
+      "imm": "0xe678",
+      "label": "I2CS",
+      "via_callee": "0x2bb3",
+      "call_at": "0x0958"
+    },
+    {
+      "at": "0x2c46",
+      "op": "MOVX_WRITE",
+      "imm": "0xe679",
+      "label": "I2DAT",
+      "via_callee": "0x2bb3",
+      "call_at": "0x0958"
+    },
+    {
+      "at": "0x2c54",
+      "op": "MOVX_WRITE",
+      "imm": "0xe678",
+      "label": "I2CS",
+      "via_callee": "0x2bb3",
+      "call_at": "0x0958"
+    },
+    {
+      "at": "0x1130",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x1142",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x1148",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x114e",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x1154",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x1159",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x1160",
+      "op": "MOVX_WRITE",
+      "imm": "0xe602",
+      "label": "PINFLAGSAB",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x1167",
+      "op": "MOVX_WRITE",
+      "imm": "0xe603",
+      "label": "PINFLAGSCD",
+      "via_callee": "0x1000",
+      "call_at": "0x0993"
+    },
+    {
+      "at": "0x2916",
+      "op": "MOVX_WRITE",
+      "imm": "0xe694",
+      "label": "E6xx_e694",
+      "via_callee": "0x27d9",
+      "call_at": "0x099a"
+    },
+    {
+      "at": "0x291d",
+      "op": "MOVX_WRITE",
+      "imm": "0xe695",
+      "label": "E6xx_e695",
+      "via_callee": "0x27d9",
+      "call_at": "0x099a"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d62",
+      "call_at": "0x099d"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d67",
+      "call_at": "0x09a5"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d6c",
+      "call_at": "0x09ad"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d6c",
+      "call_at": "0x09ad"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d71",
+      "call_at": "0x09b5"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d71",
+      "call_at": "0x09b5"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d76",
+      "call_at": "0x09bd"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d76",
+      "call_at": "0x09bd"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d7b",
+      "call_at": "0x09c5"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d7b",
+      "call_at": "0x09c5"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d80",
+      "call_at": "0x09cd"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d80",
+      "call_at": "0x09cd"
+    },
+    {
+      "at": "0x1efc",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d80",
+      "call_at": "0x09cd"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d85",
+      "call_at": "0x09d5"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d85",
+      "call_at": "0x09d5"
+    },
+    {
+      "at": "0x1efc",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d85",
+      "call_at": "0x09d5"
+    },
+    {
+      "at": "0x1f01",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d85",
+      "call_at": "0x09d5"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d8a",
+      "call_at": "0x09dd"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d8a",
+      "call_at": "0x09dd"
+    },
+    {
+      "at": "0x1efc",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d8a",
+      "call_at": "0x09dd"
+    },
+    {
+      "at": "0x1f01",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d8a",
+      "call_at": "0x09dd"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d8f",
+      "call_at": "0x09e5"
+    },
+    {
+      "at": "0x1eea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d8f",
+      "call_at": "0x09e5"
+    },
+    {
+      "at": "0x1efc",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d8f",
+      "call_at": "0x09e5"
+    },
+    {
+      "at": "0x1f01",
+      "op": "MOVX_WRITE",
+      "imm": "0xe61a",
+      "label": "EP6FIFOCFG",
+      "via_callee": "0x1d8f",
+      "call_at": "0x09e5"
+    },
+    {
+      "at": "0x1f08",
+      "op": "MOVX_WRITE",
+      "imm": "0xe602",
+      "label": "PINFLAGSAB",
+      "via_callee": "0x1d8f",
+      "call_at": "0x09e5"
+    },
+    {
+      "at": "0x1dea",
+      "op": "MOVX_WRITE",
+      "imm": "0xe68d",
+      "label": "EP6BCL",
+      "via_callee": "0x1d94",
+      "call_at": "0x09ed"
+    }
+  ],
+  "highlight_calls_to_0x1435": [
+    {
+      "at": "0x0894",
+      "op": "LCALL",
+      "dest": "0x1435"
+    },
+    {
+      "at": "0x08a6",
+      "op": "LJMP",
+      "dest": "0x1435"
+    }
+  ],
+  "interpretation": "After IRAM clear, early LCALL targets are scanned for MOV DPTR,#E6xx + MOVX; first-seen write labels form an init/config candidate order. Early transfer to 0x1435 links init to the EP6/FIFO hub candidate.",
+  "confidence": "candidate",
+  "boundary": "byte-scan LCALL + lite disasm of callees; misaligned false positives possible",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

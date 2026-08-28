@@ -1,0 +1,239 @@
+{
+  "generated_at": "2026-08-28T13:14:58.886970+00:00",
+  "status": "mapped",
+  "layer": "G0-G1",
+  "plan_ref": "BINARY_RE_PLAN.md",
+  "path": "phase_b/analysis/fx2_ram_from_enum.bin",
+  "size_bytes": 16384,
+  "sha256": "ac3461195e2dd3fe6a436cdcae0f6cc481054923d2cd4cb1fba9d1c2299a3241",
+  "source_note": "Volatile FX2 RAM from USB 0xA0 — NOT eeprom.bin; map is code anchors + SFR refs, not full physical XRAM census",
+  "regions": {
+    "code_image": {
+      "start": "0x0000",
+      "end_exclusive": "0x4000",
+      "note": "FX2 on-chip code/xdata RAM loaded via 0xA0"
+    },
+    "ivt_classic": {
+      "start": "0x0000",
+      "end_exclusive": "0x0046",
+      "note": "classic 8051 vectors + USB hint slot"
+    },
+    "sfr_xdata_window": {
+      "start": "0xe600",
+      "end_exclusive": "0xe700",
+      "note": "FX2 SFR/XDATA; not inside RAM image bytes — referenced via MOV DPTR",
+      "in_image": false
+    },
+    "zero_runs_ge_32": []
+  },
+  "ivt": [
+    {
+      "vector": "reset",
+      "offset": "0x0000",
+      "bytes": "02075b",
+      "ljmp_dest": "0x075b",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "IE0_ext0",
+      "offset": "0x0003",
+      "bytes": "020f2a",
+      "ljmp_dest": "0x0f2a",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "TF0_timer0",
+      "offset": "0x000b",
+      "bytes": "021f64",
+      "ljmp_dest": "0x1f64",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "IE1_ext1",
+      "offset": "0x0013",
+      "bytes": "90c403",
+      "preview": [
+        "MOV DPTR,#0xc403",
+        "MOV A,#0xff",
+        "MOVX @DPTR,A",
+        "RET"
+      ],
+      "confidence": "hypothesis"
+    },
+    {
+      "vector": "TF1_timer1",
+      "offset": "0x001b",
+      "bytes": "0230b3",
+      "ljmp_dest": "0x30b3",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "serial_RI_TI",
+      "offset": "0x0023",
+      "bytes": "82d201",
+      "preview": [
+        "DB 0x82",
+        "SETB 0x01",
+        "LCALL 0x299e",
+        "MOV A,#0x08"
+      ],
+      "confidence": "hypothesis"
+    },
+    {
+      "vector": "TF2_EXF2",
+      "offset": "0x002b",
+      "bytes": "f0d082",
+      "preview": [
+        "MOVX @DPTR,A",
+        "POP 0x82",
+        "POP 0x83",
+        "POP 0xe0"
+      ],
+      "confidence": "hypothesis"
+    },
+    {
+      "vector": "USB_or_ext_hint",
+      "offset": "0x0043",
+      "bytes": "021b00",
+      "ljmp_dest": "0x1b00",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "image_base",
+      "start": "0x0000",
+      "end_exclusive": "0x4000",
+      "role": "volatile_code_xdata_image"
+    },
+    {
+      "name": "reset_vector",
+      "start": "0x0000",
+      "role": "ivt_reset",
+      "ljmp": "0x075b"
+    },
+    {
+      "name": "main_init",
+      "start": "0x075b",
+      "role": "reset_target"
+    },
+    {
+      "name": "hot_abs_0x0393",
+      "start": "0x0393",
+      "role": "abs_branch_hotspot"
+    },
+    {
+      "name": "cmd_0x01_owner_candidate",
+      "start": "0x0473",
+      "role": "ep1_opcode_imm_owner"
+    },
+    {
+      "name": "cmd_0x08_datapath_hub",
+      "start": "0x1435",
+      "role": "ep1_opcode_and_fifo_hub"
+    },
+    {
+      "name": "opcode_0x01_owner",
+      "start": "0x054c",
+      "role": "ep1_dispatch_owner_candidate",
+      "opcode": "0x01"
+    },
+    {
+      "name": "opcode_0x08_owner",
+      "start": "0x1435",
+      "role": "ep1_dispatch_owner_candidate",
+      "opcode": "0x08"
+    },
+    {
+      "name": "opcode_0x09_owner",
+      "start": "0x1c5b",
+      "role": "ep1_dispatch_owner_candidate",
+      "opcode": "0x09"
+    },
+    {
+      "name": "opcode_0x0a_owner",
+      "start": "0x0b13",
+      "role": "ep1_dispatch_owner_candidate",
+      "opcode": "0x0a"
+    },
+    {
+      "name": "opcode_0x04_owner",
+      "start": "0x07ea",
+      "role": "ep1_dispatch_owner_candidate",
+      "opcode": "0x04"
+    },
+    {
+      "name": "datapath_0x1435",
+      "start": "0x1435",
+      "role": "fifo_ep_in_candidate",
+      "score": 17
+    },
+    {
+      "name": "datapath_0x2337",
+      "start": "0x2337",
+      "role": "fifo_ep_in_candidate",
+      "score": 10
+    },
+    {
+      "name": "datapath_0x111c",
+      "start": "0x111c",
+      "role": "fifo_ep_in_candidate",
+      "score": 8
+    },
+    {
+      "name": "datapath_0x1db8",
+      "start": "0x1db8",
+      "role": "fifo_ep_in_candidate",
+      "score": 8
+    },
+    {
+      "name": "datapath_0x054c",
+      "start": "0x054c",
+      "role": "fifo_ep_in_candidate",
+      "score": 3
+    }
+  ],
+  "sfr_label_coverage": [
+    "CPUCS",
+    "EP1INCFG",
+    "EP1OUTCFG",
+    "EP2CS",
+    "EP4BCH",
+    "EP4BCL",
+    "EP4CFG",
+    "EP4CS",
+    "EP4FIFOCFG",
+    "EP6BCL",
+    "EP6CFG",
+    "EP6CS",
+    "EP6FIFOCFG",
+    "EP8BCL",
+    "FIFORESET",
+    "I2CS",
+    "I2DAT",
+    "IFCONFIG",
+    "INPKTEND",
+    "OUTPKTEND",
+    "PINFLAGSAB",
+    "PINFLAGSCD",
+    "SUDPTRCTL",
+    "SUDPTRH",
+    "SUDPTRL",
+    "USBCS"
+  ],
+  "reset": {
+    "byte0": "0x02",
+    "interpretation": "LJMP abs",
+    "target": "0x075b",
+    "confidence": "candidate"
+  },
+  "routine_seed_count": 131,
+  "confidence": "candidate",
+  "boundary": "candidate map from RAM image only; EEPROM dump may extend/alter layout",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

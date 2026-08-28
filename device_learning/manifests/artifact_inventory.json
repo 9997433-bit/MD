@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-28T13:04:06.056520+00:00",
-  "artifact_count": 84,
-  "present_count": 84,
+  "generated_at": "2026-08-28T13:15:03.946587+00:00",
+  "artifact_count": 88,
+  "present_count": 88,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 1697866
+      "size_bytes": 1834837
     },
     {
       "path": "coverage.json",
       "description": "完成度统计",
       "exists": true,
-      "size_bytes": 880
+      "size_bytes": 867
     },
     {
       "path": "bridge_matrix.json",
@@ -25,7 +25,7 @@
       "path": "STATIC_REPORT.md",
       "description": "静态摘要",
       "exists": true,
-      "size_bytes": 1636
+      "size_bytes": 1623
     },
     {
       "path": "STATIC_CLOSURE.md",
@@ -43,7 +43,7 @@
       "path": "BLOCKED_REPORT.md",
       "description": "阻塞项报告",
       "exists": true,
-      "size_bytes": 3711
+      "size_bytes": 3668
     },
     {
       "path": "BRIDGE_REPORT.md",
@@ -61,7 +61,7 @@
       "path": "IDENTIFIER_INDEX.md",
       "description": "identifier 全表",
       "exists": true,
-      "size_bytes": 18942
+      "size_bytes": 18944
     },
     {
       "path": "HARDWARE_HANDOFF.md",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15119
+      "size_bytes": 15143
     },
     {
       "path": "manifests/output_hashes.json",
@@ -127,7 +127,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 12823
+      "size_bytes": 13437
     },
     {
       "path": "manifests/bit_strings.json",
@@ -199,7 +199,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 819
+      "size_bytes": 806
     },
     {
       "path": "manifests/experiment_index.json",
@@ -244,22 +244,40 @@
       "size_bytes": 14548
     },
     {
+      "path": "manifests/fx2_address_map.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 5393
+    },
+    {
       "path": "manifests/fx2_cmd_dispatch_hypothesis.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 25744
+      "size_bytes": 52520
     },
     {
       "path": "manifests/fx2_datapath_hypothesis.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 5739
+      "size_bytes": 4181
+    },
+    {
+      "path": "manifests/fx2_init_chain.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 64600
+    },
+    {
+      "path": "manifests/fx2_ivt_map.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1858
     },
     {
       "path": "manifests/fx2_oracle_crosscheck.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 3076
+      "size_bytes": 3175
     },
     {
       "path": "manifests/fx2_ram_disasm.json",
@@ -283,7 +301,13 @@
       "path": "manifests/fx2_ram_xrefs.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 10095
+      "size_bytes": 15399
+    },
+    {
+      "path": "manifests/fx2_routine_1435_annotation.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1318
     },
     {
       "path": "manifests/hardware_bom.json",
@@ -301,7 +325,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1024
+      "size_bytes": 1011
     },
     {
       "path": "manifests/pcap_synthetic_meta.json",
@@ -313,7 +337,7 @@
       "path": "manifests/pending_index.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 17922
+      "size_bytes": 17677
     },
     {
       "path": "manifests/phase_b_readiness.json",
@@ -331,7 +355,7 @@
       "path": "manifests/phase_b_upgrade_proposals.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 295
+      "size_bytes": 354
     },
     {
       "path": "manifests/phase_c_readiness.json",
@@ -343,7 +367,7 @@
       "path": "manifests/phase_roadmap.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 3969
+      "size_bytes": 3937
     },
     {
       "path": "manifests/phase_transition.json",
@@ -415,7 +439,7 @@
       "path": "manifests/usb_cmd_data_correlation.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 119
+      "size_bytes": 8448
     },
     {
       "path": "manifests/usb_command_replay_script.json",

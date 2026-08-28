@@ -223,6 +223,35 @@ def build_proposals() -> dict:
         notes.append("protocol_log.json present (human/auto draft).")
         # Do not propose a downgrade; framing lives on bulk, not EP0 vendor ctrl.
 
+    addr_map = load_json("manifests/fx2_address_map.json")
+    init_chain = load_json("manifests/fx2_init_chain.json")
+    ram_bin = ROOT / "phase_b" / "analysis" / "fx2_ram_from_enum.bin"
+    if ram_bin.exists() and addr_map.get("status") == "mapped":
+        applicable = True
+        notes.append("fx2_address_map.json mapped from volatile RAM image.")
+        if p := propose(
+            "FW-MCU-CODE-XRAM-MAP",
+            "candidate",
+            "16KiB RAM address map + SFR/XDATA refs from fx2_ram_from_enum.bin",
+            "manifests/fx2_address_map.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "FW-MCU-RESET-VECTOR",
+            "candidate",
+            "Reset 0x0000→0x075B with init SFR walk",
+            "manifests/fx2_init_chain.json + manifests/fx2_ivt_map.json",
+        ):
+            proposals.append(p)
+        if init_chain.get("status") == "scanned":
+            if p := propose(
+                "FW-MCU-CORE-IMAGE",
+                "candidate",
+                "RAM image supports init-chain and address-map analysis",
+                "phase_b/analysis/fx2_ram_from_enum.bin",
+            ):
+                proposals.append(p)
+
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "applicable": applicable,

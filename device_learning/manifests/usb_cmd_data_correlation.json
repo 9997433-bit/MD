@@ -1,5 +1,572 @@
 {
-  "generated_at": "2026-08-28T13:04:00.696110+00:00",
-  "status": "missing",
-  "boundary": "no usb_session.pcapng"
+  "generated_at": "2026-08-28T13:13:39.027571+00:00",
+  "device": "0x3923:0x744f",
+  "usb_addr": 24,
+  "status": "hypothesis",
+  "confidence": "candidate",
+  "ep01_out_count": 3724,
+  "ep84_in_count": 294,
+  "ep84_burst_count": 12,
+  "first_ep84_t": 19.245,
+  "first_opcode_sightings": [
+    {
+      "t": 6.538,
+      "opcode": "0x00"
+    },
+    {
+      "t": 7.418,
+      "opcode": "0x02"
+    },
+    {
+      "t": 7.693,
+      "opcode": "0x01"
+    },
+    {
+      "t": 7.835,
+      "opcode": "0x0a"
+    },
+    {
+      "t": 8.271,
+      "opcode": "0x09"
+    },
+    {
+      "t": 8.545,
+      "opcode": "0x08"
+    },
+    {
+      "t": 8.69,
+      "opcode": "0x0f"
+    },
+    {
+      "t": 8.69,
+      "opcode": "0x11"
+    },
+    {
+      "t": 8.737,
+      "opcode": "0x0c"
+    },
+    {
+      "t": 8.876,
+      "opcode": "0x10"
+    }
+  ],
+  "opcodes_preceding_bursts_top": [
+    {
+      "opcode": "0x08",
+      "burst_hits": 176
+    },
+    {
+      "opcode": "0x01",
+      "burst_hits": 118
+    },
+    {
+      "opcode": "0x09",
+      "burst_hits": 118
+    },
+    {
+      "opcode": "0x0a",
+      "burst_hits": 60
+    },
+    {
+      "opcode": "0x0b",
+      "burst_hits": 60
+    },
+    {
+      "opcode": "0x0f",
+      "burst_hits": 12
+    },
+    {
+      "opcode": "0x10",
+      "burst_hits": 12
+    },
+    {
+      "opcode": "0x04",
+      "burst_hits": 12
+    }
+  ],
+  "bursts": [
+    {
+      "t0": 19.245,
+      "duration_s": 0.0,
+      "packets": 1,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          16
+        ],
+        [
+          "0x01",
+          9
+        ],
+        [
+          "0x09",
+          9
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 47
+    },
+    {
+      "t0": 27.326,
+      "duration_s": 0.0,
+      "packets": 1,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          14
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          9
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 46
+    },
+    {
+      "t0": 34.092,
+      "duration_s": 2.192424,
+      "packets": 41,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          14
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x01",
+          9
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 46
+    },
+    {
+      "t0": 38.998,
+      "duration_s": 2.318552,
+      "packets": 43,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          14
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 47
+    },
+    {
+      "t0": 44.034,
+      "duration_s": 1.653413,
+      "packets": 31,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          14
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 47
+    },
+    {
+      "t0": 48.035,
+      "duration_s": 1.343527,
+      "packets": 25,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          14
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 47
+    },
+    {
+      "t0": 56.101,
+      "duration_s": 2.168626,
+      "packets": 41,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          15
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 48
+    },
+    {
+      "t0": 62.075,
+      "duration_s": 1.125414,
+      "packets": 23,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          15
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 48
+    },
+    {
+      "t0": 66.363,
+      "duration_s": 0.919198,
+      "packets": 18,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          15
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 48
+    },
+    {
+      "t0": 69.538,
+      "duration_s": 1.114939,
+      "packets": 19,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          15
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 48
+    },
+    {
+      "t0": 73.298,
+      "duration_s": 1.357176,
+      "packets": 24,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          15
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 48
+    },
+    {
+      "t0": 76.857,
+      "duration_s": 1.373305,
+      "packets": 27,
+      "preceding_opcodes_0.5s": [
+        [
+          "0x08",
+          15
+        ],
+        [
+          "0x01",
+          10
+        ],
+        [
+          "0x09",
+          10
+        ],
+        [
+          "0x0a",
+          5
+        ],
+        [
+          "0x0b",
+          5
+        ],
+        [
+          "0x0f",
+          1
+        ],
+        [
+          "0x10",
+          1
+        ],
+        [
+          "0x04",
+          1
+        ]
+      ],
+      "preceding_count": 48
+    }
+  ],
+  "interpretation": "Opcodes that frequently appear in the 0.5s before EP84 bursts are start/arm candidates; meanings remain unconfirmed without host software or firmware symbols.",
+  "boundary": "Timing correlation ≠ semantic proof",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
 }

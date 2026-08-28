@@ -1,25 +1,11 @@
 {
-  "generated_at": "2026-08-28T13:04:00.941047+00:00",
+  "generated_at": "2026-08-28T13:14:58.640739+00:00",
   "status": "hypothesis",
   "layer": "L5",
   "plan_ref": "BINARY_RE_PLAN.md",
   "source_note": "Volatile FX2 RAM — NOT eeprom.bin",
   "usb_data_plane_note": "Host session uses bulk EP 0x06/0x84; FX2 side often maps EP6/EP8 — labels are public TRM names, board mapping candidate only",
   "sfr_sites_by_label": {
-    "EP1INCFG": [
-      {
-        "at": "0x2f0e",
-        "imm": "0xe611",
-        "owner_routine": "0x2f08"
-      }
-    ],
-    "EP1OUTCFG": [
-      {
-        "at": "0x2f08",
-        "imm": "0xe610",
-        "owner_routine": "0x2f08"
-      }
-    ],
     "EP2CS": [
       {
         "at": "0x0742",
@@ -108,11 +94,6 @@
         "at": "0x1531",
         "imm": "0xe6a2",
         "owner_routine": "0x1435"
-      },
-      {
-        "at": "0x315f",
-        "imm": "0xe6a2",
-        "owner_routine": "0x314b"
       }
     ],
     "FIFORESET": [
@@ -125,28 +106,6 @@
         "at": "0x23dd",
         "imm": "0xe604",
         "owner_routine": "0x2337"
-      },
-      {
-        "at": "0x306f",
-        "imm": "0xe604",
-        "owner_routine": "0x306f"
-      }
-    ],
-    "IFCONFIG": [
-      {
-        "at": "0x2b51",
-        "imm": "0xe601",
-        "owner_routine": "0x2a7c"
-      },
-      {
-        "at": "0x2efb",
-        "imm": "0xe601",
-        "owner_routine": "0x2efb"
-      },
-      {
-        "at": "0x3076",
-        "imm": "0xe601",
-        "owner_routine": "0x3076"
       }
     ],
     "PINFLAGSAB": [
@@ -216,22 +175,6 @@
       "score": 8
     },
     {
-      "entry": "0x314b",
-      "labels": [
-        "EP6CS"
-      ],
-      "hit_count": 1,
-      "score": 6
-    },
-    {
-      "entry": "0x306f",
-      "labels": [
-        "FIFORESET"
-      ],
-      "hit_count": 1,
-      "score": 4
-    },
-    {
       "entry": "0x054c",
       "labels": [
         "EP2CS"
@@ -247,39 +190,6 @@
       ],
       "hit_count": 2,
       "score": 2
-    },
-    {
-      "entry": "0x2f08",
-      "labels": [
-        "EP1INCFG",
-        "EP1OUTCFG"
-      ],
-      "hit_count": 2,
-      "score": 2
-    },
-    {
-      "entry": "0x2a7c",
-      "labels": [
-        "IFCONFIG"
-      ],
-      "hit_count": 1,
-      "score": 1
-    },
-    {
-      "entry": "0x2efb",
-      "labels": [
-        "IFCONFIG"
-      ],
-      "hit_count": 1,
-      "score": 1
-    },
-    {
-      "entry": "0x3076",
-      "labels": [
-        "IFCONFIG"
-      ],
-      "hit_count": 1,
-      "score": 1
     }
   ],
   "primary_followups_for_ghidra": [
@@ -287,8 +197,6 @@
     "0x2337",
     "0x111c",
     "0x1db8",
-    "0x314b",
-    "0x306f",
     "0x054c",
     "0x18af"
   ],

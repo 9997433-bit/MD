@@ -1,22 +1,15 @@
 {
-  "generated_at": "2026-08-28T13:04:03.097390+00:00",
+  "generated_at": "2026-08-28T13:15:00.977535+00:00",
   "blocked_statuses": [
     "missing",
     "not_started",
     "unknown"
   ],
-  "total_blocked": 75,
+  "total_blocked": 74,
   "by_status": {
     "missing": {
-      "count": 8,
+      "count": 7,
       "items": [
-        {
-          "identifier": "FW-MCU-CODE-XRAM-MAP",
-          "layer": "usb",
-          "status": "missing",
-          "boundary": "no_dump",
-          "module": "mcu"
-        },
         {
           "identifier": "FW-EEPROM-IMAGE",
           "layer": "usb",
@@ -643,9 +636,8 @@
       ]
     },
     "usb": {
-      "count": 12,
+      "count": 11,
       "identifiers": [
-        "FW-MCU-CODE-XRAM-MAP",
         "FW-EEPROM-IMAGE",
         "FW-EEPROM-CONFIG-BYTE",
         "FW-EEPROM-VIDPID",
@@ -661,7 +653,6 @@
     }
   },
   "phase_b_unblocks": [
-    "FW-MCU-CODE-XRAM-MAP",
     "FW-EEPROM-IMAGE",
     "FW-EEPROM-CONFIG-BYTE",
     "FW-EEPROM-VIDPID",

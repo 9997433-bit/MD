@@ -27,6 +27,7 @@ SFR_LABELS = {
     0xE600: "CPUCS",
     0xE601: "IFCONFIG",
     0xE602: "PINFLAGSAB",
+    0xE603: "PINFLAGSCD",
     0xE604: "FIFORESET",
     0xE610: "EP1OUTCFG",
     0xE611: "EP1INCFG",
@@ -34,10 +35,28 @@ SFR_LABELS = {
     0xE613: "EP4CFG",
     0xE614: "EP6CFG",
     0xE615: "EP8CFG",
+    0xE618: "EP2FIFOCFG",
+    0xE619: "EP4FIFOCFG",
+    0xE61A: "EP6FIFOCFG",
+    0xE61B: "EP8FIFOCFG",
+    0xE65D: "OUTPKTEND",
+    0xE65F: "INPKTEND",
+    0xE678: "I2CS",
+    0xE679: "I2DAT",
+    0xE680: "USBCS",
+    0xE68A: "EP4BCH",
+    0xE68B: "EP4BCL",
+    0xE68C: "EP6BCH",
+    0xE68D: "EP6BCL",
+    0xE68E: "EP8BCH",
+    0xE68F: "EP8BCL",
     0xE6A0: "EP2CS",
     0xE6A1: "EP4CS",
     0xE6A2: "EP6CS",
     0xE6A3: "EP8CS",
+    0xE6B3: "SUDPTRH",
+    0xE6B4: "SUDPTRL",
+    0xE6B5: "SUDPTRCTL",
     0xE6F5: "EP0BCH",
     0xE6F6: "EP0BCL",
 }
@@ -123,20 +142,26 @@ def imm16_histogram(movs: list[dict]) -> list[dict]:
 
 
 def opcode_imm_hits(data: bytes, opcodes: list[int]) -> dict[str, list[str]]:
-    """Find code offsets of CJNE/single-byte compares against known bulk opcodes later."""
-    # Also collect locations of literal opcode bytes as immediate in MOV A,#imm (0x74)
+    """Find code offsets comparing/loading known bulk opcodes as immediates."""
     found: dict[str, list[str]] = {f"0x{o:02x}": [] for o in opcodes}
+
+    def add(key: str, at: int) -> None:
+        if key in found and len(found[key]) < 40:
+            found[key].append(f"0x{at:04x}")
+
     for i in range(len(data) - 1):
-        if data[i] == 0x74:  # MOV A,#imm
-            imm = data[i + 1]
-            key = f"0x{imm:02x}"
-            if key in found and len(found[key]) < 30:
-                found[key].append(f"0x{i:04x}")
-        if data[i] == 0xB4:  # CJNE A,#imm,rel
-            imm = data[i + 1]
-            key = f"0x{imm:02x}"
-            if key in found and len(found[key]) < 30:
-                found[key].append(f"0x{i:04x}")
+        op = data[i]
+        imm = data[i + 1]
+        key = f"0x{imm:02x}"
+        # MOV/ADD/ADDC/ORL/ANL/XRL A,#imm and CJNE A,#imm
+        if op in (0x74, 0x24, 0x34, 0x44, 0x54, 0x64, 0xB4):
+            add(key, i)
+        # CJNE @R0/#, @R1/#, Rn,#imm
+        if op in (0xB6, 0xB7) or 0xB8 <= op <= 0xBF:
+            add(key, i)
+        # MOV Rn,#imm
+        if 0x78 <= op <= 0x7F:
+            add(key, i)
     return {k: v for k, v in found.items() if v}
 
 

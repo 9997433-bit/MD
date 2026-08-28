@@ -1,11 +1,10 @@
 {
-  "generated_at": "2026-08-28T13:04:02.941820+00:00",
+  "generated_at": "2026-08-28T13:15:00.821608+00:00",
   "phase_b": [
     {
       "action": "eeprom_dump",
       "artifact": "phase_b/captures/eeprom.bin",
       "unblocks": [
-        "FW-MCU-CODE-XRAM-MAP",
         "FW-EEPROM-IMAGE",
         "FW-EEPROM-CONFIG-BYTE",
         "FW-EEPROM-VIDPID",

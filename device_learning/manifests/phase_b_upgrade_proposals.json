@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-08-28T13:04:08.732920+00:00",
-  "applicable": false,
+  "generated_at": "2026-08-28T13:15:06.627734+00:00",
+  "applicable": true,
   "proposal_count": 0,
   "proposals": [],
   "notes": [
-    "Only synthetic EEPROM available — no upgrade proposals."
+    "Only synthetic EEPROM available — no upgrade proposals.",
+    "fx2_address_map.json mapped from volatile RAM image."
   ],
   "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
 }

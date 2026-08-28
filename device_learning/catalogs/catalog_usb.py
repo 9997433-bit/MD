@@ -52,14 +52,16 @@ ENTRIES = [
     make_entry(
         "FW-MCU-RESET-VECTOR", "FW", "mcu",
         "Reset vector / boot entry of the MCU firmware",
-        "candidate", "hint from RAM image byte0; needs Ghidra confirmation",
-        "manifests/fx2_ram_scan.json",
+        "candidate",
+        "0x0000 LJMP 0x075B documented; init SFR order is candidate-level linear walk",
+        "manifests/fx2_ram_scan.json + fx2_init_chain.json + fx2_ivt_map.json",
     ),
     make_entry(
         "FW-MCU-CODE-XRAM-MAP", "FW", "mcu",
         "Code / external-RAM address map of the MCU",
-        "missing", "no_dump",
-        "memory layout and XRAM mapping unknown without a dump",
+        "candidate",
+        "16KiB volatile RAM image map + SFR/XDATA refs only; persistent EEPROM layout still unknown",
+        "manifests/fx2_address_map.json + fx2_ram_xrefs.json + fx2_ivt_map.json + fx2_init_chain.json",
     ),
     make_entry(
         "FW-MCU-I2C-BOOT-PATH", "FW", "mcu",
