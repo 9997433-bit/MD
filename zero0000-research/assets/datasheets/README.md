@@ -8,13 +8,14 @@
 |---|---|---|---|---|
 | XC7K160T(Kintex-7) | AMD/Xilinx | DS182(电气特性) | <https://docs.amd.com/v/u/en-US/ds182_Kintex_7_Data_Sheet> | `ds182_kintex7.pdf` |
 | XC7K160T(Kintex-7) | AMD/Xilinx | DS180(7 系列总览) | <https://docs.amd.com/v/u/en-US/ds180_7Series_Overview> | `ds180_7series_overview.pdf` |
-| FT600Q(USB 3.0 FIFO) | FTDI | DS_FT600Q-FT601Q | <https://ftdichip.com/wp-content/uploads/2020/07/DS_FT600Q-FT601Q-IC-Datasheet.pdf> | `ft600q_ft601q.pdf` |
+| FT600Q(USB 3.0 FIFO) | FTDI | FT_001118(v1.06) | <https://ftdichip.com/wp-content/uploads/2024/11/DS_FT600Q-FT601Q-IC-Datasheet.pdf> | `ft600q_ft601q.pdf` |
 | ADS62P49(双通道 14-bit 250 MSPS ADC) | TI | SLAS635 | <https://www.ti.com/lit/ds/symlink/ads62p49.pdf> | `ads62p49.pdf` |
-| DAC3283(双通道 16-bit 800 MSPS DAC) | TI | SLAS646 | <https://www.ti.com/lit/ds/symlink/dac3283.pdf> | `dac3283.pdf` |
+| DAC3283(双通道 16-bit 800 MSPS DAC) | TI | SLAS693 | <https://www.ti.com/lit/ds/symlink/dac3283.pdf> | `dac3283.pdf` |
 | CDCE72010(10 路时钟分配/抖动清除) | TI | SCAS858 | <https://www.ti.com/lit/ds/symlink/cdce72010.pdf> | `cdce72010.pdf` |
 | S25FL128S(128 Mb SPI NOR Flash) | Infineon(原 Cypress/Spansion) | 001-98283 | <https://www.infineon.com/assets/row/public/documents/10/49/infineon-s25fl128s-s25fl256s-128-mb-16-mb-256-mb-32-mb-fl-s-flash-spi-multi-io-3-v-datasheet-en.pdf?fileId=8ac78c8c7d0d8da4017d0ecfb6a64a17> | `s25fl128s.pdf` |
 | IS43TR16128D(2 Gb DDR3,128M×16) | ISSI | 43-46TR16128D | <https://www.issi.com/WW/pdf/43-46TR16128D-82560DL.pdf> | `is43tr16128d.pdf` |
 | RTL8211FI(千兆以太网 PHY) | Realtek | JATR-8275-15 | 无官方公开直链,见下方说明 | `rtl8211fi.pdf` |
+| TPS54425(电源,附带) | TI | 产品页 | <https://www.ti.com/product/TPS54425> | `tps54425.pdf` |
 
 ### 各链接说明
 
@@ -40,5 +41,7 @@ curl -L -o cdce72010.pdf  "https://www.ti.com/lit/ds/symlink/cdce72010.pdf"
 ## git 说明
 
 本目录的 `*.pdf` 已在仓库根 `.gitignore` 中忽略,下载的 PDF 只留在本地,不要提交;若某份手册确需入库存档(例如厂商已下架),单独用 `git add -f` 并在 commit message 中说明理由。
+
+旁证套件(非本板器件,供交叉比对):Abaco FMC150、TI TSW4200、FTDI AN_421/AN_379。
 
 链接核验日期:2026-08-28(TI/ISSI/Infineon/FTDI/AMD 均为当日官方有效地址;防爬行为以当日实测为准)。
