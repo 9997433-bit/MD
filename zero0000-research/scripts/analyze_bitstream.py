@@ -59,6 +59,7 @@ last_reg = None
 fdri_writes = []       # (当前FAR, 字数)
 far_writes = []        # FAR 值序列
 current_far = None
+fdri_payload = []      # (byte_off, word_count) 记录 FDRI 负载位置用于逐帧分析
 
 parse_errors = 0
 words_parsed = 0
@@ -114,6 +115,7 @@ while pos + 4 <= end:
             reg_write_words[reg] += wc
             if reg == 2:  # FDRI
                 fdri_writes.append((current_far, wc))
+                fdri_payload.append((pos, wc))
             pos += wc * 4
         else:
             pos += wc * 4
@@ -232,6 +234,44 @@ def entropy(buf):
 body = data[sync_off:sync_off + min(0x200000, len(data)-sync_off)]
 print(f"\n=== 熵 ===\n  同步字后 {len(body)} 字节熵: {entropy(body):.4f} bit/byte "
       f"(接近8=加密/压缩; ~1-2=普通未加密配置数据)")
+
+# ---------- 逐帧零/非零分布（利用率与 BRAM 初始化粗估） ----------
+print("\n=== 逐帧非零分布（配置利用率粗估） ===")
+if fdri_payload:
+    off0, wc0 = fdri_payload[0]
+    frame_bytes = WORDS_PER_FRAME * 4
+    nframes = wc0 // WORDS_PER_FRAME
+    zero_frames = 0
+    nonzero_frames = 0
+    # 记录非零帧的序号，用于观察尾部(BRAM内容帧)是否聚集
+    nz_positions = []
+    ZERO_FRAME = b"\x00" * frame_bytes
+    for i in range(nframes):
+        fb = data[off0 + i*frame_bytes: off0 + (i+1)*frame_bytes]
+        if fb == ZERO_FRAME:
+            zero_frames += 1
+        else:
+            nonzero_frames += 1
+            nz_positions.append(i)
+    print(f"  FDRI 总帧数: {nframes}")
+    print(f"  全零帧: {zero_frames} ({zero_frames/nframes*100:.1f}%)")
+    print(f"  非零帧: {nonzero_frames} ({nonzero_frames/nframes*100:.1f}%)  <= 配置利用率上界粗估")
+    # 分 10 段统计非零帧密度，观察分布形态
+    seg = 10
+    print(f"  非零帧按位置分 {seg} 段密度:")
+    for s in range(seg):
+        lo = s * nframes // seg
+        hi = (s + 1) * nframes // seg
+        cnt = sum(1 for p in nz_positions if lo <= p < hi)
+        span = hi - lo
+        bar = "#" * int(cnt / span * 40) if span else ""
+        print(f"    段{s} 帧[{lo:5d},{hi:5d}): 非零 {cnt:5d}/{span:5d} ({cnt/span*100:5.1f}%) {bar}")
+    # 尾部 15% 视作 BRAM 内容帧候选区（7-series FDRI 先写 blk0 再写 blk1）
+    tail_lo = int(nframes * 0.85)
+    tail_nz = sum(1 for p in nz_positions if p >= tail_lo)
+    tail_span = nframes - tail_lo
+    print(f"  尾部15%区 帧[{tail_lo},{nframes}) 非零: {tail_nz}/{tail_span} "
+          f"({tail_nz/tail_span*100:.1f}%)  <= BRAM 初始化内容密度粗估")
 
 # ---------- 明文字符串扫描：软核/外设线索 ----------
 print("\n=== 软核/外设明文特征扫描 ===")
