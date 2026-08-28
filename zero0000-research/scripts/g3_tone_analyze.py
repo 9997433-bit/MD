@@ -159,8 +159,8 @@ def analyze(x: list[float], fin: float | None, fs_guess: float) -> dict:
         out["fin_error_at_guess"] = abs(f_at_guess - fin) / fin if fin else None
         # 若 fs_guess 正确且为时域，误差应很小；若已是谱则 bin 含义不同
         out["note"] = (
-            "若 fs_estimated 落入 245.76/122.88 族且 fin_error_at_guess≪1%，"
-            "支持「时域上传 + 该样率」(H2/H8)；"
+            "若 fs_estimated 落入 61.44/122.88/163.84/245.76 族且 fin_error_at_guess≪1%，"
+            "支持「时域上传 + 该样率」(H2/H8；含计划 C 的 61.44)；"
             "若峰钉死与 Fin 无关，疑 DDC/板内谱(H-DDC/H-FFT)。"
         )
     return out
