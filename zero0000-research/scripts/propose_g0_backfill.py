@@ -53,7 +53,8 @@ def main() -> int:
         "# G2 → G0 回填提案（自动生成 · 须人工复核）",
         "",
         f"> generated: {datetime.now(timezone.utc).isoformat()}",
-        "> **禁止**未复核直接改 G0；Must 以人工粘贴后的 `G0_命题基线证据表.md` 为准。",
+        "> 复核本提案后执行：`python3 scripts/apply_g0_backfill.py --apply`"
+        "（可选 `--power-on-only`）。demo/examples 路径会被拒绝。",
         "",
         "## 建议等级",
         "",
@@ -103,9 +104,9 @@ def main() -> int:
         "",
         "## 下一步",
         "",
-        "1. 人工打开 `G2_时钟与SPI记录.md` 填表并勾选靶标",
-        "2. 改 `G0_命题基线证据表.md` 对应节等级 + 附哈希",
-        "3. 重跑 `Must完成审计_当前缺口.md`；若 P1.3/P1.4 达 ✅ 或强 🔶 → Must-1 翻转",
+        "1. 复核上表建议等级与哈希（对照 LA/示波器原始文件）",
+        "2. `python3 scripts/apply_g0_backfill.py`（dry-run）→ `--apply`",
+        "3. `audit_must.py` 应随 apply 刷新；P1.3/P1.4 达 ✅ 或强 🔶 → Must-1",
         "4. 再开 G3（勿跳）",
         "",
     ]

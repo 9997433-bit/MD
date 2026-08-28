@@ -25,6 +25,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 G0 = ROOT / "06_docs" / "G0_命题基线证据表.md"
 G2_REC = ROOT / "05_tests" / "G2_时钟与SPI记录.md"
+CARD = ROOT / "06_docs" / "当前结论卡_①②.md"
+PROG = ROOT / "06_docs" / "算法目标进度.md"
 DEFAULT_INBOX = ROOT / "05_tests" / "g2_inbox"
 MUST_ACCEPT = {"✅", "强🔶", "强 🔶"}
 
@@ -90,6 +92,58 @@ def append_evidence(text: str, pid: str, paragraph: str) -> str:
     insert_at = nl + 1
     note = f"\n> G2 回填 {datetime.now(timezone.utc).date().isoformat()}：{paragraph}\n"
     return text[:insert_at] + note + text[insert_at:]
+
+
+def sync_progress_docs(
+    plan: dict[str, str | None],
+    clocks: dict,
+    spi: dict,
+    hashes: dict[str, str],
+) -> list[str]:
+    """Keep conclusion card + progress dashboard aligned after G0 apply."""
+    wrote: list[str] = []
+    hash_short = "; ".join(f"{k}={v[:8]}…" for k, v in hashes.items()) or "—"
+    p13 = plan.get("P1.3") or "❓"
+    p14 = plan.get("P1.4") or "❓"
+    clock_notes = "；".join(clocks.get("notes") or []) or "见 G2 记录"
+    spi_notes = "；".join(spi.get("notes") or []) or "见 G2 记录"
+
+    if CARD.is_file():
+        text = CARD.read_text(encoding="utf-8")
+        # Replace the 采样/更新钟 and SPI 模式 table rows (grade column last).
+        text2, n1 = re.subn(
+            r"(\|\s*采样/更新钟\s*\|)[^|]*(\|)[^|]*(\|)",
+            rf"\1 实测回填；{clock_notes}；哈希 {hash_short} \2 {p13} \3",
+            text,
+            count=1,
+        )
+        text2, n2 = re.subn(
+            r"(\|\s*SPI 模式\s*\|)[^|]*(\|)[^|]*(\|)",
+            rf"\1 实测回填；{spi_notes}；哈希 {hash_short} \2 {p14} \3",
+            text2,
+            count=1,
+        )
+        if n1 or n2:
+            CARD.write_text(text2, encoding="utf-8")
+            wrote.append(str(CARD))
+
+    if PROG.is_file():
+        text = PROG.read_text(encoding="utf-8")
+        g2_cell = (
+            f"✅ 实测已回填（P1.3={p13}；P1.4={p14}）"
+            if (plan.get("P1.3") or plan.get("P1.4"))
+            else "⬜ 预备齐；**阻塞：实测投放**"
+        )
+        text2, n = re.subn(
+            r"(\|\s*G2\s*\|)[^|]*(\|)[^|]*(\|)",
+            rf"\1 {g2_cell} \2 `G2_时钟与SPI记录.md` + inbox 哈希 \3",
+            text,
+            count=1,
+        )
+        if n:
+            PROG.write_text(text2, encoding="utf-8")
+            wrote.append(str(PROG))
+    return wrote
 
 
 def write_g2_record(infer: dict, hashes: dict[str, str], power_on_only: bool) -> str:
@@ -286,6 +340,8 @@ def main() -> int:
     )
     print(f"WROTE {G0}")
     print(f"WROTE {G2_REC}")
+    for path in sync_progress_docs(plan, clocks, spi, hashes):
+        print(f"WROTE {path}")
     import subprocess
 
     subprocess.run(

@@ -204,6 +204,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1 再加深：R5b Wiley/RHINO 实测钟族（61.44 / 163.84÷3）写入 `算法线索` + `g2_mode_infer` 族表  
 - [x] G1 再加深：R11c Conserviss 共享 IDELAY / 无 bitslip → 修正 H5 证伪口径  
 - [x] G1/G2 预备：R11d SPI 单向（独立 SDO）陷阱 + G2 清单 C3 双先验（A/B）  
+- [x] G1 再加深：R11e Conserviss 验收双判据（DACCLK±1% + CONFIG31=0x12）+ apply 同步结论卡  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）

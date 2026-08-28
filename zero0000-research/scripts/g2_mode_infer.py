@@ -149,6 +149,15 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
             p14 = "🔶"
         elif p14 == "🔶" and checklist.get("A2_adc_0x41_lvds"):
             p14 = "✅"
+    # Conserviss host/run_acceptance.py dual identity: CONFIG31 version=0x12
+    if checklist.get("D2_dac_version_read"):
+        notes.append(
+            "DAC VERSION31/CONFIG31 读见 → Conserviss 验收式身份靶标（期望 version=0x12）"
+        )
+        if p14 == "❓":
+            p14 = "强 🔶"
+        elif p14 == "🔶":
+            p14 = "强 🔶"
     return {"P1.4_suggested": p14, "P1.5_suggested": p15, "notes": notes}
 
 
@@ -206,11 +215,17 @@ def self_test() -> int:
     if c_r["P1.3_suggested"] != "强 🔶" or "163.84" not in c_r["H8"]:
         print("SELF-TEST FAILED RHINO 163.84 family", c_r, file=sys.stderr)
         return 1
+    # R11e: CONFIG31/VERSION read alone → 强 🔶 (Must-1 grade)
+    s_id = infer_spi({"D2_dac_version_read": True})
+    if s_id["P1.4_suggested"] != "强 🔶" or "VERSION31" not in "".join(s_id["notes"]):
+        print("SELF-TEST FAILED R11e CONFIG31 identity", s_id, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
     print(
-        "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, RHINO 163.84)"
+        "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, "
+        "RHINO 163.84, R11e CONFIG31)"
     )
     return 0
 
