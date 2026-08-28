@@ -26,3 +26,13 @@ def test_phase_c_checklist():
 
 def test_health_check_script_exists():
     assert (ROOT / "scripts" / "health_check.py").exists()
+
+
+def test_health_allows_phase_b_captures():
+    """Real USB/protocol captures are expected once Phase B starts."""
+    from scripts import health_check as hc
+
+    ok, detail = hc.captures_clean()
+    assert ok, detail
+    names = {p.name for p in hc.CAPTURES.iterdir() if p.is_file()}
+    assert names <= hc.ALLOWED_CAPTURE_NAMES

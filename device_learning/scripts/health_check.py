@@ -21,13 +21,29 @@ def check(name: str, ok: bool, detail: str = "") -> bool:
     return ok
 
 
+ALLOWED_CAPTURE_NAMES = {
+    ".gitkeep",
+    "eeprom.bin",
+    "usb_enum.pcapng",
+    "usb_session.pcapng",
+    "usb_enum.pcap",
+    "usb_session.pcap",
+    "protocol_log.json",
+}
+
+
 def captures_clean() -> tuple[bool, str]:
+    """Allow empty captures/ or known Phase B artifacts only (no junk)."""
     if not CAPTURES.exists():
         return False, "captures dir missing"
-    extras = [p.name for p in CAPTURES.iterdir() if p.is_file() and p.name != ".gitkeep"]
+    names = sorted(p.name for p in CAPTURES.iterdir() if p.is_file())
+    extras = [n for n in names if n not in ALLOWED_CAPTURE_NAMES]
     if extras:
         return False, f"unexpected files: {', '.join(extras)}"
-    return True, ".gitkeep only"
+    known = [n for n in names if n != ".gitkeep"]
+    if not known:
+        return True, ".gitkeep only"
+    return True, f"phase_b artifacts: {', '.join(known)}"
 
 
 def main() -> int:
