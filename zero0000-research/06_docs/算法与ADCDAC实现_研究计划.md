@@ -191,6 +191,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1/P2.5：确认公开 prjxray **无** xc7k160t（`prjxray_K160T帧图可得性.md`）  
 - [x] G2 摩擦降低：`G2_投放三步.md`  
 - [x] Must-2 归因陷阱排除：`G3G4` §4.1b（DAC 片内 FIR/混频 ≠ FPGA 算法）  
+- [x] Must-2 §4.2：通路形态排除表已填（硬 IP 本体仍开放；见矩阵 §4.2）  
 - [x] G2 管线：单侧钟→强 🔶；ingest 产出 `G2_G0回填提案.md`  
 - [x] G1 再加深：Conserviss/FMC150-VC707 硬件验证表（钟计划 B + SPI 全表；`G1_FMC150_VC707对照.md`）  
 - [x] 静态结论卡：`当前结论卡_①②.md`；SPI checklist 剖面评分（Conserviss/E2E）  
