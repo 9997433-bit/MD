@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T08:51:21.776544+00:00",
+  "generated_at": "2026-08-28T08:54:20.760143+00:00",
   "artifact_count": 68,
   "present_count": 68,
   "artifacts": [
@@ -7,13 +7,13 @@
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 288643
+      "size_bytes": 275672
     },
     {
       "path": "coverage.json",
       "description": "完成度统计",
       "exists": true,
-      "size_bytes": 868
+      "size_bytes": 881
     },
     {
       "path": "bridge_matrix.json",
@@ -25,7 +25,7 @@
       "path": "STATIC_REPORT.md",
       "description": "静态摘要",
       "exists": true,
-      "size_bytes": 1624
+      "size_bytes": 1637
     },
     {
       "path": "STATIC_CLOSURE.md",
@@ -97,7 +97,7 @@
       "path": "manifests/static_freeze.json",
       "description": "静态阶段冻结记录",
       "exists": true,
-      "size_bytes": 523
+      "size_bytes": 510
     },
     {
       "path": "manifests/static_phase_closed.json",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15193
+      "size_bytes": 15183
     },
     {
       "path": "manifests/output_hashes.json",
@@ -121,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 10285
+      "size_bytes": 10282
     },
     {
       "path": "manifests/bit_strings.json",
@@ -193,7 +193,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 807
+      "size_bytes": 820
     },
     {
       "path": "manifests/experiment_index.json",
@@ -367,7 +367,7 @@
       "path": "manifests/usb_command_taxonomy.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 138
+      "size_bytes": 5667
     },
     {
       "path": "manifests/usb_companion_7317.json",
@@ -391,13 +391,13 @@
       "path": "manifests/usb_primary_ctrl_744f.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 132
+      "size_bytes": 786
     },
     {
       "path": "manifests/usb_protocol_decode.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 128
+      "size_bytes": 3465
     },
     {
       "path": "manifests/usb_session_traffic.json",

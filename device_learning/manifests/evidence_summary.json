@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-28T08:51:21.225664+00:00",
-  "phase": "phase_b_in_progress",
+  "generated_at": "2026-08-28T08:54:20.215186+00:00",
+  "phase": "static_complete_pending_hardware",
   "identifiers": 237,
   "status_counts": {
     "confirmed": 76,

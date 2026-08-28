@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-28T08:51:22.475192+00:00",
+  "generated_at": "2026-08-28T08:54:21.449253+00:00",
   "package": "device_learning",
   "version": "static-1.0",
-  "phase": "phase_b_in_progress",
+  "phase": "static_complete_pending_hardware",
   "static_phase_complete": true,
-  "frozen_at": "2026-08-28T08:51:22.370738+00:00",
+  "frozen_at": "2026-08-28T08:54:21.344092+00:00",
   "metrics": {
     "identifiers": 237,
     "confirmed": 76,
@@ -13,7 +13,7 @@
     "manifest_json_count": 53
   },
   "input_hashes": {
-    "combined_output_sha256": "90861e3ec3244ac8b8a7189d7ec91ec7e80d1fb989c83e8fc6017f954e9c1cb5"
+    "combined_output_sha256": "101650afd28eb16f27f55f74ea57db1e333fd82f753c037edb862383504f9be7"
   },
   "checklists": {
     "phase_b": "0/6",

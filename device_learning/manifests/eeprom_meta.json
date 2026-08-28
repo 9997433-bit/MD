@@ -1,9 +1,9 @@
 {
   "status": "synthetic_pipeline_test",
-  "generated_at": "2026-08-28T08:53:21.814694+00:00",
+  "generated_at": "2026-08-28T08:54:17.148228+00:00",
   "warning": "Using synthetic fixture — NOT device data",
-  "source": "synthetic_in_captures",
-  "path": "phase_b/captures/eeprom.bin",
+  "source": "synthetic_reference",
+  "path": "phase_b/fixtures/eeprom_synthetic_reference.bin",
   "size_bytes": 8192,
   "sha256": "fcae3cd1280d6db74d358e6b72d4b9f3879a46a826cd4f8e294822e27f78eb93",
   "boot_format": "C2",
