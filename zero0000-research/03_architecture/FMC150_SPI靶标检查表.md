@@ -132,12 +132,13 @@ FMC150 类固件的 ADC 初始化足迹(一例公开配置见 TI E2E,地址集�
 
 | 项目 | 特征 |
 |------|------|
-| 引脚 | SPI_LE(锁存使能,低电平期间移位)、SPI_CLK、SPI_MOSI、SPI_MISO(独立回读) |
+| 引脚（RGC-64 脚号） | **SPI_MISO=15；SPI_MOSI=44, SPI_LE=45, SPI_CLK=46**（✅ datasheet） |
 | 帧格式 | **固定 32 bit = 28 bit 数据 + 低 4 bit 地址,LSB 先行** ← 与另两片截然不同,是波形归属的第一判据 |
 | 寄存器 | Reg0–Reg11 为配置(存 EEPROM);**Reg12(0xC)为状态/控制,仅 RAM** |
 | 读命令 | 地址场 = 0xE(1110),目标寄存器地址放在数据场;回读数据 bit0 恒为 0(需忽略) |
 | EEPROM 命令 | "Copy RAM→EEPROM–unlock"(命令字低字节 0x1F)可反复执行;"–lock"(低字节 0x3F)**一次性永久锁定** |
 | 引导行为 | MODE_SEL=H 时为 SPI 模式;上电先从片内 EEPROM 加载配置——**即使 FPGA 不发 SPI,时钟输出也可能已经在跑** |
+| 板上找点 | `G2_照片探针地图.md` §3.5；MOSI/LE/CLK 同边簇,MISO 在 Pin1 边 |
 
 ### 5.2 关键寄存器与状态位(公开信息)✅
 
