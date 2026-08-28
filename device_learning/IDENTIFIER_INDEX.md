@@ -1,6 +1,6 @@
 # Identifier 索引（自动生成）
 
-**生成时间**：2026-08-28 07:30 UTC
+**生成时间**：2026-08-28 08:51 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -160,7 +160,7 @@
 | `FW-MCU-RESET-VECTOR` | missing | Reset vector / boot entry of the MCU firmware |
 | `FW-MCU-CODE-XRAM-MAP` | missing | Code / external-RAM address map of the MCU |
 | `FW-MCU-I2C-BOOT-PATH` | missing | MCU boot path loading from the serial EEPROM over I2C |
-| `FW-MCU-RENUMERATION` | missing | USB re-numeration behaviour after firmware load |
+| `FW-MCU-RENUMERATION` | candidate | USB re-numeration after FX2 RAM load: 0x7317 → 0x744f |
 | `FW-EEPROM-IMAGE` | missing | Serial EEPROM contents image |
 | `FW-EEPROM-CONFIG-BYTE` | missing | EEPROM leading boot-configuration byte |
 | `FW-EEPROM-VIDPID` | missing | VID/PID fields possibly stored in the EEPROM |
@@ -180,12 +180,12 @@
 | `PROTO-EP-INTERRUPT` | candidate | No interrupt endpoint in observed interface descriptor |
 | `PROTO-EP-ALT-SETTINGS` | candidate | Only bAlternateSetting=0 observed |
 | `PROTO-XFER-MODE` | confirmed | Acquisition stream uses bulk transfers (not isochronous) |
-| `PROTO-CTRL-VENDOR-REQ` | unknown | Vendor-specific control-request surface |
+| `PROTO-CTRL-VENDOR-REQ` | candidate | Vendor-specific control-request surface |
 | `DRV-HOST-MODULE` | not_started | Host-side USB driver module |
 | `DRV-INF-BINDING` | not_started | Driver INF binding (VID/PID match) |
 | `DRV-IOCTL-SURFACE` | not_started | Driver IOCTL interface surface |
-| `DRV-FIRMWARE-LOADER` | not_started | Host-side firmware downloader |
-| `DRV-PIPE-EP-BIND` | unknown | Driver pipe-to-endpoint binding |
+| `DRV-FIRMWARE-LOADER` | candidate | Host-side firmware downloader |
+| `DRV-PIPE-EP-BIND` | candidate | Driver pipe-to-endpoint binding |
 
 ## REF (24)
 

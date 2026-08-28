@@ -1,12 +1,12 @@
 # 阻塞项报告（自动生成）
 
-**生成时间**：2026-08-28 07:30 UTC
+**生成时间**：2026-08-28 08:51 UTC
 
-**阻塞总数**：83 条
+**阻塞总数**：79 条
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
-## missing (12)
+## missing (11)
 
 | Identifier | Layer | Boundary |
 |------------|-------|----------|
@@ -14,7 +14,6 @@
 | `FW-MCU-RESET-VECTOR` | usb | no_dump |
 | `FW-MCU-CODE-XRAM-MAP` | usb | no_dump |
 | `FW-MCU-I2C-BOOT-PATH` | usb | no_dump |
-| `FW-MCU-RENUMERATION` | usb | no_dump |
 | `FW-EEPROM-IMAGE` | usb | no_dump |
 | `FW-EEPROM-CONFIG-BYTE` | usb | no_dump |
 | `FW-EEPROM-VIDPID` | usb | no_dump |
@@ -23,7 +22,7 @@
 | `FW-EEPROM-DID-FIELD` | usb | no_dump |
 | `FW-EEPROM-FW-RECORDS` | usb | no_dump |
 
-## not_started (21)
+## not_started (20)
 
 | Identifier | Layer | Boundary |
 |------------|-------|----------|
@@ -31,7 +30,6 @@
 | `DRV-HOST-MODULE` | usb | no_binary |
 | `DRV-INF-BINDING` | usb | no_binary |
 | `DRV-IOCTL-SURFACE` | usb | no_binary |
-| `DRV-FIRMWARE-LOADER` | usb | no_binary |
 | `LEARN-011-8051-DISASM` | learn | Need eeprom.bin |
 | `LEARN-012-PIN-TEST` | learn | Need hardware |
 | `LEARN-013-RELAY-TEST` | learn | Need hardware |
@@ -49,7 +47,7 @@
 | `EXP-014-DATA-FRAME` | exp | Depends EXP-008 |
 | `EXP-015-BRG-UPGRADE` | exp | Needs EXP-004..008 |
 
-## unknown (50)
+## unknown (48)
 
 | Identifier | Layer | Boundary |
 |------------|-------|----------|
@@ -98,8 +96,6 @@
 | `SIG-ADC-SAMPLE-RATE` | signal | no_datasheet |
 | `SIG-ADC-REFERENCE` | signal | no_measurement |
 | `FW-FPGA-CONFIG-IFACE` | usb | no_dump |
-| `PROTO-CTRL-VENDOR-REQ` | usb | bRequest semantics not tabulated |
-| `DRV-PIPE-EP-BIND` | usb | cross_layer |
 | `ARCH-007-CLOCK-FPGA` | arch | — |
 | `ARCH-008-RESET-USB` | arch | — |
 | `LEARN-014-BRAM-DECODE` | learn | No decoder |

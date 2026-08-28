@@ -142,5 +142,7 @@
     "support": "2891/3724 EP0x01 OUT payloads match BE length==packet_len"
   },
   "boundary": "Hypothesis only; not a full command dictionary",
-  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "superseded_by": "manifests/usb_command_taxonomy.json",
+  "supersede_note": "BE u32 total-length match (~77.6%) was the tag==0 special case; refined framing is BE u16 tag + u16 frame_len (100% match)."
 }

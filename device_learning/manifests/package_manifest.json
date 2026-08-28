@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-08-28T07:30:55.175794+00:00",
+  "generated_at": "2026-08-28T08:51:22.475192+00:00",
   "package": "device_learning",
   "version": "static-1.0",
   "phase": "phase_b_in_progress",
   "static_phase_complete": true,
-  "frozen_at": "2026-08-28T07:30:55.070134+00:00",
+  "frozen_at": "2026-08-28T08:51:22.370738+00:00",
   "metrics": {
     "identifiers": 237,
     "confirmed": 76,
-    "blocked": 83,
-    "pytest_count": 105,
-    "manifest_json_count": 49
+    "blocked": 79,
+    "pytest_count": 106,
+    "manifest_json_count": 53
   },
   "input_hashes": {
-    "combined_output_sha256": "043c57744aef4373279e0d277cb1f052f6f62a11880e575f901a2cebf91bdc43"
+    "combined_output_sha256": "90861e3ec3244ac8b8a7189d7ec91ec7e80d1fb989c83e8fc6017f954e9c1cb5"
   },
   "checklists": {
-    "phase_b": "4/6",
-    "phase_b_status": "in_progress"
+    "phase_b": "0/6",
+    "phase_b_status": "not_started"
   },
-  "recommended_next_phase": "phase_b_in_progress",
+  "recommended_next_phase": "static_complete_pending_hardware",
   "next_actions": [
     "Place phase_b/captures/eeprom.bin (8192 bytes, real device dump)",
     "Place phase_b/captures/*.pcapng (USB captures)",

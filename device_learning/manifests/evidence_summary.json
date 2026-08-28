@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-08-28T07:30:53.939018+00:00",
+  "generated_at": "2026-08-28T08:51:21.225664+00:00",
   "phase": "phase_b_in_progress",
   "identifiers": 237,
   "status_counts": {
     "confirmed": 76,
-    "candidate": 72,
-    "unknown": 50,
+    "candidate": 76,
+    "unknown": 48,
     "hypothesis": 6,
-    "not_started": 21,
-    "missing": 12
+    "not_started": 20,
+    "missing": 11
   },
-  "blocked": 83,
+  "blocked": 79,
   "hardware_ready": {
     "eeprom_present": false,
     "eeprom_observed": false,
-    "usb_capture_present": true,
-    "usb_capture_observed": true,
-    "protocol_log_present": true
+    "usb_capture_present": false,
+    "usb_capture_observed": false,
+    "protocol_log_present": false
   },
   "bitstream": {
     "idcode": "0x01414093",

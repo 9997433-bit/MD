@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:30:53.070444+00:00",
+  "generated_at": "2026-08-28T08:51:20.351833+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,22 +10,22 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-28T07:30:52.967872+00:00",
+      "generated_at": "2026-08-28T08:51:20.248598+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
       "identifiers": 237,
       "status_counts": {
         "confirmed": 76,
-        "candidate": 72,
-        "unknown": 50,
+        "candidate": 76,
+        "unknown": 48,
         "hypothesis": 6,
-        "not_started": 21,
-        "missing": 12
+        "not_started": 20,
+        "missing": 11
       },
-      "pytest_count": 105,
-      "manifest_json_count": 49,
-      "phase_b_blockers_remaining": 1,
+      "pytest_count": 106,
+      "manifest_json_count": 53,
+      "phase_b_blockers_remaining": 3,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
         "make handoff",
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-28T07:30:52.194039+00:00",
+      "generated_at": "2026-08-28T08:51:19.464711+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -88,53 +88,53 @@
           "label": "USB 枚举抓包",
           "artifact": "phase_b/captures/usb_enum.pcapng",
           "unblocks": "PROTO-DESC-*",
-          "present": true,
-          "size_bytes": 562768
+          "present": false,
+          "size_bytes": null
         },
         {
           "id": "usb_session",
           "label": "USB 工作会话抓包",
           "artifact": "phase_b/captures/usb_session.pcapng",
           "unblocks": "PROTO-EP-*, SIG-* (partial)",
-          "present": true,
-          "size_bytes": 5750896
+          "present": false,
+          "size_bytes": null
         }
       ],
-      "ready_count": 2,
+      "ready_count": 0,
       "blocker_count": 3,
       "deep_analysis_ready": false,
-      "checklist": "4/6",
+      "checklist": "0/6",
       "upgrade_proposals_pending": 0,
-      "next_command": "make phase-b"
+      "next_command": "make check-captures"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-28T07:30:52.425508+00:00",
+      "generated_at": "2026-08-28T08:51:19.696682+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-      "phase_b_prerequisite_met": true,
+      "phase_b_prerequisite_met": false,
       "checklist": "0/6",
       "experiment_logs": 0,
-      "recommended_action": "make phase-c"
+      "recommended_action": "complete phase B captures first"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-28T07:29:57.309048+00:00",
+      "generated_at": "2026-08-28T08:51:17.209092+00:00",
       "current_phase": "static_complete_pending_hardware",
-      "recommended_phase": "phase_b_in_progress",
-      "transition_ready": true,
+      "recommended_phase": "static_complete_pending_hardware",
+      "transition_ready": false,
       "capture_flags": {
         "eeprom_file": false,
         "eeprom_observed": false,
         "eeprom_synthetic": false,
-        "usb_enum": true,
+        "usb_enum": false,
         "usb_enum_synthetic": false,
-        "usb_session": true,
-        "any_pcap": true,
-        "any_pcap_observed": true
+        "usb_session": false,
+        "any_pcap": false,
+        "any_pcap_observed": false
       },
       "warnings": [],
-      "action": "make phase-b"
+      "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-28T07:30:52.038220+00:00",
+      "generated_at": "2026-08-28T08:51:19.308430+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -142,18 +142,15 @@
         },
         {
           "path": "phase_b/captures/usb_enum.pcapng",
-          "exists": true,
-          "size_bytes": 562768
+          "exists": false
         },
         {
           "path": "phase_b/captures/usb_session.pcapng",
-          "exists": true,
-          "size_bytes": 5750896
+          "exists": false
         },
         {
           "path": "phase_b/captures/protocol_log.json",
-          "exists": true,
-          "size_bytes": 16928
+          "exists": false
         },
         {
           "path": "phase_b/analysis/firmware.bin",
@@ -164,35 +161,34 @@
           "exists": false
         }
       ],
-      "present_count": 3,
+      "present_count": 0,
       "expected_count": 6,
       "flags": {
         "eeprom_present": false,
         "eeprom_observed": false,
-        "usb_capture_present": true,
-        "usb_capture_observed": true,
-        "protocol_log_present": true
+        "usb_capture_present": false,
+        "usb_capture_observed": false,
+        "protocol_log_present": false
       },
       "eeprom_status": "synthetic_pipeline_test",
-      "usb_capture_status": "observed",
-      "protocol_log_status": "observed",
+      "usb_capture_status": "missing",
+      "protocol_log_status": "missing",
       "firmware_extract_status": "missing",
       "ready_for_deep_analysis": false,
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-28T07:30:52.116263+00:00",
-      "applicable": true,
+      "generated_at": "2026-08-28T08:51:19.386885+00:00",
+      "applicable": false,
       "proposal_count": 0,
       "proposals": [],
       "notes": [
-        "Only synthetic EEPROM available — no upgrade proposals.",
-        "usb_protocol_decode.json available — descriptor/endpoint map decoded."
+        "Only synthetic EEPROM available — no upgrade proposals."
       ],
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-28T07:30:51.394637+00:00",
+      "generated_at": "2026-08-28T08:51:18.674694+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -202,7 +198,6 @@
             "FW-MCU-RESET-VECTOR",
             "FW-MCU-CODE-XRAM-MAP",
             "FW-MCU-I2C-BOOT-PATH",
-            "FW-MCU-RENUMERATION",
             "FW-EEPROM-IMAGE",
             "FW-EEPROM-CONFIG-BYTE",
             "FW-EEPROM-VIDPID",
@@ -221,9 +216,7 @@
         {
           "action": "usb_enum_capture",
           "artifact": "phase_b/captures/usb_enum.pcapng",
-          "unblocks": [
-            "PROTO-CTRL-VENDOR-REQ"
-          ],
+          "unblocks": [],
           "feeds": [
             "analyze_pcap_stub.py",
             "EXP-002-USB-ENUM",
@@ -338,18 +331,18 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-28T07:29:56.440011+00:00",
-      "phase": "phase_b_in_progress",
+      "generated_at": "2026-08-28T08:50:35.076283+00:00",
+      "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
         "confirmed": 76,
-        "candidate": 72,
-        "unknown": 50,
+        "candidate": 76,
+        "unknown": 48,
         "hypothesis": 6,
-        "not_started": 21,
-        "missing": 12
+        "not_started": 20,
+        "missing": 11
       },
-      "blocked": 83,
+      "blocked": 79,
       "hardware_ready": {
         "eeprom_present": false,
         "eeprom_observed": false,
@@ -372,7 +365,7 @@
     "phase_b_CHECKLIST": {
       "version": "1.0",
       "phase": "B",
-      "status": "in_progress",
+      "status": "not_started",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "prerequisites": [
         "legal_authorization",
@@ -395,14 +388,14 @@
           "name": "usb_enum_capture",
           "artifact": "phase_b/captures/usb_enum.pcapng",
           "template": "phase_b/templates/usb_capture.md",
-          "done": true
+          "done": false
         },
         {
           "id": "B3",
           "name": "usb_session_capture",
           "artifact": "phase_b/captures/usb_session.pcapng",
           "template": "phase_b/templates/usb_capture.md",
-          "done": true
+          "done": false
         },
         {
           "id": "B4",
@@ -410,13 +403,13 @@
           "artifact": "phase_b/captures/protocol_log.json",
           "template": "phase_b/templates/protocol_log_template.json",
           "optional": true,
-          "done": true
+          "done": false
         },
         {
           "id": "B5",
           "name": "ledger_refresh",
           "command": "make phase-b",
-          "done": true
+          "done": false
         },
         {
           "id": "B6",
@@ -429,8 +422,8 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T07:30:49.942248+00:00",
-      "done_count": 4,
+      "updated_at": "2026-08-28T08:51:17.129664+00:00",
+      "done_count": 0,
       "total_count": 6
     },
     "phase_c_CHECKLIST": {
@@ -486,7 +479,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T07:29:57.221364+00:00",
+      "updated_at": "2026-08-28T08:51:16.009859+00:00",
       "done_count": 0,
       "total_count": 6
     }

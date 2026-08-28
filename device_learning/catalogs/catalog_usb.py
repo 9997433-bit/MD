@@ -69,9 +69,9 @@ ENTRIES = [
     ),
     make_entry(
         "FW-MCU-RENUMERATION", "FW", "mcu",
-        "USB re-numeration behaviour after firmware load",
-        "missing", "no_dump",
-        "whether/when the device re-enumerates is unknown",
+        "USB re-numeration after FX2 RAM load: 0x7317 → 0x744f",
+        "candidate", "persistent EEPROM image still missing",
+        "usb_enum_decode_notes.json + usb_vendor_ctrl_7317.json (0xA0/CPUCS)",
     ),
     # ---- FW: serial EEPROM boot image ----
     make_entry(
@@ -196,8 +196,8 @@ ENTRIES = [
     make_entry(
         "PROTO-CTRL-VENDOR-REQ", "PROTO", "control",
         "Vendor-specific control-request surface",
-        "unknown", "bRequest semantics not tabulated",
-        "usb_session.pcapng control URBs present; decode pending",
+        "candidate", "primary has no vendor ctrl; companion FX2 0xA0/A4/A5/B0 tabulated",
+        "usb_primary_ctrl_744f.json + usb_vendor_ctrl_7317.json",
     ),
     # ---- DRV: host-side driver ----
     make_entry(
@@ -221,13 +221,13 @@ ENTRIES = [
     make_entry(
         "DRV-FIRMWARE-LOADER", "DRV", "driver",
         "Host-side firmware downloader",
-        "not_started", "no_binary",
-        "whether firmware is downloaded at attach, and its format, unknown",
+        "candidate", "FX2-style RAM load observed (0xA0/CPUCS) before renumeration",
+        "usb_vendor_ctrl_7317.json + usb_enum_decode_notes.json (0x7317→0x744f)",
     ),
     make_entry(
         "DRV-PIPE-EP-BIND", "DRV", "driver",
         "Driver pipe-to-endpoint binding",
-        "unknown", "cross_layer",
-        "depends on PROTO endpoint map; no evidence yet",
+        "candidate", "cmd plane EP01/81; data plane EP06/84 from session",
+        "usb_protocol_decode.json + usb_data_plane_hypothesis.json + usb_command_taxonomy.json",
     ),
 ]

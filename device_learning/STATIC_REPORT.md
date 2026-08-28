@@ -1,6 +1,6 @@
 # 静态分析报告（自动生成）
 
-**生成时间**：2026-08-28 07:30 UTC
+**生成时间**：2026-08-28 08:51 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -14,12 +14,12 @@
 
 | Status | 数量 |
 |--------|------|
-| candidate | 72 |
+| candidate | 76 |
 | confirmed | 76 |
 | hypothesis | 6 |
-| missing | 12 |
-| not_started | 21 |
-| unknown | 50 |
+| missing | 11 |
+| not_started | 20 |
+| unknown | 48 |
 
 ## 硬件
 
@@ -43,7 +43,7 @@
 
 ## 待解项
 
-- 阻塞 identifier：**83** 条（见 `manifests/pending_index.json`）
+- 阻塞 identifier：**79** 条（见 `manifests/pending_index.json`）
 
 ## 数据路径
 
@@ -56,7 +56,7 @@
 ## 阶段 B 状态
 
 - EEPROM 已采集：否
-- USB 抓包已采集：是
+- USB 抓包已采集：否
 
 ## 阻塞项（需实机）
 

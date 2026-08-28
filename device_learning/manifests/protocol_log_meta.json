@@ -1,17 +1,6 @@
 {
-  "generated_at": "2026-08-28T07:30:51.806664+00:00",
-  "status": "observed",
+  "generated_at": "2026-08-28T08:51:19.075910+00:00",
+  "status": "missing",
   "path": "phase_b/captures/protocol_log.json",
-  "size_bytes": 16928,
-  "sha256": "10f5f38dd265591dd6010eab0ee9e90f24260b26a5d8a5ab09e86a489b722db3",
-  "command_count": 30,
-  "unresolved_count": 3,
-  "meta_present": {
-    "capture_source": true,
-    "capture_file": true,
-    "captured_at": true
-  },
-  "valid": true,
-  "issues": [],
-  "boundary": "Human-curated log; does not auto-upgrade PROTO-* without ledger review"
+  "boundary": "Optional; copy phase_b/templates/protocol_log_template.json after capture"
 }

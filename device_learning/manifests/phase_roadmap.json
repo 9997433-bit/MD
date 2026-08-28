@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:30:51.394637+00:00",
+  "generated_at": "2026-08-28T08:51:18.674694+00:00",
   "phase_b": [
     {
       "action": "eeprom_dump",
@@ -9,7 +9,6 @@
         "FW-MCU-RESET-VECTOR",
         "FW-MCU-CODE-XRAM-MAP",
         "FW-MCU-I2C-BOOT-PATH",
-        "FW-MCU-RENUMERATION",
         "FW-EEPROM-IMAGE",
         "FW-EEPROM-CONFIG-BYTE",
         "FW-EEPROM-VIDPID",
@@ -28,9 +27,7 @@
     {
       "action": "usb_enum_capture",
       "artifact": "phase_b/captures/usb_enum.pcapng",
-      "unblocks": [
-        "PROTO-CTRL-VENDOR-REQ"
-      ],
+      "unblocks": [],
       "feeds": [
         "analyze_pcap_stub.py",
         "EXP-002-USB-ENUM",

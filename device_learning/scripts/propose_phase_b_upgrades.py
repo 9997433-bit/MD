@@ -14,8 +14,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from catalogs.catalog_usb import ENTRIES as USB_ENTRIES  # noqa: E402
-
 OUT = ROOT / "manifests" / "phase_b_upgrade_proposals.json"
 
 
@@ -27,17 +25,15 @@ def load_json(rel: str) -> dict:
 
 
 def current_status(identifier: str) -> str | None:
-    for e in USB_ENTRIES:
-        if e["identifier"] == identifier:
-            return e["status"]
-    try:
-        from catalogs.catalog_learn import ENTRIES as LEARN_ENTRIES
-
-        for e in LEARN_ENTRIES:
-            if e["identifier"] == identifier:
-                return e["status"]
-    except Exception:
-        pass
+    catalogs = ["catalog_usb", "catalog_learn", "catalog_signal", "catalog_exp"]
+    for name in catalogs:
+        try:
+            mod = __import__(f"catalogs.{name}", fromlist=["ENTRIES"])
+            for e in getattr(mod, "ENTRIES", []):
+                if e["identifier"] == identifier:
+                    return e["status"]
+        except Exception:
+            continue
     return None
 
 
@@ -155,16 +151,44 @@ def build_proposals() -> dict:
             proposals.append(p)
         if p := propose(
             "PROTO-CTRL-VENDOR-REQ",
-            "unknown",
-            "Control transfers present; bRequest semantics not yet tabulated",
-            evid,
+            "candidate",
+            "Primary: no vendor ctrl; companion FX2 0xA0/A4/A5/B0 tabulated",
+            "manifests/usb_primary_ctrl_744f.json + manifests/usb_vendor_ctrl_7317.json",
         ):
             proposals.append(p)
         if p := propose(
             "LEARN-010-USB-PROTO",
             "candidate",
-            "Real pcap decoded; command table still open",
-            evid,
+            "Framing 100% on EP01/81; opcode meanings still open",
+            "manifests/usb_command_taxonomy.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "SIG-PROTOCOL-FRAMING",
+            "candidate",
+            "BE u16 tag + frame_len + body_len + type + opcode (100% length match)",
+            "manifests/usb_command_taxonomy.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "DRV-FIRMWARE-LOADER",
+            "candidate",
+            "FX2 RAM load via 0xA0/CPUCS then renumeration 0x7317→0x744f",
+            "manifests/usb_vendor_ctrl_7317.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "DRV-PIPE-EP-BIND",
+            "candidate",
+            "Cmd EP01/81 + data EP06/84 observed in session",
+            "manifests/usb_command_taxonomy.json + manifests/usb_data_plane_hypothesis.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "FW-MCU-RENUMERATION",
+            "candidate",
+            "Observed companion→primary renumeration after RAM load",
+            "manifests/usb_enum_decode_notes.json + manifests/usb_vendor_ctrl_7317.json",
         ):
             proposals.append(p)
     elif usb.get("status") == "observed" and has_usb_files:
@@ -183,8 +207,8 @@ def build_proposals() -> dict:
 
     if proto_log.get("status") == "observed":
         applicable = True
-        if p := propose("PROTO-CTRL-VENDOR-REQ", "unknown", "protocol_log curated entries present", "phase_b/captures/protocol_log.json"):
-            proposals.append(p)
+        notes.append("protocol_log.json present (human/auto draft).")
+        # Do not propose a downgrade; framing lives on bulk, not EP0 vendor ctrl.
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),

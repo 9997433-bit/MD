@@ -45,6 +45,7 @@ def main() -> int:
     status = load_status()
     run("analyze_pcap_stub.py")
     run("analyze_usb_pcap_decode.py")
+    run("analyze_usb_command_taxonomy.py")
     run("analyze_protocol_log.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")

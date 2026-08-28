@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T07:30:54.893492+00:00",
+  "generated_at": "2026-08-28T08:51:22.190283+00:00",
   "total_identifiers": 237,
   "by_layer": {
     "hw": 32,
@@ -13,11 +13,11 @@
   },
   "status_counts": {
     "confirmed": 76,
-    "candidate": 72,
-    "unknown": 50,
+    "candidate": 76,
+    "unknown": 48,
     "hypothesis": 6,
-    "not_started": 21,
-    "missing": 12
+    "not_started": 20,
+    "missing": 11
   },
   "stop_conditions": {
     "1_no_empty_status": true,
@@ -33,5 +33,5 @@
   },
   "all_pass": true,
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-  "phase": "phase_b_in_progress"
+  "phase": "static_complete_pending_hardware"
 }

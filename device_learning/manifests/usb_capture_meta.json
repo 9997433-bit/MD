@@ -1,20 +1,6 @@
 {
-  "generated_at": "2026-08-28T07:30:51.727079+00:00",
-  "status": "observed",
-  "capture_count": 2,
-  "files": [
-    {
-      "name": "usb_enum.pcapng",
-      "size_bytes": 562768,
-      "sha256": "df096a1fb7bcdc5f4c0ab85db95954af119271cb24a0e10d1a9f727507e31f53",
-      "magic": "pcapng"
-    },
-    {
-      "name": "usb_session.pcapng",
-      "size_bytes": 5750896,
-      "sha256": "fedb99ad954abe461fd987f6f592c6f95fba3ffac37f8665196edd5f57363b1b",
-      "magic": "pcapng"
-    }
-  ],
-  "boundary": "File metadata only; endpoint/protocol decode requires Wireshark + device"
+  "generated_at": "2026-08-28T08:51:18.995132+00:00",
+  "status": "missing",
+  "path": "phase_b/captures",
+  "boundary": "No USB capture yet; place *.pcapng in phase_b/captures/"
 }

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28T07:30:54.481218+00:00",
-  "artifact_count": 64,
-  "present_count": 64,
+  "generated_at": "2026-08-28T08:51:21.776544+00:00",
+  "artifact_count": 68,
+  "present_count": 68,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 268480
+      "size_bytes": 288643
     },
     {
       "path": "coverage.json",
@@ -43,7 +43,7 @@
       "path": "BLOCKED_REPORT.md",
       "description": "阻塞项报告",
       "exists": true,
-      "size_bytes": 4089
+      "size_bytes": 3891
     },
     {
       "path": "BRIDGE_REPORT.md",
@@ -61,7 +61,7 @@
       "path": "IDENTIFIER_INDEX.md",
       "description": "identifier 全表",
       "exists": true,
-      "size_bytes": 18903
+      "size_bytes": 18915
     },
     {
       "path": "HARDWARE_HANDOFF.md",
@@ -73,19 +73,19 @@
       "path": "PHASE_B_READINESS.md",
       "description": "阶段 B 就绪报告",
       "exists": true,
-      "size_bytes": 706
+      "size_bytes": 705
     },
     {
       "path": "PHASE_C_READINESS.md",
       "description": "阶段 C 就绪报告",
       "exists": true,
-      "size_bytes": 328
+      "size_bytes": 348
     },
     {
       "path": "phase_b/CHECKLIST.json",
       "description": "阶段 B 机器可读检查清单",
       "exists": true,
-      "size_bytes": 1614
+      "size_bytes": 1618
     },
     {
       "path": "phase_c/CHECKLIST.json",
@@ -97,7 +97,7 @@
       "path": "manifests/static_freeze.json",
       "description": "静态阶段冻结记录",
       "exists": true,
-      "size_bytes": 510
+      "size_bytes": 523
     },
     {
       "path": "manifests/static_phase_closed.json",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15336
+      "size_bytes": 15193
     },
     {
       "path": "manifests/output_hashes.json",
@@ -121,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 9495
+      "size_bytes": 10285
     },
     {
       "path": "manifests/bit_strings.json",
@@ -145,7 +145,7 @@
       "path": "manifests/capture_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1154
+      "size_bytes": 1074
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -193,7 +193,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 804
+      "size_bytes": 807
     },
     {
       "path": "manifests/experiment_index.json",
@@ -253,7 +253,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 998
+      "size_bytes": 1011
     },
     {
       "path": "manifests/pcap_synthetic_meta.json",
@@ -265,43 +265,43 @@
       "path": "manifests/pending_index.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 19867
+      "size_bytes": 18910
     },
     {
       "path": "manifests/phase_b_readiness.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 986
+      "size_bytes": 990
     },
     {
       "path": "manifests/phase_b_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1095
+      "size_bytes": 435
     },
     {
       "path": "manifests/phase_b_upgrade_proposals.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 373
+      "size_bytes": 295
     },
     {
       "path": "manifests/phase_c_readiness.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 252
+      "size_bytes": 272
     },
     {
       "path": "manifests/phase_roadmap.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 4131
+      "size_bytes": 4061
     },
     {
       "path": "manifests/phase_transition.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 477
+      "size_bytes": 549
     },
     {
       "path": "manifests/photo_hw_map.json",
@@ -325,7 +325,7 @@
       "path": "manifests/protocol_log_meta.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 504
+      "size_bytes": 219
     },
     {
       "path": "manifests/sensitive_audit.json",
@@ -349,7 +349,7 @@
       "path": "manifests/usb_bulk_framing_hypothesis.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 2085
+      "size_bytes": 2290
     },
     {
       "path": "manifests/usb_bulk_pair_hypothesis.json",
@@ -361,7 +361,13 @@
       "path": "manifests/usb_capture_meta.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 578
+      "size_bytes": 183
+    },
+    {
+      "path": "manifests/usb_command_taxonomy.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 138
     },
     {
       "path": "manifests/usb_companion_7317.json",
@@ -370,22 +376,40 @@
       "size_bytes": 7041
     },
     {
+      "path": "manifests/usb_data_plane_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 3020
+    },
+    {
       "path": "manifests/usb_enum_decode_notes.json",
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 5244
     },
     {
+      "path": "manifests/usb_primary_ctrl_744f.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 132
+    },
+    {
       "path": "manifests/usb_protocol_decode.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 3465
+      "size_bytes": 128
     },
     {
       "path": "manifests/usb_session_traffic.json",
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 1250
+    },
+    {
+      "path": "manifests/usb_vendor_ctrl_7317.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 4669
     }
   ]
 }

@@ -67,8 +67,8 @@ ENTRIES = [
         "usb",
         "Application-level framing carried over the USB link",
         "candidate",
-        "bulk endpoints known; command/frame layout not reverse-engineered",
-        "usb_protocol_decode.json + usb_session.pcapng bulk traffic",
+        "100% match: BE u16 tag + u16 frame_len + u16 body_len + type + opcode; semantics open",
+        "usb_command_taxonomy.json (supersedes BE-u32-only hypothesis)",
     ),
     _e(
         "SIG-INPUT-CONNECTOR",

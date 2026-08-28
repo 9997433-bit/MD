@@ -9,9 +9,9 @@
 | 指标 | 值 |
 |------|-----|
 | Identifier | **237** |
-| pytest | **105** 全部通过 |
+| pytest | **106** 全部通过 |
 | confirmed | 76 |
-| blocked | 83 |
+| blocked | 79 |
 | 静态阶段 | **已关闭冻结** (`static_phase_closed.json`) |
 
 ## 八层 catalog
