@@ -17,3 +17,6 @@ __pycache__/
 # zero0000 research: keep docs/scripts; large extracted bin optional local
 # (mcs is source of truth; bin can be regenerated)
 zero0000-research/assets/firmware/*.bin
+
+# datasheet PDFs: index only (see assets/datasheets/README.md); download locally
+zero0000-research/assets/datasheets/*.pdf
