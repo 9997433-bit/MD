@@ -1,4 +1,5 @@
 using UnityEngine;
+using CosmicFront.Combat;
 using CosmicFront.Core;
 using CosmicFront.Mech;
 using CosmicFront.Network;
@@ -75,6 +76,10 @@ namespace CosmicFront.AI
                 else if (GameManager.Instance != null && !GameManager.Instance.IsMultiplayer)
                 {
                     GameManager.Instance.RegisterKill();
+                    KillFeedEvents.Raise(
+                        KillFeedEvents.ResolveDisplayName(killer),
+                        KillFeedEvents.ResolveDisplayName(health.gameObject),
+                        "主炮");
                 }
             }
 

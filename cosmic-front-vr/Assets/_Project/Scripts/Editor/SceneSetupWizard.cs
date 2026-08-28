@@ -155,6 +155,7 @@ namespace CosmicFront.Editor
 
             CreateBattleHud(xrRig.transform, playerMech.GetComponent<MechController>());
             CreateMatchScoreboardUi();
+            CreateKillFeedUi();
             CreateMatchResultsUi();
 
             var spawnerGo = new GameObject("EnemySpawner");
@@ -439,6 +440,40 @@ namespace CosmicFront.Editor
             SetPrivateField(ui, "scoreboardText", text);
         }
 
+
+        private static void CreateKillFeedUi()
+        {
+            var canvasGo = new GameObject("KillFeedCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 40;
+            canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+            var feed = CreateText(canvasGo.transform, "KillFeed", "", 16, TextAnchor.UpperLeft);
+            feed.rectTransform.anchorMin = new Vector2(0f, 0.35f);
+            feed.rectTransform.anchorMax = new Vector2(0f, 0.85f);
+            feed.rectTransform.pivot = new Vector2(0f, 1f);
+            feed.rectTransform.anchoredPosition = new Vector2(16f, 0f);
+            feed.rectTransform.sizeDelta = new Vector2(420f, 0f);
+            feed.color = new Color(1f, 0.92f, 0.75f, 0.95f);
+
+            var banner = CreateText(canvasGo.transform, "StreakBanner", "", 36, TextAnchor.MiddleCenter);
+            banner.rectTransform.anchorMin = new Vector2(0.5f, 0.72f);
+            banner.rectTransform.anchorMax = new Vector2(0.5f, 0.72f);
+            banner.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+            banner.rectTransform.anchoredPosition = Vector2.zero;
+            banner.rectTransform.sizeDelta = new Vector2(640f, 64f);
+            banner.fontStyle = FontStyle.Bold;
+            banner.color = new Color(1f, 0.78f, 0.2f, 1f);
+            banner.gameObject.SetActive(false);
+
+            var killFeed = canvasGo.AddComponent<KillFeedUI>();
+            SetPrivateField(killFeed, "feedText", feed);
+
+            var streak = canvasGo.AddComponent<StreakTracker>();
+            SetPrivateField(streak, "bannerText", banner);
+        }
+
         private static void CreateBoostVignette(VRComfortSettings comfort, Transform parent)
         {
             var canvasGo = new GameObject("BoostVignette");
@@ -721,6 +756,15 @@ namespace CosmicFront.Editor
             var flagship = CreateWarshipPrefabAsset();
             SetPrivateField(escort, "flagshipPrefab", flagship);
             SetPrivateField(escort, "waypoints", wps);
+
+            // Attacker waves for escort mode (prefab may already exist from CreateMechPrefabAsset).
+            var wave = escortRoot.AddComponent<EscortAttackWaveSpawner>();
+            var attackerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/_Project/Prefabs/EnemyMech.prefab");
+            if (attackerPrefab != null)
+            {
+                SetPrivateField(wave, "attackerPrefab", attackerPrefab);
+            }
 
             // Capture points A/B/C
             var captureRoot = new GameObject("CapturePointsMode");

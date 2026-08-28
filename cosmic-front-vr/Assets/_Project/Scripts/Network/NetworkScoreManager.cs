@@ -3,6 +3,7 @@ using System.Text;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
+using CosmicFront.Combat;
 using CosmicFront.Core;
 
 namespace CosmicFront.Network
@@ -118,6 +119,11 @@ namespace CosmicFront.Network
             {
                 AddPlayerDeath(victimConn.ClientId, victimHealth.Team);
             }
+
+            KillFeedEvents.Raise(
+                KillFeedEvents.ResolveDisplayName(killer),
+                KillFeedEvents.ResolveDisplayName(victim),
+                "主炮");
 
             NotifyOwnerStats(killerConn, victimConn);
         }
