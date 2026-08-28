@@ -54,6 +54,7 @@ zero0000-research/
 ## 当前状态
 
 **算法/ADC·DAC 实现目标**（进行中）：见 `06_docs/算法与ADCDAC实现_研究计划.md` · `算法目标进度.md`。  
-- **G0/G1 已通过**（含位流 SPI 常量阴性扫描）；**G2 起需板**（记录模板 + `decode_spi_capture.py` 已备）。  
-- G3/G4 方案：`05_tests/G3G4_算法判别矩阵.md`；报告骨架：`ADC_DAC实现与算法推断报告.md`。  
+- **G0/G1 已通过**（SPI 常量阴性扫描 + TSW4200/上位机结案）；**G2 起需板**。  
+- G2/G3 工具：`decode_spi_capture.py` · `g2_mode_infer.py` · `g3_tone_analyze.py`。  
+- 报告骨架：`ADC_DAC实现与算法推断报告.md`。  
 - 仅现有资料静态总览：`现有资料口径总梳理.md`。
