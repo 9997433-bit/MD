@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T00:51:07.953398+00:00",
+  "generated_at": "2026-08-28T07:11:27.746097+00:00",
   "total_identifiers": 237,
   "by_layer": {
     "hw": 32,
@@ -33,5 +33,5 @@
   },
   "all_pass": true,
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
-  "phase": "static_complete_pending_hardware"
+  "phase": "phase_b_in_progress"
 }

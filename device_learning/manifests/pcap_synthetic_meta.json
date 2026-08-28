@@ -1,7 +1,7 @@
 {
   "type": "synthetic_reference",
   "warning": "NOT a device USB capture — pipeline test fixture only",
-  "generated_at": "2026-08-28T00:51:03.861212+00:00",
+  "generated_at": "2026-08-28T07:11:23.538391+00:00",
   "path": "phase_b/fixtures/usb_enum_synthetic_reference.pcapng",
   "size_bytes": 28,
   "sha256": "3d269a1e29b7c5760e85f16bf148e93bbe4bb4401ca0e2ff1399f11fb634d679",

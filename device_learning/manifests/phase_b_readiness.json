@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T00:51:05.277803+00:00",
+  "generated_at": "2026-08-28T07:11:25.002052+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "blockers": [
     {
@@ -15,22 +15,22 @@
       "label": "USB 枚举抓包",
       "artifact": "phase_b/captures/usb_enum.pcapng",
       "unblocks": "PROTO-DESC-*",
-      "present": false,
-      "size_bytes": null
+      "present": true,
+      "size_bytes": 562768
     },
     {
       "id": "usb_session",
       "label": "USB 工作会话抓包",
       "artifact": "phase_b/captures/usb_session.pcapng",
       "unblocks": "PROTO-EP-*, SIG-* (partial)",
-      "present": false,
-      "size_bytes": null
+      "present": true,
+      "size_bytes": 5750896
     }
   ],
-  "ready_count": 0,
+  "ready_count": 2,
   "blocker_count": 3,
   "deep_analysis_ready": false,
-  "checklist": "0/6",
+  "checklist": "3/6",
   "upgrade_proposals_pending": 0,
-  "next_command": "make check-captures"
+  "next_command": "make phase-b"
 }

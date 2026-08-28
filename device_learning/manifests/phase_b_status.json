@@ -1,17 +1,32 @@
 {
-  "generated_at": "2026-08-28T00:51:11.886484+00:00",
+  "generated_at": "2026-08-28T07:11:24.442602+00:00",
   "captures_dir": "phase_b/captures",
-  "capture_count": 0,
-  "captures": [],
+  "capture_count": 2,
+  "captures": [
+    {
+      "name": "usb_enum.pcapng",
+      "size_bytes": 562768,
+      "sha256": "df096a1fb7bcdc5f4c0ab85db95954af119271cb24a0e10d1a9f727507e31f53",
+      "type": "usb_capture",
+      "is_synthetic_fixture": false
+    },
+    {
+      "name": "usb_session.pcapng",
+      "size_bytes": 5750896,
+      "sha256": "fedb99ad954abe461fd987f6f592c6f95fba3ffac37f8665196edd5f57363b1b",
+      "type": "usb_capture",
+      "is_synthetic_fixture": false
+    }
+  ],
   "flags": {
     "eeprom_present": false,
     "eeprom_observed": false,
-    "usb_capture_present": false,
-    "usb_capture_observed": false,
+    "usb_capture_present": true,
+    "usb_capture_observed": true,
     "protocol_log_present": false
   },
-  "ready_for_ledger_refresh": false,
+  "ready_for_ledger_refresh": true,
   "next_steps": [
-    "Place eeprom.bin and/or *.pcapng in phase_b/captures/"
+    "Run analyze_pcap_stub.py then generate_ledger.py"
   ]
 }

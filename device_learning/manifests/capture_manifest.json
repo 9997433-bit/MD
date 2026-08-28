@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T00:51:05.123779+00:00",
+  "generated_at": "2026-08-28T07:11:24.844593+00:00",
   "artifacts": [
     {
       "path": "phase_b/captures/eeprom.bin",
@@ -7,11 +7,13 @@
     },
     {
       "path": "phase_b/captures/usb_enum.pcapng",
-      "exists": false
+      "exists": true,
+      "size_bytes": 562768
     },
     {
       "path": "phase_b/captures/usb_session.pcapng",
-      "exists": false
+      "exists": true,
+      "size_bytes": 5750896
     },
     {
       "path": "phase_b/captures/protocol_log.json",
@@ -26,17 +28,17 @@
       "exists": false
     }
   ],
-  "present_count": 0,
+  "present_count": 2,
   "expected_count": 6,
   "flags": {
     "eeprom_present": false,
     "eeprom_observed": false,
-    "usb_capture_present": false,
-    "usb_capture_observed": false,
+    "usb_capture_present": true,
+    "usb_capture_observed": true,
     "protocol_log_present": false
   },
   "eeprom_status": "synthetic_pipeline_test",
-  "usb_capture_status": "missing",
+  "usb_capture_status": "observed",
   "protocol_log_status": "missing",
   "firmware_extract_status": "missing",
   "ready_for_deep_analysis": false,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T00:51:07.552458+00:00",
+  "generated_at": "2026-08-28T07:11:27.331079+00:00",
   "artifact_count": 58,
   "present_count": 58,
   "artifacts": [
@@ -73,19 +73,19 @@
       "path": "PHASE_B_READINESS.md",
       "description": "阶段 B 就绪报告",
       "exists": true,
-      "size_bytes": 705
+      "size_bytes": 706
     },
     {
       "path": "PHASE_C_READINESS.md",
       "description": "阶段 C 就绪报告",
       "exists": true,
-      "size_bytes": 348
+      "size_bytes": 328
     },
     {
       "path": "phase_b/CHECKLIST.json",
       "description": "阶段 B 机器可读检查清单",
       "exists": true,
-      "size_bytes": 1618
+      "size_bytes": 1615
     },
     {
       "path": "phase_c/CHECKLIST.json",
@@ -145,7 +145,7 @@
       "path": "manifests/capture_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1074
+      "size_bytes": 1128
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -193,7 +193,7 @@
       "path": "manifests/evidence_summary.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 820
+      "size_bytes": 818
     },
     {
       "path": "manifests/experiment_index.json",
@@ -271,25 +271,25 @@
       "path": "manifests/phase_b_readiness.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 990
+      "size_bytes": 986
     },
     {
       "path": "manifests/phase_b_status.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 435
+      "size_bytes": 879
     },
     {
       "path": "manifests/phase_b_upgrade_proposals.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 295
+      "size_bytes": 328
     },
     {
       "path": "manifests/phase_c_readiness.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 272
+      "size_bytes": 252
     },
     {
       "path": "manifests/phase_roadmap.json",
@@ -301,7 +301,7 @@
       "path": "manifests/phase_transition.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 549
+      "size_bytes": 477
     },
     {
       "path": "manifests/photo_hw_map.json",
@@ -349,7 +349,7 @@
       "path": "manifests/usb_capture_meta.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 183
+      "size_bytes": 578
     }
   ]
 }
