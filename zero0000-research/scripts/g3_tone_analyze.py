@@ -84,7 +84,14 @@ def spectrum_like_heuristic(x: list[float]) -> dict:
 
 
 def nearest_clock_family(fs: float) -> str:
-    family = [122.88e6, 245.76e6, 491.52e6, 61.44e6, 30.72e6]
+    family = [
+        30.72e6,
+        61.44e6,
+        122.88e6,
+        163.84e6,
+        245.76e6,
+        491.52e6,
+    ]
     if not math.isfinite(fs) or fs <= 0:
         return "n/a"
     best = min(family, key=lambda c: abs(c - fs) / c)

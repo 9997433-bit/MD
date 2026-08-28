@@ -198,6 +198,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1/G2 预备：`decode_cdce_profile.py`（Table-8→Hz）+ infer SPI→计划 B 先验  
 - [x] G2 管线：`ingest --demo` 端到端（Conserviss-min+计划B；禁止回填 G0）  
 - [x] Must 机器核验：`scripts/audit_must.py`（未达标 exit 1）  
+- [x] G1 再加深：R5b Wiley/RHINO 实测钟族（61.44 / 163.84÷3）写入 `算法线索` + `g2_mode_infer` 族表  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）

@@ -16,8 +16,12 @@ import sys
 from pathlib import Path
 
 
+# 3GPP/LTE 族 + RHINO 实测上限（491.52÷3=163.84；见 R5b）
 FAMILY = {
+    "30.72e6": 30.72e6,
+    "61.44e6": 61.44e6,
     "122.88e6": 122.88e6,
+    "163.84e6": 163.84e6,
     "245.76e6": 245.76e6,
     "491.52e6": 491.52e6,
 }
@@ -42,7 +46,9 @@ def infer_clocks(clocks: list[dict]) -> dict:
     if adc and adc_f:
         notes.append(f"ADC clk ≈ {adc_f}")
     elif adc:
-        notes.append(f"ADC clk={adc} Hz 不在 122.88/245.76/491.52 族（tol 1%）")
+        notes.append(
+            f"ADC clk={adc} Hz 不在 30.72/61.44/122.88/163.84/245.76/491.52 族（tol 1%）"
+        )
     if dac and dac_f:
         notes.append(f"DACCLK ≈ {dac_f}")
     elif dac:
@@ -81,6 +87,10 @@ def infer_clocks(clocks: list[dict]) -> dict:
         h8 = "支持·计划B(Conserviss:双路245.76+2x)"
     elif adc_f == "122.88e6" or dac_f == "122.88e6":
         h8 = "弱支持（见122.88；核对探点/插值）"
+    elif adc_f == "163.84e6" or dac_f == "163.84e6":
+        h8 = "弱支持·RHINO类（491.52÷3=163.84；非A/B主先验）"
+    elif adc_f == "61.44e6" or dac_f == "61.44e6":
+        h8 = "弱支持·RHINO示例率（61.44；非A/B主先验）"
     elif adc_f or dac_f:
         h8 = "弱支持（单侧）" if not (adc and dac) else "弱支持（族内但非A/B典型比）"
 
@@ -176,10 +186,17 @@ def self_test() -> int:
     if "计划B" not in "".join(s_c["notes"]) or s_c["P1.4_suggested"] != "✅":
         print("SELF-TEST FAILED conserviss spi prior", s_c, file=sys.stderr)
         return 1
+    # RHINO-class ÷3 family must not be flagged "out of family"
+    c_r = infer_clocks([{"id": "C2", "hz": 163.84e6}])
+    if c_r["P1.3_suggested"] != "🔶" or "163.84" not in c_r["H8"]:
+        print("SELF-TEST FAILED RHINO 163.84 family", c_r, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. single-sided → 🔶, Conserviss plan B, SPI→B prior)")
+    print(
+        "SELF-TEST OK (single-sided→🔶, plan B, SPI→B prior, RHINO 163.84 family)"
+    )
     return 0
 
 
