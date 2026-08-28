@@ -257,9 +257,16 @@ def e2e_self_test() -> int:
             if label == "planC" and "计划C" not in h8:
                 print(f"SELF-TEST FAILED {label} H8={h8}", file=sys.stderr)
                 return 1
+            x = infer.get("crosscheck") or {}
+            if label == "planB" and x.get("consistent") is not True:
+                print(f"SELF-TEST FAILED {label} crosscheck={x}", file=sys.stderr)
+                return 1
+            if label == "planC" and x.get("consistent") is not True:
+                print(f"SELF-TEST FAILED {label} crosscheck={x}", file=sys.stderr)
+                return 1
             print(
                 f"SELF-TEST OK e2e {label} Must-grades P1.3={p13} P1.4={p14} "
-                f"hashes={len(hashes)} H8={h8} (G0 untouched)"
+                f"hashes={len(hashes)} H8={h8} cross={x.get('consistent')} (G0 untouched)"
             )
             return 0
         finally:

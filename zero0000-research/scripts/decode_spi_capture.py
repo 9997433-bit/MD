@@ -649,14 +649,17 @@ def _cdce_lsb_bits(data28: int, addr: int) -> list[int]:
 
 
 def _synth_frames_e2e_min() -> list[tuple[list[int], int, bool]]:
+    # 0x2000 = LOW SPEED OFF (Fs>80); 0x4180 = DDR LVDS
+    adc0 = _msb_bits(0x2000, 16)
     adc = _msb_bits(0x4180, 16)
     dac = _msb_bits(0x01, 8) + _msb_bits(0x11, 8)
     cdce = _cdce_lsb_bits(0x683C034, 0)
-    return [(adc, 3, True), (dac, 4, False), (cdce, 5, False)]
+    return [(adc0, 3, True), (adc, 3, True), (dac, 4, False), (cdce, 5, False)]
 
 
 def _synth_frames_conserviss_min() -> list[tuple[list[int], int, bool]]:
     frames: list[tuple[list[int], int, bool]] = [
+        (_msb_bits(0x2000, 16), 3, True),  # LOW SPEED OFF — plan A/B
         (_msb_bits(0x4180, 16), 3, True),
         (_msb_bits(0x5004, 16), 3, True),
         (_msb_bits(0x01, 8) + _msb_bits(0x21, 8), 4, False),
@@ -669,6 +672,7 @@ def _synth_frames_conserviss_min() -> list[tuple[list[int], int, bool]]:
 
 def _synth_frames_rhino_min() -> list[tuple[list[int], int, bool]]:
     frames: list[tuple[list[int], int, bool]] = [
+        (_msb_bits(0x2004, 16), 3, True),  # LOW SPEED ON — plan C Fs=61.44
         (_msb_bits(0x4180, 16), 3, True),
         (_msb_bits(0x5004, 16), 3, True),
         (_msb_bits(0x01, 8) + _msb_bits(0x21, 8), 4, False),
@@ -744,6 +748,7 @@ def self_test() -> int:
         flags3.get("best_cdce_profile") != "conserviss"
         or not flags3.get("conserviss_dac_cfg1")
         or not flags3.get("A_adc_0x50_twos")
+        or not flags3.get("A_adc_0x20_low_speed_off")
     ):
         print("SELF-TEST FAILED conserviss min", flags3, file=sys.stderr)
         return 1
@@ -762,10 +767,12 @@ def self_test() -> int:
             True,
         )
     )
-    if flags4.get("best_cdce_profile") != "rhino_61m44":
+    if flags4.get("best_cdce_profile") != "rhino_61m44" or not flags4.get(
+        "A_adc_0x20_low_speed_on"
+    ):
         print("SELF-TEST FAILED rhino min", flags4, file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. --auto-map aliases + conserviss/rhino min)")
+    print("SELF-TEST OK (incl. --auto-map aliases + conserviss/rhino min + 0x20 LOW SPEED)")
     return 0
 
 
