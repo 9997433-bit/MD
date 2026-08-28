@@ -15,7 +15,8 @@
 | S25FL128S(128 Mb SPI NOR Flash) | Infineon(原 Cypress/Spansion) | 001-98283 | <https://www.infineon.com/assets/row/public/documents/10/49/infineon-s25fl128s-s25fl256s-128-mb-16-mb-256-mb-32-mb-fl-s-flash-spi-multi-io-3-v-datasheet-en.pdf?fileId=8ac78c8c7d0d8da4017d0ecfb6a64a17> | `s25fl128s.pdf` |
 | IS43TR16128D(2 Gb DDR3,128M×16) | ISSI | 43-46TR16128D | <https://www.issi.com/WW/pdf/43-46TR16128D-82560DL.pdf> | `is43tr16128d.pdf` |
 | RTL8211FI(千兆以太网 PHY) | Realtek | JATR-8275-15 | 无官方公开直链,见下方说明 | `rtl8211fi.pdf` |
-| TPS54425(电源,附带) | TI | 产品页 | <https://www.ti.com/product/TPS54425> | `tps54425.pdf` |
+| TPS74401（U10/U11 净轨 LDO，✅） | TI | SBVS066 | <https://www.ti.com/lit/ds/symlink/tps74401.pdf> | `tps74401.pdf` |
+| （已排除）TPS54425 | — | — | 封装与图25 不符，勿再下载作本板证据 | — |
 
 ### 各链接说明
 
@@ -34,6 +35,7 @@
 curl -L -o ads62p49.pdf   "https://www.ti.com/lit/ds/symlink/ads62p49.pdf"
 curl -L -o dac3283.pdf    "https://www.ti.com/lit/ds/symlink/dac3283.pdf"
 curl -L -o cdce72010.pdf  "https://www.ti.com/lit/ds/symlink/cdce72010.pdf"
+curl -L -o tps74401.pdf   "https://www.ti.com/lit/ds/symlink/tps74401.pdf"
 ```
 
 其余(AMD/FTDI/Infineon/ISSI)因站点防爬,请用浏览器打开上表直链下载,保存为表中"建议本地文件名"。下载后可用 `file *.pdf` 确认是真实 PDF(防爬拦截时保存下来的会是 HTML)。
