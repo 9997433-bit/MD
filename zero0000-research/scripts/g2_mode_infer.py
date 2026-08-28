@@ -17,9 +17,12 @@ from pathlib import Path
 
 
 # 3GPP/LTE 族 + RHINO 实测上限（491.52÷3=163.84；见 R5b）
+# + LDV 旁支：491.52÷12=40.96（常见 AOM/IF 相关分频；R13）
 FAMILY = {
     "30.72e6": 30.72e6,
+    "40.96e6": 40.96e6,
     "61.44e6": 61.44e6,
+    "81.92e6": 81.92e6,
     "122.88e6": 122.88e6,
     "163.84e6": 163.84e6,
     "245.76e6": 245.76e6,
@@ -47,7 +50,7 @@ def infer_clocks(clocks: list[dict]) -> dict:
         notes.append(f"ADC clk ≈ {adc_f}")
     elif adc:
         notes.append(
-            f"ADC clk={adc} Hz 不在 30.72/61.44/122.88/163.84/245.76/491.52 族（tol 1%）"
+            f"ADC clk={adc} Hz 不在 30.72/40.96/61.44/81.92/122.88/163.84/245.76/491.52 族（tol 1%）"
         )
     if dac and dac_f:
         notes.append(f"DACCLK ≈ {dac_f}")
@@ -94,6 +97,8 @@ def infer_clocks(clocks: list[dict]) -> dict:
         h8 = "弱支持·RHINO类（491.52÷3=163.84；非A/B主先验）"
     elif adc_f == "61.44e6" or dac_f == "61.44e6":
         h8 = "弱支持·RHINO示例率（61.44；非A/B主先验）"
+    elif adc_f == "40.96e6" or dac_f == "40.96e6" or adc_f == "81.92e6" or dac_f == "81.92e6":
+        h8 = "弱支持·LDV旁支（40.96=491.52÷12 / 81.92；R13）"
     elif adc_f or dac_f:
         h8 = "弱支持（单侧）" if not (adc and dac) else "弱支持（族内但非A/B典型比）"
 
@@ -234,6 +239,11 @@ def self_test() -> int:
     if c_c["P1.3_suggested"] != "✅" or "计划C" not in c_c["H8"]:
         print("SELF-TEST FAILED RHINO Plan C", c_c, file=sys.stderr)
         return 1
+    # R13 LDV sideband 40.96 (=491.52/12)
+    c_ldv = infer_clocks([{"id": "C2", "hz": 40.96e6}])
+    if c_ldv["P1.3_suggested"] != "强 🔶" or "40.96" not in c_ldv["H8"]:
+        print("SELF-TEST FAILED LDV 40.96 family", c_ldv, file=sys.stderr)
+        return 1
     # SPI best==rhino_61m44 → Plan C clock prior note
     s_r = infer_spi(
         {
@@ -256,7 +266,7 @@ def self_test() -> int:
         return 1
     print(
         "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, "
-        "RHINO 163.84/PlanC + SPI→C prior, R11e CONFIG31)"
+        "RHINO 163.84/PlanC + SPI→C prior, R11e CONFIG31, LDV 40.96)"
     )
     return 0
 
