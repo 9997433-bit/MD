@@ -175,7 +175,55 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
             p14 = "强 🔶"
         elif p14 == "🔶":
             p14 = "强 🔶"
+    if checklist.get("A_adc_0x20_low_speed_on"):
+        notes.append(
+            "ADC 0x20 LOW SPEED=1 → datasheet 要求 Fs≤80 MSPS（相容计划 C / LDV 旁支）"
+        )
+        if p14 == "❓":
+            p14 = "🔶"
+    elif checklist.get("A_adc_0x20_low_speed_off"):
+        notes.append("ADC 0x20 LOW SPEED=0 → 期望 Fs>80 MSPS（相容计划 A/B）")
+        if p14 == "❓":
+            p14 = "🔶"
     return {"P1.4_suggested": p14, "P1.5_suggested": p15, "notes": notes}
+
+
+def crosscheck_clock_spi(clocks: list[dict], checklist: dict) -> dict:
+    """C2 样钟 vs ADS62P49 0x20 LOW SPEED（SLAS635）交叉核验。"""
+    notes: list[str] = []
+    bump = None  # optional P1.4 bump
+    consistent: bool | None = None
+    by_id = {c["id"]: c.get("hz") for c in clocks if "id" in c and c.get("hz")}
+    adc = by_id.get("C2") or by_id.get("ADC_CLK")
+    ls_on = bool(checklist.get("A_adc_0x20_low_speed_on"))
+    ls_off = bool(checklist.get("A_adc_0x20_low_speed_off"))
+    if not adc or not (ls_on or ls_off):
+        return {"notes": notes, "P1.4_bump": bump, "consistent": None}
+    if adc <= 80e6 * 1.01:
+        if ls_on:
+            notes.append(
+                f"交叉一致：C2={adc:.0f}≤80e6 且 ADC LOW SPEED=1 → 强化计划C/低率 P1.4"
+            )
+            bump = "强 🔶"
+            consistent = True
+        elif ls_off:
+            notes.append(
+                f"交叉冲突：C2={adc:.0f}≤80e6 但 LOW SPEED=0（核对探点或 SPI 译码）"
+            )
+            consistent = False
+    else:
+        if ls_off:
+            notes.append(
+                f"交叉一致：C2={adc:.0f}>80e6 且 LOW SPEED=0 → 强化计划A/B P1.4"
+            )
+            bump = "强 🔶"
+            consistent = True
+        elif ls_on:
+            notes.append(
+                f"交叉冲突：C2={adc:.0f}>80e6 但 LOW SPEED=1（核对探点或 SPI）"
+            )
+            consistent = False
+    return {"notes": notes, "P1.4_bump": bump, "consistent": consistent}
 
 
 def self_test() -> int:
@@ -261,14 +309,40 @@ def self_test() -> int:
     if s_id["P1.4_suggested"] != "强 🔶" or "VERSION31" not in "".join(s_id["notes"]):
         print("SELF-TEST FAILED R11e CONFIG31 identity", s_id, file=sys.stderr)
         return 1
+    # R5c Plan C + LOW SPEED ON → cross-consistent → P1.4 强 🔶
+    x_ok = crosscheck_clock_spi(
+        [{"id": "C2", "hz": 61.44e6}],
+        {"A_adc_0x20_low_speed_on": True},
+    )
+    if not x_ok["consistent"] or "交叉一致" not in "".join(x_ok["notes"]):
+        print("SELF-TEST FAILED PlanC×LOW SPEED cross", x_ok, file=sys.stderr)
+        return 1
+    x_bad = crosscheck_clock_spi(
+        [{"id": "C2", "hz": 245.76e6}],
+        {"A_adc_0x20_low_speed_on": True},
+    )
+    if x_bad["consistent"] is not False or "交叉冲突" not in "".join(x_bad["notes"]):
+        print("SELF-TEST FAILED A/B×LOW SPEED conflict", x_bad, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
     print(
         "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, "
-        "RHINO 163.84/PlanC + SPI→C prior, R11e CONFIG31, LDV 40.96)"
+        "RHINO 163.84/PlanC + SPI→C prior, R11e CONFIG31, LDV 40.96, "
+        "ADC 0x20×C2 crosscheck)"
     )
     return 0
+
+
+def _bump_grade(cur: str, bump: str | None) -> str:
+    if not bump:
+        return cur
+    order = ["❓", "🔶", "强 🔶", "✅"]
+    try:
+        return bump if order.index(bump) > order.index(cur) else cur
+    except ValueError:
+        return cur
 
 
 def main() -> int:
@@ -291,11 +365,23 @@ def main() -> int:
         )
         return 0
     out: dict = {}
+    clocks_list: list[dict] = []
+    checklist: dict = {}
     if args.clocks:
-        out["clocks"] = infer_clocks(json.loads(args.clocks.read_text()))
+        clocks_list = json.loads(args.clocks.read_text())
+        out["clocks"] = infer_clocks(clocks_list)
     if args.spi:
         blob = json.loads(args.spi.read_text())
-        out["spi"] = infer_spi(blob.get("checklist", blob), blob.get("frames"))
+        checklist = blob.get("checklist", blob)
+        out["spi"] = infer_spi(checklist, blob.get("frames"))
+    if clocks_list and checklist:
+        x = crosscheck_clock_spi(clocks_list, checklist)
+        out["crosscheck"] = x
+        if x["notes"] and "spi" in out:
+            out["spi"]["notes"] = list(out["spi"].get("notes") or []) + x["notes"]
+            out["spi"]["P1.4_suggested"] = _bump_grade(
+                out["spi"]["P1.4_suggested"], x.get("P1.4_bump")
+            )
     print(json.dumps(out, ensure_ascii=False, indent=2))
     return 0
 

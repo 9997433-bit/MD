@@ -220,6 +220,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1/G2：LDV 旁支钟族 40.96/81.92 写入 `g2_mode_infer` + R13 行业解调先例（专利/IMEKO 级通识）  
 - [x] G1 再加深：R13b CN117109719B Fin/LO 候选表（25–50 MHz 等）→ G3 §2c + `g3_tone_analyze --list-ldv-fins`（不升 Must）  
 - [x] G1 再加深：R13c《激光技术》2023 相位解缠 → G3 §2d / H-鉴相解缠（不升 Must）  
+- [x] G2 管线：ADC **0x20 LOW SPEED** ↔ C2（≤80 MSPS）交叉核验写入 `g2_mode_infer` / 现场表单  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）

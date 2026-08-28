@@ -321,6 +321,12 @@ def decode_adc(t: float, bits: list[int]) -> Frame:
     fr.decoded = {"addr": f"0x{addr:02X}", "data": f"0x{data:02X}", "name": ADC_KEY_ADDR.get(addr, "")}
     if addr == 0x41:
         fr.notes.append("DDR LVDS" if (data & 0x80) else "parallel CMOS")
+    if addr == 0x20:
+        # SLAS635: D2=1 → LOW SPEED for Fs ≤ 80 MSPS
+        if data & 0x04:
+            fr.notes.append("LOW SPEED ON (Fs≤80 MSPS)")
+        else:
+            fr.notes.append("LOW SPEED OFF (Fs>80 MSPS)")
     if addr in (0x62, 0x75) and (data & 0x7):
         fr.notes.append(f"test pattern mode={data & 0x7} (H5 校准足迹?)")
     return fr
@@ -477,6 +483,22 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
             f.decoded.get("addr") == "0x41" and "DDR LVDS" in f.notes for f in adc
         ),
         "A_adc_0x50_twos": (0x50, 0x04) in adc_words,
+        "A_adc_0x20_low_speed_on": any(
+            f.decoded.get("addr") == "0x20" and "LOW SPEED ON" in "".join(f.notes)
+            for f in adc
+        ),
+        "A_adc_0x20_low_speed_off": any(
+            f.decoded.get("addr") == "0x20" and "LOW SPEED OFF" in "".join(f.notes)
+            for f in adc
+        ),
+        "adc_0x20_data": next(
+            (
+                f.decoded.get("data")
+                for f in reversed(adc)
+                if f.decoded.get("addr") == "0x20"
+            ),
+            None,
+        ),
         "D1_dac_cfg1_seen": any(f.decoded.get("addr") == "0x01" for f in dac),
         "D2_dac_version_read": any("VERSION read" in n for f in dac for n in f.notes),
         "C1_cdce_writes": any(
