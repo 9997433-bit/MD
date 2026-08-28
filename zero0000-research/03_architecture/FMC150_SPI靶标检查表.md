@@ -38,7 +38,8 @@ FMC150 参考设计的 SPI 拓扑(来自公开 UCF/用户手册):**共享 SCLK +
 | 回读 | `cdce_sdo`、`ads_sdo`(ADC 的 SDOUT 引脚)、DAC 经 SDIO 或 ALARM_SDO | 各自独立 |
 | 杂散控制 | `cdce_n_reset`、`cdce_n_pd`、`ref_en`、`adc_reset`、`txenable` | GPIO 驱动 |
 
-> 注:原版 FMC150 还带一片 AMC7823 电压/温度监控(`mon_n_en`)。zero0000 板**未确认**存在该器件;若抓包发现第四路片选,应回头核对 BOM(❓)。
+> 注:原版 FMC150 还带一片 AMC7823 电压/温度监控(`mon_n_en`)。zero0000 板**未确认**存在该器件;若抓包发现第四路片选,应回头核对 BOM(❓)。  
+> **R11d（Conserviss `pin_map` 实测）**：FMC150 上 `spi_sdata` 经 SN74AVC4T245 **固定为 FPGA→卡单向**；若把该线当双向 SPI 读，会写成功、读回全 `0xFF`。本板有无同款电平转换 ❓，但三芯片本就分立 SDO——**P1.4/P1.5 回读比对必须挂独立 SDO 脚，禁止用 MOSI 线解读回读**。
 
 ---
 
