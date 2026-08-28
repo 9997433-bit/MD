@@ -5,11 +5,15 @@ on:
     paths:
       - 'zero0000-research/scripts/**'
       - 'zero0000-research/05_tests/g2_inbox/**'
+      - 'zero0000-research/06_docs/二进制基准_分析计划与目标.md'
+      - 'zero0000-research/assets/firmware/**'
       - '.github/workflows/zero0000-research.yml'
   pull_request:
     paths:
       - 'zero0000-research/scripts/**'
       - 'zero0000-research/05_tests/g2_inbox/**'
+      - 'zero0000-research/06_docs/二进制基准_分析计划与目标.md'
+      - 'zero0000-research/assets/firmware/**'
       - '.github/workflows/zero0000-research.yml'
 
 jobs:
@@ -34,6 +38,8 @@ jobs:
           python3 scripts/ocr_scope_hz.py --self-test >/dev/null
       - name: Plan C synthetic demo (never writes G0)
         run: python3 scripts/ingest_g2_inbox.py --demo-plan-c >/dev/null
+      - name: Binary-baseline B-Must (offline bitstream track)
+        run: python3 scripts/audit_binary_baseline.py
       - name: Must audit (expect fail without measured inbox)
         run: |
           set +e
