@@ -57,12 +57,13 @@ def build_proposals() -> dict:
     fw_extract = load_json("manifests/firmware_extract.json")
     fw_scan = load_json("manifests/firmware_scan.json")
     proto_log = load_json("manifests/protocol_log_meta.json")
+    eeprom_path = ROOT / "phase_b" / "captures" / "eeprom.bin"
 
     proposals: list[dict] = []
     applicable = False
     notes: list[str] = []
 
-    if eeprom.get("status") == "observed":
+    if eeprom.get("status") == "observed" and eeprom_path.is_file():
         applicable = True
         notes.append("Real EEPROM dump detected (not synthetic fixture).")
         if p := propose("FW-EEPROM-IMAGE", "candidate", "8192-byte dump on disk", "phase_b/captures/eeprom.bin"):
@@ -100,6 +101,11 @@ def build_proposals() -> dict:
             if p := propose("FW-MCU-RESET-VECTOR", "unknown", "Firmware bytes present; entry not disassembled", "manifests/firmware_scan.json"):
                 proposals.append(p)
 
+    elif eeprom.get("status") == "observed":
+        notes.append(
+            "Ignoring observed EEPROM metadata because phase_b/captures/eeprom.bin is absent; "
+            "no FW-EEPROM-* proposals."
+        )
     elif eeprom.get("status") == "synthetic_pipeline_test":
         notes.append("Only synthetic EEPROM available — no upgrade proposals.")
 
@@ -160,6 +166,13 @@ def build_proposals() -> dict:
             "LEARN-010-USB-PROTO",
             "candidate",
             "Framing 100% on EP01/81; opcode meanings still open",
+            "manifests/usb_command_taxonomy.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "EXP-011-PROTO-TABLE",
+            "candidate",
+            "14 observed opcode byte values cataloged; meanings remain unknown",
             "manifests/usb_command_taxonomy.json",
         ):
             proposals.append(p)

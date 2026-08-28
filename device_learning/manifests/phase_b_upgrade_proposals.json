@@ -1,10 +1,20 @@
 {
-  "generated_at": "2026-08-28T08:54:23.411066+00:00",
-  "applicable": false,
-  "proposal_count": 0,
-  "proposals": [],
+  "generated_at": "2026-08-28T09:33:45.373332+00:00",
+  "applicable": true,
+  "proposal_count": 1,
+  "proposals": [
+    {
+      "identifier": "EXP-011-PROTO-TABLE",
+      "current_status": "not_started",
+      "proposed_status": "candidate",
+      "reason": "14 observed opcode byte values cataloged; meanings remain unknown",
+      "evidence": "manifests/usb_command_taxonomy.json",
+      "requires_human_review": true
+    }
+  ],
   "notes": [
-    "Only synthetic EEPROM available — no upgrade proposals."
+    "Only synthetic EEPROM available — no upgrade proposals.",
+    "usb_protocol_decode.json available — descriptor/endpoint map decoded."
   ],
   "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
 }
