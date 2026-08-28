@@ -3,7 +3,7 @@
 > 日期：2026-08-28  
 > 脚本：`scripts/analyze_bram_frames.py`（可复现）  
 > 对象：`20230825_s2056` FDRI 16 560 帧  
-> 方法边界：**非** Vivado/prjxray 列级 frame map（K160T 公开库不完整）；用 UG470「先 blk0 后 blk1」写序 + 密度塌陷估计 BRAM 内容区。
+> 方法边界：**非** Vivado 列级 frame map。公开 `prjxray-db` **仅有 xc7k70t、无 xc7k160t**（`prjxray_K160T帧图可得性.md` ✅ 路径关闭）。本分析用 UG470「先 blk0 后 blk1」写序 + 密度塌陷估计 BRAM 内容区。
 
 ---
 
@@ -40,7 +40,7 @@
 |------|------|------|
 | 大规模 **已初始化 BRAM ROM**（PicoBlaze 程序、大 MicroBlaze 镜像）**不像存在** | 🔶→**更强 🔶** | 候选 BRAM 区非零字节仅 ~5.5 KB 量级 |
 | SPI/DDR 引导的**小** MicroBlaze / 纯 RTL | 仍不能排除 | ❓ |
-| 精确 blk1 边界 | 仍 ❓ | 需官方/Vivado frame map |
+| 精确 blk1 边界 | 仍 ❓ | 公开 prjxray **无** K160T；须 Vivado 或自建 map |
 
 **不升级到 ✅**：命题成功标准要求 ILA/总线或等价运行期证据。
 

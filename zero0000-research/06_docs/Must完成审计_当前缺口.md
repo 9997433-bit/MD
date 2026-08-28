@@ -17,8 +17,9 @@
 
 **Must-1 总判：失败**（P1.3、P1.4 仍 ❓）。
 
-解锁：`05_tests/g2_inbox/` 根目录 + `scripts/ingest_g2_inbox.py`（见 `G2_资源门禁_用户动作.md`）。  
-管线自检：`decode_spi_capture.py --self-test`（含 `--auto-map`）✅；**不等于** P1.4 实测。
+解锁：`05_tests/G2_投放三步.md` → `g2_inbox/` + `ingest_g2_inbox.py`。  
+管线自检：`decode_spi_capture.py --self-test`（含 `--auto-map`）✅；**不等于** P1.4 实测。  
+静态旁路：公开 prjxray **无** xc7k160t（`prjxray_K160T帧图可得性.md`）——**不能**用帧图替代钟/SPI。
 
 ---
 

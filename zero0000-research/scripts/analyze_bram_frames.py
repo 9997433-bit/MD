@@ -7,7 +7,7 @@
 估计 BRAM 内容起点，并统计该区内非零字节——用于加强「无大规模 BRAM ROM 初值」
 （P2.5 / 软核）的可复现证据。
 
-精确列级映射仍需器件 frame map（Vivado / prjxray；K160T 公开库不完整）→ 边界保持 🔶。
+精确列级映射仍需器件 frame map（Vivado；公开 **prjxray-db 无 xc7k160t**，见 `prjxray_K160T帧图可得性.md`）→ 边界保持 🔶。
 
 用法：
   python3 analyze_bram_frames.py [/path/to/s2056.bin]
