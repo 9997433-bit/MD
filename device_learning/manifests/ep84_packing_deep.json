@@ -1,0 +1,979 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-28T14:34:48.226514+00:00",
+  "status": "hypothesis_only",
+  "device": "0x3923:0x744f",
+  "source": {
+    "path": "phase_b/captures/usb_session.pcapng",
+    "sha256": "fedb99ad954abe461fd987f6f592c6f95fba3ffac37f8665196edd5f57363b1b",
+    "usb_device_address": 24,
+    "tool": "tshark",
+    "display_filter_basis": "usb.device_address == 24 && usb.endpoint_address == 0x84 && usb.capdata"
+  },
+  "ep84_payload_count": 294,
+  "ep84_payload_bytes": 3383796,
+  "length_summary": {
+    "min": 3532,
+    "max": 32768,
+    "p50": 7032.0,
+    "p90": 18301.6,
+    "all_multiple_of_4": true,
+    "multiple_of_4_count": 294,
+    "multiple_of_3_count": 98,
+    "modulo_3_histogram": {
+      "0": 98,
+      "1": 98,
+      "2": 98
+    }
+  },
+  "byte_lane_mod4": [
+    {
+      "offset_mod": 0,
+      "unique_values": 16,
+      "entropy_bits": 2.767261,
+      "top_values_hex": [
+        {
+          "value": "0e",
+          "count": 290693
+        },
+        {
+          "value": "ff",
+          "count": 204875
+        },
+        {
+          "value": "00",
+          "count": 95288
+        },
+        {
+          "value": "be",
+          "count": 74771
+        }
+      ]
+    },
+    {
+      "offset_mod": 1,
+      "unique_values": 256,
+      "entropy_bits": 5.404984,
+      "top_values_hex": [
+        {
+          "value": "61",
+          "count": 139488
+        },
+        {
+          "value": "e0",
+          "count": 77075
+        },
+        {
+          "value": "ff",
+          "count": 76625
+        },
+        {
+          "value": "01",
+          "count": 76487
+        }
+      ]
+    },
+    {
+      "offset_mod": 2,
+      "unique_values": 256,
+      "entropy_bits": 7.371319,
+      "top_values_hex": [
+        {
+          "value": "ee",
+          "count": 78149
+        },
+        {
+          "value": "8f",
+          "count": 76861
+        },
+        {
+          "value": "ff",
+          "count": 4159
+        },
+        {
+          "value": "03",
+          "count": 4151
+        }
+      ]
+    },
+    {
+      "offset_mod": 3,
+      "unique_values": 2,
+      "entropy_bits": 0.977459,
+      "top_values_hex": [
+        {
+          "value": "00",
+          "count": 497549
+        },
+        {
+          "value": "80",
+          "count": 348400
+        }
+      ]
+    }
+  ],
+  "header_probes": {
+    "first_u32_equals_payload_len": {
+      "big_endian_matches": 0,
+      "little_endian_matches": 0,
+      "n": 294
+    },
+    "top_prefix4": [
+      {
+        "hex": "beffee00",
+        "count": 27
+      },
+      {
+        "hex": "bf018f00",
+        "count": 24
+      },
+      {
+        "hex": "0e66f980",
+        "count": 3
+      },
+      {
+        "hex": "ffe07000",
+        "count": 2
+      },
+      {
+        "hex": "0e673180",
+        "count": 2
+      },
+      {
+        "hex": "0e671580",
+        "count": 2
+      },
+      {
+        "hex": "0e670d00",
+        "count": 2
+      },
+      {
+        "hex": "0e671600",
+        "count": 2
+      }
+    ],
+    "top_prefix8": [
+      {
+        "hex": "beffee00beffee00",
+        "count": 27
+      },
+      {
+        "hex": "bf018f00bf018f00",
+        "count": 24
+      },
+      {
+        "hex": "0e60fb800e610980",
+        "count": 2
+      },
+      {
+        "hex": "0b6c69800b6c2d00",
+        "count": 1
+      },
+      {
+        "hex": "0b9293000b927300",
+        "count": 1
+      },
+      {
+        "hex": "0a60fc000a60b900",
+        "count": 1
+      },
+      {
+        "hex": "06e3c68006e38080",
+        "count": 1
+      },
+      {
+        "hex": "05ea550005ea3180",
+        "count": 1
+      }
+    ],
+    "fully_constant_4byte_payloads": 51,
+    "interpretation": "No per-payload length header is visible. Repeated prefixes include flat constant fills, not unique start magic."
+  },
+  "channel_stride_probe_shift7": {
+    "method": "BE u32>>7 abs-delta medians at lags 1..16 on capped active-burst words",
+    "lags": {
+      "1": {
+        "median": 35.0,
+        "p90": 106.0
+      },
+      "2": {
+        "median": 37.0,
+        "p90": 120.0
+      },
+      "3": {
+        "median": 38.0,
+        "p90": 135.0
+      },
+      "4": {
+        "median": 39.0,
+        "p90": 150.0
+      },
+      "5": {
+        "median": 40.0,
+        "p90": 166.0
+      },
+      "6": {
+        "median": 42.0,
+        "p90": 186.0
+      },
+      "7": {
+        "median": 43.0,
+        "p90": 209.0
+      },
+      "8": {
+        "median": 44.0,
+        "p90": 234.0
+      },
+      "9": {
+        "median": 44.0,
+        "p90": 262.0
+      },
+      "10": {
+        "median": 45.0,
+        "p90": 289.0
+      },
+      "11": {
+        "median": 45.0,
+        "p90": 320.0
+      },
+      "12": {
+        "median": 46.0,
+        "p90": 349.0
+      },
+      "13": {
+        "median": 46.0,
+        "p90": 380.0
+      },
+      "14": {
+        "median": 47.0,
+        "p90": 411.0
+      },
+      "15": {
+        "median": 47.0,
+        "p90": 443.0
+      },
+      "16": {
+        "median": 48.0,
+        "p90": 473.3
+      }
+    },
+    "result": "Lag 1 is smoothest among 1..16 in this capture; no round-robin minimum at 2 or 4 is required by the data."
+  },
+  "hypotheses_ranked": [
+    {
+      "id": "P1_BE32_SHIFT7_SCALAR",
+      "statement": "EP84 is a headerless stream of big-endian 32-bit words with seven low zero bits (structural >>7 values); channel interleave 1.",
+      "decoder": "be32_shift7",
+      "width_bits": 32,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 82.0,
+      "confidence": "candidate",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 35.0,
+        "interior_abs_delta_p90": 107.0,
+        "boundary_abs_delta_median": 87.0,
+        "lag_abs_delta_medians": {
+          "1": 35.0,
+          "2": 37.0,
+          "4": 40.0
+        },
+        "byte3_00_or_80_ratio": 1.0,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": 1,
+        "value_max_sampled": 33554429
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-1 abs-delta median=35.000",
+        "active-boundary abs-delta median=87.000",
+        "byte3 in {0x00,0x80} fraction=1.000000"
+      ],
+      "counterevidence": []
+    },
+    {
+      "id": "P2_BE24_PLUS_AUXBIT",
+      "statement": "Each 4-byte slot holds a big-endian 24-bit value in bytes 0..2 plus an auxiliary bit at byte3 bit7.",
+      "decoder": "be24_plus_aux",
+      "width_bits": 32,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 79.96,
+      "confidence": "candidate",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 17.0,
+        "interior_abs_delta_p90": 54.0,
+        "boundary_abs_delta_median": 44.0,
+        "lag_abs_delta_medians": {
+          "1": 17.0,
+          "2": 18.0,
+          "4": 20.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": 0.0,
+        "value_count_sampled": 300915,
+        "value_min_sampled": 0,
+        "value_max_sampled": 16777214
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-1 abs-delta median=17.000",
+        "active-boundary abs-delta median=44.000",
+        "aux-bit flip rate (sampled)=0.0000"
+      ],
+      "counterevidence": []
+    },
+    {
+      "id": "P_RAW_32_BE_S",
+      "statement": "Raw 32-bit BE signed words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 32,
+      "endian": "be",
+      "signed": true,
+      "channel_interleave": 1,
+      "score": 67.96,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 4480.0,
+        "interior_abs_delta_p90": 13696.0,
+        "boundary_abs_delta_median": 11136.0,
+        "lag_abs_delta_medians": {
+          "1": 4480.0,
+          "2": 4736.0,
+          "4": 5120.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": -1090523648,
+        "value_max_sampled": 241656576
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-1 abs-delta median=4480.000",
+        "active-boundary abs-delta median=11136.000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.12"
+      ]
+    },
+    {
+      "id": "P_RAW_32_BE_U",
+      "statement": "Raw 32-bit BE unsigned words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 32,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 67.96,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 4480.0,
+        "interior_abs_delta_p90": 13696.0,
+        "boundary_abs_delta_median": 11136.0,
+        "lag_abs_delta_medians": {
+          "1": 4480.0,
+          "2": 4736.0,
+          "4": 5120.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": 128,
+        "value_max_sampled": 4294966912
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-1 abs-delta median=4480.000",
+        "active-boundary abs-delta median=11136.000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.12"
+      ]
+    },
+    {
+      "id": "P1_BE32_SHIFT7_INTERLEAVE_2",
+      "statement": "Same as P1 but round-robin interleave 2.",
+      "decoder": "be32_shift7",
+      "width_bits": 32,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 2,
+      "score": 57.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 37.0,
+        "interior_abs_delta_p90": 122.0,
+        "boundary_abs_delta_median": 87.0,
+        "lag_abs_delta_medians": {
+          "1": 35.0,
+          "2": 37.0,
+          "4": 40.0
+        },
+        "byte3_00_or_80_ratio": 1.0,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": 1,
+        "value_max_sampled": 33554429
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-2 abs-delta median=37.000",
+        "active-boundary abs-delta median=87.000",
+        "byte3 in {0x00,0x80} fraction=1.000000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.15"
+      ]
+    },
+    {
+      "id": "P1_BE32_SHIFT7_INTERLEAVE_4",
+      "statement": "Same as P1 but round-robin interleave 4.",
+      "decoder": "be32_shift7",
+      "width_bits": 32,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 4,
+      "score": 57.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 40.0,
+        "interior_abs_delta_p90": 154.0,
+        "boundary_abs_delta_median": 87.0,
+        "lag_abs_delta_medians": {
+          "1": 35.0,
+          "2": 37.0,
+          "4": 40.0
+        },
+        "byte3_00_or_80_ratio": 1.0,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": 1,
+        "value_max_sampled": 33554429
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-4 abs-delta median=40.000",
+        "active-boundary abs-delta median=87.000",
+        "byte3 in {0x00,0x80} fraction=1.000000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.15"
+      ]
+    },
+    {
+      "id": "P_RAW_16_BE_S",
+      "statement": "Raw 16-bit BE signed words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 16,
+      "endian": "be",
+      "signed": true,
+      "channel_interleave": 1,
+      "score": 46.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 12289.0,
+        "interior_abs_delta_p90": 28038.2,
+        "boundary_abs_delta_median": 12289.0,
+        "lag_abs_delta_medians": {
+          "1": 12289.0,
+          "2": 0.0,
+          "4": 0.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 601830,
+        "value_min_sampled": -32768,
+        "value_max_sampled": 32640
+      },
+      "support": [
+        "payload lengths divisible by 2: 294/294",
+        "interior lag-1 abs-delta median=12289.000",
+        "active-boundary abs-delta median=12289.000"
+      ],
+      "counterevidence": []
+    },
+    {
+      "id": "P_RAW_16_BE_U",
+      "statement": "Raw 16-bit BE unsigned words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 16,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 42.04,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 26271.0,
+        "interior_abs_delta_p90": 57541.0,
+        "boundary_abs_delta_median": 22559.0,
+        "lag_abs_delta_medians": {
+          "1": 26271.0,
+          "2": 0.0,
+          "4": 0.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 601830,
+        "value_min_sampled": 0,
+        "value_max_sampled": 65535
+      },
+      "support": [
+        "payload lengths divisible by 2: 294/294",
+        "interior lag-1 abs-delta median=26271.000",
+        "active-boundary abs-delta median=22559.000"
+      ],
+      "counterevidence": []
+    },
+    {
+      "id": "P_RAW_32_LE_U",
+      "statement": "Raw 32-bit LE unsigned words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 32,
+      "endian": "le",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 32.33,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 4063232.0,
+        "interior_abs_delta_p90": 2149187584.0,
+        "boundary_abs_delta_median": 10413312.0,
+        "lag_abs_delta_medians": {
+          "1": 4063232.0,
+          "2": 5111808.0,
+          "4": 6291200.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": 512,
+        "value_max_sampled": 2164260361
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-1 abs-delta median=4063232.000",
+        "active-boundary abs-delta median=10413312.000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.45",
+        "BE byte3 0x00/0x80 lane signature conflicts with LE word decode"
+      ]
+    },
+    {
+      "id": "P_RAW_32_LE_S",
+      "statement": "Raw 32-bit LE signed words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 32,
+      "endian": "le",
+      "signed": true,
+      "channel_interleave": 1,
+      "score": 32.31,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 4063232.0,
+        "interior_abs_delta_p90": 2149253120.0,
+        "boundary_abs_delta_median": 10413312.0,
+        "lag_abs_delta_medians": {
+          "1": 4063232.0,
+          "2": 5111808.0,
+          "4": 6291200.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 300915,
+        "value_min_sampled": -2147483648,
+        "value_max_sampled": 16776959
+      },
+      "support": [
+        "payload lengths divisible by 4: 294/294",
+        "interior lag-1 abs-delta median=4063232.000",
+        "active-boundary abs-delta median=10413312.000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.45",
+        "BE byte3 0x00/0x80 lane signature conflicts with LE word decode"
+      ]
+    },
+    {
+      "id": "P_RAW_16_LE_U",
+      "statement": "Raw 16-bit LE unsigned words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 16,
+      "endian": "le",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 0.98,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 24723.0,
+        "interior_abs_delta_p90": 63232.0,
+        "boundary_abs_delta_median": 24704.0,
+        "lag_abs_delta_medians": {
+          "1": 24723.0,
+          "2": 0.0,
+          "4": 0.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 601830,
+        "value_min_sampled": 0,
+        "value_max_sampled": 65535
+      },
+      "support": [
+        "payload lengths divisible by 2: 294/294",
+        "interior lag-1 abs-delta median=24723.000",
+        "active-boundary abs-delta median=24704.000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.45",
+        "BE byte3 0x00/0x80 lane signature conflicts with LE word decode"
+      ]
+    },
+    {
+      "id": "P_RAW_16_LE_S",
+      "statement": "Raw 16-bit LE signed words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 16,
+      "endian": "le",
+      "signed": true,
+      "channel_interleave": 1,
+      "score": 0.96,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 1.0,
+        "interior_abs_delta_median": 24711.0,
+        "interior_abs_delta_p90": 57523.0,
+        "boundary_abs_delta_median": 24750.0,
+        "lag_abs_delta_medians": {
+          "1": 24711.0,
+          "2": 0.0,
+          "4": 0.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 601830,
+        "value_min_sampled": -32768,
+        "value_max_sampled": 32523
+      },
+      "support": [
+        "payload lengths divisible by 2: 294/294",
+        "interior lag-1 abs-delta median=24711.000",
+        "active-boundary abs-delta median=24750.000"
+      ],
+      "counterevidence": [
+        "structural penalty applied=0.45",
+        "BE byte3 0x00/0x80 lane signature conflicts with LE word decode"
+      ]
+    },
+    {
+      "id": "P_RAW_24_BE_S",
+      "statement": "Raw 24-bit BE signed words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 24,
+      "endian": "be",
+      "signed": true,
+      "channel_interleave": 1,
+      "score": 0.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 0.333333,
+        "interior_abs_delta_median": 4829055.0,
+        "interior_abs_delta_p90": 9327492.0,
+        "boundary_abs_delta_median": 44.0,
+        "lag_abs_delta_medians": {
+          "1": 4829055.0,
+          "2": 4186334.0,
+          "4": 1024.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 401122,
+        "value_min_sampled": -8388608,
+        "value_max_sampled": 8388096
+      },
+      "support": [
+        "interior lag-1 abs-delta median=4829055.000",
+        "active-boundary abs-delta median=44.000"
+      ],
+      "counterevidence": [
+        "payload length divisibility by 3: 98/294",
+        "structural penalty applied=0.60"
+      ]
+    },
+    {
+      "id": "P_RAW_24_BE_U",
+      "statement": "Raw 24-bit BE unsigned words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 24,
+      "endian": "be",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 0.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 0.333333,
+        "interior_abs_delta_median": 5884079.0,
+        "interior_abs_delta_p90": 12644781.0,
+        "boundary_abs_delta_median": 44.0,
+        "lag_abs_delta_medians": {
+          "1": 5884079.0,
+          "2": 6378271.0,
+          "4": 1024.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 401122,
+        "value_min_sampled": 0,
+        "value_max_sampled": 16777209
+      },
+      "support": [
+        "interior lag-1 abs-delta median=5884079.000",
+        "active-boundary abs-delta median=44.000"
+      ],
+      "counterevidence": [
+        "payload length divisibility by 3: 98/294",
+        "structural penalty applied=0.60"
+      ]
+    },
+    {
+      "id": "P_RAW_24_LE_S",
+      "statement": "Raw 24-bit LE signed words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 24,
+      "endian": "le",
+      "signed": true,
+      "channel_interleave": 1,
+      "score": 0.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 0.333333,
+        "interior_abs_delta_median": 4841983.0,
+        "interior_abs_delta_p90": 9297096.0,
+        "boundary_abs_delta_median": 2031617.0,
+        "lag_abs_delta_medians": {
+          "1": 4841983.0,
+          "2": 4213759.0,
+          "4": 8192.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 401122,
+        "value_min_sampled": -8388608,
+        "value_max_sampled": 8388095
+      },
+      "support": [
+        "interior lag-1 abs-delta median=4841983.000",
+        "active-boundary abs-delta median=2031617.000"
+      ],
+      "counterevidence": [
+        "payload length divisibility by 3: 98/294",
+        "structural penalty applied=1.05",
+        "BE byte3 0x00/0x80 lane signature conflicts with LE word decode"
+      ]
+    },
+    {
+      "id": "P_RAW_24_LE_U",
+      "statement": "Raw 24-bit LE unsigned words, interleave 1.",
+      "decoder": "raw",
+      "width_bits": 24,
+      "endian": "le",
+      "signed": false,
+      "channel_interleave": 1,
+      "score": 0.0,
+      "confidence": "hypothesis",
+      "metrics": {
+        "payload_divisible_ratio": 0.333333,
+        "interior_abs_delta_median": 5902874.0,
+        "interior_abs_delta_p90": 12654105.0,
+        "boundary_abs_delta_median": 2228224.0,
+        "lag_abs_delta_medians": {
+          "1": 5902874.0,
+          "2": 6332704.0,
+          "4": 8192.0
+        },
+        "byte3_00_or_80_ratio": null,
+        "aux_bit_flip_rate_sampled": null,
+        "value_count_sampled": 401122,
+        "value_min_sampled": 0,
+        "value_max_sampled": 16777088
+      },
+      "support": [
+        "interior lag-1 abs-delta median=5902874.000",
+        "active-boundary abs-delta median=2228224.000"
+      ],
+      "counterevidence": [
+        "payload length divisibility by 3: 98/294",
+        "structural penalty applied=1.05",
+        "BE byte3 0x00/0x80 lane signature conflicts with LE word decode"
+      ]
+    }
+  ],
+  "top_hypothesis": {
+    "id": "P1_BE32_SHIFT7_SCALAR",
+    "score": 82.0,
+    "confidence": "candidate",
+    "statement": "EP84 is a headerless stream of big-endian 32-bit words with seven low zero bits (structural >>7 values); channel interleave 1."
+  },
+  "sample_rate_estimates": {
+    "method": "active bursts (n>=2, gap>0.2s split); fs = sustained_bytes_per_s / (bytes_per_word * channels)",
+    "packing_basis_id": "P1_BE32_SHIFT7_SCALAR",
+    "active_burst_count": 10,
+    "aggregate_sustained_bytes_per_s": 216347.926,
+    "candidates": [
+      {
+        "channels_assumed": 1,
+        "bytes_per_word": 4,
+        "sustained_bytes_per_s": 216347.926,
+        "words_per_s": 54086.982,
+        "fs_hz_estimate": 54086.982,
+        "note": "throughput envelope only; not a confirmed device sample rate"
+      },
+      {
+        "channels_assumed": 2,
+        "bytes_per_word": 4,
+        "sustained_bytes_per_s": 216347.926,
+        "words_per_s": 54086.982,
+        "fs_hz_estimate": 27043.491,
+        "note": "throughput envelope only; not a confirmed device sample rate"
+      },
+      {
+        "channels_assumed": 4,
+        "bytes_per_word": 4,
+        "sustained_bytes_per_s": 216347.926,
+        "words_per_s": 54086.982,
+        "fs_hz_estimate": 13521.745,
+        "note": "throughput envelope only; not a confirmed device sample rate"
+      }
+    ],
+    "per_burst": [
+      {
+        "burst_index": 0,
+        "t0": 34.092482,
+        "duration_s": 2.192424,
+        "bytes": 466276,
+        "packets": 41,
+        "bytes_per_s": 212676.015,
+        "words_per_s_4B": 53169.004
+      },
+      {
+        "burst_index": 1,
+        "t0": 38.99799,
+        "duration_s": 2.318552,
+        "bytes": 492084,
+        "packets": 43,
+        "bytes_per_s": 212237.638,
+        "words_per_s_4B": 53059.409
+      },
+      {
+        "burst_index": 2,
+        "t0": 44.034047,
+        "duration_s": 1.653413,
+        "bytes": 356052,
+        "packets": 31,
+        "bytes_per_s": 215343.656,
+        "words_per_s_4B": 53835.914
+      },
+      {
+        "burst_index": 3,
+        "t0": 48.034944,
+        "duration_s": 1.343527,
+        "bytes": 292616,
+        "packets": 25,
+        "bytes_per_s": 217796.888,
+        "words_per_s_4B": 54449.222
+      },
+      {
+        "burst_index": 4,
+        "t0": 56.100804,
+        "duration_s": 2.168626,
+        "bytes": 461420,
+        "packets": 41,
+        "bytes_per_s": 212770.667,
+        "words_per_s_4B": 53192.667
+      },
+      {
+        "burst_index": 5,
+        "t0": 62.075416,
+        "duration_s": 1.125414,
+        "bytes": 248360,
+        "packets": 23,
+        "bytes_per_s": 220683.233,
+        "words_per_s_4B": 55170.808
+      },
+      {
+        "burst_index": 6,
+        "t0": 66.362886,
+        "duration_s": 0.919198,
+        "bytes": 205428,
+        "packets": 18,
+        "bytes_per_s": 223486.126,
+        "words_per_s_4B": 55871.531
+      },
+      {
+        "burst_index": 7,
+        "t0": 69.537527,
+        "duration_s": 1.114939,
+        "bytes": 247564,
+        "packets": 19,
+        "bytes_per_s": 222042.641,
+        "words_per_s_4B": 55510.66
+      },
+      {
+        "burst_index": 8,
+        "t0": 73.2977,
+        "duration_s": 1.357176,
+        "bytes": 298912,
+        "packets": 24,
+        "bytes_per_s": 220245.569,
+        "words_per_s_4B": 55061.392
+      },
+      {
+        "burst_index": 9,
+        "t0": 76.856711,
+        "duration_s": 1.373305,
+        "bytes": 299084,
+        "packets": 27,
+        "bytes_per_s": 217784.105,
+        "words_per_s_4B": 54446.026
+      }
+    ],
+    "confidence": "hypothesis"
+  },
+  "blocks_full_restore": [
+    "No known-stimulus capture to validate scale, offset, signedness, or units",
+    "Byte3 bit7 meaning (aux flag vs numeric LSB) not separable from passive data",
+    "Channel count / mapping not identifiable without single-channel stimulus",
+    "Opcode semantics for stream arm/config remain unlabeled",
+    "Host-requested fs not present in this capture metadata"
+  ],
+  "related_manifests": [
+    "manifests/usb_sample_packing_hypothesis.json",
+    "manifests/usb_cmd_data_correlation.json",
+    "manifests/usb_command_taxonomy.json",
+    "manifests/usb_data_plane_hypothesis.json",
+    "manifests/usb_throughput_hypothesis.json",
+    "manifests/ep01_stream_arm_sequence.json"
+  ],
+  "confidence_policy": {
+    "confirmed": "never used by this tool",
+    "candidate": "strong repeated structural evidence in this capture",
+    "hypothesis": "plausible but needs stimulus/firmware corroboration"
+  },
+  "boundary": "Structural packing scores only. No sample semantics, channel map, or fs are confirmed.",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}
