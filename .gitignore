@@ -13,3 +13,7 @@ __pycache__/
 *.csproj.user
 *.sln.docstates
 
+
+# zero0000 research: keep docs/scripts; large extracted bin optional local
+# (mcs is source of truth; bin can be regenerated)
+zero0000-research/assets/firmware/*.bin
