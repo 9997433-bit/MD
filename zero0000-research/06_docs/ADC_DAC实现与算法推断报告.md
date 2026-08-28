@@ -14,7 +14,7 @@
 | ① 数字接口族 | ADC→FPGA：DDR LVDS（高采样率下唯一现实）；FPGA→DAC：8-bit DDR LVDS+FRAME | 器件 ✅ / 板上边沿 🔶→❓ |
 | ① 采样/更新率 | **先验** ADC≈245.76 MSPS、DACCLK≈491.52（÷2/÷1）；**未测** | ❓（先验 🔶） |
 | ① 插值 | **先验** DAC 2x（匹配上述钟比）；CONFIG1 实测未见 | ❓ |
-| ① SPI 配置 | 靶标表已备；位流无明文写表；上电谁写未知 | ❓ |
+| ① SPI 配置 | 靶标表已备；位流无明文/无 KC705 MIF；**飞线优先 R83/R88/R89/R105/R106**（照片地图） | ❓ |
 | ② 缓冲 | DDR3×2=512 MB，带宽预算支持段采/深缓冲 | 🔶 |
 | ② 抽取/NCO/FIR/FFT | **不能命名**；先验偏向形态 A（时域上传），B 未排除 | ❓ |
 | ② 软核 | 倾向无 BRAM 驻留软核（BRAM 初值极少） | 🔶 |
@@ -45,8 +45,9 @@
 
 - 判据：ADC 0x41 D7、DAC fir0/fir1、CDCE Reg0–C / LOCK  
 - 工具：`decode_spi_capture.py` + `G2_当日执行包.md`  
+- 飞线：`G2_照片探针地图.md` — 先蜂鸣 **R83/R88/R89/R105/R106**  
 - 配置归属（P1.5）：EEPROM / FPGA RTL / 主机 — 仅上电嗅探可裁决  
-- 静态否定：FMC150 E2E 明文簇无；**KC705_DDS 上游整表 MIF 连续 blob 无**（`KC705_DDS_SPI_MIF对照.md` ✅）→ 非「照抄该公开工程 BRAM 表」 
+- 静态否定：FMC150 E2E 明文簇无；**KC705_DDS 上游整表 MIF 连续 blob 无**（`KC705_DDS_SPI_MIF对照.md` ✅） 
 
 ### 2.5 固件侧配置骨架 —— ✅（仅 FPGA 自举）
 
