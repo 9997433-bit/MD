@@ -17,11 +17,12 @@ import sys
 from pathlib import Path
 
 
-def load_i16(path: Path, interleaved: bool, max_n: int) -> list[float]:
+def load_i16(path: Path, pack: str, max_n: int) -> list[float]:
+    """pack: mono | ab (Conserviss-style interleaved A,B int16 LE — take channel A)."""
     raw = path.read_bytes()
     n = len(raw) // 2
     samples = list(struct.unpack(f"<{n}h", raw[: n * 2]))
-    if interleaved:
+    if pack == "ab":
         samples = samples[0::2]
     return [float(x) for x in samples[:max_n]]
 
@@ -130,7 +131,7 @@ def self_test() -> int:
         raw += struct.pack("<h", v)
     path = Path(tempfile.mkstemp(suffix=".bin")[1])
     path.write_bytes(raw)
-    x = load_i16(path, False, n)
+    x = load_i16(path, "mono", n)
     r = analyze(x, fin, fs)
     print("self-test", r)
     ok = (
@@ -139,11 +140,20 @@ def self_test() -> int:
         and "245.76" in r["fs_family"]
         and r["heuristic"]["hint"].startswith("time-domain")
     )
+    # Conserviss-style A/B interleaved: A=sin, B=0
+    raw_ab = bytearray()
+    for i in range(n):
+        a = int(10000 * math.sin(2 * math.pi * fin * i / fs))
+        raw_ab += struct.pack("<hh", a, 0)
+    path_ab = Path(tempfile.mkstemp(suffix="_ab.bin")[1])
+    path_ab.write_bytes(raw_ab)
+    r_ab = analyze(load_i16(path_ab, "ab", n), fin, fs)
     path.unlink(missing_ok=True)
-    if not ok:
-        print("SELF-TEST FAILED", file=sys.stderr)
+    path_ab.unlink(missing_ok=True)
+    if not ok or r_ab["fin_error_at_guess"] is None or r_ab["fin_error_at_guess"] >= 0.02:
+        print("SELF-TEST FAILED", r_ab, file=sys.stderr)
         return 1
-    print("SELF-TEST OK")
+    print("SELF-TEST OK (incl. --pack ab)")
     return 0
 
 
@@ -152,7 +162,13 @@ def main() -> int:
     ap.add_argument("file", nargs="?", type=Path)
     ap.add_argument("--fin", type=float, help="injected tone Hz")
     ap.add_argument("--fs-guess", type=float, default=245.76e6)
-    ap.add_argument("--interleaved", action="store_true")
+    ap.add_argument(
+        "--pack",
+        choices=("mono", "ab"),
+        default="mono",
+        help="mono int16, or Conserviss-style interleaved A/B (use A)",
+    )
+    ap.add_argument("--interleaved", action="store_true", help="alias for --pack ab")
     ap.add_argument("--n", type=int, default=4096)
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
@@ -163,7 +179,8 @@ def main() -> int:
     if not args.file.is_file():
         print(f"missing {args.file}", file=sys.stderr)
         return 2
-    x = load_i16(args.file, args.interleaved, args.n)
+    pack = "ab" if args.interleaved else args.pack
+    x = load_i16(args.file, pack, args.n)
     if len(x) < args.n:
         print(f"need >= {args.n} samples, got {len(x)}", file=sys.stderr)
         return 1

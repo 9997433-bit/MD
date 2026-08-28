@@ -127,6 +127,7 @@
 | 从 MCS 字符串点名 FFT/DDC/NCO **算法存在** | ✅ 方法不可用 | 禁止当算法排除/肯定 |
 | 仅凭 DAC SMA 插值/Fs/n 搬移 ⇒ FPGA 内 FIR/NCO | ✅ 排除该归因 | DAC3283 片内即有（`信号链` §1.2；矩阵 §4.1b） |
 | 仅凭主机样率低 ⇒ 板上必有 FPGA 抽取 | ✅ 排除该唯一解释 | 段采亦可；须 G3 |
+| 「FMC150 血统 ⇒ 板内必有 FFT/DDC」 | ✅ 排除该归因 | Conserviss 时域 AXI + 主机 FFT（R10） |
 
 **未排除**（须 G2–G4）：运行时拼帧 SPI、EEPROM 自举、主机下发配置；形态 A/B/C；H1–H9 本体；板内 FFT/DDC/FIR 模块本身；DAC 片内 fir/mixer **是否已启用**（须 SPI）。
 
