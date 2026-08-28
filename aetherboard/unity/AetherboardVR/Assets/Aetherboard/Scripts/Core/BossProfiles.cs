@@ -26,6 +26,7 @@ namespace Aetherboard.Core
         bool IsSpread(TelegraphKind t) => false;
         bool IsStack(TelegraphKind t) => false;
         bool IsIceRing(TelegraphKind t) => false;
+        bool IsHeatLink(TelegraphKind t) => false;
     }
 
     public class EarthGuardianProfile : IBossProfile
@@ -336,6 +337,98 @@ namespace Aetherboard.Core
         public bool IsIceRing(TelegraphKind t) => t == TelegraphKind.IceRing;
     }
 
+    public class FireSovereignProfile : IBossProfile
+    {
+        public string BossId => "fire";
+
+        public BossState Create() => new()
+        {
+            BossId = BossId,
+            Name = "火灵君主",
+            Hp = 5200,
+            MaxHp = 5200,
+            Alive = true
+        };
+
+        public void UpdatePhase(BossState boss)
+        {
+            if (boss.HpRatio <= 0.4f) boss.Phase = 3;
+            else if (boss.HpRatio <= 0.7f) boss.Phase = 2;
+            else boss.Phase = 1;
+        }
+
+        public TelegraphKind PickTelegraph(BossState boss, Random rng)
+        {
+            if (boss.Phase == 1) return TelegraphKind.FlameBreath;
+            if (boss.Phase == 2) return TelegraphKind.Meteor;
+            if (boss.FuryCastTurns > 0) return TelegraphKind.Eruption;
+            if (boss.ShrinkLevel < 1) return TelegraphKind.HeatLink;
+            return TelegraphKind.Eruption;
+        }
+
+        public TelegraphPreview Preview(TelegraphKind telegraph, int boardSize, BossState boss)
+        {
+            var preview = new TelegraphPreview { Telegraph = telegraph };
+            preview.Message = telegraph switch
+            {
+                TelegraphKind.FlameBreath => "Boss 预备火息：对角线 X 路径高伤。",
+                TelegraphKind.Meteor => "Boss 预备陨石：随机落点危险区。",
+                TelegraphKind.HeatLink => "Boss 预备灼热连结：必须与友军相邻。",
+                TelegraphKind.Eruption => "Boss 读条「喷发」：2 回合内必须打断！",
+                _ => ""
+            };
+            if (telegraph == TelegraphKind.FlameBreath)
+                preview.DangerCells = BoardMath.PositionsDiagonals(BoardMath.BoardCenter(boardSize), boardSize);
+            return preview;
+        }
+
+        public (List<GridPos>, List<string>) ResolveMechanic(
+            TelegraphKind telegraph, BossState boss, int boardSize, Random rng)
+        {
+            var hazards = new List<GridPos>();
+            var logs = new List<string>();
+            switch (telegraph)
+            {
+                case TelegraphKind.FlameBreath:
+                    hazards = BoardMath.PositionsDiagonals(BoardMath.BoardCenter(boardSize), boardSize);
+                    logs.Add("火息沿对角线扫过！");
+                    break;
+                case TelegraphKind.Meteor:
+                    logs.Add("陨石砸落！");
+                    break;
+                case TelegraphKind.HeatLink:
+                    boss.ShrinkLevel += 1;
+                    logs.Add("灼热连结：孤身者受创！");
+                    break;
+                case TelegraphKind.Eruption when boss.FuryCastTurns > 0:
+                    boss.FuryCastTurns -= 1;
+                    if (boss.FuryCastTurns == 0) logs.Add("喷发发动！");
+                    break;
+            }
+            return (hazards, logs);
+        }
+
+        public int MechanicDamage(TelegraphKind telegraph) => telegraph switch
+        {
+            TelegraphKind.FlameBreath => 155,
+            TelegraphKind.Meteor => 150,
+            TelegraphKind.HeatLink => 200,
+            TelegraphKind.Eruption => 9999,
+            _ => 0
+        };
+
+        public int BasicDamage(BossState boss) => boss.Phase switch
+        {
+            1 => 115,
+            2 => 145,
+            _ => 175
+        };
+
+        public string FuryName => "喷发";
+        public string VictoryMessage => "胜利！火灵君主被击败。";
+        public bool IsHeatLink(TelegraphKind t) => t == TelegraphKind.HeatLink;
+    }
+
     public static class BossRegistry
     {
         private static readonly Dictionary<string, IBossProfile> Profiles = new()
@@ -343,6 +436,7 @@ namespace Aetherboard.Core
             ["earth"] = new EarthGuardianProfile(),
             ["wind"] = new WindSovereignProfile(),
             ["ice"] = new IceEmpressProfile(),
+            ["fire"] = new FireSovereignProfile(),
         };
 
         public static IBossProfile Get(string bossId) =>

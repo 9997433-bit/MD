@@ -81,7 +81,12 @@ class BattleEngine:
         self.profile.update_phase(self.state.boss)
         telegraph = self.profile.pick_telegraph(self.state.boss, self.rng)
         self.state.boss.telegraph = telegraph
-        if telegraph in {Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD} and self.state.boss.fury_cast_turns == 0:
+        if telegraph in {
+            Telegraph.EARTHEN_FURY,
+            Telegraph.CYCLONE,
+            Telegraph.BLIZZARD,
+            Telegraph.ERUPTION,
+        } and self.state.boss.fury_cast_turns == 0:
             self.state.boss.fury_cast_turns = 2
         self.state.pending_hazards = self._pending_mechanic_cells(telegraph)
         preview = self.profile.preview(telegraph, self.state.board_size, self.state.boss)
@@ -94,6 +99,9 @@ class BattleEngine:
         if telegraph == Telegraph.FROZEN_GROUND and self.state.pending_hazards:
             center = self.state.pending_hazards[0]
             self.state.log.add(f"[预警] 霜冻区域约在 ({center.x}, {center.y}) 附近。")
+        if telegraph == Telegraph.METEOR and self.state.pending_hazards:
+            spots = ", ".join(f"({p.x},{p.y})" for p in self.state.pending_hazards[:3])
+            self.state.log.add(f"[预警] 陨石落点约在 {spots}。")
         self.state.phase = Phase.MOVE
 
     def _pending_mechanic_cells(self, telegraph: Telegraph) -> list[Pos]:
@@ -104,6 +112,17 @@ class BattleEngine:
         if telegraph == Telegraph.FROZEN_GROUND:
             top_left = Pos(self.rng.randint(1, size - 3), self.rng.randint(1, size - 3))
             return positions_2x2(top_left, size)
+        if telegraph == Telegraph.METEOR:
+            boss = Pos(size // 2, 2)
+            picks: list[Pos] = []
+            attempts = 0
+            while len(picks) < 3 and attempts < 40:
+                attempts += 1
+                candidate = Pos(self.rng.randint(0, size - 1), self.rng.randint(0, size - 1))
+                if candidate == boss or candidate in picks:
+                    continue
+                picks.append(candidate)
+            return picks
         preview = self.profile.preview(telegraph, size, self.state.boss)
         return preview.danger_cells
 
@@ -323,6 +342,15 @@ class BattleEngine:
                 self._apply_damage_to_unit(unit, damage)
                 self.state.log.add(f"{unit.name} 未站在冰环上，受到 {damage} 伤害。")
 
+    def _resolve_heat_link(self) -> None:
+        damage = self.profile.mechanic_damage(Telegraph.HEAT_LINK)
+        living = self.living_party()
+        for unit in living:
+            if any(u.id != unit.id and unit.pos.distance(u.pos) <= 1 for u in living):
+                continue
+            self._apply_damage_to_unit(unit, damage)
+            self.state.log.add(f"{unit.name} 未能连结，受到 {damage} 伤害。")
+
     def resolve_turn(self) -> None:
         if self.state.phase != Phase.RESOLVE:
             return
@@ -336,10 +364,17 @@ class BattleEngine:
             hazards = list(self.state.pending_hazards)
         if telegraph == Telegraph.FROZEN_GROUND and self.state.pending_hazards:
             hazards = list(self.state.pending_hazards)
+        if telegraph == Telegraph.METEOR and self.state.pending_hazards:
+            hazards = list(self.state.pending_hazards)
         for entry in logs:
             self.state.log.add(entry)
 
-        if hazards and telegraph in {Telegraph.SHRINK, Telegraph.EARTHQUAKE, Telegraph.FROZEN_GROUND}:
+        if hazards and telegraph in {
+            Telegraph.SHRINK,
+            Telegraph.EARTHQUAKE,
+            Telegraph.FROZEN_GROUND,
+            Telegraph.METEOR,
+        }:
             apply_hazards(self.state.cells, hazards, self.state.board_size)
             mech_dmg = self.profile.mechanic_damage(telegraph)
             if mech_dmg > 0 and telegraph not in {Telegraph.SPREAD, Telegraph.STACK}:
@@ -356,6 +391,9 @@ class BattleEngine:
         if telegraph == Telegraph.BLIZZARD and self.state.boss.fury_cast_turns == 0:
             for unit in self.living_party():
                 self._apply_damage_to_unit(unit, self.profile.mechanic_damage(telegraph))
+        if telegraph == Telegraph.ERUPTION and self.state.boss.fury_cast_turns == 0:
+            for unit in self.living_party():
+                self._apply_damage_to_unit(unit, self.profile.mechanic_damage(telegraph))
 
         if telegraph == Telegraph.SPREAD:
             self._resolve_spread()
@@ -363,6 +401,8 @@ class BattleEngine:
             self._resolve_stack()
         elif telegraph == Telegraph.ICE_RING:
             self._resolve_ice_ring()
+        elif telegraph == Telegraph.HEAT_LINK:
+            self._resolve_heat_link()
 
         tank = next((u for u in self.living_party() if u.job.value == "knight"), None)
         if self.living_party():

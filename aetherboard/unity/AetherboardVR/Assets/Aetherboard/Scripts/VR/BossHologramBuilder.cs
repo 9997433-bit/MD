@@ -141,6 +141,14 @@ namespace Aetherboard.VR
                 spike.transform.localRotation = Quaternion.Euler(25, -20, 15);
                 _coreRenderer = body.GetComponent<Renderer>();
             }
+            else if (_bossId == "fire")
+            {
+                var body = CreatePrimitive(PrimitiveType.Sphere, _coreRoot, "FireCore",
+                    new Vector3(0.15f, 0.18f, 0.15f), Vector3.zero);
+                var flame = CreatePrimitive(PrimitiveType.Capsule, _coreRoot, "Flame",
+                    new Vector3(0.08f, 0.1f, 0.08f), new Vector3(0, 0.12f, 0));
+                _coreRenderer = body.GetComponent<Renderer>();
+            }
             else
             {
                 var body = CreatePrimitive(PrimitiveType.Sphere, _coreRoot, "EarthCore",
@@ -245,6 +253,7 @@ namespace Aetherboard.VR
         {
             "wind" => new Color(0.4f, 0.78f, 1f),
             "ice" => new Color(0.55f, 0.82f, 1f),
+            "fire" => new Color(1f, 0.38f, 0.12f),
             _ => new Color(0.92f, 0.32f, 0.12f)
         };
     }

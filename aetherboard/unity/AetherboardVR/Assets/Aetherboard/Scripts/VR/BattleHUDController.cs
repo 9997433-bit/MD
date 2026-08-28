@@ -42,7 +42,10 @@ namespace Aetherboard.VR
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("土灵 (1)", _btnW)) _director.SetBoss("earth");
             if (GUILayout.Button("风灵 (2)", _btnW)) _director.SetBoss("wind");
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
             if (GUILayout.Button("冰灵 (3)", _btnW)) _director.SetBoss("ice");
+            if (GUILayout.Button("火灵 (4)", _btnW)) _director.SetBoss("fire");
             GUILayout.EndHorizontal();
 
             if (_coop != null)
@@ -122,7 +125,7 @@ namespace Aetherboard.VR
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | H/N联机 B传输 | F5/F9存读档 | F6/F7回放 | E/A/1/2/3</size>", RichLabel());
+            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | H/N联机 B传输 | F5/F9存读档 | F6/F7回放 | E/A/1/2/3/4</size>", RichLabel());
             GUILayout.EndArea();
         }
 
@@ -157,6 +160,10 @@ namespace Aetherboard.VR
             TelegraphKind.FrozenGround => "霜冻",
             TelegraphKind.IceRing => "冰环",
             TelegraphKind.Blizzard => "暴雪",
+            TelegraphKind.FlameBreath => "火息",
+            TelegraphKind.Meteor => "陨石",
+            TelegraphKind.HeatLink => "灼热连结",
+            TelegraphKind.Eruption => "喷发",
             _ => "—"
         };
     }

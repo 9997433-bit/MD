@@ -44,12 +44,17 @@ class Telegraph(Enum):
     FROZEN_GROUND = auto()
     ICE_RING = auto()
     BLIZZARD = auto()
+    FLAME_BREATH = auto()
+    METEOR = auto()
+    HEAT_LINK = auto()
+    ERUPTION = auto()
 
 
 class BossId(Enum):
     EARTH = "earth"
     WIND = "wind"
     ICE = "ice"
+    FIRE = "fire"
 
 
 @dataclass(frozen=True)

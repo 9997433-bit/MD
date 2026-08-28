@@ -92,6 +92,14 @@ def score_position(unit: UnitState, pos: Pos, state) -> int:
             score += 40
         else:
             score -= 30
+    elif telegraph == Telegraph.FLAME_BREATH:
+        if abs(pos.x - center.x) == abs(pos.y - center.y):
+            score -= 60
+    elif telegraph == Telegraph.METEOR:
+        if any(p.x == pos.x and p.y == pos.y for p in state.pending_hazards):
+            score -= 80
+    elif telegraph == Telegraph.HEAT_LINK:
+        score -= _min_dist_to_others(unit, pos, party) * 5
     else:
         score += _min_dist_to_others(unit, pos, party)
 
@@ -99,7 +107,7 @@ def score_position(unit: UnitState, pos: Pos, state) -> int:
         score -= 1000
     if unit.job.value == "black_mage" and pos != unit.pos:
         score -= 2
-    if unit.job.value == "knight" and telegraph != Telegraph.SPREAD:
+    if unit.job.value == "knight" and telegraph not in {Telegraph.SPREAD, Telegraph.HEAT_LINK}:
         score -= pos.distance(boss) * 2
     return score
 

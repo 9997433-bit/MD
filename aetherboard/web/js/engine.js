@@ -118,6 +118,17 @@ export class BattleEngine {
       }
       return out;
     }
+    if (telegraph === Telegraph.METEOR) {
+      const picks = [];
+      let attempts = 0;
+      while (picks.length < 3 && attempts < 40) {
+        attempts += 1;
+        const c = { x: this.randInt(0, BOARD_SIZE - 1), y: this.randInt(0, BOARD_SIZE - 1) };
+        if (posEq(c, BOSS_POS) || picks.some((p) => posEq(p, c))) continue;
+        picks.push(c);
+      }
+      return picks;
+    }
     return this.profile.preview(telegraph, this.boss, []).danger;
   }
 
@@ -126,7 +137,7 @@ export class BattleEngine {
     this.updateBossPhase();
     const telegraph = this.profile.pickTelegraph(this.boss);
     this.boss.telegraph = telegraph;
-    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD].includes(telegraph) && this.boss.fury === 0) {
+    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD, Telegraph.ERUPTION].includes(telegraph) && this.boss.fury === 0) {
       this.boss.fury = 2;
     }
     this.pendingHazards = this.rollPendingHazards(telegraph);
@@ -140,6 +151,10 @@ export class BattleEngine {
     if (telegraph === Telegraph.FROZEN_GROUND && this.pendingHazards.length) {
       const c = this.pendingHazards[0];
       this.addLog(`[预警] 霜冻区域约在 (${c.x}, ${c.y}) 附近。`);
+    }
+    if (telegraph === Telegraph.METEOR && this.pendingHazards.length) {
+      const spots = this.pendingHazards.slice(0, 3).map((p) => `(${p.x},${p.y})`).join(", ");
+      this.addLog(`[预警] 陨石落点约在 ${spots}。`);
     }
     this.phase = Phase.MOVE;
   }
@@ -323,7 +338,7 @@ export class BattleEngine {
     const result = this.profile.resolve(telegraph, this.boss, this.pendingHazards, this);
     result.logs.forEach((l) => this.addLog(l));
 
-    const persist = [Telegraph.SHRINK, Telegraph.EARTHQUAKE, Telegraph.FROZEN_GROUND];
+    const persist = [Telegraph.SHRINK, Telegraph.EARTHQUAKE, Telegraph.FROZEN_GROUND, Telegraph.METEOR];
     if (result.hazards?.length && persist.includes(telegraph)) {
       this.applyHazards(result.hazards);
       if (result.dmg > 0) {
@@ -337,7 +352,7 @@ export class BattleEngine {
       });
     }
 
-    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD].includes(telegraph) && this.boss.fury === 0) {
+    if ([Telegraph.EARTHEN_FURY, Telegraph.CYCLONE, Telegraph.BLIZZARD, Telegraph.ERUPTION].includes(telegraph) && this.boss.fury === 0) {
       this.living().forEach((u) => this.hitUnit(u, result.dmg));
     }
 
@@ -345,6 +360,13 @@ export class BattleEngine {
       const center = { x: 3, y: 3 };
       this.living().forEach((u) => {
         if (dist(u.pos, center) !== 2) this.hitUnit(u, result.dmg);
+      });
+    }
+
+    if (result.heatLink) {
+      const living = this.living();
+      living.forEach((u) => {
+        if (!living.some((o) => o.id !== u.id && dist(u.pos, o.pos) <= 1)) this.hitUnit(u, result.dmg);
       });
     }
 

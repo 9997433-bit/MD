@@ -75,7 +75,7 @@ adb logcat -s Unity | grep Aetherboard
 | 8 | 联机 WS | PC Host `H`，Quest Client `N` + WS | 状态同步 |
 | 9 | 联机 NGO | PC Host `H`，Quest `N` + **NetcodeNative** | 端口 7777 同步 |
 | 10 | 音效 | 阶段切换 / 伤害 | 程序化音效播放 |
-| 11 | Boss 切换 | 左侧面板选土灵/风灵/冰灵（桌面 `1`/`2`/`3`） | Boss 名称与机制变更，重启后记住上次选择 |
+| 11 | Boss 切换 | 左侧面板选土灵/风灵/冰灵/火灵（桌面 `1`/`2`/`3`/`4`） | Boss 名称与机制变更，重启后记住上次选择 |
 
 ## 联机配置（Quest → PC Host）
 

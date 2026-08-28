@@ -63,6 +63,7 @@
 | **VR 操作提示** | ✅ | 首次启动可关闭的 cheat sheet |
 | **第三 Boss（冰灵女皇）** | ✅ | 冰枪/霜冻/冰环/暴雪 · Web/VR/C#/Python 对齐 |
 | **三 Boss 音频/VFX 抛光** | ✅ | 冰主题和弦 + 读条条配色 + Quest 验收项 #11 |
+| **第四 Boss（火灵君主）** | ✅ | 火息/陨石/灼热连结/喷发 · Web/VR/C#/Python 对齐 |
 | 在线多人传输层 | ✅ | TCP / WS / NGO 三路并行 |
 | Quest 实机验证 | 🔲 | 人工 10 项（工具链已就绪，见 QUEST_VERIFICATION.md） |
 
@@ -103,7 +104,7 @@ cd aetherboard/csharp/Aetherboard.Core.Tests && dotnet test
 
 ## 首版 VR 范围
 
-- 单人 vs 土灵守护者 / 风灵领主 / 冰灵女皇
+- 单人 vs 土灵守护者 / 风灵领主 / 冰灵女皇 / 火灵君主
 - 1 张桌台场景
 - 抓取棋子 + 技能环 + 预警高亮
 - 坐姿 / 站姿桌台高度

@@ -12,7 +12,7 @@
 | Unity VR 交互 / VFX / 音效 | ✅ |
 | 三路联机（TCP / WS / NGO） | ✅ |
 | Quest 打包 / 侧载 / 验收工具链 | ✅ |
-| **三 Boss（土/风/冰）** | ✅ v0.3.0-vr |
+| **四 Boss（土/风/冰/火）** | ✅ v0.4.0-vr |
 | Quest 实机 11 项人工验收 | 🔲 见 `docs/QUEST_VERIFICATION.md` |
 
 完整功能清单见 [`docs/VR_ROADMAP.md`](docs/VR_ROADMAP.md)。
@@ -70,7 +70,7 @@ cd aetherboard
 ## VR 功能概览
 
 - **7×7 桌台**：抓取棋子、格子吸附、技能环 VR 射线
-- **三 Boss**：土灵守护者 / 风灵领主 / 冰灵女皇，读条 VFX + 机制预警
+- **四 Boss**：土灵 / 风灵 / 冰灵 / 火灵，读条 VFX + 机制预警
 - **双人协作**：P1 铁卫/游弦，P2 白愈/黑炎
 - **联机**：Host 权威，TCP `8767` / WS `8769` / NGO `7777`
 - **美术**：Styled Prefab + FBX 导入向导 + URP 后处理
@@ -81,7 +81,7 @@ cd aetherboard
 | 键 | 功能 |
 |----|------|
 | `E` / `A` | 结束阶段 / 自动一步 |
-| `1` / `2` / `3` | 土灵 / 风灵 / 冰灵 Boss |
+| `1` / `2` / `3` / `4` | 土灵 / 风灵 / 冰灵 / 火灵 Boss |
 | `C` / `Tab` | 双人模式 / 切换玩家 |
 | `H` / `N` / `B` | Host / Client / 切换传输 |
 | `F5` / `F9` | 存档 / 读档 |

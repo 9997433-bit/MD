@@ -6,7 +6,12 @@ import random
 from dataclasses import dataclass
 from typing import Protocol
 
-from ..board import positions_at_distance, positions_in_radius, positions_2x2
+from ..board import (
+    positions_at_distance,
+    positions_diagonals,
+    positions_in_radius,
+    positions_2x2,
+)
 from ..types import BossState, Pos, Telegraph
 
 
@@ -322,14 +327,99 @@ class IceEmpressBoss:
         return "胜利！冰灵女皇被击败。"
 
 
-BOSS_PROFILES: dict[str, EarthGuardianBoss | WindSovereignBoss | IceEmpressBoss] = {
+class FireSovereignBoss:
+    boss_id = "fire"
+
+    def create(self) -> BossState:
+        return BossState(name="火灵君主", hp=5200, max_hp=5200, boss_id=self.boss_id)
+
+    def update_phase(self, boss: BossState) -> None:
+        ratio = boss.hp_ratio
+        if ratio <= 0.4:
+            boss.phase = 3
+        elif ratio <= 0.7:
+            boss.phase = 2
+        else:
+            boss.phase = 1
+
+    def pick_telegraph(self, boss: BossState, rng: random.Random) -> Telegraph:
+        if boss.phase == 1:
+            return Telegraph.FLAME_BREATH
+        if boss.phase == 2:
+            return Telegraph.METEOR
+        if boss.fury_cast_turns > 0:
+            return Telegraph.ERUPTION
+        if boss.shrink_level < 1:
+            return Telegraph.HEAT_LINK
+        return Telegraph.ERUPTION
+
+    def preview(self, telegraph: Telegraph, board_size: int, boss: BossState) -> TelegraphPreview:
+        messages = {
+            Telegraph.FLAME_BREATH: "Boss 预备火息：对角线 X 路径高伤。",
+            Telegraph.METEOR: "Boss 预备陨石：随机落点危险区。",
+            Telegraph.HEAT_LINK: "Boss 预备灼热连结：必须与友军相邻。",
+            Telegraph.ERUPTION: "Boss 读条「喷发」：2 回合内必须打断！",
+        }
+        danger: list[Pos] = []
+        if telegraph == Telegraph.FLAME_BREATH:
+            danger = positions_diagonals(_center(board_size), board_size)
+        return TelegraphPreview(telegraph, messages.get(telegraph, ""), danger)
+
+    def resolve_mechanic(
+        self,
+        telegraph: Telegraph,
+        boss: BossState,
+        board_size: int,
+        rng: random.Random,
+    ) -> tuple[list[Pos], list[str]]:
+        logs: list[str] = []
+        hazards: list[Pos] = []
+        if telegraph == Telegraph.FLAME_BREATH:
+            hazards = positions_diagonals(_center(board_size), board_size)
+            logs.append("火息沿对角线扫过！")
+        elif telegraph == Telegraph.METEOR:
+            logs.append("陨石砸落！")
+        elif telegraph == Telegraph.HEAT_LINK:
+            boss.shrink_level += 1
+            logs.append("灼热连结：孤身者受创！")
+        elif telegraph == Telegraph.ERUPTION:
+            if boss.fury_cast_turns > 0:
+                boss.fury_cast_turns -= 1
+                if boss.fury_cast_turns == 0:
+                    logs.append("喷发发动！")
+        return hazards, logs
+
+    def mechanic_damage(self, telegraph: Telegraph) -> int:
+        return {
+            Telegraph.FLAME_BREATH: 155,
+            Telegraph.METEOR: 150,
+            Telegraph.HEAT_LINK: 200,
+            Telegraph.ERUPTION: 9999,
+        }.get(telegraph, 0)
+
+    def basic_damage(self, boss: BossState) -> int:
+        return {1: 115, 2: 145, 3: 175}.get(boss.phase, 115)
+
+    def fury_name(self) -> str:
+        return "喷发"
+
+    def victory_message(self) -> str:
+        return "胜利！火灵君主被击败。"
+
+
+BOSS_PROFILES: dict[
+    str, EarthGuardianBoss | WindSovereignBoss | IceEmpressBoss | FireSovereignBoss
+] = {
     "earth": EarthGuardianBoss(),
     "wind": WindSovereignBoss(),
     "ice": IceEmpressBoss(),
+    "fire": FireSovereignBoss(),
 }
 
 
-def get_boss_profile(boss_id: str) -> EarthGuardianBoss | WindSovereignBoss | IceEmpressBoss:
+def get_boss_profile(
+    boss_id: str,
+) -> EarthGuardianBoss | WindSovereignBoss | IceEmpressBoss | FireSovereignBoss:
     return BOSS_PROFILES.get(boss_id, BOSS_PROFILES["earth"])
 
 

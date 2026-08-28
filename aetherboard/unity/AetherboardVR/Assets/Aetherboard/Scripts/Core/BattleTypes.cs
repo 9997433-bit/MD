@@ -43,7 +43,11 @@ namespace Aetherboard.Core
         IceLance,
         FrozenGround,
         IceRing,
-        Blizzard
+        Blizzard,
+        FlameBreath,
+        Meteor,
+        HeatLink,
+        Eruption
     }
 
     [Serializable]

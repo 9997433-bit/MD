@@ -61,6 +61,22 @@ class BossTests(unittest.TestCase):
         self.assertTrue(any(p.x == 3 and p.y == 3 for p in preview.danger_cells))
         self.assertFalse(any(p.x == 3 and p.y == 1 for p in preview.danger_cells))
 
+    def test_fire_phase_two_meteor(self) -> None:
+        profile = get_boss_profile("fire")
+        boss = create_boss("fire")
+        boss.hp = 3200
+        profile.update_phase(boss)
+        telegraph = profile.pick_telegraph(boss, random.Random(0))
+        self.assertEqual(telegraph, Telegraph.METEOR)
+
+    def test_fire_flame_breath_diagonals(self) -> None:
+        profile = get_boss_profile("fire")
+        boss = create_boss("fire")
+        preview = profile.preview(Telegraph.FLAME_BREATH, 7, boss)
+        self.assertTrue(any(p.x == 3 and p.y == 3 for p in preview.danger_cells))
+        self.assertTrue(any(p.x == 0 and p.y == 0 for p in preview.danger_cells))
+        self.assertFalse(any(p.x == 3 and p.y == 4 for p in preview.danger_cells))
+
 
 if __name__ == "__main__":
     unittest.main()

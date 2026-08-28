@@ -45,6 +45,10 @@ namespace Aetherboard.VR
                     TelegraphKind.FrozenGround => new Color(0.35f, 0.7f, 1f),
                     TelegraphKind.IceRing => new Color(0.6f, 0.95f, 1f),
                     TelegraphKind.Blizzard => new Color(0.75f, 0.9f, 1f),
+                    TelegraphKind.FlameBreath => new Color(1f, 0.35f, 0.1f),
+                    TelegraphKind.Meteor => new Color(1f, 0.45f, 0.15f),
+                    TelegraphKind.HeatLink => new Color(1f, 0.55f, 0.2f),
+                    TelegraphKind.Eruption => new Color(1f, 0.25f, 0.05f),
                     _ => Color.white
                 };
                 Burst(_table.GridToWorld(pos.X, pos.Y), color);

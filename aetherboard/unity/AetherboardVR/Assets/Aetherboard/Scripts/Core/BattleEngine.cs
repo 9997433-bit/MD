@@ -77,7 +77,9 @@ namespace Aetherboard.Core
             _profile.UpdatePhase(State.Boss);
             var telegraph = _profile.PickTelegraph(State.Boss, _rng);
             State.Boss.Telegraph = telegraph;
-            if (telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone or TelegraphKind.Blizzard && State.Boss.FuryCastTurns == 0)
+            if ((telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone
+                    or TelegraphKind.Blizzard or TelegraphKind.Eruption)
+                && State.Boss.FuryCastTurns == 0)
                 State.Boss.FuryCastTurns = 2;
 
             State.PendingHazards = RollPendingHazards(telegraph);
@@ -98,6 +100,11 @@ namespace Aetherboard.Core
                 var c = State.PendingHazards[0];
                 AddLog($"[预警] 霜冻区域约在 ({c.X}, {c.Y}) 附近。");
             }
+            if (telegraph == TelegraphKind.Meteor && State.PendingHazards.Count > 0)
+            {
+                var spots = string.Join(", ", State.PendingHazards.Take(3).Select(p => $"({p.X},{p.Y})"));
+                AddLog($"[预警] 陨石落点约在 {spots}。");
+            }
             State.Phase = BattlePhase.Move;
         }
 
@@ -112,6 +119,18 @@ namespace Aetherboard.Core
             {
                 var topLeft = new GridPos(_rng.Next(1, State.BoardSize - 3), _rng.Next(1, State.BoardSize - 3));
                 return BoardMath.Positions2x2(topLeft, State.BoardSize);
+            }
+            if (telegraph == TelegraphKind.Meteor)
+            {
+                var boss = BoardMath.BossPos(State.BoardSize);
+                var picks = new List<GridPos>();
+                for (var attempts = 0; picks.Count < 3 && attempts < 40; attempts++)
+                {
+                    var candidate = new GridPos(_rng.Next(0, State.BoardSize), _rng.Next(0, State.BoardSize));
+                    if (candidate.Equals(boss) || picks.Contains(candidate)) continue;
+                    picks.Add(candidate);
+                }
+                return picks;
             }
             return new List<GridPos>(_profile.Preview(telegraph, State.BoardSize, State.Boss).DangerCells);
         }
@@ -307,9 +326,12 @@ namespace Aetherboard.Core
                 hazards = new List<GridPos>(State.PendingHazards);
             if (telegraph == TelegraphKind.FrozenGround && State.PendingHazards.Count > 0)
                 hazards = new List<GridPos>(State.PendingHazards);
+            if (telegraph == TelegraphKind.Meteor && State.PendingHazards.Count > 0)
+                hazards = new List<GridPos>(State.PendingHazards);
             foreach (var entry in logs) AddLog(entry);
 
-            if (hazards.Count > 0 && telegraph is TelegraphKind.Shrink or TelegraphKind.Earthquake or TelegraphKind.FrozenGround)
+            if (hazards.Count > 0 && telegraph is (TelegraphKind.Shrink or TelegraphKind.Earthquake
+                or TelegraphKind.FrozenGround or TelegraphKind.Meteor))
             {
                 BoardMath.ApplyHazards(State.Cells, hazards);
                 var mechDmg = _profile.MechanicDamage(telegraph);
@@ -328,7 +350,9 @@ namespace Aetherboard.Core
                         HitUnit(unit, mechDmg);
             }
 
-            if (telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone or TelegraphKind.Blizzard && State.Boss.FuryCastTurns == 0)
+            if ((telegraph is TelegraphKind.EarthenFury or TelegraphKind.Cyclone
+                    or TelegraphKind.Blizzard or TelegraphKind.Eruption)
+                && State.Boss.FuryCastTurns == 0)
             {
                 var dmg = _profile.MechanicDamage(telegraph);
                 foreach (var unit in LivingParty()) HitUnit(unit, dmg);
@@ -341,6 +365,7 @@ namespace Aetherboard.Core
             }
 
             if (_profile.IsIceRing(telegraph)) ResolveIceRing();
+            if (_profile.IsHeatLink(telegraph)) ResolveHeatLink();
 
             var tank = LivingParty().FirstOrDefault(u => u.Job == JobType.Knight);
             var living = LivingParty();
@@ -430,6 +455,19 @@ namespace Aetherboard.Core
                     HitUnit(unit, dmg);
                     AddLog($"{unit.DisplayName} 未站在冰环上，受到 {dmg} 伤害。");
                 }
+            }
+        }
+
+        private void ResolveHeatLink()
+        {
+            var dmg = _profile.MechanicDamage(TelegraphKind.HeatLink);
+            var living = LivingParty();
+            foreach (var unit in living)
+            {
+                if (living.Any(u => u.Id != unit.Id && unit.Pos.Distance(u.Pos) <= 1))
+                    continue;
+                HitUnit(unit, dmg);
+                AddLog($"{unit.DisplayName} 未能连结，受到 {dmg} 伤害。");
             }
         }
 

@@ -123,6 +123,7 @@ namespace Aetherboard.VR
         {
             "wind" => new Color(0.45f, 0.75f, 1f),
             "ice" => new Color(0.55f, 0.82f, 1f),
+            "fire" => new Color(1f, 0.35f, 0.1f),
             _ => new Color(0.95f, 0.25f, 0.08f)
         };
 
@@ -139,6 +140,7 @@ namespace Aetherboard.VR
             {
                 "wind" => new Color(0.5f, 0.9f, 1f),
                 "ice" => new Color(0.65f, 0.92f, 1f),
+                "fire" => new Color(1f, 0.55f, 0.15f),
                 _ => new Color(1f, 0.85f, 0.2f)
             };
 

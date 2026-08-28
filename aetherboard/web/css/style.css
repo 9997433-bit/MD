@@ -96,6 +96,11 @@ header h1 {
   background: linear-gradient(180deg, rgba(8, 20, 48, 0.9), rgba(6, 14, 32, 0.85));
 }
 
+.fury-cast.fire {
+  border-color: #7a2a1a;
+  background: linear-gradient(180deg, rgba(48, 14, 8, 0.9), rgba(32, 10, 6, 0.85));
+}
+
 .fury-cast.casting {
   animation: fury-glow 1.6s ease-in-out infinite;
 }
@@ -113,6 +118,7 @@ header h1 {
 
 .fury-cast.wind .fury-label { color: #9edcff; }
 .fury-cast.ice .fury-label { color: #a8d8ff; }
+.fury-cast.fire .fury-label { color: #ffb199; }
 
 .fury-bar-wrap {
   background: #111822;
@@ -134,6 +140,10 @@ header h1 {
 
 .fury-cast.ice .fury-bar-fill {
   background: linear-gradient(90deg, #2a5a9a, #7ec8ff);
+}
+
+.fury-cast.fire .fury-bar-fill {
+  background: linear-gradient(90deg, #c0392b, #ff7a3a);
 }
 
 .fury-burst {

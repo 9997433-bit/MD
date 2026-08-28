@@ -41,13 +41,19 @@ export function scorePosition(unit, pos, engine) {
     if (pos.x === BOSS_POS.x || pos.y === BOSS_POS.y) score -= 60;
   } else if (telegraph === Telegraph.FROZEN_GROUND) {
     if (engine.pendingHazards?.some((p) => posEq(p, pos))) score -= 80;
-  } else if (telegraph === Telegraph.ICE_RING) {
+  }   else if (telegraph === Telegraph.ICE_RING) {
     if (dist(pos, center) === 2) score += 40;
     else score -= 30;
+  } else if (telegraph === Telegraph.FLAME_BREATH) {
+    if (Math.abs(pos.x - center.x) === Math.abs(pos.y - center.y)) score -= 60;
+  } else if (telegraph === Telegraph.METEOR) {
+    if (engine.pendingHazards?.some((p) => posEq(p, pos))) score -= 80;
+  } else if (telegraph === Telegraph.HEAT_LINK) {
+    score -= minDist(unit, pos, party) * 5;
   } else score += minDist(unit, pos, party);
 
   if (unit.job === "black_mage" && !posEq(pos, unit.pos)) score -= 2;
-  if (unit.job === "knight" && telegraph !== Telegraph.SPREAD) score -= dist(pos, BOSS_POS) * 2;
+  if (unit.job === "knight" && telegraph !== Telegraph.SPREAD && telegraph !== Telegraph.HEAT_LINK) score -= dist(pos, BOSS_POS) * 2;
   return score;
 }
 
