@@ -210,6 +210,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1 再加深：位流 ASCII/UTF-16 SPI hex 与频率字面量阴性（`位流SPI常量搜索.md` §5c）  
 - [x] G2 摩擦降低：`ocr_scope_hz.py`（示波器截图 → 候选 Hz；须人眼确认）  
 - [x] G1 再加深：R12 Conserviss 双路 DAC 核实 + R5c RHINO 计划 C（`83040002` 靶标）  
+- [x] G2 管线：`--demo-plan-c` 端到端自测 + CI `zero0000-research.yml`  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）
