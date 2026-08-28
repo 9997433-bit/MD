@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-08-28T09:34:06Z",
+  "source": {
+    "path": "phase_b/captures/usb_enum.pcapng",
+    "size_bytes": 562768,
+    "sha256": "df096a1fb7bcdc5f4c0ab85db95954af119271cb24a0e10d1a9f727507e31f53",
+    "tool": "tshark 4.2.2"
+  },
+  "device": {
+    "idVendor": "0x3923",
+    "idProduct": "0x7317",
+    "bus_id": 2,
+    "device_address": 8
+  },
+  "artifact": {
+    "path": "phase_b/analysis/fx2_ram_from_enum.bin",
+    "size_bytes": 16384,
+    "sha256": "ac3461195e2dd3fe6a436cdcae0f6cc481054923d2cd4cb1fba9d1c2299a3241",
+    "format": "flat binary mapped at address 0x0000",
+    "payload_order": "ascending wValue address",
+    "selection": "final contiguous host-to-device bRequest 0xA0 data stage, after the second CPUCS hold",
+    "selection_note": "The earlier 1284-byte 0xA0 stage overlaps addresses 0x0000-0x0503 and is later overwritten. The artifact therefore represents the final observed internal-RAM address state rather than duplicating both temporal stages.",
+    "sparse": false
+  },
+  "address_ranges": [
+    {
+      "bRequest": "0xA0",
+      "start": "0x0000",
+      "end_inclusive": "0x3FFF",
+      "end_exclusive": "0x4000",
+      "size_bytes": 16384,
+      "transfer_count": 32,
+      "frame_range": [
+        159,
+        283
+      ],
+      "coverage": "contiguous"
+    }
+  ],
+  "a0_transfer_summary": {
+    "host_to_device_transfer_count_including_cpucs": 39,
+    "host_to_device_bytes_including_cpucs": 17672,
+    "data_transfer_count_excluding_cpucs": 35,
+    "data_payload_bytes_excluding_cpucs": 17668,
+    "unique_address_coverage_bytes": 16384,
+    "temporal_overlap_bytes": 1284,
+    "stages": [
+      {
+        "name": "initial_internal_stage",
+        "start": "0x0000",
+        "end_inclusive": "0x0503",
+        "size_bytes": 1284,
+        "transfer_count": 3,
+        "frames": [
+          49,
+          53,
+          57
+        ],
+        "sha256": "8d1f79bd1755bfe4e9de9f841bb8bf9164d4fd6be5131148076d3103cbdd11f9",
+        "included_in_artifact": false,
+        "reason": "overwritten by the final contiguous stage"
+      },
+      {
+        "name": "final_internal_ram_stage",
+        "start": "0x0000",
+        "end_inclusive": "0x3FFF",
+        "size_bytes": 16384,
+        "transfer_count": 32,
+        "first_frame": 159,
+        "last_frame": 283,
+        "sha256": "ac3461195e2dd3fe6a436cdcae0f6cc481054923d2cd4cb1fba9d1c2299a3241",
+        "included_in_artifact": true
+      }
+    ]
+  },
+  "cpucs_0xE600_sequence": [
+    {
+      "frame": 47,
+      "time_relative_s": 5.756657,
+      "value": "0x01",
+      "operation": "hold CPU in reset"
+    },
+    {
+      "frame": 61,
+      "time_relative_s": 5.757475,
+      "value": "0x00",
+      "operation": "release CPU"
+    },
+    {
+      "frame": 157,
+      "time_relative_s": 6.326918,
+      "value": "0x01",
+      "operation": "hold CPU in reset"
+    },
+    {
+      "frame": 287,
+      "time_relative_s": 6.334603,
+      "value": "0x00",
+      "operation": "release CPU"
+    }
+  ],
+  "related_vendor_transfers": [
+    {
+      "bRequest": "0xA4",
+      "direction": "host-to-device",
+      "start": "0x4000",
+      "end_inclusive": "0x5C6C",
+      "size_bytes": 7277,
+      "transfer_count": 15,
+      "sha256_of_address_ordered_payloads": "01efdef82693cda36dfd2b059f30ba42231244fe99dad9cc280b0b44a4acd0ab",
+      "included_in_artifact": false,
+      "note": "Observed custom request semantics are not established."
+    },
+    {
+      "bRequest": "0xA5",
+      "direction": "host-to-device",
+      "start": "0x4000",
+      "end_inclusive": "0x4E13",
+      "size_bytes": 3604,
+      "transfer_count": 8,
+      "sha256_of_address_ordered_payloads": "7450864b96c757af319ad179f063a0e465de1542091023d7f571118a239ff843",
+      "included_in_artifact": false,
+      "note": "Observed custom request semantics are not established."
+    },
+    {
+      "bRequest": "0xB0",
+      "direction": "device-to-host",
+      "start": "0x0000",
+      "size_bytes": 2,
+      "transfer_count": 1,
+      "included_in_artifact": false,
+      "note": "Short custom status/read request; semantics are not established."
+    }
+  ],
+  "readback_verification": {
+    "write_read_pairs_checked": 58,
+    "exact_matches": 58,
+    "mismatches": 0,
+    "scope": "All non-CPUCS 0xA0, 0xA4, and 0xA5 writes have an immediately following same-request readback with identical captured bytes."
+  },
+  "confidence": {
+    "payload_extraction": "high",
+    "address_coverage": "high",
+    "fx2_ram_load_interpretation": "high",
+    "related_0xA4_0xA5_semantics": "low",
+    "basis": [
+      "Captured host-to-device setup packets contain complete payloads and explicit wValue addresses.",
+      "The selected 0xA0 stage is contiguous from 0x0000 through 0x3FFF.",
+      "All 58 observed memory write/readback pairs match byte-for-byte.",
+      "CPUCS writes at 0xE600 follow the FX2 hold/load/release convention."
+    ]
+  },
+  "warning": "This is a volatile FX2-style RAM load reconstructed from USB traffic. It is NOT eeprom.bin, is not a persistent EEPROM image, and does not replace the missing EEPROM dump.",
+  "boundary": "Only bRequest 0xA0 is assigned FX2 internal-RAM semantics here. Requests 0xA4, 0xA5, and 0xB0 are recorded as related observed traffic without claiming device-specific meanings."
+}
