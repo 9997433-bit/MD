@@ -317,11 +317,14 @@ def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
 
     lines += [
         "",
-        "## Next (human)",
+        "## Next",
         "",
-        "1. 复核 `G2_G0回填提案.md` → 写入 `G2_时钟与SPI记录.md` 与 `G0_命题基线证据表.md`",
-        "2. 改等级时附上本报告中的 sha256",
-        "3. `python3 scripts/audit_must.py --write-md` 核验 Must；未达标勿开 G3 算法定性",
+        "1. 复核 `G2_G0回填提案.md`（等级与哈希）",
+        "2. `python3 scripts/apply_g0_backfill.py` 预览 → 确认后加 `--apply`"
+        + (" --power-on-only" if False else "")
+        + " 写回 G0 / `G2_时钟与SPI记录.md`",
+        "3. `python3 scripts/audit_must.py --write-md`；P1.3/P1.4 达 ✅ 或强 🔶 → Must-1",
+        "4. 再开 G3（勿跳）",
         "",
     ]
     out_report.write_text("\n".join(lines) + "\n", encoding="utf-8")

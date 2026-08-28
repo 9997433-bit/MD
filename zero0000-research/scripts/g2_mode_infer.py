@@ -54,25 +54,26 @@ def infer_clocks(clocks: list[dict]) -> dict:
     elif dac:
         notes.append(f"DACCLK={dac} Hz 不在族内")
     # 命题要求测得 ADC 与 DAC；单侧落入族 → 强 🔶；双侧 → ✅
+    # 注意：Must-1 只接受 ✅ 或「强 🔶」，普通 🔶 不能翻 Must
     if adc and dac:
         if adc_f and dac_f:
             p13 = "✅"
         elif adc_f or dac_f:
-            p13 = "🔶"
+            p13 = "强 🔶"
             notes.append("仅一侧落入族或另一侧偏离 → 强 🔶，未满 ✅")
         else:
             p13 = "🔶"
-            notes.append("双侧测得但均偏离先验族 → 🔶（需复核探点）")
+            notes.append("双侧测得但均偏离先验族 → 🔶（需复核探点；不达 Must-1）")
         ratio = dac / adc if adc else None
         if ratio:
             notes.append(f"DACCLK/ADC ≈ {ratio:.3f}")
     elif adc or dac:
         if adc_f or dac_f:
-            p13 = "🔶"
+            p13 = "强 🔶"
             notes.append("仅测得一侧且落入族 → 强 🔶；补另一侧可冲 ✅")
         else:
             p13 = "🔶"
-            notes.append("仅测得一侧且偏离族 → 🔶")
+            notes.append("仅测得一侧且偏离族 → 🔶（不达 Must-1）")
     interp = None
     if dac and data and data > 0:
         interp = round(dac / data)
@@ -164,17 +165,23 @@ def self_test() -> int:
     s = infer_spi(checklist)
     print(json.dumps({"clocks": c, "spi": s}, ensure_ascii=False, indent=2))
     ok = c["P1.3_suggested"] == "✅" and s["P1.4_suggested"] == "✅" and c["interp_hint"] == 2
-    # single-sided clock → 强 🔶
+    # single-sided clock → 强 🔶 (Must-1 grade)
     c1 = infer_clocks([{"id": "C2", "hz": 245.76e6}])
-    if c1["P1.3_suggested"] != "🔶":
+    if c1["P1.3_suggested"] != "强 🔶":
         print("SELF-TEST FAILED single-sided", c1, file=sys.stderr)
         return 1
     # Conserviss plan B: both 245.76
-    c_b = infer_clocks([{"id": "C2", "hz": 245.76e6}, {"id": "C3", "hz": 245.76e6}, {"id": "C6", "hz": 122.88e6}])
+    c_b = infer_clocks(
+        [
+            {"id": "C2", "hz": 245.76e6},
+            {"id": "C3", "hz": 245.76e6},
+            {"id": "C6", "hz": 122.88e6},
+        ]
+    )
     if c_b["P1.3_suggested"] != "✅" or "计划B" not in c_b["H8"]:
         print("SELF-TEST FAILED plan B", c_b, file=sys.stderr)
         return 1
-    # Conserviss SPI profile → clock prior note
+    # Conserviss SPI profile → clock prior note + R11c static IDELAY
     s_c = infer_spi(
         {
             "A2_adc_0x41_lvds": True,
@@ -196,14 +203,14 @@ def self_test() -> int:
         return 1
     # RHINO-class ÷3 family must not be flagged "out of family"
     c_r = infer_clocks([{"id": "C2", "hz": 163.84e6}])
-    if c_r["P1.3_suggested"] != "🔶" or "163.84" not in c_r["H8"]:
+    if c_r["P1.3_suggested"] != "强 🔶" or "163.84" not in c_r["H8"]:
         print("SELF-TEST FAILED RHINO 163.84 family", c_r, file=sys.stderr)
         return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
     print(
-        "SELF-TEST OK (single-sided→🔶, plan B, SPI→B prior, R11c IDELAY, RHINO 163.84)"
+        "SELF-TEST OK (single-sided→强🔶, plan B, SPI→B prior, R11c IDELAY, RHINO 163.84)"
     )
     return 0
 
