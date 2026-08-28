@@ -83,18 +83,20 @@ Master-SPI 自举 ✅；前端 SPI = RTL / EEPROM / 主机 三态 ❓（仅上�
 | A′ | 段采原始 IF → 主机解调/谱 | 高（与 B/C **同级待验**） |
 | B/C | 板内 DDC/解调 → IQ/速度/位移 | 高（测振仪 + R5d/R13b） |
 | 鉴相/解缠 | CORDIC atan ± 相位解缠后上传 | 中（R13c《激光技术》2023；非本板） |
-| 板内 FFT 只传谱 | 定长 2ⁿ 幅度谱 | 中 |
+| 条纹计数 / 多流 | 极值计数→可选滤波→板内 FFT→AXI 开关 | 中（R14 Vibrometer；Red Pitaya≠本板） |
+| 板内 FFT 只传谱 | 定长 2ⁿ 幅度谱 | 中（R14 自检例亦相容） |
 
 G3 Fin 优先：`g3_tone_analyze.py --list-ldv-fins`（10→25→40→45→49→50→1→5 MHz）。  
-判读表：`G3G4` §2c/§2d；假说含 **H-鉴相/解缠**。
+判读表：`G3G4` §2c/§2d/**§2e**；假说含 **H-鉴相/解缠**、**H-条纹计数**。
 
 ### 3.3 禁止句式（Must-2）
 
-- 「测振仪 / 专利 / RHINO_CALF ⇒ 本板必有 FFT/DDC/解缠」  
+- 「测振仪 / 专利 / RHINO_CALF / Vibrometer ⇒ 本板必有 FFT/DDC/解缠/条纹计数」  
 - 「DAC SMA 插值/混频 ⇒ FPGA FIR/NCO」  
 - 「主机样率低 ⇒ 必有 FPGA 抽取」  
 - 「FMC150 血统 ⇒ 板内 FFT/DDC」  
 - 「IF/LO 25–50 MHz ⇒ CDCE 样钟」  
+- 「Red Pitaya 125 MSPS ⇒ 本板样钟」
 
 完整表：`G3G4_算法判别矩阵.md` §4.1b / §4.2。
 
@@ -116,7 +118,7 @@ G3 Fin 优先：`g3_tone_analyze.py --list-ldv-fins`（10→25→40→45→49→
 
 ## 5. 主动链路（G3）——待填
 
-`G3_ADDA闭环记录.md`；R13 优先 H-DDC / 鉴相解缠 / A′ 判别；含 G3-DIP（SW5）。
+`G3_ADDA闭环记录.md`；R13 优先 H-DDC / 鉴相解缠 / **H-条纹计数（R14）** / A′ 判别；含 G3-DIP（SW5）。
 
 ---
 
@@ -129,7 +131,7 @@ G3 Fin 优先：`g3_tone_analyze.py --list-ldv-fins`（10→25→40→45→49→
 ### 6.2 排除（静态 · 通路/归因）
 
 见矩阵 §4.2（BRAM 软核 DSP、单路 GbE 满速原始流、计划 B 无抽取直通、明文 IP 标签、FMC150/RHINO/专利/测振仪血统外推、IF 当样钟等）。  
-**未排除**：无符号硬 IP 本体；形态 A′/B/C；H1–H9 / H-鉴相解缠；片内 fir/mixer 是否已启用。
+**未排除**：无符号硬 IP 本体；形态 A′/B/C；H1–H9 / H-鉴相解缠 / H-条纹计数；片内 fir/mixer 是否已启用。
 
 ### 6.3 P2
 
