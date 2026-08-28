@@ -71,18 +71,24 @@ def infer_clocks(clocks: list[dict]) -> dict:
     if dac and data and data > 0:
         interp = round(dac / data)
         notes.append(f"DACCLK/DATACLK ≈ {dac/data:.3f} → interp hint {interp}x")
+    # H8: two FMC150-class clock plans (see G1_FMC150_VC707对照.md)
+    #   A: ADC 245.76 / DACCLK 491.52 (older verbal prior)
+    #   B: ADC 245.76 / DACCLK 245.76 + 2x interp (Conserviss hardware)
+    h8 = "未触及/弱"
+    if adc_f == "245.76e6" and dac_f == "491.52e6":
+        h8 = "支持·计划A(ADC245.76/DACCLK491.52)"
+    elif adc_f == "245.76e6" and dac_f == "245.76e6":
+        h8 = "支持·计划B(Conserviss:双路245.76+2x)"
+    elif adc_f == "122.88e6" or dac_f == "122.88e6":
+        h8 = "弱支持（见122.88；核对探点/插值）"
+    elif adc_f or dac_f:
+        h8 = "弱支持（单侧）" if not (adc and dac) else "弱支持（族内但非A/B典型比）"
+
     return {
         "P1.3_suggested": p13,
         "interp_hint": interp,
         "notes": notes,
-        "H8": (
-            "支持"
-            if adc
-            and dac
-            and adc_f in ("122.88e6", "245.76e6")
-            and dac_f == "491.52e6"
-            else ("弱支持（单侧）" if (adc_f or dac_f) and not (adc and dac) else "未触及/弱")
-        ),
+        "H8": h8,
     }
 
 
@@ -127,10 +133,15 @@ def self_test() -> int:
     if c1["P1.3_suggested"] != "🔶":
         print("SELF-TEST FAILED single-sided", c1, file=sys.stderr)
         return 1
+    # Conserviss plan B: both 245.76
+    c_b = infer_clocks([{"id": "C2", "hz": 245.76e6}, {"id": "C3", "hz": 245.76e6}, {"id": "C6", "hz": 122.88e6}])
+    if c_b["P1.3_suggested"] != "✅" or "计划B" not in c_b["H8"]:
+        print("SELF-TEST FAILED plan B", c_b, file=sys.stderr)
+        return 1
     if not ok:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. single-sided → 🔶)")
+    print("SELF-TEST OK (incl. single-sided → 🔶, Conserviss plan B)")
     return 0
 
 

@@ -76,6 +76,24 @@ CDCE_EXTERNAL = {
     0xA: 0x02FC07C,
     0xB: 0x00001C8,
 }
+# Conserviss/FMC150-VC707 hardware-validated profile (cdce72010_init_int_491_52MHz.coe)
+# Full 32-bit words including addr nibble; data28 = word >> 4.
+CDCE_CONSERVISS = {
+    0x0: 0x683C035,
+    0x1: 0x6800002,
+    0x2: 0x8380000,
+    0x3: 0x6800000,
+    0x4: 0xE980000,
+    0x5: 0x6800000,
+    0x6: 0x6800000,
+    0x7: 0x8380001,
+    0x8: 0x6800009,
+    0x9: 0x68050CC,
+    0xA: 0x05FC270,
+    0xB: 0x0000040,
+    0xC: 0x0000180,
+}
+DAC_CONSERVISS_CFG1 = 0x21  # FIR0=2x + twos
 
 
 def _as_bool(v: str) -> int:
@@ -284,6 +302,8 @@ def decode_dac(t: float, bits: list[int]) -> Frame:
         d = data_bytes[0]
         fir0, fir1 = (d >> 4) & 1, (d >> 5) & 1
         fr.notes.append(f"fir0={fir0} fir1={fir1} → interp ~{1 + fir0 + fir1*2}x(?)")
+        if d == DAC_CONSERVISS_CFG1:
+            fr.notes.append("matches Conserviss FMC150-VC707 CONFIG1 (2x+twos)")
     if rw and addr == 0x1F:
         fr.notes.append("VERSION read (D2 靶标)")
     return fr
@@ -307,8 +327,12 @@ def decode_cdce(t: float, bits: list[int]) -> Frame:
         fr.notes.append("READ command (addr field 0xE)")
     if (word & 0xFF) == 0x3F:
         fr.notes.append("!! EEPROM LOCK 0x3F — record immediately, irreversible")
-    # 比对 FMC150 两列
-    for label, table in (("internal", CDCE_INTERNAL), ("external", CDCE_EXTERNAL)):
+    # 比对 FMC150 两列 + Conserviss VC707 硬件表
+    for label, table in (
+        ("internal", CDCE_INTERNAL),
+        ("external", CDCE_EXTERNAL),
+        ("conserviss", CDCE_CONSERVISS),
+    ):
         if addr in table and table[addr] == data28:
             fr.notes.append(f"matches FMC150 {label} Reg{addr:X}")
     return fr
@@ -338,6 +362,15 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
         "EEPROM_lock_seen": any("EEPROM LOCK" in n for f in cdce for n in f.notes),
         "adc_addr_hit_count": len(adc_addrs & set(range(0x100))),
         "adc_key_addrs_hit": sorted(hex(a) for a in adc_addrs if a in ADC_KEY_ADDR),
+        "conserviss_cdce_reg_hits": sum(
+            1
+            for f in cdce
+            for n in f.notes
+            if "matches FMC150 conserviss" in n
+        ),
+        "conserviss_dac_cfg1": any(
+            "Conserviss FMC150-VC707 CONFIG1" in n for f in dac for n in f.notes
+        ),
     }
     return flags
 

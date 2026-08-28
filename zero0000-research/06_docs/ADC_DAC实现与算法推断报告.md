@@ -12,8 +12,8 @@
 |------|----------|------|
 | ① 芯片是谁 | ADC=ADS62P49，DAC=DAC3283，钟=CDCE72010+491.52 VCXO | ✅ |
 | ① 数字接口族 | ADC→FPGA：DDR LVDS（高采样率下唯一现实）；FPGA→DAC：8-bit DDR LVDS+FRAME | 器件 ✅ / 板上边沿 🔶→❓ |
-| ① 采样/更新率 | **先验** ADC≈245.76 MSPS、DACCLK≈491.52（÷2/÷1）；**未测** | ❓（先验 🔶） |
-| ① 插值 | **先验** DAC 2x（匹配上述钟比）；CONFIG1 实测未见 | ❓ |
+| ① 采样/更新率 | **双先验** A: ADC245.76/DACCLK491.52；**B(Conserviss实测)**: 双路245.76+DAC 2x→122.88 数据率；**未测** | ❓（先验 🔶） |
+| ① 插值 | 先验 DAC **2x**（A/B 皆然；CONFIG1 Conserviss=`0x21`）；实测未见 | ❓ |
 | ① SPI 配置 | 靶标表已备；位流无明文/无 KC705 MIF；**飞线优先 R83/R88/R89/R105/R106**（照片地图） | ❓ |
 | ② 缓冲 | DDR3×2=512 MB，带宽预算支持段采/深缓冲 | 🔶 |
 | ② 抽取/NCO/FIR/FFT | **不能命名**；先验偏向形态 A（时域上传），B 未排除 | ❓ |
@@ -38,16 +38,20 @@
 
 ### 2.3 时钟 —— ❓
 
-- X1=491.52 丝印 🔶；FMC150 E2E + TSW4200 双重先验支持 245.76/491.52  
-- G2-2 测 C2/C3（及可选 C6 DATACLK→插值比）  
+- X1=491.52 丝印 🔶  
+- **双先验**：  
+  - 计划 A：ADC≈245.76、DACCLK≈491.52（旧 FMC150 口头惯例）  
+  - 计划 B：ADC≈245.76、**DACCLK≈245.76**、DAC **2x**→数据率 122.88（`G1_FMC150_VC707对照.md`，Conserviss **硬件回读**）  
+- TSW4200 支持 ADC 245.76；**不得默认 DACCLK=491.52**  
+- G2-2 测 C2/C3（及 C6 DATACLK→插值比）裁决 A/B  
 
 ### 2.4 SPI 工作模式 —— ❓
 
-- 判据：ADC 0x41 D7、DAC fir0/fir1、CDCE Reg0–C / LOCK  
+- 判据：ADC 0x41 / 0x50；DAC CONFIG1（Conserviss=`0x21` 2x+twos）；CDCE 全表（注意 Reg0=`683C035` ≠ 旧 E2E `683C034`）  
 - 工具：`decode_spi_capture.py --auto-map` + `ingest_g2_inbox.py` + `G2_当日执行包.md`  
 - 飞线：`G2_照片探针地图.md` — 先蜂鸣 **R83/R88/R89/R105/R106**  
-- 配置归属（P1.5）：EEPROM / FPGA RTL / 主机 — 仅上电嗅探可裁决  
-- 静态否定：FMC150 E2E 明文簇无；**KC705_DDS 上游整表 MIF 连续 blob 无**（`KC705_DDS_SPI_MIF对照.md` ✅） 
+- 配置归属（P1.5）：EEPROM / FPGA RTL / 主机 — 仅上电嗅探可裁决；Conserviss 参考实现 = control IP 自动 SPI  
+- 静态否定：FMC150 E2E / Conserviss 整表 CDCE 明文簇无；KC705_DDS MIF 无  
 
 ### 2.5 固件侧配置骨架 —— ✅（仅 FPGA 自举）
 
