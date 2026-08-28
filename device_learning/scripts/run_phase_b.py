@@ -61,6 +61,9 @@ def main() -> int:
         run("analyze_fx2_stream_path.py")
         run("analyze_fx2_address_map.py")
         run("analyze_fx2_oracle_crosscheck.py")
+    if (CAPTURES / "usb_session.pcapng").exists():
+        run("unpack_ep84_candidate.py")
+    run("analyze_restore_crosscheck.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")

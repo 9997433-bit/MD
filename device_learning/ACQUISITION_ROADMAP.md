@@ -64,4 +64,8 @@
 
 [`DSA_REFERENCE_FUNCTION_PLAN.md`](DSA_REFERENCE_FUNCTION_PLAN.md)
 
+还原进度（启发式，非完全还原）见：
+
+[`RESTORE_PROGRESS.md`](RESTORE_PROGRESS.md)
+
 该文档只做功能规划与证据门禁，不构成厂商 SKU 等价声明。
