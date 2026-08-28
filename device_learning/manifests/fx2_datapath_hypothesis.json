@@ -1,0 +1,300 @@
+{
+  "generated_at": "2026-08-28T12:57:45.126081+00:00",
+  "status": "hypothesis",
+  "layer": "L5",
+  "plan_ref": "BINARY_RE_PLAN.md",
+  "source_note": "Volatile FX2 RAM — NOT eeprom.bin",
+  "usb_data_plane_note": "Host session uses bulk EP 0x06/0x84; FX2 side often maps EP6/EP8 — labels are public TRM names, board mapping candidate only",
+  "sfr_sites_by_label": {
+    "EP1INCFG": [
+      {
+        "at": "0x2f0e",
+        "imm": "0xe611",
+        "owner_routine": "0x2f08"
+      }
+    ],
+    "EP1OUTCFG": [
+      {
+        "at": "0x2f08",
+        "imm": "0xe610",
+        "owner_routine": "0x2f08"
+      }
+    ],
+    "EP2CS": [
+      {
+        "at": "0x0742",
+        "imm": "0xe6a0",
+        "owner_routine": "0x054c"
+      },
+      {
+        "at": "0x074c",
+        "imm": "0xe6a0",
+        "owner_routine": "0x054c"
+      },
+      {
+        "at": "0x0753",
+        "imm": "0xe6a0",
+        "owner_routine": "0x054c"
+      }
+    ],
+    "EP4CFG": [
+      {
+        "at": "0x1182",
+        "imm": "0xe613",
+        "owner_routine": "0x111c"
+      },
+      {
+        "at": "0x15fc",
+        "imm": "0xe613",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x1a6d",
+        "imm": "0xe613",
+        "owner_routine": "0x18af"
+      }
+    ],
+    "EP4CS": [
+      {
+        "at": "0x151c",
+        "imm": "0xe6a1",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x1deb",
+        "imm": "0xe6a1",
+        "owner_routine": "0x1db8"
+      }
+    ],
+    "EP6CFG": [
+      {
+        "at": "0x11f2",
+        "imm": "0xe614",
+        "owner_routine": "0x111c"
+      },
+      {
+        "at": "0x1605",
+        "imm": "0xe614",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x1f19",
+        "imm": "0xe614",
+        "owner_routine": "0x1db8"
+      },
+      {
+        "at": "0x23ad",
+        "imm": "0xe614",
+        "owner_routine": "0x2337"
+      }
+    ],
+    "EP6CS": [
+      {
+        "at": "0x148e",
+        "imm": "0xe6a2",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x14fa",
+        "imm": "0xe6a2",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x150b",
+        "imm": "0xe6a2",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x1531",
+        "imm": "0xe6a2",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x315f",
+        "imm": "0xe6a2",
+        "owner_routine": "0x314b"
+      }
+    ],
+    "FIFORESET": [
+      {
+        "at": "0x161f",
+        "imm": "0xe604",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x23dd",
+        "imm": "0xe604",
+        "owner_routine": "0x2337"
+      },
+      {
+        "at": "0x306f",
+        "imm": "0xe604",
+        "owner_routine": "0x306f"
+      }
+    ],
+    "IFCONFIG": [
+      {
+        "at": "0x2b51",
+        "imm": "0xe601",
+        "owner_routine": "0x2a7c"
+      },
+      {
+        "at": "0x2efb",
+        "imm": "0xe601",
+        "owner_routine": "0x2efb"
+      },
+      {
+        "at": "0x3076",
+        "imm": "0xe601",
+        "owner_routine": "0x3076"
+      }
+    ],
+    "PINFLAGSAB": [
+      {
+        "at": "0x115d",
+        "imm": "0xe602",
+        "owner_routine": "0x111c"
+      },
+      {
+        "at": "0x1660",
+        "imm": "0xe602",
+        "owner_routine": "0x1435"
+      },
+      {
+        "at": "0x1a48",
+        "imm": "0xe602",
+        "owner_routine": "0x18af"
+      },
+      {
+        "at": "0x1f05",
+        "imm": "0xe602",
+        "owner_routine": "0x1db8"
+      }
+    ]
+  },
+  "datapath_routine_candidates": [
+    {
+      "entry": "0x1435",
+      "labels": [
+        "EP4CFG",
+        "EP4CS",
+        "EP6CFG",
+        "EP6CS",
+        "FIFORESET",
+        "PINFLAGSAB"
+      ],
+      "hit_count": 9,
+      "score": 17
+    },
+    {
+      "entry": "0x2337",
+      "labels": [
+        "EP6CFG",
+        "FIFORESET"
+      ],
+      "hit_count": 2,
+      "score": 10
+    },
+    {
+      "entry": "0x111c",
+      "labels": [
+        "EP4CFG",
+        "EP6CFG",
+        "PINFLAGSAB"
+      ],
+      "hit_count": 3,
+      "score": 8
+    },
+    {
+      "entry": "0x1db8",
+      "labels": [
+        "EP4CS",
+        "EP6CFG",
+        "PINFLAGSAB"
+      ],
+      "hit_count": 3,
+      "score": 8
+    },
+    {
+      "entry": "0x314b",
+      "labels": [
+        "EP6CS"
+      ],
+      "hit_count": 1,
+      "score": 6
+    },
+    {
+      "entry": "0x306f",
+      "labels": [
+        "FIFORESET"
+      ],
+      "hit_count": 1,
+      "score": 4
+    },
+    {
+      "entry": "0x054c",
+      "labels": [
+        "EP2CS"
+      ],
+      "hit_count": 3,
+      "score": 3
+    },
+    {
+      "entry": "0x18af",
+      "labels": [
+        "EP4CFG",
+        "PINFLAGSAB"
+      ],
+      "hit_count": 2,
+      "score": 2
+    },
+    {
+      "entry": "0x2f08",
+      "labels": [
+        "EP1INCFG",
+        "EP1OUTCFG"
+      ],
+      "hit_count": 2,
+      "score": 2
+    },
+    {
+      "entry": "0x2a7c",
+      "labels": [
+        "IFCONFIG"
+      ],
+      "hit_count": 1,
+      "score": 1
+    },
+    {
+      "entry": "0x2efb",
+      "labels": [
+        "IFCONFIG"
+      ],
+      "hit_count": 1,
+      "score": 1
+    },
+    {
+      "entry": "0x3076",
+      "labels": [
+        "IFCONFIG"
+      ],
+      "hit_count": 1,
+      "score": 1
+    }
+  ],
+  "primary_followups_for_ghidra": [
+    "0x1435",
+    "0x2337",
+    "0x111c",
+    "0x1db8",
+    "0x314b",
+    "0x306f",
+    "0x054c",
+    "0x18af"
+  ],
+  "packing_link": "manifests/usb_sample_packing_hypothesis.json",
+  "confidence": "hypothesis",
+  "boundary": "SFR DPTR immediates suggest access sites, not proven sample packing logic",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "next_layer": "L6 deepen oracle; L4/L5 Ghidra CFG; L7 eeprom when available"
+}

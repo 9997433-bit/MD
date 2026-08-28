@@ -9,7 +9,7 @@
 | 指标 | 值 |
 |------|-----|
 | Identifier | **237** |
-| pytest | **113** 全部通过 |
+| pytest | **114** 全部通过 |
 | confirmed | 76 |
 | blocked | 75 |
 | 静态阶段 | **已关闭冻结** (`static_phase_closed.json`) |

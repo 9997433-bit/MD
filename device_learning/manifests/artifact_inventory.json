@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28T12:53:10.500956+00:00",
-  "artifact_count": 79,
-  "present_count": 79,
+  "generated_at": "2026-08-28T12:57:50.180662+00:00",
+  "artifact_count": 82,
+  "present_count": 82,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 1616625
+      "size_bytes": 1616780
     },
     {
       "path": "coverage.json",
@@ -242,6 +242,24 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 14548
+    },
+    {
+      "path": "manifests/fx2_cmd_dispatch_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 25744
+    },
+    {
+      "path": "manifests/fx2_datapath_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 5739
+    },
+    {
+      "path": "manifests/fx2_ram_routines.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 32076
     },
     {
       "path": "manifests/fx2_ram_scan.json",

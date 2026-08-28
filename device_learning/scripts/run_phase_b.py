@@ -51,6 +51,9 @@ def main() -> int:
     if (ROOT / "phase_b" / "analysis" / "fx2_ram_from_enum.bin").exists():
         run("analyze_fx2_ram_image.py")
         run("analyze_fx2_ram_xrefs.py")
+        run("analyze_fx2_ram_routines.py")
+        run("analyze_fx2_cmd_dispatch.py")
+        run("analyze_fx2_datapath.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")

@@ -21,6 +21,14 @@
 | **L6** | 抓包坐实 | 用 session 时序/常量做 oracle | 命中则升 candidate；打脸则回退 | 更新 `protocol_log` / 账本提案 |
 | **L7** | EEPROM 对齐 | 有 `eeprom.bin` 后 diff RAM vs C2 | 标明同构/差异区 | `eeprom` manifests + disasm |
 
+### 进度（脚本自动化）
+
+- L0–L2：✅ `analyze_fx2_ram_image.py` / `analyze_fx2_ram_xrefs.py`
+- L3–L5：✅ `analyze_fx2_ram_routines.py` / `analyze_fx2_cmd_dispatch.py` / `analyze_fx2_datapath.py`（假设级）
+- L6：部分（`usb_cmd_data_correlation.json`）；需 Ghidra 闭环
+- L7：❌ 缺 `eeprom.bin`
+- 笔记：`phase_b/analysis/MCU_NOTES.md`
+
 ## 里程碑目标（可验收）
 
 1. **G0 — 地图**：L0–L2 完成，任意人可用脚本复现 xref 报告。  

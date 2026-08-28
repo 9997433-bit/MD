@@ -24,13 +24,20 @@ def _refresh_phase_b_manifests() -> None:
 
 
 FW_OUT = ROOT / "phase_b" / "analysis" / "firmware.bin"
+# Keep committed / reconstructed firmware artifacts across pytest hygiene.
+ANALYSIS_KEEP = {
+    ".gitkeep",
+    "fx2_ram_from_enum.bin",
+    "MCU_NOTES.md",
+    "mcu_disasm.txt",
+}
 
 
 def restore_analysis_artifacts() -> None:
     analysis = ROOT / "phase_b" / "analysis"
     if analysis.exists():
         for path in analysis.iterdir():
-            if path.is_file() and path.name != ".gitkeep":
+            if path.is_file() and path.name not in ANALYSIS_KEEP:
                 path.unlink()
         (analysis / ".gitkeep").touch(exist_ok=True)
 
