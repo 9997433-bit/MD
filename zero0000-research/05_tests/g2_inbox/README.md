@@ -7,7 +7,13 @@ cd zero0000-research
 python3 scripts/ingest_g2_inbox.py
 ```
 
-脚本会：校验文件 →（若有 CSV）**自动列名映射**译码 → `g2_mode_infer` → 写出 `05_tests/G2_inbox_infer_report.md` 与哈希。
+脚本会：校验文件 →（若有 CSV）**自动列名映射**译码 → `g2_mode_infer` →（Conserviss 命中则挂 `decode_cdce_profile` 先验）→ 写出 `05_tests/G2_inbox_infer_report.md`、`G2_G0回填提案.md` 与哈希。
+
+端到端合成演练（**禁止**当实测）：
+
+```bash
+python3 scripts/ingest_g2_inbox.py --demo
+```
 
 ## 需要的文件名（任选存在即可跑通子集）
 

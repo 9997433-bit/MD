@@ -43,14 +43,74 @@ def main() -> int:
     ap.add_argument("--cs-adc", default=None)
     ap.add_argument("--cs-dac", default=None)
     ap.add_argument("--cs-cdce", default=None)
+    ap.add_argument(
+        "--demo",
+        action="store_true",
+        help="run Conserviss synthetic demo into _derived/demo_* (NOT for G0 backfill)",
+    )
     args = ap.parse_args()
     inbox: Path = args.inbox.resolve()
+
+    if args.demo:
+        return run_demo(inbox)
+
+    return run_ingest(inbox, args)
+
+
+def run_demo(inbox: Path) -> int:
+    """End-to-end pipeline with synthetic Conserviss + plan-B clocks. Never touches G0."""
+    demo_dir = inbox / "_derived" / "demo_inbox"
+    if demo_dir.exists():
+        for p in demo_dir.iterdir():
+            if p.is_file():
+                p.unlink()
+    demo_dir.mkdir(parents=True, exist_ok=True)
+    clocks = demo_dir / "g2_clocks.json"
+    clocks.write_text(
+        json.dumps(
+            [
+                {"id": "C2", "hz": 245760000, "note": "DEMO Conserviss plan B"},
+                {"id": "C3", "hz": 245760000, "note": "DEMO"},
+                {"id": "C6", "hz": 122880000, "note": "DEMO DATACLK"},
+            ],
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    csv_path = demo_dir / "spi_capture.conserviss_min.example.csv"
+    r = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPTS / "decode_spi_capture.py"),
+            "--write-conserviss-example",
+            str(csv_path),
+        ],
+        cwd=ROOT,
+    )
+    if r.returncode != 0:
+        return r.returncode
+    # Isolate reports under demo_dir
+    class Args:
+        sclk = mosi = cs_adc = cs_dac = cs_cdce = None
+
+    code = run_ingest(demo_dir, Args(), demo_banner=True)
+    print(
+        "DEMO DONE — outputs under g2_inbox/_derived/demo_inbox/ ; "
+        "DO NOT paste into G0 (synthetic).",
+        file=sys.stderr,
+    )
+    return code
+
+
+def run_ingest(inbox: Path, args, demo_banner: bool = False) -> int:
     inbox.mkdir(parents=True, exist_ok=True)
     out_dir = inbox / "_derived"
     out_dir.mkdir(parents=True, exist_ok=True)
+    is_default = inbox == DEFAULT_INBOX.resolve()
     out_report = (
         ROOT / "05_tests" / "G2_inbox_infer_report.md"
-        if inbox == DEFAULT_INBOX.resolve()
+        if is_default and not demo_banner
         else inbox / "G2_inbox_infer_report.md"
     )
 
@@ -58,13 +118,13 @@ def main() -> int:
     if not clocks.is_file():
         clocks = inbox / "clocks.json"
     csv_candidates = sorted(inbox.glob("*.csv")) + sorted(inbox.glob("spi*.csv"))
-    # de-dup; never treat tracked examples/ as real G2 captures
+    # de-dup; never treat tracked examples/ as real G2 captures (unless demo_inbox)
     seen = set()
     csvs = []
     for c in csv_candidates:
         if c.resolve() in seen:
             continue
-        if c.parent.name == "examples" or "example" in c.name.lower():
+        if not demo_banner and (c.parent.name == "examples" or "example" in c.name.lower()):
             continue
         seen.add(c.resolve())
         csvs.append(c)
@@ -87,8 +147,8 @@ def main() -> int:
                 "NOTE: g2_clocks.json present but all hz are null — not usable for P1.3",
                 file=sys.stderr,
             )
-        print(f"See template: {inbox / 'g2_clocks.template.json'}", file=sys.stderr)
-        print(f"Synthetic column demos: {inbox / 'examples'}/ (not auto-ingested)", file=sys.stderr)
+        print(f"See template: {DEFAULT_INBOX / 'g2_clocks.template.json'}", file=sys.stderr)
+        print(f"Synthetic demos: python3 scripts/ingest_g2_inbox.py --demo", file=sys.stderr)
         return 2
 
     lines = [
@@ -96,10 +156,13 @@ def main() -> int:
         "",
         f"> generated: {datetime.now(timezone.utc).isoformat()}",
         f"> inbox: `{rel(inbox)}`",
-        "",
-        "## Input hashes",
-        "",
     ]
+    if demo_banner:
+        lines += [
+            "",
+            "> **DEMO / SYNTHETIC** — Conserviss-min + plan-B clocks. **禁止**回填 G0 / Must。",
+        ]
+    lines += ["", "## Input hashes", ""]
     infer_cmd = [sys.executable, str(SCRIPTS / "g2_mode_infer.py")]
     spi_json = None
 
@@ -125,15 +188,15 @@ def main() -> int:
             "--json",
             str(spi_json),
         ]
-        if args.sclk:
+        if getattr(args, "sclk", None):
             cmd += ["--sclk", args.sclk]
-        if args.mosi:
+        if getattr(args, "mosi", None):
             cmd += ["--mosi", args.mosi]
-        if args.cs_adc:
+        if getattr(args, "cs_adc", None):
             cmd += ["--cs-adc", args.cs_adc]
-        if args.cs_dac:
+        if getattr(args, "cs_dac", None):
             cmd += ["--cs-dac", args.cs_dac]
-        if args.cs_cdce:
+        if getattr(args, "cs_cdce", None):
             cmd += ["--cs-cdce", args.cs_cdce]
         print("RUN", " ".join(cmd))
         r = subprocess.run(cmd, cwd=ROOT)
@@ -175,6 +238,34 @@ def main() -> int:
                         spi_blob = json.loads(spi_json.read_text(encoding="utf-8"))
                         if "checklist" in spi_blob:
                             infer_blob["checklist"] = spi_blob["checklist"]
+                            # Attach CDCE Table-8 prior when Conserviss (or named) profile wins
+                            best = spi_blob["checklist"].get("best_cdce_profile")
+                            if best in ("conserviss", "e2e_internal", "e2e_external"):
+                                profile_arg = (
+                                    "conserviss"
+                                    if best == "conserviss"
+                                    else (
+                                        "e2e_internal"
+                                        if best == "e2e_internal"
+                                        else "e2e_external"
+                                    )
+                                )
+                                cp = subprocess.run(
+                                    [
+                                        sys.executable,
+                                        str(SCRIPTS / "decode_cdce_profile.py"),
+                                        "--profile",
+                                        profile_arg,
+                                    ],
+                                    cwd=ROOT,
+                                    capture_output=True,
+                                    text=True,
+                                )
+                                if cp.returncode == 0 and cp.stdout:
+                                    try:
+                                        infer_blob["cdce_profile_prior"] = json.loads(cp.stdout)
+                                    except json.JSONDecodeError:
+                                        pass
                     except (json.JSONDecodeError, OSError):
                         pass
                 infer_json_path.write_text(
@@ -184,10 +275,19 @@ def main() -> int:
                 hashes[rel(infer_json_path)] = sha256(infer_json_path)
 
     lines.append("```")
+    if infer_blob.get("cdce_profile_prior"):
+        lines += [
+            "",
+            "## CDCE profile prior (Table-8)",
+            "",
+            "```json",
+            json.dumps(infer_blob["cdce_profile_prior"], ensure_ascii=False, indent=2),
+            "```",
+        ]
 
     proposal = (
         ROOT / "05_tests" / "G2_G0回填提案.md"
-        if inbox == DEFAULT_INBOX.resolve()
+        if is_default and not demo_banner
         else inbox / "G2_G0回填提案.md"
     )
     if infer_blob:
@@ -212,6 +312,8 @@ def main() -> int:
             f"- `{rel(proposal)}`（须人工复核后才改 G0）",
             f"- `{rel(infer_json_path)}` sha256=`{hashes.get(rel(infer_json_path), '')}`",
         ]
+        if demo_banner:
+            lines.append("- **DEMO：勿粘贴进 G0**")
 
     lines += [
         "",

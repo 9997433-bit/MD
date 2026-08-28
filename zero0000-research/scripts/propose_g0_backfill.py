@@ -46,6 +46,8 @@ def main() -> int:
     profile = checklist.get("best_cdce_profile", "—")
     ratio = checklist.get("conserviss_cdce_match_ratio", "—")
     dac_cfg = checklist.get("dac_cfg1_value", "—")
+    dac_pre = checklist.get("conserviss_dac_pre_sync_ratio", "—")
+    cdce_prior = infer.get("cdce_profile_prior") or {}
 
     lines = [
         "# G2 → G0 回填提案（自动生成 · 须人工复核）",
@@ -61,7 +63,24 @@ def main() -> int:
         f"| P1.4 | {p14} | {'; '.join(spi.get('notes') or []) or '（无 SPI）'} |",
         f"| P1.5 | {p15} | 仅上电实验标记={args.power_on_only} |",
         f"| H8 | {clocks.get('H8', '—')} | interp_hint={clocks.get('interp_hint')} |",
-        f"| CDCE 剖面 | {profile} | Conserviss match_ratio={ratio}; DAC CONFIG1={dac_cfg} |",
+        f"| CDCE 剖面 | {profile} | Conserviss match_ratio={ratio}; DAC CONFIG1={dac_cfg}; pre_sync_ratio={dac_pre} |",
+        "",
+    ]
+    if cdce_prior:
+        lines += [
+            "## CDCE 分频先验（decode_cdce_profile · 非实测）",
+            "",
+            f"- profile=`{cdce_prior.get('profile')}` plan_hint=`{cdce_prior.get('plan_hint')}`",
+            f"- G2 先验: `{json.dumps(cdce_prior.get('g2_prior') or {}, ensure_ascii=False)}`",
+            "- **仅当**实测 SPI 剖面匹配且布线同构时，用此先验对表 C2/C3；**不得**单独升 P1.3",
+            "",
+        ]
+    lines += [
+        "## Must-1 缺口速查",
+        "",
+        f"- P1.3 仍需实测钟：{'已有建议 ' + str(p13) if p13 not in ('❓', None) else '**缺** g2_clocks.json'}",
+        f"- P1.4 仍需 SPI：{'已有建议 ' + str(p14) if p14 not in ('❓', None) else '**缺** spi_capture.csv'}",
+        "- P1.1/P1.2：静态 🔶；边沿/蜂鸣另计",
         "",
         "## 输入哈希",
         "",

@@ -518,10 +518,18 @@ def run_decode(rows: list[dict], cs_active_low: bool) -> list[Frame]:
 
 def synthesize_self_test_csv(path: Path) -> None:
     """生成最小合成波形：ADC 写 0x4180、DAC 写 CONFIG1=0x11、CDCE Reg0 internal。"""
+    _write_spi_csv(path, _synth_frames_e2e_min())
+
+
+def synthesize_conserviss_min_csv(path: Path) -> None:
+    """Conserviss 最小足迹：ADC 4180/5004、DAC CFG1=0x21、CDCE Reg0+2+A。"""
+    _write_spi_csv(path, _synth_frames_conserviss_min())
+
+
+def _write_spi_csv(path: Path, frame_specs: list[tuple[list[int], int, bool]]) -> None:
     rows: list[list[str]] = [["time", "SCLK", "MOSI", "SEN", "SDENB", "SPI_LE"]]
 
     def emit_frame(t0: float, bits_order: list[int], cs_col: int, sample_falling: bool) -> float:
-        # cs_col: 3=SEN, 4=SDENB, 5=SPI_LE；空闲片选=1（高）
         t = t0
 
         def push(clk: int, mos: int, cs_asserted: bool) -> None:
@@ -532,12 +540,10 @@ def synthesize_self_test_csv(path: Path) -> None:
             rows.append(row)
             t += 1e-8
 
-        # 断言片选；空闲时钟：下降沿采样用高、上升沿采样用低
         idle_clk = 1 if sample_falling else 0
         push(idle_clk, 0, True)
         for b in bits_order:
             if sample_falling:
-                # 置数 → 拉低采样 → 拉高准备下一位
                 push(1, b, True)
                 push(0, b, True)
                 push(1, b, True)
@@ -549,17 +555,40 @@ def synthesize_self_test_csv(path: Path) -> None:
         return t + 5e-8
 
     t = 0.0
-    adc_bits = [(0x4180 >> i) & 1 for i in range(15, -1, -1)]
-    t = emit_frame(t, adc_bits, 3, True)
-    dac_bits = [(0x01 >> i) & 1 for i in range(7, -1, -1)] + [(0x11 >> i) & 1 for i in range(7, -1, -1)]
-    t = emit_frame(t, dac_bits, 4, False)
-    word = (0x683C034 << 4) | 0x0
-    cdce_bits = [(word >> i) & 1 for i in range(32)]  # LSB first 移位顺序
-    t = emit_frame(t, cdce_bits, 5, False)
+    for bits, cs_col, falling in frame_specs:
+        t = emit_frame(t, bits, cs_col, falling)
 
     with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerows(rows)
+
+
+def _msb_bits(val: int, n: int) -> list[int]:
+    return [(val >> i) & 1 for i in range(n - 1, -1, -1)]
+
+
+def _cdce_lsb_bits(data28: int, addr: int) -> list[int]:
+    word = ((data28 & 0x0FFFFFFF) << 4) | (addr & 0xF)
+    return [(word >> i) & 1 for i in range(32)]
+
+
+def _synth_frames_e2e_min() -> list[tuple[list[int], int, bool]]:
+    adc = _msb_bits(0x4180, 16)
+    dac = _msb_bits(0x01, 8) + _msb_bits(0x11, 8)
+    cdce = _cdce_lsb_bits(0x683C034, 0)
+    return [(adc, 3, True), (dac, 4, False), (cdce, 5, False)]
+
+
+def _synth_frames_conserviss_min() -> list[tuple[list[int], int, bool]]:
+    frames: list[tuple[list[int], int, bool]] = [
+        (_msb_bits(0x4180, 16), 3, True),
+        (_msb_bits(0x5004, 16), 3, True),
+        (_msb_bits(0x01, 8) + _msb_bits(0x21, 8), 4, False),
+    ]
+    # Reg0, Reg2 (ADC clk ÷2), RegA — enough for conserviss best_cdce_profile
+    for addr, data28 in ((0, 0x683C035), (2, 0x8380000), (0xA, 0x05FC270)):
+        frames.append((_cdce_lsb_bits(data28, addr), 5, False))
+    return frames
 
 
 def self_test() -> int:
@@ -603,7 +632,30 @@ def self_test() -> int:
     if not ok:
         print("SELF-TEST FAILED", map2, flags2, file=sys.stderr)
         return 1
-    print("SELF-TEST OK (incl. --auto-map aliases)")
+    # Conserviss min footprint
+    tmp3 = Path("/tmp/spi_conserviss_min.csv")
+    synthesize_conserviss_min_csv(tmp3)
+    flags3 = checklist_from_frames(
+        run_decode(
+            load_csv(
+                tmp3,
+                None,
+                "SCLK",
+                "MOSI",
+                {"adc": "SEN", "dac": "SDENB", "cdce": "SPI_LE"},
+                auto_map=False,
+            )[0],
+            True,
+        )
+    )
+    if (
+        flags3.get("best_cdce_profile") != "conserviss"
+        or not flags3.get("conserviss_dac_cfg1")
+        or not flags3.get("A_adc_0x50_twos")
+    ):
+        print("SELF-TEST FAILED conserviss min", flags3, file=sys.stderr)
+        return 1
+    print("SELF-TEST OK (incl. --auto-map aliases + conserviss min)")
     return 0
 
 
@@ -620,12 +672,21 @@ def main() -> int:
     ap.add_argument("--cs-active", choices=("low", "high"), default="low")
     ap.add_argument("--auto-map", action="store_true", help="resolve Saleae/PulseView-style column aliases")
     ap.add_argument("--json", dest="json_out")
-    ap.add_argument("--write-example", type=Path, help="write synthetic example CSV and exit")
+    ap.add_argument("--write-example", type=Path, help="write synthetic E2E-min example CSV and exit")
+    ap.add_argument(
+        "--write-conserviss-example",
+        type=Path,
+        help="write synthetic Conserviss-min example CSV and exit",
+    )
     args = ap.parse_args()
 
     if args.write_example:
         synthesize_self_test_csv(args.write_example)
         print(f"wrote example {args.write_example}")
+        return 0
+    if args.write_conserviss_example:
+        synthesize_conserviss_min_csv(args.write_conserviss_example)
+        print(f"wrote conserviss example {args.write_conserviss_example}")
         return 0
     if args.self_test:
         return self_test()

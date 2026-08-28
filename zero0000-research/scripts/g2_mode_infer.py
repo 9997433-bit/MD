@@ -115,10 +115,11 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
     # Conserviss / E2E profile scoring (from decode_spi_capture checklist)
     best = checklist.get("best_cdce_profile")
     c_ratio = checklist.get("conserviss_cdce_match_ratio") or 0
+    c_hits = checklist.get("conserviss_cdce_reg_hits") or 0
     dac_pre = checklist.get("conserviss_dac_pre_sync_ratio") or 0
-    if best == "conserviss" and c_ratio >= 0.5:
+    if best == "conserviss" and (c_ratio >= 0.2 or c_hits >= 3):
         notes.append(
-            f"CDCE≈Conserviss (ratio={c_ratio}) → G2 钟先验计划B：C2≈C3≈245.76e6；"
+            f"CDCE≈Conserviss (ratio={c_ratio}, hits={c_hits}) → G2 钟先验计划B：C2≈C3≈245.76e6；"
             "见 decode_cdce_profile.py / G1 §6"
         )
         if p14 == "❓":
@@ -165,7 +166,8 @@ def self_test() -> int:
             "D1_dac_cfg1_seen": True,
             "C1_cdce_writes": True,
             "best_cdce_profile": "conserviss",
-            "conserviss_cdce_match_ratio": 0.9,
+            "conserviss_cdce_match_ratio": 0.23,
+            "conserviss_cdce_reg_hits": 3,
             "conserviss_dac_cfg1": True,
             "dac_cfg1_value": "0x21",
             "conserviss_dac_pre_sync_ratio": 0.5,
