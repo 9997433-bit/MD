@@ -54,7 +54,7 @@ zero0000-research/
 ## 当前状态
 
 **算法/ADC·DAC 实现目标**（进行中）：见 `06_docs/算法与ADCDAC实现_研究计划.md` · `算法目标进度.md`。  
-- **G0/G1 已通过**（SPI 常量阴性 + TSW4200 + **BRAM 帧密度** + 通路假说图）；**G2 起需板**。  
+- **固件工作流程（证据分级）**：`02_firmware/板卡固件工作流程.md`  
+- **G0/G1 已通过**；**G2 起需板**（`05_tests/G2_当日执行包.md`）。  
 - 工具：`analyze_bram_frames.py` · `decode_spi_capture.py` · `g2_mode_infer.py` · `g3_tone_analyze.py`。  
-- 报告骨架：`ADC_DAC实现与算法推断报告.md`。  
-- 仅现有资料静态总览：`现有资料口径总梳理.md`。
+- 报告骨架：`ADC_DAC实现与算法推断报告.md`。
