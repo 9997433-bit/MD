@@ -7,6 +7,8 @@
 ## 现有资料状态
 
 - G0 ✅（P1.1/P1.2 **强 🔶**；P1.3/P1.4 **❓**）/ G1 ✅（R10–R12 + R5b/R5c + Hamming≤2）  
+- 位流逆向阶梯已收束：`02_firmware/位流逆向_能推出与不能.md`（再扫位流不升 Must）  
+
 - G2 管线齐（ingest → `mk_g2_clocks.py --confirm-measured` → `apply_g0_backfill.py --apply`；`--demo` **禁止**回填）  
 - **Must-2 通过**；**Must-1/3 仅差实测钟/SPI**  
 - 一页结论：`当前结论卡_①②.md`（**≠ Must 完成**）
