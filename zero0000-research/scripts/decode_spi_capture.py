@@ -344,10 +344,49 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
     dac = [f for f in frames if f.device == "DAC3283"]
     cdce = [f for f in frames if f.device == "CDCE72010"]
     adc_addrs = set()
+    adc_words: set[tuple[int, int]] = set()
     for f in adc:
         a = f.decoded.get("addr")
+        d = f.decoded.get("data")
         if a:
-            adc_addrs.add(int(a, 16))
+            ai = int(a, 16)
+            adc_addrs.add(ai)
+            if d:
+                adc_words.add((ai, int(d, 16)))
+    cdce_by_addr: dict[int, int] = {}
+    for f in cdce:
+        if "READ" in "".join(f.notes):
+            continue
+        a = f.decoded.get("addr")
+        d = f.decoded.get("data28")
+        if a and d:
+            cdce_by_addr[int(a, 16)] = int(d, 16)
+
+    def profile_hits(table: dict[int, int]) -> tuple[int, int, list[str]]:
+        hit = 0
+        detail = []
+        for addr, expect in table.items():
+            got = cdce_by_addr.get(addr)
+            if got == expect:
+                hit += 1
+                detail.append(f"Reg{addr:X}=ok")
+            elif got is not None:
+                detail.append(f"Reg{addr:X}=0x{got:07X}≠0x{expect:07X}")
+        return hit, len(table), detail
+
+    c_hit, c_n, c_detail = profile_hits(CDCE_CONSERVISS)
+    i_hit, i_n, _ = profile_hits(CDCE_INTERNAL)
+    e_hit, e_n, _ = profile_hits(CDCE_EXTERNAL)
+
+    dac_cfg1 = None
+    for f in dac:
+        if f.decoded.get("addr") == "0x01" and f.decoded.get("data"):
+            try:
+                dac_cfg1 = int(f.decoded["data"][0], 16)
+            except (TypeError, ValueError, IndexError):
+                pass
+            break
+
     flags = {
         "G1_adc_16bit_frames": len(adc) > 0,
         "G2_dac_instr_frames": len(dac) > 0,
@@ -355,21 +394,35 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
         "A2_adc_0x41_lvds": any(
             f.decoded.get("addr") == "0x41" and "DDR LVDS" in f.notes for f in adc
         ),
+        "A_adc_0x50_twos": (0x50, 0x04) in adc_words,
         "D1_dac_cfg1_seen": any(f.decoded.get("addr") == "0x01" for f in dac),
         "D2_dac_version_read": any("VERSION read" in n for f in dac for n in f.notes),
-        "C1_cdce_writes": any(f.decoded.get("addr", "").startswith("0x") and "READ" not in "".join(f.notes) for f in cdce),
+        "C1_cdce_writes": any(
+            f.decoded.get("addr", "").startswith("0x") and "READ" not in "".join(f.notes)
+            for f in cdce
+        ),
         "H5_test_pattern": any("test pattern" in n for f in adc for n in f.notes),
         "EEPROM_lock_seen": any("EEPROM LOCK" in n for f in cdce for n in f.notes),
         "adc_addr_hit_count": len(adc_addrs & set(range(0x100))),
         "adc_key_addrs_hit": sorted(hex(a) for a in adc_addrs if a in ADC_KEY_ADDR),
-        "conserviss_cdce_reg_hits": sum(
-            1
-            for f in cdce
-            for n in f.notes
-            if "matches FMC150 conserviss" in n
-        ),
-        "conserviss_dac_cfg1": any(
-            "Conserviss FMC150-VC707 CONFIG1" in n for f in dac for n in f.notes
+        "conserviss_cdce_reg_hits": c_hit,
+        "conserviss_cdce_reg_total": c_n,
+        "conserviss_cdce_match_ratio": round(c_hit / c_n, 3) if c_n else 0.0,
+        "conserviss_cdce_detail": c_detail,
+        "e2e_internal_cdce_hits": i_hit,
+        "e2e_internal_cdce_total": i_n,
+        "e2e_external_cdce_hits": e_hit,
+        "e2e_external_cdce_total": e_n,
+        "conserviss_dac_cfg1": dac_cfg1 == DAC_CONSERVISS_CFG1,
+        "dac_cfg1_value": None if dac_cfg1 is None else f"0x{dac_cfg1:02X}",
+        "best_cdce_profile": (
+            "conserviss"
+            if c_hit >= i_hit and c_hit >= e_hit and c_hit > 0
+            else "e2e_internal"
+            if i_hit >= e_hit and i_hit > 0
+            else "e2e_external"
+            if e_hit > 0
+            else "none"
         ),
     }
     return flags

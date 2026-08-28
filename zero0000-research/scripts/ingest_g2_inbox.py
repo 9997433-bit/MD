@@ -170,6 +170,13 @@ def main() -> int:
             except json.JSONDecodeError:
                 infer_blob = {}
             if infer_blob:
+                if spi_json and spi_json.is_file():
+                    try:
+                        spi_blob = json.loads(spi_json.read_text(encoding="utf-8"))
+                        if "checklist" in spi_blob:
+                            infer_blob["checklist"] = spi_blob["checklist"]
+                    except (json.JSONDecodeError, OSError):
+                        pass
                 infer_json_path.write_text(
                     json.dumps(infer_blob, indent=2, ensure_ascii=False) + "\n",
                     encoding="utf-8",

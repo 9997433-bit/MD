@@ -30,11 +30,22 @@ def main() -> int:
 
     clocks = infer.get("clocks") or {}
     spi = infer.get("spi") or {}
+    # optional nested checklist from decode JSON path via ingest-derived infer
+    checklist = {}
+    if isinstance(spi.get("notes"), list):
+        pass
+    # allow passing full decode blob as --infer with checklist key
+    checklist = infer.get("checklist") or spi.get("checklist") or {}
+
     p13 = clocks.get("P1.3_suggested", "❓")
     p14 = spi.get("P1.4_suggested", "❓")
     p15 = spi.get("P1.5_suggested", "❓")
     if args.power_on_only and "位流内" in str(p15):
         p15 = "✅（仅上电无主机仍有 SPI → 位流内主控）"
+
+    profile = checklist.get("best_cdce_profile", "—")
+    ratio = checklist.get("conserviss_cdce_match_ratio", "—")
+    dac_cfg = checklist.get("dac_cfg1_value", "—")
 
     lines = [
         "# G2 → G0 回填提案（自动生成 · 须人工复核）",
@@ -50,6 +61,7 @@ def main() -> int:
         f"| P1.4 | {p14} | {'; '.join(spi.get('notes') or []) or '（无 SPI）'} |",
         f"| P1.5 | {p15} | 仅上电实验标记={args.power_on_only} |",
         f"| H8 | {clocks.get('H8', '—')} | interp_hint={clocks.get('interp_hint')} |",
+        f"| CDCE 剖面 | {profile} | Conserviss match_ratio={ratio}; DAC CONFIG1={dac_cfg} |",
         "",
         "## 输入哈希",
         "",
