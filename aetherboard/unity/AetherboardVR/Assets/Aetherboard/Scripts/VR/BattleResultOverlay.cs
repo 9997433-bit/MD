@@ -129,6 +129,7 @@ namespace Aetherboard.VR
 
             var row = CreateRow(panel);
             CreateButton(row, "再战", RestartSameBoss);
+            CreateButton(row, "下一个", () => { _director?.CycleNextBoss(); Hide(); });
             CreateButton(row, "土灵", () => SwitchBoss("earth"));
             CreateButton(row, "风灵", () => SwitchBoss("wind"));
             CreateButton(row, "冰灵", () => SwitchBoss("ice"));

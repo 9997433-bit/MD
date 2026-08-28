@@ -47,6 +47,7 @@ namespace Aetherboard.VR
             if (GUILayout.Button("冰灵 (3)", _btnW)) _director.SetBoss("ice");
             if (GUILayout.Button("火灵 (4)", _btnW)) _director.SetBoss("fire");
             GUILayout.EndHorizontal();
+            if (GUILayout.Button("下一个 Boss (0)", _btnW)) _director.CycleNextBoss();
 
             if (_coop != null)
             {
@@ -125,7 +126,7 @@ namespace Aetherboard.VR
                 GUILayout.Label(state.Log[i]);
             GUILayout.EndScrollView();
 
-            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | H/N联机 B传输 | F5/F9存读档 | F6/F7回放 | E/A/1/2/3/4</size>", RichLabel());
+            GUILayout.Label("<size=10>LMB移动 | RMB技能 | C双人 Tab切玩家 | H/N联机 B传输 | F5/F9存读档 | F6/F7回放 | E/A/0/1-4</size>", RichLabel());
             GUILayout.EndArea();
         }
 

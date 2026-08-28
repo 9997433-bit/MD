@@ -84,6 +84,7 @@ namespace Aetherboard.VR
                 "扳机 — 选中 / 确认技能\n" +
                 "A — 结束阶段  |  B — 自动一步\n" +
                 "左侧 — 土灵/风灵/冰灵/火灵\n" +
+                "下一个 Boss — 循环切换\n" +
                 "右侧 — 联机", 15);
 
             var btnGo = new GameObject("Dismiss", typeof(RectTransform), typeof(Image), typeof(Button));

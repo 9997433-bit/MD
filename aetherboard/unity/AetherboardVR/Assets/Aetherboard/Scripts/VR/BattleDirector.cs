@@ -63,6 +63,8 @@ namespace Aetherboard.VR
             _network?.NotifyLocalStateChanged();
         }
 
+        public void CycleNextBoss() => SetBoss(BossRegistry.CycleBossId(Engine.BossId));
+
         public string ExportSnapshotJson()
         {
             _lastSnapshotJson = BattleStateCodec.Serialize(State, Engine.BossId);
