@@ -36,8 +36,13 @@ namespace CosmicFront.Combat
                 direction = Vector3.Slerp(direction, toTarget, homingAssist).normalized;
             }
 
+            MuzzleFlash.Play(origin);
+            Debug.DrawRay(origin.position, direction * range, Color.yellow, 0.05f);
+
             if (Physics.Raycast(origin.position, direction, out var hit, range, hitMask, QueryTriggerInteraction.Ignore))
             {
+                HitFeedback.Spawn(hit.point);
+
                 var damageable = hit.collider.GetComponentInParent<IDamageable>();
                 if (damageable != null && damageable.IsAlive)
                 {
@@ -45,6 +50,7 @@ namespace CosmicFront.Combat
                     if (ownerTeam == null || damageable.Team != ownerTeam.Team || damageable.Team == TeamId.None)
                     {
                         damageable.ApplyDamage(damage, owner);
+                        DamageNumberUI.Spawn(hit.point, damage);
                     }
                 }
             }

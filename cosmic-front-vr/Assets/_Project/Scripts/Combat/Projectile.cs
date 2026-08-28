@@ -53,6 +53,9 @@ namespace CosmicFront.Combat
                 return;
             }
 
+            var hitPoint = other.ClosestPoint(transform.position);
+            HitFeedback.Spawn(hitPoint);
+
             var damageable = other.GetComponentInParent<IDamageable>();
             if (damageable != null && damageable.IsAlive)
             {
@@ -60,6 +63,7 @@ namespace CosmicFront.Combat
                 if (ownerTeam == null || damageable.Team != ownerTeam.Team || damageable.Team == TeamId.None)
                 {
                     damageable.ApplyDamage(_damage, _owner);
+                    DamageNumberUI.Spawn(hitPoint, _damage);
                 }
             }
 
