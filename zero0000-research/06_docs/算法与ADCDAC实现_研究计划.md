@@ -222,6 +222,7 @@ G0 现有资料 ──► G1 资料/软件 ──► G2 被动测(钟/SPI) ─�
 - [x] G1 再加深：R13c《激光技术》2023 相位解缠 → G3 §2d / H-鉴相解缠（不升 Must）  
 - [x] G2 管线：ADC **0x20 LOW SPEED** ↔ C2（≤80 MSPS）交叉核验写入 `g2_mode_infer` / 现场表单  
 - [x] G2 管线：DAC **CONFIG1 插值** ↔ C3/C6（靶标 X2）交叉核验  
+- [x] G1 再加深：R14 Apollo3zehn/Vibrometer 开源 HDL 形态（条纹计数/板内 FFT/多流）+ R14b 带通采样 atan（不升 Must）  
 - [ ] G1 加分：若获得**私发**上位机/原理图再增量
 
 ### 有板后（最短路径到「实现级」）
