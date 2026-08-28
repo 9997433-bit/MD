@@ -52,8 +52,11 @@ def main() -> int:
         run("analyze_fx2_ram_image.py")
         run("analyze_fx2_ram_xrefs.py")
         run("analyze_fx2_ram_routines.py")
+        run("analyze_cmd_data_correlation.py")
         run("analyze_fx2_cmd_dispatch.py")
         run("analyze_fx2_datapath.py")
+        run("analyze_fx2_ram_disasm.py")
+        run("analyze_fx2_oracle_crosscheck.py")
     if (CAPTURES / "eeprom.bin").exists():
         run("analyze_eeprom.py")
         run("scan_firmware_stub.py")

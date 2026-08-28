@@ -24,8 +24,9 @@
 ### 进度（脚本自动化）
 
 - L0–L2：✅ `analyze_fx2_ram_image.py` / `analyze_fx2_ram_xrefs.py`
-- L3–L5：✅ `analyze_fx2_ram_routines.py` / `analyze_fx2_cmd_dispatch.py` / `analyze_fx2_datapath.py`（假设级）
-- L6：部分（`usb_cmd_data_correlation.json`）；需 Ghidra 闭环
+- L3–L5：✅ routines / cmd_dispatch / datapath（假设级；`0x1435` 为 L4∩L5 热点）
+- L6：✅ `fx2_oracle_crosscheck.json`（`0x08`→candidate 关联，语义 unknown）
+- G4 lite：✅ `phase_b/analysis/mcu_disasm.txt`（关键区域；非完整 Ghidra CFG）
 - L7：❌ 缺 `eeprom.bin`
 - 笔记：`phase_b/analysis/MCU_NOTES.md`
 

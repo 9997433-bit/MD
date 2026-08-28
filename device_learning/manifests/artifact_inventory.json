@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28T12:57:50.180662+00:00",
-  "artifact_count": 82,
-  "present_count": 82,
+  "generated_at": "2026-08-28T13:04:06.056520+00:00",
+  "artifact_count": 84,
+  "present_count": 84,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 1616780
+      "size_bytes": 1697866
     },
     {
       "path": "coverage.json",
@@ -85,7 +85,7 @@
       "path": "phase_b/CHECKLIST.json",
       "description": "阶段 B 机器可读检查清单",
       "exists": true,
-      "size_bytes": 1618
+      "size_bytes": 1617
     },
     {
       "path": "phase_c/CHECKLIST.json",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15090
+      "size_bytes": 15119
     },
     {
       "path": "manifests/output_hashes.json",
@@ -127,7 +127,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 12040
+      "size_bytes": 12823
     },
     {
       "path": "manifests/bit_strings.json",
@@ -151,7 +151,7 @@
       "path": "manifests/capture_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1074
+      "size_bytes": 1100
     },
     {
       "path": "manifests/catalog_integrity.json",
@@ -254,6 +254,18 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 5739
+    },
+    {
+      "path": "manifests/fx2_oracle_crosscheck.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 3076
+    },
+    {
+      "path": "manifests/fx2_ram_disasm.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 1532
     },
     {
       "path": "manifests/fx2_ram_routines.json",

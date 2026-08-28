@@ -55,10 +55,10 @@
       "depends": [
         "B1"
       ],
-      "done": false
+      "done": true
     }
   ],
-  "updated_at": "2026-08-28T12:57:55.662082+00:00",
-  "done_count": 4,
+  "updated_at": "2026-08-28T13:04:11.444732+00:00",
+  "done_count": 5,
   "total_count": 6
 }

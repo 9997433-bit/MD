@@ -1,10 +1,10 @@
 # 阶段检查清单报告（自动生成）
 
-**生成时间**：2026-08-28 12:57 UTC
+**生成时间**：2026-08-28 13:04 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
-### 阶段 B — not_started (0/6)
+### 阶段 B — in_progress (1/6)
 
 | ID | Task | Done |
 |----|------|------|
@@ -13,7 +13,7 @@
 | B3 | usb_session_capture | · |
 | B4 | protocol_log | · |
 | B5 | ledger_refresh | · |
-| B6 | 8051_disasm | · |
+| B6 | 8051_disasm | ✓ |
 
 ### 阶段 C — not_started (0/6)
 

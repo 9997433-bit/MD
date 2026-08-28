@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T12:57:48.651743+00:00",
+  "generated_at": "2026-08-28T13:04:04.605387+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,7 +10,7 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-28T12:57:48.545072+00:00",
+      "generated_at": "2026-08-28T13:04:04.503155+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
@@ -24,7 +24,7 @@
         "missing": 8
       },
       "pytest_count": 114,
-      "manifest_json_count": 67,
+      "manifest_json_count": 69,
       "phase_b_blockers_remaining": 3,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-28T12:57:47.754150+00:00",
+      "generated_at": "2026-08-28T13:04:03.724512+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -103,12 +103,12 @@
       "ready_count": 0,
       "blocker_count": 3,
       "deep_analysis_ready": false,
-      "checklist": "0/6",
+      "checklist": "1/6",
       "upgrade_proposals_pending": 0,
       "next_command": "make check-captures"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-28T12:57:47.986473+00:00",
+      "generated_at": "2026-08-28T13:04:03.957248+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": false,
       "checklist": "0/6",
@@ -116,7 +116,7 @@
       "recommended_action": "complete phase B captures first"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-28T12:57:45.522412+00:00",
+      "generated_at": "2026-08-28T13:04:01.495471+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "static_complete_pending_hardware",
       "transition_ready": false,
@@ -134,7 +134,7 @@
       "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-28T12:57:47.599385+00:00",
+      "generated_at": "2026-08-28T13:04:03.568492+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -158,10 +158,11 @@
         },
         {
           "path": "phase_b/analysis/mcu_disasm.txt",
-          "exists": false
+          "exists": true,
+          "size_bytes": 28755
         }
       ],
-      "present_count": 0,
+      "present_count": 1,
       "expected_count": 6,
       "flags": {
         "eeprom_present": false,
@@ -178,7 +179,7 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-28T12:57:47.677060+00:00",
+      "generated_at": "2026-08-28T13:04:03.646986+00:00",
       "applicable": false,
       "proposal_count": 0,
       "proposals": [],
@@ -188,7 +189,7 @@
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-28T12:57:46.971836+00:00",
+      "generated_at": "2026-08-28T13:04:02.941820+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
@@ -328,7 +329,7 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-28T12:53:09.955892+00:00",
+      "generated_at": "2026-08-28T13:03:00.099477+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
@@ -362,7 +363,7 @@
     "phase_b_CHECKLIST": {
       "version": "1.0",
       "phase": "B",
-      "status": "not_started",
+      "status": "in_progress",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "prerequisites": [
         "legal_authorization",
@@ -416,11 +417,11 @@
           "depends": [
             "B1"
           ],
-          "done": false
+          "done": true
         }
       ],
-      "updated_at": "2026-08-28T12:57:45.442317+00:00",
-      "done_count": 0,
+      "updated_at": "2026-08-28T13:04:01.415682+00:00",
+      "done_count": 1,
       "total_count": 6
     },
     "phase_c_CHECKLIST": {
@@ -476,7 +477,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-28T12:57:43.720090+00:00",
+      "updated_at": "2026-08-28T13:03:59.438540+00:00",
       "done_count": 0,
       "total_count": 6
     }

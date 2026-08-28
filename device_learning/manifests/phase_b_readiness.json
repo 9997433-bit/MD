@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T12:57:47.754150+00:00",
+  "generated_at": "2026-08-28T13:04:03.724512+00:00",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "blockers": [
     {
@@ -30,7 +30,7 @@
   "ready_count": 0,
   "blocker_count": 3,
   "deep_analysis_ready": false,
-  "checklist": "0/6",
+  "checklist": "1/6",
   "upgrade_proposals_pending": 0,
   "next_command": "make check-captures"
 }

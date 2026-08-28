@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T12:57:47.599385+00:00",
+  "generated_at": "2026-08-28T13:04:03.568492+00:00",
   "artifacts": [
     {
       "path": "phase_b/captures/eeprom.bin",
@@ -23,10 +23,11 @@
     },
     {
       "path": "phase_b/analysis/mcu_disasm.txt",
-      "exists": false
+      "exists": true,
+      "size_bytes": 28755
     }
   ],
-  "present_count": 0,
+  "present_count": 1,
   "expected_count": 6,
   "flags": {
     "eeprom_present": false,

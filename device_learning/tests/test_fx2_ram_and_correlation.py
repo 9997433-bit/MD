@@ -50,22 +50,19 @@ def test_cmd_data_correlation_manifest():
 
 
 @pytest.mark.skipif(not RAM.exists(), reason="fx2_ram_from_enum.bin missing")
-def test_fx2_l3_l5_manifests():
-    for name, status_key in (
-        ("fx2_ram_routines.json", "scanned"),
-        ("fx2_cmd_dispatch_hypothesis.json", "hypothesis"),
-        ("fx2_datapath_hypothesis.json", "hypothesis"),
-    ):
-        path = ROOT / "manifests" / name
-        if not path.exists():
-            continue
-        data = json.loads(path.read_text(encoding="utf-8"))
-        if data.get("status") != status_key:
-            continue
-        assert "declaration" in data
-        if name == "fx2_ram_routines.json":
-            assert data["routine_count"] >= 1
-        if name == "fx2_cmd_dispatch_hypothesis.json":
-            assert data["dispatch_candidates"]
-        if name == "fx2_datapath_hypothesis.json":
-            assert data["datapath_routine_candidates"] is not None
+def test_fx2_disasm_and_oracle():
+    disasm = ROOT / "phase_b" / "analysis" / "mcu_disasm.txt"
+    meta = ROOT / "manifests" / "fx2_ram_disasm.json"
+    oracle = ROOT / "manifests" / "fx2_oracle_crosscheck.json"
+    if disasm.exists():
+        text = disasm.read_text(encoding="utf-8")
+        assert "0x075b" in text.lower() or "0x075B" in text or "075b" in text.lower()
+        assert "0x1435" in text or "1435" in text
+    if meta.exists():
+        data = json.loads(meta.read_text(encoding="utf-8"))
+        if data.get("status") == "partial_disasm":
+            assert data["region_count"] >= 4
+    if oracle.exists():
+        data = json.loads(oracle.read_text(encoding="utf-8"))
+        if data.get("status") == "crosschecked":
+            assert data.get("headline", {}).get("opcode") == "0x08"

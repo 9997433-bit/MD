@@ -28,6 +28,12 @@
 2. `analyze_fx2_cmd_dispatch.py` → opcode→owner 例程候选（对照 EP84 时序 oracle）  
 3. `analyze_fx2_datapath.py` → EP6/FIFO 相关例程打分  
 
+## G4 lite disasm
+
+- 文本：`phase_b/analysis/mcu_disasm.txt`（关键区域，非完整 Ghidra）
+- 索引：`manifests/fx2_ram_disasm.json`
+- L6 交叉：`manifests/fx2_oracle_crosscheck.json`（`0x08`∩`0x1435`∩EP84 oracle → candidate 级关联，语义仍 unknown）
+
 ## Ghidra 优先标注清单
 
 1. `0x075B` 主初始化：跟踪至 EP*CFG / FIFORESET / CPUCS  
