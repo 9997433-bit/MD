@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28T07:29:56.984259+00:00",
-  "artifact_count": 63,
-  "present_count": 63,
+  "generated_at": "2026-08-28T07:30:54.481218+00:00",
+  "artifact_count": 64,
+  "present_count": 64,
   "artifacts": [
     {
       "path": "EvidenceLedger.json",
       "description": "主账本",
       "exists": true,
-      "size_bytes": 264984
+      "size_bytes": 268480
     },
     {
       "path": "coverage.json",
@@ -97,7 +97,7 @@
       "path": "manifests/static_freeze.json",
       "description": "静态阶段冻结记录",
       "exists": true,
-      "size_bytes": 523
+      "size_bytes": 510
     },
     {
       "path": "manifests/static_phase_closed.json",
@@ -109,7 +109,7 @@
       "path": "manifests/handoff_bundle.json",
       "description": "一站式交接 JSON",
       "exists": true,
-      "size_bytes": 15350
+      "size_bytes": 15336
     },
     {
       "path": "manifests/output_hashes.json",
@@ -121,7 +121,7 @@
       "path": "manifests/artifact_inventory.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 9331
+      "size_bytes": 9495
     },
     {
       "path": "manifests/bit_strings.json",
@@ -253,7 +253,7 @@
       "path": "manifests/package_manifest.json",
       "description": "generated manifest",
       "exists": true,
-      "size_bytes": 1011
+      "size_bytes": 998
     },
     {
       "path": "manifests/pcap_synthetic_meta.json",
@@ -350,6 +350,12 @@
       "description": "generated manifest",
       "exists": true,
       "size_bytes": 2085
+    },
+    {
+      "path": "manifests/usb_bulk_pair_hypothesis.json",
+      "description": "generated manifest",
+      "exists": true,
+      "size_bytes": 2412
     },
     {
       "path": "manifests/usb_capture_meta.json",

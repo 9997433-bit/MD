@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-08-28T07:30:49.777090+00:00",
+  "device": "0x3923:0x744f",
+  "pairing_rule": "first EP0x81 IN after EP0x01 OUT with 0 < dt <= 50ms",
+  "out_count": 3724,
+  "in_with_payload_count": 3434,
+  "paired_count": 3429,
+  "unpaired_out_count": 295,
+  "pair_ratio": 0.9208,
+  "in_be_u32_length_match_ratio": 0.7574,
+  "top_out_in_patterns": [
+    {
+      "out_body4": "00080101",
+      "in_body4": "00080100",
+      "in_len": 12,
+      "count": 1609
+    },
+    {
+      "out_body4": "00080109",
+      "in_body4": "000c0100",
+      "in_len": 16,
+      "count": 749
+    },
+    {
+      "out_body4": "00010014",
+      "in_body4": "00010030",
+      "in_len": 48,
+      "count": 322
+    },
+    {
+      "out_body4": "00010010",
+      "in_body4": "0001000c",
+      "in_len": 12,
+      "count": 223
+    },
+    {
+      "out_body4": "00100009",
+      "in_body4": "00080100",
+      "in_len": 12,
+      "count": 188
+    },
+    {
+      "out_body4": "00010014",
+      "in_body4": "0001000c",
+      "in_len": 12,
+      "count": 104
+    },
+    {
+      "out_body4": "0001000c",
+      "in_body4": "0001000c",
+      "in_len": 12,
+      "count": 81
+    },
+    {
+      "out_body4": "00010014",
+      "in_body4": "00010014",
+      "in_len": 20,
+      "count": 43
+    },
+    {
+      "out_body4": "00010018",
+      "in_body4": "0001000c",
+      "in_len": 12,
+      "count": 27
+    },
+    {
+      "out_body4": "0001000c",
+      "in_body4": "00080100",
+      "in_len": 12,
+      "count": 25
+    },
+    {
+      "out_body4": "000c0105",
+      "in_body4": "00080100",
+      "in_len": 12,
+      "count": 14
+    },
+    {
+      "out_body4": "00100008",
+      "in_body4": "00010010",
+      "in_len": 16,
+      "count": 12
+    },
+    {
+      "out_body4": "000c0104",
+      "in_body4": "0001000c",
+      "in_len": 12,
+      "count": 12
+    },
+    {
+      "out_body4": "00010014",
+      "in_body4": "00010010",
+      "in_len": 16,
+      "count": 3
+    },
+    {
+      "out_body4": "00080101",
+      "in_body4": "00180100",
+      "in_len": 28,
+      "count": 3
+    }
+  ],
+  "dt_histogram_ms_top": {
+    "0.0": 2692,
+    "0.002": 351,
+    "0.001": 133,
+    "0.023": 23,
+    "0.011": 18,
+    "0.034": 14,
+    "0.035": 13,
+    "0.03": 12,
+    "0.003": 11,
+    "0.039": 10
+  },
+  "boundary": "Temporal pairing heuristic only; not proven request/response semantics",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

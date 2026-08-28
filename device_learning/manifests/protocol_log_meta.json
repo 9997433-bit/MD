@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-28T07:29:54.290458+00:00",
+  "generated_at": "2026-08-28T07:30:51.806664+00:00",
   "status": "observed",
   "path": "phase_b/captures/protocol_log.json",
-  "size_bytes": 19403,
-  "sha256": "b5d39ed5465c72bb4b8b11e0267577e16b639fad00aa5d142f7493dc41ed3017",
-  "command_count": 40,
+  "size_bytes": 16928,
+  "sha256": "10f5f38dd265591dd6010eab0ee9e90f24260b26a5d8a5ab09e86a489b722db3",
+  "command_count": 30,
   "unresolved_count": 3,
   "meta_present": {
     "capture_source": true,
