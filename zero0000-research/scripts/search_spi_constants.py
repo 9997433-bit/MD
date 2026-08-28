@@ -107,6 +107,17 @@ CDCE_EXTERNAL_28 = {
 # TI 出厂 EEPROM 默认（SCAA090，含地址半字节的 32-bit 首字示例）
 CDCE_SCAA090_REG0_32 = 0x002C0040
 
+# E2E 帖中出现过的失败/变体值（同样高辨识度；用于扩大阴性扫描）
+CDCE_ALT_28 = {
+    # (scheme, addr) -> data28
+    ("alt_regA_05FC270", 0xA): 0x05FC270,
+    ("alt_regA_47FC752", 0xA): 0x47FC752,
+    ("alt_regA_0BFC07C", 0xA): 0x0BFC07C,
+    ("alt_reg0_auto", 0x0): 0x683C03C,
+    ("alt_regB_0000800", 0xB): 0x0000800,
+    ("alt_regB_8000040", 0xB): 0x8000040,
+}
+
 # ADS62P49：16-bit 帧 = addr8 | data8；高价值靶标
 ADC_FRAMES = {
     "soft_reset_0x00": 0x0001,  # 常见：addr0 + read-enable 等变体也搜
@@ -151,7 +162,13 @@ def u32_patterns(word: int) -> list[tuple[str, bytes]]:
 
 
 def search_cdce(data: bytes) -> dict:
-    results: dict = {"internal_full32": [], "external_full32": [], "data28_only": [], "scaa090": []}
+    results: dict = {
+        "internal_full32": [],
+        "external_full32": [],
+        "alt_full32": [],
+        "data28_only": [],
+        "scaa090": [],
+    }
 
     def pack_full(data28: int, addr: int) -> int:
         return ((data28 & 0x0FFFFFFF) << 4) | (addr & 0xF)
@@ -188,6 +205,26 @@ def search_cdce(data: bytes) -> dict:
                             "offsets": [f"0x{h:X}" for h in hits[:8]],
                         }
                     )
+
+    # E2E 变体（跳过低熵 data28，避免 0x800B 类碰撞）
+    for (name, addr), d28 in CDCE_ALT_28.items():
+        if d28 < 0x10000:
+            continue
+        full = pack_full(d28, addr)
+        for endian, pat in u32_patterns(full):
+            hits = find_all(data, pat)
+            if hits:
+                results["alt_full32"].append(
+                    {
+                        "name": name,
+                        "reg": addr,
+                        "data28": f"0x{d28:07X}",
+                        "full32": f"0x{full:08X}",
+                        "endian": endian,
+                        "count": len(hits),
+                        "offsets": [f"0x{h:X}" for h in hits[:8]],
+                    }
+                )
 
     for endian, pat in u32_patterns(CDCE_SCAA090_REG0_32):
         hits = find_all(data, pat)

@@ -46,6 +46,9 @@ python3 scripts/search_spi_constants.py /tmp/s2056.bin --json /tmp/spi_const_rep
 | 外部 Reg0 | `0x683C0380` | 0 | 0 |
 | 外部 Reg0 Auto | `0x683C03C0` | 0 | 0 |
 | 外部 RegA | `0x02FC07CA` | 0 | 0 |
+| E2E 变体 RegA `05FC270` / `47FC752` / `0BFC07C` | （对应 full32） | 0 | 0 |
+
+（低熵变体如 `0x0000800` 不做肯定/否定依据，易与配置噪声碰撞。）
 
 ### 3.2 成簇检测 —— **无**
 
