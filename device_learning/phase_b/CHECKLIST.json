@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "phase": "B",
-  "status": "not_started",
+  "status": "in_progress",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "prerequisites": [
     "legal_authorization",
@@ -24,14 +24,14 @@
       "name": "usb_enum_capture",
       "artifact": "phase_b/captures/usb_enum.pcapng",
       "template": "phase_b/templates/usb_capture.md",
-      "done": false
+      "done": true
     },
     {
       "id": "B3",
       "name": "usb_session_capture",
       "artifact": "phase_b/captures/usb_session.pcapng",
       "template": "phase_b/templates/usb_capture.md",
-      "done": false
+      "done": true
     },
     {
       "id": "B4",
@@ -39,13 +39,13 @@
       "artifact": "phase_b/captures/protocol_log.json",
       "template": "phase_b/templates/protocol_log_template.json",
       "optional": true,
-      "done": false
+      "done": true
     },
     {
       "id": "B5",
       "name": "ledger_refresh",
       "command": "make phase-b",
-      "done": false
+      "done": true
     },
     {
       "id": "B6",
@@ -55,10 +55,10 @@
       "depends": [
         "B1"
       ],
-      "done": false
+      "done": true
     }
   ],
-  "updated_at": "2026-08-27T16:38:57.024918+00:00",
-  "done_count": 0,
+  "updated_at": "2026-08-28T14:40:32.477416+00:00",
+  "done_count": 5,
   "total_count": 6
 }

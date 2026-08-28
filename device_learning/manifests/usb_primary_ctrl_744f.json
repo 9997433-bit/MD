@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-08-28T08:54:26.639427+00:00",
+  "device": "0x3923:0x744f",
+  "usb_addr": 24,
+  "status": "decoded",
+  "confidence": "confirmed",
+  "finding": "Primary device uses almost no vendor control; session control traffic is standard GET_DESCRIPTOR / SET_CONFIGURATION only. Command/data planes are bulk EP01/81 and EP06/84.",
+  "setup_histogram": [
+    {
+      "bmRequestType": "0x80",
+      "bRequest": 6,
+      "count": 5
+    },
+    {
+      "bmRequestType": "0x00",
+      "bRequest": 9,
+      "count": 1
+    }
+  ],
+  "vendor_control_setup_count": 0,
+  "vendor_control_on_primary": "none_observed_in_session",
+  "companion_vendor_control": "see usb_vendor_ctrl_7317.json (FX2 0xA0 RAM load)",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

@@ -23,7 +23,7 @@ def test_sensitive_audit_clean():
 def test_evidence_summary():
     data = json.loads((ROOT / "manifests" / "evidence_summary.json").read_text())
     assert data["identifiers"] >= 237
-    assert data["blocked"] >= 90
+    assert data["blocked"] >= 70
     assert data["bitstream"]["idcode"] == "0x01414093"
     assert data["catalog_integrity_ok"] is True
 
@@ -33,4 +33,5 @@ def test_blocked_report_exists():
     assert path.exists()
     text = path.read_text()
     assert "missing" in text
-    assert "FW-MCU-CORE-IMAGE" in text
+    # Persistent EEPROM dump remains the hard blocker; MCU RAM extract may already be candidate.
+    assert "FW-EEPROM-IMAGE" in text

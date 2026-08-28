@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-08-28T13:14:58.805414+00:00",
+  "status": "scanned",
+  "layer": "L1-IVT",
+  "vectors": [
+    {
+      "vector": "reset",
+      "offset": "0x0000",
+      "bytes": "02075b",
+      "ljmp_dest": "0x075b",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "IE0_ext0",
+      "offset": "0x0003",
+      "bytes": "020f2a",
+      "ljmp_dest": "0x0f2a",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "TF0_timer0",
+      "offset": "0x000b",
+      "bytes": "021f64",
+      "ljmp_dest": "0x1f64",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "IE1_ext1",
+      "offset": "0x0013",
+      "bytes": "90c403",
+      "preview": [
+        "MOV DPTR,#0xc403",
+        "MOV A,#0xff",
+        "MOVX @DPTR,A",
+        "RET"
+      ],
+      "confidence": "hypothesis"
+    },
+    {
+      "vector": "TF1_timer1",
+      "offset": "0x001b",
+      "bytes": "0230b3",
+      "ljmp_dest": "0x30b3",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    },
+    {
+      "vector": "serial_RI_TI",
+      "offset": "0x0023",
+      "bytes": "82d201",
+      "preview": [
+        "DB 0x82",
+        "SETB 0x01",
+        "LCALL 0x299e",
+        "MOV A,#0x08"
+      ],
+      "confidence": "hypothesis"
+    },
+    {
+      "vector": "TF2_EXF2",
+      "offset": "0x002b",
+      "bytes": "f0d082",
+      "preview": [
+        "MOVX @DPTR,A",
+        "POP 0x82",
+        "POP 0x83",
+        "POP 0xe0"
+      ],
+      "confidence": "hypothesis"
+    },
+    {
+      "vector": "USB_or_ext_hint",
+      "offset": "0x0043",
+      "bytes": "021b00",
+      "ljmp_dest": "0x1b00",
+      "kind": "LJMP",
+      "confidence": "candidate"
+    }
+  ],
+  "source_note": "fx2_ram_from_enum.bin — NOT eeprom.bin",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

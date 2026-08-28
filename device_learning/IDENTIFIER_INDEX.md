@@ -1,6 +1,6 @@
 # Identifier 索引（自动生成）
 
-**生成时间**：2026-08-27 16:38 UTC
+**生成时间**：2026-08-28 13:15 UTC
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -133,7 +133,7 @@
 | `SIG-CONFIG-BOOT` | candidate | FPGA configuration/boot lines from the config memory |
 | `SIG-ACQ-CHANNEL` | unknown | Acquisition channel from the analog front-end into the fabric |
 | `SIG-POWER-RAILS` | unknown | Core / I/O rail voltages presented to the FPGA |
-| `SIG-PROTOCOL-FRAMING` | unknown | Application-level framing carried over the USB link |
+| `SIG-PROTOCOL-FRAMING` | candidate | Application-level framing carried over the USB link |
 | `SIG-INPUT-CONNECTOR` | candidate | Analog input interface / connector at the board edge |
 | `SIG-INPUT-PROTECTION` | unknown | Input over-voltage protection / clamp on the front-end |
 | `SIG-COUPLING-MODE` | unknown | Input coupling selection (AC / DC) ahead of the gain stage |
@@ -156,11 +156,11 @@
 | `FW-EEPROM-LAYOUT-REF` | candidate | Public FX2LP EEPROM field layout reference |
 | `FW-EEPROM-BOOT-BYTE-RULE` | candidate | Boot config byte semantics (0xC0/0xC2) |
 | `FW-EEPROM-FW-OFFSET` | candidate | Typical 8051 firmware start offset 0x10 in EEPROM |
-| `FW-MCU-CORE-IMAGE` | missing | 8051-compatible microcontroller firmware image |
-| `FW-MCU-RESET-VECTOR` | missing | Reset vector / boot entry of the MCU firmware |
-| `FW-MCU-CODE-XRAM-MAP` | missing | Code / external-RAM address map of the MCU |
-| `FW-MCU-I2C-BOOT-PATH` | missing | MCU boot path loading from the serial EEPROM over I2C |
-| `FW-MCU-RENUMERATION` | missing | USB re-numeration behaviour after firmware load |
+| `FW-MCU-CORE-IMAGE` | candidate | 8051-compatible microcontroller firmware image |
+| `FW-MCU-RESET-VECTOR` | candidate | Reset vector / boot entry of the MCU firmware |
+| `FW-MCU-CODE-XRAM-MAP` | candidate | Code / external-RAM address map of the MCU |
+| `FW-MCU-I2C-BOOT-PATH` | candidate | MCU boot path loading from the serial EEPROM over I2C |
+| `FW-MCU-RENUMERATION` | candidate | USB re-numeration after FX2 RAM load: 0x7317 → 0x744f |
 | `FW-EEPROM-IMAGE` | missing | Serial EEPROM contents image |
 | `FW-EEPROM-CONFIG-BYTE` | missing | EEPROM leading boot-configuration byte |
 | `FW-EEPROM-VIDPID` | missing | VID/PID fields possibly stored in the EEPROM |
@@ -170,22 +170,22 @@
 | `FW-EEPROM-FW-RECORDS` | missing | Firmware image data records / firmware size (C2 data-record region) |
 | `FW-FPGA-BITSTREAM` | candidate | FPGA bitstream file (firmware/device.bit) |
 | `FW-FPGA-CONFIG-IFACE` | unknown | FPGA configuration interface / load source |
-| `PROTO-DESC-DEVICE` | not_started | USB device descriptor |
-| `PROTO-DESC-CONFIG` | not_started | USB configuration descriptor |
-| `PROTO-DESC-INTERFACE` | not_started | USB interface descriptor |
-| `PROTO-DESC-STRING` | not_started | USB string descriptors |
-| `PROTO-EP-MAP` | unknown | Overall endpoint map |
-| `PROTO-EP-BULK-IN` | unknown | Bulk IN endpoint (data upstream to host) |
-| `PROTO-EP-BULK-OUT` | unknown | Bulk OUT endpoint (commands downstream) |
-| `PROTO-EP-INTERRUPT` | unknown | Interrupt endpoint (status / events) |
-| `PROTO-EP-ALT-SETTINGS` | unknown | Interface alternate settings |
-| `PROTO-XFER-MODE` | unknown | Data transfer mode for the acquisition stream (bulk vs isochronous) |
-| `PROTO-CTRL-VENDOR-REQ` | not_started | Vendor-specific control-request surface |
+| `PROTO-DESC-DEVICE` | confirmed | USB device descriptor VID=0x3923 PID=0x744f bcdDevice=0x0001 |
+| `PROTO-DESC-CONFIG` | confirmed | USB configuration descriptor: 1 interface, bmAttributes=0x80 |
+| `PROTO-DESC-INTERFACE` | confirmed | Interface 0 vendor-specific (0xff), 4 endpoints, alt=0 |
+| `PROTO-DESC-STRING` | candidate | USB string descriptors (partial; serial candidate present) |
+| `PROTO-EP-MAP` | confirmed | Endpoints: bulk 0x01 OUT, 0x81 IN, 0x06 OUT, 0x84 IN (512 B) |
+| `PROTO-EP-BULK-IN` | confirmed | Bulk IN endpoints 0x81 and 0x84, wMaxPacketSize=512 |
+| `PROTO-EP-BULK-OUT` | confirmed | Bulk OUT endpoints 0x01 and 0x06, wMaxPacketSize=512 |
+| `PROTO-EP-INTERRUPT` | candidate | No interrupt endpoint in observed interface descriptor |
+| `PROTO-EP-ALT-SETTINGS` | candidate | Only bAlternateSetting=0 observed |
+| `PROTO-XFER-MODE` | confirmed | Acquisition stream uses bulk transfers (not isochronous) |
+| `PROTO-CTRL-VENDOR-REQ` | candidate | Vendor-specific control-request surface |
 | `DRV-HOST-MODULE` | not_started | Host-side USB driver module |
 | `DRV-INF-BINDING` | not_started | Driver INF binding (VID/PID match) |
 | `DRV-IOCTL-SURFACE` | not_started | Driver IOCTL interface surface |
-| `DRV-FIRMWARE-LOADER` | not_started | Host-side firmware downloader |
-| `DRV-PIPE-EP-BIND` | unknown | Driver pipe-to-endpoint binding |
+| `DRV-FIRMWARE-LOADER` | candidate | Host-side firmware downloader |
+| `DRV-PIPE-EP-BIND` | candidate | Driver pipe-to-endpoint binding |
 
 ## REF (24)
 
@@ -249,8 +249,8 @@
 | `LEARN-007-REF-DESIGN` | candidate | Compare REF catalog to public TRMs |
 | `LEARN-008-SYSTEM-MAP` | candidate | Follow data path in system_map.json |
 | `LEARN-009-EEPROM-LAYOUT` | candidate | Study FX2LP EEPROM boot layout |
-| `LEARN-010-USB-PROTO` | not_started | USB protocol from capture |
-| `LEARN-011-8051-DISASM` | not_started | 8051 firmware reverse engineering |
+| `LEARN-010-USB-PROTO` | candidate | USB command and acquisition planes from captures |
+| `LEARN-011-8051-DISASM` | candidate | 8051 firmware reverse engineering |
 | `LEARN-012-PIN-TEST` | not_started | Pin hypothesis verification experiments |
 | `LEARN-013-RELAY-TEST` | not_started | Relay switching experiment design |
 | `LEARN-014-BRAM-DECODE` | unknown | BRAM init extraction from bitstream |
@@ -266,8 +266,8 @@
 | ID | Status | Description |
 |----|--------|-------------|
 | `EXP-001-EEPROM-DUMP` | not_started | Read serial EEPROM to binary file |
-| `EXP-002-USB-ENUM` | not_started | Capture USB enumeration traffic |
-| `EXP-003-USB-SESSION` | not_started | Capture config+acquire session |
+| `EXP-002-USB-ENUM` | candidate | Capture USB enumeration traffic |
+| `EXP-003-USB-SESSION` | candidate | Capture config+acquire session |
 | `EXP-004-PIN-FIFO` | not_started | Probe Slave FIFO signals vs REF catalog |
 | `EXP-005-PIN-ADC` | not_started | Probe ADC serial interface timing |
 | `EXP-006-RELAY-TOGGLE` | not_started | Toggle relay and measure coax path |
@@ -277,7 +277,7 @@
 | `EXP-010-8051-DISASM` | not_started | Disassemble firmware from EEPROM slice |
 | `EXP-011-PROTO-TABLE` | not_started | Build command byte table from pcap |
 | `EXP-012-VIDPID` | not_started | Record VID/PID from descriptor or EEPROM |
-| `EXP-013-ENDPOINT-MAP` | not_started | Map bulk IN/OUT endpoint numbers |
+| `EXP-013-ENDPOINT-MAP` | confirmed | Map bulk IN/OUT endpoint numbers |
 | `EXP-014-DATA-FRAME` | not_started | Determine sample packing in USB stream |
 | `EXP-015-BRG-UPGRADE` | not_started | Upgrade hypothesis bridges to confirmed |
 

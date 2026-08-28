@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-08-28T13:14:58.805414+00:00",
+  "status": "annotated",
+  "layer": "L4-L5",
+  "routine_entry": "0x1435",
+  "why": "Dominant owner for opcode 0x08 immediates AND top EP6/FIFO datapath score",
+  "sfr_access_sequence": [
+    {
+      "at": "0x148e",
+      "imm": "0xe6a2",
+      "label": "EP6CS"
+    },
+    {
+      "at": "0x14fa",
+      "imm": "0xe6a2",
+      "label": "EP6CS"
+    },
+    {
+      "at": "0x150b",
+      "imm": "0xe6a2",
+      "label": "EP6CS"
+    },
+    {
+      "at": "0x151c",
+      "imm": "0xe6a1",
+      "label": "EP4CS"
+    },
+    {
+      "at": "0x1531",
+      "imm": "0xe6a2",
+      "label": "EP6CS"
+    }
+  ],
+  "cmd_opcode_immediates_in_window": [
+    {
+      "at": "0x1546",
+      "text": "MOV A,#0x04",
+      "imm": "0x04"
+    },
+    {
+      "at": "0x156f",
+      "text": "MOV A,#0x08",
+      "imm": "0x08"
+    },
+    {
+      "at": "0x1588",
+      "text": "MOV A,#0x08",
+      "imm": "0x08"
+    }
+  ],
+  "interpretation": "Ordered SFR touches inside 0x1435 suggest endpoint/FIFO configuration co-located with opcode-0x08 immediate sites; treat as start/arm+datapath hub candidate only.",
+  "semantics": "unknown",
+  "confidence": "candidate",
+  "oracle_ref": "manifests/fx2_oracle_crosscheck.json",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

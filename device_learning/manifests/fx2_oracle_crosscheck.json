@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-08-28T13:14:58.984517+00:00",
+  "status": "crosschecked",
+  "layer": "L6",
+  "plan_ref": "BINARY_RE_PLAN.md",
+  "source_note": "Binary from fx2_ram_from_enum.bin; oracle from usb_session — NOT eeprom.bin",
+  "top_datapath_routine": "0x1435",
+  "top_datapath_labels": [
+    "EP4CFG",
+    "EP4CS",
+    "EP6CFG",
+    "EP6CS",
+    "FIFORESET",
+    "PINFLAGSAB"
+  ],
+  "findings": [
+    {
+      "opcode": "0x01",
+      "binary_owner_routine": "0x054c",
+      "oracle_ep84_precede_hits": 118,
+      "overlaps_top_datapath_routine": false,
+      "top_datapath_routine": "0x1435",
+      "confidence": "candidate",
+      "note": "binary owner + strong EP84-precede oracle",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x08",
+      "binary_owner_routine": "0x1435",
+      "oracle_ep84_precede_hits": 176,
+      "overlaps_top_datapath_routine": true,
+      "top_datapath_routine": "0x1435",
+      "confidence": "candidate",
+      "note": "owner equals top datapath routine AND EP84-precede oracle",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x09",
+      "binary_owner_routine": "0x1c5b",
+      "oracle_ep84_precede_hits": 118,
+      "overlaps_top_datapath_routine": false,
+      "top_datapath_routine": "0x1435",
+      "confidence": "candidate",
+      "note": "binary owner + strong EP84-precede oracle",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0a",
+      "binary_owner_routine": "0x0b13",
+      "oracle_ep84_precede_hits": 60,
+      "overlaps_top_datapath_routine": false,
+      "top_datapath_routine": "0x1435",
+      "confidence": "candidate",
+      "note": "binary owner + strong EP84-precede oracle",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x0b",
+      "binary_owner_routine": null,
+      "oracle_ep84_precede_hits": 60,
+      "overlaps_top_datapath_routine": false,
+      "top_datapath_routine": "0x1435",
+      "confidence": "hypothesis",
+      "note": "insufficient joint evidence",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x04",
+      "binary_owner_routine": "0x07ea",
+      "oracle_ep84_precede_hits": 12,
+      "overlaps_top_datapath_routine": false,
+      "top_datapath_routine": "0x1435",
+      "confidence": "hypothesis",
+      "note": "insufficient joint evidence",
+      "semantics": "unknown"
+    },
+    {
+      "opcode": "0x05",
+      "binary_owner_routine": "0x0f23",
+      "oracle_ep84_precede_hits": null,
+      "overlaps_top_datapath_routine": false,
+      "top_datapath_routine": "0x1435",
+      "confidence": "hypothesis",
+      "note": "insufficient joint evidence",
+      "semantics": "unknown"
+    }
+  ],
+  "headline": {
+    "opcode": "0x08",
+    "binary_owner_routine": "0x1435",
+    "oracle_ep84_precede_hits": 176,
+    "overlaps_top_datapath_routine": true,
+    "top_datapath_routine": "0x1435",
+    "confidence": "candidate",
+    "note": "owner equals top datapath routine AND EP84-precede oracle",
+    "semantics": "unknown"
+  },
+  "taxonomy_opcode_count": 14,
+  "boundary": "candidate ≠ confirmed semantics; still need Ghidra CFG + controlled experiments",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

@@ -14,8 +14,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from catalogs.catalog_usb import ENTRIES as USB_ENTRIES  # noqa: E402
-
 OUT = ROOT / "manifests" / "phase_b_upgrade_proposals.json"
 
 
@@ -27,9 +25,15 @@ def load_json(rel: str) -> dict:
 
 
 def current_status(identifier: str) -> str | None:
-    for e in USB_ENTRIES:
-        if e["identifier"] == identifier:
-            return e["status"]
+    catalogs = ["catalog_usb", "catalog_learn", "catalog_signal", "catalog_exp"]
+    for name in catalogs:
+        try:
+            mod = __import__(f"catalogs.{name}", fromlist=["ENTRIES"])
+            for e in getattr(mod, "ENTRIES", []):
+                if e["identifier"] == identifier:
+                    return e["status"]
+        except Exception:
+            continue
     return None
 
 
@@ -53,12 +57,13 @@ def build_proposals() -> dict:
     fw_extract = load_json("manifests/firmware_extract.json")
     fw_scan = load_json("manifests/firmware_scan.json")
     proto_log = load_json("manifests/protocol_log_meta.json")
+    eeprom_path = ROOT / "phase_b" / "captures" / "eeprom.bin"
 
     proposals: list[dict] = []
     applicable = False
     notes: list[str] = []
 
-    if eeprom.get("status") == "observed":
+    if eeprom.get("status") == "observed" and eeprom_path.is_file():
         applicable = True
         notes.append("Real EEPROM dump detected (not synthetic fixture).")
         if p := propose("FW-EEPROM-IMAGE", "candidate", "8192-byte dump on disk", "phase_b/captures/eeprom.bin"):
@@ -96,27 +101,156 @@ def build_proposals() -> dict:
             if p := propose("FW-MCU-RESET-VECTOR", "unknown", "Firmware bytes present; entry not disassembled", "manifests/firmware_scan.json"):
                 proposals.append(p)
 
+    elif eeprom.get("status") == "observed":
+        notes.append(
+            "Ignoring observed EEPROM metadata because phase_b/captures/eeprom.bin is absent; "
+            "no FW-EEPROM-* proposals."
+        )
     elif eeprom.get("status") == "synthetic_pipeline_test":
         notes.append("Only synthetic EEPROM available — no upgrade proposals.")
 
-    if usb.get("status") == "observed":
+    decode = load_json("manifests/usb_protocol_decode.json")
+    has_usb_files = (ROOT / "phase_b" / "captures" / "usb_enum.pcapng").exists() or (
+        ROOT / "phase_b" / "captures" / "usb_session.pcapng"
+    ).exists()
+
+    # Only propose from decode when real pcap files are on disk (pytest empties captures/).
+    if decode.get("status") == "decoded" and has_usb_files:
         applicable = True
-        notes.append("USB capture files present.")
+        notes.append("usb_protocol_decode.json available — descriptor/endpoint map decoded.")
+        evid = "manifests/usb_protocol_decode.json"
+        for ident, reason in (
+            ("PROTO-DESC-DEVICE", "Device descriptor decoded (VID/PID/bcdDevice)"),
+            ("PROTO-DESC-CONFIG", "Configuration descriptor decoded (1 interface)"),
+            ("PROTO-DESC-INTERFACE", "Interface descriptor decoded (vendor-specific 0xff, 4 EPs)"),
+        ):
+            if p := propose(ident, "confirmed", reason, evid):
+                proposals.append(p)
+        if p := propose(
+            "PROTO-DESC-STRING",
+            "candidate",
+            "String descriptors partial (serial candidate present; manufacturer/product sparse)",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose("PROTO-EP-MAP", "confirmed", "Four bulk endpoints mapped (0x01/0x81/0x06/0x84)", evid):
+            proposals.append(p)
+        if p := propose("PROTO-EP-BULK-IN", "confirmed", "Bulk IN 0x81 and 0x84, wMaxPacketSize=512", evid):
+            proposals.append(p)
+        if p := propose("PROTO-EP-BULK-OUT", "confirmed", "Bulk OUT 0x01 and 0x06, wMaxPacketSize=512", evid):
+            proposals.append(p)
+        if p := propose(
+            "PROTO-EP-INTERRUPT",
+            "candidate",
+            "No interrupt endpoint in interface descriptor (4 bulk only)",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose(
+            "PROTO-EP-ALT-SETTINGS",
+            "candidate",
+            "Only bAlternateSetting=0 observed",
+            evid,
+        ):
+            proposals.append(p)
+        if p := propose("PROTO-XFER-MODE", "confirmed", "Session traffic is bulk-dominant; no isochronous", evid):
+            proposals.append(p)
+        if p := propose(
+            "PROTO-CTRL-VENDOR-REQ",
+            "candidate",
+            "Primary: no vendor ctrl; companion FX2 0xA0/A4/A5/B0 tabulated",
+            "manifests/usb_primary_ctrl_744f.json + manifests/usb_vendor_ctrl_7317.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "LEARN-010-USB-PROTO",
+            "candidate",
+            "Framing 100% on EP01/81; opcode meanings still open",
+            "manifests/usb_command_taxonomy.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "EXP-011-PROTO-TABLE",
+            "candidate",
+            "14 observed opcode byte values cataloged; meanings remain unknown",
+            "manifests/usb_command_taxonomy.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "SIG-PROTOCOL-FRAMING",
+            "candidate",
+            "BE u16 tag + frame_len + body_len + type + opcode (100% length match)",
+            "manifests/usb_command_taxonomy.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "DRV-FIRMWARE-LOADER",
+            "candidate",
+            "FX2 RAM load via 0xA0/CPUCS then renumeration 0x7317→0x744f",
+            "manifests/usb_vendor_ctrl_7317.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "DRV-PIPE-EP-BIND",
+            "candidate",
+            "Cmd EP01/81 + data EP06/84 observed in session",
+            "manifests/usb_command_taxonomy.json + manifests/usb_data_plane_hypothesis.json",
+        ):
+            proposals.append(p)
+        if p := propose(
+            "FW-MCU-RENUMERATION",
+            "candidate",
+            "Observed companion→primary renumeration after RAM load",
+            "manifests/usb_enum_decode_notes.json + manifests/usb_vendor_ctrl_7317.json",
+        ):
+            proposals.append(p)
+    elif usb.get("status") == "observed" and has_usb_files:
+        applicable = True
+        notes.append("USB capture files present; decode pending.")
         for ident in (
             "PROTO-DESC-DEVICE",
             "PROTO-DESC-CONFIG",
             "PROTO-DESC-INTERFACE",
             "PROTO-DESC-STRING",
         ):
-            if p := propose(ident, "not_started", "pcap present; descriptor parse pending", "manifests/usb_capture_meta.json"):
+            if p := propose(ident, "candidate", "pcap present; run analyze_usb_pcap_decode.py", "manifests/usb_capture_meta.json"):
                 proposals.append(p)
-        if p := propose("PROTO-EP-MAP", "unknown", "pcap present; endpoint map not decoded", "manifests/usb_capture_meta.json"):
+        if p := propose("PROTO-EP-MAP", "candidate", "pcap present; endpoint map pending decode", "manifests/usb_capture_meta.json"):
             proposals.append(p)
 
     if proto_log.get("status") == "observed":
         applicable = True
-        if p := propose("PROTO-CTRL-VENDOR-REQ", "unknown", "protocol_log curated entries present", "phase_b/captures/protocol_log.json"):
+        notes.append("protocol_log.json present (human/auto draft).")
+        # Do not propose a downgrade; framing lives on bulk, not EP0 vendor ctrl.
+
+    addr_map = load_json("manifests/fx2_address_map.json")
+    init_chain = load_json("manifests/fx2_init_chain.json")
+    ram_bin = ROOT / "phase_b" / "analysis" / "fx2_ram_from_enum.bin"
+    if ram_bin.exists() and addr_map.get("status") == "mapped":
+        applicable = True
+        notes.append("fx2_address_map.json mapped from volatile RAM image.")
+        if p := propose(
+            "FW-MCU-CODE-XRAM-MAP",
+            "candidate",
+            "16KiB RAM address map + SFR/XDATA refs from fx2_ram_from_enum.bin",
+            "manifests/fx2_address_map.json",
+        ):
             proposals.append(p)
+        if p := propose(
+            "FW-MCU-RESET-VECTOR",
+            "candidate",
+            "Reset 0x0000→0x075B with init SFR walk",
+            "manifests/fx2_init_chain.json + manifests/fx2_ivt_map.json",
+        ):
+            proposals.append(p)
+        if init_chain.get("status") == "scanned":
+            if p := propose(
+                "FW-MCU-CORE-IMAGE",
+                "candidate",
+                "RAM image supports init-chain and address-map analysis",
+                "phase_b/analysis/fx2_ram_from_enum.bin",
+            ):
+                proposals.append(p)
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),

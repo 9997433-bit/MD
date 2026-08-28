@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-08-28T07:31:36.879343+00:00",
+  "device": "0x3923:0x744f",
+  "ep06_out": {
+    "endpoint": "0x06",
+    "name": "bulk_out_ep06",
+    "packet_count": 417,
+    "length_histogram": {
+      "512": 255,
+      "2000": 161,
+      "490": 1
+    },
+    "be_u32_length_match_ratio": 0.0,
+    "top_prefix4": [
+      [
+        "00000000",
+        245
+      ],
+      [
+        "1d41d41d",
+        4
+      ],
+      [
+        "80240e00",
+        2
+      ],
+      [
+        "10000000",
+        2
+      ],
+      [
+        "80040000",
+        2
+      ],
+      [
+        "0090f00f",
+        1
+      ],
+      [
+        "00000008",
+        1
+      ],
+      [
+        "00000002",
+        1
+      ],
+      [
+        "01498080",
+        1
+      ],
+      [
+        "00080000",
+        1
+      ]
+    ],
+    "unique_bytes_in_first32_hist": {
+      "1": 65,
+      "2": 5,
+      "3": 7,
+      "4": 3,
+      "5": 5,
+      "6": 5,
+      "7": 7,
+      "8": 5,
+      "9": 7,
+      "10": 10,
+      "11": 13,
+      "12": 11,
+      "13": 13,
+      "14": 7,
+      "15": 10
+    },
+    "inter_arrival_s": {
+      "p50": 0.001731,
+      "p90": 0.009803,
+      "p99": 0.01018,
+      "min": 1.3e-05,
+      "max": 75.67649
+    },
+    "role_hypothesis": "NOT command framing (BE length match low); likely sample/status data plane"
+  },
+  "ep84_in": {
+    "endpoint": "0x84",
+    "name": "bulk_in_ep84",
+    "packet_count": 294,
+    "length_histogram": {
+      "5640": 5,
+      "15168": 4,
+      "5508": 4,
+      "32768": 4,
+      "5788": 3,
+      "5732": 3,
+      "5804": 3,
+      "5592": 3,
+      "5700": 3,
+      "8000": 2,
+      "5904": 2,
+      "5908": 2
+    },
+    "be_u32_length_match_ratio": 0.0,
+    "top_prefix4": [
+      [
+        "beffee00",
+        27
+      ],
+      [
+        "bf018f00",
+        24
+      ],
+      [
+        "0e66f980",
+        3
+      ],
+      [
+        "ffe07000",
+        2
+      ],
+      [
+        "0e673180",
+        2
+      ],
+      [
+        "0e671580",
+        2
+      ],
+      [
+        "0e670d00",
+        2
+      ],
+      [
+        "0e671600",
+        2
+      ],
+      [
+        "0e670080",
+        2
+      ],
+      [
+        "0e672100",
+        2
+      ]
+    ],
+    "unique_bytes_in_first32_hist": {
+      "4": 51,
+      "9": 4,
+      "10": 15,
+      "11": 61,
+      "12": 112,
+      "13": 48,
+      "14": 3
+    },
+    "inter_arrival_s": {
+      "p50": 0.0326,
+      "p90": 0.102299,
+      "p99": 3.805986,
+      "min": 0.017339,
+      "max": 8.081482
+    },
+    "role_hypothesis": "NOT command framing (BE length match low); likely sample/status data plane"
+  },
+  "vs_command_plane": {
+    "ep01_be_length_match_ratio_ref": 0.7763,
+    "ep06_near_ep01_within_10ms_ratio": 0.4436,
+    "interpretation": "EP0x01/0x81 look like framed commands; EP0x06/0x84 look like separate data plane"
+  },
+  "confidence": "hypothesis",
+  "boundary": "No sample format decode; ADC packing unknown without known stimulus + EEPROM/firmware",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

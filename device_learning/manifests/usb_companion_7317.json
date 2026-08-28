@@ -1,0 +1,260 @@
+{
+  "generated_at": "2026-08-28T07:20:22.624370+00:00",
+  "status": "observed",
+  "tool": "tshark",
+  "role": "companion",
+  "confidence": "candidate",
+  "sources": {
+    "usb_enum.pcapng": true,
+    "usb_session.pcapng": true
+  },
+  "identity": {
+    "idVendor": "0x3923",
+    "idVendor_name": "National Instruments Corp. (USB-IF)",
+    "idProduct": "0x7317",
+    "bcdDevice": "0x744f",
+    "bcdUSB": "0x0200",
+    "bDeviceClass": "0xff",
+    "bDeviceSubClass": "0xff",
+    "bDeviceProtocol": "0xff",
+    "bMaxPacketSize0": 64,
+    "bNumConfigurations": 1,
+    "iManufacturer": 0,
+    "iProduct": 0,
+    "iSerialNumber": 0,
+    "confidence": "confirmed",
+    "evidence": "device descriptor in usb_enum.pcapng frame 38 and usb_session.pcapng frame 88"
+  },
+  "device_addresses": {
+    "usb_enum.pcapng": 8,
+    "usb_session.pcapng": 23
+  },
+  "relationship": {
+    "primary_idProduct": "0x744f",
+    "note": "Secondary device on same bus as primary 0x3923:0x744f; companion bcdDevice 0x744f observed historically and confirmed in both captures (equals primary idProduct value).",
+    "same_bus": true,
+    "bus_id": 2,
+    "confidence": "candidate"
+  },
+  "configuration": {
+    "bConfigurationValue": 1,
+    "bNumInterfaces": 1,
+    "wTotalLength": 171,
+    "bmAttributes": "0x80",
+    "self_powered": false,
+    "remote_wakeup": false,
+    "bMaxPower_mA": 100,
+    "confidence": "confirmed",
+    "evidence": "usb_enum.pcapng / usb_session.pcapng configuration descriptor"
+  },
+  "interfaces": [
+    {
+      "bInterfaceNumber": 0,
+      "bAlternateSetting": 0,
+      "bNumEndpoints": 0,
+      "bInterfaceClass": "0xff",
+      "bInterfaceSubClass": "0xff",
+      "bInterfaceProtocol": "0xff",
+      "note": "Default after SET_CONFIGURATION; no non-control endpoints"
+    },
+    {
+      "bInterfaceNumber": 0,
+      "bAlternateSetting": 1,
+      "bNumEndpoints": 6,
+      "bInterfaceClass": "0xff",
+      "bInterfaceSubClass": "0xff",
+      "bInterfaceProtocol": "0xff",
+      "endpoints": [
+        {
+          "bEndpointAddress": "0x01",
+          "direction": "OUT",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x81",
+          "direction": "IN",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x02",
+          "direction": "OUT",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x04",
+          "direction": "OUT",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x86",
+          "direction": "IN",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x88",
+          "direction": "IN",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        }
+      ]
+    },
+    {
+      "bInterfaceNumber": 0,
+      "bAlternateSetting": 2,
+      "bNumEndpoints": 6,
+      "bInterfaceClass": "0xff",
+      "bInterfaceSubClass": "0xff",
+      "bInterfaceProtocol": "0xff",
+      "endpoints": [
+        {
+          "bEndpointAddress": "0x01",
+          "direction": "OUT",
+          "type": "interrupt",
+          "wMaxPacketSize": 64
+        },
+        {
+          "bEndpointAddress": "0x81",
+          "direction": "IN",
+          "type": "interrupt",
+          "wMaxPacketSize": 64
+        },
+        {
+          "bEndpointAddress": "0x02",
+          "direction": "OUT",
+          "type": "interrupt",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x04",
+          "direction": "OUT",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x86",
+          "direction": "IN",
+          "type": "interrupt",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x88",
+          "direction": "IN",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        }
+      ]
+    },
+    {
+      "bInterfaceNumber": 0,
+      "bAlternateSetting": 3,
+      "bNumEndpoints": 6,
+      "bInterfaceClass": "0xff",
+      "bInterfaceSubClass": "0xff",
+      "bInterfaceProtocol": "0xff",
+      "endpoints": [
+        {
+          "bEndpointAddress": "0x01",
+          "direction": "OUT",
+          "type": "interrupt",
+          "wMaxPacketSize": 64
+        },
+        {
+          "bEndpointAddress": "0x81",
+          "direction": "IN",
+          "type": "interrupt",
+          "wMaxPacketSize": 64
+        },
+        {
+          "bEndpointAddress": "0x02",
+          "direction": "OUT",
+          "type": "isochronous",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x04",
+          "direction": "OUT",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x86",
+          "direction": "IN",
+          "type": "isochronous",
+          "wMaxPacketSize": 512
+        },
+        {
+          "bEndpointAddress": "0x88",
+          "direction": "IN",
+          "type": "bulk",
+          "wMaxPacketSize": 512
+        }
+      ]
+    }
+  ],
+  "alt_settings_used": {
+    "observed_set_configuration": 1,
+    "observed_set_interface": false,
+    "active_alternate_in_captures": 0,
+    "confidence": "candidate",
+    "boundary": "Alt 1–3 present in descriptors but never selected in either capture"
+  },
+  "session_traffic_volume": {
+    "usb_enum.pcapng": {
+      "device_address": 8,
+      "frames": 254,
+      "sum_frame_len": 65414,
+      "sum_data_len": 58304,
+      "endpoint_traffic_counts": {
+        "xfer=0x02 ep=0x80": 126,
+        "xfer=0x02 ep=0x00": 126,
+        "xfer=0xff ep=0x00": 2
+      },
+      "bulk_frames": 0,
+      "non_ep0_frames": 0
+    },
+    "usb_session.pcapng": {
+      "device_address": 23,
+      "frames": 254,
+      "sum_frame_len": 65414,
+      "sum_data_len": 58304,
+      "frame_range": [
+        85,
+        338
+      ],
+      "endpoint_traffic_counts": {
+        "xfer=0x02 ep=0x80": 126,
+        "xfer=0x02 ep=0x00": 126,
+        "xfer=0xff ep=0x00": 2
+      },
+      "bulk_frames": 0,
+      "non_ep0_frames": 0,
+      "relative_to_primary": {
+        "primary_device_address": 24,
+        "primary_frames": 15877,
+        "companion_fraction_of_addressed": 0.0157
+      }
+    },
+    "note": "Companion traffic is EP0 control only (descriptor + vendor control); no data-plane bulk/interrupt/iso observed. Volume matches enum capture (~254 frames)."
+  },
+  "vendor_control": {
+    "status": "observed_not_decoded",
+    "bRequest_codes_seen": [
+      160,
+      164,
+      165,
+      176
+    ],
+    "bmRequestType_seen": [
+      "0x40",
+      "0xc0"
+    ],
+    "boundary": "Vendor bRequest semantics not reverse-engineered; large wValue-indexed control reads/writes on EP0 only"
+  },
+  "boundary": "May be programmer/aux interface; present on bus beside primary 0x744f but not used for session data path in these captures",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

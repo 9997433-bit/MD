@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-08-28T14:40:30.950273+00:00",
+  "status": "partial_restore",
+  "overall_restore_fraction_estimate": 0.422,
+  "fraction_note": "Heuristic coverage of reverse-engineering facets; NOT product equivalence",
+  "facets": {
+    "usb_transport_and_framing": 0.9,
+    "stream_arm_sequence_structure": 0.6,
+    "command_body_tlv_structure": 0.55,
+    "sample_word_structure": 0.6,
+    "sample_physical_units": 0.05,
+    "channel_map_and_sync": 0.25,
+    "fx2_datapath_anchors": 0.5,
+    "fpga_analog_behavior": 0.15,
+    "host_end_to_end_restore": 0.2
+  },
+  "layers": [
+    {
+      "layer": "USB_command_plane",
+      "restored": "framing + opcode inventory + arm-window consensus + 0x0c TLV/body pairing",
+      "artifact": "ep01_stream_arm_sequence.json / ep01_body_semantics.json / usb_command_taxonomy.json",
+      "confidence": "candidate",
+      "missing": "opcode semantics proof via replay; stimulus-linked field meanings"
+    },
+    {
+      "layer": "USB_data_plane_bytes",
+      "restored": "EP84 as primary sample bulk IN; length%4==0; headerless BE32>>7 top model",
+      "artifact": "ep84_packing_deep.json / ep84_unpack_preview.json",
+      "confidence": "candidate",
+      "missing": "volts scale, signedness, channel interleave proof"
+    },
+    {
+      "layer": "FX2_firmware_path",
+      "restored": "0x1435 hub FIFO/EP micro-ops; init→0x1435; opcode imm sites",
+      "artifact": "fx2_stream_path.json / MCU_NOTES.md",
+      "confidence": "candidate",
+      "missing": "full CFG, indirect calls, eeprom.bin"
+    },
+    {
+      "layer": "joint_oracle",
+      "restored": "0x08 owner ∩ 0x1435 ∩ EP84-precede",
+      "artifact": "fx2_oracle_crosscheck.json",
+      "confidence": "candidate",
+      "missing": "proof 0x08 is start vs FIFO constant"
+    },
+    {
+      "layer": "analog_frontend_FPGA",
+      "restored": "architecture sketch only (BNC→relay→ADC→FPGA→FX2)",
+      "artifact": "ARCHITECTURE.md / system_map.json",
+      "confidence": "hypothesis",
+      "missing": "bitstream behavior, coupling/IEPE/trigger experiments"
+    },
+    {
+      "layer": "host_output_API",
+      "restored": "API sketch mapped to EP01/81 + EP84",
+      "artifact": "HOST_ACQ_API_SKETCH.md",
+      "confidence": "hypothesis",
+      "missing": "working open-source stack validated on live device"
+    }
+  ],
+  "top_packing": {
+    "id": "P1_BE32_SHIFT7_SCALAR",
+    "score": 82.0,
+    "confidence": "candidate",
+    "statement": "EP84 is a headerless stream of big-endian 32-bit words with seven low zero bits (structural >>7 values); channel interleave 1."
+  },
+  "arm_first_occurrence_chain": [
+    "0x01",
+    "0x0f",
+    "0x08",
+    "0x09",
+    "0x0a",
+    "0x0b",
+    "0x10",
+    "0x04"
+  ],
+  "body_hypotheses": [
+    "H_STATUS_OK_2",
+    "H_KEEPALIVE_01",
+    "H_BODY_0C_TLV",
+    "H_SUB_03_CHANNEL",
+    "H_SUB_0F_READBACK",
+    "H_SUB_20_QUERY"
+  ],
+  "channel_index_candidate_hist": {
+    "0": 52,
+    "1": 52,
+    "2": 52,
+    "3": 52
+  },
+  "oracle_headline": {
+    "opcode": "0x08",
+    "binary_owner_routine": "0x1435",
+    "oracle_ep84_precede_hits": 176,
+    "overlaps_top_datapath_routine": true,
+    "top_datapath_routine": "0x1435",
+    "confidence": "candidate",
+    "note": "owner equals top datapath routine AND EP84-precede oracle",
+    "semantics": "unknown"
+  },
+  "unpack_preview_status": "preview",
+  "blockers_to_full_restore": [
+    "No known-stimulus capture to validate scale, offset, signedness, or units",
+    "Byte3 bit7 meaning (aux flag vs numeric LSB) not separable from passive data",
+    "Channel count / mapping not identifiable without single-channel stimulus",
+    "Opcode semantics for stream arm/config remain unlabeled",
+    "Host-requested fs not present in this capture metadata",
+    "No controlled stimulus capture in phase_b/captures/",
+    "eeprom.bin still missing (L7)",
+    "Cannot auto-upgrade to confirmed under catalog policy"
+  ],
+  "blocker_experiments_doc": "phase_c/templates/FULL_RESTORE_BLOCKERS.md",
+  "passive_evidence_exhausted": true,
+  "next_actions": [
+    "Lab B1: known sine/DC on AI0 alone → validate packing + scale",
+    "Lab B2: 4ch common-source / single-hot → channel map vs 0c03 index",
+    "Lab B3: Replay white-list arm recipe from ep01_stream_arm_sequence.json",
+    "Lab B5: Physical eeprom.bin dump for L7 firmware truth"
+  ],
+  "confidence_ceiling": "candidate",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

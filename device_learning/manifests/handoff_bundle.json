@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:38:57.795951+00:00",
+  "generated_at": "2026-08-28T13:15:02.482808+00:00",
   "package": "device_learning",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "resume_commands": [
@@ -10,21 +10,21 @@
   ],
   "sections": {
     "manifests_static_closure": {
-      "generated_at": "2026-08-27T16:38:57.691189+00:00",
+      "generated_at": "2026-08-28T13:15:02.381134+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "static_phase_closed": true,
       "frozen": true,
       "identifiers": 237,
       "status_counts": {
-        "confirmed": 68,
-        "candidate": 65,
-        "unknown": 56,
+        "confirmed": 76,
+        "candidate": 81,
+        "unknown": 48,
         "hypothesis": 6,
-        "not_started": 30,
-        "missing": 12
+        "not_started": 19,
+        "missing": 7
       },
-      "pytest_count": 104,
-      "manifest_json_count": 43,
+      "pytest_count": 115,
+      "manifest_json_count": 73,
       "phase_b_blockers_remaining": 3,
       "upgrade_proposals_pending": 0,
       "resume_commands": [
@@ -72,7 +72,7 @@
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
     },
     "manifests_phase_b_readiness": {
-      "generated_at": "2026-08-27T16:38:50.275777+00:00",
+      "generated_at": "2026-08-28T13:15:01.604867+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "blockers": [
         {
@@ -103,12 +103,12 @@
       "ready_count": 0,
       "blocker_count": 3,
       "deep_analysis_ready": false,
-      "checklist": "0/6",
+      "checklist": "1/6",
       "upgrade_proposals_pending": 0,
       "next_command": "make check-captures"
     },
     "manifests_phase_c_readiness": {
-      "generated_at": "2026-08-27T16:38:50.507361+00:00",
+      "generated_at": "2026-08-28T13:15:01.836513+00:00",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "phase_b_prerequisite_met": false,
       "checklist": "0/6",
@@ -116,7 +116,7 @@
       "recommended_action": "complete phase B captures first"
     },
     "manifests_phase_transition": {
-      "generated_at": "2026-08-27T16:38:57.104956+00:00",
+      "generated_at": "2026-08-28T13:14:59.375429+00:00",
       "current_phase": "static_complete_pending_hardware",
       "recommended_phase": "static_complete_pending_hardware",
       "transition_ready": false,
@@ -134,7 +134,7 @@
       "action": "place real captures in phase_b/captures/ (see HARDWARE_HANDOFF.md)"
     },
     "manifests_capture_manifest": {
-      "generated_at": "2026-08-27T16:38:50.118562+00:00",
+      "generated_at": "2026-08-28T13:15:01.449208+00:00",
       "artifacts": [
         {
           "path": "phase_b/captures/eeprom.bin",
@@ -158,10 +158,11 @@
         },
         {
           "path": "phase_b/analysis/mcu_disasm.txt",
-          "exists": false
+          "exists": true,
+          "size_bytes": 28833
         }
       ],
-      "present_count": 0,
+      "present_count": 1,
       "expected_count": 6,
       "flags": {
         "eeprom_present": false,
@@ -178,27 +179,23 @@
       "boundary": "Inventory only; status upgrades require ledger refresh"
     },
     "manifests_phase_b_upgrade_proposals": {
-      "generated_at": "2026-08-27T16:38:55.215722+00:00",
-      "applicable": false,
+      "generated_at": "2026-08-28T13:15:01.527415+00:00",
+      "applicable": true,
       "proposal_count": 0,
       "proposals": [],
       "notes": [
-        "Only synthetic EEPROM available — no upgrade proposals."
+        "Only synthetic EEPROM available — no upgrade proposals.",
+        "fx2_address_map.json mapped from volatile RAM image."
       ],
       "boundary": "Advisory only; edit catalogs/*.py after human review — never auto-apply"
     },
     "manifests_phase_roadmap": {
-      "generated_at": "2026-08-27T16:38:49.490373+00:00",
+      "generated_at": "2026-08-28T13:15:00.821608+00:00",
       "phase_b": [
         {
           "action": "eeprom_dump",
           "artifact": "phase_b/captures/eeprom.bin",
           "unblocks": [
-            "FW-MCU-CORE-IMAGE",
-            "FW-MCU-RESET-VECTOR",
-            "FW-MCU-CODE-XRAM-MAP",
-            "FW-MCU-I2C-BOOT-PATH",
-            "FW-MCU-RENUMERATION",
             "FW-EEPROM-IMAGE",
             "FW-EEPROM-CONFIG-BYTE",
             "FW-EEPROM-VIDPID",
@@ -217,13 +214,7 @@
         {
           "action": "usb_enum_capture",
           "artifact": "phase_b/captures/usb_enum.pcapng",
-          "unblocks": [
-            "PROTO-DESC-DEVICE",
-            "PROTO-DESC-CONFIG",
-            "PROTO-DESC-INTERFACE",
-            "PROTO-DESC-STRING",
-            "PROTO-EP-MAP"
-          ],
+          "unblocks": [],
           "feeds": [
             "analyze_pcap_stub.py",
             "EXP-002-USB-ENUM",
@@ -253,14 +244,14 @@
         {
           "experiment": "EXP-002-USB-ENUM",
           "description": "Capture USB enumeration traffic",
-          "status": "not_started",
-          "depends": "Need device+host"
+          "status": "candidate",
+          "depends": "pcap present; deeper vendor-req table open"
         },
         {
           "experiment": "EXP-003-USB-SESSION",
           "description": "Capture config+acquire session",
-          "status": "not_started",
-          "depends": "Need official driver"
+          "status": "candidate",
+          "depends": "pcap present; command semantics open"
         },
         {
           "experiment": "EXP-004-PIN-FIFO",
@@ -319,8 +310,8 @@
         {
           "experiment": "EXP-013-ENDPOINT-MAP",
           "description": "Map bulk IN/OUT endpoint numbers",
-          "status": "not_started",
-          "depends": "Depends EXP-002"
+          "status": "confirmed",
+          "depends": null
         },
         {
           "experiment": "EXP-014-DATA-FRAME",
@@ -338,24 +329,24 @@
       "note": "Roadmap only; status upgrades require real evidence in ledger refresh"
     },
     "manifests_evidence_summary": {
-      "generated_at": "2026-08-27T16:38:52.032205+00:00",
+      "generated_at": "2026-08-28T13:13:48.240022+00:00",
       "phase": "static_complete_pending_hardware",
       "identifiers": 237,
       "status_counts": {
-        "confirmed": 68,
-        "candidate": 65,
-        "unknown": 56,
+        "confirmed": 76,
+        "candidate": 80,
+        "unknown": 48,
         "hypothesis": 6,
-        "not_started": 30,
-        "missing": 12
+        "not_started": 19,
+        "missing": 8
       },
-      "blocked": 98,
+      "blocked": 74,
       "hardware_ready": {
         "eeprom_present": false,
         "eeprom_observed": false,
-        "usb_capture_present": false,
-        "usb_capture_observed": false,
-        "protocol_log_present": false
+        "usb_capture_present": true,
+        "usb_capture_observed": true,
+        "protocol_log_present": true
       },
       "bitstream": {
         "idcode": "0x01414093",
@@ -372,7 +363,7 @@
     "phase_b_CHECKLIST": {
       "version": "1.0",
       "phase": "B",
-      "status": "not_started",
+      "status": "in_progress",
       "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
       "prerequisites": [
         "legal_authorization",
@@ -426,11 +417,11 @@
           "depends": [
             "B1"
           ],
-          "done": false
+          "done": true
         }
       ],
-      "updated_at": "2026-08-27T16:38:57.024918+00:00",
-      "done_count": 0,
+      "updated_at": "2026-08-28T13:14:59.295965+00:00",
+      "done_count": 1,
       "total_count": 6
     },
     "phase_c_CHECKLIST": {
@@ -486,7 +477,7 @@
           "done": false
         }
       ],
-      "updated_at": "2026-08-27T16:38:56.867424+00:00",
+      "updated_at": "2026-08-28T13:14:57.126709+00:00",
       "done_count": 0,
       "total_count": 6
     }

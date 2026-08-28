@@ -14,6 +14,8 @@ GITKEEP = CAPTURES / ".gitkeep"
 SYNTH = ROOT / "phase_b" / "fixtures" / "eeprom_synthetic_reference.bin"
 EEPROM_CAPTURE = CAPTURES / "eeprom.bin"
 SCRIPTS = ROOT / "scripts"
+# Session stash so real device dumps survive pytest without breaking empty-capture tests.
+_STASH = ROOT / "phase_b" / ".pytest_captures_stash"
 
 
 def _refresh_phase_b_manifests() -> None:
@@ -22,24 +24,65 @@ def _refresh_phase_b_manifests() -> None:
 
 
 FW_OUT = ROOT / "phase_b" / "analysis" / "firmware.bin"
+# Keep committed / reconstructed firmware artifacts across pytest hygiene.
+ANALYSIS_KEEP = {
+    ".gitkeep",
+    "fx2_ram_from_enum.bin",
+    "MCU_NOTES.md",
+    "mcu_disasm.txt",
+}
 
 
 def restore_analysis_artifacts() -> None:
     analysis = ROOT / "phase_b" / "analysis"
     if analysis.exists():
         for path in analysis.iterdir():
-            if path.is_file() and path.name != ".gitkeep":
+            if path.is_file() and path.name not in ANALYSIS_KEEP:
                 path.unlink()
         (analysis / ".gitkeep").touch(exist_ok=True)
 
 
 def restore_captures_dir() -> None:
-    """Remove transient capture files but keep directory tracked via .gitkeep."""
+    """Empty captures/ for test isolation (real dumps live in session stash)."""
     CAPTURES.mkdir(parents=True, exist_ok=True)
     for path in CAPTURES.iterdir():
         if path.is_file() and path.name != ".gitkeep":
             path.unlink()
     GITKEEP.touch(exist_ok=True)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _stash_real_captures_for_session():
+    """Move real captures aside for the whole pytest session, restore afterward."""
+    _STASH.mkdir(parents=True, exist_ok=True)
+    CAPTURES.mkdir(parents=True, exist_ok=True)
+    for path in list(CAPTURES.iterdir()):
+        if path.is_file() and path.name != ".gitkeep":
+            dest = _STASH / path.name
+            if dest.exists():
+                dest.unlink()
+            shutil.move(str(path), str(dest))
+    GITKEEP.touch(exist_ok=True)
+    yield
+    CAPTURES.mkdir(parents=True, exist_ok=True)
+    for path in list(CAPTURES.iterdir()):
+        if path.is_file() and path.name != ".gitkeep":
+            path.unlink()
+    if _STASH.exists():
+        for path in _STASH.iterdir():
+            if path.is_file():
+                shutil.move(str(path), str(CAPTURES / path.name))
+        shutil.rmtree(_STASH, ignore_errors=True)
+    # Prefer git-tracked copies when stash was empty but files exist in index.
+    subprocess.run(
+        ["git", "checkout", "--", "phase_b/captures"],
+        cwd=ROOT,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    GITKEEP.touch(exist_ok=True)
+    _refresh_phase_b_manifests()
 
 
 @pytest.fixture(autouse=True)

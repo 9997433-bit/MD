@@ -1,6 +1,6 @@
 # 静态阶段关闭摘要
 
-**生成时间**：2026-08-27T16:38:57.691189+00:00
+**生成时间**：2026-08-28T13:15:07.565378+00:00
 
 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -11,10 +11,10 @@
 | 静态关闭 | `True` |
 | 冻结 | `True` |
 | Identifier | **237** |
-| confirmed | 68 |
-| blocked 类 | missing 12 + unknown 56 + not_started 30 |
-| pytest | **104** |
-| manifest JSON | 43 |
+| confirmed | 76 |
+| blocked 类 | missing 7 + unknown 48 + not_started 19 |
+| pytest | **115** |
+| manifest JSON | 73 |
 
 ## 静态阶段不再扩展
 

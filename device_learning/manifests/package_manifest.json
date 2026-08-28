@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-08-27T16:38:53.259625+00:00",
+  "generated_at": "2026-08-28T13:15:04.679075+00:00",
   "package": "device_learning",
   "version": "static-1.0",
-  "phase": "static_complete_pending_hardware",
+  "phase": "phase_b_in_progress",
   "static_phase_complete": true,
-  "frozen_at": "2026-08-27T16:38:53.155522+00:00",
+  "frozen_at": "2026-08-28T13:15:04.575247+00:00",
   "metrics": {
     "identifiers": 237,
-    "confirmed": 68,
-    "blocked": 98,
-    "pytest_count": 104,
-    "manifest_json_count": 43
+    "confirmed": 76,
+    "blocked": 74,
+    "pytest_count": 115,
+    "manifest_json_count": 73
   },
   "input_hashes": {
-    "combined_output_sha256": "f024b9b98047c6a3b599e688bcc405cf48bee20261d39c2df6bdad85105e1f02"
+    "combined_output_sha256": "94982804ad079217aca154dd99da29697b82696177748e775f13095faa9063b6"
   },
   "checklists": {
-    "phase_b": "0/6",
-    "phase_b_status": "not_started"
+    "phase_b": "1/6",
+    "phase_b_status": "in_progress"
   },
   "recommended_next_phase": "static_complete_pending_hardware",
   "next_actions": [

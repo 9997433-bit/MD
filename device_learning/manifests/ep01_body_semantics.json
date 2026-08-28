@@ -1,0 +1,1438 @@
+{
+  "generated_at": "2026-08-28T14:40:29.879610+00:00",
+  "status": "hypothesized",
+  "device": "0x3923:0x744f",
+  "usb_addr": 24,
+  "ep01_out_count": 3724,
+  "ep81_in_count": 3434,
+  "paired_by_tag": 3716,
+  "pair_rate": 0.9979,
+  "opcode_stats": {
+    "0x00": {
+      "out_count": 2,
+      "body_len_hist": {
+        "4": 2
+      },
+      "subcode_hist": {},
+      "paired": 0,
+      "in_status_hist": {},
+      "in_body_len_hist": {},
+      "examples": [
+        {
+          "t": 6.538268,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          }
+        },
+        {
+          "t": 7.526119,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          }
+        }
+      ]
+    },
+    "0x02": {
+      "out_count": 1,
+      "body_len_hist": {
+        "4": 1
+      },
+      "subcode_hist": {},
+      "paired": 0,
+      "in_status_hist": {},
+      "in_body_len_hist": {},
+      "examples": [
+        {
+          "t": 7.418291,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          }
+        }
+      ]
+    },
+    "0x01": {
+      "out_count": 1814,
+      "body_len_hist": {
+        "4": 1814
+      },
+      "subcode_hist": {},
+      "paired": 1813,
+      "in_status_hist": {
+        "00000002": 1813
+      },
+      "in_body_len_hist": {
+        "4": 1809,
+        "20": 4
+      },
+      "examples": [
+        {
+          "t": 7.693214,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          },
+          "in_dt": 0.000211,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 7.743067,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          },
+          "in_dt": 0.00023,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 7.793181,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          },
+          "in_dt": 0.000222,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 7.844033,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "00000000",
+            "role_guess": "empty_keepalive_body"
+          },
+          "in_dt": 0.000377,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x0a": {
+      "out_count": 80,
+      "body_len_hist": {
+        "8": 55,
+        "4": 25
+      },
+      "subcode_hist": {
+        "0x03": 52,
+        "0x05": 12,
+        "0x01": 12,
+        "0x09": 3,
+        "0x20": 1
+      },
+      "paired": 80,
+      "in_status_hist": {
+        "00000002": 80
+      },
+      "in_body_len_hist": {
+        "4": 79,
+        "8": 1
+      },
+      "examples": [
+        {
+          "t": 7.835182,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c200000",
+            "tlv_prefix": "0c20",
+            "subcode": "0x20",
+            "role_guess": "status_or_capability_query_candidate",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000327,
+          "in_body_hex": "0000000200000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.736269,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000000000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 0,
+            "u32_at_4_be": 0,
+            "channel_index_candidate": 0,
+            "rest_hex": "000000000000"
+          },
+          "in_dt": 0.000369,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.782468,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000001000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 1,
+            "u32_at_4_be": 16777216,
+            "channel_index_candidate": 1,
+            "rest_hex": "000001000000"
+          },
+          "in_dt": 0.000362,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.828539,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000002000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 2,
+            "u32_at_4_be": 33554432,
+            "channel_index_candidate": 2,
+            "rest_hex": "000002000000"
+          },
+          "in_dt": 0.000327,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x09": {
+      "out_count": 1155,
+      "body_len_hist": {
+        "4": 777,
+        "12": 326,
+        "8": 52
+      },
+      "subcode_hist": {
+        "0x20": 750,
+        "0x00": 278,
+        "0x03": 52,
+        "0x10": 48,
+        "0x01": 12,
+        "0x05": 12,
+        "0x09": 3
+      },
+      "paired": 1152,
+      "in_status_hist": {
+        "00000002": 1152
+      },
+      "in_body_len_hist": {
+        "8": 749,
+        "4": 402,
+        "12": 1
+      },
+      "examples": [
+        {
+          "t": 8.270966,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c200000",
+            "tlv_prefix": "0c20",
+            "subcode": "0x20",
+            "role_guess": "status_or_capability_query_candidate",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.001864,
+          "in_body_hex": "0000000200000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.272908,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c200000",
+            "tlv_prefix": "0c20",
+            "subcode": "0x20",
+            "role_guess": "status_or_capability_query_candidate",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.001821,
+          "in_body_hex": "0000000200000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.274813,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c200000",
+            "tlv_prefix": "0c20",
+            "subcode": "0x20",
+            "role_guess": "status_or_capability_query_candidate",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.002824,
+          "in_body_hex": "0000000200000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.277729,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c200000",
+            "tlv_prefix": "0c20",
+            "subcode": "0x20",
+            "role_guess": "status_or_capability_query_candidate",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.0003,
+          "in_body_hex": "0000000200000000",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x08": {
+      "out_count": 522,
+      "body_len_hist": {
+        "12": 431,
+        "8": 64,
+        "16": 15,
+        "4": 12
+      },
+      "subcode_hist": {
+        "0x0f": 368,
+        "0x03": 52,
+        "0x10": 48,
+        "0x00": 15,
+        "0x01": 12,
+        "0x08": 12,
+        "0x0c": 3,
+        "0x09": 3,
+        "0x0b": 3,
+        "0x0e": 2,
+        "0x04": 2,
+        "0x06": 2
+      },
+      "paired": 522,
+      "in_status_hist": {
+        "00000002": 522
+      },
+      "in_body_len_hist": {
+        "40": 322,
+        "4": 142,
+        "12": 43,
+        "8": 15
+      },
+      "examples": [
+        {
+          "t": 8.5452,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c0f00000000002c00000020",
+            "tlv_prefix": "0c0f",
+            "subcode": "0x0f",
+            "u32_pair_be": [
+              44,
+              32
+            ],
+            "u32_pair_le": [
+              738197504,
+              536870912
+            ],
+            "rest_hex": "00000000002c00000020"
+          },
+          "in_dt": 0.002239,
+          "in_body_hex": "0000000200229f93aed300000000000000000000000000000000d9fb81001bfdffffa7fa81000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.547497,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c0f00000000004c00000020",
+            "tlv_prefix": "0c0f",
+            "subcode": "0x0f",
+            "u32_pair_be": [
+              76,
+              32
+            ],
+            "u32_pair_le": [
+              1275068416,
+              536870912
+            ],
+            "rest_hex": "00000000004c00000020"
+          },
+          "in_dt": 0.002612,
+          "in_body_hex": "000000020022a8fbffff87f68100cdfaffff38fb8100ff01000000008000000000000f0b7a000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.550168,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c0f00000000006c00000004",
+            "tlv_prefix": "0c0f",
+            "subcode": "0x0f",
+            "u32_pair_be": [
+              108,
+              4
+            ],
+            "u32_pair_le": [
+              1811939328,
+              67108864
+            ],
+            "rest_hex": "00000000006c00000004"
+          },
+          "in_dt": 0.0009,
+          "in_body_hex": "000000020006d65ffeff0000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.551146,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c0f00000000000000000002",
+            "tlv_prefix": "0c0f",
+            "subcode": "0x0f",
+            "u32_pair_be": [
+              0,
+              2
+            ],
+            "u32_pair_le": [
+              0,
+              33554432
+            ],
+            "rest_hex": "00000000000000000002"
+          },
+          "in_dt": 0.000932,
+          "in_body_hex": "000000020004a443",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x0f": {
+      "out_count": 13,
+      "body_len_hist": {
+        "4": 13
+      },
+      "subcode_hist": {
+        "0x03": 13
+      },
+      "paired": 13,
+      "in_status_hist": {
+        "00000002": 13
+      },
+      "in_body_len_hist": {
+        "4": 13
+      },
+      "examples": [
+        {
+          "t": 8.689859,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000252,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 19.15437,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000242,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 27.215631,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000243,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 33.937364,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000278,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x11": {
+      "out_count": 2,
+      "body_len_hist": {
+        "4": 2
+      },
+      "subcode_hist": {
+        "0x03": 1,
+        "0x11": 1
+      },
+      "paired": 1,
+      "in_status_hist": {
+        "00000002": 1
+      },
+      "in_body_len_hist": {
+        "4": 1
+      },
+      "examples": [
+        {
+          "t": 8.690162,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000277,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.876503,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c110000",
+            "tlv_prefix": "0c11",
+            "subcode": "0x11",
+            "rest_hex": "0000"
+          }
+        }
+      ]
+    },
+    "0x0c": {
+      "out_count": 9,
+      "body_len_hist": {
+        "8": 4,
+        "12": 4,
+        "4": 1
+      },
+      "subcode_hist": {
+        "0x03": 4,
+        "0x10": 4,
+        "0x09": 1
+      },
+      "paired": 9,
+      "in_status_hist": {
+        "00000002": 9
+      },
+      "in_body_len_hist": {
+        "4": 9
+      },
+      "examples": [
+        {
+          "t": 8.736701,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000000000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 0,
+            "u32_at_4_be": 0,
+            "channel_index_candidate": 0,
+            "rest_hex": "000000000000"
+          },
+          "in_dt": 0.000286,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.782876,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000001000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 1,
+            "u32_at_4_be": 16777216,
+            "channel_index_candidate": 1,
+            "rest_hex": "000001000000"
+          },
+          "in_dt": 0.000293,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.828927,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000002000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 2,
+            "u32_at_4_be": 33554432,
+            "channel_index_candidate": 2,
+            "rest_hex": "000002000000"
+          },
+          "in_dt": 0.00028,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 8.875047,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000003000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 3,
+            "u32_at_4_be": 50331648,
+            "channel_index_candidate": 3,
+            "rest_hex": "000003000000"
+          },
+          "in_dt": 0.000425,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x10": {
+      "out_count": 13,
+      "body_len_hist": {
+        "4": 13
+      },
+      "subcode_hist": {
+        "0x03": 13
+      },
+      "paired": 13,
+      "in_status_hist": {
+        "00000002": 13
+      },
+      "in_body_len_hist": {
+        "4": 13
+      },
+      "examples": [
+        {
+          "t": 8.87554,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000235,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 19.18284,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000223,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 27.266457,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000205,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 33.987753,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c030000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000197,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x0d": {
+      "out_count": 7,
+      "body_len_hist": {
+        "12": 4,
+        "4": 3
+      },
+      "subcode_hist": {
+        "0x10": 4,
+        "0x09": 3
+      },
+      "paired": 7,
+      "in_status_hist": {
+        "00000002": 7
+      },
+      "in_body_len_hist": {
+        "4": 4,
+        "16": 3
+      },
+      "examples": [
+        {
+          "t": 8.97174,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c10000000000000fffe5fd6",
+            "tlv_prefix": "0c10",
+            "subcode": "0x10",
+            "u32_at_4_le": 0,
+            "tail4_hex": "fffe5fd6",
+            "tail4_le_i32": -698351873,
+            "tail4_be_i32": -106538,
+            "rest_hex": "000000000000fffe5fd6"
+          },
+          "in_dt": 0.000381,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 83.941086,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c10000000000000fffe5fd6",
+            "tlv_prefix": "0c10",
+            "subcode": "0x10",
+            "u32_at_4_le": 0,
+            "tail4_hex": "fffe5fd6",
+            "tail4_le_i32": -698351873,
+            "tail4_be_i32": -106538,
+            "rest_hex": "000000000000fffe5fd6"
+          },
+          "in_dt": 0.000376,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 85.361647,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 4,
+            "hex": "0c090000",
+            "tlv_prefix": "0c09",
+            "subcode": "0x09",
+            "rest_hex": "0000"
+          },
+          "in_dt": 0.000433,
+          "in_body_hex": "0000000200011af70000000000000000",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 90.688309,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 12,
+            "hex": "0c10000000000000fffe5fd6",
+            "tlv_prefix": "0c10",
+            "subcode": "0x10",
+            "u32_at_4_le": 0,
+            "tail4_hex": "fffe5fd6",
+            "tail4_le_i32": -698351873,
+            "tail4_be_i32": -106538,
+            "rest_hex": "000000000000fffe5fd6"
+          },
+          "in_dt": 0.000336,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x0b": {
+      "out_count": 76,
+      "body_len_hist": {
+        "8": 48,
+        "4": 16,
+        "16": 12
+      },
+      "subcode_hist": {
+        "0x03": 48,
+        "0x01": 12,
+        "0x05": 12,
+        "0x09": 3,
+        "0x0b": 1
+      },
+      "paired": 76,
+      "in_status_hist": {
+        "00000002": 76
+      },
+      "in_body_len_hist": {
+        "4": 76
+      },
+      "examples": [
+        {
+          "t": 19.181669,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000000000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 0,
+            "u32_at_4_be": 0,
+            "channel_index_candidate": 0,
+            "rest_hex": "000000000000"
+          },
+          "in_dt": 0.000287,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 19.181987,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000001000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 1,
+            "u32_at_4_be": 16777216,
+            "channel_index_candidate": 1,
+            "rest_hex": "000001000000"
+          },
+          "in_dt": 0.000262,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 19.182278,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000002000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 2,
+            "u32_at_4_be": 33554432,
+            "channel_index_candidate": 2,
+            "rest_hex": "000002000000"
+          },
+          "in_dt": 0.000246,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 19.182552,
+          "tag": 1,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c03000003000000",
+            "tlv_prefix": "0c03",
+            "subcode": "0x03",
+            "u32_at_4_le": 3,
+            "u32_at_4_be": 50331648,
+            "channel_index_candidate": 3,
+            "rest_hex": "000003000000"
+          },
+          "in_dt": 0.000259,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x04": {
+      "out_count": 15,
+      "body_len_hist": {
+        "8": 15
+      },
+      "subcode_hist": {
+        "0x01": 12,
+        "0x09": 3
+      },
+      "paired": 15,
+      "in_status_hist": {
+        "00000002": 15
+      },
+      "in_body_len_hist": {
+        "4": 15
+      },
+      "examples": [
+        {
+          "t": 19.203965,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000287,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 27.285339,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000326,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 34.006763,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000279,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 38.91241,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000327,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    },
+    "0x05": {
+      "out_count": 15,
+      "body_len_hist": {
+        "8": 15
+      },
+      "subcode_hist": {
+        "0x01": 12,
+        "0x09": 3
+      },
+      "paired": 15,
+      "in_status_hist": {
+        "00000002": 15
+      },
+      "in_body_len_hist": {
+        "4": 15
+      },
+      "examples": [
+        {
+          "t": 19.442567,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000313,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 27.437402,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000364,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 36.287189,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000332,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        },
+        {
+          "t": 41.318875,
+          "tag": 0,
+          "type": 1,
+          "body_dissect": {
+            "body_len": 8,
+            "hex": "0c01000000040001",
+            "tlv_prefix": "0c01",
+            "subcode": "0x01",
+            "rest_hex": "000000040001"
+          },
+          "in_dt": 0.000294,
+          "in_body_hex": "00000002",
+          "in_status_u32_be": 2
+        }
+      ]
+    }
+  },
+  "subcode_counts": {
+    "0x20": 751,
+    "0x0f": 368,
+    "0x00": 293,
+    "0x03": 235,
+    "0x10": 104,
+    "0x01": 72,
+    "0x05": 36,
+    "0x09": 22,
+    "0x08": 12,
+    "0x0b": 4,
+    "0x0c": 3,
+    "0x0e": 2,
+    "0x04": 2,
+    "0x06": 2,
+    "0x11": 1
+  },
+  "channel_index_candidate_hist": {
+    "0": 52,
+    "1": 52,
+    "2": 52,
+    "3": 52
+  },
+  "ep81_status_prefix_hist": {
+    "00000002": 3716
+  },
+  "long_readback_examples": [
+    {
+      "t": 8.5452,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000002c00000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          44,
+          32
+        ],
+        "u32_pair_le": [
+          738197504,
+          536870912
+        ],
+        "rest_hex": "00000000002c00000020"
+      },
+      "in_dt": 0.002239,
+      "in_body_hex": "0000000200229f93aed300000000000000000000000000000000d9fb81001bfdffffa7fa81000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.547497,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000004c00000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          76,
+          32
+        ],
+        "u32_pair_le": [
+          1275068416,
+          536870912
+        ],
+        "rest_hex": "00000000004c00000020"
+      },
+      "in_dt": 0.002612,
+      "in_body_hex": "000000020022a8fbffff87f68100cdfaffff38fb8100ff01000000008000000000000f0b7a000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.552139,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000000000000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          0,
+          32
+        ],
+        "u32_pair_le": [
+          0,
+          536870912
+        ],
+        "rest_hex": "00000000000000000020"
+      },
+      "in_dt": 0.002283,
+      "in_body_hex": "000000020022a4430001002c0070840040004e0049000000000000004e0041005400490000000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.554473,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000002000000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          32,
+          32
+        ],
+        "u32_pair_le": [
+          536870912,
+          536870912
+        ],
+        "rest_hex": "00000000002000000020"
+      },
+      "in_dt": 0.002249,
+      "in_body_hex": "0000000200220000000000000000000000009f93aed3000000000000000000000000000000000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.556785,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000004000000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          64,
+          32
+        ],
+        "u32_pair_le": [
+          1073741824,
+          536870912
+        ],
+        "rest_hex": "00000000004000000020"
+      },
+      "in_dt": 0.002428,
+      "in_body_hex": "000000020022d9fb81001bfdffffa7fa8100a8fbffff87f68100cdfaffff38fb8100ff0100000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.559247,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000006000000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          96,
+          32
+        ],
+        "u32_pair_le": [
+          1610612736,
+          536870912
+        ],
+        "rest_hex": "00000000006000000020"
+      },
+      "in_dt": 0.002159,
+      "in_body_hex": "00000002002200008000000000000f0b7a00d65ffeff9f93aed30000000000000000000000000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.561467,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f00000000008000000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          128,
+          32
+        ],
+        "u32_pair_le": [
+          2147483648,
+          536870912
+        ],
+        "rest_hex": "00000000008000000020"
+      },
+      "in_dt": 0.002408,
+      "in_body_hex": "00000002002200000000d9fb81001bfdffffa7fa8100a8fbffff87f68100cdfaffff38fb81000000",
+      "in_status_u32_be": 2
+    },
+    {
+      "t": 8.563907,
+      "tag": 1,
+      "type": 1,
+      "body_dissect": {
+        "body_len": 12,
+        "hex": "0c0f0000000000a000000020",
+        "tlv_prefix": "0c0f",
+        "subcode": "0x0f",
+        "u32_pair_be": [
+          160,
+          32
+        ],
+        "u32_pair_le": [
+          2684354560,
+          536870912
+        ],
+        "rest_hex": "0000000000a000000020"
+      },
+      "in_dt": 0.002504,
+      "in_body_hex": "000000020022ff01000000008000000000000f0b7a00d65ffeffc6fbffffb6f9ffffbef9ffff0000",
+      "in_status_u32_be": 2
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H_STATUS_OK_2",
+      "statement": "EP81 body prefix u32be==2 is the dominant success/status code for paired replies",
+      "support": "3716/3716 paired replies",
+      "confidence": "candidate"
+    },
+    {
+      "id": "H_KEEPALIVE_01",
+      "statement": "opcode 0x01 OUT body 00000000 with IN status 2 is keepalive/poll",
+      "support": {
+        "out_count": 1814,
+        "body_len_hist": {
+          "4": 1814
+        },
+        "subcode_hist": {},
+        "paired": 1813,
+        "in_status_hist": {
+          "00000002": 1813
+        },
+        "in_body_len_hist": {
+          "4": 1809,
+          "20": 4
+        },
+        "examples": [
+          {
+            "t": 7.693214,
+            "tag": 0,
+            "type": 1,
+            "body_dissect": {
+              "body_len": 4,
+              "hex": "00000000",
+              "role_guess": "empty_keepalive_body"
+            },
+            "in_dt": 0.000211,
+            "in_body_hex": "00000002",
+            "in_status_u32_be": 2
+          },
+          {
+            "t": 7.743067,
+            "tag": 0,
+            "type": 1,
+            "body_dissect": {
+              "body_len": 4,
+              "hex": "00000000",
+              "role_guess": "empty_keepalive_body"
+            },
+            "in_dt": 0.00023,
+            "in_body_hex": "00000002",
+            "in_status_u32_be": 2
+          },
+          {
+            "t": 7.793181,
+            "tag": 0,
+            "type": 1,
+            "body_dissect": {
+              "body_len": 4,
+              "hex": "00000000",
+              "role_guess": "empty_keepalive_body"
+            },
+            "in_dt": 0.000222,
+            "in_body_hex": "00000002",
+            "in_status_u32_be": 2
+          },
+          {
+            "t": 7.844033,
+            "tag": 0,
+            "type": 1,
+            "body_dissect": {
+              "body_len": 4,
+              "hex": "00000000",
+              "role_guess": "empty_keepalive_body"
+            },
+            "in_dt": 0.000377,
+            "in_body_hex": "00000002",
+            "in_status_u32_be": 2
+          }
+        ]
+      },
+      "confidence": "candidate"
+    },
+    {
+      "id": "H_BODY_0C_TLV",
+      "statement": "Non-empty command bodies frequently use 0x0c|subcode|… vendor TLV",
+      "support": {
+        "0x20": 751,
+        "0x0f": 368,
+        "0x00": 293,
+        "0x03": 235,
+        "0x10": 104,
+        "0x01": 72,
+        "0x05": 36,
+        "0x09": 22,
+        "0x08": 12,
+        "0x0b": 4,
+        "0x0c": 3,
+        "0x0e": 2,
+        "0x04": 2,
+        "0x06": 2,
+        "0x11": 1
+      },
+      "confidence": "candidate"
+    },
+    {
+      "id": "H_SUB_03_CHANNEL",
+      "statement": "TLV subcode 0x03 carries u32 index 0..3 — channel select/config candidate",
+      "support": {
+        "index_hist": {
+          "0": 52,
+          "1": 52,
+          "2": 52,
+          "3": 52
+        },
+        "note": "4 distinct indices match 4 AI channels"
+      },
+      "confidence": "candidate"
+    },
+    {
+      "id": "H_SUB_0F_READBACK",
+      "statement": "opcode 0x08 + sub 0x0f often yields longer EP81 bodies (config readback candidate)",
+      "support": {
+        "long_readback_examples": 8
+      },
+      "confidence": "hypothesis"
+    },
+    {
+      "id": "H_SUB_20_QUERY",
+      "statement": "subcode 0x20 short body on 0x09 looks like status/capability query",
+      "support": "frequent 0c200000 on opcode 0x09",
+      "confidence": "hypothesis"
+    }
+  ],
+  "confidence_ceiling": "candidate",
+  "boundary": "Field meanings inferred from passive traffic only; not stimulus-validated",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

@@ -1,0 +1,214 @@
+{
+  "generated_at": "2026-08-28T08:43:53.755201+00:00",
+  "source": "phase_b/captures/usb_enum.pcapng",
+  "device": {
+    "idVendor": "0x3923",
+    "idProduct": "0x7317",
+    "usb_addr": "2.8.x"
+  },
+  "status": "decoded_partial",
+  "confidence": "candidate",
+  "fx2_vendor_memory_access": {
+    "bRequest": 160,
+    "bRequest_hex": "0xA0",
+    "meaning": "Cypress FX2-family vendor memory R/W (public AN/TRM convention)",
+    "host_to_device_count": 39,
+    "device_to_host_count": 35,
+    "host_to_device_bytes_sum_wLength": 17672,
+    "cpucs_0xE600_access_count": 4,
+    "cpucs_note": "0xE600 is FX2 CPUCS; write used to hold/release 8051 during RAM load"
+  },
+  "other_vendor_bRequests": {
+    "0xA4_164": "observed block R/W around 0x4000+",
+    "0xA5_165": "observed block reads",
+    "0xB0_176": "observed short read (wLength=2)"
+  },
+  "request_histogram_top": [
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 160,
+      "wValue": "0xe600",
+      "wLength": 1,
+      "count": 4
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 160,
+      "wValue": "0x0000",
+      "wLength": 512,
+      "count": 2
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 160,
+      "wValue": "0x0000",
+      "wLength": 512,
+      "count": 2
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 160,
+      "wValue": "0x0200",
+      "wLength": 512,
+      "count": 2
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 160,
+      "wValue": "0x0200",
+      "wLength": 512,
+      "count": 2
+    },
+    {
+      "bmRequestType": "0x80",
+      "bRequest": 6,
+      "wValue": "",
+      "wLength": 18,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x80",
+      "bRequest": 6,
+      "wValue": "",
+      "wLength": 9,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x80",
+      "bRequest": 6,
+      "wValue": "",
+      "wLength": 180,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x00",
+      "bRequest": 9,
+      "wValue": "",
+      "wLength": 0,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 160,
+      "wValue": "0x0400",
+      "wLength": 260,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 160,
+      "wValue": "0x0400",
+      "wLength": 260,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 176,
+      "wValue": "0x0000",
+      "wLength": 2,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4000",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 164,
+      "wValue": "0x4000",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4200",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 164,
+      "wValue": "0x4200",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4400",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 164,
+      "wValue": "0x4400",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4600",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 164,
+      "wValue": "0x4600",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4800",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 164,
+      "wValue": "0x4800",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4a00",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0xc0",
+      "bRequest": 164,
+      "wValue": "0x4a00",
+      "wLength": 512,
+      "count": 1
+    },
+    {
+      "bmRequestType": "0x40",
+      "bRequest": 164,
+      "wValue": "0x4c00",
+      "wLength": 512,
+      "count": 1
+    }
+  ],
+  "interpretation": "Companion 0x7317 performs FX2-style RAM firmware download then renumerates as 0x744f. Persistent EEPROM image still missing — this capture shows volatile load path only.",
+  "unblocks_partial": [
+    "FW-MCU-RENUMERATION",
+    "ARCH-004-USB-BOOT"
+  ],
+  "still_blocked": [
+    "FW-EEPROM-IMAGE",
+    "FW-MCU-CORE-IMAGE"
+  ],
+  "boundary": "Vendor request meanings from public FX2 docs + observed traffic; not device-unique opcode table",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为"
+}

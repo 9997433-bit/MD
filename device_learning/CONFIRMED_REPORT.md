@@ -1,8 +1,8 @@
 # 已确认项报告（自动生成）
 
-**生成时间**：2026-08-27 16:38 UTC
+**生成时间**：2026-08-28 13:15 UTC
 
-**confirmed 总数**：68 条
+**confirmed 总数**：76 条
 
 > 目录完整 ≠ 厂商等价 ≠ 掌握运行行为
 
@@ -71,6 +71,18 @@
 | `FRM-020-REG-WRITE-SET` | frame_deep.json register inventory |
 | `FRM-023-ZERO-RATIO` | frame_deep.json scan |
 
+## USB (7)
+
+| Identifier | Evidence |
+|------------|----------|
+| `PROTO-DESC-DEVICE` | usb_protocol_decode.json / usb_session.pcapng device descriptor |
+| `PROTO-DESC-CONFIG` | usb_protocol_decode.json configuration descriptor |
+| `PROTO-DESC-INTERFACE` | usb_protocol_decode.json interface descriptor |
+| `PROTO-EP-MAP` | usb_protocol_decode.json endpoints |
+| `PROTO-EP-BULK-IN` | usb_protocol_decode.json + session URB counts |
+| `PROTO-EP-BULK-OUT` | usb_protocol_decode.json + session URB counts |
+| `PROTO-XFER-MODE` | usb_protocol_decode.json transfer_mode + session traffic |
+
 ## ARCH (5)
 
 | Identifier | Evidence |
@@ -95,4 +107,10 @@
 | `LEARN-018-PHOTO-INDEX` | photo_index.json |
 | `LEARN-019-REGENERATE` | generate_ledger.py |
 | `LEARN-020-BOUNDARY` | OMISSIONS_AND_REMAINING.md |
+
+## EXP (1)
+
+| Identifier | Evidence |
+|------------|----------|
+| `EXP-013-ENDPOINT-MAP` | usb_protocol_decode.json |
 

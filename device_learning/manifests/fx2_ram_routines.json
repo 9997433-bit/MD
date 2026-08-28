@@ -1,0 +1,1415 @@
+{
+  "generated_at": "2026-08-28T13:14:58.288900+00:00",
+  "status": "scanned",
+  "layer": "L3",
+  "plan_ref": "BINARY_RE_PLAN.md",
+  "path": "phase_b/analysis/fx2_ram_from_enum.bin",
+  "sha256": "ac3461195e2dd3fe6a436cdcae0f6cc481054923d2cd4cb1fba9d1c2299a3241",
+  "source_note": "Volatile FX2 RAM — NOT eeprom.bin",
+  "seed_entry_count": 131,
+  "routine_count": 131,
+  "all_routines": [
+    {
+      "entry": "0x0393",
+      "end_exclusive": "0x03b3",
+      "size_bytes": 32,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 40
+    },
+    {
+      "entry": "0x16b7",
+      "end_exclusive": "0x18af",
+      "size_bytes": 504,
+      "last_ret": "0x18ae",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 30
+    },
+    {
+      "entry": "0x03b3",
+      "end_exclusive": "0x03f1",
+      "size_bytes": 62,
+      "last_ret": "0x03f0",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 18
+    },
+    {
+      "entry": "0x0473",
+      "end_exclusive": "0x0517",
+      "size_bytes": 164,
+      "last_ret": "0x0516",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 18
+    },
+    {
+      "entry": "0x0436",
+      "end_exclusive": "0x0442",
+      "size_bytes": 12,
+      "last_ret": "0x0441",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 17
+    },
+    {
+      "entry": "0x0dfd",
+      "end_exclusive": "0x0e05",
+      "size_bytes": 8,
+      "last_ret": "0x0e04",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 17
+    },
+    {
+      "entry": "0x27d9",
+      "end_exclusive": "0x27e2",
+      "size_bytes": 9,
+      "last_ret": "0x27e1",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 14
+    },
+    {
+      "entry": "0x33e1",
+      "end_exclusive": "0x340f",
+      "size_bytes": 46,
+      "last_ret": "0x340e",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 14
+    },
+    {
+      "entry": "0x2ebf",
+      "end_exclusive": "0x2eed",
+      "size_bytes": 46,
+      "last_ret": "0x2eec",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 12
+    },
+    {
+      "entry": "0x2bb3",
+      "end_exclusive": "0x2c66",
+      "size_bytes": 179,
+      "last_ret": "0x2c65",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 9
+    },
+    {
+      "entry": "0x306f",
+      "end_exclusive": "0x3076",
+      "size_bytes": 7,
+      "last_ret": "0x3075",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 9
+    },
+    {
+      "entry": "0x0442",
+      "end_exclusive": "0x0459",
+      "size_bytes": 23,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 8
+    },
+    {
+      "entry": "0x0126",
+      "end_exclusive": "0x014c",
+      "size_bytes": 38,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 7
+    },
+    {
+      "entry": "0x0165",
+      "end_exclusive": "0x0192",
+      "size_bytes": 45,
+      "last_ret": "0x0191",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 7
+    },
+    {
+      "entry": "0x33d0",
+      "end_exclusive": "0x33e1",
+      "size_bytes": 17,
+      "last_ret": "0x33e0",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 7
+    },
+    {
+      "entry": "0x035c",
+      "end_exclusive": "0x0380",
+      "size_bytes": 36,
+      "last_ret": "0x037f",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 6
+    },
+    {
+      "entry": "0x0002",
+      "end_exclusive": "0x0006",
+      "size_bytes": 4,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0192",
+      "end_exclusive": "0x0202",
+      "size_bytes": 112,
+      "last_ret": "0x01f4",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0202",
+      "end_exclusive": "0x035c",
+      "size_bytes": 346,
+      "last_ret": "0x035b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0e1d",
+      "end_exclusive": "0x0e28",
+      "size_bytes": 11,
+      "last_ret": "0x0e27",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x1fff",
+      "end_exclusive": "0x2000",
+      "size_bytes": 1,
+      "last_ret": "0x1fff",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0000",
+      "end_exclusive": "0x0002",
+      "size_bytes": 2,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0006",
+      "end_exclusive": "0x0007",
+      "size_bytes": 1,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0459",
+      "end_exclusive": "0x0473",
+      "size_bytes": 26,
+      "last_ret": "0x0472",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0e37",
+      "end_exclusive": "0x0e43",
+      "size_bytes": 12,
+      "last_ret": "0x0e42",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0ec4",
+      "end_exclusive": "0x0eca",
+      "size_bytes": 6,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x1da8",
+      "end_exclusive": "0x1db8",
+      "size_bytes": 16,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x1db8",
+      "end_exclusive": "0x1fff",
+      "size_bytes": 583,
+      "last_ret": "0x1ffe",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x27f8",
+      "end_exclusive": "0x298a",
+      "size_bytes": 402,
+      "last_ret": "0x2989",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x299e",
+      "end_exclusive": "0x29a5",
+      "size_bytes": 7,
+      "last_ret": "0x29a4",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x2c82",
+      "end_exclusive": "0x2c89",
+      "size_bytes": 7,
+      "last_ret": "0x2c88",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x2c9d",
+      "end_exclusive": "0x2d07",
+      "size_bytes": 106,
+      "last_ret": "0x2d06",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x31ee",
+      "end_exclusive": "0x321c",
+      "size_bytes": 46,
+      "last_ret": "0x321b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x33a1",
+      "end_exclusive": "0x33d0",
+      "size_bytes": 47,
+      "last_ret": "0x33cf",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0007",
+      "end_exclusive": "0x0126",
+      "size_bytes": 287,
+      "last_ret": "0x00f8",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x014c",
+      "end_exclusive": "0x0165",
+      "size_bytes": 25,
+      "last_ret": "0x0164",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x042a",
+      "end_exclusive": "0x0436",
+      "size_bytes": 12,
+      "last_ret": "0x0435",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x054c",
+      "end_exclusive": "0x075b",
+      "size_bytes": 527,
+      "last_ret": "0x075a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x07ea",
+      "end_exclusive": "0x0af9",
+      "size_bytes": 783,
+      "last_ret": "0x0af8",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0e28",
+      "end_exclusive": "0x0e37",
+      "size_bytes": 15,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0e43",
+      "end_exclusive": "0x0e51",
+      "size_bytes": 14,
+      "last_ret": "0x0e50",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0e51",
+      "end_exclusive": "0x0e5e",
+      "size_bytes": 13,
+      "last_ret": "0x0e5d",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0e72",
+      "end_exclusive": "0x0e7d",
+      "size_bytes": 11,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0e7d",
+      "end_exclusive": "0x0e88",
+      "size_bytes": 11,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0eef",
+      "end_exclusive": "0x0ef6",
+      "size_bytes": 7,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0f02",
+      "end_exclusive": "0x0f0a",
+      "size_bytes": 8,
+      "last_ret": "0x0f09",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0f1c",
+      "end_exclusive": "0x0f23",
+      "size_bytes": 7,
+      "last_ret": "0x0f22",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0f23",
+      "end_exclusive": "0x10c6",
+      "size_bytes": 419,
+      "last_ret": "0x10c5",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x120e",
+      "end_exclusive": "0x1232",
+      "size_bytes": 36,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x1327",
+      "end_exclusive": "0x1435",
+      "size_bytes": 270,
+      "last_ret": "0x1434",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x1435",
+      "end_exclusive": "0x16b7",
+      "size_bytes": 642,
+      "last_ret": "0x15f2",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x2000",
+      "end_exclusive": "0x215a",
+      "size_bytes": 346,
+      "last_ret": "0x2159",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x2561",
+      "end_exclusive": "0x270a",
+      "size_bytes": 425,
+      "last_ret": "0x2709",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x27ee",
+      "end_exclusive": "0x27f8",
+      "size_bytes": 10,
+      "last_ret": "0x27f7",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x2a36",
+      "end_exclusive": "0x2a57",
+      "size_bytes": 33,
+      "last_ret": "0x2a56",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x2a57",
+      "end_exclusive": "0x2a67",
+      "size_bytes": 16,
+      "last_ret": "0x2a66",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x2f13",
+      "end_exclusive": "0x304b",
+      "size_bytes": 312,
+      "last_ret": "0x304a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x304b",
+      "end_exclusive": "0x306f",
+      "size_bytes": 36,
+      "last_ret": "0x306e",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x3076",
+      "end_exclusive": "0x3081",
+      "size_bytes": 11,
+      "last_ret": "0x3080",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x308b",
+      "end_exclusive": "0x30d3",
+      "size_bytes": 72,
+      "last_ret": "0x30d2",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x3235",
+      "end_exclusive": "0x3243",
+      "size_bytes": 14,
+      "last_ret": "0x3242",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x340f",
+      "end_exclusive": "0x4000",
+      "size_bytes": 3057,
+      "last_ret": "0x3452",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0380",
+      "end_exclusive": "0x0393",
+      "size_bytes": 19,
+      "last_ret": "0x0392",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x03f1",
+      "end_exclusive": "0x042a",
+      "size_bytes": 57,
+      "last_ret": "0x0409",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0517",
+      "end_exclusive": "0x0522",
+      "size_bytes": 11,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0522",
+      "end_exclusive": "0x053c",
+      "size_bytes": 26,
+      "last_ret": "0x0522",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x053c",
+      "end_exclusive": "0x054c",
+      "size_bytes": 16,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0af9",
+      "end_exclusive": "0x0b13",
+      "size_bytes": 26,
+      "last_ret": "0x0b12",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0b13",
+      "end_exclusive": "0x0c90",
+      "size_bytes": 381,
+      "last_ret": "0x0c8f",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0c90",
+      "end_exclusive": "0x0c98",
+      "size_bytes": 8,
+      "last_ret": "0x0c97",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0c98",
+      "end_exclusive": "0x0def",
+      "size_bytes": 343,
+      "last_ret": "0x0dee",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0def",
+      "end_exclusive": "0x0dfd",
+      "size_bytes": 14,
+      "last_ret": "0x0dfc",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0e05",
+      "end_exclusive": "0x0e1d",
+      "size_bytes": 24,
+      "last_ret": "0x0e1c",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0e5e",
+      "end_exclusive": "0x0e72",
+      "size_bytes": 20,
+      "last_ret": "0x0e71",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0e88",
+      "end_exclusive": "0x0e9b",
+      "size_bytes": 19,
+      "last_ret": "0x0e9a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0e9b",
+      "end_exclusive": "0x0eaa",
+      "size_bytes": 15,
+      "last_ret": "0x0ea9",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0eaa",
+      "end_exclusive": "0x0eb6",
+      "size_bytes": 12,
+      "last_ret": "0x0eb5",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0eb6",
+      "end_exclusive": "0x0ec4",
+      "size_bytes": 14,
+      "last_ret": "0x0ec3",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0eca",
+      "end_exclusive": "0x0ed7",
+      "size_bytes": 13,
+      "last_ret": "0x0ed6",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0ed7",
+      "end_exclusive": "0x0ee4",
+      "size_bytes": 13,
+      "last_ret": "0x0ee3",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0ee4",
+      "end_exclusive": "0x0eef",
+      "size_bytes": 11,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0ef6",
+      "end_exclusive": "0x0f02",
+      "size_bytes": 12,
+      "last_ret": "0x0f01",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0f0a",
+      "end_exclusive": "0x0f15",
+      "size_bytes": 11,
+      "last_ret": "0x0f14",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x0f15",
+      "end_exclusive": "0x0f1c",
+      "size_bytes": 7,
+      "last_ret": "0x0f1b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x10c6",
+      "end_exclusive": "0x10e8",
+      "size_bytes": 34,
+      "last_ret": "0x10e7",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x10e8",
+      "end_exclusive": "0x1102",
+      "size_bytes": 26,
+      "last_ret": "0x1101",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1102",
+      "end_exclusive": "0x111c",
+      "size_bytes": 26,
+      "last_ret": "0x111b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x111c",
+      "end_exclusive": "0x120e",
+      "size_bytes": 242,
+      "last_ret": "0x11db",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1232",
+      "end_exclusive": "0x1233",
+      "size_bytes": 1,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1233",
+      "end_exclusive": "0x1327",
+      "size_bytes": 244,
+      "last_ret": "0x123c",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x18af",
+      "end_exclusive": "0x1b00",
+      "size_bytes": 593,
+      "last_ret": "0x1aff",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1b00",
+      "end_exclusive": "0x1c36",
+      "size_bytes": 310,
+      "last_ret": "0x1c35",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1c36",
+      "end_exclusive": "0x1c47",
+      "size_bytes": 17,
+      "last_ret": "0x1c46",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1c47",
+      "end_exclusive": "0x1c5b",
+      "size_bytes": 20,
+      "last_ret": "0x1c5a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x1c5b",
+      "end_exclusive": "0x1da8",
+      "size_bytes": 333,
+      "last_ret": "0x1d5a",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x215a",
+      "end_exclusive": "0x2252",
+      "size_bytes": 248,
+      "last_ret": "0x2251",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2252",
+      "end_exclusive": "0x2337",
+      "size_bytes": 229,
+      "last_ret": "0x2336",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2337",
+      "end_exclusive": "0x247b",
+      "size_bytes": 324,
+      "last_ret": "0x247a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x247b",
+      "end_exclusive": "0x2561",
+      "size_bytes": 230,
+      "last_ret": "0x2560",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x270a",
+      "end_exclusive": "0x27ce",
+      "size_bytes": 196,
+      "last_ret": "0x27cd",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x27ce",
+      "end_exclusive": "0x27d9",
+      "size_bytes": 11,
+      "last_ret": "0x27d8",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x27e2",
+      "end_exclusive": "0x27e7",
+      "size_bytes": 5,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x27e7",
+      "end_exclusive": "0x27ee",
+      "size_bytes": 7,
+      "last_ret": "0x27ed",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x298a",
+      "end_exclusive": "0x299e",
+      "size_bytes": 20,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x29a5",
+      "end_exclusive": "0x29bb",
+      "size_bytes": 22,
+      "last_ret": "0x29ba",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x29bb",
+      "end_exclusive": "0x29d1",
+      "size_bytes": 22,
+      "last_ret": "0x29d0",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x29d1",
+      "end_exclusive": "0x2a36",
+      "size_bytes": 101,
+      "last_ret": "0x2a35",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2a67",
+      "end_exclusive": "0x2a7c",
+      "size_bytes": 21,
+      "last_ret": "0x2a7b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2a7c",
+      "end_exclusive": "0x2bb3",
+      "size_bytes": 311,
+      "last_ret": "0x2b70",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2c66",
+      "end_exclusive": "0x2c7b",
+      "size_bytes": 21,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2c7b",
+      "end_exclusive": "0x2c82",
+      "size_bytes": 7,
+      "last_ret": "0x2c81",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2c89",
+      "end_exclusive": "0x2c94",
+      "size_bytes": 11,
+      "last_ret": "0x2c93",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2c94",
+      "end_exclusive": "0x2c9d",
+      "size_bytes": 9,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2d07",
+      "end_exclusive": "0x2dd3",
+      "size_bytes": 204,
+      "last_ret": "0x2dd2",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2dd3",
+      "end_exclusive": "0x2e00",
+      "size_bytes": 45,
+      "last_ret": "0x2de3",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2e00",
+      "end_exclusive": "0x2ebf",
+      "size_bytes": 191,
+      "last_ret": "0x2ebe",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2eed",
+      "end_exclusive": "0x2efb",
+      "size_bytes": 14,
+      "last_ret": "0x2efa",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2efb",
+      "end_exclusive": "0x2f08",
+      "size_bytes": 13,
+      "last_ret": "0x2f07",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x2f08",
+      "end_exclusive": "0x2f13",
+      "size_bytes": 11,
+      "last_ret": "0x2f12",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x3081",
+      "end_exclusive": "0x308b",
+      "size_bytes": 10,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x30d3",
+      "end_exclusive": "0x314b",
+      "size_bytes": 120,
+      "last_ret": "0x314a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x314b",
+      "end_exclusive": "0x3183",
+      "size_bytes": 56,
+      "last_ret": "0x3182",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x3183",
+      "end_exclusive": "0x31d4",
+      "size_bytes": 81,
+      "last_ret": "0x31b9",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x31d4",
+      "end_exclusive": "0x31ee",
+      "size_bytes": 26,
+      "last_ret": "0x31ed",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x321c",
+      "end_exclusive": "0x3235",
+      "size_bytes": 25,
+      "last_ret": "0x3234",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x3243",
+      "end_exclusive": "0x3287",
+      "size_bytes": 68,
+      "last_ret": "0x3286",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x3287",
+      "end_exclusive": "0x3297",
+      "size_bytes": 16,
+      "last_ret": "0x3296",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x3297",
+      "end_exclusive": "0x330d",
+      "size_bytes": 118,
+      "last_ret": "0x330c",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x330d",
+      "end_exclusive": "0x3329",
+      "size_bytes": 28,
+      "last_ret": "0x331a",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x3329",
+      "end_exclusive": "0x33a1",
+      "size_bytes": 120,
+      "last_ret": "0x33a0",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 2
+    },
+    {
+      "entry": "0x075b",
+      "end_exclusive": "0x07ea",
+      "size_bytes": 143,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 1
+    }
+  ],
+  "top_routines_by_inbound": [
+    {
+      "entry": "0x0393",
+      "end_exclusive": "0x03b3",
+      "size_bytes": 32,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 40
+    },
+    {
+      "entry": "0x16b7",
+      "end_exclusive": "0x18af",
+      "size_bytes": 504,
+      "last_ret": "0x18ae",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 30
+    },
+    {
+      "entry": "0x03b3",
+      "end_exclusive": "0x03f1",
+      "size_bytes": 62,
+      "last_ret": "0x03f0",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 18
+    },
+    {
+      "entry": "0x0473",
+      "end_exclusive": "0x0517",
+      "size_bytes": 164,
+      "last_ret": "0x0516",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 18
+    },
+    {
+      "entry": "0x0436",
+      "end_exclusive": "0x0442",
+      "size_bytes": 12,
+      "last_ret": "0x0441",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 17
+    },
+    {
+      "entry": "0x0dfd",
+      "end_exclusive": "0x0e05",
+      "size_bytes": 8,
+      "last_ret": "0x0e04",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 17
+    },
+    {
+      "entry": "0x27d9",
+      "end_exclusive": "0x27e2",
+      "size_bytes": 9,
+      "last_ret": "0x27e1",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 14
+    },
+    {
+      "entry": "0x33e1",
+      "end_exclusive": "0x340f",
+      "size_bytes": 46,
+      "last_ret": "0x340e",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 14
+    },
+    {
+      "entry": "0x2ebf",
+      "end_exclusive": "0x2eed",
+      "size_bytes": 46,
+      "last_ret": "0x2eec",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 12
+    },
+    {
+      "entry": "0x2bb3",
+      "end_exclusive": "0x2c66",
+      "size_bytes": 179,
+      "last_ret": "0x2c65",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 9
+    },
+    {
+      "entry": "0x306f",
+      "end_exclusive": "0x3076",
+      "size_bytes": 7,
+      "last_ret": "0x3075",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 9
+    },
+    {
+      "entry": "0x0442",
+      "end_exclusive": "0x0459",
+      "size_bytes": 23,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 8
+    },
+    {
+      "entry": "0x0126",
+      "end_exclusive": "0x014c",
+      "size_bytes": 38,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 7
+    },
+    {
+      "entry": "0x0165",
+      "end_exclusive": "0x0192",
+      "size_bytes": 45,
+      "last_ret": "0x0191",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 7
+    },
+    {
+      "entry": "0x33d0",
+      "end_exclusive": "0x33e1",
+      "size_bytes": 17,
+      "last_ret": "0x33e0",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 7
+    },
+    {
+      "entry": "0x035c",
+      "end_exclusive": "0x0380",
+      "size_bytes": 36,
+      "last_ret": "0x037f",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 6
+    },
+    {
+      "entry": "0x0002",
+      "end_exclusive": "0x0006",
+      "size_bytes": 4,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0192",
+      "end_exclusive": "0x0202",
+      "size_bytes": 112,
+      "last_ret": "0x01f4",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0202",
+      "end_exclusive": "0x035c",
+      "size_bytes": 346,
+      "last_ret": "0x035b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0e1d",
+      "end_exclusive": "0x0e28",
+      "size_bytes": 11,
+      "last_ret": "0x0e27",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x1fff",
+      "end_exclusive": "0x2000",
+      "size_bytes": 1,
+      "last_ret": "0x1fff",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 5
+    },
+    {
+      "entry": "0x0000",
+      "end_exclusive": "0x0002",
+      "size_bytes": 2,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0006",
+      "end_exclusive": "0x0007",
+      "size_bytes": 1,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0459",
+      "end_exclusive": "0x0473",
+      "size_bytes": 26,
+      "last_ret": "0x0472",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0e37",
+      "end_exclusive": "0x0e43",
+      "size_bytes": 12,
+      "last_ret": "0x0e42",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0ec4",
+      "end_exclusive": "0x0eca",
+      "size_bytes": 6,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x1da8",
+      "end_exclusive": "0x1db8",
+      "size_bytes": 16,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x1db8",
+      "end_exclusive": "0x1fff",
+      "size_bytes": 583,
+      "last_ret": "0x1ffe",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x27f8",
+      "end_exclusive": "0x298a",
+      "size_bytes": 402,
+      "last_ret": "0x2989",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x299e",
+      "end_exclusive": "0x29a5",
+      "size_bytes": 7,
+      "last_ret": "0x29a4",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x2c82",
+      "end_exclusive": "0x2c89",
+      "size_bytes": 7,
+      "last_ret": "0x2c88",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x2c9d",
+      "end_exclusive": "0x2d07",
+      "size_bytes": 106,
+      "last_ret": "0x2d06",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x31ee",
+      "end_exclusive": "0x321c",
+      "size_bytes": 46,
+      "last_ret": "0x321b",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x33a1",
+      "end_exclusive": "0x33d0",
+      "size_bytes": 47,
+      "last_ret": "0x33cf",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 4
+    },
+    {
+      "entry": "0x0007",
+      "end_exclusive": "0x0126",
+      "size_bytes": 287,
+      "last_ret": "0x00f8",
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x014c",
+      "end_exclusive": "0x0165",
+      "size_bytes": 25,
+      "last_ret": "0x0164",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x042a",
+      "end_exclusive": "0x0436",
+      "size_bytes": 12,
+      "last_ret": "0x0435",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x054c",
+      "end_exclusive": "0x075b",
+      "size_bytes": 527,
+      "last_ret": "0x075a",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x07ea",
+      "end_exclusive": "0x0af9",
+      "size_bytes": 783,
+      "last_ret": "0x0af8",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x0e28",
+      "end_exclusive": "0x0e37",
+      "size_bytes": 15,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 3
+    }
+  ],
+  "routine_covering_0x075b": [
+    {
+      "entry": "0x075b",
+      "end_exclusive": "0x07ea",
+      "size_bytes": 143,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 1
+    }
+  ],
+  "routines_near_init_0x0700_0x0900": [
+    {
+      "entry": "0x07ea",
+      "end_exclusive": "0x0af9",
+      "size_bytes": 783,
+      "last_ret": "0x0af8",
+      "ends_with_ret": true,
+      "inbound_abs_refs": 3
+    },
+    {
+      "entry": "0x075b",
+      "end_exclusive": "0x07ea",
+      "size_bytes": 143,
+      "last_ret": null,
+      "ends_with_ret": false,
+      "inbound_abs_refs": 1
+    }
+  ],
+  "confidence": "hypothesis",
+  "boundary": "RET-based segmentation is heuristic; overlapping/fall-through routines expected",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "next_layer": "L4 command dispatch candidates from opcode immediates + routine ownership"
+}
