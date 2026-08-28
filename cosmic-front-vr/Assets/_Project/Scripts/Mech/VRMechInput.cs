@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using CosmicFront.Player;
 
 namespace CosmicFront.Mech
 {
@@ -45,10 +46,27 @@ namespace CosmicFront.Mech
             var lockOnPressed = lockPressed && !_lockPressedLastFrame;
             _lockPressedLastFrame = lockPressed;
 
+            var moveX = leftStick.x;
+            var yaw = rightStick.x * yawScale;
+            var comfort = VRComfortSettings.Instance;
+            if (comfort != null)
+            {
+                if (comfort.DisableStrafeOption)
+                {
+                    moveX = 0f;
+                }
+
+                // When snap is off, scale continuous yaw by comfort SmoothTurnSpeed (90°/s baseline).
+                if (comfort.SmoothTurnEnabled && comfort.SmoothTurnSpeed > 0f)
+                {
+                    yaw *= comfort.SmoothTurnSpeed / 90f;
+                }
+            }
+
             return new MechInputState
             {
-                Move = new Vector3(leftStick.x, 0f, leftStick.y),
-                Yaw = rightStick.x * yawScale,
+                Move = new Vector3(moveX, 0f, leftStick.y),
+                Yaw = yaw,
                 Pitch = -rightStick.y * pitchScale,
                 Boost = leftClick,
                 FirePrimary = rightTrigger > 0.5f,

@@ -4,7 +4,8 @@ using UnityEngine.XR;
 namespace CosmicFront.Player
 {
     /// <summary>
-    /// Snap-turn the XR rig for comfort. Right stick horizontal flick when mech is idle.
+    /// Snap-turn the XR rig for comfort. Right stick horizontal flick when snap is enabled.
+    /// When snap is off, does nothing — Mech continuous yaw owns the right stick (smooth turn).
     /// </summary>
     public class VRSnapTurn : MonoBehaviour
     {
@@ -17,8 +18,12 @@ namespace CosmicFront.Player
 
         private void Update()
         {
-            if (!VRComfortSettings.Instance || !VRComfortSettings.Instance.SnapTurnEnabled)
+            var comfort = VRComfortSettings.Instance;
+            if (comfort == null || !comfort.SnapTurnEnabled)
             {
+                // Smooth turn path: ComfortSettings.SmoothTurnSpeed / SmoothTurnEnabled are for
+                // Mech yaw consumers. Do not rotate the rig from the right stick here — that would
+                // fight VRMechInput yaw/pitch.
                 return;
             }
 
@@ -46,8 +51,8 @@ namespace CosmicFront.Player
             }
 
             var angle = stick.x > 0f
-                ? VRComfortSettings.Instance.SnapTurnAngle
-                : -VRComfortSettings.Instance.SnapTurnAngle;
+                ? comfort.SnapTurnAngle
+                : -comfort.SnapTurnAngle;
 
             var target = turnTarget != null ? turnTarget : transform;
             target.Rotate(0f, angle, 0f, Space.World);
