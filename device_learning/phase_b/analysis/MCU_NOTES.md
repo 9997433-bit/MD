@@ -59,6 +59,24 @@
 
 Language：`8051:LE:16:default`，基址 `0x0000`。导出：`mcu_disasm.txt`。
 
+## Stream path walk (L5 deepen)
+
+> 产物：`manifests/fx2_stream_path.json`（confidence ≤ **candidate**；语义 unknown）
+
+- **种子例程**：`0x1435` + datapath 高分 + opcode `0x01/0x08/0x09/0x0a` owner 候选（≥`0x0400`）
+- **lite CFG**：节点 113 / 边 200；入边热点：`0x0753`(10), `0x16b7`(7), `0x0747`(5), `0x0ade`(5), `0x0649`(4), `0x0c8f`(4)
+- **hub 调用/转移**：`0x07ea`, `0x151b`, `0x15f2`, `0x1db8`, `0x2c66`, `0x2c73`, `0x2c82`, `0x2c89`, `0x2c94`
+- **E6xx FIFO/EP 首见序（0x1435 窗）**：EP8BCL → EP6CS → EP4CS → EP6BCL → EP4CFG → EP6CFG → EP4FIFOCFG → EP6FIFOCFG → FIFORESET
+- **arm-stream micro-op 候选（精简）**：`0x1482` lcall/0x2c73; `0x1485` lcall/0x2c94; `0x148d` fifo_ep_write/EP8BCL; `0x1491` fifo_ep_read/EP6CS; `0x14bf` lcall/0x2c89; `0x14c2` lcall/0x2c66; `0x14c5` lcall/0x2c94; `0x14c8` lcall/0x2c89; `0x14f9` fifo_ep_write/EP8BCL; `0x14fd` fifo_ep_read/EP6CS; `0x150a` fifo_ep_write/EP8BCL; `0x150e` fifo_ep_read/EP6CS; `0x1518` lcall/0x07ea; `0x151b` ret; `0x151f` fifo_ep_read/EP4CS; `0x1528` fifo_ep_read/EP6BCL
+- **opcode 比较/立即数站点**：
+  - `0x01`: 24 sites; kinds={'CJNE_Rn_imm': 8, 'MOV_A_imm': 6, 'MOV_Rn_imm': 5, 'ANL_A_imm': 2, 'CJNE_A_imm': 2, 'ORL_A_imm': 1}; sample 0x014c, 0x0165, 0x0193, 0x0393, 0x03b3, 0x03cd
+  - `0x08`: 24 sites; kinds={'MOV_A_imm': 10, 'ORL_A_imm': 4, 'MOV_Rn_imm': 4, 'XRL_A_imm': 1, 'ADD_A_imm': 2, 'ANL_A_imm': 2, 'CJNE_Rn_imm': 1}; sample 0x0029, 0x003a, 0x05f3, 0x0987, 0x0aaf, 0x1006
+  - `0x09`: 3 sites; kinds={'ORL_A_imm': 1, 'ADD_A_imm': 2}; sample 0x1cac, 0x2d8c, 0x30fb
+  - `0x0a`: 7 sites; kinds={'MOV_Rn_imm': 4, 'ADD_A_imm': 1, 'ORL_A_imm': 1, 'CJNE_Rn_imm': 1}; sample 0x0c74, 0x0c90, 0x1c93, 0x2d83, 0x2e97, 0x3261
+- **边界**：线性 lite 反汇编 + AJMP/ACALL 页寻址 + BFS 深度 2；非完整 Ghidra CFG；间接调用未解
+- **脚本**：`scripts/analyze_fx2_stream_path.py`（由 `run_phase_b.py` 调用）
+
+
 ## 仍阻塞
 
 - 持久 `eeprom.bin`（L7）  

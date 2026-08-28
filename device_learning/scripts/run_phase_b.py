@@ -47,6 +47,7 @@ def main() -> int:
     run("analyze_usb_pcap_decode.py")
     run("analyze_usb_command_taxonomy.py")
     run("analyze_cmd_data_correlation.py")
+    run("analyze_ep84_packing_deep.py")
     run("analyze_protocol_log.py")
     if (ROOT / "phase_b" / "analysis" / "fx2_ram_from_enum.bin").exists():
         run("analyze_fx2_ram_image.py")

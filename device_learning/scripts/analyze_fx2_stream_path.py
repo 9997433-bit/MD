@@ -120,12 +120,19 @@ def seed_entries(data: bytes) -> list[int]:
             if cand.get("opcode") not in ("0x01", "0x08", "0x09", "0x0a"):
                 continue
             for owner in (cand.get("dominant_owner_routines") or [])[:3]:
-                seeds.add(int(owner["entry"], 16))
+                addr = int(owner["entry"], 16)
+                # Skip IVT/noise owners below typical code floor
+                if addr >= 0x0400:
+                    seeds.add(addr)
     return sorted(a for a in seeds if 0 <= a < len(data))
 
 
-def walk_entry(data: bytes, entry: int) -> dict:
-    """Linear lite walk: edges + E6xx MOVX ops + opcode imm/CJNE sites."""
+def walk_entry(data: bytes, entry: int, window: int = 0x300) -> dict:
+    """Window scan (does not stop at AJMP/LJMP): edges + E6xx MOVX + opcode sites.
+
+    Early unconditional jumps are recorded as edges, but scanning continues so
+    co-located FIFO/arm sequences after an early AJMP (common in 0x1435) remain visible.
+    """
     edges: list[dict] = []
     fifo_ops: list[dict] = []
     opcode_sites: list[dict] = []
@@ -133,7 +140,7 @@ def walk_entry(data: bytes, entry: int) -> dict:
     dptr: int | None = None
     last_mov_a: int | None = None
     pc = entry
-    end = min(len(data), entry + 0x300)
+    end = min(len(data), entry + window)
     for _ in range(WALK_INSNS_PER_ENTRY):
         if pc >= end:
             break
@@ -208,48 +215,34 @@ def walk_entry(data: bytes, entry: int) -> dict:
                     }
                 )
 
-        # Control-flow edges
+        # Control-flow edges (continue scanning after jumps)
         if op == 0x02 and size >= 3:  # LJMP
             dest = (data[pc + 1] << 8) | data[pc + 2]
             if dest < len(data):
                 edges.append({"at": hx(pc), "op": "LJMP", "dest": hx(dest), "from_entry": hx(entry)})
-            pc = end  # terminate linear walk
-            continue
-        if op == 0x12 and size >= 3:  # LCALL
+        elif op == 0x12 and size >= 3:  # LCALL
             dest = (data[pc + 1] << 8) | data[pc + 2]
             if dest < len(data):
                 edges.append({"at": hx(pc), "op": "LCALL", "dest": hx(dest), "from_entry": hx(entry)})
-            pc = nxt
-            continue
-        if (op & 0x1F) == 0x01 and size >= 2:  # AJMP
+        elif (op & 0x1F) == 0x01 and size >= 2:  # AJMP
             dest = a11_dest(pc, op, data[pc + 1])
             if dest < len(data):
                 edges.append({"at": hx(pc), "op": "AJMP", "dest": hx(dest), "from_entry": hx(entry)})
-            pc = end
-            continue
-        if (op & 0x1F) == 0x11 and size >= 2:  # ACALL
+        elif (op & 0x1F) == 0x11 and size >= 2:  # ACALL
             dest = a11_dest(pc, op, data[pc + 1])
             if dest < len(data):
                 edges.append({"at": hx(pc), "op": "ACALL", "dest": hx(dest), "from_entry": hx(entry)})
-            pc = nxt
-            continue
-        if op == 0x22:  # RET
+        elif op == 0x22:  # RET
             rets.append(hx(pc))
             edges.append({"at": hx(pc), "op": "RET", "dest": None, "from_entry": hx(entry)})
-            break
-        if op == 0x32:  # RETI
+        elif op == 0x32:  # RETI
             rets.append(hx(pc))
             edges.append({"at": hx(pc), "op": "RETI", "dest": None, "from_entry": hx(entry)})
-            break
-        if op == 0x80 and size >= 2:  # SJMP — follow for denser linear path
+        elif op == 0x80 and size >= 2:  # SJMP
             rel = data[pc + 1] - 256 if data[pc + 1] > 127 else data[pc + 1]
             dest = nxt + rel
             if 0 <= dest < len(data):
                 edges.append({"at": hx(pc), "op": "SJMP", "dest": hx(dest), "from_entry": hx(entry)})
-                if dest > pc:
-                    pc = dest
-                    continue
-            break
 
         pc = nxt
 
@@ -260,6 +253,32 @@ def walk_entry(data: bytes, entry: int) -> dict:
         "opcode_compare_sites": opcode_sites,
         "ret_sites": rets,
     }
+
+
+def expand_graph_bfs(data: bytes, seeds: list[int], max_depth: int = 2) -> list[dict]:
+    """BFS-expand call targets from seeds to deepen the lite graph."""
+    seen = set(seeds)
+    queue = [(e, 0) for e in seeds]
+    walks: list[dict] = []
+    while queue and len(walks) < GRAPH_MAX_NODES:
+        entry, depth = queue.pop(0)
+        window = HUB_WINDOW if entry == HUB else 0x180
+        w = walk_entry(data, entry, window=window)
+        walks.append(w)
+        if depth >= max_depth:
+            continue
+        for e in w["edges"]:
+            if e.get("op") not in ("LCALL", "ACALL", "LJMP", "AJMP"):
+                continue
+            dest = e.get("dest")
+            if not dest:
+                continue
+            d = int(dest, 16)
+            if d in seen or d >= len(data):
+                continue
+            seen.add(d)
+            queue.append((d, depth + 1))
+    return walks
 
 
 def _branch_preview(data: bytes, start: int, n: int) -> list[str]:
@@ -448,51 +467,65 @@ def _role_hint(label: str, kind: str) -> str:
 
 
 def find_global_opcode_compares(data: bytes) -> list[dict]:
-    """Scan image for CJNE A,#op and MOV A,#op near branches for focus opcodes."""
+    """Scan image for focus-opcode immediates (MOV/CJNE/ORL/ADD/MOV Rn) + nearby branches."""
     sites: list[dict] = []
     i = 0
     n = len(data)
-    while i < n:
-        # CJNE A,#imm,rel
-        if data[i] == 0xB4 and i + 2 < n and data[i + 1] in FOCUS_OPCODES:
-            imm = data[i + 1]
+    while i < n - 1:
+        op = data[i]
+        imm = data[i + 1]
+        if imm not in FOCUS_OPCODES:
+            i += 1
+            continue
+        kind = None
+        size = 2
+        text = None
+        branch_dest = None
+        if op == 0xB4 and i + 2 < n:  # CJNE A,#imm,rel
+            kind = "CJNE_A_imm"
+            size = 3
             rel = data[i + 2] - 256 if data[i + 2] > 127 else data[i + 2]
-            dest = i + 3 + rel
+            branch_dest = i + 3 + rel
+            text = f"CJNE A,#0x{imm:02x},0x{branch_dest:04x}"
+        elif 0xB8 <= op <= 0xBF and i + 2 < n:  # CJNE Rn,#imm,rel
+            kind = "CJNE_Rn_imm"
+            size = 3
+            rn = op - 0xB8
+            rel = data[i + 2] - 256 if data[i + 2] > 127 else data[i + 2]
+            branch_dest = i + 3 + rel
+            text = f"CJNE R{rn},#0x{imm:02x},0x{branch_dest:04x}"
+        elif op == 0x74:
+            kind = "MOV_A_imm"
+            text = f"MOV A,#0x{imm:02x}"
+        elif 0x78 <= op <= 0x7F:
+            kind = "MOV_Rn_imm"
+            text = f"MOV R{op - 0x78},#0x{imm:02x}"
+        elif op in (0x24, 0x34, 0x44, 0x54, 0x64):
+            mn = {0x24: "ADD", 0x34: "ADDC", 0x44: "ORL", 0x54: "ANL", 0x64: "XRL"}[op]
+            kind = f"{mn}_A_imm"
+            text = f"{mn} A,#0x{imm:02x}"
+        if kind is None:
+            i += 1
+            continue
+
+        nearby = _nearby_abs(data, i, 48)
+        preview = _branch_preview(data, i, 6)
+        # Keep dispatch-like sites; also keep MOV Rn,# near LCALL (common EP01 arg setup)
+        keep = bool(nearby) or kind.startswith("CJNE") or kind in ("MOV_A_imm", "MOV_Rn_imm")
+        if keep:
             sites.append(
                 {
                     "at": hx(i),
-                    "kind": "CJNE_A_imm",
+                    "kind": kind,
                     "imm": f"0x{imm:02x}",
-                    "branch_dest": hx(dest) if 0 <= dest < n else None,
-                    "nearby_abs_branches": _nearby_abs(data, i, 48),
+                    "text": text,
+                    "branch_dest": hx(branch_dest) if branch_dest is not None and 0 <= branch_dest < n else None,
+                    "nearby_abs_branches": nearby,
+                    "follow_window_preview": preview,
                 }
             )
-            i += 3
-            continue
-        # MOV A,#imm
-        if data[i] == 0x74 and i + 1 < n and data[i + 1] in FOCUS_OPCODES:
-            imm = data[i + 1]
-            # Only keep if a branch/call sits nearby (reduces noise from unrelated immediates)
-            nearby = _nearby_abs(data, i, 32)
-            preview = _branch_preview(data, i, 5)
-            has_branchish = any(
-                p.split(": ", 1)[-1].startswith(("CJNE", "JZ", "JNZ", "JC", "JNC", "SJMP", "LJMP", "LCALL", "AJMP", "ACALL"))
-                for p in preview[1:]
-            )
-            if nearby or has_branchish:
-                sites.append(
-                    {
-                        "at": hx(i),
-                        "kind": "MOV_A_imm",
-                        "imm": f"0x{imm:02x}",
-                        "nearby_abs_branches": nearby,
-                        "follow_window_preview": preview,
-                    }
-                )
-            i += 2
-            continue
-        i += 1
-    # Cap per opcode
+        i += size
+
     by_op: dict[str, list] = {f"0x{o:02x}": [] for o in FOCUS_OPCODES}
     for s in sites:
         bucket = by_op.get(s["imm"])
@@ -549,34 +582,32 @@ def update_notes(report: dict) -> None:
     if not NOTES.exists():
         return
     text = NOTES.read_text(encoding="utf-8")
-    arm = report.get("arm_stream_micro_ops_ordered") or []
-    labels = []
-    for a in arm:
-        lab = a.get("label") or a.get("imm")
-        if lab and lab not in labels:
-            labels.append(lab)
+    arm = report.get("arm_stream_compact_candidates") or report.get("arm_stream_micro_ops_ordered") or []
+    labels = report.get("arm_stream_label_first_seen_order") or []
     top_edges = (report.get("call_jump_graph") or {}).get("inbound_abs_or_page") or []
     top_line = ", ".join(f"`{r['entry']}`({r['inbound']})" for r in top_edges[:6]) or "(none)"
     op_sites = report.get("opcode_compare_sites_summary") or []
     op_lines = "\n".join(
-        f"  - `{row['opcode']}`: {row['site_count']} sites; owners/near {', '.join(row.get('sample_ats') or [])}"
+        f"  - `{row['opcode']}`: {row['site_count']} sites; kinds={row.get('kind_counts')}; sample {', '.join(row.get('sample_ats') or [])}"
         for row in op_sites
     )
+    callees = ", ".join(f"`{c}`" for c in (report.get("hub_callees_and_transfers") or [])[:12]) or "(none)"
     arm_preview = []
-    for a in arm[:18]:
+    for a in arm[:16]:
         bit = a.get("label") or a.get("imm") or ""
         arm_preview.append(f"`{a['at']}` {a['micro_op']}" + (f"/{bit}" if bit else ""))
     section = f"""{NOTES_SECTION_TITLE}
 
 > 产物：`manifests/fx2_stream_path.json`（confidence ≤ **candidate**；语义 unknown）
 
-- **种子例程**：`0x1435` + datapath 高分 + opcode `0x01/0x08/0x09/0x0a` owner 候选
+- **种子例程**：`0x1435` + datapath 高分 + opcode `0x01/0x08/0x09/0x0a` owner 候选（≥`0x0400`）
 - **lite CFG**：节点 {(report.get('call_jump_graph') or {}).get('node_count')} / 边 {(report.get('call_jump_graph') or {}).get('edge_count')}；入边热点：{top_line}
-- **E6xx FIFO/EP 序（0x1435 窗精简）**：{' → '.join(labels[:14]) or '(none)'}
-- **arm-stream micro-op 候选（节选）**：{'; '.join(arm_preview) if arm_preview else '(none)'}
-- **opcode 比较站点**：
+- **hub 调用/转移**：{callees}
+- **E6xx FIFO/EP 首见序（0x1435 窗）**：{' → '.join(labels[:14]) or '(none)'}
+- **arm-stream micro-op 候选（精简）**：{'; '.join(arm_preview) if arm_preview else '(none)'}
+- **opcode 比较/立即数站点**：
 {op_lines or '  - (none)'}
-- **边界**：线性 lite 反汇编 + AJMP/ACALL 页寻址；非完整 Ghidra CFG；间接调用未解
+- **边界**：线性 lite 反汇编 + AJMP/ACALL 页寻址 + BFS 深度 2；非完整 Ghidra CFG；间接调用未解
 - **脚本**：`scripts/analyze_fx2_stream_path.py`（由 `run_phase_b.py` 调用）
 
 """
@@ -615,9 +646,11 @@ def main() -> None:
 
     data = RAM.read_bytes()
     seeds = seed_entries(data)
-    walks = [walk_entry(data, e) for e in seeds]
+    walks = expand_graph_bfs(data, seeds, max_depth=2)
     graph = build_graph(walks)
     hub_walk = next((w for w in walks if w["entry"] == hx(HUB)), walks[0] if walks else {})
+    # Prefer dedicated full-window hub walk for FIFO/arm sequencing
+    hub_full = walk_entry(data, HUB, window=HUB_WINDOW)
     arm_ops = arm_stream_micro_ops(data)
     arm_ordered = summarize_arm_ops(arm_ops)
     global_compares = find_global_opcode_compares(data)
@@ -628,12 +661,16 @@ def main() -> None:
         key = f"0x{op:02x}"
         sites = [s for s in global_compares if s["imm"] == key]
         sample = [s["at"] for s in sites[:6]]
+        kinds = {}
+        for s in sites:
+            kinds[s["kind"]] = kinds.get(s["kind"], 0) + 1
         op_summary.append(
             {
                 "opcode": key,
                 "site_count": len(sites),
-                "cjne_count": sum(1 for s in sites if s["kind"] == "CJNE_A_imm"),
-                "mov_a_count": sum(1 for s in sites if s["kind"] == "MOV_A_imm"),
+                "kind_counts": kinds,
+                "cjne_count": sum(1 for s in sites if s["kind"].startswith("CJNE")),
+                "mov_imm_count": sum(1 for s in sites if s["kind"].startswith("MOV_")),
                 "sample_ats": sample,
                 "semantics": "unknown",
                 "confidence": "candidate" if sites else "hypothesis",
@@ -650,10 +687,18 @@ def main() -> None:
     callees_from_hub = sorted(
         {
             e["dest"]
-            for e in (hub_walk.get("edges") or [])
+            for e in (hub_full.get("edges") or [])
             if e.get("op") in ("LCALL", "ACALL", "LJMP", "AJMP") and e.get("dest")
         }
     )
+
+    # Compact "arm stream" candidate: labeled FIFO/EP writes + opcode imm + helper calls in order
+    arm_compact = [
+        a
+        for a in arm_ordered
+        if a["micro_op"] in ("fifo_ep_write", "fifo_ep_read", "opcode_imm_load", "opcode_compare", "lcall", "ret")
+        and (a.get("label") in ARM_LABELS or a["micro_op"] in ("opcode_imm_load", "opcode_compare", "lcall", "ret"))
+    ]
 
     report = {
         "generated_at": now,
@@ -667,9 +712,10 @@ def main() -> None:
         "seed_entries": [hx(s) for s in seeds],
         "call_jump_graph": graph,
         "hub_callees_and_transfers": callees_from_hub,
-        "hub_fifo_endpoint_ops": (hub_walk.get("fifo_endpoint_ops") or [])[:80],
-        "hub_opcode_sites_in_walk": hub_walk.get("opcode_compare_sites") or [],
+        "hub_fifo_endpoint_ops": (hub_full.get("fifo_endpoint_ops") or [])[:80],
+        "hub_opcode_sites_in_walk": hub_full.get("opcode_compare_sites") or [],
         "arm_stream_micro_ops_ordered": arm_ordered[:80],
+        "arm_stream_compact_candidates": arm_compact[:40],
         "arm_stream_label_first_seen_order": hub_label_order,
         "opcode_compare_sites": global_compares,
         "opcode_compare_sites_summary": op_summary,
@@ -710,8 +756,9 @@ def main() -> None:
                 "graph_nodes": graph["node_count"],
                 "graph_edges": graph["edge_count"],
                 "arm_ops": len(arm_ordered),
+                "arm_compact": len(arm_compact),
                 "label_order": hub_label_order,
-                "hub_callees": callees_from_hub[:12],
+                "hub_callees": callees_from_hub[:16],
                 "opcode_summary": op_summary,
             },
             indent=2,

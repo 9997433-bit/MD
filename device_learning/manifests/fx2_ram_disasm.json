@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-28T13:14:58.724504+00:00",
+  "generated_at": "2026-08-28T14:31:22.798342+00:00",
   "status": "partial_disasm",
   "layer": "G4-lite",
   "plan_ref": "BINARY_RE_PLAN.md",
   "path_txt": "phase_b/analysis/mcu_disasm.txt",
   "sha256": "ac3461195e2dd3fe6a436cdcae0f6cc481054923d2cd4cb1fba9d1c2299a3241",
-  "region_count": 11,
+  "region_count": 16,
   "regions": [
     {
       "name": "reset_vector",
@@ -25,12 +25,27 @@
     {
       "name": "cmd_0x01_owner_0x0473",
       "start": "0x0473",
-      "insn_count": 125
+      "insn_count": 152
+    },
+    {
+      "name": "cmd_0x01_owner_0x054c",
+      "start": "0x054c",
+      "insn_count": 103
     },
     {
       "name": "cmd_0x08_datapath_0x1435",
       "start": "0x1435",
       "insn_count": 200
+    },
+    {
+      "name": "cmd_0x09_owner_0x1c5b",
+      "start": "0x1c5b",
+      "insn_count": 124
+    },
+    {
+      "name": "cmd_0x0a_owner_0x0b13",
+      "start": "0x0b13",
+      "insn_count": 83
     },
     {
       "name": "cpucs_cluster_0x16ab",
@@ -53,14 +68,24 @@
       "insn_count": 78
     },
     {
-      "name": "datapath_0x054c",
-      "start": "0x054c",
-      "insn_count": 67
-    },
-    {
       "name": "datapath_0x18af",
       "start": "0x18af",
       "insn_count": 88
+    },
+    {
+      "name": "opcode_0x08_owner_0x0007",
+      "start": "0x0007",
+      "insn_count": 100
+    },
+    {
+      "name": "opcode_0x09_owner_0x2d07",
+      "start": "0x2d07",
+      "insn_count": 86
+    },
+    {
+      "name": "opcode_0x0a_owner_0x0c90",
+      "start": "0x0c90",
+      "insn_count": 83
     }
   ],
   "confidence": "hypothesis",
