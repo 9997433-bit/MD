@@ -82,7 +82,7 @@ namespace CosmicFront.Core
             }
 
             playerMech.SetTeam(GameManager.Instance.SelectedTeam);
-            playerMech.SetArchetype(GameManager.Instance.SelectedMech);
+            playerMech.SetModel(GameManager.Instance.SelectedModel);
 
             if (GameManager.Instance.PilotLoadout != null)
             {

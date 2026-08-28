@@ -5,9 +5,18 @@
 
 ## 1. 机甲（Mech）
 
-### 1.1 型号预设 — `MechStatsPresets`（`Mech/MechMovement.cs`）
+### 1.1 型号预设 — `MechModelCatalog`（目标机型）
 
-| 参数 | 轻型 Kestrel (`Light`) | 重型 Bastion (`Heavy`) | 建议调参区间 |
+| 参数 | Kestrel | Bastion | Warden | Mediator | Beacon |
+|------|---------|---------|--------|----------|--------|
+| HP | 100 | 200 | 110 | 140 | 80 |
+| 盾 | 50 | 80 | 70 | 90 | 40 |
+| 速度 | 18 | 12 | 14 | 15 | 20 |
+| 主武 DPS | 30 | 45 | 18 | 32 | 22 |
+
+兼容旧名：`MechStatsPresets.Light/Heavy` 仍映射到 Kestrel/Bastion。
+
+### 1.1b 旧预设别名 — `MechStatsPresets`
 |------|------------------------|------------------------|--------------|
 | MaxHealth | 100 | 200 | Light 80–120 / Heavy 160–240 |
 | MaxShield | 50 | 80 | Light 40–70 / Heavy 60–120 |

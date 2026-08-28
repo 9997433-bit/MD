@@ -38,6 +38,7 @@ namespace CosmicFront.Mech
             ReadButton(left, CommonUsages.primary2DAxisClick, out var leftClick);
             ReadButton(left, CommonUsages.gripButton, out var leftGrip);
             ReadButton(right, CommonUsages.primaryButton, out var rightPrimary);
+            ReadButton(right, CommonUsages.secondaryButton, out var rightSecondary);
 
             ReadAxis(left, CommonUsages.trigger, out var leftTrigger);
             ReadAxis(right, CommonUsages.trigger, out var rightTrigger);
@@ -71,6 +72,7 @@ namespace CosmicFront.Mech
                 Boost = leftClick,
                 FirePrimary = rightTrigger > 0.5f,
                 FireSecondary = leftTrigger > 0.5f,
+                AbilityPressed = rightSecondary,
                 LockOnPressed = lockOnPressed,
                 LockOnHeld = lockPressed
             };

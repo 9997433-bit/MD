@@ -549,6 +549,13 @@ namespace CosmicFront.Editor
             root.AddComponent<LockOnSystem>();
             root.AddComponent<WeaponPrimary>();
             root.AddComponent<WeaponSecondary>();
+            root.AddComponent<MechSpecialAbility>();
+
+            var model = isPlayer
+                ? MechModelCatalog.DefaultForTeam(team)
+                : (team == TeamId.Orbital ? MechModelId.Kestrel : MechModelId.Bastion);
+            mech.SetTeam(team);
+            mech.SetModel(model);
 
             if (isPlayer)
             {

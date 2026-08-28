@@ -24,6 +24,33 @@ namespace CosmicFront.Core
             public const float PrimaryDps = 45f;
         }
 
+        public static class MechWarden
+        {
+            public const float MaxHealth = 110f;
+            public const float MaxShield = 70f;
+            public const float MaxSpeed = 14f;
+            public const float BoostFuel = 90f;
+            public const float PrimaryDps = 18f;
+        }
+
+        public static class MechMediator
+        {
+            public const float MaxHealth = 140f;
+            public const float MaxShield = 90f;
+            public const float MaxSpeed = 15f;
+            public const float BoostFuel = 85f;
+            public const float PrimaryDps = 32f;
+        }
+
+        public static class MechBeacon
+        {
+            public const float MaxHealth = 80f;
+            public const float MaxShield = 40f;
+            public const float MaxSpeed = 20f;
+            public const float BoostFuel = 110f;
+            public const float PrimaryDps = 22f;
+        }
+
         public static class MechMovementDefaults
         {
             public const float Acceleration = 35f;

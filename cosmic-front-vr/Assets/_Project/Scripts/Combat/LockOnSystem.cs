@@ -9,7 +9,11 @@ namespace CosmicFront.Combat
         [SerializeField] private float lockRange = 200f;
         [SerializeField] private LayerMask targetLayers = ~0;
 
-        public Transform CurrentTarget { get; private set; }
+        public void ConfigureSensors(float range, float coneDegrees)
+        {
+            lockRange = range;
+            lockConeDegrees = coneDegrees;
+        }
 
         private readonly System.Collections.Generic.List<Transform> _candidates = new System.Collections.Generic.List<Transform>();
         private int _candidateIndex;

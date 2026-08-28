@@ -6,7 +6,7 @@ using CosmicFront.Network;
 namespace CosmicFront.Mech
 {
     /// <summary>
-    /// Root controller for player or AI mechs. Attach to root with Rigidbody.
+    /// Root controller for player or AI mechs. Applies target MechModelId stats/visuals/abilities.
     /// </summary>
     [RequireComponent(typeof(MechMovement))]
     [RequireComponent(typeof(HealthSystem))]
@@ -16,18 +16,22 @@ namespace CosmicFront.Mech
         [SerializeField] private Transform pitchPivot;
         [SerializeField] private Transform fireOrigin;
         [SerializeField] private MechArchetype archetype = MechArchetype.Light;
+        [SerializeField] private MechModelId modelId = MechModelId.Kestrel;
         [SerializeField] private TeamId team = TeamId.Terran;
+        [SerializeField] private bool rebuildVisualOnApply = true;
 
         private MechMovement _movement;
         private HealthSystem _health;
         private LockOnSystem _lockOn;
         private WeaponPrimary _primary;
         private WeaponSecondary _secondary;
+        private MechSpecialAbility _ability;
         private IMechInputProvider _input;
         private NetworkMechSync _network;
 
         public TeamId Team => team;
         public MechArchetype Archetype => archetype;
+        public MechModelId ModelId => modelId;
         public LockOnSystem LockOn => _lockOn;
         public Transform FireOrigin => fireOrigin != null ? fireOrigin : pitchPivot;
 
@@ -38,10 +42,16 @@ namespace CosmicFront.Mech
             _lockOn = GetComponent<LockOnSystem>();
             _primary = GetComponent<WeaponPrimary>();
             _secondary = GetComponent<WeaponSecondary>();
+            _ability = GetComponent<MechSpecialAbility>();
+            if (_ability == null)
+            {
+                _ability = gameObject.AddComponent<MechSpecialAbility>();
+            }
+
             _network = GetComponent<NetworkMechSync>();
             _input = GetComponent<MechInputRouter>() ?? GetComponent<IMechInputProvider>();
 
-            ApplyArchetype();
+            ApplyModel();
             _health.Died += OnDied;
         }
 
@@ -57,23 +67,56 @@ namespace CosmicFront.Mech
         {
             team = newTeam;
             _health.Configure(team, _health.MaxHealth, _health.MaxShield);
+            if (rebuildVisualOnApply)
+            {
+                MechVisualBuilder.Apply(transform, modelId, team);
+            }
         }
 
         public void SetArchetype(MechArchetype newArchetype)
         {
             archetype = newArchetype;
-            ApplyArchetype();
+            modelId = MechModelCatalog.FromArchetype(newArchetype).Id;
+            ApplyModel();
         }
 
-        public void ApplyArchetype()
+        public void SetModel(MechModelId newModel)
         {
-            var stats = archetype == MechArchetype.Heavy ? MechStatsPresets.Heavy : MechStatsPresets.Light;
+            modelId = newModel;
+            archetype = MechModelCatalog.Get(newModel).Archetype;
+            ApplyModel();
+        }
+
+        public void ApplyArchetype() => ApplyModel();
+
+        public void ApplyModel()
+        {
+            var def = MechModelCatalog.Get(modelId);
+            archetype = def.Archetype;
+            var stats = MechModelCatalog.ToStats(def);
             _movement.Configure(stats);
             _health.Configure(team, stats.MaxHealth, stats.MaxShield);
 
             if (_primary != null)
             {
-                _primary.Configure(archetype == MechArchetype.Heavy ? 45f : 30f);
+                _primary.Configure(def.PrimaryDps);
+            }
+
+            if (_secondary != null)
+            {
+                _secondary.ConfigureDamage(def.SecondaryDamage);
+            }
+
+            if (_lockOn != null)
+            {
+                _lockOn.ConfigureSensors(def.LockRange, def.LockCone);
+            }
+
+            _ability?.Configure(modelId);
+
+            if (rebuildVisualOnApply)
+            {
+                MechVisualBuilder.Apply(transform, modelId, team);
             }
         }
 
@@ -104,6 +147,11 @@ namespace CosmicFront.Mech
                 }
 
                 _lockOn.UpdateAiming(FireOrigin);
+            }
+
+            if (input.AbilityPressed && _ability != null)
+            {
+                _ability.TryActivate(FireOrigin, _lockOn != null ? _lockOn.CurrentTarget : null);
             }
 
             if (_primary != null && input.FirePrimary)

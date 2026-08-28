@@ -30,6 +30,11 @@ namespace CosmicFront.Ship
 
         public GameObject TryLaunch(TeamId team, MechArchetype archetype, GameObject owner)
         {
+            return TryLaunch(team, MechModelCatalog.FromArchetype(archetype).Id, owner);
+        }
+
+        public GameObject TryLaunch(TeamId team, MechModelId model, GameObject owner)
+        {
             if (!Ready || mechPrefab == null)
             {
                 return null;
@@ -41,7 +46,7 @@ namespace CosmicFront.Ship
             if (controller != null)
             {
                 controller.SetTeam(team);
-                controller.SetArchetype(archetype);
+                controller.SetModel(model);
             }
 
             var rb = mech.GetComponent<Rigidbody>();

@@ -21,6 +21,11 @@ namespace CosmicFront.Combat
             _ammo = maxAmmo;
         }
 
+        public void ConfigureDamage(float damage)
+        {
+            projectileDamage = damage;
+        }
+
         /// <summary>
         /// Multiplier on fire cooldown duration (0.95 = -5% cooldown).
         /// </summary>

@@ -42,6 +42,12 @@ namespace CosmicFront.UI
             }
 
             PopulateDropdowns();
+            if (teamDropdown != null)
+            {
+                teamDropdown.onValueChanged.AddListener(_ => RefreshMechOptions());
+            }
+
+            RefreshMechOptions();
             NetworkBootstrap.StatusChanged += OnNetworkStatus;
         }
 
@@ -133,12 +139,7 @@ namespace CosmicFront.UI
 
             if (mechDropdown != null)
             {
-                mechDropdown.ClearOptions();
-                mechDropdown.AddOptions(new System.Collections.Generic.List<string>
-                {
-                    "轻型 — 迅影 Kestrel",
-                    "重型 — 重盾 Bastion"
-                });
+                RefreshMechOptions();
             }
 
             if (mapDropdown != null)
@@ -173,6 +174,36 @@ namespace CosmicFront.UI
                     "据点争夺 Domination"
                 });
             }
+        }
+
+        private void RefreshMechOptions()
+        {
+            if (mechDropdown == null)
+            {
+                return;
+            }
+
+            var team = TeamId.Terran;
+            if (teamDropdown != null)
+            {
+                switch (teamDropdown.value)
+                {
+                    case 1: team = TeamId.Orbital; break;
+                    case 2: team = TeamId.Neutral; break;
+                }
+            }
+
+            var models = MechModelCatalog.GetForTeam(team);
+            mechDropdown.ClearOptions();
+            var labels = new System.Collections.Generic.List<string>();
+            foreach (var def in models)
+            {
+                labels.Add(MechModelCatalog.FormatOption(def));
+            }
+
+            mechDropdown.AddOptions(labels);
+            mechDropdown.value = 0;
+            mechDropdown.RefreshShownValue();
         }
 
         private void OnStartClicked()
@@ -216,7 +247,6 @@ namespace CosmicFront.UI
             }
 
             var team = TeamId.Terran;
-            var mech = MechArchetype.Light;
 
             if (teamDropdown != null)
             {
@@ -234,12 +264,14 @@ namespace CosmicFront.UI
                 }
             }
 
-            if (mechDropdown != null)
+            var models = MechModelCatalog.GetForTeam(team);
+            var model = models.Count > 0 ? models[0].Id : MechModelCatalog.DefaultForTeam(team);
+            if (mechDropdown != null && mechDropdown.value >= 0 && mechDropdown.value < models.Count)
             {
-                mech = mechDropdown.value == 0 ? MechArchetype.Light : MechArchetype.Heavy;
+                model = models[mechDropdown.value].Id;
             }
 
-            GameManager.Instance.SelectLoadout(team, mech);
+            GameManager.Instance.SelectLoadout(team, model);
 
             if (spawnDropdown != null)
             {
@@ -292,8 +324,8 @@ namespace CosmicFront.UI
             }
 
             controlsHint.text = VRMechInput.IsHeadsetPresent()
-                ? "VR: 机甲/战舰 | Escort 护旗 | Domination 占点"
-                : "键鼠: WASD | B登舰 | 模式: TDM / Escort / Domination";
+                ? "VR: 右B键机体技能 | 阵营切换刷新可用机型"
+                : "键鼠: V 机体技能 | 机库按阵营筛选目标机型";
         }
 
         private void UpdateSteamStatus()

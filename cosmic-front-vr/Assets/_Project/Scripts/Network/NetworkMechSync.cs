@@ -46,17 +46,22 @@ namespace CosmicFront.Network
         {
             if (IsOwner && GameManager.Instance != null)
             {
-                SubmitLoadoutServerRpc(GameManager.Instance.SelectedTeam, GameManager.Instance.SelectedMech);
+                SubmitLoadoutServerRpc(GameManager.Instance.SelectedTeam, GameManager.Instance.SelectedModel);
             }
         }
 
         [ServerRpc]
-        private void SubmitLoadoutServerRpc(TeamId team, MechArchetype archetype)
+        private void SubmitLoadoutServerRpc(TeamId team, MechModelId model)
         {
-            ConfigureOwnerLoadout(team, archetype);
+            ConfigureOwnerLoadout(team, model);
         }
 
         public void ConfigureOwnerLoadout(TeamId team, MechArchetype archetype)
+        {
+            ConfigureOwnerLoadout(team, MechModelCatalog.FromArchetype(archetype).Id);
+        }
+
+        public void ConfigureOwnerLoadout(TeamId team, MechModelId model)
         {
             if (_mech == null)
             {
@@ -64,7 +69,7 @@ namespace CosmicFront.Network
             }
 
             _mech.SetTeam(team);
-            _mech.SetArchetype(archetype);
+            _mech.SetModel(model);
 
             if (GameManager.Instance != null && GameManager.Instance.PilotLoadout != null)
             {
@@ -195,7 +200,7 @@ namespace CosmicFront.Network
             if (GameManager.Instance != null)
             {
                 _mech.SetTeam(GameManager.Instance.SelectedTeam);
-                _mech.SetArchetype(GameManager.Instance.SelectedMech);
+                _mech.SetModel(GameManager.Instance.SelectedModel);
             }
 
             var cockpit = transform.Find("YawPivot/PitchPivot/CockpitAnchor");

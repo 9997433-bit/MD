@@ -13,6 +13,7 @@ namespace CosmicFront.Mech
         public bool Boost;
         public bool FirePrimary;
         public bool FireSecondary;
+        public bool AbilityPressed;
         public bool LockOnPressed;
         public bool LockOnHeld;
     }
@@ -45,6 +46,7 @@ namespace CosmicFront.Mech
                 Boost = Input.GetKey(KeyCode.LeftShift),
                 FirePrimary = Input.GetMouseButton(0),
                 FireSecondary = Input.GetMouseButton(1),
+                AbilityPressed = Input.GetKeyDown(KeyCode.V),
                 LockOnPressed = Input.GetKeyDown(KeyCode.Tab),
                 LockOnHeld = Input.GetKey(KeyCode.Tab)
             };

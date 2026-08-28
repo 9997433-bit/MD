@@ -133,6 +133,7 @@ CosmicFrontServer.exe -batchmode -nographics -cosmicServer
 - [Dedicated Server](docs/DEDICATED_SERVER.md)
 - [战舰系统](docs/SHIP_SYSTEM.md)
 - [游戏模式与 Steam](docs/GAME_MODES.md)
+- [目标机型](docs/MECH_MODELS.md)
 - [数值平衡表（P6）](docs/BALANCE_SHEET.md)
 - [Steam 上架检查清单](docs/STEAM_CHECKLIST.md)
 - [P6 打磨上架路线图](docs/P6_ROADMAP.md)

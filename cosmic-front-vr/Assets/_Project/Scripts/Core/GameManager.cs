@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using CosmicFront.Network;
 using CosmicFront.Tuning;
+using CosmicFront.Mech;
 
 namespace CosmicFront.Core
 {
@@ -29,6 +30,7 @@ namespace CosmicFront.Core
         public bool IsMultiplayer => CurrentMatchMode != MatchMode.SinglePlayer;
         public TeamId SelectedTeam { get; private set; } = TeamId.Terran;
         public MechArchetype SelectedMech { get; private set; } = MechArchetype.Light;
+        public MechModelId SelectedModel { get; private set; } = MechModelId.Kestrel;
         public SpawnPreference SelectedSpawn { get; private set; } = SpawnPreference.Mech;
         public GameModeType SelectedGameMode { get; private set; } = GameModeType.TeamDeathmatch;
         public string SelectedBattleScene { get; private set; }
@@ -59,6 +61,31 @@ namespace CosmicFront.Core
         {
             SelectedTeam = team;
             SelectedMech = mech;
+            SelectedModel = MechModelCatalog.FromArchetype(mech).Id;
+            // Keep model legal for team.
+            var allowed = MechModelCatalog.GetForTeam(team);
+            var ok = false;
+            foreach (var def in allowed)
+            {
+                if (def.Id == SelectedModel)
+                {
+                    ok = true;
+                    break;
+                }
+            }
+
+            if (!ok)
+            {
+                SelectedModel = MechModelCatalog.DefaultForTeam(team);
+                SelectedMech = MechModelCatalog.Get(SelectedModel).Archetype;
+            }
+        }
+
+        public void SelectLoadout(TeamId team, MechModelId model)
+        {
+            SelectedTeam = team;
+            SelectedModel = model;
+            SelectedMech = MechModelCatalog.Get(model).Archetype;
         }
 
         public void SetPilotLoadout(PilotLoadout loadout)

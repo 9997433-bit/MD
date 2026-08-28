@@ -249,11 +249,11 @@ namespace CosmicFront.Ship
             }
 
             var team = GameManager.Instance != null ? GameManager.Instance.SelectedTeam : _currentShip.Team;
-            var archetype = GameManager.Instance != null
-                ? GameManager.Instance.SelectedMech
-                : MechArchetype.Light;
+            var model = GameManager.Instance != null
+                ? GameManager.Instance.SelectedModel
+                : MechModelId.Kestrel;
 
-            var launched = _currentShip.LaunchBay.TryLaunch(team, archetype, gameObject);
+            var launched = _currentShip.LaunchBay.TryLaunch(team, model, gameObject);
             if (launched == null)
             {
                 return;
