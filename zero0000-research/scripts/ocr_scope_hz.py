@@ -55,10 +55,25 @@ def parse_hz_candidates(text: str) -> list[dict]:
     for pat in HZ_PATTERNS:
         for m in pat.finditer(text):
             gd = m.groupdict()
-            num = _to_float(gd["num"])
+            try:
+                num = _to_float(gd["num"])
+            except (TypeError, ValueError):
+                continue
             unit = (gd.get("unit") or "Hz").lower()
             if "exp" in gd and gd["exp"] is not None:
-                num *= 10 ** int(gd["exp"])
+                try:
+                    exp = int(gd["exp"])
+                except (TypeError, ValueError):
+                    continue
+                # Board-photo OCR noise yields absurd exponents; skip before overflow.
+                if abs(exp) > 12:
+                    continue
+                try:
+                    num *= 10.0**exp
+                except OverflowError:
+                    continue
+            if not (num == num) or num in (float("inf"), float("-inf")):  # NaN/inf
+                continue
             if unit.startswith("g"):
                 hz = num * 1e9
             elif unit.startswith("m") and "sps" not in unit:
@@ -72,7 +87,10 @@ def parse_hz_candidates(text: str) -> list[dict]:
             # keep RF-ish band
             if not (1e6 <= hz <= 2e9):
                 continue
-            key = int(round(hz))
+            try:
+                key = int(round(hz))
+            except (OverflowError, ValueError):
+                continue
             if key in seen:
                 continue
             seen.add(key)
@@ -140,6 +158,9 @@ def self_test() -> int:
     assert any(abs(c["hz"] - 491520000) < 1000 for c in c2), c2
     c_plan_c = parse_hz_candidates("ADC 61.44 MHz")
     assert any(abs(c["hz"] - 61440000) < 1000 for c in c_plan_c), c_plan_c
+    # OCR garbage from board photos must not OverflowError / invent RF hits
+    junk = parse_hz_candidates("2e999999 noise 1e-9999 ae 10^999999 Hz xxx")
+    assert junk == [], junk
     text_len = 0
     try:
         from PIL import Image, ImageDraw
