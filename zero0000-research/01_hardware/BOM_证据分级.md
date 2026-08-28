@@ -4,8 +4,8 @@
 
 | 位号 | 识别型号 | 功能 | 证据等级 | 证据 | 备注 |
 |------|----------|------|----------|------|------|
-| U? | Xilinx XC7K160T FFG676 | 主 FPGA | 🔶 | 丝印 KINTEX-7 XC7K160T FFG676 | 需 IDCODE 最终确认 |
-| U2 | FTDI FT600Q | USB3↔FIFO | 🔶 | 多图可见 FT600Q；一图曾疑似 FT232 | **争议，待核** |
+| U? | Xilinx XC7K160T FFG676 | 主 FPGA | ✅ | 丝印 + 固件 IDCODE `0x0364C093` + 位流长度吻合 | 照片与固件一致 |
+| U2 | FTDI FT600Q | USB3↔FIFO | 🔶 | 多图可见 FT600Q；一图曾疑似 FT232 | 有实物用 PID 0x601E 终核 |
 | — | ISSI IS43TR16128D ×2 | DDR3 | 🔶 | 丝印 IS43TR16128D-125KBLI | 约 2×2Gb |
 | — | Realtek RTL8211FI | 千兆 PHY | 🔶 | 丝印 8211FI | — |
 | U21 | Spansion FL128SAI… | SPI Flash 16MB | 🔶 | FL128SAIF00 / FL128SAI01 | 存 mcs |
