@@ -97,5 +97,10 @@ namespace CosmicFront.AI
         {
             State = EnemyState.Dead;
         }
+
+        public void SetTarget(Transform target)
+        {
+            playerTarget = target;
+        }
     }
 }

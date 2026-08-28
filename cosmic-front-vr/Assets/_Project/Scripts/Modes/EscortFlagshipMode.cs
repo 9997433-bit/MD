@@ -11,6 +11,7 @@ namespace CosmicFront.Modes
     /// <summary>
     /// Escort mode: defenders protect a flagship moving along waypoints; attackers destroy it.
     /// Terran = defender by default, Orbital = attacker (or flipped via inspector).
+    /// Attach <see cref="EscortAttackWaveSpawner"/> on this GameObject (or a sibling) for attacker AI waves.
     /// </summary>
     public class EscortFlagshipMode : NetworkBehaviour
     {
@@ -36,6 +37,7 @@ namespace CosmicFront.Modes
         public bool EscortSucceeded => _escortSucceeded.Value;
         public TeamId DefenderTeam => defenderTeam;
         public TeamId AttackerTeam => defenderTeam == TeamId.Terran ? TeamId.Orbital : TeamId.Terran;
+        public Transform FlagshipTransform => _flagship != null ? _flagship.transform : null;
 
         public event Action StatusChanged;
         public event Action<bool> EscortEnded;
