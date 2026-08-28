@@ -188,79 +188,104 @@ def write_g2_record(infer: dict, hashes: dict[str, str], power_on_only: bool) ->
 
 
 def e2e_self_test() -> int:
-    """Scratch inbox: plan-B clocks + Conserviss SPI → Must-acceptable grades; never touch G0."""
+    """Scratch inbox: plan-B then plan-C → Must-acceptable grades; never touch G0."""
     import shutil
     import subprocess
     import tempfile
 
-    tmp = Path(tempfile.mkdtemp(prefix="g2_e2e_must_"))
-    try:
-        clocks = tmp / "g2_clocks.json"
-        clocks.write_text(
-            json.dumps(
+    def _run_scratch(
+        label: str,
+        clock_rows: list[dict],
+        write_flag: str,
+    ) -> int:
+        tmp = Path(tempfile.mkdtemp(prefix=f"g2_e2e_{label}_"))
+        try:
+            clocks = tmp / "g2_clocks.json"
+            clocks.write_text(
+                json.dumps(clock_rows, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            csv_path = tmp / "spi_capture.csv"
+            r = subprocess.run(
                 [
-                    {"id": "C2", "hz": 245760000, "note": "E2E scratch"},
-                    {"id": "C3", "hz": 245760000, "note": "E2E scratch"},
-                    {"id": "C6", "hz": 122880000, "note": "E2E scratch"},
+                    sys.executable,
+                    str(ROOT / "scripts" / "decode_spi_capture.py"),
+                    write_flag,
+                    str(csv_path),
                 ],
-                indent=2,
+                cwd=ROOT,
             )
-            + "\n",
-            encoding="utf-8",
-        )
-        csv_path = tmp / "spi_capture.csv"
-        r = subprocess.run(
-            [
-                sys.executable,
-                str(ROOT / "scripts" / "decode_spi_capture.py"),
-                "--write-conserviss-example",
-                str(csv_path),
-            ],
-            cwd=ROOT,
-        )
-        if r.returncode != 0:
-            print("SELF-TEST FAILED write example", file=sys.stderr)
-            return 1
-        # rename away from *example* so ingest accepts it
-        real_csv = tmp / "spi_capture.csv"
-        if "example" in csv_path.name.lower():
-            # write-conserviss-example may keep name; force clean name
-            pass
-        # decode_spi writes the path we gave; ensure name has no 'example'
-        if "example" in real_csv.name.lower():
-            print("SELF-TEST FAILED csv name contains example", file=sys.stderr)
-            return 1
-        r = subprocess.run(
-            [
-                sys.executable,
-                str(ROOT / "scripts" / "ingest_g2_inbox.py"),
-                "--inbox",
-                str(tmp),
-            ],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-        )
-        if r.returncode != 0:
-            print("SELF-TEST FAILED ingest", r.stdout, r.stderr, file=sys.stderr)
-            return 1
-        infer, hashes = load_infer(tmp)
-        p13 = norm_grade(str((infer.get("clocks") or {}).get("P1.3_suggested", "❓")))
-        p14 = norm_grade(str((infer.get("spi") or {}).get("P1.4_suggested", "❓")))
-        if not (must_ok(p13) and must_ok(p14)):
+            if r.returncode != 0:
+                print(f"SELF-TEST FAILED {label} write example", file=sys.stderr)
+                return 1
+            if "example" in csv_path.name.lower():
+                print(f"SELF-TEST FAILED {label} csv name contains example", file=sys.stderr)
+                return 1
+            r = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "ingest_g2_inbox.py"),
+                    "--inbox",
+                    str(tmp),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            if r.returncode != 0:
+                print(
+                    f"SELF-TEST FAILED {label} ingest",
+                    r.stdout,
+                    r.stderr,
+                    file=sys.stderr,
+                )
+                return 1
+            infer, hashes = load_infer(tmp)
+            p13 = norm_grade(str((infer.get("clocks") or {}).get("P1.3_suggested", "❓")))
+            p14 = norm_grade(str((infer.get("spi") or {}).get("P1.4_suggested", "❓")))
+            if not (must_ok(p13) and must_ok(p14)):
+                print(
+                    f"SELF-TEST FAILED {label} grades P1.3={p13} P1.4={p14} "
+                    f"hashes={list(hashes)}",
+                    file=sys.stderr,
+                )
+                return 1
+            h8 = str((infer.get("clocks") or {}).get("H8", ""))
+            if label == "planB" and "计划B" not in h8:
+                print(f"SELF-TEST FAILED {label} H8={h8}", file=sys.stderr)
+                return 1
+            if label == "planC" and "计划C" not in h8:
+                print(f"SELF-TEST FAILED {label} H8={h8}", file=sys.stderr)
+                return 1
             print(
-                f"SELF-TEST FAILED grades P1.3={p13} P1.4={p14} hashes={list(hashes)}",
-                file=sys.stderr,
+                f"SELF-TEST OK e2e {label} Must-grades P1.3={p13} P1.4={p14} "
+                f"hashes={len(hashes)} H8={h8} (G0 untouched)"
             )
-            return 1
-        # dry-run apply on scratch must not require writing; ensure --apply on non-default refused
-        print(
-            f"SELF-TEST OK e2e scratch Must-grades P1.3={p13} P1.4={p14} "
-            f"hashes={len(hashes)} (G0 untouched)"
+            return 0
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    if (
+        _run_scratch(
+            "planB",
+            [
+                {"id": "C2", "hz": 245760000, "note": "E2E scratch"},
+                {"id": "C3", "hz": 245760000, "note": "E2E scratch"},
+                {"id": "C6", "hz": 122880000, "note": "E2E scratch"},
+            ],
+            "--write-conserviss-example",
         )
-        return 0
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+        != 0
+    ):
+        return 1
+    return _run_scratch(
+        "planC",
+        [
+            {"id": "C2", "hz": 61440000, "note": "E2E Plan C"},
+            {"id": "C3", "hz": 245760000, "note": "E2E Plan C"},
+        ],
+        "--write-rhino-example",
+    )
 
 
 def main() -> int:
