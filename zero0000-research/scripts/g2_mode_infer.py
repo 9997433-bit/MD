@@ -118,8 +118,6 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
         p15 = "🔶（倾向位流内 SPI 主控；需对照「仅上电无主机」实验定 ✅）"
     elif checklist.get("G3_cdce_32bit_frames") is False and checklist.get("G1_adc_16bit_frames") is False:
         notes.append("三片均无帧 → 或未抓到，或全 EEPROM/主机未接")
-    if checklist.get("H5_test_pattern"):
-        notes.append("ADC 测试图样写入 → H5 支持")
     if checklist.get("EEPROM_lock_seen"):
         notes.append("!! EEPROM lock 0x3F 出现")
     # Conserviss / E2E profile scoring (from decode_spi_capture checklist)
@@ -127,6 +125,13 @@ def infer_spi(checklist: dict, frames: list | None = None) -> dict:
     c_ratio = checklist.get("conserviss_cdce_match_ratio") or 0
     c_hits = checklist.get("conserviss_cdce_reg_hits") or 0
     dac_pre = checklist.get("conserviss_dac_pre_sync_ratio") or 0
+    if checklist.get("H5_test_pattern"):
+        notes.append("ADC 测试图样写入 → H5 支持")
+    elif best == "conserviss" and (c_ratio >= 0.2 or c_hits >= 3):
+        notes.append(
+            "无 ADC 测试图样 + CDCE≈Conserviss → 相容 R11c 静态共享 IDELAY"
+            "（非 bitslip 自校准）；勿把 H5=false 当成链路失败"
+        )
     if best == "conserviss" and (c_ratio >= 0.2 or c_hits >= 3):
         notes.append(
             f"CDCE≈Conserviss (ratio={c_ratio}, hits={c_hits}) → G2 钟先验计划B：C2≈C3≈245.76e6；"
@@ -186,6 +191,9 @@ def self_test() -> int:
     if "计划B" not in "".join(s_c["notes"]) or s_c["P1.4_suggested"] != "✅":
         print("SELF-TEST FAILED conserviss spi prior", s_c, file=sys.stderr)
         return 1
+    if "静态共享 IDELAY" not in "".join(s_c["notes"]):
+        print("SELF-TEST FAILED R11c static IDELAY note", s_c, file=sys.stderr)
+        return 1
     # RHINO-class ÷3 family must not be flagged "out of family"
     c_r = infer_clocks([{"id": "C2", "hz": 163.84e6}])
     if c_r["P1.3_suggested"] != "🔶" or "163.84" not in c_r["H8"]:
@@ -195,7 +203,7 @@ def self_test() -> int:
         print("SELF-TEST FAILED", file=sys.stderr)
         return 1
     print(
-        "SELF-TEST OK (single-sided→🔶, plan B, SPI→B prior, RHINO 163.84 family)"
+        "SELF-TEST OK (single-sided→🔶, plan B, SPI→B prior, R11c IDELAY, RHINO 163.84)"
     )
     return 0
 
