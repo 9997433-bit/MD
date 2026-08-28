@@ -6,7 +6,7 @@
 
 ## 现有资料状态
 
-- G0 ✅ / G1 ✅（…；**R10 Conserviss** 钟计划 B + 时域 AXI；**当前结论卡**）  
+- G0 ✅ / G1 ✅（…；**R10/R11 Conserviss** 钟计划 B + limitations 带宽/2:1/iotest；**当前结论卡**）  
 - **prjxray-db 无 xc7k160t** → 公开帧图定 blk1 路径关闭  
 - G2–G4 方案与工具齐；**阻塞 = 实物板 + 示波器/LA 或投放文件**  
 - 一页结论：`06_docs/当前结论卡_①②.md`（**≠ Must 完成**）

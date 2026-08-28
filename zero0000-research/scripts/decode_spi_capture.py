@@ -94,6 +94,48 @@ CDCE_CONSERVISS = {
     0xC: 0x0000180,
 }
 DAC_CONSERVISS_CFG1 = 0x21  # FIR0=2x + twos
+# Conserviss C_DAC_PRE_SYNC_CONFIG (addr → data); used for profile hit ratio only.
+DAC_CONSERVISS_PRE_SYNC: dict[int, int] = {
+    0x00: 0x70,
+    0x01: 0x21,
+    0x02: 0x00,
+    0x03: 0x90,
+    0x04: 0xFF,
+    0x06: 0x00,
+    0x07: 0x00,
+    0x08: 0x00,
+    0x09: 0x7A,
+    0x0A: 0xB6,
+    0x0B: 0xEA,
+    0x0C: 0x45,
+    0x0D: 0x1A,
+    0x0E: 0x16,
+    0x0F: 0xAA,
+    0x10: 0xC6,
+    0x11: 0x24,
+    0x12: 0x02,
+    0x13: 0x02,
+    0x14: 0x00,
+    0x15: 0x00,
+    0x16: 0x00,
+    0x17: 0x04,
+    0x18: 0x83,
+    0x19: 0x00,
+    0x1A: 0x00,
+    0x1B: 0x00,
+    0x1C: 0x00,
+    0x1D: 0x00,
+    0x1E: 0x24,
+}
+# Pre-sync readback expects (CONFIG1,17,18,19,23,31) — for notes when reads appear.
+DAC_CONSERVISS_PRE_VERIFY_EXPECT = {
+    0x01: 0x21,
+    0x11: 0x24,
+    0x12: 0x02,
+    0x13: 0x02,
+    0x17: 0x04,
+    0x1F: 0x12,
+}
 
 
 def _as_bool(v: str) -> int:
@@ -304,6 +346,16 @@ def decode_dac(t: float, bits: list[int]) -> Frame:
         fr.notes.append(f"fir0={fir0} fir1={fir1} → interp ~{1 + fir0 + fir1*2}x(?)")
         if d == DAC_CONSERVISS_CFG1:
             fr.notes.append("matches Conserviss FMC150-VC707 CONFIG1 (2x+twos)")
+    if (not rw) and addr in DAC_CONSERVISS_PRE_SYNC and data_bytes:
+        if data_bytes[0] == DAC_CONSERVISS_PRE_SYNC[addr]:
+            fr.notes.append(f"matches Conserviss pre-sync CONFIG{addr}")
+    if rw and addr in DAC_CONSERVISS_PRE_VERIFY_EXPECT and data_bytes:
+        exp = DAC_CONSERVISS_PRE_VERIFY_EXPECT[addr]
+        got = data_bytes[0]
+        if got == exp:
+            fr.notes.append(f"Conserviss pre-verify CONFIG{addr}=0x{got:02X} ok")
+        else:
+            fr.notes.append(f"pre-verify CONFIG{addr}=0x{got:02X}≠0x{exp:02X}")
     if rw and addr == 0x1F:
         fr.notes.append("VERSION read (D2 靶标)")
     return fr
@@ -379,13 +431,30 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
     e_hit, e_n, _ = profile_hits(CDCE_EXTERNAL)
 
     dac_cfg1 = None
+    dac_writes: dict[int, int] = {}
     for f in dac:
-        if f.decoded.get("addr") == "0x01" and f.decoded.get("data"):
-            try:
-                dac_cfg1 = int(f.decoded["data"][0], 16)
-            except (TypeError, ValueError, IndexError):
-                pass
-            break
+        if f.decoded.get("rw") == "R":
+            continue
+        a = f.decoded.get("addr")
+        dlist = f.decoded.get("data") or []
+        if not a or not dlist:
+            continue
+        try:
+            ai, di = int(a, 16), int(dlist[0], 16)
+        except (TypeError, ValueError, IndexError):
+            continue
+        dac_writes[ai] = di  # last write wins
+        if ai == 0x01 and dac_cfg1 is None:
+            dac_cfg1 = di
+
+    dac_pre_hit = 0
+    dac_pre_detail: list[str] = []
+    for addr, expect in DAC_CONSERVISS_PRE_SYNC.items():
+        got = dac_writes.get(addr)
+        if got == expect:
+            dac_pre_hit += 1
+        elif got is not None:
+            dac_pre_detail.append(f"C{addr:02X}=0x{got:02X}≠0x{expect:02X}")
 
     flags = {
         "G1_adc_16bit_frames": len(adc) > 0,
@@ -415,6 +484,10 @@ def checklist_from_frames(frames: list[Frame]) -> dict:
         "e2e_external_cdce_total": e_n,
         "conserviss_dac_cfg1": dac_cfg1 == DAC_CONSERVISS_CFG1,
         "dac_cfg1_value": None if dac_cfg1 is None else f"0x{dac_cfg1:02X}",
+        "conserviss_dac_pre_sync_hits": dac_pre_hit,
+        "conserviss_dac_pre_sync_total": len(DAC_CONSERVISS_PRE_SYNC),
+        "conserviss_dac_pre_sync_ratio": round(dac_pre_hit / len(DAC_CONSERVISS_PRE_SYNC), 3),
+        "conserviss_dac_pre_sync_mismatches": dac_pre_detail[:12],
         "best_cdce_profile": (
             "conserviss"
             if c_hit >= i_hit and c_hit >= e_hit and c_hit > 0

@@ -1,8 +1,22 @@
 # Must 完成审计（当前 · 未达成）
 
 > 对照 `算法与ADCDAC实现_研究计划.md` §5 **最低合格（Must）**。  
-> 审计时刻：2026-08-28（SPI auto-map / inbox 加固后复审）；证据以仓库现文件 + `g2_inbox` 根目录无实测为准。  
+> 审计时刻：2026-08-28（R11 后）；`ingest_g2_inbox.py` exit **2**。  
 > 结论：**Must 未达成 → 总目标未完成。禁止标 complete。**
+
+---
+
+## 机器核验快照
+
+```text
+g2_inbox 根: 无 g2_clocks.json；无非 example 的 *.csv
+G0 等级: P1.1🔶 P1.2🔶 P1.3❓ P1.4❓ | P2.1🔶 P2.2❓ P2.3❓ P2.4❓
+G3G4 §4.2: 仍含「（空）」
+§4.1b: 已含 GbE 满速流 + 计划B无抽取直通（条件）排除
+USB/板: 无
+Montyzhang/zero0000: c9fbd9f（仍仅 mcs+照片）
+decode_spi_capture --self-test: OK（含 conserviss_dac_pre_sync_*）
+```
 
 ---
 
@@ -10,58 +24,43 @@
 
 | 命题 | 当前 | 权威证据 | 判定 |
 |------|------|----------|------|
-| P1.1 模拟拓扑 | 🔶 | `G0_命题基线证据表.md` §1.1；BOM/信号链照片 | **未达 ✅**；强 🔶 可辩，但通道一一对应未蜂鸣 |
-| P1.2 DDR LVDS | 🔶 | 同 §1.2；datasheet 排除法 | **未达 ✅**（标准要求边沿/ILA） |
-| P1.3 样钟/更新钟 | ❓ | 同 §1.3；`g2_inbox` **无**可用 `g2_clocks.json`（非全 null） | **缺口** — 无测频 Hz |
-| P1.4 SPI 模式 | ❓ | 同 §1.4；根目录 **无** `spi_capture.csv`（`examples/` 为合成，ingest 忽略） | **缺口** — 无 SPI 帧 |
+| P1.1 | 🔶 | G0；BOM/信号链照片 | 强 🔶 可辩；**未 ✅** |
+| P1.2 | 🔶 | G0；datasheet 排除法 | **未 ✅**（缺边沿） |
+| P1.3 | ❓ | 无测频 JSON | **缺口** |
+| P1.4 | ❓ | 无 SPI CSV | **缺口** |
 
-**Must-1 总判：失败**（P1.3、P1.4 仍 ❓）。
-
-解锁：`05_tests/G2_投放三步.md` → `g2_inbox/` + `ingest_g2_inbox.py`。  
-管线自检：`decode_spi_capture.py --self-test`（含 `--auto-map`）✅；**不等于** P1.4 实测。  
-静态旁路：公开 prjxray **无** xc7k160t（`prjxray_K160T帧图可得性.md`）——**不能**用帧图替代钟/SPI。
+**Must-1：失败。**
 
 ---
 
-## Must-2：P2 排除表（哪些算法不像）
-
-| 项 | 状态 | 证据 |
-|----|------|------|
-| 细假说排除（ROM/MIF/大 BRAM 软核/硬编码网常量/明文 IP 标签） | ✅ | `G3G4_算法判别矩阵.md` §4.1 |
-| **归因陷阱**排除（DAC SMA≠FPGA FIR/NCO 等） | ✅ | 同文档 §4.1b；datasheet+BOM |
-| **算法模块**排除（板内 FFT/DDC/FIR **存在性**） | ❌ 空 | §4.2 仍空；须 G3/G4 |
-
-**Must-2 总判：部分加强** — 「不像」的错误归因与细假说已写清；**模块存在性**排除仍未到。按「哪些算法不像」严格读，模块行空则 **仍未完全满足**。
-
----
-
-## Must-3：第三人可按记录复现关键实验
+## Must-2：P2 排除表
 
 | 项 | 状态 |
 |----|------|
-| Day-1 / G2 / G3 步骤与脚本 | ✅ 文档+脚本在库（含 auto-map / examples 演练） |
-| 已完成实验的原始数据+哈希 | ❌ 无钟/SPI/单音落盘 |
+| §4.1 + §4.1b 细假说/归因/带宽形态排除 | ✅（R11 再加强） |
+| §4.2 算法模块排除 | ❌ 空 |
 
-**Must-3 总判：失败**（无可复现实测记录，仅有方案）。
-
----
-
-## 环境核验（本审计执行时）
-
-```text
-g2_inbox 根: 仅 template/README（ingest exit 2）
-g2_inbox/examples: 合成 CSV（非实测；ingest 忽略）
-USB/板卡: 无
-Montyzhang/zero0000: 仍仅 mcs+照片（最新 commit 2026-08-28 上传）
-分支: cursor/zero0000-research-7055
-```
+**Must-2：部分**（模块行空 → 未完全满足「哪些算法不像」的模块义）。
 
 ---
 
-## 下一步（唯一能翻转 Must-1 的动作）
+## Must-3：可复现实测
 
-1. 用户投放 `g2_clocks.json`（至少 C2 或 C3 非 null）与/或根目录 `spi_capture.csv`  
-2. `python3 scripts/ingest_g2_inbox.py`  
-3. 人工复核后回填 G0 → 再开本审计为「Must-1 通过」  
+| 项 | 状态 |
+|----|------|
+| 步骤与脚本 | ✅ |
+| 原始数据+哈希 | ❌ |
 
-在此之前：**保持 goal active，不做空静态扫描。**
+**Must-3：失败。**
+
+---
+
+## 静态可读答案（≠ Must）
+
+见 `当前结论卡_①②.md`（含 R11）。
+
+## 解锁
+
+`G2_投放三步.md` → 根目录实测 → `python3 scripts/ingest_g2_inbox.py`。
+
+在此之前：**goal active；不做空静态扫描。**
