@@ -11,7 +11,8 @@
 | 问题 | 当前答案 | 等级 |
 |------|----------|------|
 | ① 芯片是谁 | ADC=ADS62P49，DAC=DAC3283，钟=CDCE72010+491.52 VCXO | ✅ |
-| ① 数字接口族 | ADC→FPGA：DDR LVDS（高采样率下唯一现实）；FPGA→DAC：8-bit DDR LVDS+FRAME | 器件 ✅ / 板上边沿 🔶→❓ |
+| ① 数字接口族 | ADC→FPGA：DDR LVDS；FPGA→DAC：8-bit DDR LVDS+FRAME | **强 🔶**（边沿未测） |
+| ① 模拟拓扑 | SIG→T5–T8→ADC；DAC2=J6→U28 / DAC1=J7→U29→L2–L9→U3；A/B 未蜂鸣 | **强 🔶** |
 | ① 采样/更新率 | **双先验** A: ADC245.76/DACCLK491.52；**B(Conserviss实测)**: 双路245.76+DAC 2x→122.88 数据率；**未测** | ❓（先验 🔶） |
 | ① 插值 | 先验 DAC **2x**（A/B 皆然；CONFIG1 Conserviss=`0x21`）；实测未见 | ❓ |
 | ① SPI 配置 | 靶标表已备；位流无明文/无 KC705 MIF；**飞线优先 R83/R88/R89/R105/R106**（照片地图） | ❓ |
@@ -26,15 +27,15 @@
 
 ## 2. 问题① — ADC/DAC 如何实现（展开）
 
-### 2.1 模拟前端拓扑 —— 🔶
+### 2.1 模拟前端拓扑 —— **强 🔶**
 
 - SMA 丝印：`SIG1/SIG2/DAC1/DAC2/CLK_IN/TRIG` ✅  
-- SIG→T5–T8 变压器→ADS62P49；DAC3283→L2–L9 滤波+缓冲→DAC SMA 🔶  
+- SIG→T5–T8 变压器→ADS62P49；**DAC2=J6→U28、DAC1=J7→U29→L2–L9→U3**（`SMA通道几何映射.md`）  
 - 通道 A/B 与丝印一一对应：须 G2 蜂鸣 → 升 ✅  
 
-### 2.2 数字接口 —— 🔶
+### 2.2 数字接口 —— **强 🔶**
 
-- datasheet 排除法已到顶；G2-5 探 LVDS/FRAME 升 ✅  
+- datasheet 排除法 + LVDS 串阻簇照片；G2-5 探 LVDS/FRAME 升 ✅  
 
 ### 2.3 时钟 —— ❓
 
