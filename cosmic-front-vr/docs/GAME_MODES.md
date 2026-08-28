@@ -25,12 +25,13 @@
 - 占领后每 2 秒 +1 占点分
 - 先到 100 分获胜
 
-## Steamworks 骨架
+## Steamworks 与邀请深链（P5/P6）
 
 `SteamManager`：
 - **默认离线模式**（无需 Steamworks.NET 即可运行）
 - 显示本机用户名
 - 预留 `COSMIC_STEAMWORKS` 宏接入 Steamworks.NET
+- `ParseJoinUrl` / `TryGetJoinEndpoint` 解析邀请深链为 IP + 端口
 
 ### 接入真实 Steam
 
@@ -45,7 +46,18 @@
 cosmicfront://join?ip=192.168.1.10&port=7770
 ```
 
-`SteamManager.GetInviteConnectString()` 可生成。
+- **生成**：`SteamManager.GetInviteConnectString(ip, port)`；Host 成功后 `InviteCodePanel` 刷新并支持一键复制到剪贴板
+- **解析**：`SteamManager.ParseJoinUrl(url, out ip, out port)`；实例上 `TryGetJoinEndpoint` 读取待处理邀请
+
+### 启动深链（Client）
+
+命令行参数：
+
+```
+-cosmicJoin=cosmicfront://join?ip=192.168.1.10&port=7770
+```
+
+`SteamInviteBootstrap` 读取该参数 → 自动填入机库地址栏 → 默认自动 Join（可在组件上关闭 `autoJoin`）。
 
 ## 相关脚本
 
@@ -53,6 +65,8 @@ cosmicfront://join?ip=192.168.1.10&port=7770
 Modes/EscortFlagshipMode.cs
 Modes/CapturePointsMode.cs
 Steam/SteamManager.cs
+Steam/SteamInviteBootstrap.cs
+UI/InviteCodePanel.cs
 UI/ModeStatusUI.cs
 ```
 

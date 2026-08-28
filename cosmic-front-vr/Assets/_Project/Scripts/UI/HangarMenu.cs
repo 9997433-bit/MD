@@ -22,6 +22,8 @@ namespace CosmicFront.UI
         [SerializeField] private Text controlsHint;
         [SerializeField] private Text steamStatusText;
 
+        private ushort _joinPort = NetworkSessionConfig.Port;
+
         private void Awake()
         {
             if (startButton != null)
@@ -62,6 +64,24 @@ namespace CosmicFront.UI
                 steamGo.AddComponent<SteamManager>();
             }
 
+            if (FindObjectOfType<SteamInviteBootstrap>() == null)
+            {
+                var inviteGo = new GameObject("SteamInviteBootstrap");
+                inviteGo.AddComponent<SteamInviteBootstrap>();
+            }
+
+            if (FindObjectOfType<InviteCodePanel>() == null)
+            {
+                var panelGo = new GameObject("InviteCodePanel", typeof(RectTransform));
+                var canvas = FindObjectOfType<Canvas>();
+                if (canvas != null)
+                {
+                    panelGo.transform.SetParent(canvas.transform, false);
+                }
+
+                panelGo.AddComponent<InviteCodePanel>();
+            }
+
             if (addressInput != null && string.IsNullOrWhiteSpace(addressInput.text))
             {
                 addressInput.text = NetworkSessionConfig.DefaultAddress;
@@ -70,6 +90,24 @@ namespace CosmicFront.UI
             UpdateStatus("选择模式 / 地图 / 生成方式后开始");
             UpdateControlsHint();
             UpdateSteamStatus();
+        }
+
+        /// <summary>Fills the join address field from a Steam invite deep-link endpoint.</summary>
+        public void ApplyJoinEndpoint(string ip, ushort port)
+        {
+            if (addressInput != null && !string.IsNullOrWhiteSpace(ip))
+            {
+                addressInput.text = ip.Trim();
+            }
+
+            _joinPort = port > 0 ? port : NetworkSessionConfig.Port;
+            UpdateStatus($"邀请已填入 {ip}:{_joinPort}");
+        }
+
+        /// <summary>Triggers the same path as the Join button (used by SteamInviteBootstrap).</summary>
+        public void TriggerJoin()
+        {
+            OnJoinClicked();
         }
 
         private void Update()
@@ -166,8 +204,8 @@ namespace CosmicFront.UI
             }
 
             var address = addressInput != null ? addressInput.text : NetworkSessionConfig.DefaultAddress;
-            UpdateStatus($"正在加入 {address}...");
-            GameManager.Instance.StartMultiplayerClient(address);
+            UpdateStatus($"正在加入 {address}:{_joinPort}...");
+            GameManager.Instance.StartMultiplayerClient(address, _joinPort);
         }
 
         private bool ApplyLoadout()

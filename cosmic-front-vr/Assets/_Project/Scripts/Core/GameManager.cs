@@ -33,6 +33,7 @@ namespace CosmicFront.Core
         public GameModeType SelectedGameMode { get; private set; } = GameModeType.TeamDeathmatch;
         public string SelectedBattleScene { get; private set; }
         public string MultiplayerAddress { get; private set; } = NetworkSessionConfig.DefaultAddress;
+        public ushort MultiplayerPort { get; private set; } = NetworkSessionConfig.Port;
         public float MatchTimeRemaining { get; private set; }
         public int PlayerKills { get; private set; }
         public int PlayerDeaths { get; private set; }
@@ -105,14 +106,15 @@ namespace CosmicFront.Core
             NetworkBootstrap.StartHost(BeginMatchLoad);
         }
 
-        public void StartMultiplayerClient(string address)
+        public void StartMultiplayerClient(string address, ushort port = 0)
         {
             ApplySelectedLoadoutFromUiDefaults();
             CurrentMatchMode = MatchMode.MultiplayerClient;
             MultiplayerAddress = string.IsNullOrWhiteSpace(address)
                 ? NetworkSessionConfig.DefaultAddress
                 : address.Trim();
-            NetworkBootstrap.StartClient(MultiplayerAddress, OnMultiplayerClientConnected);
+            MultiplayerPort = port > 0 ? port : NetworkSessionConfig.Port;
+            NetworkBootstrap.StartClient(MultiplayerAddress, OnMultiplayerClientConnected, MultiplayerPort);
         }
 
         private void OnMultiplayerClientConnected()

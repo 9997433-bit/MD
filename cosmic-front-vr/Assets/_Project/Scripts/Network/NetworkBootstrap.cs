@@ -45,7 +45,7 @@ namespace CosmicFront.Network
             }
         }
 
-        public static void StartClient(string address, Action onConnected)
+        public static void StartClient(string address, Action onConnected, ushort port = 0)
         {
             var nm = RequireNetworkManager();
             if (nm == null)
@@ -53,10 +53,11 @@ namespace CosmicFront.Network
                 return;
             }
 
+            var connectPort = port > 0 ? port : NetworkSessionConfig.Port;
             SubscribeOnce(nm, onConnected);
-            RaiseStatus($"正在连接 {address}...");
+            RaiseStatus($"正在连接 {address}:{connectPort}...");
 
-            if (!nm.ClientManager.StartConnection(address, NetworkSessionConfig.Port))
+            if (!nm.ClientManager.StartConnection(address, connectPort))
             {
                 RaiseStatus("Client 连接失败");
             }
