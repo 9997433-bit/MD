@@ -88,7 +88,8 @@ namespace CosmicFront.UI
                 teamDropdown.AddOptions(new System.Collections.Generic.List<string>
                 {
                     "地球联合军 (Terran Union)",
-                    "轨道联盟 (Orbital League)"
+                    "轨道联盟 (Orbital League)",
+                    "维和舰队 (Neutral Force)"
                 });
             }
 
@@ -181,7 +182,18 @@ namespace CosmicFront.UI
 
             if (teamDropdown != null)
             {
-                team = teamDropdown.value == 0 ? TeamId.Terran : TeamId.Orbital;
+                switch (teamDropdown.value)
+                {
+                    case 1:
+                        team = TeamId.Orbital;
+                        break;
+                    case 2:
+                        team = TeamId.Neutral;
+                        break;
+                    default:
+                        team = TeamId.Terran;
+                        break;
+                }
             }
 
             if (mechDropdown != null)

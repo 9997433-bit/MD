@@ -100,6 +100,17 @@ namespace CosmicFront.Core
             NotifyChanged();
         }
 
+        public void RestoreShield(float amount)
+        {
+            if (!IsAlive || amount <= 0f)
+            {
+                return;
+            }
+
+            CurrentShield = Mathf.Min(maxShield, CurrentShield + amount);
+            NotifyChanged();
+        }
+
         private void Update()
         {
             if (!IsAlive || maxShield <= 0f || CurrentShield >= maxShield)
