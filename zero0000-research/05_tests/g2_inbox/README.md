@@ -36,6 +36,15 @@ python3 scripts/mk_g2_clocks.py --from-csv readings.csv --confirm-measured
 
 无 `--confirm-measured` **不会**写入 inbox 根（防把先验当实测）。格式样例见 `examples/g2_clocks.planA.example.json` / `planB`（ingest **忽略** examples/）。
 
+### 示波器截图 OCR（可选）
+
+```bash
+# 把屏幕照片放入本目录后列出候选 Hz，人眼核对再写入
+python3 scripts/ocr_scope_hz.py 05_tests/g2_inbox/scope_c2.jpg
+python3 scripts/ocr_scope_hz.py 05_tests/g2_inbox/scope_c2.jpg --as-c2 0 --as-c3-same \
+  --write-clocks --confirm-measured
+```
+
 SPI CSV 列名：默认 `SCLK,MOSI,SEN,SDENB,SPI_LE`；也可用 Saleae 风格（`SPI_CLK`/`SDATA`/`ADC_CS`/…）。ingest 默认 `--auto-map`，也可用参数覆盖。
 
 **禁止**把未测的猜测 Hz 填进 JSON，或把 `examples/*.csv` 冒充实测。
