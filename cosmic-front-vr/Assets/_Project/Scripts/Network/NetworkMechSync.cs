@@ -65,6 +65,11 @@ namespace CosmicFront.Network
 
             _mech.SetTeam(team);
             _mech.SetArchetype(archetype);
+
+            if (GameManager.Instance != null && GameManager.Instance.PilotLoadout != null)
+            {
+                TuningApplier.Apply(_mech, GameManager.Instance.PilotLoadout);
+            }
         }
 
         public void RequestPrimaryFire(Transform origin, Transform lockTarget)
