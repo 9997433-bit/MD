@@ -124,20 +124,46 @@ def spectrum_like_heuristic(x: list[float]) -> dict:
     }
 
 
+# 样钟族（与 g2_mode_infer.FAMILY 对齐；不含专利 IF/LO）
+CLOCK_FAMILY_HZ = [
+    30.72e6,
+    40.96e6,
+    61.44e6,
+    81.92e6,
+    122.88e6,
+    163.84e6,
+    245.76e6,
+    491.52e6,
+]
+
+# R13b：CN117109719B 等公开 LDV 注入/监视候选（IF/LO，非样钟）
+LDV_FIN_MHZ = [
+    (10.0, "generic fs-estimate tone"),
+    (25.0, "patent meas channel / LO square"),
+    (40.0, "patent LO square / AOM-neighbour"),
+    (45.0, "patent LO square"),
+    (49.0, "patent LO square"),
+    (50.0, "patent first meas channel"),
+    (1.0, "patent low-range channel"),
+    (5.0, "patent mid-low channel"),
+]
+
+
 def nearest_clock_family(fs: float) -> str:
-    family = [
-        30.72e6,
-        61.44e6,
-        122.88e6,
-        163.84e6,
-        245.76e6,
-        491.52e6,
-    ]
+    family = CLOCK_FAMILY_HZ
     if not math.isfinite(fs) or fs <= 0:
         return "n/a"
     best = min(family, key=lambda c: abs(c - fs) / c)
     err = abs(best - fs) / best
     return f"{best/1e6:.2f} MHz family (rel_err={err:.2%})"
+
+
+def list_ldv_fins() -> None:
+    print("R13b LDV Fin / DAC-watch candidates (NOT sample clocks):")
+    print("  order  MHz     note")
+    for i, (mhz, note) in enumerate(LDV_FIN_MHZ, 1):
+        print(f"  {i:2d}     {mhz:5.1f}   {note}")
+    print("Source: 应用域_激光测振仪.md §3b / G3G4 §2c — do not upgrade Must.")
 
 
 def analyze(x: list[float], fin: float | None, fs_guess: float) -> dict:
@@ -159,9 +185,10 @@ def analyze(x: list[float], fin: float | None, fs_guess: float) -> dict:
         out["fin_error_at_guess"] = abs(f_at_guess - fin) / fin if fin else None
         # 若 fs_guess 正确且为时域，误差应很小；若已是谱则 bin 含义不同
         out["note"] = (
-            "若 fs_estimated 落入 61.44/122.88/163.84/245.76 族且 fin_error_at_guess≪1%，"
-            "支持「时域上传 + 该样率」(H2/H8；含计划 C 的 61.44)；"
-            "若峰钉死与 Fin 无关，疑 DDC/板内谱(H-DDC/H-FFT)。"
+            "若 fs_estimated 落入 40.96/61.44/81.92/122.88/163.84/245.76 族且 "
+            "fin_error_at_guess≪1%，支持「时域上传 + 该样率」(H2/H8；含计划 C / LDV 旁支)；"
+            "若峰钉死与 Fin 无关，疑 DDC/板内谱/已解调(H-DDC/H-FFT)；"
+            "Fin 优先序见 --list-ldv-fins。"
         )
     return out
 
@@ -234,11 +261,19 @@ def main() -> int:
     ap.add_argument("--interleaved", action="store_true", help="alias for --pack ab")
     ap.add_argument("--n", type=int, default=4096)
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument(
+        "--list-ldv-fins",
+        action="store_true",
+        help="print R13b LDV Fin/DAC-watch MHz list (CN117109719B priors)",
+    )
     args = ap.parse_args()
+    if args.list_ldv_fins:
+        list_ldv_fins()
+        return 0
     if args.self_test:
         return self_test()
     if not args.file:
-        ap.error("file required (or --self-test)")
+        ap.error("file required (or --self-test / --list-ldv-fins)")
     if not args.file.is_file():
         print(f"missing {args.file}", file=sys.stderr)
         return 2
