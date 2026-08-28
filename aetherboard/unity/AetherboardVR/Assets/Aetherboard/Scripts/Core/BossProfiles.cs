@@ -446,5 +446,33 @@ namespace Aetherboard.Core
             new List<string>(Profiles.Keys);
 
         public static string DisplayName(string bossId) => Get(bossId).Create().Name;
+
+        public static readonly IReadOnlyList<string> BossOrder = new List<string>
+        {
+            "earth", "wind", "ice", "fire"
+        };
+
+        public static string MechanicSummary(string bossId) => bossId switch
+        {
+            "wind" => "P1 风刃 · P2 分散 · P3 集合+旋风",
+            "ice" => "P1 冰枪 · P2 霜冻 · P3 冰环+暴雪",
+            "fire" => "P1 火息 · P2 陨石 · P3 连结+喷发",
+            _ => "P1 重击 · P2 地震 · P3 缩圈+土神之怒"
+        };
+
+        public static string CycleBossId(string currentId)
+        {
+            var order = BossOrder;
+            var idx = 0;
+            for (var i = 0; i < order.Count; i++)
+            {
+                if (order[i] == currentId)
+                {
+                    idx = i;
+                    break;
+                }
+            }
+            return order[(idx + 1) % order.Count];
+        }
     }
 }

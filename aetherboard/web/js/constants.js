@@ -1,5 +1,6 @@
 export const BOARD_SIZE = 7;
 export const BOSS_POS = { x: 3, y: 2 };
+export const BOSS_ORDER = ["earth", "wind", "ice", "fire"];
 
 export const Phase = {
   WARNING: "WARNING",

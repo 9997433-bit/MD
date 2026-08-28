@@ -44,10 +44,10 @@ namespace Aetherboard.VR
             var profile = BossRegistry.Get(id);
             _statusText.text = id switch
             {
-                "wind" => $"<b>{profile.Create().Name}</b>\n风刃 · 分散 · 集合读条",
-                "ice" => $"<b>{profile.Create().Name}</b>\n冰枪 · 霜冻 · 冰环读条",
-                "fire" => $"<b>{profile.Create().Name}</b>\n火息 · 陨石 · 连结读条",
-                _ => $"<b>{profile.Create().Name}</b>\n重击 · 地震 · 缩圈读条"
+                "wind" => $"<b>{profile.Create().Name}</b>\n{BossRegistry.MechanicSummary(id)}",
+                "ice" => $"<b>{profile.Create().Name}</b>\n{BossRegistry.MechanicSummary(id)}",
+                "fire" => $"<b>{profile.Create().Name}</b>\n{BossRegistry.MechanicSummary(id)}",
+                _ => $"<b>{profile.Create().Name}</b>\n{BossRegistry.MechanicSummary(id)}"
             };
         }
 
@@ -63,7 +63,7 @@ namespace Aetherboard.VR
             gameObject.AddComponent<GraphicRaycaster>();
 
             var rect = gameObject.GetComponent<RectTransform>() ?? gameObject.AddComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(420, 300);
+            rect.sizeDelta = new Vector2(420, 340);
             transform.localScale = Vector3.one * 0.0012f;
 
             var panel = CreatePanel(transform, new Color(0.08f, 0.1f, 0.14f, 0.92f));
@@ -84,6 +84,13 @@ namespace Aetherboard.VR
             CreateButton(row, "风灵", () => SelectBoss("wind"), new Color(0.18f, 0.38f, 0.52f));
             CreateButton(row, "冰灵", () => SelectBoss("ice"), new Color(0.35f, 0.55f, 0.85f));
             CreateButton(row, "火灵", () => SelectBoss("fire"), new Color(0.72f, 0.28f, 0.12f));
+
+            var row2 = CreateRow(panel);
+            CreateButton(row2, "下一个 Boss", () =>
+            {
+                _director?.CycleNextBoss();
+                RefreshStatus();
+            }, new Color(0.28f, 0.32f, 0.42f));
         }
 
         private static void EnsureEventSystem()

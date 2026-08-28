@@ -111,7 +111,7 @@ namespace Aetherboard.VR
             sb.AppendLine("  [ ] 8 Online WS — PC host sync");
             sb.AppendLine("  [ ] 9 Online NGO — NetcodeNative 7777");
             sb.AppendLine("  [ ] 10 Audio — phase/damage SFX");
-            sb.AppendLine("  [ ] 11 Boss select — earth/wind/ice/fire via left panel (or keys 1/2/3/4 desktop)");
+            sb.AppendLine("  [ ] 11 Boss select — pick or cycle earth/wind/ice/fire (keys 0/1-4 desktop)");
         }
 
         private static void LogCheck(StringBuilder sb, string label, bool pass)

@@ -35,6 +35,7 @@ namespace Aetherboard.VR
             if (Input.GetKeyDown(KeyCode.Alpha2)) _director.SetBoss("wind");
             if (Input.GetKeyDown(KeyCode.Alpha3)) _director.SetBoss("ice");
             if (Input.GetKeyDown(KeyCode.Alpha4)) _director.SetBoss("fire");
+            if (Input.GetKeyDown(KeyCode.Alpha0)) _director.CycleNextBoss();
             if (Input.GetKeyDown(KeyCode.Escape)) CancelSelection();
             if (Input.GetKeyDown(KeyCode.C))
             {

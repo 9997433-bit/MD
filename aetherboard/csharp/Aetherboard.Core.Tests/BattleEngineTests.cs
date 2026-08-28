@@ -233,6 +233,16 @@ namespace Aetherboard.Core.Tests
         }
 
         [Fact]
+        public void BossRegistry_CycleBossId_RotatesFourBosses()
+        {
+            Assert.Equal("wind", BossRegistry.CycleBossId("earth"));
+            Assert.Equal("ice", BossRegistry.CycleBossId("wind"));
+            Assert.Equal("fire", BossRegistry.CycleBossId("ice"));
+            Assert.Equal("earth", BossRegistry.CycleBossId("fire"));
+            Assert.Equal("wind", BossRegistry.CycleBossId("unknown"));
+        }
+
+        [Fact]
         public void Fire_AutoPlay_CanWin()
         {
             var wins = 0;

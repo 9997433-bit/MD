@@ -1,4 +1,4 @@
-import { BOSS_POS, JOB_SKILLS, Phase, SKILLS, TELEGRAPH_TEXT } from "./constants.js";
+import { BOSS_POS, BOSS_ORDER, JOB_SKILLS, Phase, SKILLS, TELEGRAPH_TEXT } from "./constants.js";
 import { importHostState } from "./hostState.js";
 import { canControl } from "./coop.js";
 import { CommandLog, downloadReplayJson, replayCommands } from "./replay.js";
@@ -57,6 +57,17 @@ export class GameUI {
       this.pendingSkillId = null;
       this.render();
     });
+  }
+
+  cycleNextBoss() {
+    if (this.remoteMode) return;
+    const idx = BOSS_ORDER.indexOf(this.engine.bossId);
+    const next = BOSS_ORDER[(idx + 1) % BOSS_ORDER.length];
+    this.onBossChange(next);
+    this.recordCommand({ type: "SetBoss", bossId: next });
+    this.selectedUnitId = null;
+    this.pendingSkillId = null;
+    this.render();
   }
 
   setPlayerId(id) {

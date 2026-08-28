@@ -51,4 +51,7 @@ if (remoteMode) {
   initRemote();
 } else {
   ui.render();
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "0") ui.cycleNextBoss();
+  });
 }
