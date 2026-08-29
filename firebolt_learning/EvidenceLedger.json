@@ -1,6 +1,6 @@
 {
   "schema": "firebolt_learning.EvidenceLedger.v1",
-  "generated_at": "2026-08-28T14:32:10.900699+00:00",
+  "generated_at": "2026-08-29T01:03:43.675031+00:00",
   "product": {
     "name": "NI USB-6453",
     "codename": "Firebolt",
@@ -387,6 +387,46 @@
         "status": "candidate",
         "boundary": "pointer_heuristic",
         "note": "tFPGARegisterAccess.c file 0x4624C -> VA 0x4001C24C; aids future Ghidra load"
+      },
+      {
+        "identifier": "FX3-UIB-BASE",
+        "module": "fx3",
+        "source_identifier": "USB UIB MMIO literals at 0xE0030000 / 0xE0033000",
+        "status": "confirmed",
+        "boundary": "firmware_mmio_literals",
+        "note": "Highest-frequency E00* immediates; USB engine"
+      },
+      {
+        "identifier": "FX3-GCTL-BASE",
+        "module": "fx3",
+        "source_identifier": "GCTL MMIO literals at 0xE0050000 / 0xE0051000",
+        "status": "confirmed",
+        "boundary": "firmware_mmio_literals",
+        "note": "Clock/power/id controller region"
+      },
+      {
+        "identifier": "FX3-PIB-BASE",
+        "module": "fx3",
+        "source_identifier": "PIB/GPIF MMIO base 0xE0010000 present",
+        "status": "confirmed",
+        "boundary": "firmware_mmio_literals",
+        "note": "On-chip bridge toward FPGA GPIF-II"
+      },
+      {
+        "identifier": "FX3-PIB-SOCKET-STRIDE",
+        "module": "fx3",
+        "source_identifier": "PIB socket register stride = 16 bytes (index<<4)",
+        "status": "confirmed",
+        "boundary": "arm_disassembly",
+        "note": "VA 0x400115F8: r3=0xE0010000+(index<<4); see fx3_mmio_map.json"
+      },
+      {
+        "identifier": "FX3-GPIF-FPGA-BRIDGE",
+        "module": "fx3",
+        "source_identifier": "FPGA reached via PIB/GPIF sockets, not via ARM sample-clock engine",
+        "status": "confirmed",
+        "boundary": "arch_synthesis",
+        "note": "Reinforces FX3-ROLE-SUMMARY; fabric regmap still unknown"
       }
     ],
     "bitstream": [
@@ -515,9 +555,9 @@
     ]
   },
   "stats": {
-    "identifier_count": 61,
+    "identifier_count": 66,
     "by_status": {
-      "confirmed": 48,
+      "confirmed": 53,
       "candidate": 6,
       "unknown": 6,
       "hypothesis": 1
@@ -525,7 +565,7 @@
     "by_block": {
       "spec": 19,
       "hardware": 10,
-      "fx3": 17,
+      "fx3": 22,
       "bitstream": 7,
       "learn": 8
     }

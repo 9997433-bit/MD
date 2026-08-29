@@ -224,8 +224,8 @@ def build_system_map() -> dict:
             {
                 "from": "NODE-FPGA",
                 "to": "NODE-FX3",
-                "via": "GPIF_DMA_and_registers",
-                "status": "candidate",
+                "via": "GPIF_PIB_sockets_0xE0010000",
+                "status": "confirmed",
             },
             {
                 "from": "NODE-FX3",

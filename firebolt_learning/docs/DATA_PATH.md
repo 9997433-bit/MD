@@ -14,6 +14,7 @@ AI0..31 ──► 16×ADC（共享 sample clock convert）──► Artix-7 FPGA
                                             ┌─────┴──────┐
                                             │ Fusion@EP0 │  控制面（vendor class）
                                             │ Bulk EPx   │  数据面（Signal Stream 假设）
+                                            │ PIB@E001h  │  GPIF sockets ← FPGA（confirmed 桥）
                                             └─────┬──────┘
                                                   ▼
                                               Host DAQmx

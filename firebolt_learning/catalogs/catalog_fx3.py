@@ -123,6 +123,41 @@ FX3_ENTRIES: list[tuple[str, str, str, str, str]] = [
         "pointer_heuristic",
         "tFPGARegisterAccess.c file 0x4624C -> VA 0x4001C24C; aids future Ghidra load",
     ),
+    (
+        "FX3-UIB-BASE",
+        "USB UIB MMIO literals at 0xE0030000 / 0xE0033000",
+        "confirmed",
+        "firmware_mmio_literals",
+        "Highest-frequency E00* immediates; USB engine",
+    ),
+    (
+        "FX3-GCTL-BASE",
+        "GCTL MMIO literals at 0xE0050000 / 0xE0051000",
+        "confirmed",
+        "firmware_mmio_literals",
+        "Clock/power/id controller region",
+    ),
+    (
+        "FX3-PIB-BASE",
+        "PIB/GPIF MMIO base 0xE0010000 present",
+        "confirmed",
+        "firmware_mmio_literals",
+        "On-chip bridge toward FPGA GPIF-II",
+    ),
+    (
+        "FX3-PIB-SOCKET-STRIDE",
+        "PIB socket register stride = 16 bytes (index<<4)",
+        "confirmed",
+        "arm_disassembly",
+        "VA 0x400115F8: r3=0xE0010000+(index<<4); see fx3_mmio_map.json",
+    ),
+    (
+        "FX3-GPIF-FPGA-BRIDGE",
+        "FPGA reached via PIB/GPIF sockets, not via ARM sample-clock engine",
+        "confirmed",
+        "arch_synthesis",
+        "Reinforces FX3-ROLE-SUMMARY; fabric regmap still unknown",
+    ),
 ]
 
 

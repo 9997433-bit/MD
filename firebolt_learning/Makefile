@@ -14,6 +14,7 @@ ledger:
 deep-fx3:
 	python3 scripts/analyze_fx3_deep.py
 	python3 scripts/analyze_fx3_static_re.py
+	python3 scripts/analyze_fx3_mmio.py
 	python3 scripts/analyze_bitstream_deep.py
 
 test:
