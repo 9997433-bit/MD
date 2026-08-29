@@ -21,8 +21,10 @@ namespace CosmicFront.UI
         [SerializeField] private Text statusText;
         [SerializeField] private Text controlsHint;
         [SerializeField] private Text steamStatusText;
+        [SerializeField] private HangarMechPreview mechPreview;
 
         private ushort _joinPort = NetworkSessionConfig.Port;
+        private System.Collections.Generic.List<MechModelId> _mechOptions = new System.Collections.Generic.List<MechModelId>();
 
         private void Awake()
         {
@@ -44,7 +46,16 @@ namespace CosmicFront.UI
             PopulateDropdowns();
             if (teamDropdown != null)
             {
-                teamDropdown.onValueChanged.AddListener(_ => RefreshMechOptions());
+                teamDropdown.onValueChanged.AddListener(_ =>
+                {
+                    RefreshMechOptions();
+                    NotifyPreview();
+                });
+            }
+
+            if (mechDropdown != null)
+            {
+                mechDropdown.onValueChanged.AddListener(_ => NotifyPreview());
             }
 
             RefreshMechOptions();
@@ -96,6 +107,49 @@ namespace CosmicFront.UI
             UpdateStatus("选择模式 / 地图 / 生成方式后开始");
             UpdateControlsHint();
             UpdateSteamStatus();
+
+            if (mechPreview == null)
+            {
+                mechPreview = FindObjectOfType<HangarMechPreview>();
+            }
+
+            NotifyPreview();
+        }
+
+        public TeamId GetSelectedTeam()
+        {
+            if (teamDropdown == null)
+            {
+                return TeamId.Terran;
+            }
+
+            return teamDropdown.value switch
+            {
+                1 => TeamId.Orbital,
+                2 => TeamId.Neutral,
+                _ => TeamId.Terran
+            };
+        }
+
+        public MechModelId GetSelectedModel()
+        {
+            if (_mechOptions.Count == 0)
+            {
+                return MechModelCatalog.DefaultForTeam(GetSelectedTeam());
+            }
+
+            var idx = mechDropdown != null ? Mathf.Clamp(mechDropdown.value, 0, _mechOptions.Count - 1) : 0;
+            return _mechOptions[idx];
+        }
+
+        private void NotifyPreview()
+        {
+            if (mechPreview == null)
+            {
+                mechPreview = FindObjectOfType<HangarMechPreview>();
+            }
+
+            mechPreview?.Show(GetSelectedTeam(), GetSelectedModel());
         }
 
         /// <summary>Fills the join address field from a Steam invite deep-link endpoint.</summary>
@@ -183,27 +237,21 @@ namespace CosmicFront.UI
                 return;
             }
 
-            var team = TeamId.Terran;
-            if (teamDropdown != null)
-            {
-                switch (teamDropdown.value)
-                {
-                    case 1: team = TeamId.Orbital; break;
-                    case 2: team = TeamId.Neutral; break;
-                }
-            }
-
+            var team = GetSelectedTeam();
             var models = MechModelCatalog.GetForTeam(team);
             mechDropdown.ClearOptions();
+            _mechOptions.Clear();
             var labels = new System.Collections.Generic.List<string>();
             foreach (var def in models)
             {
                 labels.Add(MechModelCatalog.FormatOption(def));
+                _mechOptions.Add(def.Id);
             }
 
             mechDropdown.AddOptions(labels);
             mechDropdown.value = 0;
             mechDropdown.RefreshShownValue();
+            NotifyPreview();
         }
 
         private void OnStartClicked()
@@ -265,7 +313,7 @@ namespace CosmicFront.UI
             }
 
             var models = MechModelCatalog.GetForTeam(team);
-            var model = models.Count > 0 ? models[0].Id : MechModelCatalog.DefaultForTeam(team);
+            var model = GetSelectedModel();
             if (mechDropdown != null && mechDropdown.value >= 0 && mechDropdown.value < models.Count)
             {
                 model = models[mechDropdown.value].Id;

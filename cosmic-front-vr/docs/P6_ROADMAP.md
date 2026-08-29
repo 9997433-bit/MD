@@ -40,17 +40,17 @@
 ### 5. 护送 AI（Escort）
 
 - [ ] 旗舰受击反应：减速 / 喊话事件 / 护航召唤
-- [ ] 进攻方 AI：优先集火旗舰权重
-- [ ] 护送方 AI：拦截接近旗舰的敌人
+- [x] 进攻方 AI：优先集火旗舰权重（`EscortAttackWaveSpawner`）
+- [x] 护送方 AI：拦截接近旗舰的敌人（`EscortDefenderWing`）
 - [ ] 航点失败兜底（卡住、出界）
 - [ ] 网络权威下进度与存活 SyncVar 回归测试
 
 ### 6. 据点 VFX（Domination）
 
-- [ ] 中立 / TU / OL 占点环颜色与进度填充
-- [ ] 占领完成脉冲、 integr 得分飘字（可选）
+- [x] 中立 / TU / OL / NF 占点环颜色与进度填充（`CapturePointVisual` + `CapturePointProgressRing`）
+- [ ] 占领完成脉冲、积分得分飘字（可选）
 - [ ] 距离外可辨识的柱光 / 全息标记（避免遮挡驾驶）
-- [ ] 与 `ModeStatusUI` 文案同步
+- [x] 与 `ModeStatusUI` 文案同步
 
 ### 7. 击杀 UI（Kill Feed / 结算）
 

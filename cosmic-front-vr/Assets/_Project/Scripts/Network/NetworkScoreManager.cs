@@ -29,11 +29,13 @@ namespace CosmicFront.Network
         private readonly SyncVar<float> _timeRemaining = new();
         private readonly SyncVar<int> _terranScore = new();
         private readonly SyncVar<int> _orbitalScore = new();
+        private readonly SyncVar<int> _neutralScore = new();
         private readonly SyncList<PlayerScoreEntry> _playerScores = new();
 
         public float TimeRemaining => _timeRemaining.Value;
         public int TerranScore => _terranScore.Value;
         public int OrbitalScore => _orbitalScore.Value;
+        public int NeutralScore => _neutralScore.Value;
         public SyncList<PlayerScoreEntry> PlayerScores => _playerScores;
 
         public event Action ScoresChanged;
@@ -48,6 +50,7 @@ namespace CosmicFront.Network
             _timeRemaining.OnChange += OnTimerChanged;
             _terranScore.OnChange += OnTeamScoreChanged;
             _orbitalScore.OnChange += OnTeamScoreChanged;
+            _neutralScore.OnChange += OnTeamScoreChanged;
         }
 
         private void OnDestroy()
@@ -63,6 +66,7 @@ namespace CosmicFront.Network
             _timeRemaining.Value = matchDurationSeconds;
             _terranScore.Value = 0;
             _orbitalScore.Value = 0;
+            _neutralScore.Value = 0;
             _playerScores.Clear();
         }
 
@@ -137,6 +141,9 @@ namespace CosmicFront.Network
                     break;
                 case TeamId.Orbital:
                     _orbitalScore.Value++;
+                    break;
+                case TeamId.Neutral:
+                    _neutralScore.Value++;
                     break;
             }
         }
@@ -248,7 +255,7 @@ namespace CosmicFront.Network
         public string BuildScoreboardText()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"TU {TerranScore}  |  OL {OrbitalScore}");
+            sb.AppendLine($"TU {TerranScore}  |  OL {OrbitalScore}  |  NF {NeutralScore}");
             sb.AppendLine($"Time {Mathf.CeilToInt(TimeRemaining)}s");
 
             for (var i = 0; i < _playerScores.Count; i++)

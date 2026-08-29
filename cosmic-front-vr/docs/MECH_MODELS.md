@@ -33,4 +33,5 @@
 - `MechModelId` / `MechModelCatalog`
 - `MechController.SetModel`
 - `MechSpecialAbility`
-- 机库：`HangarMenu.RefreshMechOptions`（换阵营刷新列表）
+- 机库：`HangarMenu.RefreshMechOptions`（换阵营刷新列表）+ `HangarMechPreview` 旋转预览
+- HUD：`CockpitHUD` 显示机型代号/中文名与专属技能冷却（键 **V** / VR 右 B）

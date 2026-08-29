@@ -97,6 +97,11 @@ namespace CosmicFront.Editor
             Object.DestroyImmediate(previewMech.GetComponent<Rigidbody>());
             Object.DestroyImmediate(previewMech.GetComponent<SimpleEnemyAI>());
 
+            var preview = previewMech.AddComponent<HangarMechPreview>();
+            SetPrivateField(preview, "previewMech", previewMech.GetComponent<MechController>());
+            SetPrivateField(preview, "turntable", previewMech.transform);
+            previewMech.GetComponent<MechController>().SetModel(MechModelId.Bastion);
+
             CreateHangarUi();
             CreateXRRig(new Vector3(0f, 0f, -6f), null);
             CreateFishNetNetworkManager();
@@ -284,6 +289,8 @@ namespace CosmicFront.Editor
             SetPrivateField(menu, "statusText", status);
             SetPrivateField(menu, "controlsHint", hint);
             SetPrivateField(menu, "steamStatusText", steam);
+            var preview = Object.FindObjectOfType<HangarMechPreview>();
+            SetPrivateField(menu, "mechPreview", preview);
         }
 
         private static void CreateFishNetNetworkManager()
@@ -378,17 +385,27 @@ namespace CosmicFront.Editor
             var healthBar = CreateSlider(canvasGo.transform, "HealthBar", new Vector2(-200f, 150f), Color.red);
             var shieldBar = CreateSlider(canvasGo.transform, "ShieldBar", new Vector2(-200f, 120f), Color.cyan);
             var boostBar = CreateSlider(canvasGo.transform, "BoostBar", new Vector2(-200f, 90f), Color.yellow);
+            var abilityBar = CreateSlider(canvasGo.transform, "AbilityBar", new Vector2(-200f, 60f), new Color(0.35f, 0.85f, 1f));
             var lockText = CreateText(canvasGo.transform, "Lock", "---", 18, TextAnchor.MiddleCenter);
             lockText.rectTransform.anchoredPosition = new Vector2(200f, 150f);
             var speedText = CreateText(canvasGo.transform, "Speed", "0 m/s", 16, TextAnchor.MiddleCenter);
             speedText.rectTransform.anchoredPosition = new Vector2(200f, 120f);
+            var modelText = CreateText(canvasGo.transform, "Model", "MS-L1 Kestrel", 14, TextAnchor.MiddleLeft);
+            modelText.rectTransform.anchoredPosition = new Vector2(-200f, 180f);
+            modelText.rectTransform.sizeDelta = new Vector2(280f, 28f);
+            var abilityText = CreateText(canvasGo.transform, "AbilityLabel", "技能就绪 [V]", 14, TextAnchor.MiddleCenter);
+            abilityText.rectTransform.anchoredPosition = new Vector2(200f, 90f);
+            abilityText.rectTransform.sizeDelta = new Vector2(220f, 28f);
 
             var hud = canvasGo.AddComponent<CockpitHUD>();
             SetPrivateField(hud, "healthBar", healthBar);
             SetPrivateField(hud, "shieldBar", shieldBar);
             SetPrivateField(hud, "boostBar", boostBar);
+            SetPrivateField(hud, "abilityBar", abilityBar);
             SetPrivateField(hud, "lockIndicator", lockText);
             SetPrivateField(hud, "speedLabel", speedText);
+            SetPrivateField(hud, "modelLabel", modelText);
+            SetPrivateField(hud, "abilityLabel", abilityText);
             SetPrivateField(hud, "mech", mech);
         }
 
@@ -773,6 +790,13 @@ namespace CosmicFront.Editor
                 SetPrivateField(wave, "attackerPrefab", attackerPrefab);
             }
 
+            // Defender wing intercepts attackers near the flagship.
+            var wing = escortRoot.AddComponent<EscortDefenderWing>();
+            if (attackerPrefab != null)
+            {
+                SetPrivateField(wing, "defenderPrefab", attackerPrefab);
+            }
+
             // Capture points A/B/C
             var captureRoot = new GameObject("CapturePointsMode");
             var capture = captureRoot.AddComponent<CapturePointsMode>();
@@ -798,6 +822,7 @@ namespace CosmicFront.Editor
                 var cp = go.AddComponent<CapturePoint>();
                 // CapturePointVisual also ensures CapturePointWorldLabel on Awake.
                 go.AddComponent<CapturePointVisual>();
+                go.AddComponent<CapturePointProgressRing>();
                 go.AddComponent<NetworkObject>();
                 SetPrivateField(cp, "pointName", pointDefs[i].Item1);
                 SetPrivateField(cp, "radius", 12f);

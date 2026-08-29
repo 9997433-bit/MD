@@ -12,17 +12,20 @@
 
 ## 护送旗舰
 
-- 组件：`EscortFlagshipMode`
+- 组件：`EscortFlagshipMode` + `EscortAttackWaveSpawner` + `EscortDefenderWing`
 - 旗舰沿 `EscortWaypoints` 自动巡航
+- 进攻方波次 AI 优先集火旗舰
+- 护送方护航机（最多 3 架）拦截接近旗舰的敌军，阵亡后延迟补员
 - 护送方可登舰保护 / 用机甲护航
 - 进攻方集火旗舰 HP（1200 + 盾 400）
 - 右上角显示护送进度百分比
 
 ## 据点争夺
 
-- 组件：`CapturePoint` + `CapturePointsMode`
-- 据点内我方单位更多即可占领
+- 组件：`CapturePoint` + `CapturePointsMode` + `CapturePointVisual` + `CapturePointProgressRing`
+- 据点内我方单位更多即可占领；进度环随占领绝对值缩放并按阵营着色
 - 占领后每 2 秒 +1 占点分
+- 记分板显示 TU / OL / NF 三方击杀分
 - 先到 100 分获胜
 
 ## Steamworks 与邀请深链（P5/P6）
