@@ -1,0 +1,97 @@
+{
+  "schema": "firebolt_learning.fx3_regaccess_shape.v1",
+  "declaration": "\u76ee\u5f55\u5b8c\u6574 \u2260 \u5382\u5546\u7b49\u4ef7 \u2260 \u638c\u63e1\u8fd0\u884c\u884c\u4e3a",
+  "pib_config_block": {
+    "base": "0xE0011000",
+    "init_func_va": "0x4001250C",
+    "store_offsets_sorted": [
+      4,
+      12,
+      16,
+      56,
+      60,
+      72,
+      76,
+      80,
+      84,
+      96,
+      100,
+      104,
+      108,
+      112,
+      116,
+      120,
+      124,
+      128,
+      132,
+      136,
+      140
+    ],
+    "store_count": 23,
+    "status": "candidate",
+    "meaning": "Firmware init base at 0xE0011000 with many stores; public pib_regs.h places this in rsrvd0[] \u2014 no official field names"
+  },
+  "subsystem_tags": {
+    "file_region": "0x46180",
+    "names": [
+      "Op",
+      "Fpga",
+      "Fusion",
+      "Trace"
+    ],
+    "note": "Adjacent to Main Thread / State Machine handler strings; logging or subsystem enum candidates",
+    "status": "candidate"
+  },
+  "gpif_cfg_object": {
+    "example_func_va": "0x400113D0",
+    "fields": [
+      {
+        "offset": "0x00",
+        "access": "ldrh",
+        "note": "checked != 0"
+      },
+      {
+        "offset": "0x04",
+        "access": "ldr",
+        "note": "word/ptr"
+      },
+      {
+        "offset": "0x08",
+        "access": "ldr",
+        "note": "word/ptr"
+      },
+      {
+        "offset": "0x0C",
+        "access": "ldrh",
+        "note": "u16"
+      },
+      {
+        "offset": "0x10",
+        "access": "ldr",
+        "note": "word"
+      },
+      {
+        "offset": "0x14",
+        "access": "ldrh",
+        "note": "compared to 0/1 (mode or count)"
+      },
+      {
+        "offset": "0x18",
+        "access": "ldr",
+        "note": "nested ptr; [p+4] bits 0xc tested"
+      }
+    ],
+    "status": "candidate",
+    "interpretation": "GPIF/DMA configuration object walker \u2014 not AI channel map"
+  },
+  "boundary": {
+    "is_fpga_fabric_regmap": false,
+    "fx3_regmap_status": "unknown",
+    "why": "Recovered PIB config offsets and GPIF object field shapes only. Fabric-side AIConv/sample-clock registers are not identified."
+  },
+  "learning": {
+    "access_path": "Fusion/host \u2192 FX3 ARM \u2192 PIB@0xE0011000 / sockets \u2192 GPIF \u2192 FPGA",
+    "next_static_step": "Ghidra on tFPGARegisterAccess callers with this PIB base as landmark",
+    "next_dynamic_step": "USB capture for Fusion requests that trigger these PIB writes"
+  }
+}

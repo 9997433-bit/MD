@@ -1,0 +1,469 @@
+{
+  "schema": "firebolt_learning.fx3_static_re.v1",
+  "declaration": "\u76ee\u5f55\u5b8c\u6574 \u2260 \u5382\u5546\u7b49\u4ef7 \u2260 \u638c\u63e1\u8fd0\u884c\u884c\u4e3a",
+  "usb_descriptors": {
+    "start": 283432,
+    "device": {
+      "bcdUSB": "0x0210",
+      "bDeviceClass": 0,
+      "bMaxPacketSize0": 64,
+      "idVendor": "0x3923",
+      "idProduct": "0x7b44",
+      "bcdDevice": "0x0001",
+      "bNumConfigurations": 1
+    },
+    "configurations": [
+      {
+        "offset": 284292,
+        "wTotalLength": 130,
+        "bNumInterfaces": 1,
+        "bConfigurationValue": 1,
+        "bmAttributes": "0x80",
+        "bMaxPower_2mA": 250
+      }
+    ],
+    "interfaces": [
+      {
+        "offset": 284301,
+        "bInterfaceNumber": 0,
+        "bAlternateSetting": 0,
+        "bNumEndpoints": 16,
+        "bInterfaceClass": 255,
+        "bInterfaceSubClass": 0,
+        "bInterfaceProtocol": 0
+      }
+    ],
+    "endpoints": [
+      {
+        "offset": 284310,
+        "bEndpointAddress": "0x81",
+        "direction": "IN",
+        "number": 1,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284317,
+        "bEndpointAddress": "0x82",
+        "direction": "IN",
+        "number": 2,
+        "bmAttributes": "0x03",
+        "xfer": "interrupt",
+        "wMaxPacketSize": 64,
+        "bInterval": 1
+      },
+      {
+        "offset": 284324,
+        "bEndpointAddress": "0x03",
+        "direction": "OUT",
+        "number": 3,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284331,
+        "bEndpointAddress": "0x84",
+        "direction": "IN",
+        "number": 4,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284338,
+        "bEndpointAddress": "0x05",
+        "direction": "OUT",
+        "number": 5,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284345,
+        "bEndpointAddress": "0x86",
+        "direction": "IN",
+        "number": 6,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284352,
+        "bEndpointAddress": "0x07",
+        "direction": "OUT",
+        "number": 7,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284359,
+        "bEndpointAddress": "0x88",
+        "direction": "IN",
+        "number": 8,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284366,
+        "bEndpointAddress": "0x08",
+        "direction": "OUT",
+        "number": 8,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284373,
+        "bEndpointAddress": "0x89",
+        "direction": "IN",
+        "number": 9,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284380,
+        "bEndpointAddress": "0x09",
+        "direction": "OUT",
+        "number": 9,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284387,
+        "bEndpointAddress": "0x8a",
+        "direction": "IN",
+        "number": 10,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284394,
+        "bEndpointAddress": "0x0a",
+        "direction": "OUT",
+        "number": 10,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284401,
+        "bEndpointAddress": "0x8b",
+        "direction": "IN",
+        "number": 11,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284408,
+        "bEndpointAddress": "0x0b",
+        "direction": "OUT",
+        "number": 11,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      },
+      {
+        "offset": 284415,
+        "bEndpointAddress": "0x0c",
+        "direction": "OUT",
+        "number": 12,
+        "bmAttributes": "0x02",
+        "xfer": "bulk",
+        "wMaxPacketSize": 64,
+        "bInterval": 0
+      }
+    ]
+  },
+  "bulk_endpoint_count": 15,
+  "bulk_endpoints": [
+    {
+      "offset": 284310,
+      "bEndpointAddress": "0x81",
+      "direction": "IN",
+      "number": 1,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284324,
+      "bEndpointAddress": "0x03",
+      "direction": "OUT",
+      "number": 3,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284331,
+      "bEndpointAddress": "0x84",
+      "direction": "IN",
+      "number": 4,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284338,
+      "bEndpointAddress": "0x05",
+      "direction": "OUT",
+      "number": 5,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284345,
+      "bEndpointAddress": "0x86",
+      "direction": "IN",
+      "number": 6,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284352,
+      "bEndpointAddress": "0x07",
+      "direction": "OUT",
+      "number": 7,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284359,
+      "bEndpointAddress": "0x88",
+      "direction": "IN",
+      "number": 8,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284366,
+      "bEndpointAddress": "0x08",
+      "direction": "OUT",
+      "number": 8,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284373,
+      "bEndpointAddress": "0x89",
+      "direction": "IN",
+      "number": 9,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284380,
+      "bEndpointAddress": "0x09",
+      "direction": "OUT",
+      "number": 9,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284387,
+      "bEndpointAddress": "0x8a",
+      "direction": "IN",
+      "number": 10,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284394,
+      "bEndpointAddress": "0x0a",
+      "direction": "OUT",
+      "number": 10,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284401,
+      "bEndpointAddress": "0x8b",
+      "direction": "IN",
+      "number": 11,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284408,
+      "bEndpointAddress": "0x0b",
+      "direction": "OUT",
+      "number": 11,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    },
+    {
+      "offset": 284415,
+      "bEndpointAddress": "0x0c",
+      "direction": "OUT",
+      "number": 12,
+      "bmAttributes": "0x02",
+      "xfer": "bulk",
+      "wMaxPacketSize": 64,
+      "bInterval": 0
+    }
+  ],
+  "string_file_offsets": {
+    "source/nimarengoSrc/tFPGARegisterAccess.c": 287308,
+    "source/nimarengoSrc/startup/tFPGA.c": 287408,
+    "source/nimarengoCore/fusion2/tFusionManager.c": 284464,
+    "source/nimarengoCore/tDMAManager.c": 286892,
+    "01_DMA_THREAD": 297360,
+    "03_PIB_THREAD": 297388,
+    "45:Counter Data Monitor handler": 287204,
+    "43:State Machine handler": 287176,
+    "Fusion": 284494
+  },
+  "load_base_heuristic": "0x3ffd6000",
+  "load_base_scores": {
+    "0x3ffd6000": 1,
+    "0x40000000": 0,
+    "0x40003000": 0,
+    "0x000000f4": 0,
+    "0x00000000": 0
+  },
+  "xref_samples": [
+    {
+      "string": "source/nimarengoSrc/tFPGARegisterAccess.c",
+      "string_file_off": 287308,
+      "ptr_va": "0x4001c24c",
+      "xref_file_off": 110548,
+      "insns_before_literal": [
+        "0x3fff0fa4: ldr r3, [r4]",
+        "0x3fff0fa8: beq #0x3fff0fe8",
+        "0x3fff0fac: cmp r3, #0",
+        "0x3fff0fb0: blt #0x3fff1000",
+        "0x3fff0fb4: cmp r0, #9",
+        "0x3fff0fb8: ldrls pc, [pc, r0, lsl #2]",
+        "0x3fff0fbc: b #0x3fff1530",
+        "0x3fff0fc0: andmi ip, r1, r4, lsr #3",
+        "0x3fff0fc4: mulmi r1, ip, pc",
+        "0x3fff0fc8: andmi ip, r1, ip, ror #2",
+        "0x3fff0fcc: ldrdmi ip, sp, [r1], -ip",
+        "0x3fff0fd0: andmi ip, r1, r4, lsl r2"
+      ],
+      "immediates": [
+        "#0x3fff8b90",
+        "#0xec4]",
+        "#0x3fff0fe8",
+        "#0",
+        "#0x3fff1000",
+        "#9",
+        "#2]",
+        "#0x3fff1530",
+        "#3",
+        "#2"
+      ]
+    }
+  ],
+  "fpga_fusion_immediate_histogram": {
+    "note": "heuristic only \u2014 not a proven register map",
+    "top_immediates": [
+      [
+        "#0x3fff8b90",
+        1
+      ],
+      [
+        "#0xec4]",
+        1
+      ],
+      [
+        "#0x3fff0fe8",
+        1
+      ],
+      [
+        "#0",
+        1
+      ],
+      [
+        "#0x3fff1000",
+        1
+      ],
+      [
+        "#9",
+        1
+      ],
+      [
+        "#2]",
+        1
+      ],
+      [
+        "#0x3fff1530",
+        1
+      ],
+      [
+        "#3",
+        1
+      ],
+      [
+        "#2",
+        1
+      ]
+    ]
+  },
+  "learning": {
+    "usb_control_plane": "Interface class 255 vendor-specific; Fusion vendor requests expected on EP0",
+    "usb_data_plane_hypothesis": "15 bulk + 1 interrupt endpoints \u2192 multi-pipe DMA / Signal Stream shape; frame layout still unknown (forced null)",
+    "usb2_descriptor_caveat": "bcdUSB 0x0210 and wMaxPacketSize 64 are what this image embeds; product may still enumerate SS at runtime \u2014 do not over-claim",
+    "best_load_base_heuristic": "0x3ffd6000",
+    "base_scores": {
+      "0x3ffd6000": 1,
+      "0x40000000": 0,
+      "0x40003000": 0,
+      "0x000000f4": 0,
+      "0x00000000": 0
+    },
+    "sync_not_in_fx3": true,
+    "regmap_status": "unknown \u2014 immediates listed are candidates only",
+    "see_also": [
+      "docs/DATA_PATH.md",
+      "docs/fx3_role_map.md"
+    ]
+  }
+}

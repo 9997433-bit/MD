@@ -1,0 +1,143 @@
+{
+  "path": "firmware/niusbFireboltFPGA.cfg",
+  "size": 1599718,
+  "entropy": 4.467,
+  "leading_ff": 32,
+  "bus_width_detect_hex": "000000bb11220044ffffffffffffffff",
+  "sync_offset": 48,
+  "idcode": "0x0362C093",
+  "device": "XC7A100T",
+  "packet_stats": {
+    "T1_op0_CRC": 8984,
+    "T1_op2_TIMER": 1,
+    "T1_op2_WBSTAR": 1,
+    "T1_op2_CMD": 74,
+    "T1_op2_19": 1,
+    "T1_op2_COR0": 1,
+    "T1_op2_COR1": 1,
+    "T1_op2_IDCODE": 1,
+    "T1_op2_MASK": 4,
+    "T1_op2_CTL0": 2,
+    "T1_op2_CTL1": 2,
+    "T1_op2_FAR": 1753,
+    "T1_op2_FDRI": 53,
+    "T2_FDRI_like": 22,
+    "T1_op2_10": 1713,
+    "T1_op2_CRC": 2,
+    "T0_other": 2
+  },
+  "fdri_segments": [
+    {
+      "offset": 232,
+      "word_count": 2121,
+      "byte_count": 8484
+    },
+    {
+      "offset": 31216,
+      "word_count": 26361,
+      "byte_count": 105444
+    },
+    {
+      "offset": 136692,
+      "word_count": 7373,
+      "byte_count": 29492
+    },
+    {
+      "offset": 173112,
+      "word_count": 16665,
+      "byte_count": 66660
+    },
+    {
+      "offset": 239804,
+      "word_count": 38178,
+      "byte_count": 152712
+    },
+    {
+      "offset": 392548,
+      "word_count": 9999,
+      "byte_count": 39996
+    },
+    {
+      "offset": 432576,
+      "word_count": 16362,
+      "byte_count": 65448
+    },
+    {
+      "offset": 499296,
+      "word_count": 2828,
+      "byte_count": 11312
+    },
+    {
+      "offset": 514736,
+      "word_count": 2121,
+      "byte_count": 8484
+    },
+    {
+      "offset": 540232,
+      "word_count": 17271,
+      "byte_count": 69084
+    },
+    {
+      "offset": 609348,
+      "word_count": 9090,
+      "byte_count": 36360
+    },
+    {
+      "offset": 645740,
+      "word_count": 30805,
+      "byte_count": 123220
+    },
+    {
+      "offset": 768992,
+      "word_count": 16261,
+      "byte_count": 65044
+    },
+    {
+      "offset": 834068,
+      "word_count": 23937,
+      "byte_count": 95748
+    },
+    {
+      "offset": 929848,
+      "word_count": 12625,
+      "byte_count": 50500
+    },
+    {
+      "offset": 980380,
+      "word_count": 8989,
+      "byte_count": 35956
+    },
+    {
+      "offset": 1016368,
+      "word_count": 2727,
+      "byte_count": 10908
+    },
+    {
+      "offset": 1047916,
+      "word_count": 34845,
+      "byte_count": 139380
+    },
+    {
+      "offset": 1194224,
+      "word_count": 16766,
+      "byte_count": 67064
+    },
+    {
+      "offset": 1261320,
+      "word_count": 38077,
+      "byte_count": 152308
+    },
+    {
+      "offset": 1413660,
+      "word_count": 26361,
+      "byte_count": 105444
+    },
+    {
+      "offset": 1519136,
+      "word_count": 2222,
+      "byte_count": 8888
+    }
+  ],
+  "fdri_segment_count": 22,
+  "boundary_note": "Device/carrier confirmed via IDCODE. Sample-clock tree, bank/AIConv HDL, and FIFO packing remain unknown without netlist or lab; do not upgrade BIT-SYNC-CLOCK-TREE / BIT-BANK-AICONV from this metadata alone."
+}

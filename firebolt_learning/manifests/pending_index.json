@@ -1,0 +1,86 @@
+{
+  "schema": "firebolt_learning.pending_index.v1",
+  "generated_at": "2026-08-28T13:40:00+00:00",
+  "declaration": "静态骨架阶段登记；升级前不得把任何 unknown 升为 confirmed。",
+  "sources": [
+    "firebolt_learning/EvidenceLedger.json",
+    "firebolt_learning/OMISSIONS_AND_REMAINING.md"
+  ],
+  "upgrade_means_vocab": ["usb_capture", "ghidra", "netlist", "lab", "photo_bom"],
+  "pending": [
+    {
+      "identifier": "BIT-SYNC-CLOCK-TREE",
+      "status": "unknown",
+      "upgrade_means": "netlist",
+      "blocks_learning_question": "Q1",
+      "notes": "FPGA fabric 内 sample clock / 多 ADC convert 同源连线树。同步逻辑 locus 目前仅由 SPEC+arch 断言，未经网表证实。来源: EvidenceLedger(bitstream) + OMISSIONS。"
+    },
+    {
+      "identifier": "BIT-BANK-AICONV",
+      "status": "unknown",
+      "upgrade_means": "netlist",
+      "blocks_learning_question": "Q3",
+      "notes": "bank 切换与 AIConv 定时器 HDL 实现（inter-bank delay）。可辅以 lab 实机+抓包对照。也间接关系 Q2(16 vs 32-SE bank)。来源: EvidenceLedger(bitstream) + OMISSIONS。"
+    },
+    {
+      "identifier": "BIT-FIFO-LOGIC",
+      "status": "unknown",
+      "upgrade_means": "netlist",
+      "blocks_learning_question": "Q5",
+      "notes": "AI FIFO 在 fabric 中的 sizing / packing。SPEC 给出 8191 samples 共享深度，但 HDL 未知。来源: EvidenceLedger(bitstream)。"
+    },
+    {
+      "identifier": "FX3-REGMAP",
+      "status": "unknown",
+      "upgrade_means": "ghidra",
+      "blocks_learning_question": "Q4",
+      "notes": "tFPGARegisterAccess 的具体 FPGA 寄存器偏移表，是 FX3↔FPGA 配置边界。可 ghidra 深挖 + 抓包对照。来源: EvidenceLedger(fx3) + OMISSIONS。"
+    },
+    {
+      "identifier": "FX3-FUSION-REQ",
+      "status": "unknown",
+      "upgrade_means": "usb_capture",
+      "blocks_learning_question": "Q4",
+      "notes": "Fusion vendor bRequest / payload 字典（tFusionVendorDeviceRequest）。本阶段刻意延后，需 USB 抓包。来源: EvidenceLedger(fx3) + OMISSIONS。"
+    },
+    {
+      "identifier": "USB-FRAME-LAYOUT",
+      "status": "unknown",
+      "upgrade_means": "usb_capture",
+      "blocks_learning_question": "Q5",
+      "notes": "Signal Stream 帧内通道打包格式。可抓流或驱动静态。来源: OMISSIONS（EvidenceLedger 未单列 identifier）。"
+    },
+    {
+      "identifier": "HW-ADC-MPN",
+      "status": "unknown",
+      "upgrade_means": "photo_bom",
+      "blocks_learning_question": null,
+      "notes": "16×ADC 确切料号。需高清照片丝印或原理图/BOM。属硬件识别，不阻断具体学习问题。来源: EvidenceLedger(hardware) + OMISSIONS。"
+    },
+    {
+      "identifier": "HW-PHOTO-LOCAL",
+      "status": "unknown",
+      "upgrade_means": "photo_bom",
+      "blocks_learning_question": null,
+      "notes": "照片默认不入库；需从 sixfour 拉取到 hardware/photos/。资产/管理项，不阻断学习问题。来源: OMISSIONS（EvidenceLedger 未单列 identifier）。"
+    },
+    {
+      "identifier": "HOST-DAQMX",
+      "status": "unknown",
+      "upgrade_means": "ghidra",
+      "blocks_learning_question": null,
+      "notes": "主机 API → Fusion 映射；需驱动/NI-DAQmx 静态逆向。明确范围外，不阻断本卡同步学习问题。来源: OMISSIONS（EvidenceLedger 未单列 identifier）。"
+    },
+    {
+      "identifier": "FX3-STATE-MACHINE",
+      "status": "hypothesis",
+      "upgrade_means": "ghidra",
+      "blocks_learning_question": "Q4",
+      "notes": "State Machine handler 线程名。可能是 device/USB 状态机而非 AI sample FSM；需 ghidra 证实。关键 hypothesis：若为采样 FSM 则影响 FX3 vs FPGA 职责界定。来源: EvidenceLedger(fx3)。"
+    }
+  ],
+  "summary": {
+    "count_unknown": 9,
+    "count_hypothesis": 1
+  }
+}

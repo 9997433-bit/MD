@@ -1,0 +1,48 @@
+{
+  "product": "NI USB-6453 / Firebolt",
+  "phase": "static_skeleton_no_capture",
+  "forced_null_bridges": [
+    "SPEC-SIM -> BIT-SYNC-CLOCK-TREE proven wiring",
+    "SPEC-BANK -> FX3-REGMAP AIConv register",
+    "FX3-FUSION-SYMBOL -> USB-FRAME-LAYOUT",
+    "BIT-IDCODE -> channel packing format",
+    "HW-PHOTO-ADC-ARRAY -> exact ADC MPN",
+    "DMA_THREAD -> DAQmx task semantics",
+    "Counter-Data-Monitor -> AI sample clock identity",
+    "system_map NODE-HOST -> Fusion field dictionary"
+  ],
+  "cells": {
+    "spec_to_fpga_sync": {
+      "proven_bridge": null,
+      "reason": "规格描述同时采样语义；bitstream 未提供网表级时钟树证据"
+    },
+    "spec_bank_to_fx3_reg": {
+      "proven_bridge": null,
+      "reason": "AIConv.Rate 为软件属性名；FX3 寄存器映射未还原且本阶段不抓包"
+    },
+    "fx3_fusion_to_frame": {
+      "proven_bridge": null,
+      "reason": "仅有 Fusion/DMA 符号锚点；无 USB 流格式"
+    },
+    "idcode_to_packing": {
+      "proven_bridge": null,
+      "reason": "器件确认 ≠ 帧格式确认"
+    },
+    "photo_to_adc_mpn": {
+      "proven_bridge": null,
+      "reason": "重复前端可见；料号未 confirmed"
+    },
+    "dma_to_daqmx": {
+      "proven_bridge": null,
+      "reason": "强制 null：主机栈不在本包范围"
+    },
+    "counter_monitor_to_ai_clk": {
+      "proven_bridge": null,
+      "reason": "字符串存在不等于 AI sample clock 同源证明"
+    },
+    "host_node_to_fusion_dict": {
+      "proven_bridge": null,
+      "reason": "NODE-HOST 标记 not_started；抓包延后"
+    }
+  }
+}

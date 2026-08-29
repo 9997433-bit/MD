@@ -1,0 +1,92 @@
+{
+  "source_repo": "https://github.com/Montyzhang/sixfour",
+  "policy": "photos not vendored by default; fetch into hardware/photos/ if needed",
+  "count": 17,
+  "photos": [
+    {
+      "name": "微信图片_20260826133630_103_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_103_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_104_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_104_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_105_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_105_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_106_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_106_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_107_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_107_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_108_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_108_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_109_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_109_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133630_110_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133630_110_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_111_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_111_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_112_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_112_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_113_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_113_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_114_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_114_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_115_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_115_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_116_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_116_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_117_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_117_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_118_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_118_144.jpg",
+      "vendored": false
+    },
+    {
+      "name": "微信图片_20260826133646_119_144.jpg",
+      "source_url": "https://github.com/Montyzhang/sixfour/blob/main/微信图片_20260826133646_119_144.jpg",
+      "vendored": false
+    }
+  ]
+}

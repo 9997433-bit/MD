@@ -1,0 +1,119 @@
+{
+  "schema": "firebolt_learning.fx3_deep.v1",
+  "generated_at": "2026-08-29T02:50:57.633417+00:00",
+  "generated_by": "scripts/analyze_fx3_deep.py",
+  "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
+  "phase": "static_deep_no_capture",
+  "image": {
+    "path": "firmware/niusbFirebolt.cfg",
+    "size": 361054,
+    "sha256": "6d0aa09e84498d0da7d81233bb4b9b0f9ffaa4ce959e0de68516483e5be48567",
+    "entropy": 5.814
+  },
+  "cy_header": {
+    "present": true,
+    "magic_ascii": "CY",
+    "magic_hex": "43591cb0",
+    "image_ctrl_bytes": [
+      28,
+      176
+    ],
+    "exec_marker": 176,
+    "note": "Cypress FX3 (CYUSB301x) boot image header"
+  },
+  "usb": {
+    "descriptor_offset": 283432,
+    "idVendor": 14627,
+    "idProduct": 31556,
+    "idVendor_hex": "0x3923",
+    "idProduct_hex": "0x7B44",
+    "bcdUSB": "0x0210"
+  },
+  "rtos_threadx": {
+    "present": true,
+    "banner": "Copyright (c) 1996-2008 Express Logic Inc. * ThreadX ARM9/RVDS Version G5.1.5.1 SN: 2923-115-1301 *",
+    "version": "G5.1.5.1",
+    "serial": "2923-115-1301"
+  },
+  "source_paths": [
+    "source/nimarengoCore/fusion2/tFusionManager.c",
+    "source/nimarengoCore/fusion2/tFusionVendorDeviceRequest.h",
+    "source/nimarengoCore/fx3/tSerialFlash.c",
+    "source/nimarengoCore/fx3/tUart.c",
+    "source/nimarengoCore/tDMAManager.c",
+    "source/nimarengoCore/tDescriptor.c",
+    "source/nimarengoCore/tScheduler.c",
+    "source/nimarengoCore/tTimer.c",
+    "source/nimarengoSrc/main.c",
+    "source/nimarengoSrc/startup/tFPGA.c",
+    "source/nimarengoSrc/tFPGARegisterAccess.c"
+  ],
+  "thread_names": [
+    "01_DMA_THREAD",
+    "02_SYSTEM_THREAD",
+    "03_PIB_THREAD",
+    "04_UIB_THREAD",
+    "05_LPP_THREAD",
+    "06_SIB_THREAD",
+    "07_DEBUG_THREAD",
+    "Main Thread",
+    "System Timer Thread"
+  ],
+  "handlers": [
+    "42:Secondary IRQ handler",
+    "43:State Machine handler",
+    "45:Counter Data Monitor handler"
+  ],
+  "fusion_strings": [
+    "./source/nimarengoCore/fusion2/tFusionVendorDeviceRequest.h",
+    "Fusion",
+    "source/nimarengoCore/fusion2/tFusionManager.c"
+  ],
+  "dma_strings": [
+    "01_DMA_THREAD",
+    "03_PIB_THREAD",
+    "_dmaBuf",
+    "source/nimarengoCore/tDMAManager.c"
+  ],
+  "fpga_strings": [
+    "source/nimarengoSrc/startup/tFPGA.c",
+    "source/nimarengoSrc/tFPGARegisterAccess.c"
+  ],
+  "entropy_profile": {
+    "window": 4096,
+    "count": 89,
+    "min": 0.0,
+    "max": 6.26,
+    "mean": 5.229,
+    "high_entropy_windows": 0,
+    "low_entropy_windows": 8
+  },
+  "zero_regions": [
+    {
+      "offset": 329592,
+      "offset_hex": "0x50778",
+      "length": 31400,
+      "fraction_of_image": 0.08697
+    }
+  ],
+  "string_stats": {
+    "min_len": 5,
+    "total_strings": 112,
+    "unique_strings": 106,
+    "source_path_count": 11,
+    "thread_name_count": 9,
+    "handler_count": 3,
+    "fusion_count": 3,
+    "dma_count": 4,
+    "fpga_count": 2
+  },
+  "role_conclusion": {
+    "fx3_role": "config_proxy_and_dma_bridge",
+    "sync_timebase_in_arm": false,
+    "rationale": "FX3 image carries USB descriptor + Fusion vendor request handling + DMA/PIB threads + FPGA load/register-access source paths, but no sample-clock / convert-timing engine. Acquisition sync lives in the FPGA/ADC layer, not the ThreadX ARM core.",
+    "unknown_upgrades": {
+      "FX3-REGMAP": "concrete FPGA register offsets — needs Ghidra on tFPGARegisterAccess.c",
+      "FX3-FUSION-REQ": "Fusion bRequest/payload dictionary — needs USB capture (deferred)"
+    }
+  }
+}

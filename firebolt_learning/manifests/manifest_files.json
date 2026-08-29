@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "path": "firmware/niusbFirebolt.cfg",
+      "size": 361054,
+      "sha256": "6d0aa09e84498d0da7d81233bb4b9b0f9ffaa4ce959e0de68516483e5be48567"
+    },
+    {
+      "path": "firmware/niusbFireboltFPGA.cfg",
+      "size": 1599718,
+      "sha256": "cc5c15f45f39384a4c86db1628c4282d26890e90865348d36ad60f39548fe733"
+    }
+  ],
+  "source_repo": "https://github.com/Montyzhang/sixfour"
+}

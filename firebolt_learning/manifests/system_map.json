@@ -1,0 +1,101 @@
+{
+  "generated_by": "generate_ledger.py",
+  "product": "NI USB-6453 / Firebolt",
+  "node_count": 6,
+  "edge_count": 5,
+  "nodes": [
+    {
+      "id": "NODE-AI-IN",
+      "layer": "hw",
+      "name": "Analog inputs AI0..31",
+      "status": "confirmed",
+      "evidence": [
+        "SPEC-PRODUCT-USB-6453",
+        "HW-ADC-ARRAY"
+      ]
+    },
+    {
+      "id": "NODE-ADC16",
+      "layer": "hw",
+      "name": "16× ADC (shared-clock convert)",
+      "status": "confirmed",
+      "evidence": [
+        "SPEC-ADC-16",
+        "SPEC-SYNC-LAYER",
+        "HW-SYNC-LOCUS"
+      ]
+    },
+    {
+      "id": "NODE-FPGA",
+      "layer": "bit",
+      "name": "Artix-7 XC7A100T fabric",
+      "status": "confirmed",
+      "evidence": [
+        "BIT-IDCODE",
+        "HW-FPGA-XC7A100T"
+      ]
+    },
+    {
+      "id": "NODE-FX3",
+      "layer": "fw",
+      "name": "CYUSB3014 FX3 (ThreadX)",
+      "status": "confirmed",
+      "evidence": [
+        "FX3-IMG-CY-MAGIC",
+        "FX3-USB-VIDPID",
+        "FX3-ROLE-SUMMARY"
+      ]
+    },
+    {
+      "id": "NODE-USB",
+      "layer": "bus",
+      "name": "USB3 Signal Stream + Fusion control",
+      "status": "candidate",
+      "evidence": [
+        "SPEC-XFER-STREAM",
+        "FX3-FUSION",
+        "FX3-DMA"
+      ]
+    },
+    {
+      "id": "NODE-HOST",
+      "layer": "host",
+      "name": "NI-DAQmx / LabVIEW (out of scope)",
+      "status": "not_started",
+      "evidence": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "NODE-AI-IN",
+      "to": "NODE-ADC16",
+      "via": "analog",
+      "status": "confirmed"
+    },
+    {
+      "from": "NODE-ADC16",
+      "to": "NODE-FPGA",
+      "via": "parallel_samples_shared_clock",
+      "status": "confirmed"
+    },
+    {
+      "from": "NODE-FPGA",
+      "to": "NODE-FX3",
+      "via": "GPIF_PIB_sockets_0xE0010000",
+      "status": "confirmed"
+    },
+    {
+      "from": "NODE-FX3",
+      "to": "NODE-USB",
+      "via": "USB3",
+      "status": "candidate"
+    },
+    {
+      "from": "NODE-USB",
+      "to": "NODE-HOST",
+      "via": "Fusion_and_SignalStream",
+      "status": "not_started"
+    }
+  ],
+  "mermaid": "flowchart LR\n  NODE-AI-IN -->|analog| NODE-ADC16\n  NODE-ADC16 -->|shared convert clock| NODE-FPGA\n  NODE-FPGA -->|GPIF/regs candidate| NODE-FX3\n  NODE-FX3 -->|USB3| NODE-USB\n  NODE-USB -->|not_started| NODE-HOST\n"
+}
