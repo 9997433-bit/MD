@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>光径 BEAM PATH — 激光反射解谜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">光径</span>
+      <span class="brand-en">BEAM PATH</span>
+    </div>
+    <div class="hud">
+      <span id="levelLabel">关卡 1</span>
+      <span id="moveLabel">操作 0</span>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section class="intro" id="intro">
+      <h1 class="hero-brand">光径</h1>
+      <p class="hero-line">转动反射镜，把氦氖红光送进探测器。</p>
+      <div class="cta-row">
+        <button type="button" class="btn primary" id="btnStart">开始</button>
+        <button type="button" class="btn ghost" id="btnHow">怎么玩</button>
+      </div>
+    </section>
+
+    <section class="play hidden" id="play">
+      <canvas id="board" width="720" height="720" aria-label="激光光路棋盘"></canvas>
+      <aside class="panel">
+        <p class="tip" id="tip">点击反射镜旋转 90°</p>
+        <div class="actions">
+          <button type="button" class="btn primary" id="btnFire">发射</button>
+          <button type="button" class="btn ghost" id="btnReset">重置本关</button>
+          <button type="button" class="btn ghost" id="btnSkip">下一关</button>
+        </div>
+        <ol class="legend">
+          <li><i class="lg emitter"></i>激光源</li>
+          <li><i class="lg mirror"></i>可转反射镜</li>
+          <li><i class="lg wall"></i>挡光挡板</li>
+          <li><i class="lg target"></i>光电探测器</li>
+        </ol>
+      </aside>
+    </section>
+
+    <section class="win hidden" id="win">
+      <h2>光路接通</h2>
+      <p id="winText">探测器收到拍频般的稳定信号。</p>
+      <div class="cta-row">
+        <button type="button" class="btn primary" id="btnNext">下一关</button>
+        <button type="button" class="btn ghost" id="btnAgain">再玩本关</button>
+      </div>
+    </section>
+
+    <section class="how hidden" id="how">
+      <h2>怎么玩</h2>
+      <p>每关有一束固定方向的激光。点击棋盘上的反射镜，每次旋转 90°。摆好后点「发射」，光束沿网格直线传播，遇镜反射；全部探测器被点亮即过关。</p>
+      <button type="button" class="btn primary" id="btnHowClose">知道了</button>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
