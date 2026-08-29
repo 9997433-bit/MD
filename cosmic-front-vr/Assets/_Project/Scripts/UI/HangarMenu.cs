@@ -1,0 +1,391 @@
+using UnityEngine;
+using UnityEngine.UI;
+using CosmicFront.Core;
+using CosmicFront.Mech;
+using CosmicFront.Network;
+using CosmicFront.Steam;
+
+namespace CosmicFront.UI
+{
+    public class HangarMenu : MonoBehaviour
+    {
+        [SerializeField] private Dropdown teamDropdown;
+        [SerializeField] private Dropdown mechDropdown;
+        [SerializeField] private Dropdown mapDropdown;
+        [SerializeField] private Dropdown spawnDropdown;
+        [SerializeField] private Dropdown modeDropdown;
+        [SerializeField] private Button startButton;
+        [SerializeField] private Button hostButton;
+        [SerializeField] private Button joinButton;
+        [SerializeField] private InputField addressInput;
+        [SerializeField] private Text statusText;
+        [SerializeField] private Text controlsHint;
+        [SerializeField] private Text steamStatusText;
+        [SerializeField] private HangarMechPreview mechPreview;
+
+        private ushort _joinPort = NetworkSessionConfig.Port;
+        private System.Collections.Generic.List<MechModelId> _mechOptions = new System.Collections.Generic.List<MechModelId>();
+
+        private void Awake()
+        {
+            if (startButton != null)
+            {
+                startButton.onClick.AddListener(OnStartClicked);
+            }
+
+            if (hostButton != null)
+            {
+                hostButton.onClick.AddListener(OnHostClicked);
+            }
+
+            if (joinButton != null)
+            {
+                joinButton.onClick.AddListener(OnJoinClicked);
+            }
+
+            PopulateDropdowns();
+            if (teamDropdown != null)
+            {
+                teamDropdown.onValueChanged.AddListener(_ =>
+                {
+                    RefreshMechOptions();
+                    NotifyPreview();
+                });
+            }
+
+            if (mechDropdown != null)
+            {
+                mechDropdown.onValueChanged.AddListener(_ => NotifyPreview());
+            }
+
+            RefreshMechOptions();
+            NetworkBootstrap.StatusChanged += OnNetworkStatus;
+        }
+
+        private void OnDestroy()
+        {
+            NetworkBootstrap.StatusChanged -= OnNetworkStatus;
+        }
+
+        private void Start()
+        {
+            if (GameManager.Instance == null)
+            {
+                var go = new GameObject("GameManager");
+                go.AddComponent<GameManager>();
+            }
+
+            if (SteamManager.Instance == null)
+            {
+                var steamGo = new GameObject("SteamManager");
+                steamGo.AddComponent<SteamManager>();
+            }
+
+            if (FindObjectOfType<SteamInviteBootstrap>() == null)
+            {
+                var inviteGo = new GameObject("SteamInviteBootstrap");
+                inviteGo.AddComponent<SteamInviteBootstrap>();
+            }
+
+            if (FindObjectOfType<InviteCodePanel>() == null)
+            {
+                var panelGo = new GameObject("InviteCodePanel", typeof(RectTransform));
+                var canvas = FindObjectOfType<Canvas>();
+                if (canvas != null)
+                {
+                    panelGo.transform.SetParent(canvas.transform, false);
+                }
+
+                panelGo.AddComponent<InviteCodePanel>();
+            }
+
+            if (addressInput != null && string.IsNullOrWhiteSpace(addressInput.text))
+            {
+                addressInput.text = NetworkSessionConfig.DefaultAddress;
+            }
+
+            UpdateStatus("选择模式 / 地图 / 生成方式后开始");
+            UpdateControlsHint();
+            UpdateSteamStatus();
+
+            if (mechPreview == null)
+            {
+                mechPreview = FindObjectOfType<HangarMechPreview>();
+            }
+
+            NotifyPreview();
+        }
+
+        public TeamId GetSelectedTeam()
+        {
+            if (teamDropdown == null)
+            {
+                return TeamId.Terran;
+            }
+
+            return teamDropdown.value switch
+            {
+                1 => TeamId.Orbital,
+                2 => TeamId.Neutral,
+                _ => TeamId.Terran
+            };
+        }
+
+        public MechModelId GetSelectedModel()
+        {
+            if (_mechOptions.Count == 0)
+            {
+                return MechModelCatalog.DefaultForTeam(GetSelectedTeam());
+            }
+
+            var idx = mechDropdown != null ? Mathf.Clamp(mechDropdown.value, 0, _mechOptions.Count - 1) : 0;
+            return _mechOptions[idx];
+        }
+
+        private void NotifyPreview()
+        {
+            if (mechPreview == null)
+            {
+                mechPreview = FindObjectOfType<HangarMechPreview>();
+            }
+
+            mechPreview?.Show(GetSelectedTeam(), GetSelectedModel());
+        }
+
+        /// <summary>Fills the join address field from a Steam invite deep-link endpoint.</summary>
+        public void ApplyJoinEndpoint(string ip, ushort port)
+        {
+            if (addressInput != null && !string.IsNullOrWhiteSpace(ip))
+            {
+                addressInput.text = ip.Trim();
+            }
+
+            _joinPort = port > 0 ? port : NetworkSessionConfig.Port;
+            UpdateStatus($"邀请已填入 {ip}:{_joinPort}");
+        }
+
+        /// <summary>Triggers the same path as the Join button (used by SteamInviteBootstrap).</summary>
+        public void TriggerJoin()
+        {
+            OnJoinClicked();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                OnStartClicked();
+            }
+        }
+
+        private void PopulateDropdowns()
+        {
+            if (teamDropdown != null)
+            {
+                teamDropdown.ClearOptions();
+                teamDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "地球联合军 (Terran Union)",
+                    "轨道联盟 (Orbital League)",
+                    "维和舰队 (Neutral Force)"
+                });
+            }
+
+            if (mechDropdown != null)
+            {
+                RefreshMechOptions();
+            }
+
+            if (mapDropdown != null)
+            {
+                mapDropdown.ClearOptions();
+                mapDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "环带外壁 — Station Rim",
+                    "碎屑航道 — Debris Lane"
+                });
+            }
+
+            if (spawnDropdown != null)
+            {
+                spawnDropdown.ClearOptions();
+                spawnDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "机甲出击",
+                    "战舰 — 舵手",
+                    "战舰 — 炮手",
+                    "战舰 — 舰长"
+                });
+            }
+
+            if (modeDropdown != null)
+            {
+                modeDropdown.ClearOptions();
+                modeDropdown.AddOptions(new System.Collections.Generic.List<string>
+                {
+                    "团队死斗 TDM",
+                    "护送旗舰 Escort",
+                    "据点争夺 Domination"
+                });
+            }
+        }
+
+        private void RefreshMechOptions()
+        {
+            if (mechDropdown == null)
+            {
+                return;
+            }
+
+            var team = GetSelectedTeam();
+            var models = MechModelCatalog.GetForTeam(team);
+            mechDropdown.ClearOptions();
+            _mechOptions.Clear();
+            var labels = new System.Collections.Generic.List<string>();
+            foreach (var def in models)
+            {
+                labels.Add(MechModelCatalog.FormatOption(def));
+                _mechOptions.Add(def.Id);
+            }
+
+            mechDropdown.AddOptions(labels);
+            mechDropdown.value = 0;
+            mechDropdown.RefreshShownValue();
+            NotifyPreview();
+        }
+
+        private void OnStartClicked()
+        {
+            if (!ApplyLoadout())
+            {
+                return;
+            }
+
+            GameManager.Instance.StartSinglePlayerMission();
+        }
+
+        private void OnHostClicked()
+        {
+            if (!ApplyLoadout())
+            {
+                return;
+            }
+
+            UpdateStatus("正在启动 Host...");
+            GameManager.Instance.StartMultiplayerHost();
+        }
+
+        private void OnJoinClicked()
+        {
+            if (!ApplyLoadout())
+            {
+                return;
+            }
+
+            var address = addressInput != null ? addressInput.text : NetworkSessionConfig.DefaultAddress;
+            UpdateStatus($"正在加入 {address}:{_joinPort}...");
+            GameManager.Instance.StartMultiplayerClient(address, _joinPort);
+        }
+
+        private bool ApplyLoadout()
+        {
+            if (GameManager.Instance == null)
+            {
+                return false;
+            }
+
+            var team = TeamId.Terran;
+
+            if (teamDropdown != null)
+            {
+                switch (teamDropdown.value)
+                {
+                    case 1:
+                        team = TeamId.Orbital;
+                        break;
+                    case 2:
+                        team = TeamId.Neutral;
+                        break;
+                    default:
+                        team = TeamId.Terran;
+                        break;
+                }
+            }
+
+            var models = MechModelCatalog.GetForTeam(team);
+            var model = GetSelectedModel();
+            if (mechDropdown != null && mechDropdown.value >= 0 && mechDropdown.value < models.Count)
+            {
+                model = models[mechDropdown.value].Id;
+            }
+
+            GameManager.Instance.SelectLoadout(team, model);
+
+            if (spawnDropdown != null)
+            {
+                GameManager.Instance.SelectSpawnPreference((SpawnPreference)spawnDropdown.value);
+            }
+            else
+            {
+                GameManager.Instance.SelectSpawnPreference(SpawnPreference.Mech);
+            }
+
+            if (modeDropdown != null)
+            {
+                GameManager.Instance.SelectGameMode((GameModeType)modeDropdown.value);
+            }
+            else
+            {
+                GameManager.Instance.SelectGameMode(GameModeType.TeamDeathmatch);
+            }
+
+            if (mapDropdown != null && mapDropdown.value == 1)
+            {
+                GameManager.Instance.SelectBattleScene(GameManager.Instance.GetAsteroidSceneName());
+            }
+            else
+            {
+                GameManager.Instance.SelectBattleScene(null);
+            }
+
+            return true;
+        }
+
+        private void OnNetworkStatus(string message)
+        {
+            UpdateStatus(message);
+        }
+
+        public void UpdateStatus(string message)
+        {
+            if (statusText != null)
+            {
+                statusText.text = message;
+            }
+        }
+
+        private void UpdateControlsHint()
+        {
+            if (controlsHint == null)
+            {
+                return;
+            }
+
+            controlsHint.text = VRMechInput.IsHeadsetPresent()
+                ? "VR: 右B键机体技能 | 阵营切换刷新可用机型"
+                : "键鼠: V 机体技能 | 机库按阵营筛选目标机型";
+        }
+
+        private void UpdateSteamStatus()
+        {
+            if (steamStatusText == null || SteamManager.Instance == null)
+            {
+                return;
+            }
+
+            steamStatusText.text = SteamManager.Instance.IsOfflineFallback
+                ? $"Steam: 离线 ({SteamManager.Instance.PersonaName})"
+                : $"Steam: {SteamManager.Instance.PersonaName}";
+        }
+    }
+}

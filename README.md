@@ -2,6 +2,10 @@
 
 本仓库包含 **原始安装包**、**解包 payload（53 文件）** 与 **E1733A 干涉仪程序静态分析学习包**。
 
+## Cosmic Front VR（VR 游戏项目）
+
+独立 Unity 项目位于 [`cosmic-front-vr/`](cosmic-front-vr/README.md) — 原创宇宙战争 VR 对战平台（P1 单机原型阶段）。
+
 ## 目录结构
 
 | 路径 | 说明 |
