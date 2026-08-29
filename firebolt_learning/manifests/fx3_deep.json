@@ -1,6 +1,6 @@
 {
   "schema": "firebolt_learning.fx3_deep.v1",
-  "generated_at": "2026-08-29T01:03:42.894399+00:00",
+  "generated_at": "2026-08-29T01:08:43.033152+00:00",
   "generated_by": "scripts/analyze_fx3_deep.py",
   "declaration": "目录完整 ≠ 厂商等价 ≠ 掌握运行行为",
   "phase": "static_deep_no_capture",

@@ -158,6 +158,41 @@ FX3_ENTRIES: list[tuple[str, str, str, str, str]] = [
         "arch_synthesis",
         "Reinforces FX3-ROLE-SUMMARY; fabric regmap still unknown",
     ),
+    (
+        "FX3-PIB-CFG-BASE",
+        "PIB config MMIO block base 0xE0011000",
+        "confirmed",
+        "arm_disassembly",
+        "Init func VA 0x4001250C literal; see fx3_regaccess_shape.json",
+    ),
+    (
+        "FX3-PIB-CFG-STORES",
+        "PIB config init writes many offsets (0x0C/0x10/0x3C/0x48..)",
+        "confirmed",
+        "arm_disassembly",
+        "Engine/socket setup — not fabric AIConv map",
+    ),
+    (
+        "FX3-SUBSYSTEM-TAGS",
+        "Tags Op/Fpga/Fusion/Trace near Main Thread strings",
+        "candidate",
+        "firmware_string_table",
+        "Possible log/state enums; not proven AI sample FSM",
+    ),
+    (
+        "FX3-GPIF-CFG-OBJECT",
+        "Config object field layout +0x00..+0x18 at VA 0x400113D0",
+        "candidate",
+        "arm_disassembly",
+        "Descriptor/walker — not channel sample table",
+    ),
+    (
+        "FX3-ACCESS-PATH-SHAPE",
+        "Host/Fusion→FX3→PIB→GPIF→FPGA path shape recovered",
+        "confirmed",
+        "arch_synthesis",
+        "Does not include fabric regmap or Fusion field dictionary",
+    ),
 ]
 
 

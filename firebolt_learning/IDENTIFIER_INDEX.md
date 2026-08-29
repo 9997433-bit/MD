@@ -1,6 +1,6 @@
 # Firebolt Identifier Index
 > **停止条件**：目录完整 ≠ 厂商等价 ≠ 掌握运行行为。
-生成自 EvidenceLedger（66 条）。
+生成自 EvidenceLedger（71 条）。
 
 ## spec
 
@@ -67,6 +67,11 @@
 | `FX3-PIB-BASE` | confirmed | firmware_mmio_literals | On-chip bridge toward FPGA GPIF-II |
 | `FX3-PIB-SOCKET-STRIDE` | confirmed | arm_disassembly | VA 0x400115F8: r3=0xE0010000+(index<<4); see fx3_mmio_map.json |
 | `FX3-GPIF-FPGA-BRIDGE` | confirmed | arch_synthesis | Reinforces FX3-ROLE-SUMMARY; fabric regmap still unknown |
+| `FX3-PIB-CFG-BASE` | confirmed | arm_disassembly | Init func VA 0x4001250C literal; see fx3_regaccess_shape.json |
+| `FX3-PIB-CFG-STORES` | confirmed | arm_disassembly | Engine/socket setup — not fabric AIConv map |
+| `FX3-SUBSYSTEM-TAGS` | candidate | firmware_string_table | Possible log/state enums; not proven AI sample FSM |
+| `FX3-GPIF-CFG-OBJECT` | candidate | arm_disassembly | Descriptor/walker — not channel sample table |
+| `FX3-ACCESS-PATH-SHAPE` | confirmed | arch_synthesis | Does not include fabric regmap or Fusion field dictionary |
 
 ## bitstream
 
@@ -97,7 +102,7 @@
 
 | status | count |
 |---|---|
-| candidate | 6 |
-| confirmed | 53 |
+| candidate | 8 |
+| confirmed | 56 |
 | hypothesis | 1 |
 | unknown | 6 |

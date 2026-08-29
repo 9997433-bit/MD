@@ -6,8 +6,8 @@
 
 1. 读 `README.md`、`docs/PHASE_PLAN.md`、`OMISSIONS_AND_REMAINING.md`
 2. 读规格驱动条目：`catalogs/catalog_spec_sync.py`（或账本 `catalogs.spec`）
-3. 看 `manifests/system_map.json` + `docs/DATA_PATH.md` + `docs/FX3_GPIF_PATH.md` — 数据路径与 GPIF 桥
-4. 对照 `manifests/firmware_meta.json` / `fx3_static_re.json` / `fx3_mmio_map.json` + `bitstream_meta.json`
+3. 看 `manifests/system_map.json` + `docs/DATA_PATH.md` + `docs/FX3_GPIF_PATH.md` + `docs/FX3_REGACCESS_SHAPE.md`
+4. 对照 `fx3_static_re.json` / `fx3_mmio_map.json` / `fx3_regaccess_shape.json` + bitstream meta
 5. 读 `bridge_matrix.json` — 哪些桥被强制置空
 6. 用 `docs/LEARN_ANSWERS.md` + `catalogs/catalog_learn.py` 自测
 

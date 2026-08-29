@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-29T01:03:43.675031+00:00",
-  "identifier_count": 66,
+  "generated_at": "2026-08-29T01:08:44.035611+00:00",
+  "identifier_count": 71,
   "by_status": {
-    "confirmed": 53,
-    "candidate": 6,
+    "confirmed": 56,
+    "candidate": 8,
     "unknown": 6,
     "hypothesis": 1
   },
   "by_block": {
     "spec": 19,
     "hardware": 10,
-    "fx3": 22,
+    "fx3": 27,
     "bitstream": 7,
     "learn": 8
   },

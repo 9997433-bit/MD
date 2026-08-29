@@ -1,6 +1,6 @@
 {
   "schema": "firebolt_learning.EvidenceLedger.v1",
-  "generated_at": "2026-08-29T01:03:43.675031+00:00",
+  "generated_at": "2026-08-29T01:08:44.035611+00:00",
   "product": {
     "name": "NI USB-6453",
     "codename": "Firebolt",
@@ -427,6 +427,46 @@
         "status": "confirmed",
         "boundary": "arch_synthesis",
         "note": "Reinforces FX3-ROLE-SUMMARY; fabric regmap still unknown"
+      },
+      {
+        "identifier": "FX3-PIB-CFG-BASE",
+        "module": "fx3",
+        "source_identifier": "PIB config MMIO block base 0xE0011000",
+        "status": "confirmed",
+        "boundary": "arm_disassembly",
+        "note": "Init func VA 0x4001250C literal; see fx3_regaccess_shape.json"
+      },
+      {
+        "identifier": "FX3-PIB-CFG-STORES",
+        "module": "fx3",
+        "source_identifier": "PIB config init writes many offsets (0x0C/0x10/0x3C/0x48..)",
+        "status": "confirmed",
+        "boundary": "arm_disassembly",
+        "note": "Engine/socket setup — not fabric AIConv map"
+      },
+      {
+        "identifier": "FX3-SUBSYSTEM-TAGS",
+        "module": "fx3",
+        "source_identifier": "Tags Op/Fpga/Fusion/Trace near Main Thread strings",
+        "status": "candidate",
+        "boundary": "firmware_string_table",
+        "note": "Possible log/state enums; not proven AI sample FSM"
+      },
+      {
+        "identifier": "FX3-GPIF-CFG-OBJECT",
+        "module": "fx3",
+        "source_identifier": "Config object field layout +0x00..+0x18 at VA 0x400113D0",
+        "status": "candidate",
+        "boundary": "arm_disassembly",
+        "note": "Descriptor/walker — not channel sample table"
+      },
+      {
+        "identifier": "FX3-ACCESS-PATH-SHAPE",
+        "module": "fx3",
+        "source_identifier": "Host/Fusion→FX3→PIB→GPIF→FPGA path shape recovered",
+        "status": "confirmed",
+        "boundary": "arch_synthesis",
+        "note": "Does not include fabric regmap or Fusion field dictionary"
       }
     ],
     "bitstream": [
@@ -555,17 +595,17 @@
     ]
   },
   "stats": {
-    "identifier_count": 66,
+    "identifier_count": 71,
     "by_status": {
-      "confirmed": 53,
-      "candidate": 6,
+      "confirmed": 56,
+      "candidate": 8,
       "unknown": 6,
       "hypothesis": 1
     },
     "by_block": {
       "spec": 19,
       "hardware": 10,
-      "fx3": 22,
+      "fx3": 27,
       "bitstream": 7,
       "learn": 8
     }
