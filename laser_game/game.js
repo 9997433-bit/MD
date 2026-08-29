@@ -485,5 +485,12 @@
     show("play");
   });
 
-  if (state) draw();
+  if (new URLSearchParams(location.search).get("play") === "1") {
+    loadLevel(0);
+    show("play");
+    const m = state.mirrors[0];
+    if (m) m.facing = "NE";
+    draw();
+    setTimeout(fire, 500);
+  }
 })();
