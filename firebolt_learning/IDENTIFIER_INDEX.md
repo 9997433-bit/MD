@@ -1,6 +1,6 @@
 # Firebolt Identifier Index
 > **停止条件**：目录完整 ≠ 厂商等价 ≠ 掌握运行行为。
-生成自 EvidenceLedger（71 条）。
+生成自 EvidenceLedger（77 条）。
 
 ## spec
 
@@ -67,11 +67,17 @@
 | `FX3-PIB-BASE` | confirmed | firmware_mmio_literals | On-chip bridge toward FPGA GPIF-II |
 | `FX3-PIB-SOCKET-STRIDE` | confirmed | arm_disassembly | VA 0x400115F8: r3=0xE0010000+(index<<4); see fx3_mmio_map.json |
 | `FX3-GPIF-FPGA-BRIDGE` | confirmed | arch_synthesis | Reinforces FX3-ROLE-SUMMARY; fabric regmap still unknown |
-| `FX3-PIB-CFG-BASE` | confirmed | arm_disassembly | Init func VA 0x4001250C literal; see fx3_regaccess_shape.json |
-| `FX3-PIB-CFG-STORES` | confirmed | arm_disassembly | Engine/socket setup — not fabric AIConv map |
+| `FX3-PIB-CFG-BASE` | candidate | arm_disassembly_sdk_gap | Demoted: not a named pib_regs.h block; see FX3-PIB-E0011000-GAP |
+| `FX3-PIB-CFG-STORES` | candidate | arm_disassembly_sdk_gap | Stores confirmed; field names unknown (reserved region) |
 | `FX3-SUBSYSTEM-TAGS` | candidate | firmware_string_table | Possible log/state enums; not proven AI sample FSM |
 | `FX3-GPIF-CFG-OBJECT` | candidate | arm_disassembly | Descriptor/walker — not channel sample table |
 | `FX3-ACCESS-PATH-SHAPE` | confirmed | arch_synthesis | Does not include fabric regmap or Fusion field dictionary |
+| `FX3-PIB-SDK-CROSSREF` | confirmed | sdk_crossref | 0xE0010000/4000/8000 present; see fx3_pib_crossref.json |
+| `FX3-GPIF-CONFIG-LIT` | confirmed | firmware_mmio_literals | Public CY_U3P_PIB_GPIF_CONFIG_ADDRESS |
+| `FX3-SOCK-BASE-LIT` | confirmed | firmware_mmio_literals | Official stride n*0x80; 32 sockets |
+| `FX3-SOCK-STRIDE-OFFICIAL` | confirmed | sdk_crossref | Distinct from observed <<4 pattern at 0xE0010000 |
+| `FX3-PIB-E0011000-GAP` | candidate | sdk_crossref | Prior 'PIB cfg base' naming demoted; writes exist but no SDK field names |
+| `FX3-PP-MMIO-WINDOW` | unknown | sdk_crossref_absent_literal | Likely fabric window; access path unresolved |
 
 ## bitstream
 
@@ -102,7 +108,7 @@
 
 | status | count |
 |---|---|
-| candidate | 8 |
-| confirmed | 56 |
+| candidate | 11 |
+| confirmed | 58 |
 | hypothesis | 1 |
-| unknown | 6 |
+| unknown | 7 |

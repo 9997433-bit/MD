@@ -8,8 +8,10 @@
 |----|------|----------|
 | BIT-SYNC-CLOCK-TREE | FPGA 内 sample clock / convert 同源连线 | 网表逆向或芯片级探测 |
 | BIT-BANK-AICONV | bank 切换与 AIConv 定时器 HDL | 同上 / 实机 + 抓包对照 |
-| FX3-REGMAP | `tFPGARegisterAccess` 寄存器偏移表（**fabric**，非 PIB `0xE0011000` 配置块） | Ghidra 深挖 + 抓包 |
-| FX3-PIB-CFG-SEMANTICS | `0xE0011000` 各偏移的字段语义（socket 映射表） | FX3 TRM 对照 + 实机 |
+| FX3-REGMAP | FPGA fabric 寄存器偏移表 | Ghidra + 抓包 |
+| FX3-PP-MMIO | `PP_MMIO_ADDR/DATA` 访问序列与地址字典 | Ghidra（基址+0x7E3C）/ 抓包 |
+| FX3-SOCK-AI-MAP | 哪个 PIB socket 承载 AI 样本流 | 抓包 + DMA 描述符 RE |
+| FX3-PIB-CFG-SEMANTICS | `0xE0011000` 保留区写入的字段语义 | 无公开头文件；需更深 RE |
 | FX3-FUSION-REQ | Fusion vendor bRequest/payload | **USB 抓包**（刻意延后） |
 | USB-FRAME-LAYOUT | Signal Stream 帧内通道打包格式 | 抓流 / 驱动静态 |
 | USB-SS-RUNTIME | 运行时是否另有 SS 描述符/1024B 包长 | 实机枚举 / 抓包 |

@@ -16,6 +16,7 @@ deep-fx3:
 	python3 scripts/analyze_fx3_static_re.py
 	python3 scripts/analyze_fx3_mmio.py
 	python3 scripts/analyze_fx3_regaccess_shape.py
+	python3 scripts/analyze_fx3_pib_crossref.py
 	python3 scripts/analyze_bitstream_deep.py
 
 test:

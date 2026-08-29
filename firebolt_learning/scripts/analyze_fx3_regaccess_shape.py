@@ -71,8 +71,11 @@ def main() -> None:
             "init_func_va": "0x4001250C",
             "store_offsets_sorted": sorted(set(offsets)),
             "store_count": len(offsets),
-            "status": "confirmed",
-            "meaning": "FX3 PIB/GPIF configuration MMIO block (socket/engine setup)",
+            "status": "candidate",
+            "meaning": (
+                "Firmware init base at 0xE0011000 with many stores; "
+                "public pib_regs.h places this in rsrvd0[] — no official field names"
+            ),
         },
         "subsystem_tags": tags,
         "gpif_cfg_object": cfg_object,

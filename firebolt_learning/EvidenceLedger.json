@@ -1,6 +1,6 @@
 {
   "schema": "firebolt_learning.EvidenceLedger.v1",
-  "generated_at": "2026-08-29T01:08:44.035611+00:00",
+  "generated_at": "2026-08-29T02:50:58.737897+00:00",
   "product": {
     "name": "NI USB-6453",
     "codename": "Firebolt",
@@ -431,18 +431,18 @@
       {
         "identifier": "FX3-PIB-CFG-BASE",
         "module": "fx3",
-        "source_identifier": "PIB config MMIO block base 0xE0011000",
-        "status": "confirmed",
-        "boundary": "arm_disassembly",
-        "note": "Init func VA 0x4001250C literal; see fx3_regaccess_shape.json"
+        "source_identifier": "Writes observed at 0xE0011000 (public SDK reserved gap)",
+        "status": "candidate",
+        "boundary": "arm_disassembly_sdk_gap",
+        "note": "Demoted: not a named pib_regs.h block; see FX3-PIB-E0011000-GAP"
       },
       {
         "identifier": "FX3-PIB-CFG-STORES",
         "module": "fx3",
-        "source_identifier": "PIB config init writes many offsets (0x0C/0x10/0x3C/0x48..)",
-        "status": "confirmed",
-        "boundary": "arm_disassembly",
-        "note": "Engine/socket setup — not fabric AIConv map"
+        "source_identifier": "Init func stores many offsets relative to 0xE0011000 base",
+        "status": "candidate",
+        "boundary": "arm_disassembly_sdk_gap",
+        "note": "Stores confirmed; field names unknown (reserved region)"
       },
       {
         "identifier": "FX3-SUBSYSTEM-TAGS",
@@ -467,6 +467,54 @@
         "status": "confirmed",
         "boundary": "arch_synthesis",
         "note": "Does not include fabric regmap or Fusion field dictionary"
+      },
+      {
+        "identifier": "FX3-PIB-SDK-CROSSREF",
+        "module": "fx3",
+        "source_identifier": "Firmware literals match Cypress PIB/GPIF/socket map",
+        "status": "confirmed",
+        "boundary": "sdk_crossref",
+        "note": "0xE0010000/4000/8000 present; see fx3_pib_crossref.json"
+      },
+      {
+        "identifier": "FX3-GPIF-CONFIG-LIT",
+        "module": "fx3",
+        "source_identifier": "GPIF_CONFIG literal 0xE0014000 present",
+        "status": "confirmed",
+        "boundary": "firmware_mmio_literals",
+        "note": "Public CY_U3P_PIB_GPIF_CONFIG_ADDRESS"
+      },
+      {
+        "identifier": "FX3-SOCK-BASE-LIT",
+        "module": "fx3",
+        "source_identifier": "PIB socket array base 0xE0018000 present",
+        "status": "confirmed",
+        "boundary": "firmware_mmio_literals",
+        "note": "Official stride n*0x80; 32 sockets"
+      },
+      {
+        "identifier": "FX3-SOCK-STRIDE-OFFICIAL",
+        "module": "fx3",
+        "source_identifier": "Official DMA socket stride is 128 bytes at 0xE0018000",
+        "status": "confirmed",
+        "boundary": "sdk_crossref",
+        "note": "Distinct from observed <<4 pattern at 0xE0010000"
+      },
+      {
+        "identifier": "FX3-PIB-E0011000-GAP",
+        "module": "fx3",
+        "source_identifier": "0xE0011000 is in public rsrvd0 gap — unnamed",
+        "status": "candidate",
+        "boundary": "sdk_crossref",
+        "note": "Prior 'PIB cfg base' naming demoted; writes exist but no SDK field names"
+      },
+      {
+        "identifier": "FX3-PP-MMIO-WINDOW",
+        "module": "fx3",
+        "source_identifier": "PP_MMIO_ADDR/DATA (0xE0017E3C/40) not absolute in image",
+        "status": "unknown",
+        "boundary": "sdk_crossref_absent_literal",
+        "note": "Likely fabric window; access path unresolved"
       }
     ],
     "bitstream": [
@@ -595,17 +643,17 @@
     ]
   },
   "stats": {
-    "identifier_count": 71,
+    "identifier_count": 77,
     "by_status": {
-      "confirmed": 56,
-      "candidate": 8,
-      "unknown": 6,
+      "confirmed": 58,
+      "candidate": 11,
+      "unknown": 7,
       "hypothesis": 1
     },
     "by_block": {
       "spec": 19,
       "hardware": 10,
-      "fx3": 27,
+      "fx3": 33,
       "bitstream": 7,
       "learn": 8
     }

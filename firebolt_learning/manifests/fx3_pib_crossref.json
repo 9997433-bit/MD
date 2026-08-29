@@ -1,0 +1,323 @@
+{
+  "schema": "firebolt_learning.fx3_pib_crossref.v1",
+  "declaration": "\u76ee\u5f55\u5b8c\u6574 \u2260 \u5382\u5546\u7b49\u4ef7 \u2260 \u638c\u63e1\u8fd0\u884c\u884c\u4e3a",
+  "source": {
+    "header": "Cypress FX3 SDK pib_regs.h / gpif_regs.h",
+    "reference_repo": "https://github.com/nickdademo/cypress-fx3-sdk-linux"
+  },
+  "official_layout_summary": {
+    "PIB_BASE": "0xE0010000",
+    "GPIF_REGS": "0xE0014000",
+    "PP_MAILBOX_MMIO": "0xE0017E34 .. 0xE0017E50",
+    "SOCKET_ARRAY": "0xE0018000 + n*0x80 (32 sockets)",
+    "socket_stride_bytes": 128
+  },
+  "named_literal_hits": [
+    {
+      "address": "0xE0010000",
+      "count": 12,
+      "present": true,
+      "name": "PIB_CONFIG",
+      "group": "pib_core"
+    },
+    {
+      "address": "0xE0010004",
+      "count": 0,
+      "present": false,
+      "name": "PIB_INTR",
+      "group": "pib_core"
+    },
+    {
+      "address": "0xE0010008",
+      "count": 0,
+      "present": false,
+      "name": "PIB_INTR_MASK",
+      "group": "pib_core"
+    },
+    {
+      "address": "0xE001000C",
+      "count": 0,
+      "present": false,
+      "name": "PIB_CLOCK_DETECT",
+      "group": "pib_core"
+    },
+    {
+      "address": "0xE0010010",
+      "count": 0,
+      "present": false,
+      "name": "PIB_RD_MAILBOX0",
+      "group": "pib_core"
+    },
+    {
+      "address": "0xE0010018",
+      "count": 0,
+      "present": false,
+      "name": "PIB_WR_MAILBOX0",
+      "group": "pib_core"
+    },
+    {
+      "address": "0xE0014000",
+      "count": 2,
+      "present": true,
+      "name": "GPIF_CONFIG",
+      "group": "gpif"
+    },
+    {
+      "address": "0xE0014004",
+      "count": 1,
+      "present": true,
+      "name": "GPIF_BUS_CONFIG",
+      "group": "gpif"
+    },
+    {
+      "address": "0xE00140FC",
+      "count": 0,
+      "present": false,
+      "name": "GPIF_THREAD_CONFIG[0]",
+      "group": "gpif"
+    },
+    {
+      "address": "0xE0014118",
+      "count": 0,
+      "present": false,
+      "name": "GPIF_WAVEFORM_CTRL_STAT",
+      "group": "gpif"
+    },
+    {
+      "address": "0xE0017E00",
+      "count": 0,
+      "present": false,
+      "name": "PP_ID",
+      "group": "pp_mode"
+    },
+    {
+      "address": "0xE0017E34",
+      "count": 0,
+      "present": false,
+      "name": "PP_WR_MAILBOX0",
+      "group": "pp_mode"
+    },
+    {
+      "address": "0xE0017E3C",
+      "count": 0,
+      "present": false,
+      "name": "PP_MMIO_ADDR",
+      "group": "pp_mode",
+      "note": "fabric MMIO window addr"
+    },
+    {
+      "address": "0xE0017E40",
+      "count": 0,
+      "present": false,
+      "name": "PP_MMIO_DATA",
+      "group": "pp_mode",
+      "note": "fabric MMIO window data"
+    },
+    {
+      "address": "0xE0017E44",
+      "count": 0,
+      "present": false,
+      "name": "PP_MMIO",
+      "group": "pp_mode"
+    },
+    {
+      "address": "0xE0017F00",
+      "count": 0,
+      "present": false,
+      "name": "PIB_ID",
+      "group": "pib_id"
+    },
+    {
+      "address": "0xE0017F04",
+      "count": 2,
+      "present": true,
+      "name": "PIB_POWER",
+      "group": "pib_id"
+    },
+    {
+      "address": "0xE0018000",
+      "count": 1,
+      "present": true,
+      "name": "PIB_SCK0_DSCR",
+      "group": "sockets",
+      "note": "socket[n] base = 0xE0018000 + n*0x80"
+    },
+    {
+      "address": "0xE0018010",
+      "count": 1,
+      "present": true,
+      "name": "PIB_SCK0_INTR",
+      "group": "sockets"
+    }
+  ],
+  "present_groups": [
+    "gpif",
+    "pib_core",
+    "pib_id",
+    "sockets"
+  ],
+  "absent_but_important": [
+    {
+      "address": "0xE00140FC",
+      "count": 0,
+      "present": false,
+      "name": "GPIF_THREAD_CONFIG[0]",
+      "group": "gpif"
+    },
+    {
+      "address": "0xE0014118",
+      "count": 0,
+      "present": false,
+      "name": "GPIF_WAVEFORM_CTRL_STAT",
+      "group": "gpif"
+    },
+    {
+      "address": "0xE0017E00",
+      "count": 0,
+      "present": false,
+      "name": "PP_ID",
+      "group": "pp_mode"
+    },
+    {
+      "address": "0xE0017E34",
+      "count": 0,
+      "present": false,
+      "name": "PP_WR_MAILBOX0",
+      "group": "pp_mode"
+    },
+    {
+      "address": "0xE0017E3C",
+      "count": 0,
+      "present": false,
+      "name": "PP_MMIO_ADDR",
+      "group": "pp_mode",
+      "note": "fabric MMIO window addr"
+    },
+    {
+      "address": "0xE0017E40",
+      "count": 0,
+      "present": false,
+      "name": "PP_MMIO_DATA",
+      "group": "pp_mode",
+      "note": "fabric MMIO window data"
+    },
+    {
+      "address": "0xE0017E44",
+      "count": 0,
+      "present": false,
+      "name": "PP_MMIO",
+      "group": "pp_mode"
+    }
+  ],
+  "e0011000_clarification": {
+    "address": "0xE0011000",
+    "firmware_literal_count": 2,
+    "note": "0xE0011000 lies inside pib_regs.h rsrvd0[] gap (between core +0x28 and GPIF @0xE0014000). Firmware writes here, but public header gives no field names \u2014 keep semantics candidate/unknown; do not equate to GPIF_CONFIG or socket[].",
+    "status": "candidate"
+  },
+  "socket_stride_clarification": {
+    "prior_claim": "0xE0010000 + index<<4 (16-byte)",
+    "official_socket_stride": "0xE0018000 + index*0x80 (128-byte)",
+    "resolution": "Keep both observations: <<4 pattern exists in disassembly against 0xE0010000; official DMA socket registers use *0x80 at 0xE0018000 (literal present). Do not collapse them into one map without more RE.",
+    "status": "candidate"
+  },
+  "pp_mmio_path": {
+    "importance": "PP_MMIO_ADDR/DATA are the public PP-mode window into external/FPGA space",
+    "absolute_literals_in_image": false,
+    "implication": "Fabric register access may use PIB base pointer + 0x7E3C/0x7E40 offsets, GPIF ingress/egress regs, or a non-PP path \u2014 still unknown without deeper RE/capture",
+    "status": "unknown"
+  },
+  "top_e001_literals": [
+    {
+      "address": "0xE0010000",
+      "count": 12
+    },
+    {
+      "address": "0xE0011002",
+      "count": 3
+    },
+    {
+      "address": "0xE0011000",
+      "count": 2
+    },
+    {
+      "address": "0xE0014000",
+      "count": 2
+    },
+    {
+      "address": "0xE0013003",
+      "count": 2
+    },
+    {
+      "address": "0xE001C00C",
+      "count": 2
+    },
+    {
+      "address": "0xE0017F04",
+      "count": 2
+    },
+    {
+      "address": "0xE0010195",
+      "count": 2
+    },
+    {
+      "address": "0xE001F000",
+      "count": 1
+    },
+    {
+      "address": "0xE0010192",
+      "count": 1
+    },
+    {
+      "address": "0xE0014004",
+      "count": 1
+    },
+    {
+      "address": "0xE0012002",
+      "count": 1
+    },
+    {
+      "address": "0xE0018010",
+      "count": 1
+    },
+    {
+      "address": "0xE001E00E",
+      "count": 1
+    },
+    {
+      "address": "0xE0010C00",
+      "count": 1
+    },
+    {
+      "address": "0xE0010013",
+      "count": 1
+    },
+    {
+      "address": "0xE0017000",
+      "count": 1
+    },
+    {
+      "address": "0xE0010690",
+      "count": 1
+    },
+    {
+      "address": "0xE0018000",
+      "count": 1
+    }
+  ],
+  "learning": {
+    "confirmed": [
+      "Firmware links Cypress PIB @0xE0010000, GPIF @0xE0014000, sockets @0xE0018000",
+      "FPGA data plane remains GPIF/PIB \u2014 sync timebase still not on ARM"
+    ],
+    "refined": [
+      "0xE0011000 init block is not a named public GPIF struct \u2014 demote over-specific naming",
+      "Official socket stride is 128B; prior 16B claim is a separate pattern"
+    ],
+    "still_unknown": [
+      "PP_MMIO fabric register dictionary",
+      "Which PIB sockets carry AI sample stream",
+      "Fusion bRequest \u2192 PIB/GPIF programming sequence"
+    ]
+  }
+}

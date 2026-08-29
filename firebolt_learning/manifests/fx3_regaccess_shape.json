@@ -28,8 +28,8 @@
       140
     ],
     "store_count": 23,
-    "status": "confirmed",
-    "meaning": "FX3 PIB/GPIF configuration MMIO block (socket/engine setup)"
+    "status": "candidate",
+    "meaning": "Firmware init base at 0xE0011000 with many stores; public pib_regs.h places this in rsrvd0[] \u2014 no official field names"
   },
   "subsystem_tags": {
     "file_region": "0x46180",

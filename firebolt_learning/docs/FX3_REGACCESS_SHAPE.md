@@ -5,21 +5,30 @@
 
 ## 本轮确认
 
-### 1. PIB 配置块 `0xE0011000`
+### 1. 关于 `0xE0011000`（已用 SDK 校正）
 
-初始化函数 VA `0x4001250C` 的字面量基址为 **`0xE0011000`**，并对该基址执行一串 `str`：
+初始化函数 VA `0x4001250C` 确实以 **`0xE0011000`** 为基址写入多处偏移。  
+但对照公开 `pib_regs.h`，该地址落在 **`rsrvd0[]` 保留空隙**（core 与 GPIF@`0xE0014000` 之间），**没有官方字段名**。
 
-典型偏移（见 `manifests/fx3_regaccess_shape.json`）：  
-`0x04, 0x0C, 0x10, 0x38, 0x3C, 0x48–0x54, 0x60–0x6C, 0x70–0x8C, …`
+因此：
 
-含义：这是 **FX3 片上 PIB/GPIF 引擎配置**，用于把 socket/总线参数设好，以便 FPGA 侧 GPIF-II 数据通路工作。
+- “有写入” = 事实（disasm）
+- “标准 PIB 配置块具名基址” = **撤回**；改见 `docs/FX3_PIB_CROSSREF.md`
 
-### 2. 与 `0xE0010000 + index<<4` 的关系
+具名、可对照 SDK 的锚点改为：
 
-- `0xE0010000 + n*16`：按 socket 索引的寄存器窗（已 confirmed）
-- `0xE0011000`：更偏 **全局/块级配置** 基址（本轮 confirmed）
+- `0xE0010000` PIB_CONFIG  
+- `0xE0014000` GPIF_CONFIG  
+- `0xE0018000` socket[]（步长 0x80）
 
-二者同属 PIB 族，共同构成 FX3→FPGA 桥的 MMIO 面。
+### 2. Socket 步长（两套观察）
+
+- 官方 DMA socket：`0xE0018000 + n×0x80`（固件含该基址字面量）
+- 另见反汇编：`0xE0010000 + index<<4` 模式——**并存**，勿合并
+
+### 3. 与 GPIF 官方区的关系
+
+具名 GPIF 在 `0xE0014000`。学习路径仍是 GPIF/PIB → USB；同步不在 ARM。
 
 ### 3. 子系统标签（candidate）
 
